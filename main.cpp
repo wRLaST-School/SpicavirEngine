@@ -1,5 +1,6 @@
 #include "Essentials.h"
 #include "wWindow.h"
+#include "wDirectX.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -22,118 +23,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	MSG msg{};
 
 	/*DirectX初期化処理*/
-	//Vars
+	InitWDX();
 	HRESULT result;
-	ComPtr<ID3D12Device> dev = nullptr;
-	ComPtr<IDXGIFactory6> dxgiFactory = nullptr;
-	ComPtr<IDXGISwapChain4> swapchain = nullptr;
-	ComPtr<ID3D12CommandAllocator> cmdAllocator = nullptr;
-	ComPtr<ID3D12GraphicsCommandList> cmdList = nullptr;
-	ComPtr<ID3D12CommandQueue> cmdQueue = nullptr;
-	ComPtr<ID3D12DescriptorHeap> rtvHeaps = nullptr;
-
-	result = CreateDXGIFactory1(IID_PPV_ARGS(&dxgiFactory));
-	vector< ComPtr<IDXGIAdapter1>> adapters;
-
-	ComPtr<IDXGIAdapter1> tmpAdapter = nullptr;
-
-	//グラボ君の面接しま～～す
-	for (int i = 0; dxgiFactory->EnumAdapters1(i, &tmpAdapter) != DXGI_ERROR_NOT_FOUND; i++)
-	{
-		adapters.push_back(tmpAdapter);
-	}
-
-	for(auto &adp : adapters)
-	{
-		DXGI_ADAPTER_DESC1 adesc;
-		adp->GetDesc1(&adesc);
-
-		//ソフトウェアはお呼びでないのでお祈りメール
-		if (adesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
-			continue;
-		}
-
-		wstring strDesc = adesc.Description;
-		// Intel UHDはさよなら
-		if (strDesc.find(L"Intel") == wstring::npos)
-		{
-			//君優秀だねぇ～採用ぅ
-			tmpAdapter = adp;
-			break;
-		}
-	}
-
-	//デバイス生成(複数生成しないように！)
-	D3D_FEATURE_LEVEL levels[] =
-	{
-		D3D_FEATURE_LEVEL_12_1,
-		D3D_FEATURE_LEVEL_12_0,
-		D3D_FEATURE_LEVEL_11_1,
-		D3D_FEATURE_LEVEL_11_0,
-	};
-
-	D3D_FEATURE_LEVEL featureLevel;
-
-	for (int i = 0; i < _countof(levels); i++)
-	{
-		//採用したアダプターでデバイスを生成
-		result = D3D12CreateDevice(tmpAdapter.Get(), levels[i], IID_PPV_ARGS(&dev));
-		if (result == S_OK)
-		{
-			featureLevel = levels[i];
-			break;
-		}
-	}
-
-	//コマンドリストとコマンドキュー
-	result = dev->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&cmdAllocator));
-
-	result = dev->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cmdAllocator.Get(), nullptr, IID_PPV_ARGS(&cmdList));
-
-	D3D12_COMMAND_QUEUE_DESC cmdQueueDesc{};
-
-	dev->CreateCommandQueue(&cmdQueueDesc, IID_PPV_ARGS(&cmdQueue));
-
-	//ダブルバッファリングとか
-	DXGI_SWAP_CHAIN_DESC1 swapchainDesc{};
-
-	swapchainDesc.Width = GetwWindow()->width;
-	swapchainDesc.Height = GetwWindow()->height;
-	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //色情報の書式
-	swapchainDesc.SampleDesc.Count = 1;
-	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
-	swapchainDesc.BufferCount = 2;
-	swapchainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
-	ComPtr<IDXGISwapChain1> swapchain1;
-	dxgiFactory->CreateSwapChainForHwnd(cmdQueue.Get(), GetwWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
-	swapchain1.As(&swapchain);
-
-	/**/
-	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
-	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	heapDesc.NumDescriptors = 2;
-	dev->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&rtvHeaps));
-
-	vector<ComPtr<ID3D12Resource>> backBuffers(2);
-
-	for (int i = 0; i < 2; i++)
-	{
-		result = swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
-		CD3DX12_CPU_DESCRIPTOR_HANDLE handle = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
-			i, dev->GetDescriptorHandleIncrementSize(heapDesc.Type));
-
-		dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, handle);
-	}
-
-	//フェンス
-	ComPtr<ID3D12Fence> fence = nullptr;
-	UINT64 fenceVal = 0;
-
-	result = dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
-
-	/*DirectX初期化処理ここまで*/
 
 	/*Init Draw*/
 	XMFLOAT3 vertices[] = {
@@ -158,7 +49,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
-	result = dev->CreateCommittedResource(
+	result = GetWDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -280,13 +171,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	ComPtr<ID3DBlob> rootSigBlob = nullptr;
 	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
-	result = dev->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
+	result = GetWDX()->dev->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
 
 	// パイプラインにルートシグネチャをセット
 	gpipeline.pRootSignature = rootsignature.Get();
 
 	ID3D12PipelineState* pipelinestate = nullptr;
-	result = dev->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipelinestate));
+	result = GetWDX()->dev->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipelinestate));
 	/*Init Draw End*/
 
 	/*ループ*/
@@ -306,26 +197,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*毎フレーム処理*/
 		
 		//バックバッファ番号を取得(0か1)
-		UINT bbIndex = swapchain->GetCurrentBackBufferIndex();
+		UINT bbIndex = GetWDX()->swapchain->GetCurrentBackBufferIndex();
 
 		//リソースバリアーを書き込み可能状態に
 		D3D12_RESOURCE_BARRIER barrierDesc{};
-		barrierDesc.Transition.pResource = backBuffers[bbIndex].Get();
+		barrierDesc.Transition.pResource = GetWDX()->backBuffers[bbIndex].Get();
 		barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
 		barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-		cmdList->ResourceBarrier(1, &barrierDesc);
+		GetWDX()->cmdList->ResourceBarrier(1, &barrierDesc);
 
-		CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
-		bbIndex, dev->GetDescriptorHandleIncrementSize(heapDesc.Type));
-		cmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
+		CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetWDX()->rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
+		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetWDX()->heapDesc.Type));
+		GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
 
 		//画面クリア
 		float clearColor[] = { 0.1f, 0.25f, 0.5f, 0.0f };
-		cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
+		GetWDX()->cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
 
 		/*描画処理*/
-		cmdList->SetPipelineState(pipelinestate);
-		cmdList->SetGraphicsRootSignature(rootsignature.Get());
+		GetWDX()->cmdList->SetPipelineState(pipelinestate);
+		GetWDX()->cmdList->SetGraphicsRootSignature(rootsignature.Get());
 
 		D3D12_VIEWPORT viewport{};
 
@@ -336,7 +227,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		viewport.MinDepth = 0.0f;
 		viewport.MaxDepth = 1.0f;
 
-		cmdList->RSSetViewports(1, &viewport);
+		GetWDX()->cmdList->RSSetViewports(1, &viewport);
 
 		D3D12_RECT scissorrect{};
 
@@ -345,13 +236,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		scissorrect.top = 0;                                        // 切り抜き座標上
 		scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
 
-		cmdList->RSSetScissorRects(1, &scissorrect);
+		GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
-		cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		cmdList->IASetVertexBuffers(0, 1, &vbView);
+		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-		cmdList->DrawInstanced(3, 1, 0, 0);
+		GetWDX()->cmdList->DrawInstanced(3, 1, 0, 0);
 
 		/*描画処理ここまで*/
 
@@ -359,30 +250,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 		barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
-		cmdList->ResourceBarrier(1, &barrierDesc);
-
-		//命令を実行して描画
-		cmdList->Close();
-
-		ID3D12CommandList* cmdLists[] = {cmdList.Get()};
-		cmdQueue->ExecuteCommandLists(1, cmdLists);
-
-		swapchain->Present(1, 0);
-
-		//描画コマンドが終わったら次のフレームの準備
-		cmdQueue->Signal(fence.Get(), ++fenceVal);
-		if (fence->GetCompletedValue() != fenceVal) 
-		{
-			HANDLE event = CreateEvent(nullptr, false, false, nullptr);
-			fence->SetEventOnCompletion(fenceVal, event);
-			WaitForSingleObject(event, INFINITE);
-			CloseHandle(event);
-		}
-
-		cmdAllocator->Reset();
-		cmdList->Reset(cmdAllocator.Get(), nullptr);
+		GetWDX()->cmdList->ResourceBarrier(1, &barrierDesc);
 
 		/*毎フレーム処理ここまで*/
+		GetWDX()->EndFrame();
 	}
 	/*ループここまで*/
 	CloseAllwWindow();
