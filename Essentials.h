@@ -5,6 +5,9 @@
 #include "libs/WrelfyLib.h"
 #include <DirectXMath.h>
 #include <d3dcompiler.h>
+#include <d3dx12.h>
+#include <DirectXTex.h>
+#include <map>
 
 #include <vector>
 #include <string>

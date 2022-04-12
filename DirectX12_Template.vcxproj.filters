@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ヘッダー ファイル\DirectX">
+      <UniqueIdentifier>{cce4e419-1214-4ad3-a3b1-23993260475b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\DirectX">
+      <UniqueIdentifier>{c25a2f10-50c4-4476-8fc5-f91b99251afc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Window">
+      <UniqueIdentifier>{5edf9e2e-ad54-42fa-bf03-5a905135e50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Window">
+      <UniqueIdentifier>{5a0d396e-e43e-493c-bf6d-e227653459cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,8 +33,14 @@
     <ClCompile Include="Essentials.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="wDirectX.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="wWindow.cpp">
+      <Filter>ソース ファイル\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +49,12 @@
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="wDirectX.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="wWindow.h">
+      <Filter>ヘッダー ファイル\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

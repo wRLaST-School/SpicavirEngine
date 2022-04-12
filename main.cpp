@@ -1,4 +1,5 @@
 #include "Essentials.h"
+#include "wWindow.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -11,38 +12,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 #endif //  _DEBUG
 
-
-	/*ウィンドウ作成*/
-	const int WIN_W = 1280;
-	const int WIN_H = 720;
-
-	WNDCLASSEX  w{};
-	w.cbSize = sizeof(WNDCLASSEX);
-	w.lpfnWndProc = (WNDPROC)WindowProc;
-	w.lpszClassName = L"DirectXGame";
-	w.hInstance = GetModuleHandle(nullptr);
-	w.hCursor = LoadCursor(NULL, IDC_ARROW);
-
-	RegisterClassEx(&w);
-
-	//ウィンドウサイズのRECT
-	RECT wrc = { 0, 0, WIN_W, WIN_H };
-	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);//サイズ補正を自動で
-
-	HWND hwnd = CreateWindow(w.lpszClassName,
-		L"WindowName",
-		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		wrc.right - wrc.left,
-		wrc.bottom - wrc.top,
-		nullptr, //親ウィンドウハンドル
-		nullptr, //メニューハンドル
-		w.hInstance,
-		nullptr);
-
-	ShowWindow(hwnd, SW_SHOW);
-	/*ウィンドウ作成ここまで*/
+	//ウィンドウを生成
+	{
+		wWindow wwnd;
+		wwnd.Create(L"DirectXTest", 1280, 720);
+		RegisterwWindow(wwnd, "Default");
+	}
 
 	MSG msg{};
 
@@ -122,8 +97,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ダブルバッファリングとか
 	DXGI_SWAP_CHAIN_DESC1 swapchainDesc{};
 
-	swapchainDesc.Width = WIN_W;
-	swapchainDesc.Height = WIN_H;
+	swapchainDesc.Width = GetwWindow()->width;
+	swapchainDesc.Height = GetwWindow()->height;
 	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //色情報の書式
 	swapchainDesc.SampleDesc.Count = 1;
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
@@ -132,7 +107,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	ComPtr<IDXGISwapChain1> swapchain1;
-	dxgiFactory->CreateSwapChainForHwnd(cmdQueue.Get(), hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
+	dxgiFactory->CreateSwapChainForHwnd(cmdQueue.Get(), GetwWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
 	swapchain1.As(&swapchain);
 
 	/**/
@@ -146,9 +121,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	for (int i = 0; i < 2; i++)
 	{
 		result = swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
-		D3D12_CPU_DESCRIPTOR_HANDLE handle = rtvHeaps->GetCPUDescriptorHandleForHeapStart();
-
-		handle.ptr += i * dev->GetDescriptorHandleIncrementSize(heapDesc.Type);
+		CD3DX12_CPU_DESCRIPTOR_HANDLE handle = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
+			i, dev->GetDescriptorHandleIncrementSize(heapDesc.Type));
 
 		dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, handle);
 	}
@@ -341,8 +315,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 		cmdList->ResourceBarrier(1, &barrierDesc);
 
-		D3D12_CPU_DESCRIPTOR_HANDLE rtvH = rtvHeaps->GetCPUDescriptorHandleForHeapStart();
-		rtvH.ptr += bbIndex * dev->GetDescriptorHandleIncrementSize(heapDesc.Type);
+		CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
+		bbIndex, dev->GetDescriptorHandleIncrementSize(heapDesc.Type));
 		cmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
 
 		//画面クリア
@@ -355,8 +329,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		D3D12_VIEWPORT viewport{};
 
-		viewport.Width = WIN_W;
-		viewport.Height = WIN_H;
+		viewport.Width = GetwWindow()->width;
+		viewport.Height = GetwWindow()->height;
 		viewport.TopLeftX = 0;
 		viewport.TopLeftY = 0;
 		viewport.MinDepth = 0.0f;
@@ -367,9 +341,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		D3D12_RECT scissorrect{};
 
 		scissorrect.left = 0;                                       // 切り抜き座標左
-		scissorrect.right = scissorrect.left + WIN_W;        // 切り抜き座標右
+		scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
 		scissorrect.top = 0;                                        // 切り抜き座標上
-		scissorrect.bottom = scissorrect.top + WIN_H;       // 切り抜き座標下
+		scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
 
 		cmdList->RSSetScissorRects(1, &scissorrect);
 
@@ -411,7 +385,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*毎フレーム処理ここまで*/
 	}
 	/*ループここまで*/
-	UnregisterClass(w.lpszClassName, w.hInstance);
+	CloseAllwWindow();
 
 
 	return 0;
