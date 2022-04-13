@@ -473,7 +473,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*•`‰æˆ—*/
 		GetWDX()->cmdList->SetPipelineState(pipelinestate.Get());
 		GetWDX()->cmdList->SetGraphicsRootSignature(rootsignature.Get());
-
+		@
 		D3D12_VIEWPORT viewport{};
 
 		viewport.Width = GetwWindow()->width;
