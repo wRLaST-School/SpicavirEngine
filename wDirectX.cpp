@@ -110,12 +110,12 @@ void wDirectX::Init() {
 void wDirectX::EndFrame()
 {	
 	//命令を実行して描画
-	GetWDX()->cmdList->Close();
+	cmdList->Close();
 
-	ID3D12CommandList* cmdLists[] = { GetWDX()->cmdList.Get() };
-	GetWDX()->cmdQueue->ExecuteCommandLists(1, cmdLists);
+	ID3D12CommandList* cmdLists[] = { cmdList.Get() };
+	cmdQueue->ExecuteCommandLists(1, cmdLists);
 
-	GetWDX()->swapchain->Present(1, 0);
+	swapchain->Present(1, 0);
 
 	//描画コマンドが終わったら次のフレームの準備
 	cmdQueue->Signal(fence.Get(), ++fenceVal);
