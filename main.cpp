@@ -248,6 +248,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		imageData.get()[i].w = 1.0f;
 	}
 
+	TexMetadata metadata{};
+	ScratchImage scratchImg{};
+
+	LoadFromWICFile(L"Resources/think.png", WIC_FLAGS_NONE, &metadata, scratchImg);
+
+	ScratchImage mipChain{};
+
+	GenerateMipMaps(scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+
+	if (SUCCEEDED(result)) {
+		scratchImg = move(mipChain);
+		metadata = scratchImg.GetMetadata();
+	}
+
+	metadata.format = MakeSRGB(metadata.format);
+
+
+
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
@@ -256,11 +274,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	D3D12_RESOURCE_DESC texresdesc{};
 	texresdesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	texresdesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	texresdesc.Width = texWidth;
-	texresdesc.Height = texWidth;
-	texresdesc.DepthOrArraySize = 1;
-	texresdesc.MipLevels = 1;
+	texresdesc.Format = metadata.format;
+	texresdesc.Width = metadata.width;
+	texresdesc.Height = (UINT)metadata.height;
+	texresdesc.DepthOrArraySize = metadata.height;
+	texresdesc.MipLevels = metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
 	ComPtr<ID3D12Resource> texBuff = nullptr;
@@ -272,13 +290,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		nullptr,
 		IID_PPV_ARGS(&texBuff));
 
-	texBuff->WriteToSubresource(
-		0,
-		nullptr,
-		imageData.get(),
-		sizeof(XMFLOAT4) * texWidth,
-		sizeof(XMFLOAT4) * imageDataCount
-	);
+	for (size_t i = 0; i < metadata.mipLevels; i++)
+	{
+		const Image* img = scratchImg.GetImage(i, 0, 0);
+
+		HRESULT hr = texBuff->WriteToSubresource(
+			(UINT)i,
+			nullptr,
+			img->pixels,
+			(UINT)img->rowPitch,
+			(UINT)img->slicePitch
+		);
+		assert(SUCCEEDED(hr));
+	}
 
 	const size_t kMaxSRVCount = 256;
 	
@@ -297,10 +321,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	basicHeapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	srvDesc.Format = resdesc.Format;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
+	srvDesc.Texture2D.MipLevels = resdesc.MipLevels;
 
 	GetWDX()->dev->CreateShaderResourceView(texBuff.Get(), &srvDesc, srvHandle);
 
