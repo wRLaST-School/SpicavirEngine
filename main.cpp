@@ -179,8 +179,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
 	////定数バッファ
-	struct ConstBufferData {
-		XMFLOAT4 color;
+	struct ConstBufferDataMaterial {
+		XMFLOAT4 color; //RGBA
+	};
+
+	struct ConstBufferDataTransform {
 		XMMATRIX mat;//3D変換行列
 	};
 
@@ -191,7 +194,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//リソース設定
 	D3D12_RESOURCE_DESC cbresdesc{};
 	cbresdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	cbresdesc.Width = (sizeof(ConstBufferData) + 0xff) & ~0xff;
+	cbresdesc.Width = (sizeof(ConstBufferDataMaterial) + 0xff) & ~0xff;
 	cbresdesc.Height = 1;
 	cbresdesc.DepthOrArraySize = 1;
 	cbresdesc.MipLevels = 1;
@@ -199,14 +202,49 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	//GPUリソースの生成
-	ComPtr<ID3D12Resource> constBuff = nullptr;
+	ComPtr<ID3D12Resource> constBuffMaterial = nullptr;
 	GetWDX()->dev->CreateCommittedResource(
 		&cbheapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&cbresdesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&constBuff));
+		IID_PPV_ARGS(&constBuffMaterial));
+
+	//定数バッファ2
+	ComPtr<ID3D12Resource> constBuffTransform = nullptr;
+	ConstBufferDataTransform* cBufTransform = nullptr;
+
+	{
+		//ヒープ設定
+		D3D12_HEAP_PROPERTIES cbheapprop{};
+		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+		//リソース設定
+		D3D12_RESOURCE_DESC cbresdesc{};
+		cbresdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+		cbresdesc.Width = (sizeof(ConstBufferDataMaterial) + 0xff) & ~0xff;
+		cbresdesc.Height = 1;
+		cbresdesc.DepthOrArraySize = 1;
+		cbresdesc.MipLevels = 1;
+		cbresdesc.SampleDesc.Count = 1;
+		cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+		//GPUリソースの生成
+		ComPtr<ID3D12Resource> constBuffMaterial = nullptr;
+		GetWDX()->dev->CreateCommittedResource(
+			&cbheapprop,
+			D3D12_HEAP_FLAG_NONE,
+			&cbresdesc,
+			D3D12_RESOURCE_STATE_GENERIC_READ,
+			nullptr,
+			IID_PPV_ARGS(&constBuffTransform));
+
+		HRESULT hr = constBuffTransform->Map(0, nullptr, (void**)&cBufTransform);
+		assert(SUCCEEDED(hr));
+
+		cBufTransform->mat = XMMatrixIdentity();
+	}
 
 	//定数バッファ用のデスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> basicDescHeap = nullptr;
@@ -225,12 +263,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//定数バッファビューの作成
 	D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc{};
-	cbvDesc.BufferLocation = constBuff->GetGPUVirtualAddress();
-	cbvDesc.SizeInBytes = (UINT)constBuff->GetDesc().Width;
+	cbvDesc.BufferLocation = constBuffMaterial->GetGPUVirtualAddress();
+	cbvDesc.SizeInBytes = (UINT)constBuffMaterial->GetDesc().Width;
 	GetWDX()->dev->CreateConstantBufferView(&cbvDesc, basicHeapHandle);
 
-	unique_ptr<ConstBufferData> cBuf = nullptr;
-	constBuff->Map(0, nullptr, (void**)cBuf.get());
+	unique_ptr<ConstBufferDataMaterial> cBufMaterial = nullptr;
+	constBuffMaterial->Map(0, nullptr, (void**)cBufMaterial.get());
 
 	//定数バッファここまで
 
@@ -427,7 +465,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	descRange.BaseShaderRegister = 0;
 	descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	D3D12_ROOT_PARAMETER rootParams[2] = {};
+	D3D12_ROOT_PARAMETER rootParams[3] = {};
 
 	//定数バッファ0番
 	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
@@ -441,6 +479,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	rootParams[1].DescriptorTable.NumDescriptorRanges = 1;
 	rootParams[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
+	//定数バッファ1番
+	rootParams[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParams[2].Descriptor.ShaderRegister = 1;
+	rootParams[2].Descriptor.RegisterSpace = 0;
+	rootParams[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
 	ComPtr<ID3D12RootSignature> rootsignature;
 
@@ -520,12 +563,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 		//GetWDX()->cmdList->SetGraphicsRootDescriptorTable(0, basicDescHeap->GetGPUDescriptorHandleForHeapStart());
 
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetGPUVirtualAddress());
 
 		ID3D12DescriptorHeap* ppSrvHeap[] = {srvHeap.Get()};
 		GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
 		D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, constBuffMaterial->GetGPUVirtualAddress());
 
 		D3D12_VIEWPORT viewport{};
 

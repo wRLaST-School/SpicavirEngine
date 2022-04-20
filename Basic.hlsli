@@ -1,6 +1,10 @@
 cbuffer cbuff0 : register(b0)
 {
 	float4 color;
+}
+
+cbuffer cbuff1 : register(b1)
+{
 	matrix mat;
 }
 
