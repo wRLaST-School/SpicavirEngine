@@ -9,8 +9,6 @@ public:
 
 	void EndFrame();
 
-	
-
 	HRESULT result;
 	ComPtr<ID3D12Device> dev = nullptr;
 	ComPtr<IDXGIFactory6> dxgiFactory = nullptr;
@@ -20,8 +18,6 @@ public:
 	ComPtr<ID3D12CommandQueue> cmdQueue = nullptr;
 	ComPtr<ID3D12DescriptorHeap> rtvHeaps = nullptr;
 	ComPtr<ID3D12Fence> fence = nullptr;
-
-
 
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
 
