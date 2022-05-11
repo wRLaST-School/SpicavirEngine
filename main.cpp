@@ -4,6 +4,9 @@
 #include "Input.h"
 #include "wSwapChainManager.h"
 #include "wDepth.h"
+#include "wShader.h"
+#include "wPSO.h"
+#include "wTexture.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -192,7 +195,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
 
-
 	////定数バッファ
 	struct ConstBufferDataMaterial {
 		XMFLOAT4 color; //RGBA
@@ -275,7 +277,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	D3D12_CPU_DESCRIPTOR_HANDLE basicHeapHandle = basicDescHeap->GetCPUDescriptorHandleForHeapStart();
 
-
 	//定数バッファビューの作成
 	D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc{};
 	cbvDesc.BufferLocation = constBuffMaterial->GetGPUVirtualAddress();
@@ -286,153 +287,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	constBuffMaterial->Map(0, nullptr, (void**)cBufMaterial.get());
 
 	//定数バッファここまで
-
-	//画像データの作成
-	const int texWidth = 256;
-	const int imageDataCount = texWidth * texWidth;
-
-	unique_ptr<XMFLOAT4> imageData = unique_ptr<XMFLOAT4>(new XMFLOAT4[imageDataCount]);
-
-	for (int i = 0; i < imageDataCount; i++)
-	{
-		imageData.get()[i].x = i % 256 < 128 ? 1.0f : 0.0f;
-		imageData.get()[i].y = i % 256 < 128 ? 0.0f : 1.0f;
-		imageData.get()[i].z = 0.0f;
-		imageData.get()[i].w = 1.0f;
-	}
-
-	TexMetadata metadata{};
-	ScratchImage scratchImg{};
-
-	LoadFromWICFile(L"Resources/think.png", WIC_FLAGS_NONE, &metadata, scratchImg);
-
-	ScratchImage mipChain{};
-
-	GenerateMipMaps(scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
-
-	if (SUCCEEDED(result)) {
-		scratchImg = move(mipChain);
-		metadata = scratchImg.GetMetadata();
-	}
-
-	metadata.format = MakeSRGB(metadata.format);
-
-
-
-	//テクスチャバッファ
-	D3D12_HEAP_PROPERTIES texHeapProp{};
-	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
-	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-	D3D12_RESOURCE_DESC texresdesc{};
-	texresdesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	texresdesc.Format = metadata.format;
-	texresdesc.Width = metadata.width;
-	texresdesc.Height = (UINT)metadata.height;
-	texresdesc.DepthOrArraySize = metadata.height;
-	texresdesc.MipLevels = metadata.mipLevels;
-	texresdesc.SampleDesc.Count = 1;
-
-	ComPtr<ID3D12Resource> texBuff = nullptr;
-	GetWDX()->dev->CreateCommittedResource(
-		&texHeapProp,
-		D3D12_HEAP_FLAG_NONE,
-		&texresdesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&texBuff));
-
-	for (size_t i = 0; i < metadata.mipLevels; i++)
-	{
-		const Image* img = scratchImg.GetImage(i, 0, 0);
-
-		HRESULT hr = texBuff->WriteToSubresource(
-			(UINT)i,
-			nullptr,
-			img->pixels,
-			(UINT)img->rowPitch,
-			(UINT)img->slicePitch
-		);
-		assert(SUCCEEDED(hr));
-	}
-
-	const size_t kMaxSRVCount = 256;
-	
-	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
-	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	srvHeapDesc.NumDescriptors = kMaxSRVCount;
-
-	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
-
-	GetWDX()->dev->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&srvHeap));
-
-	D3D12_CPU_DESCRIPTOR_HANDLE srvHandle = srvHeap->GetCPUDescriptorHandleForHeapStart();
-
-	//シェーダーリソースビューの生成
-	basicHeapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = resdesc.Format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = resdesc.MipLevels;
-
-	GetWDX()->dev->CreateShaderResourceView(texBuff.Get(), &srvDesc, srvHandle);
-
-	//シェーダーの読み込みとコンパイル
-	ComPtr<ID3DBlob> vsBlob = nullptr; // 頂点シェーダオブジェクト
-	ComPtr<ID3DBlob> psBlob = nullptr; // ピクセルシェーダオブジェクト
-	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
-
-	// 頂点シェーダの読み込みとコンパイル
-	result = D3DCompileFromFile(
-		L"BasicVS.hlsl",  // シェーダファイル名
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
-		"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
-		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバッグ用設定
-		0,
-		&vsBlob, &errorBlob);
-
-	if (FAILED(result)) {
-		// errorBlobからエラー内容をstring型にコピー
-		std::string errstr;
-		errstr.resize(errorBlob->GetBufferSize());
-
-		std::copy_n((char*)errorBlob->GetBufferPointer(),
-			errorBlob->GetBufferSize(),
-			errstr.begin());
-		errstr += "\n";
-		// エラー内容を出力ウィンドウに表示
-		OutputDebugStringA(errstr.c_str());
-		exit(1);
-	}
-
-	// ピクセルシェーダの読み込みとコンパイル
-	result = D3DCompileFromFile(
-		L"BasicPS.hlsl",   // シェーダファイル名
-		nullptr,
-		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
-		"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
-		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION, // デバッグ用設定
-		0,
-		&psBlob, &errorBlob);
-
-	if (FAILED(result)) {
-		// errorBlobからエラー内容をstring型にコピー
-		std::string errstr;
-		errstr.resize(errorBlob->GetBufferSize());
-
-		std::copy_n((char*)errorBlob->GetBufferPointer(),
-			errorBlob->GetBufferSize(),
-			errstr.begin());
-		errstr += "\n";
-		// エラー内容を出力ウィンドウに表示
-		OutputDebugStringA(errstr.c_str());
-		exit(1);
-	}
 
 	// 頂点レイアウト
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
@@ -449,37 +303,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 	};
 
+	//PSO
+	InitTextureBuff();
+	RegisterAndInitShader("def");
+	RegisterAndInitPSO("def", GetShader("def"));
 
-	// グラフィックスパイプライン設定
-	D3D12_GRAPHICS_PIPELINE_STATE_DESC gpipeline{};
-
-	gpipeline.VS.pShaderBytecode = vsBlob->GetBufferPointer();
-	gpipeline.VS.BytecodeLength = vsBlob->GetBufferSize();
-	gpipeline.PS.pShaderBytecode = psBlob->GetBufferPointer();
-	gpipeline.PS.BytecodeLength = psBlob->GetBufferSize();
-
-	gpipeline.InputLayout.pInputElementDescs = inputLayout;
-	gpipeline.InputLayout.NumElements = _countof(inputLayout);
-
-	gpipeline.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
-
-	gpipeline.SampleMask = D3D12_DEFAULT_SAMPLE_MASK; // 標準設定
-	gpipeline.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;  // カリングしない
-	gpipeline.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID; // ポリゴン内塗りつぶし
-	gpipeline.RasterizerState.DepthClipEnable = true; // 深度クリッピングを有効に
-
-	gpipeline.BlendState.RenderTarget[0].RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;  // RBGA全てのチャンネルを描画
-
-	gpipeline.NumRenderTargets = 1; // 描画対象は1つ
-	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // 0～255指定のRGBA
-	gpipeline.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
-
-	//Depth
-	gpipeline.DepthStencilState.DepthEnable = true;
-	gpipeline.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
-	gpipeline.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS;
-	gpipeline.DSVFormat = DXGI_FORMAT_D32_FLOAT;
-
+	GetPSODesc("def")->InputLayout.pInputElementDescs = inputLayout;
+	GetPSODesc("def")->InputLayout.NumElements = _countof(inputLayout);
 
 	D3D12_DESCRIPTOR_RANGE descRange{};
 	descRange.NumDescriptors = 1;
@@ -529,14 +359,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	rootSignatureDesc.NumStaticSamplers = 1;
 
 	ComPtr<ID3DBlob> rootSigBlob = nullptr;
+	ComPtr<ID3DBlob> errorBlob = nullptr;
 	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	result = GetWDX()->dev->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
 
 	// パイプラインにルートシグネチャをセット
-	gpipeline.pRootSignature = rootsignature.Get();
-
-	ComPtr<ID3D12PipelineState> pipelinestate = nullptr;
-	result = GetWDX()->dev->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(&pipelinestate));
+	GetPSODesc("def")->pRootSignature = rootsignature.Get();
+	GetWPSO("def")->Create();
 	/*Init Draw End*/
 
 	/*ループ*/
@@ -601,7 +430,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		GetWDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH,1.0, 0, 0, nullptr);
 
 		/*描画処理*/
-		GetWDX()->cmdList->SetPipelineState(pipelinestate.Get());
+		GetWDX()->cmdList->SetPipelineState(GetPSO("def"));
 		GetWDX()->cmdList->SetGraphicsRootSignature(rootsignature.Get());
 
 		//ID3D12DescriptorHeap* ppHeaps[] = { basicDescHeap.Get()};
@@ -610,9 +439,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetGPUVirtualAddress());
 
-		ID3D12DescriptorHeap* ppSrvHeap[] = {srvHeap.Get()};
+		ID3D12DescriptorHeap* ppSrvHeap[] = {GetShader("def")->srvHeap.Get()};
 		GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
-		D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = srvHeap->GetGPUDescriptorHandleForHeapStart();
+		D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = GetShader("def")->srvHeap->GetGPUDescriptorHandleForHeapStart();
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, constBuffTransform->GetGPUVirtualAddress());

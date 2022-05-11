@@ -146,7 +146,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="wDepth.cpp" />
     <ClCompile Include="wDirectX.cpp" />
+    <ClCompile Include="wPSO.cpp" />
+    <ClCompile Include="wShader.cpp" />
     <ClCompile Include="wSwapChainManager.cpp" />
+    <ClCompile Include="wTexture.cpp" />
     <ClCompile Include="wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +157,10 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="wDepth.h" />
     <ClInclude Include="wDirectX.h" />
+    <ClInclude Include="wPSO.h" />
+    <ClInclude Include="wShader.h" />
     <ClInclude Include="wSwapChainManager.h" />
+    <ClInclude Include="wTexture.h" />
     <ClInclude Include="wWindow.h" />
   </ItemGroup>
   <ItemGroup>
