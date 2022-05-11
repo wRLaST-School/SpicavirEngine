@@ -2,6 +2,8 @@
 #include "wWindow.h"
 #include "wDirectX.h"
 #include "Input.h"
+#include "wSwapChainManager.h"
+#include "wDepth.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -31,6 +33,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitInput();
 
 	/*Init Draw*/
+	//ダブルバッファリングとか
+	InitWSCM();
+	InitWDepth();
+
 	struct Vertex
 	{
 		XMFLOAT3 pos;
@@ -132,8 +138,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	////頂点インデックス
 	unsigned short indices[] =
 	{
-		//0,1,2,
-		//1,2,3,
+		0,1,2,
+		1,2,3,
 
 		4,5,6,
 		5,6,7,
@@ -468,6 +474,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	gpipeline.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // 0～255指定のRGBA
 	gpipeline.SampleDesc.Count = 1; // 1ピクセルにつき1回サンプリング
 
+	//Depth
+	gpipeline.DepthStencilState.DepthEnable = true;
+	gpipeline.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	gpipeline.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_LESS;
+	gpipeline.DSVFormat = DXGI_FORMAT_D32_FLOAT;
+
+
 	D3D12_DESCRIPTOR_RANGE descRange{};
 	descRange.NumDescriptors = 1;
 	descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
@@ -548,32 +561,44 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
 		/*描画処理*/
-		cBufTransform->mat = XMMatrixPerspectiveFovLH(
+		//変換
+		XMMATRIX pMat = XMMatrixPerspectiveFovLH(
 			XMConvertToRadians(45.0f),
 			(float)GetwWindow()->width / GetwWindow()->height,
 			0.1f, 1000.0f
 		);
 
+		XMMATRIX vMat;
+		XMFLOAT3 eye(0, 0, -100);
+		XMFLOAT3 target(0, 0, 0);
+		XMFLOAT3 up(0, 1, 0);
 
+		vMat = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
+
+		XMMATRIX wMat = XMMatrixIdentity();
+
+		cBufTransform->mat = wMat * vMat * pMat;
 		/*描画処理ここまで*/
 
 		//バックバッファ番号を取得(0か1)
-		UINT bbIndex = GetWDX()->swapchain->GetCurrentBackBufferIndex();
+		UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
 
 		//リソースバリアーを書き込み可能状態に
 		D3D12_RESOURCE_BARRIER barrierDesc{};
-		barrierDesc.Transition.pResource = GetWDX()->backBuffers[bbIndex].Get();
+		barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
 		barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
 		barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 		GetWDX()->cmdList->ResourceBarrier(1, &barrierDesc);
 
-		CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetWDX()->rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
-		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetWDX()->heapDesc.Type));
-		GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, nullptr);
+		CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetSCM()->rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
+		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetSCM()->heapDesc.Type));
+		D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+		GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
 		//画面クリア
 		float clearColor[] = { 0.1f, 0.25f, 0.5f, 0.0f };
 		GetWDX()->cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
+		GetWDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH,1.0, 0, 0, nullptr);
 
 		/*描画処理*/
 		GetWDX()->cmdList->SetPipelineState(pipelinestate.Get());

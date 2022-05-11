@@ -144,13 +144,17 @@
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="wDepth.cpp" />
     <ClCompile Include="wDirectX.cpp" />
+    <ClCompile Include="wSwapChainManager.cpp" />
     <ClCompile Include="wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Essentials.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="wDepth.h" />
     <ClInclude Include="wDirectX.h" />
+    <ClInclude Include="wSwapChainManager.h" />
     <ClInclude Include="wWindow.h" />
   </ItemGroup>
   <ItemGroup>

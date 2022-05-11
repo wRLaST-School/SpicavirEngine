@@ -1,4 +1,5 @@
 #include "wDirectX.h"
+#include "wSwapChainManager.h"
 static wDirectX WDX;
 
 wDirectX* GetWDX()
@@ -74,37 +75,7 @@ void wDirectX::Init() {
 
 	dev->CreateCommandQueue(&cmdQueueDesc, IID_PPV_ARGS(&cmdQueue));
 
-	//ダブルバッファリングとか
-	DXGI_SWAP_CHAIN_DESC1 swapchainDesc{};
 
-	swapchainDesc.Width = GetwWindow()->width;
-	swapchainDesc.Height = GetwWindow()->height;
-	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //色情報の書式
-	swapchainDesc.SampleDesc.Count = 1;
-	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
-	swapchainDesc.BufferCount = 2;
-	swapchainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
-	ComPtr<IDXGISwapChain1> swapchain1;
-	dxgiFactory->CreateSwapChainForHwnd(cmdQueue.Get(), GetwWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
-	swapchain1.As(&swapchain);
-
-	/**/
-	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	heapDesc.NumDescriptors = 2;
-	dev->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&rtvHeaps));
-
-	for (int i = 0; i < 2; i++)
-	{
-		result = swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
-		CD3DX12_CPU_DESCRIPTOR_HANDLE handle = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
-			i, dev->GetDescriptorHandleIncrementSize(heapDesc.Type));
-
-		dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, handle);
-	}
-
-	result = dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 
 void wDirectX::EndFrame()
@@ -115,18 +86,7 @@ void wDirectX::EndFrame()
 	ID3D12CommandList* cmdLists[] = { cmdList.Get() };
 	cmdQueue->ExecuteCommandLists(1, cmdLists);
 
-	swapchain->Present(1, 0);
+	GetSCM()->swapchain->Present(1, 0);
 
-	//描画コマンドが終わったら次のフレームの準備
-	cmdQueue->Signal(fence.Get(), ++fenceVal);
-	if (fence->GetCompletedValue() != fenceVal)
-	{
-		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
-		fence->SetEventOnCompletion(fenceVal, event);
-		WaitForSingleObject(event, INFINITE);
-		CloseHandle(event);
-	}
-
-	cmdAllocator->Reset();
-	cmdList->Reset(cmdAllocator.Get(), nullptr);
+	GetSCM()->WaitForRender();
 }
