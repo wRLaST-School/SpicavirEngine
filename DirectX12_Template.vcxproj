@@ -144,6 +144,7 @@
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Vec3.cpp" />
     <ClCompile Include="wDepth.cpp" />
     <ClCompile Include="wDirectX.cpp" />
     <ClCompile Include="wPSO.cpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="Essentials.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Vec3.h" />
     <ClInclude Include="wDepth.h" />
     <ClInclude Include="wDirectX.h" />
     <ClInclude Include="wPSO.h" />
