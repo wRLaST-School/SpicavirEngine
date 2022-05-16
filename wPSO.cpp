@@ -16,7 +16,7 @@ void wPSO::InitDesc()
 	psod.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 
 	psod.SampleMask = D3D12_DEFAULT_SAMPLE_MASK; // 標準設定
-	psod.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;  // カリングしない
+	psod.RasterizerState.CullMode = D3D12_CULL_MODE_BACK;  // カリングしない
 	psod.RasterizerState.FillMode = D3D12_FILL_MODE_SOLID; // ポリゴン内塗りつぶし
 	psod.RasterizerState.DepthClipEnable = true; // 深度クリッピングを有効に
 

@@ -7,6 +7,9 @@
 #include "wShader.h"
 #include "wPSO.h"
 #include "wTexture.h"
+#include "Vec3.h"
+#include "wConstBuffer.h"
+#include "Object3D.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -40,251 +43,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitWSCM();
 	InitWDepth();
 
-	struct Vertex
-	{
-		XMFLOAT3 pos;
-		XMFLOAT2 uv;
-	};
-
-	Vertex vertices[] = {
-		//前
-		{{-50, -50, 50},{0.0f, 1.0f}},
-		{{-50,  50, 50},{0.0f, 0.0f}},
-		{{ 50, -50, 50},{1.0f, 1.0f}},
-		{{ 50,  50, 50},{1.0f, 0.0f}},
-			
-		//後
-		{{-50, -50,  150},{0.0f, 1.0f}},
-		{{-50,  50,  150},{0.0f, 0.0f}},
-		{{ 50, -50,  150},{1.0f, 1.0f}},
-		{{ 50,  50,  150},{1.0f, 0.0f}},
-			
-		//左
-		{{-50, -50, 50},{0.0f, 1.0f}},
-		{{-50, -50,  150},{0.0f, 0.0f}},
-		{{-50,  50, 50},{1.0f, 1.0f}},
-		{{-50,  50,  150},{1.0f, 0.0f}},
-			
-		//右
-		{{ 50, -50, 50},{0.0f, 1.0f}},
-		{{ 50, -50,  150},{0.0f, 0.0f}},
-		{{ 50,  50, 50},{1.0f, 1.0f}},
-		{{ 50,  50,  150},{1.0f, 0.0f}},
-			
-		//下
-		{{-50, -50, 50},{0.0f, 1.0f}},
-		{{ 50, -50, 50},{1.0f, 1.0f}},
-		{{-50, -50,  150},{0.0f, 0.0f}},
-		{{50, -50,  150},{1.0f, 0.0f}},
-			
-		//上
-		{{-50,  50, 50},{0.0f, 1.0f}},
-		{{ 50,  50, 50},{1.0f, 1.0f}},
-		{{-50,  50,  150},{0.0f, 0.0f}},
-		{{50,  50,  150},{1.0f, 0.0f}},
-	};
-
-	//Vertex vertices[] = {
-	//	//前
-	//	{{-50,  50, 50},{0.0f, 1.0f}},
-	//	{{-50, -50, 50},{0.0f, 0.0f}},
-	//	{{ 50,  50, 50},{1.0f, 1.0f}},
-	//	{{ 50, -50, 50},{1.0f, 0.0f}},
-
-	//};
-
-	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * _countof(vertices));
-
-	////頂点バッファの設定
-	D3D12_HEAP_PROPERTIES heapprop{};
-	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
-
-	D3D12_RESOURCE_DESC resdesc{};
-	resdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	resdesc.Width = sizeVB;
-	resdesc.Height = 1;
-	resdesc.DepthOrArraySize = 1;
-	resdesc.MipLevels = 1;
-	resdesc.SampleDesc.Count = 1;
-	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	ComPtr<ID3D12Resource> vertBuff = nullptr;
-	result = GetWDX()->dev->CreateCommittedResource(
-		&heapprop,
-		D3D12_HEAP_FLAG_NONE,
-		&resdesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&vertBuff)
-	);
-
-	// GPU上のバッファに対応した仮想メモリを取得
-	Vertex* vertMap = nullptr;
-	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
-
-	// 全頂点に対して
-	for (int i = 0; i < _countof(vertices); i++)
-	{
-		vertMap[i] = vertices[i];   // 座標をコピー
-	}
-
-	// マップを解除
-	vertBuff->Unmap(0, nullptr);
-
-	// 頂点バッファビューの作成
-	D3D12_VERTEX_BUFFER_VIEW vbView{};
-
-	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
-	vbView.SizeInBytes = sizeVB;
-	vbView.StrideInBytes = sizeof(Vertex);
-
-	////頂点インデックス
-	unsigned short indices[] =
-	{
-		0,1,2,
-		1,2,3,
-
-		4,5,6,
-		5,6,7,
-
-		8,9,10,
-		9,10,11,
-
-		12,13,14,
-		13,14,15,
-
-		16,17,18,
-		17,18,19,
-
-		20,21,22,
-		21,22,23,
-	};
-
-	//頂点インデックスバッファの生成
-	UINT sizeIB = static_cast<UINT>(sizeof(unsigned short) * _countof(indices));
-
-	ComPtr<ID3D12Resource> indexBuff = nullptr;
-	resdesc.Width = sizeIB;
-
-	GetWDX()->dev->CreateCommittedResource(
-		&heapprop,
-		D3D12_HEAP_FLAG_NONE,
-		&resdesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&indexBuff)
-	);
-
-	// GPU上のバッファに対応した仮想メモリを取得
-	unsigned short* indexMap = nullptr;
-	result = indexBuff->Map(0, nullptr, (void**)&indexMap);
-
-	// 全頂点に対して
-	for (int i = 0; i < _countof(indices); i++)
-	{
-		indexMap[i] = indices[i];   // 座標をコピー
-	}
-
-	// マップを解除
-	indexBuff->Unmap(0, nullptr);
-
-	// 頂点インデックスバッファビューの作成
-	D3D12_INDEX_BUFFER_VIEW ibView{};
-
-	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
-	ibView.Format = DXGI_FORMAT_R16_UINT;
-	ibView.SizeInBytes = sizeIB;
-
 	////定数バッファ
 	struct ConstBufferDataMaterial {
 		XMFLOAT4 color; //RGBA
 	};
 
-	struct ConstBufferDataTransform {
-		XMMATRIX mat;//3D変換行列
-	};
+	wConstBuffer<ConstBufferDataMaterial> materialCB;
 
-	//ヒープ設定
-	D3D12_HEAP_PROPERTIES cbheapprop{};
-	cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
+	//Objects
+	Model model;
 
-	//リソース設定
-	D3D12_RESOURCE_DESC cbresdesc{};
-	cbresdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	cbresdesc.Width = (sizeof(ConstBufferDataMaterial) + 0xff) & ~0xff;
-	cbresdesc.Height = 1;
-	cbresdesc.DepthOrArraySize = 1;
-	cbresdesc.MipLevels = 1;
-	cbresdesc.SampleDesc.Count = 1;
-	cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+	list<Object3D> objects;
 
-	//GPUリソースの生成
-	ComPtr<ID3D12Resource> constBuffMaterial = nullptr;
-	GetWDX()->dev->CreateCommittedResource(
-		&cbheapprop,
-		D3D12_HEAP_FLAG_NONE,
-		&cbresdesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
-		IID_PPV_ARGS(&constBuffMaterial));
-
-	//定数バッファ2
-	ComPtr<ID3D12Resource> constBuffTransform = nullptr;
-	ConstBufferDataTransform* cBufTransform = nullptr;
-
+	for (int i = 0; i < 1; i++)
 	{
-		//ヒープ設定
-		D3D12_HEAP_PROPERTIES cbheapprop{};
-		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
-
-		//リソース設定
-		D3D12_RESOURCE_DESC cbresdesc{};
-		cbresdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-		cbresdesc.Width = (sizeof(ConstBufferDataMaterial) + 0xff) & ~0xff;
-		cbresdesc.Height = 1;
-		cbresdesc.DepthOrArraySize = 1;
-		cbresdesc.MipLevels = 1;
-		cbresdesc.SampleDesc.Count = 1;
-		cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-		//GPUリソースの生成
-		ComPtr<ID3D12Resource> constBuffMaterial = nullptr;
-		GetWDX()->dev->CreateCommittedResource(
-			&cbheapprop,
-			D3D12_HEAP_FLAG_NONE,
-			&cbresdesc,
-			D3D12_RESOURCE_STATE_GENERIC_READ,
-			nullptr,
-			IID_PPV_ARGS(&constBuffTransform));
-
-		HRESULT hr = constBuffTransform->Map(0, nullptr, (void**)&cBufTransform);
-		assert(SUCCEEDED(hr));
-
-		cBufTransform->mat = XMMatrixIdentity();
+		objects.push_back(Object3D());
 	}
 
-	//定数バッファ用のデスクリプタヒープ
-	ComPtr<ID3D12DescriptorHeap> basicDescHeap = nullptr;
-
-	//設定構造体
-	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc{};
-	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
-	descHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	descHeapDesc.NumDescriptors = 1;
-
-	//生成
-	GetWDX()->dev->CreateDescriptorHeap(&descHeapDesc, IID_PPV_ARGS(&basicDescHeap));
-
-	D3D12_CPU_DESCRIPTOR_HANDLE basicHeapHandle = basicDescHeap->GetCPUDescriptorHandleForHeapStart();
-
-	//定数バッファビューの作成
-	D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc{};
-	cbvDesc.BufferLocation = constBuffMaterial->GetGPUVirtualAddress();
-	cbvDesc.SizeInBytes = (UINT)constBuffMaterial->GetDesc().Width;
-	GetWDX()->dev->CreateConstantBufferView(&cbvDesc, basicHeapHandle);
-
-	unique_ptr<ConstBufferDataMaterial> cBufMaterial = nullptr;
-	constBuffMaterial->Map(0, nullptr, (void**)cBufMaterial.get());
+	for (auto itr = objects.begin(); itr != objects.end(); itr++)
+	{
+		itr->model = &model;
+	}
 
 	//定数バッファここまで
 
@@ -292,6 +71,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 		{
 			"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+
+		{
+			"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
 			D3D12_APPEND_ALIGNED_ELEMENT,
 			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
@@ -367,7 +152,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	GetPSODesc("def")->pRootSignature = rootsignature.Get();
 	GetWPSO("def")->Create();
 	/*Init Draw End*/
-
+	XMMATRIX wMat = XMMatrixIdentity();
 	/*ループ*/
 	while (true)
 	{
@@ -398,15 +183,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		);
 
 		XMMATRIX vMat;
-		XMFLOAT3 eye(0, 0, -100);
+		XMFLOAT3 eye(0, 0, -300);
 		XMFLOAT3 target(0, 0, 0);
 		XMFLOAT3 up(0, 1, 0);
 
 		vMat = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
 
-		XMMATRIX wMat = XMMatrixIdentity();
+		objects.begin()->rotation.x += 0.01;
+		objects.begin()->UpdateMatrix();
 
-		cBufTransform->mat = wMat * vMat * pMat;
+		XMMATRIX vproj = vMat * pMat;
 		/*描画処理ここまで*/
 
 		//バックバッファ番号を取得(0か1)
@@ -437,14 +223,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 		//GetWDX()->cmdList->SetGraphicsRootDescriptorTable(0, basicDescHeap->GetGPUDescriptorHandleForHeapStart());
 
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetGPUVirtualAddress());
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, materialCB.buffer->GetGPUVirtualAddress());
 
 		ID3D12DescriptorHeap* ppSrvHeap[] = {GetShader("def")->srvHeap.Get()};
 		GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
 		D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = GetShader("def")->srvHeap->GetGPUDescriptorHandleForHeapStart();
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
-
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, constBuffTransform->GetGPUVirtualAddress());
 
 		D3D12_VIEWPORT viewport{};
 
@@ -468,13 +252,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
-
-		GetWDX()->cmdList->IASetIndexBuffer(&ibView);
-
 		GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(ibView.SizeInBytes / sizeof(short), 1, 0, 0, 0);
+		for (auto itr = objects.begin(); itr != objects.end(); itr++)
+		{
+			itr->Draw(vproj);
+		}
 
 		/*描画処理ここまで*/
 
