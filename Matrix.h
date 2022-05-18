@@ -41,8 +41,7 @@ public:
 //Static Functions
 	static Matrix Identity();
 
-public:
-
+private:
 	Row r[4];
 };
 
