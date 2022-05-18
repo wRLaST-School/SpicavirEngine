@@ -96,6 +96,9 @@
     <ClCompile Include="Vec2.cpp">
       <Filter>ソース ファイル\Math\Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Matrix.cpp">
+      <Filter>ソース ファイル\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Essentials.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Vec2.h">
       <Filter>ヘッダー ファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>ヘッダー ファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

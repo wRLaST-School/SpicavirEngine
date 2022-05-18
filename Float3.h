@@ -13,4 +13,6 @@ struct Float3
 	};
 
 	operator Vec3() const { return Vec3(x, y, z); }
+
+	
 };

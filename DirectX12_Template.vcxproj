@@ -144,6 +144,7 @@
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="Vec2.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Float3.h" />
     <ClInclude Include="Float4.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="Vec2.h" />
