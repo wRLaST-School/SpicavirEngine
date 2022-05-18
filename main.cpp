@@ -51,7 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	wConstBuffer<ConstBufferDataMaterial> materialCB;
 
 	//Objects
-	Model model;
+	Model model = Model("Resources/Models/triangle.obj");
 
 	list<Object3D> objects;
 

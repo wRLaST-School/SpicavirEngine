@@ -15,6 +15,7 @@ class Model
 {
 public:
 	Model();
+	Model(string path);
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	D3D12_INDEX_BUFFER_VIEW ibView{};

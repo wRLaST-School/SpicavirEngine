@@ -1,4 +1,6 @@
 #include "Model.h"
+#include <fstream>
+#include <sstream>
 Model::Model() {
 
 	Vertex vertices[] = {
@@ -156,4 +158,162 @@ Model::Model() {
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
 
+}
+
+Model::Model(string path)
+{
+	static vector<Vertex> vertices;
+
+	static vector<USHORT> indices;
+
+	ifstream file;
+	file.open(path);
+	if (file.fail()) {
+		assert(0);
+	}
+
+	string line;
+	vector<Vec3> posList;
+	vector<Vec3> normalList;
+	vector<XMFLOAT2> tcList;
+	while (getline(file, line)) {
+		istringstream lineStream(line);
+
+		string key;
+		getline(lineStream, key, ' ');
+
+		if (key == "v")
+		{
+			Vec3 position{};
+			lineStream >> position.x;
+			lineStream >> position.y;
+			lineStream >> position.z;
+
+			posList.emplace_back(position);
+		}
+
+		if (key == "vt")
+		{
+			XMFLOAT2 texcoord{};
+			lineStream >> texcoord.x;
+			lineStream >> texcoord.y;
+
+			texcoord.y = 1.0f - texcoord.y;
+			tcList.emplace_back(texcoord);
+		}
+
+		if (key == "vn")
+		{
+			Vec3 normal{};
+
+			lineStream >> normal.x;
+			lineStream >> normal.y;
+			lineStream >> normal.z;
+
+			normalList.emplace_back(normal);
+		}
+
+		if (key == "f")
+		{
+			string indexString;
+			while (getline(lineStream, indexString, ' ')) 
+			{
+				istringstream indexStream(indexString);
+				USHORT indexPosition;
+				indexStream >> indexPosition;
+
+				indexStream.seekg(1, ios_base::cur);
+				USHORT indexTexcoord;
+				indexStream >> indexTexcoord;
+
+				indexStream.seekg(1, ios_base::cur);
+				USHORT indexNormal;
+				indexStream >> indexNormal;
+
+				Vertex vertex{};
+				vertex.pos = posList[indexPosition - 1].GetXMFloat();
+				vertex.normal = normalList[indexNormal - 1].GetXMFloat();
+				vertex.uv = tcList[indexTexcoord - 1];
+				vertices.emplace_back(vertex);
+
+				indices.emplace_back((USHORT)indices.size());
+			}
+		}
+
+	}
+	file.close();
+
+	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertices.size());
+
+	////頂点バッファの設定
+	D3D12_HEAP_PROPERTIES heapprop{};
+	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+	D3D12_RESOURCE_DESC resdesc{};
+	resdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	resdesc.Width = sizeVB;
+	resdesc.Height = 1;
+	resdesc.DepthOrArraySize = 1;
+	resdesc.MipLevels = 1;
+	resdesc.SampleDesc.Count = 1;
+	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	GetWDX()->dev->CreateCommittedResource(
+		&heapprop,
+		D3D12_HEAP_FLAG_NONE,
+		&resdesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&vertBuff)
+	);
+
+	// GPU上のバッファに対応した仮想メモリを取得
+	Vertex* vertMap = nullptr;
+	vertBuff->Map(0, nullptr, (void**)&vertMap);
+
+	// 全頂点に対して
+	for (int i = 0; i < vertices.size(); i++)
+	{
+		vertMap[i] = vertices[i];   // 座標をコピー
+	}
+
+	// マップを解除
+	vertBuff->Unmap(0, nullptr);
+
+	// 頂点バッファビューの作成
+	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
+	vbView.SizeInBytes = sizeVB;
+	vbView.StrideInBytes = sizeof(Vertex);
+
+	//頂点インデックスバッファの生成
+	UINT sizeIB = static_cast<UINT>(sizeof(unsigned short) * indices.size());
+
+	resdesc.Width = sizeIB;
+
+	GetWDX()->dev->CreateCommittedResource(
+		&heapprop,
+		D3D12_HEAP_FLAG_NONE,
+		&resdesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&indexBuff)
+	);
+
+	// GPU上のバッファに対応した仮想メモリを取得
+	unsigned short* indexMap = nullptr;
+	indexBuff->Map(0, nullptr, (void**)&indexMap);
+
+	// 全indexに対して
+	for (int i = 0; i < indices.size(); i++)
+	{
+		indexMap[i] = indices[i];   // 座標をコピー
+	}
+
+	// マップを解除
+	indexBuff->Unmap(0, nullptr);
+
+	// 頂点インデックスバッファビューの作成
+	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
+	ibView.Format = DXGI_FORMAT_R16_UINT;
+	ibView.SizeInBytes = sizeIB;
 }
