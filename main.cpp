@@ -169,10 +169,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		/*毎フレーム処理*/
 		/*更新処理*/
-
-
 		/*更新処理ここまで*/
-
 
 		/*描画処理*/
 		//変換

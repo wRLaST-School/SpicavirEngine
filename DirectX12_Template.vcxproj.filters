@@ -25,6 +25,27 @@
     <Filter Include="ヘッダー ファイル\Window">
       <UniqueIdentifier>{5a0d396e-e43e-493c-bf6d-e227653459cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\Math">
+      <UniqueIdentifier>{d3637886-5ad2-4b39-825e-b0136246bbf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math">
+      <UniqueIdentifier>{aedf9401-9922-41b0-b173-4c53aaece6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\3D">
+      <UniqueIdentifier>{61275872-b7fb-43ce-a43c-ee63c691372f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math\Float">
+      <UniqueIdentifier>{efca12d3-8c9c-409c-9f72-f3b07914b4bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math\Float">
+      <UniqueIdentifier>{0587a4ec-b495-483f-a142-7b859d287295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Math\Vector">
+      <UniqueIdentifier>{4d21319e-4381-42d3-9fc3-f271dcaf41e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Math\Vector">
+      <UniqueIdentifier>{9bc98f0f-6297-451c-a188-ebfc365d911d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,32 +63,38 @@
     <ClCompile Include="wWindow.cpp">
       <Filter>ソース ファイル\Window</Filter>
     </ClCompile>
-    <ClCompile Include="wSwapChainManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="wDepth.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="wPSO.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="wShader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="wTexture.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec3.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="wMath.cpp">
+      <Filter>ソース ファイル\Math</Filter>
     </ClCompile>
     <ClCompile Include="wConstBuffer.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="wDepth.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="wPSO.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="wShader.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="wSwapChainManager.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="wTexture.cpp">
+      <Filter>ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Object3D.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\3D</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec3.cpp">
+      <Filter>ソース ファイル\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec2.cpp">
+      <Filter>ソース ファイル\Math\Vector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,32 +110,47 @@
     <ClInclude Include="wWindow.h">
       <Filter>ヘッダー ファイル\Window</Filter>
     </ClInclude>
-    <ClInclude Include="wSwapChainManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="wDepth.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="wPSO.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="wShader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="wTexture.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec3.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="wConstBuffer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Object3D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="wMath.h">
+      <Filter>ヘッダー ファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="wConstBuffer.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="wDepth.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="wPSO.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="wShader.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="wSwapChainManager.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="wTexture.h">
+      <Filter>ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Float4.h">
+      <Filter>ヘッダー ファイル\Math\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="Float3.h">
+      <Filter>ヘッダー ファイル\Math\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="Float2.h">
+      <Filter>ヘッダー ファイル\Math\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec3.h">
+      <Filter>ヘッダー ファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>ヘッダー ファイル\Math\Vector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

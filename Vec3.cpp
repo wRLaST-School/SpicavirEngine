@@ -1,5 +1,6 @@
 #include "Vec3.h"
 #include <math.h>
+#include "Float3.h"
 
 Vec3::Vec3() :x(0), y(0), z(0)
 {
@@ -20,22 +21,22 @@ Vec3& Vec3::SetLength(float l)
 	return *this;
 }
 
-const Vec3 Vec3::operator+(const Vec3& v2) const
+Vec3 Vec3::operator+(const Vec3& v2) const
 {
 	return Vec3(this->x + v2.x, this->y + v2.y, this->z + v2.z);
 }
 
-const Vec3 Vec3::operator-(const Vec3& v2) const
+Vec3 Vec3::operator-(const Vec3& v2) const
 {
 	return Vec3(this->x - v2.x, this->y - v2.y, this->z - v2.z);
 }
 
-const Vec3 Vec3::operator*(float mul) const
+Vec3 Vec3::operator*(float mul) const
 {
 	return Vec3(this->x * mul, this->y * mul, this->z * mul);
 }
 
-const Vec3 Vec3::operator/(float div) const
+Vec3 Vec3::operator/(float div) const
 {
 	return Vec3(this->x / div, this->y / div, this->z / div);
 }
@@ -103,7 +104,7 @@ Vec3 Vec3::GetNorm() const
 
 float Vec3::GetLength() const
 {
-	return sqrt(this->GetSquaredLength());
+	return sqrtf(this->GetSquaredLength());
 }
 
 float Vec3::GetSquaredLength() const
@@ -134,6 +135,11 @@ float Vec3::Dot(const Vec3& v2) const
 Vec3 Vec3::Cross(const Vec3& v2) const
 {
 	return Vec3(y*v2.z - z*v2.y, z*v2.x - x*v2.z, x*v2.y - y*v2.x);
+}
+
+Vec3::operator Float3() const
+{
+	return Float3{ x, y, z };
 }
 
 Vec3 XMFloatToVec3(DirectX::XMFLOAT3 mat)

@@ -146,10 +146,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />
     <ClCompile Include="wConstBuffer.cpp" />
     <ClCompile Include="wDepth.cpp" />
     <ClCompile Include="wDirectX.cpp" />
+    <ClCompile Include="wMath.cpp" />
     <ClCompile Include="wPSO.cpp" />
     <ClCompile Include="wShader.cpp" />
     <ClCompile Include="wSwapChainManager.cpp" />
@@ -158,13 +160,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Essentials.h" />
+    <ClInclude Include="Float2.h" />
+    <ClInclude Include="Float3.h" />
+    <ClInclude Include="Float4.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />
     <ClInclude Include="wConstBuffer.h" />
     <ClInclude Include="wDepth.h" />
     <ClInclude Include="wDirectX.h" />
+    <ClInclude Include="wMath.h" />
     <ClInclude Include="wPSO.h" />
     <ClInclude Include="wShader.h" />
     <ClInclude Include="wSwapChainManager.h" />
