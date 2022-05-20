@@ -1,5 +1,6 @@
 #pragma once
 #include "Float4.h"
+#include "Float3.h"
 class Matrix
 {
 private:
@@ -46,9 +47,37 @@ public:
 	Row& operator[](size_t index);
 
 //Functions
+	Matrix& Transpose();
+	Matrix GetTranspose() const;
 
 //Static Functions
 	static Matrix Identity();
+
+	static Matrix ViewLookTo(Float3 eyePos, Vec3 eyeDirection, Vec3 up = Vec3(0.0f, 1.0f, 0.0f));
+	static Matrix ViewLookAt(Float3 eye, Float3 target, Vec3 up = Vec3(0.0f, 1.0f, 0.0f));
+	//逆行列を取得するだけ(カメラの行列からビューに変換)
+	static Matrix View(Matrix camera);
+
+	static Matrix Projection(float fov, float aspectRatio, float nearZ, float farZ);
+
+	static Matrix RotX(float rad);
+	static Matrix RotY(float rad);
+	static Matrix RotZ(float rad);
+
+	//RotX
+	static Matrix Pitch(float rad);
+	//RotY
+	static Matrix Yaw(float rad);
+	//RotZ
+	static Matrix Roll(float rad);
+
+	static Matrix RotRollPitchYaw(float roll, float pitch, float yaw);
+	static Matrix RotRollPitchYaw(Float3 pitchYawRoll);
+
+	static Matrix Scale(Float3 scale);
+
+	static Matrix Translation(Float3 t);
+
 
 private:
 	Row r[4];

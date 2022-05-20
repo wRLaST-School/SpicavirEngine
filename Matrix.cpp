@@ -82,3 +82,40 @@ Matrix::Row& Matrix::operator[](size_t index)
 {
 	return r[index];
 }
+
+Matrix& Matrix::Transpose()
+{
+	for (size_t i = 0; i < 3; i++)
+	{
+		for (size_t j = i + 1; j < 4; j++)
+		{
+			float temp = r[i][j];
+			r[i][j] = r[j][i];
+			r[j][i] = temp;
+		}
+	}
+	return *this;
+}
+
+Matrix Matrix::GetTranspose() const
+{
+	Matrix ret;
+	for (size_t i = 0; i < 4; i++)
+	{
+		for (size_t j = 0; j < 4; j++)
+		{
+			ret[i][j] = r[j][i];
+		}
+	}
+	return ret;
+}
+
+Matrix Matrix::Identity()
+{
+	return Matrix();
+}
+
+Matrix Matrix::View(Matrix camera)
+{
+	return -camera;
+}

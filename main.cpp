@@ -270,6 +270,5 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	/*ÉãÅ[ÉvÇ±Ç±Ç‹Ç≈*/
 	CloseAllwWindow();
 
-
 	return 0;
 }
