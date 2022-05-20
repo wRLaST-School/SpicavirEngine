@@ -4,9 +4,11 @@ class Matrix
 {
 private:
 	class Row {
-		float c[4];	
+		float c[4];
+	public:
 		float operator[](size_t index) const;
 		float& operator[](size_t index);
+		void operator = (const Float4& f4);
 	};
 
 public:
