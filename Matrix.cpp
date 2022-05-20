@@ -115,6 +115,22 @@ Matrix Matrix::Identity()
 	return Matrix();
 }
 
+Matrix Matrix::ViewLookAt(Float3 eye, Float3 target, Vec3 up)
+{
+	Vec3 camRZ = (Vec3)target - eye;
+	Vec3 camRX = up.Cross(camRZ);
+	Vec3 camRY = camRX.Cross(camRZ);
+
+	Float4 result[4] = {
+		{camRX.x, camRX.y, camRX.z, 0},
+		{camRY.x, camRY.y, camRY.z, 0},
+		{camRZ.x, camRZ.y, camRZ.z, 0},
+		{camRX.Dot(eye), camRY.Dot(eye), camRZ.Dot(eye), 1}
+	};
+
+	return -Matrix(result);
+}
+
 Matrix Matrix::View(Matrix camera)
 {
 	return -camera;
