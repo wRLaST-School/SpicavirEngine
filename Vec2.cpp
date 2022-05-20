@@ -1,6 +1,7 @@
 #include "Vec2.h"
 #include <math.h>
 #include "Float2.h"
+#include "Vec3.h"
 
 Vec2::Vec2() :x(0), y(0)
 {
@@ -80,6 +81,26 @@ Vec2& Vec2::operator/=(float div)
 	return *this;
 }
 
+bool Vec2::operator>(const Vec2& v2) const
+{
+	return this->GetSquaredLength() > v2.GetSquaredLength();
+}
+
+bool Vec2::operator>=(const Vec2& v2) const
+{
+	return this->GetSquaredLength() >= v2.GetSquaredLength();
+}
+
+bool Vec2::operator<(const Vec2& v2) const
+{
+	return this->GetSquaredLength() < v2.GetSquaredLength();
+}
+
+bool Vec2::operator<=(const Vec2& v2) const
+{
+	return this->GetSquaredLength() <= v2.GetSquaredLength();
+}
+
 float Vec2::Dot(const Vec2& v2) const
 {
 	return (this->x * v2.x) + (this->y * v2.y);
@@ -126,4 +147,9 @@ float Vec2::GetSquaredLength() const
 Vec2::operator Float2() const
 {
 	return Float2{ x, y };
+}
+
+Vec2::operator Vec3() const
+{
+	return Vec3(x, y, 0);
 }

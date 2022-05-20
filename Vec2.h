@@ -1,5 +1,6 @@
 #pragma once
 struct Float2;
+class Vec3;
 
 class Vec2
 {
@@ -34,6 +35,11 @@ public:
 
 	Vec2& operator /=(float div);
 
+	bool operator > (const Vec2& v2) const;
+	bool operator >= (const Vec2& v2) const;
+	bool operator < (const Vec2& v2) const;
+	bool operator <= (const Vec2& v2) const;
+
 	float Dot(const Vec2& v2) const;
 
 	float Cross(const Vec2& v2) const;
@@ -49,6 +55,7 @@ public:
 	float GetSquaredLength() const;
 
 	operator Float2() const;
+	operator Vec3() const;
 };
 
 

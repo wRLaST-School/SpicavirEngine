@@ -18,7 +18,7 @@ public:
 	Matrix(Float4 r0, Float4 r1, Float4 r2, Float4 r3);
 	
 	//Float4‚Ì”z—ñ‚Å‰Šú‰»
-	Matrix(Float4* p);
+	Matrix(const Float4* pf44Array);
 
 	//float‚ğ16ŒÂ‚Å‰Šú‰»
 	Matrix(float r0c0, float r0c1, float r0c2, float r0c3,
@@ -27,13 +27,20 @@ public:
 		float r3c0, float r3c1, float r3c2, float r3c3);
 
 	//float‚Ì”z—ñ‚Å‰Šú‰»
-	Matrix(float* p);
+	Matrix(const float* pf16Array);
 
 //Operators
 	Matrix operator - () const;
 
-	Row operator[](size_t index) const;
+	Matrix operator + (const Matrix& m) const;
+	Matrix operator - (const Matrix& m) const;
+	Matrix operator * (const Matrix& m) const;
 
+	Matrix& operator += (const Matrix& m);
+	Matrix& operator -= (const Matrix& m);
+	Matrix& operator *= (const Matrix& m);
+
+	Row operator[](size_t index) const;
 	Row& operator[](size_t index);
 
 //Functions

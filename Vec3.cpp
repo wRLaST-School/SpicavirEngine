@@ -1,4 +1,5 @@
 #include "Vec3.h"
+#include "Vec2.h"
 #include <math.h>
 #include "Float3.h"
 
@@ -77,6 +78,26 @@ Vec3& Vec3::operator/=(float div)
 	return *this;
 }
 
+bool Vec3::operator>(const Vec3& v2) const
+{
+	return this->GetSquaredLength() > v2.GetSquaredLength();
+}
+
+bool Vec3::operator>=(const Vec3& v2) const
+{
+	return this->GetSquaredLength() >= v2.GetSquaredLength();
+}
+
+bool Vec3::operator<(const Vec3& v2) const
+{
+	return this->GetSquaredLength() < v2.GetSquaredLength();
+}
+
+bool Vec3::operator<=(const Vec3& v2) const
+{
+	return this->GetSquaredLength() <= v2.GetSquaredLength();
+}
+
 Vec3& Vec3::Norm()
 {
 	float l = this->GetLength();
@@ -140,6 +161,11 @@ Vec3 Vec3::Cross(const Vec3& v2) const
 Vec3::operator Float3() const
 {
 	return Float3{ x, y, z };
+}
+
+Vec3::operator Vec2() const
+{
+	return Vec2(x, y);
 }
 
 Vec3 XMFloatToVec3(DirectX::XMFLOAT3 mat)

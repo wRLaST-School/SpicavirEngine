@@ -2,6 +2,7 @@
 #include <DirectXMath.h>
 
 struct Float3;
+class Vec2;
 
 class Vec3
 {
@@ -32,6 +33,11 @@ public:
 
 	Vec3& operator /=(float div);
 
+	bool operator > (const Vec3& v2) const;
+	bool operator >= (const Vec3& v2) const;
+	bool operator < (const Vec3& v2) const;
+	bool operator <= (const Vec3& v2) const;
+
 	//Sqrt‚ªŒÄ‚Î‚ê‚é
 	Vec3& Norm();
 
@@ -50,6 +56,7 @@ public:
 	Vec3 Cross(const Vec3& v2) const;
 
 	operator Float3() const;
+	operator Vec2() const;
 };
 
 Vec3 XMFloatToVec3(DirectX::XMFLOAT3 mat);
