@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <math.h>
+#include <stdexcept>
 
 Matrix::Matrix():Matrix(1.0f, 0.0f, 0.0f, 0.0f, 
 	0.0f, 1.0f, 0.0f, 0.0f, 
@@ -58,11 +59,13 @@ Matrix::Matrix(const float* pf16Array)
 
 float Matrix::Row::operator[](size_t index) const
 {
+	if (index > 3) throw std::out_of_range("ITS 4 x 4 MATRIX");
 	return c[index];
 }
 
 float& Matrix::Row::operator[](size_t index)
 {
+	if (index > 3) throw std::out_of_range("ITS 4 x 4 MATRIX");
 	return c[index];
 }
 
@@ -82,11 +85,13 @@ Matrix& Matrix::operator*=(const Matrix& m)
 
 Matrix::Row Matrix::operator[](size_t index) const
 {
+	if (index > 3) throw std::out_of_range("ITS 4 x 4 MATRIX");
 	return r[index];
 }
 
 Matrix::Row& Matrix::operator[](size_t index)
 {
+	if (index > 3) throw std::out_of_range("ITS 4 x 4 MATRIX");
 	return r[index];
 }
 
