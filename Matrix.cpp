@@ -73,6 +73,12 @@ void Matrix::Row::operator=(const Float4& f4)
 	c[3] = f4.w;
 }
 
+Matrix& Matrix::operator*=(const Matrix& m)
+{
+	*this = *this * m;
+	return *this;
+}
+
 Matrix::Row Matrix::operator[](size_t index) const
 {
 	return r[index];
@@ -195,6 +201,56 @@ Matrix Matrix::operator-() const
 	return result;
 }
 
+Matrix Matrix::operator+(const Matrix& m) const
+{
+	return Matrix(
+		r[0][0] + m[0][0],
+		r[0][1] + m[0][1],
+		r[0][2] + m[0][2],
+		r[0][3] + m[0][3],
+
+		r[1][0] + m[1][0],
+		r[1][1] + m[1][1],
+		r[1][2] + m[1][2],
+		r[1][3] + m[1][3],
+
+		r[2][0] + m[2][0],
+		r[2][1] + m[2][1],
+		r[2][2] + m[2][2],
+		r[2][3] + m[2][3],
+
+		r[3][0] + m[3][0],
+		r[3][1] + m[3][1],
+		r[3][2] + m[3][2],
+		r[3][3] + m[3][3]
+	);
+}
+
+Matrix Matrix::operator-(const Matrix& m) const
+{
+	return Matrix(
+		r[0][0] - m[0][0],
+		r[0][1] - m[0][1],
+		r[0][2] - m[0][2],
+		r[0][3] - m[0][3],
+				
+		r[1][0] - m[1][0],
+		r[1][1] - m[1][1],
+		r[1][2] - m[1][2],
+		r[1][3] - m[1][3],
+				
+		r[2][0] - m[2][0],
+		r[2][1] - m[2][1],
+		r[2][2] - m[2][2],
+		r[2][3] - m[2][3],
+				
+		r[3][0] - m[3][0],
+		r[3][1] - m[3][1],
+		r[3][2] - m[3][2],
+		r[3][3] - m[3][3]
+	);
+}
+
 Matrix Matrix::operator*(const Matrix& m) const
 {
 	return Matrix(
@@ -218,4 +274,54 @@ Matrix Matrix::operator*(const Matrix& m) const
 		r[3][0] * m[0][2] + r[3][1] * m[1][2] + r[3][2] * m[2][2] + r[3][3] * m[3][2],
 		r[3][0] * m[0][3] + r[3][1] * m[1][3] + r[3][2] * m[2][3] + r[3][3] * m[3][3]
 	);
+}
+
+Matrix& Matrix::operator+=(const Matrix& m)
+{
+	r[0][0] += m[0][0];
+	r[0][1] += m[0][1];
+	r[0][2] += m[0][2];
+	r[0][3] += m[0][3];
+
+	r[1][0] += m[1][0];
+	r[1][1] += m[1][1];
+	r[1][2] += m[1][2];
+	r[1][3] += m[1][3];
+
+	r[2][0] += m[2][0];
+	r[2][1] += m[2][1];
+	r[2][2] += m[2][2];
+	r[2][3] += m[2][3];
+					  
+	r[3][0] += m[3][0];
+	r[3][1] += m[3][1];
+	r[3][2] += m[3][2];
+	r[3][3] += m[3][3];
+
+	return *this;
+}
+
+Matrix& Matrix::operator-=(const Matrix& m)
+{
+	r[0][0] -= m[0][0];
+	r[0][1] -= m[0][1];
+	r[0][2] -= m[0][2];
+	r[0][3] -= m[0][3];
+			
+	r[1][0] -= m[1][0];
+	r[1][1] -= m[1][1];
+	r[1][2] -= m[1][2];
+	r[1][3] -= m[1][3];
+			
+	r[2][0] -= m[2][0];
+	r[2][1] -= m[2][1];
+	r[2][2] -= m[2][2];
+	r[2][3] -= m[2][3];
+			
+	r[3][0] -= m[3][0];
+	r[3][1] -= m[3][1];
+	r[3][2] -= m[3][2];
+	r[3][3] -= m[3][3];
+
+	return *this;
 }
