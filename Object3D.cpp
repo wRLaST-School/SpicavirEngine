@@ -2,18 +2,15 @@
 
 void Object3D::UpdateMatrix()
 {
-	XMMATRIX mScale, mRot, mTrans;
+	Matrix mScale, mRot, mTrans;
 
-	mScale = XMMatrixScaling(scale.x, scale.y, scale.z);
+	mScale = Matrix::Scale(scale);
 
-	mRot = XMMatrixIdentity();
-	mRot *= XMMatrixRotationZ(rotation.z);
-	mRot *= XMMatrixRotationX(rotation.x);
-	mRot *= XMMatrixRotationY(rotation.y);
+	mRot = Matrix::RotRollPitchYaw(rotation);
 
-	mTrans = XMMatrixTranslation(posision.x, posision.y, posision.z);
+	mTrans = Matrix::Translation(posision);
 
-	matWorld = XMMatrixIdentity();
+	matWorld = Matrix::Identity();
 	matWorld *= mScale;
 	matWorld *= mRot;
 	matWorld *= mTrans;
@@ -24,7 +21,7 @@ void Object3D::UpdateMatrix()
 	}
 }
 
-void Object3D::Draw(const XMMATRIX& viewProj)
+void Object3D::Draw(const Matrix& viewProj)
 {
 	transformCB.contents->mat = matWorld * viewProj;
 

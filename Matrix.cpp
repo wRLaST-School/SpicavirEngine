@@ -145,17 +145,18 @@ Matrix Matrix::ViewLookTo(Float3 eyePos, Vec3 camRZ, Vec3 up)
 Matrix Matrix::ViewLookAt(Float3 eye, Float3 target, Vec3 up)
 {
 	Vec3 camRZ = (Vec3)target - eye;
-	Vec3 camRX = up.Cross(camRZ);
-	Vec3 camRY = camRX.Cross(camRZ);
+	camRZ.Norm();
+	Vec3 camRX = up.Cross(camRZ).GetNorm();
+	Vec3 camRY = camRZ.Cross(camRX).GetNorm();
 
-	Float4 result[4] = {
-		{camRX.x, camRX.y, camRX.z, 0},
-		{camRY.x, camRY.y, camRY.z, 0},
-		{camRZ.x, camRZ.y, camRZ.z, 0},
-		{camRX.Dot(eye), camRY.Dot(eye), camRZ.Dot(eye), 1}
-	};
+	Matrix result = Matrix(
+		camRX.x, camRX.y, camRX.z, 0,
+		camRY.x, camRY.y, camRY.z, 0,
+		camRZ.x, camRZ.y, camRZ.z, 0,
+		eye.x, eye.y, eye.z, 1
+	);
 
-	return -Matrix(result);
+	return -result;
 }
 
 Matrix Matrix::View(Matrix camera)
@@ -168,7 +169,7 @@ Matrix Matrix::Projection(float fov, float aspectRatio, float nearZ, float farZ)
 	Matrix result = Matrix();
 
 	result[1][1] = 1 / tanf(fov / 2);
-	result[0][0] = aspectRatio * result[1][1];
+	result[0][0] = result[1][1] / aspectRatio;
 	result[2][2] = farZ / farZ - nearZ;
 	result[3][2] = farZ * -nearZ / farZ - nearZ;
 	result[2][3] = 1;
@@ -365,10 +366,10 @@ Matrix Matrix::Pitch(float rad)
 {
 	Matrix result = Matrix();
 
-	result[1][1] = cos(rad);
-	result[1][2] = -sin(rad);
-	result[2][1] = sin(rad);
-	result[2][2] = cos(rad);
+	result[1][1] = cosf(rad);
+	result[2][1] = -sinf(rad);
+	result[1][2] = sinf(rad);
+	result[2][2] = cosf(rad);
 
 	return result;
 }
@@ -377,10 +378,10 @@ Matrix Matrix::Yaw(float rad)
 {
 	Matrix result = Matrix();
 
-	result[0][0] = cos(rad);
-	result[0][2] = -sin(rad);
-	result[2][0] = sin(rad);
-	result[2][2] = cos(rad);
+	result[0][0] = cosf(rad);
+	result[0][2] = -sinf(rad);
+	result[2][0] = sinf(rad);
+	result[2][2] = cosf(rad);
 
 	return result;
 }
@@ -389,10 +390,10 @@ Matrix Matrix::Roll(float rad)
 {
 	Matrix result = Matrix();
 
-	result[0][0] = cos(rad);
-	result[1][0] = -sin(rad);
-	result[0][1] = sin(rad);
-	result[1][1] = cos(rad);
+	result[0][0] = cosf(rad);
+	result[1][0] = -sinf(rad);
+	result[0][1] = sinf(rad);
+	result[1][1] = cosf(rad);
 
 	return result;
 }

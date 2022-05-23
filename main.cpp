@@ -153,7 +153,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	GetPSODesc("def")->pRootSignature = rootsignature.Get();
 	GetWPSO("def")->Create();
 	/*Init Draw End*/
-	XMMATRIX wMat = XMMatrixIdentity();
+	Matrix wMat = Matrix::Identity();
 	/*ループ*/
 	while (true)
 	{
@@ -174,23 +174,55 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		/*描画処理*/
 		//変換
-		XMMATRIX pMat = XMMatrixPerspectiveFovLH(
+		Matrix pMat = Matrix::Projection(
 			XMConvertToRadians(45.0f),
 			(float)GetwWindow()->width / GetwWindow()->height,
 			0.1f, 1000.0f
 		);
 
-		XMMATRIX vMat;
-		XMFLOAT3 eye(0, 0, -300);
-		XMFLOAT3 target(0, 0, 0);
-		XMFLOAT3 up(0, 1, 0);
+		Matrix vMat;
+		Float3 eye{ 0, 0, -300 };
+		Float3 target{ 0, 0, 0 };
+		Float3 up{ 0, 1.0f, 0 };
 
-		vMat = XMMatrixLookAtLH(XMLoadFloat3(&eye), XMLoadFloat3(&target), XMLoadFloat3(&up));
+		vMat = Matrix::ViewLookAt(eye, target, up);
 
 		objects.begin()->rotation.x += 0.01;
 		objects.begin()->UpdateMatrix();
 
-		XMMATRIX vproj = vMat * pMat;
+		XMFLOAT3 eye2{ 0, 0, -300 };
+		XMFLOAT3 target2{ 0, 0, 0 };
+		XMFLOAT3 up2{ 0, 1.0f, 0 };
+
+		XMMATRIX pM = XMMatrixLookAtLH(
+			XMLoadFloat3(&eye2),
+			XMLoadFloat3(&target2),
+			XMLoadFloat3(&up2)
+		);
+
+		Matrix pm = Matrix(
+			pM.r[0].m128_f32[0],
+			pM.r[0].m128_f32[1],
+			pM.r[0].m128_f32[2],
+			pM.r[0].m128_f32[3],
+
+			pM.r[1].m128_f32[0],
+			pM.r[1].m128_f32[1],
+			pM.r[1].m128_f32[2],
+			pM.r[1].m128_f32[3],
+
+			pM.r[2].m128_f32[0],
+			pM.r[2].m128_f32[1],
+			pM.r[2].m128_f32[2],
+			pM.r[2].m128_f32[3],
+
+			pM.r[3].m128_f32[0],
+			pM.r[3].m128_f32[1],
+			pM.r[3].m128_f32[2],
+			pM.r[3].m128_f32[3]
+			);
+
+		Matrix vproj = vMat * pMat;
 		/*描画処理ここまで*/
 
 		//バックバッファ番号を取得(0か1)

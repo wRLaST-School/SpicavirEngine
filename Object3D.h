@@ -2,23 +2,23 @@
 #include "wConstBuffer.h"
 #include "Model.h"
 struct ConstBufferDataTransform {
-	XMMATRIX mat;//3D•ÏŠ·s—ñ
+	Matrix mat;//3D•ÏŠ·s—ñ
 };
 
 class Object3D
 {
 public:
-	Object3D() { transformCB.contents->mat = XMMatrixIdentity(); };
+	Object3D() { transformCB.contents->mat = Matrix::Identity(); };
 	void UpdateMatrix();
-	void Draw(const XMMATRIX& viewProj);
+	void Draw(const Matrix& viewProj);
 
 	wConstBuffer<ConstBufferDataTransform> transformCB;
 
-	XMFLOAT3 scale = { 1, 1, 1 };
-	XMFLOAT3 rotation = { 0, 0, 0 };
-	XMFLOAT3 posision = { 0, 0, 0 };
+	Float3 scale = { 1, 1, 1 };
+	Float3 rotation = { 0, 0, 0 };
+	Float3 posision = { 0, 0, 0 };
 
-	XMMATRIX matWorld = XMMatrixIdentity();
+	Matrix matWorld = Matrix::Identity();
 
 	Object3D* parent = nullptr;
 
