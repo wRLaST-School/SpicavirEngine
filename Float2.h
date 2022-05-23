@@ -10,5 +10,5 @@ struct Float2
 		x = f2.x; y = f2.y;
 	};
 
-	operator Vec2() { return Vec2(x, y); };
+	operator Vec2() const { return Vec2(x, y); };
 };

@@ -10,9 +10,13 @@
 #include "Vec3.h"
 #include "wConstBuffer.h"
 #include "Object3D.h"
+#include "Matrix.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
+	Matrix a(2,4,1,5,3,2,1,5,2,6,9,3,8,4,3,-5);
+	a = a * -a;
+
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
 	ID3D12Debug* debugController;

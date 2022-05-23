@@ -150,3 +150,52 @@ Matrix Matrix::View(Matrix camera)
 {
 	return -camera;
 }
+
+Matrix Matrix::operator-() const
+{
+	Matrix result;
+	float temp[4][8] = {};
+
+	double a;
+
+	//一時行列にコピー
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			temp[i][j] = r[i][j];
+
+			if(i == j)temp[i][4 + j] = 1;
+		}
+	}
+
+	for (int k = 0; k < 4; k++) {
+		a = 1 / temp[k][k];
+
+		for (int j = 0; j < 8; j++) {
+			temp[k][j] *= a;
+		}
+
+		for (int i = 0; i < 4; i++) {
+			if (i == k) {
+				continue;
+			}
+
+			a = -temp[i][k];
+
+			for (int j = 0; j < 8; j++) {
+				temp[i][j] += temp[k][j] * a;
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			result[i][j] = temp[i][4 + j];
+		}
+	}
+	return result;
+}
+
+Matrix Matrix::operator*(const Matrix& m) const
+{
+	return Matrix();
+}
