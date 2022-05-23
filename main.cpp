@@ -190,38 +190,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		objects.begin()->rotation.x += 0.01;
 		objects.begin()->UpdateMatrix();
 
-		XMFLOAT3 eye2{ 0, 0, -300 };
-		XMFLOAT3 target2{ 0, 0, 0 };
-		XMFLOAT3 up2{ 0, 1.0f, 0 };
-
-		XMMATRIX pM = XMMatrixLookAtLH(
-			XMLoadFloat3(&eye2),
-			XMLoadFloat3(&target2),
-			XMLoadFloat3(&up2)
-		);
-
-		Matrix pm = Matrix(
-			pM.r[0].m128_f32[0],
-			pM.r[0].m128_f32[1],
-			pM.r[0].m128_f32[2],
-			pM.r[0].m128_f32[3],
-
-			pM.r[1].m128_f32[0],
-			pM.r[1].m128_f32[1],
-			pM.r[1].m128_f32[2],
-			pM.r[1].m128_f32[3],
-
-			pM.r[2].m128_f32[0],
-			pM.r[2].m128_f32[1],
-			pM.r[2].m128_f32[2],
-			pM.r[2].m128_f32[3],
-
-			pM.r[3].m128_f32[0],
-			pM.r[3].m128_f32[1],
-			pM.r[3].m128_f32[2],
-			pM.r[3].m128_f32[3]
-			);
-
 		Matrix vproj = vMat * pMat;
 		/*ï`âÊèàóùÇ±Ç±Ç‹Ç≈*/
 
