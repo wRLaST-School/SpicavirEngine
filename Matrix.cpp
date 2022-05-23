@@ -172,6 +172,21 @@ Matrix Matrix::Projection(float fov, float aspectRatio, float nearZ, float farZ)
 	return result;
 }
 
+Matrix Matrix::RotX(float rad)
+{
+	return Pitch(rad);
+}
+
+Matrix Matrix::RotY(float rad)
+{
+	return Yaw(rad);
+}
+
+Matrix Matrix::RotZ(float rad)
+{
+	return Roll(rad);
+}
+
 Matrix Matrix::operator-() const
 {
 	Matrix result;
@@ -339,4 +354,71 @@ Matrix& Matrix::operator-=(const Matrix& m)
 	r[3][3] -= m[3][3];
 
 	return *this;
+}
+
+Matrix Matrix::Pitch(float rad)
+{
+	Matrix result = Matrix();
+
+	result[1][1] = cos(rad);
+	result[1][2] = -sin(rad);
+	result[2][1] = sin(rad);
+	result[2][2] = cos(rad);
+
+	return result;
+}
+
+Matrix Matrix::Yaw(float rad)
+{
+	Matrix result = Matrix();
+
+	result[0][0] = cos(rad);
+	result[0][2] = -sin(rad);
+	result[2][0] = sin(rad);
+	result[2][2] = cos(rad);
+
+	return result;
+}
+
+Matrix Matrix::Roll(float rad)
+{
+	Matrix result = Matrix();
+
+	result[0][0] = cos(rad);
+	result[1][0] = -sin(rad);
+	result[0][1] = sin(rad);
+	result[1][1] = cos(rad);
+
+	return result;
+}
+
+Matrix Matrix::RotRollPitchYaw(float roll, float pitch, float yaw)
+{
+	Matrix result = Matrix::Identity() * Roll(roll) * Pitch(pitch) * Yaw(yaw);
+	return result;
+}
+
+Matrix Matrix::RotRollPitchYaw(Float3 pitchYawRoll)
+{
+	return RotRollPitchYaw(pitchYawRoll.z, pitchYawRoll.x, pitchYawRoll.y);
+}
+
+Matrix Matrix::Scale(Float3 scale)
+{
+	Matrix ret = Matrix();
+	ret[0][0] = scale.x;
+	ret[1][1] = scale.y;
+	ret[2][2] = scale.z;
+
+	return ret;
+}
+
+Matrix Matrix::Translation(Float3 t)
+{
+	Matrix ret = Matrix();
+	ret[3][0] = t.x;
+	ret[3][1] = t.y;
+	ret[3][2] = t.z;
+
+	return ret;
 }
