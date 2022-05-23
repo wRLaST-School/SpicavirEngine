@@ -10,3 +10,7 @@
 #define PI 3.14159265359
 #endif
 
+#ifndef PIf
+#define PIf 3.14159265359f
+#endif
+

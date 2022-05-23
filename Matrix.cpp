@@ -1,4 +1,5 @@
 #include "Matrix.h"
+#include <math.h>
 
 Matrix::Matrix():Matrix(1.0f, 0.0f, 0.0f, 0.0f, 
 	0.0f, 1.0f, 0.0f, 0.0f, 
@@ -155,6 +156,20 @@ Matrix Matrix::ViewLookAt(Float3 eye, Float3 target, Vec3 up)
 Matrix Matrix::View(Matrix camera)
 {
 	return -camera;
+}
+
+Matrix Matrix::Projection(float fov, float aspectRatio, float nearZ, float farZ)
+{
+	Matrix result = Matrix();
+
+	result[1][1] = 1 / tanf(fov / 2);
+	result[0][0] = aspectRatio * result[1][1];
+	result[2][2] = farZ / farZ - nearZ;
+	result[3][2] = farZ * -nearZ / farZ - nearZ;
+	result[2][3] = 1;
+	result[3][3] = 0;
+
+	return result;
 }
 
 Matrix Matrix::operator-() const

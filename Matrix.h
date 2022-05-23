@@ -78,7 +78,6 @@ public:
 
 	static Matrix Translation(Float3 t);
 
-
 private:
 	Row r[4];
 };
