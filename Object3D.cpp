@@ -32,5 +32,4 @@ void Object3D::Draw(const Matrix& viewProj)
 	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
 	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(short), 1, 0, 0, 0);
-
 }

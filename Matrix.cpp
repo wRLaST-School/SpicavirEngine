@@ -122,6 +122,21 @@ Matrix Matrix::GetTranspose() const
 	return ret;
 }
 
+Vec3 Matrix::ExtractAxisX(float scale)
+{
+	return Vec3(r[0][0] / scale, r[0][1], r[0][2]).GetNorm();
+}
+
+Vec3 Matrix::ExtractAxisY(float scale)
+{
+	return Vec3(r[1][0], r[1][1] / scale, r[1][2]).GetNorm();
+}
+
+Vec3 Matrix::ExtractAxisZ(float scale)
+{
+	return Vec3(r[2][0], r[2][1], r[2][2] / scale).GetNorm();
+}
+
 Matrix Matrix::Identity()
 {
 	return Matrix();

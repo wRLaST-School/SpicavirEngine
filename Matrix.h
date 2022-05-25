@@ -50,6 +50,13 @@ public:
 	Matrix& Transpose();
 	Matrix GetTranspose() const;
 
+	//回転行列からオブジェクトのX軸方向のベクトルを取得
+	Vec3 ExtractAxisX(float scale = 1.0);
+	//回転行列からオブジェクトのY軸方向のベクトルを取得
+	Vec3 ExtractAxisY(float scale = 1.0);
+	//回転行列からオブジェクトのZ軸方向のベクトルを取得
+	Vec3 ExtractAxisZ(float scale = 1.0);
+
 //Static Functions
 	static Matrix Identity();
 
