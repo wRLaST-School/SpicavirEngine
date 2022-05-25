@@ -79,9 +79,9 @@ Model::Model() {
 		Vec3 normal = v1.Cross(v2);
 
 		normal.Norm();
-		vertices[i0].normal = normal.GetXMFloat();
-		vertices[i1].normal = normal.GetXMFloat();
-		vertices[i2].normal = normal.GetXMFloat();
+		vertices[i0].normal = normal;
+		vertices[i1].normal = normal;
+		vertices[i2].normal = normal;
 	}
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * _countof(vertices));
@@ -173,9 +173,9 @@ Model::Model(string path)
 	}
 
 	string line;
-	vector<Vec3> posList;
+	vector<Float3> posList;
 	vector<Vec3> normalList;
-	vector<XMFLOAT2> tcList;
+	vector<Float2> tcList;
 	while (getline(file, line)) {
 		istringstream lineStream(line);
 
@@ -184,7 +184,7 @@ Model::Model(string path)
 
 		if (key == "v")
 		{
-			Vec3 position{};
+			Float3 position{};
 			lineStream >> position.x;
 			lineStream >> position.y;
 			lineStream >> position.z;
@@ -194,7 +194,7 @@ Model::Model(string path)
 
 		if (key == "vt")
 		{
-			XMFLOAT2 texcoord{};
+			Float2 texcoord{};
 			lineStream >> texcoord.x;
 			lineStream >> texcoord.y;
 
@@ -231,8 +231,8 @@ Model::Model(string path)
 				indexStream >> indexNormal;
 
 				Vertex vertex{};
-				vertex.pos = posList[indexPosition - 1].GetXMFloat();
-				vertex.normal = normalList[indexNormal - 1].GetXMFloat();
+				vertex.pos = posList[indexPosition - 1];
+				vertex.normal = normalList[indexNormal - 1];
 				vertex.uv = tcList[indexTexcoord - 1];
 				vertices.emplace_back(vertex);
 

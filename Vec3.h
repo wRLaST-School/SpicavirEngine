@@ -1,5 +1,4 @@
 #pragma once
-#include <DirectXMath.h>
 
 struct Float3;
 class Vec2;
@@ -48,16 +47,10 @@ public:
 
 	float GetSquaredLength() const;
 
-	DirectX::XMFLOAT3 GetXMFloat() const;
-
-	void AddToMatLH(DirectX::XMMATRIX mat);
-
 	float Dot(const Vec3& v2) const;
 	Vec3 Cross(const Vec3& v2) const;
 
 	operator Float3() const;
 	operator Vec2() const;
 };
-
-Vec3 XMFloatToVec3(DirectX::XMFLOAT3 mat);
 

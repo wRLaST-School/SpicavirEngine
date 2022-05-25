@@ -133,21 +133,6 @@ float Vec3::GetSquaredLength() const
 	return this->x * this->x + this->y * this->y + this->z * this->z;
 }
 
-DirectX::XMFLOAT3 Vec3::GetXMFloat() const
-{
-	return DirectX::XMFLOAT3(x, y, z);
-}
-
-void Vec3::AddToMatLH(DirectX::XMMATRIX mat)
-{
-	Vec3 result;
-	result.x = mat.r[0].m128_f32[0] * x + mat.r[1].m128_f32[0] * y + mat.r[2].m128_f32[0] * z;
-	result.y = mat.r[0].m128_f32[1] * x + mat.r[1].m128_f32[1] * y + mat.r[2].m128_f32[1] * z;
-	result.z = mat.r[0].m128_f32[2] * x + mat.r[1].m128_f32[2] * y + mat.r[2].m128_f32[2] * z;
-
-	*this = result;
-}
-
 float Vec3::Dot(const Vec3& v2) const
 {
 	return x*v2.x + y*v2.y + z*v2.z;
@@ -166,9 +151,4 @@ Vec3::operator Float3() const
 Vec3::operator Vec2() const
 {
 	return Vec2(x, y);
-}
-
-Vec3 XMFloatToVec3(DirectX::XMFLOAT3 mat)
-{
-	return Vec3(mat.x, mat.y, mat.z);
 }

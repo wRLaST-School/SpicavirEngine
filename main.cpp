@@ -46,7 +46,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	////定数バッファ
 	struct ConstBufferDataMaterial {
-		XMFLOAT4 color; //RGBA
+		Float4 color; //RGBA
 	};
 
 	wConstBuffer<ConstBufferDataMaterial> materialCB;
@@ -175,7 +175,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*描画処理*/
 		//変換
 		Matrix pMat = Matrix::Projection(
-			XMConvertToRadians(45.0f),
+			PI/4,
 			(float)GetwWindow()->width / GetwWindow()->height,
 			0.1f, 1000.0f
 		);

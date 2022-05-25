@@ -151,7 +151,7 @@ Matrix Matrix::ViewLookTo(Float3 eyePos, Vec3 camRZ, Vec3 up)
 		{camRX.x, camRX.y, camRX.z, 0},
 		{camRY.x, camRY.y, camRY.z, 0},
 		{camRZ.x, camRZ.y, camRZ.z, 0},
-		{camRX.Dot(eyePos), camRY.Dot(eyePos), camRZ.Dot(eyePos), 1}
+		{eyePos.x, eyePos.y, eyePos.z, 1}
 	};
 
 	return -Matrix(result);

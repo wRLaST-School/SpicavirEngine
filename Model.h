@@ -6,9 +6,9 @@
 
 struct Vertex
 {
-	XMFLOAT3 pos;
-	XMFLOAT3 normal;
-	XMFLOAT2 uv;
+	Float3 pos;
+	Float3 normal;
+	Float2 uv;
 };
 
 class Model
