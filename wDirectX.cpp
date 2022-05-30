@@ -5,6 +5,7 @@
 #include "wRootSignature.h"
 
 #include "wConstBuffer.h"
+#include "wTextureManager.h"
 
 static wDirectX WDX;
 wConstBuffer<ConstBufferDataMaterial>* materialCB = nullptr;
@@ -132,9 +133,9 @@ void wDirectX::PreDrawCommands()
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, materialCB->buffer->GetGPUVirtualAddress());
 
-	ID3D12DescriptorHeap* ppSrvHeap[] = { GetShader("def")->srvHeap.Get() };
+	ID3D12DescriptorHeap* ppSrvHeap[] = { GetTextureManager()->srvHeap.Get()};
 	GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
-	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = GetShader("def")->srvHeap->GetGPUDescriptorHandleForHeapStart();
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = GetTextureManager()->srvHeap->GetGPUDescriptorHandleForHeapStart();
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
 
 	D3D12_VIEWPORT viewport{};

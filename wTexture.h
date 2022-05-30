@@ -12,4 +12,4 @@ public:
 };
 
 void InitTextureBuff();
-wTexture* GetTextureManager();
+wTexture* GetTexture();

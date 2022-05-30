@@ -193,6 +193,16 @@ Matrix Matrix::Projection(float fov, float aspectRatio, float nearZ, float farZ)
 	return result;
 }
 
+Matrix Matrix::Projection(int windowWidth, int windowHeight)
+{
+	return Matrix(
+		2.0f / windowWidth, 0, 0, 0,
+		0, -2.0f / windowHeight, 0, 0,
+		0, 0, 1, 0,
+		-1 , 1, 0, 1
+	);
+}
+
 Matrix Matrix::RotX(float rad)
 {
 	return Pitch(rad);

@@ -73,7 +73,7 @@ void InitTextureBuff()
 	wtex.LoadTexture("Resources/think.png");
 }
 
-wTexture* GetTextureManager()
+wTexture* GetTexture()
 {
 	return &wtex;
 }

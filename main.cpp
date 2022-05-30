@@ -13,6 +13,7 @@
 #include "Matrix.h"
 #include "wRootSignature.h"
 #include "SceneManager.h"
+#include "wTextureManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -44,8 +45,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitWSCM();
 	InitWDepth();
 
-	//PSO
 	InitTextureBuff();
+	CreateAndInitTextureManager();
+
+	//PSO
 	RegisterAndInitShader("def");
 	RegisterAndInitPSO("def", GetShader("def"));
 

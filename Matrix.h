@@ -66,6 +66,7 @@ public:
 	static Matrix View(Matrix camera);
 
 	static Matrix Projection(float fov, float aspectRatio, float nearZ, float farZ);
+	static Matrix Projection(int windowWidth, int windowHeight);
 
 	static Matrix RotX(float rad);
 	static Matrix RotY(float rad);
