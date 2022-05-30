@@ -1,6 +1,13 @@
 #include "wDirectX.h"
 #include "wSwapChainManager.h"
+#include "wDepth.h"
+#include "wPSO.h"
+#include "wRootSignature.h"
+
+#include "wConstBuffer.h"
+
 static wDirectX WDX;
+wConstBuffer<ConstBufferDataMaterial>* materialCB = nullptr;
 
 wDirectX* GetWDX()
 {
@@ -75,7 +82,93 @@ void wDirectX::Init() {
 
 	dev->CreateCommandQueue(&cmdQueueDesc, IID_PPV_ARGS(&cmdQueue));
 
+	materialCB = new wConstBuffer<ConstBufferDataMaterial>();
+}
 
+bool wDirectX::StartFrame()
+{
+	if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	if (msg.message == WM_QUIT)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+void wDirectX::PreDrawCommands()
+{
+	//バックバッファ番号を取得(0か1)
+	UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
+
+	//リソースバリアーを書き込み可能状態に
+	barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
+	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	GetWDX()->cmdList->ResourceBarrier(1, &barrierDesc);
+
+	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetSCM()->rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
+		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetSCM()->heapDesc.Type));
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
+
+	//画面クリア
+	float clearColor[] = { 0.1f, 0.25f, 0.5f, 0.0f };
+	GetWDX()->cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
+	GetWDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+
+	/*描画処理*/
+	GetWDX()->cmdList->SetPipelineState(GetPSO("def"));
+	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
+
+	//ID3D12DescriptorHeap* ppHeaps[] = { basicDescHeap.Get()};
+	//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+	//GetWDX()->cmdList->SetGraphicsRootDescriptorTable(0, basicDescHeap->GetGPUDescriptorHandleForHeapStart());
+
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, materialCB->buffer->GetGPUVirtualAddress());
+
+	ID3D12DescriptorHeap* ppSrvHeap[] = { GetShader("def")->srvHeap.Get() };
+	GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
+	D3D12_GPU_DESCRIPTOR_HANDLE srvGpuHandle = GetShader("def")->srvHeap->GetGPUDescriptorHandleForHeapStart();
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, srvGpuHandle);
+
+	D3D12_VIEWPORT viewport{};
+
+	viewport.Width = GetwWindow()->width;
+	viewport.Height = GetwWindow()->height;
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+
+	D3D12_RECT scissorrect{};
+
+	scissorrect.left = 0;                                       // 切り抜き座標左
+	scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+	scissorrect.top = 0;                                        // 切り抜き座標上
+	scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+
+	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+
+	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+}
+
+void wDirectX::PostDrawCommands()
+{
+	//リソースバリアーを戻す
+	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+
+	cmdList->ResourceBarrier(1, &barrierDesc);
 }
 
 void wDirectX::EndFrame()

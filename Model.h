@@ -11,6 +11,27 @@ struct Vertex
 	Float2 uv;
 };
 
+// 頂点レイアウト
+static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
+		{
+			"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+
+		{
+			"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+
+		{
+			"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		}
+};
+
 class Model
 {
 public:
@@ -23,4 +44,3 @@ public:
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> indexBuff = nullptr;
 };
-

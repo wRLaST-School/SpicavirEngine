@@ -154,6 +154,7 @@
     <ClCompile Include="wDirectX.cpp" />
     <ClCompile Include="wMath.cpp" />
     <ClCompile Include="wPSO.cpp" />
+    <ClCompile Include="wRootSignature.cpp" />
     <ClCompile Include="wShader.cpp" />
     <ClCompile Include="wSwapChainManager.cpp" />
     <ClCompile Include="wTexture.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="wDirectX.h" />
     <ClInclude Include="wMath.h" />
     <ClInclude Include="wPSO.h" />
+    <ClInclude Include="wRootSignature.h" />
     <ClInclude Include="wShader.h" />
     <ClInclude Include="wSwapChainManager.h" />
     <ClInclude Include="wTexture.h" />
