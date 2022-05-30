@@ -1,195 +1,213 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
+    <Filter Include="Engine">
+      <UniqueIdentifier>{8d50a1f0-5791-41a5-9153-0111cc72d7e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{12ac3a33-d8e3-467f-9996-e6aa614e6b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
+    <Filter Include="Engine\ソース ファイル\DirectX">
+      <UniqueIdentifier>{c25a2f10-50c4-4476-8fc5-f91b99251afc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\Window">
+      <UniqueIdentifier>{5edf9e2e-ad54-42fa-bf03-5a905135e50a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\Math">
+      <UniqueIdentifier>{aedf9401-9922-41b0-b173-4c53aaece6da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\Math\Float">
+      <UniqueIdentifier>{0587a4ec-b495-483f-a142-7b859d287295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\Math\Vector">
+      <UniqueIdentifier>{9bc98f0f-6297-451c-a188-ebfc365d911d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\3D">
+      <UniqueIdentifier>{61275872-b7fb-43ce-a43c-ee63c691372f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\Scene">
+      <UniqueIdentifier>{780367ae-f2b8-4dea-bc42-81d806a5e6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="リソース ファイル">
+    <Filter Include="Engine\ヘッダー ファイル\DirectX">
+      <UniqueIdentifier>{cce4e419-1214-4ad3-a3b1-23993260475b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Window">
+      <UniqueIdentifier>{5a0d396e-e43e-493c-bf6d-e227653459cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Math">
+      <UniqueIdentifier>{d3637886-5ad2-4b39-825e-b0136246bbf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Math\Float">
+      <UniqueIdentifier>{efca12d3-8c9c-409c-9f72-f3b07914b4bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Math\Vector">
+      <UniqueIdentifier>{4d21319e-4381-42d3-9fc3-f271dcaf41e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{b3c3249b-ab09-4fba-9f02-8811aa962d2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\3D">
+      <UniqueIdentifier>{4f8c7250-e03b-47b8-87ae-d5c4cacdcb19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル\DirectX">
-      <UniqueIdentifier>{cce4e419-1214-4ad3-a3b1-23993260475b}</UniqueIdentifier>
+    <Filter Include="Application\ソースファイル">
+      <UniqueIdentifier>{f28f76a2-ccad-463c-97b4-bdf228e72c51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\DirectX">
-      <UniqueIdentifier>{c25a2f10-50c4-4476-8fc5-f91b99251afc}</UniqueIdentifier>
+    <Filter Include="Application\ヘッダーファイル">
+      <UniqueIdentifier>{696e5b68-a0d6-4c59-afe6-217a87ecf169}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Window">
-      <UniqueIdentifier>{5edf9e2e-ad54-42fa-bf03-5a905135e50a}</UniqueIdentifier>
+    <Filter Include="Application\ソースファイル\Scene">
+      <UniqueIdentifier>{0e2716fc-b7ca-4f9b-ba71-858431f72756}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Window">
-      <UniqueIdentifier>{5a0d396e-e43e-493c-bf6d-e227653459cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Math">
-      <UniqueIdentifier>{d3637886-5ad2-4b39-825e-b0136246bbf3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Math">
-      <UniqueIdentifier>{aedf9401-9922-41b0-b173-4c53aaece6da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\3D">
-      <UniqueIdentifier>{61275872-b7fb-43ce-a43c-ee63c691372f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Math\Float">
-      <UniqueIdentifier>{efca12d3-8c9c-409c-9f72-f3b07914b4bb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Math\Float">
-      <UniqueIdentifier>{0587a4ec-b495-483f-a142-7b859d287295}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Math\Vector">
-      <UniqueIdentifier>{4d21319e-4381-42d3-9fc3-f271dcaf41e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Math\Vector">
-      <UniqueIdentifier>{9bc98f0f-6297-451c-a188-ebfc365d911d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Scene">
-      <UniqueIdentifier>{b3c3249b-ab09-4fba-9f02-8811aa962d2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Scene">
-      <UniqueIdentifier>{780367ae-f2b8-4dea-bc42-81d806a5e6df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\3D">
-      <UniqueIdentifier>{4f8c7250-e03b-47b8-87ae-d5c4cacdcb19}</UniqueIdentifier>
+    <Filter Include="Application\ヘッダーファイル\Scene">
+      <UniqueIdentifier>{513ea112-f226-46a2-b3de-f54f3e92ca0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Essentials.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="wDirectX.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="wWindow.cpp">
-      <Filter>ソース ファイル\Window</Filter>
+      <Filter>Engine\ソース ファイル\Window</Filter>
     </ClCompile>
     <ClCompile Include="wMath.cpp">
-      <Filter>ソース ファイル\Math</Filter>
+      <Filter>Engine\ソース ファイル\Math</Filter>
     </ClCompile>
     <ClCompile Include="wConstBuffer.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="wDepth.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="wPSO.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="wShader.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="wSwapChainManager.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="wTexture.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Object3D.cpp">
-      <Filter>ソース ファイル\3D</Filter>
+      <Filter>Engine\ソース ファイル\3D</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル\3D</Filter>
+      <Filter>Engine\ソース ファイル\3D</Filter>
     </ClCompile>
     <ClCompile Include="Vec3.cpp">
-      <Filter>ソース ファイル\Math\Vector</Filter>
+      <Filter>Engine\ソース ファイル\Math\Vector</Filter>
     </ClCompile>
     <ClCompile Include="Vec2.cpp">
-      <Filter>ソース ファイル\Math\Vector</Filter>
+      <Filter>Engine\ソース ファイル\Math\Vector</Filter>
     </ClCompile>
     <ClCompile Include="Matrix.cpp">
-      <Filter>ソース ファイル\Math</Filter>
+      <Filter>Engine\ソース ファイル\Math</Filter>
     </ClCompile>
     <ClCompile Include="wRootSignature.cpp">
-      <Filter>ソース ファイル\DirectX</Filter>
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="IScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+      <Filter>Engine\ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="wDirectX.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wWindow.h">
-      <Filter>ヘッダー ファイル\Window</Filter>
+      <Filter>Engine\ヘッダー ファイル\Window</Filter>
     </ClInclude>
     <ClInclude Include="wMath.h">
-      <Filter>ヘッダー ファイル\Math</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math</Filter>
     </ClInclude>
     <ClInclude Include="wConstBuffer.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wDepth.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wPSO.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wShader.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wSwapChainManager.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wTexture.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Float4.h">
-      <Filter>ヘッダー ファイル\Math\Float</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math\Float</Filter>
     </ClInclude>
     <ClInclude Include="Float3.h">
-      <Filter>ヘッダー ファイル\Math\Float</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math\Float</Filter>
     </ClInclude>
     <ClInclude Include="Float2.h">
-      <Filter>ヘッダー ファイル\Math\Float</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math\Float</Filter>
     </ClInclude>
     <ClInclude Include="Vec3.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="Vec2.h">
-      <Filter>ヘッダー ファイル\Math\Vector</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math\Vector</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
-      <Filter>ヘッダー ファイル\Math</Filter>
+      <Filter>Engine\ヘッダー ファイル\Math</Filter>
     </ClInclude>
     <ClInclude Include="wRootSignature.h">
-      <Filter>ヘッダー ファイル\DirectX</Filter>
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="IScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+      <Filter>Engine\ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Essentials.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Object3D.h">
-      <Filter>ヘッダー ファイル\3D</Filter>
+      <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>ヘッダー ファイル\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+      <Filter>Engine\ヘッダー ファイル\3D</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

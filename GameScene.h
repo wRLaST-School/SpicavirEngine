@@ -7,6 +7,7 @@ class GameScene :
     public IScene
 {
 public:
+    ~GameScene() {};
     void Init() override;
     void Update() override;
     void Draw() override;
