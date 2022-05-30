@@ -12,6 +12,7 @@
 #include "Object3D.h"
 #include "Matrix.h"
 #include "wRootSignature.h"
+#include "SceneManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -43,23 +44,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitWSCM();
 	InitWDepth();
 
-	//Objects
-	Model model = Model("Resources/Models/square.obj");
-
-	list<Object3D> objects;
-
-	for (int i = 0; i < 1; i++)
-	{
-		objects.push_back(Object3D());
-	}
-
-	for (auto itr = objects.begin(); itr != objects.end(); itr++)
-	{
-		itr->model = &model;
-	}
-
-	//定数バッファここまで
-
 	//PSO
 	InitTextureBuff();
 	RegisterAndInitShader("def");
@@ -70,42 +54,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	CreateAndInitRootSignature();
 	/*Init Draw End*/
-	Matrix wMat = Matrix::Identity();
+
+	//Init Scene
+	SceneManager sceneManager = SceneManager();
+	sceneManager.Init();
+
 	/*ループ*/
 	while (true)
 	{
 		if(GetWDX()->StartFrame()) break;
 		/*毎フレーム処理*/
+
 		/*更新処理*/
+		sceneManager.Update();
 		/*更新処理ここまで*/
-
-		/*描画処理*/
-		//変換
-		Matrix pMat = Matrix::Projection(
-			PI/4,
-			(float)GetwWindow()->width / GetwWindow()->height,
-			0.1f, 1000.0f
-		);
-
-		Matrix vMat;
-		Float3 eye{ 0, 0, -300 };
-		Float3 target{ 0, 0, 0 };
-		Float3 up{ 0, 1.0f, 0 };
-
-		vMat = Matrix::ViewLookAt(eye, target, up);
-
-		objects.begin()->rotation.x += 0.01;
-		objects.begin()->UpdateMatrix();
-
-		Matrix vproj = vMat * pMat;
-		/*描画前処理ここまで*/
 
 		GetWDX()->PreDrawCommands();
 
-		for (auto itr = objects.begin(); itr != objects.end(); itr++)
-		{
-			itr->Draw(vproj);
-		}
+		sceneManager.Draw();
 
 		GetWDX()->PostDrawCommands();
 
