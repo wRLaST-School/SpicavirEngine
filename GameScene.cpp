@@ -2,6 +2,7 @@
 
 void GameScene::Init()
 {
+	wTextureManager::Init();
 	wMat = Matrix::Identity();
 
 	for (int i = 0; i < 1; i++)
@@ -13,6 +14,9 @@ void GameScene::Init()
 	{
 		itr->model = &model;
 	}
+
+	texture = wTextureManager::LoadTexture("Resources/think.png", "ThinkingFace");
+	tex2 = wTextureManager::LoadTexture("Resources/think2.png", "ThinkingFace2");
 }
 
 void GameScene::Update()
@@ -40,6 +44,6 @@ void GameScene::Draw()
 {
 	for (auto itr = objects.begin(); itr != objects.end(); itr++)
 	{
-		itr->Draw(vproj);
+		itr->Draw(vproj, tex2);
 	}
 }

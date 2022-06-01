@@ -1,6 +1,7 @@
 #pragma once
 #include "wConstBuffer.h"
 #include "Model.h"
+#include "wTextureManager.h"
 struct ConstBufferDataTransform {
 	Matrix mat;//3D•ÏŠ·s—ñ
 };
@@ -10,7 +11,7 @@ class Object3D
 public:
 	Object3D() { transformCB.contents->mat = Matrix::Identity(); };
 	void UpdateMatrix();
-	void Draw(const Matrix& viewProj);
+	void Draw(const Matrix& viewProj, TextureKey key);
 
 	wConstBuffer<ConstBufferDataTransform> transformCB;
 

@@ -45,8 +45,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitWSCM();
 	InitWDepth();
 
-	InitTextureBuff();
-	CreateAndInitTextureManager();
+	wTextureManager::Create();
 
 	//PSO
 	RegisterAndInitShader("def");

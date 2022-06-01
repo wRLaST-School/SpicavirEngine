@@ -21,9 +21,11 @@ void Object3D::UpdateMatrix()
 	}
 }
 
-void Object3D::Draw(const Matrix& viewProj)
+void Object3D::Draw(const Matrix& viewProj, TextureKey key)
 {
 	transformCB.contents->mat = matWorld * viewProj;
+
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(key));
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
 

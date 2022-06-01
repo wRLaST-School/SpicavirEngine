@@ -20,5 +20,8 @@ private:
     list<Object3D> objects;
 
     Matrix vproj;
+
+    TextureKey texture;
+    TextureKey tex2;
 };
 

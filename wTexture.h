@@ -7,8 +7,7 @@ public:
 	//ŽÀŽ¿‚½‚¾‚Ìinit
 	void LoadTexture(string path);
 
-	ComPtr<ID3D12Resource> texBuff = nullptr;
-	D3D12_RESOURCE_DESC texresdesc{};
+	
 };
 
 void InitTextureBuff();
