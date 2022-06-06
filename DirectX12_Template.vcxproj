@@ -150,6 +150,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />
     <ClCompile Include="wConstBuffer.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />
     <ClInclude Include="wConstBuffer.h" />
@@ -203,6 +205,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
+    <FxCompile Include="SpritePS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="SpriteVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022.vcxproj">
@@ -211,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Basic.hlsli" />
+    <None Include="Sprite.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

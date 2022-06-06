@@ -4,15 +4,16 @@
 
 map<string, wShader> shaderMap;
 
-void wShader::Init()
+void wShader::Init(string vsPath, string psPath)
 {
+	
 	//シェーダーの読み込みとコンパイル
 	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
 	// 頂点シェーダの読み込みとコンパイル
 	HRESULT result;
 	result = D3DCompileFromFile(
-		L"BasicVS.hlsl",  // シェーダファイル名
+		wstring(vsPath.begin(), vsPath.end()).c_str(),  // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -36,7 +37,7 @@ void wShader::Init()
 
 	// ピクセルシェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		L"BasicPS.hlsl",   // シェーダファイル名
+		wstring(psPath.begin(), psPath.end()).c_str(),   // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -59,10 +60,10 @@ void wShader::Init()
 	}
 }
 
-void RegisterAndInitShader(string id)
+void RegisterAndInitShader(string id, string vsPath, string psPath)
 {
 	shaderMap[id] = wShader();
-	shaderMap[id].Init();
+	shaderMap[id].Init(vsPath, psPath);
 }
 
 wShader* GetShader(string id)

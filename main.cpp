@@ -48,8 +48,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	wTextureManager::Create();
 
 	//PSO
-	RegisterAndInitShader("def");
+	RegisterAndInitShader("def", "BasicVS.hlsl", "BasicPS.hlsl");
 	RegisterAndInitPSO("def", GetShader("def"));
+
+	//2DPSO
+	RegisterAndInitShader("2d", "SpriteVS.hlsl", "SpritePS.hlsl");
+	RegisterAndInitPSO("2d", GetShader("2d"));
 
 	GetPSODesc("def")->InputLayout.pInputElementDescs = inputLayout;
 	GetPSODesc("def")->InputLayout.NumElements = _countof(inputLayout);

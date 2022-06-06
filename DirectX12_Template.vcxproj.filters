@@ -73,6 +73,15 @@
     <Filter Include="Application\ヘッダーファイル\Scene">
       <UniqueIdentifier>{513ea112-f226-46a2-b3de-f54f3e92ca0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\2D">
+      <UniqueIdentifier>{d9b01d43-9520-45f8-83a8-cf8d74a76ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソース ファイル\2D">
+      <UniqueIdentifier>{5cff2113-7e2a-4b86-a941-ad9928d27773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{c02ae0a0-8820-45f9-ae1b-f07b6c7d505f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -140,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="wTextureManager.cpp">
       <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\ソース ファイル\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,12 +227,30 @@
     <ClInclude Include="wTextureManager.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\ヘッダー ファイル\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="BasicVS.hlsl" />
-    <FxCompile Include="BasicPS.hlsl" />
+    <FxCompile Include="BasicPS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="BasicVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="SpriteVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="SpritePS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Basic.hlsli" />
+    <None Include="Basic.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Sprite.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
