@@ -1,4 +1,5 @@
 #include "wPSO.h"
+#include "wRootSignature.h"
 map<string, wPSO> psoMap;
 
 wPSO::wPSO(wShader* shader):shader(shader)
@@ -57,6 +58,7 @@ void wPSO::InitDesc2D()
 	psod.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	psod.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_ALWAYS;
 	psod.DepthStencilState.DepthEnable = false;
+	psod.pRootSignature = GetRootSignature()->rootsignature.Get();
 }
 
 void wPSO::Create()

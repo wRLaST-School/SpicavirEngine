@@ -73,8 +73,9 @@ Sprite::Sprite(string path, TextureKey newKey)
 void Sprite::PreSpriteDraw()
 {
 	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
-	cl->SetPipelineState(GetPSO("2d"));
+	void* a = GetPSO("2d");
 	cl->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
+	cl->SetPipelineState(GetPSO("2d"));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	ID3D12DescriptorHeap* ppHeaps[] = { wTextureManager::GetInstance().srvHeap.Get() };
