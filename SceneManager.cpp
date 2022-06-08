@@ -12,7 +12,17 @@ void SceneManager::Update()
 	currentScene->Update();
 }
 
-void SceneManager::Draw()
+void SceneManager::Draw3D()
 {
-	currentScene->Draw();
+	currentScene->Draw3D();
+}
+
+void SceneManager::DrawSprite()
+{
+	currentScene->DrawSprite();
+}
+
+void SceneManager::DrawBack()
+{
+	currentScene->DrawBack();
 }

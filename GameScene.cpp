@@ -16,7 +16,8 @@ void GameScene::Init()
 	}
 
 	texture = wTextureManager::LoadTexture("Resources/think.png", "ThinkingFace");
-	tex2 = wTextureManager::LoadTexture("Resources/think2.png", "ThinkingFace2");
+
+	spr = Sprite("Resources/think2.png", "ThinkingFaceSpr");
 }
 
 void GameScene::Update()
@@ -40,10 +41,19 @@ void GameScene::Update()
 	vproj = vMat * pMat;
 }
 
-void GameScene::Draw()
+void GameScene::DrawBack()
+{
+}
+
+void GameScene::Draw3D()
 {
 	for (auto itr = objects.begin(); itr != objects.end(); itr++)
 	{
-		itr->Draw(vproj, tex2);
+		itr->Draw(vproj, texture);
 	}
+}
+
+void GameScene::DrawSprite()
+{
+	spr.Draw();
 }

@@ -99,6 +99,7 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
 	
 	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	wTextureManager::GetInstance().texDataMap[key] = metadata;
 
 	wTextureManager::GetInstance().nextRegisteredTextureIndex++;
 
@@ -119,6 +120,11 @@ D3D12_GPU_DESCRIPTOR_HANDLE wTextureManager::GetGPUDescHandle(TextureKey key)
 	heapHandle = wTextureManager::GetInstance().srvHeap->GetGPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().textureMap[key];
 	return heapHandle;
+}
+
+TexMetadata wTextureManager::GetTextureMetadata(TextureKey key)
+{
+	return wTextureManager::GetInstance().texDataMap[key];
 }
 
 wTextureManager &wTextureManager::GetInstance()

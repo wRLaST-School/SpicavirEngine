@@ -3,6 +3,7 @@
 #include "Matrix.h"
 #include "Model.h"
 #include "Object3D.h"
+#include "Sprite.h"
 class GameScene :
     public IScene
 {
@@ -10,7 +11,9 @@ public:
     ~GameScene() {};
     void Init() override;
     void Update() override;
-    void Draw() override;
+    void DrawBack() override;
+    void Draw3D() override;
+    void DrawSprite() override;
 
 private:
     Matrix wMat;
@@ -22,6 +25,7 @@ private:
     Matrix vproj;
 
     TextureKey texture;
-    TextureKey tex2;
+
+    Sprite spr;
 };
 

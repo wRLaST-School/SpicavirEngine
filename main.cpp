@@ -14,6 +14,7 @@
 #include "wRootSignature.h"
 #include "SceneManager.h"
 #include "wTextureManager.h"
+#include "Sprite.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -53,7 +54,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//2DPSO
 	RegisterAndInitShader("2d", "SpriteVS.hlsl", "SpritePS.hlsl");
-	RegisterAndInitPSO("2d", GetShader("2d"));
+	RegisterAndInitPSOfor2D("2d", GetShader("2d"));
 
 	GetPSODesc("def")->InputLayout.pInputElementDescs = inputLayout;
 	GetPSODesc("def")->InputLayout.NumElements = _countof(inputLayout);
@@ -77,7 +78,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		GetWDX()->PreDrawCommands();
 
-		sceneManager.Draw();
+		sceneManager.Draw3D();
+
+		Sprite::PreSpriteDraw();
+
+		sceneManager.DrawSprite();
+
+		Sprite::PostSpriteDraw();
 
 		GetWDX()->PostDrawCommands();
 

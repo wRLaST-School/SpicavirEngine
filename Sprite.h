@@ -1,5 +1,7 @@
 #pragma once
 #include "Essentials.h"
+#include "wTextureManager.h"
+#include "wConstBuffer.h"
 class Sprite
 {
 public:
@@ -9,15 +11,33 @@ public:
 		Float2 uv;
 	};
 
+	struct SpriteCBuffData {
+		Float4 color;
+		Matrix mat;
+	};
 public:
 	Sprite() {};
-	Sprite(string path);
+	//既存のテクスチャを使って生成
+	Sprite(TextureKey key);
+	//テクスチャを読み込んでキーに保存、それを使ってSpriteを生成
+	Sprite(string path, TextureKey newKey);
+
+	static void PreSpriteDraw();
+	static void PostSpriteDraw();
+
+	void Draw();
+
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
-	D3D12_INDEX_BUFFER_VIEW ibView{};
 
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
-	ComPtr<ID3D12Resource> indexBuff = nullptr;
+
+	wConstBuffer<SpriteCBuffData> constBuff;
+
+	TextureKey tex;
+
+	float width;
+	float height;
 };
 
 // 頂点レイアウト
