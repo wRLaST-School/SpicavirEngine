@@ -17,4 +17,3 @@ bool KeyDown(int key);
 bool KeyReleased(int key);
 //ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚©
 bool KeyTriggered(int key);
-

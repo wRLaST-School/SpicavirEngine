@@ -6,7 +6,9 @@ map<string, wShader> shaderMap;
 
 void wShader::Init(string vsPath, string psPath)
 {
-	
+	string shaderFolder = "Resources/Shaders/";
+	vsPath = shaderFolder + vsPath;
+	psPath = shaderFolder + psPath;
 	//シェーダーの読み込みとコンパイル
 	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
