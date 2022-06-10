@@ -57,10 +57,6 @@ void wRootSignature::Init()
 	ComPtr<ID3DBlob> errorBlob = nullptr;
 	result = D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	result = GetWDX()->dev->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
-
-	// パイプラインにルートシグネチャをセット
-	GetPSODesc("def")->pRootSignature = rootsignature.Get();
-	GetWPSO("def")->Create();
 }
 
 wRootSignature* GetRootSignature()

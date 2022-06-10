@@ -39,6 +39,9 @@ void GameScene::Update()
 	objects.begin()->UpdateMatrix();
 
 	vproj = vMat * pMat;
+
+	spr.position = { 600, 300, 0 };
+	spr.UpdateMatrix();
 }
 
 void GameScene::DrawBack()

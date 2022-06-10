@@ -25,8 +25,9 @@ public:
 	static void PreSpriteDraw();
 	static void PostSpriteDraw();
 
-	void Draw();
+	void UpdateMatrix();
 
+	void Draw();
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 
@@ -38,6 +39,13 @@ public:
 
 	float width;
 	float height;
+
+	float rot = 0.0f;
+	Float3 position = {};
+	Matrix world;
+
+	static Matrix proj;
+	static void InitCommon();
 };
 
 // 頂点レイアウト

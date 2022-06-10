@@ -59,8 +59,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	GetPSODesc("def")->InputLayout.pInputElementDescs = inputLayout;
 	GetPSODesc("def")->InputLayout.NumElements = _countof(inputLayout);
 
+	GetPSODesc("2d")->InputLayout.pInputElementDescs = inputLayout2D;
+	GetPSODesc("2d")->InputLayout.NumElements = _countof(inputLayout2D);
+
 	CreateAndInitRootSignature();
+
+	// パイプラインにルートシグネチャをセット
+	GetPSODesc("def")->pRootSignature = GetRootSignature()->rootsignature.Get();
+	GetPSODesc("2d")->pRootSignature = GetRootSignature()->rootsignature.Get();
+	GetWPSO("def")->Create();
+	GetWPSO("2d")->Create();
 	/*Init Draw End*/
+	Sprite::InitCommon();
 
 	//Init Scene
 	SceneManager sceneManager = SceneManager();

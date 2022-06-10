@@ -63,7 +63,8 @@ void wPSO::InitDesc2D()
 
 void wPSO::Create()
 {
-	GetWDX()->dev->CreateGraphicsPipelineState(&psod, IID_PPV_ARGS(&pso));
+	HRESULT hr = GetWDX()->dev->CreateGraphicsPipelineState(&psod, IID_PPV_ARGS(&pso));
+	int a = 0;
 }
 
 void RegisterAndInitPSO(string id, wShader* shader) 
