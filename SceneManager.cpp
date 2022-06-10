@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "Input.h"
 
 void SceneManager::Init()
 {
@@ -9,6 +10,12 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
+	if (KeyTriggered(DIK_R))
+	{
+		currentScene.release();
+		currentScene = unique_ptr<GameScene>(new GameScene());
+		currentScene->Init();
+	}
 	currentScene->Update();
 }
 

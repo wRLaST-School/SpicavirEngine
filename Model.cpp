@@ -162,9 +162,9 @@ Model::Model() {
 
 Model::Model(string path)
 {
-	static vector<Vertex> vertices;
+	vector<Vertex> vertices;
 
-	static vector<USHORT> indices;
+	vector<USHORT> indices;
 
 	ifstream file;
 	file.open(path);

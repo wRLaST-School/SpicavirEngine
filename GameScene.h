@@ -4,6 +4,13 @@
 #include "Model.h"
 #include "Object3D.h"
 #include "Sprite.h"
+const int TileQuant = 10;
+
+enum class ControllMode {
+    BIOHAZERD,
+    TPS
+};
+
 class GameScene :
     public IScene
 {
@@ -16,16 +23,16 @@ public:
     void DrawSprite() override;
 
 private:
-    Matrix wMat;
+    Model model = Model("Resources/Models/monkey.obj");
+    Model cubem = Model("Resources/Models/cube.obj");
 
-    Model model = Model("Resources/Models/square.obj");
-
-    list<Object3D> objects;
+    Object3D monkey;
+    Object3D floor[TileQuant][TileQuant];
 
     Matrix vproj;
 
     TextureKey texture;
 
-    Sprite spr;
+    ControllMode ctrlmode = ControllMode::BIOHAZERD;
 };
 

@@ -80,6 +80,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	while (true)
 	{
 		if(GetWDX()->StartFrame()) break;
+		UpdateInput();
 		/*毎フレーム処理*/
 
 		/*更新処理*/
