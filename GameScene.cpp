@@ -75,9 +75,9 @@ void GameScene::Update()
 		0.1f, 1000.0f
 	);
 
-	Float3 eyeV = camera.matWorld.ExtractAxisZ().GetNorm();
+	Float3 eyeV = camera.matWorld.ExtractAxisZ();
 	Float3 eye = camera.posision;
-	Float3 up = (Vec3)camera.matWorld.ExtractAxisY().GetNorm();
+	Float3 up = (Vec3)camera.matWorld.ExtractAxisY();
 
 	Matrix vMat = Matrix::ViewLookTo(eye, eyeV, up);
 	vproj = vMat * pMat;

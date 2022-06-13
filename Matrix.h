@@ -1,6 +1,7 @@
 #pragma once
 #include "Float4.h"
 #include "Float3.h"
+#include "Float2.h"
 class Matrix
 {
 private:
@@ -50,11 +51,11 @@ public:
 	Matrix& Transpose();
 	Matrix GetTranspose() const;
 
-	//回転行列からオブジェクトのX軸方向のベクトルを取得
+	//行列からオブジェクトのX軸方向のベクトルを取得
 	Vec3 ExtractAxisX(float scale = 1.0);
-	//回転行列からオブジェクトのY軸方向のベクトルを取得
+	//行列からオブジェクトのY軸方向のベクトルを取得
 	Vec3 ExtractAxisY(float scale = 1.0);
-	//回転行列からオブジェクトのZ軸方向のベクトルを取得
+	//行列からオブジェクトのZ軸方向のベクトルを取得
 	Vec3 ExtractAxisZ(float scale = 1.0);
 
 //Static Functions
@@ -81,6 +82,9 @@ public:
 
 	static Matrix RotRollPitchYaw(float roll, float pitch, float yaw);
 	static Matrix RotRollPitchYaw(Float3 pitchYawRoll);
+
+	//任意軸回転(クォータニオン)
+	static Matrix RotArbitrary(Vec3 axis, float rad);
 
 	static Matrix Scale(Float3 scale);
 

@@ -434,6 +434,36 @@ Matrix Matrix::RotRollPitchYaw(Float3 pitchYawRoll)
 	return RotRollPitchYaw(pitchYawRoll.z, pitchYawRoll.x, pitchYawRoll.y);
 }
 
+Matrix Matrix::RotArbitrary(Vec3 axis, float rad)
+{
+	float sn = sin(rad / 2);
+	axis.x *= sn;
+	axis.y *= sn;
+	axis.z *= sn;
+	float w = cos(rad / 2);
+	Float4 X = { axis.x * axis.x, axis.x * axis.y, axis.x * axis.z, axis.x * w };
+	Float3 Y = { axis.y * w, axis.y * axis.y, axis.y * axis.z };
+	Float2 Z = { axis.z * axis.z, axis.z * w };
+	return Matrix(
+		1 - 2 * Y.y - 2 * Z.x,
+		2 * X.y + 2 * Z.y,
+		2 * X.z - 2 * Y.x,
+		0,
+
+		2 * X.y - 2 * Z.y,
+		1 - 2 * X.x - 2*Z.x,
+		2*Y.z + 2* X.w,
+		0,
+
+		2* X.z + 2* Y.x,
+		2*Y.z - 2*X.w,
+		1- 2*X.x - 2*Y.y,
+		0,
+
+		0, 0, 0, 1
+	);
+}
+
 Matrix Matrix::Scale(Float3 scale)
 {
 	Matrix ret = Matrix();
