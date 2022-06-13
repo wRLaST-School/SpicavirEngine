@@ -62,6 +62,8 @@ Sprite::Sprite(TextureKey key)
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Sprite::Vertex);
+
+	constBuff.contents->color = {1.0, 1.0, 1.0, 1.0};
 }
 
 Sprite::Sprite(string path, TextureKey newKey)
@@ -121,6 +123,8 @@ Sprite::Sprite(string path, TextureKey newKey)
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Sprite::Vertex);
+
+	constBuff.contents->color = { 1.0, 1.0, 1.0, 1.0 };
 }
 
 void Sprite::PreSpriteDraw()
@@ -146,11 +150,12 @@ void Sprite::UpdateMatrix()
 	world *= Matrix::RotZ(rot);
 	world *= Matrix::Translation(position);
 
-	constBuff.contents->mat = world * proj;
+	constBuff.contents->mat = world;
 }
 
 void Sprite::Draw()
 {
+	constBuff.contents->mat = constBuff.contents->mat * proj;
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(tex));
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, this->constBuff.buffer->GetGPUVirtualAddress());
 

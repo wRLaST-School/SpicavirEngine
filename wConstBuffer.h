@@ -42,6 +42,5 @@ public:
 	
 public:
 	ComPtr<ID3D12Resource> buffer;
-	//ComPtr<ID3D12DescriptorHeap> descHeap = nullptr;
 	Contents* contents;
 };

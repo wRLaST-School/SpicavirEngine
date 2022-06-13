@@ -34,5 +34,9 @@ private:
     TextureKey texture;
 
     ControllMode ctrlmode = ControllMode::BIOHAZERD;
+
+    Sprite spr;
+
+    Object3D camera;
 };
 

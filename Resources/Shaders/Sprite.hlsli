@@ -1,4 +1,4 @@
-cbuffer cbuff0 : register(b0)
+cbuffer cbuff0 : register(b1)
 {
 	float4 color;
 	matrix mat;

@@ -144,17 +144,17 @@ Matrix Matrix::Identity()
 
 Matrix Matrix::ViewLookTo(Float3 eyePos, Vec3 camRZ, Vec3 up)
 {
-	Vec3 camRX = up.Cross(camRZ);
-	Vec3 camRY = camRX.Cross(camRZ);
+	Vec3 camRX = up.Cross(camRZ).GetNorm();
+	Vec3 camRY = camRZ.Cross(camRX).GetNorm();
 
-	Float4 result[4] = {
-		{camRX.x, camRX.y, camRX.z, 0},
-		{camRY.x, camRY.y, camRY.z, 0},
-		{camRZ.x, camRZ.y, camRZ.z, 0},
-		{eyePos.x, eyePos.y, eyePos.z, 1}
-	};
+	Matrix result = Matrix(
+		camRX.x, camRX.y, camRX.z, 0,
+		camRY.x, camRY.y, camRY.z, 0,
+		camRZ.x, camRZ.y, camRZ.z, 0,
+		eyePos.x, eyePos.y, eyePos.z, 1
+	);
 
-	return -Matrix(result);
+	return -result;
 }
 
 Matrix Matrix::ViewLookAt(Float3 eye, Float3 target, Vec3 up)

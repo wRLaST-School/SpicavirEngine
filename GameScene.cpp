@@ -20,10 +20,16 @@ void GameScene::Init()
 
 	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/think.png", "think");
+
+	spr = Sprite("think");
 }
 
 void GameScene::Update()
 {
+	camera.posision = (Vec3)camera.posision + Vec3((KeyDown(DIK_RIGHT) - KeyDown(DIK_LEFT)) * 0.25f, (KeyDown(DIK_SPACE) - KeyDown(DIK_LSHIFT)) * 0.25f, (KeyDown(DIK_UP) - KeyDown(DIK_DOWN)) * 0.25f);
+	camera.rotation = (Vec3)camera.rotation + Vec3((KeyDown(DIK_NUMPAD2) - KeyDown(DIK_NUMPAD8)) * 0.05f, (KeyDown(DIK_NUMPAD6) - KeyDown(DIK_NUMPAD4)) * 0.05f, 0);
+	camera.UpdateMatrix();
+
 	switch (ctrlmode)
 	{
 	case ControllMode::BIOHAZERD:
@@ -38,36 +44,17 @@ void GameScene::Update()
 		Vec3 move = front.SetLength(0.25f) * (KeyDown(DIK_W) - KeyDown(DIK_S));
 		monkey.posision = (Vec3)monkey.posision + move;
 		monkey.UpdateMatrix();
-
-		float cameraDistance = 5.0f;
-
-		Vec3 back = monkey.matWorld.ExtractAxisZ() * -1;
-
-		back.SetLength(cameraDistance);
-
-		Matrix pMat = Matrix::Projection(
-			PI / 4,
-			(float)GetwWindow()->width / GetwWindow()->height,
-			0.1f, 1000.0f
-		);
-
-		Float3 target = monkey.posision;
-		Float3 eye = (Vec3)monkey.posision + back;
-		Float3 up{ 0, 1, 0 };
-
-		Matrix vMat = Matrix::ViewLookAt(eye, target, up);
-		vproj = vMat * pMat;
 		break;
 	}
 	case ControllMode::TPS:
 	{
 		if (KeyTriggered(DIK_Q)) ctrlmode = ControllMode::BIOHAZERD;
 
-		monkey.rotation = (Vec3)monkey.rotation + Vec3(PI / 144 * (KeyDown(DIK_DOWN) - KeyDown(DIK_UP)), PI / 144 * (KeyDown(DIK_RIGHT) - KeyDown(DIK_LEFT)), 0);
+		//monkey.rotation = (Vec3)monkey.rotation + Vec3(PI / 144 * (KeyDown(DIK_DOWN) - KeyDown(DIK_UP)), PI / 144 * (KeyDown(DIK_RIGHT) - KeyDown(DIK_LEFT)), 0);
 
 		monkey.UpdateMatrix();
-		Vec3 front = monkey.matWorld.ExtractAxisZ();
-		Vec3 right = monkey.matWorld.ExtractAxisX();
+		Vec3 front = camera.matWorld.ExtractAxisZ();
+		Vec3 right = camera.matWorld.ExtractAxisX();
 
 		Vec3 move = front.GetNorm() * (KeyDown(DIK_W) - KeyDown(DIK_S));
 		move += right.GetNorm() * (KeyDown(DIK_D) - KeyDown(DIK_A));
@@ -75,31 +62,28 @@ void GameScene::Update()
 
 		monkey.posision = (Vec3)monkey.posision + move;
 		monkey.UpdateMatrix();
-
-		float cameraDistance = 5.0f;
-
-		Vec3 back = monkey.matWorld.ExtractAxisZ() * -1;
-
-		back.SetLength(cameraDistance);
-
-		Matrix pMat = Matrix::Projection(
-			PI / 4,
-			(float)GetwWindow()->width / GetwWindow()->height,
-			0.1f, 1000.0f
-		);
-
-		Float3 target = monkey.posision;
-		Float3 eye = (Vec3)monkey.posision + back;
-		Float3 up{ 0, 1, 0 };
-
-		Matrix vMat = Matrix::ViewLookAt(eye, target, up);
-		vproj = vMat * pMat;
 		break;
 	}
 	default:
 		break;
 	}
-	
+
+
+	Matrix pMat = Matrix::Projection(
+		PI / 4,
+		(float)GetwWindow()->width / GetwWindow()->height,
+		0.1f, 1000.0f
+	);
+
+	Float3 eyeV = camera.matWorld.ExtractAxisZ().GetNorm();
+	Float3 eye = camera.posision;
+	Float3 up = (Vec3)camera.matWorld.ExtractAxisY().GetNorm();
+
+	Matrix vMat = Matrix::ViewLookTo(eye, eyeV, up);
+	vproj = vMat * pMat;
+
+	spr.position = { 100, 100, 0 };
+	spr.UpdateMatrix();
 }
 
 void GameScene::DrawBack()
@@ -121,4 +105,5 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
+	//spr.Draw();
 }
