@@ -105,5 +105,5 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
-	//spr.Draw();
+	spr.Draw();
 }

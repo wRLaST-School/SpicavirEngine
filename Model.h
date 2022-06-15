@@ -11,6 +11,23 @@ struct Vertex
 	Float2 uv;
 };
 
+struct Material
+{
+	std::string name;
+	Float3 ambient;
+	Float3 diffuse;
+	Float3 specular;
+	float alpha;
+	std::string textureFile;
+
+	Material() {
+		ambient = {0.3, 0.3, 0.3};
+		diffuse = {0.0f, 0.0f, 0.0f};
+		specular = {0.0f, 0.0f, 0.0f};
+		alpha = 1.0f;
+	}
+};
+
 // 頂点レイアウト
 static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 		{
@@ -43,4 +60,6 @@ public:
 
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> indexBuff = nullptr;
+
+	Material material;
 };
