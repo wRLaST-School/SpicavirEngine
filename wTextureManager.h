@@ -10,6 +10,7 @@ public:
 	static void Create();
 	static void Init();
 	static TextureKey LoadTexture(string filePath, TextureKey key);
+	static TextureKey LoadTextureWithUniqueKey(string filePath, TextureKey key);
 
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescHandle(TextureKey key);
 	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescHandle(TextureKey key);

@@ -2,10 +2,6 @@
 #include "Essentials.h"
 #include "wWindow.h"
 
-struct ConstBufferDataMaterial {
-	Float4 color; //RGBA
-};
-
 class wDirectX
 {
 public:

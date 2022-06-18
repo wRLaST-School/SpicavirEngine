@@ -15,6 +15,7 @@ public:
 		Float4 color;
 		Matrix mat;
 	};
+
 public:
 	Sprite() {};
 	//既存のテクスチャを使って生成

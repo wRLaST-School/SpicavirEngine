@@ -2,6 +2,8 @@
 #include "Essentials.h"
 #include "wDirectX.h"
 #include "Vec3.h"
+#include "wTextureManager.h"
+#include "wConstBuffer.h"
 //TODO:頂点データを読み込めるようにする
 
 struct Vertex
@@ -18,7 +20,7 @@ struct Material
 	Float3 diffuse;
 	Float3 specular;
 	float alpha;
-	std::string textureFile;
+	TextureKey textureKey;
 
 	Material() {
 		ambient = {0.3, 0.3, 0.3};
@@ -27,6 +29,16 @@ struct Material
 		alpha = 1.0f;
 	}
 };
+
+struct ConstBufferDataMaterial {
+	Float3 ambient;
+	float padding1;
+	Float3 diffuse;
+	float padding2;
+	Float3 specular;
+	float alpha;
+};
+
 
 // 頂点レイアウト
 static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
@@ -53,7 +65,10 @@ class Model
 {
 public:
 	Model();
-	Model(string path);
+	Model(string modelName);
+
+	void LoadMaterial(const string& path, const string& filename);
+	void UpdateMaterial();
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	D3D12_INDEX_BUFFER_VIEW ibView{};
@@ -62,4 +77,6 @@ public:
 	ComPtr<ID3D12Resource> indexBuff = nullptr;
 
 	Material material;
+
+	wConstBuffer<ConstBufferDataMaterial> materialCB;
 };

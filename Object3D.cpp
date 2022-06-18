@@ -21,11 +21,30 @@ void Object3D::UpdateMatrix()
 	}
 }
 
+void Object3D::Draw(const Matrix& viewProj)
+{
+	transformCB.contents->mat = matWorld * viewProj;
+
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(model->material.textureKey));
+
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
+
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
+
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
+
+	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
+
+	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(short), 1, 0, 0, 0);
+}
+
 void Object3D::Draw(const Matrix& viewProj, TextureKey key)
 {
 	transformCB.contents->mat = matWorld * viewProj;
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(key));
+
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
 

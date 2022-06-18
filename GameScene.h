@@ -23,8 +23,10 @@ public:
     void DrawSprite() override;
 
 private:
-    Model model = Model("Resources/Models/monkey.obj");
-    Model cubem = Model("Resources/Models/cube.obj");
+    Model model = Model("monkey");
+    Model cubem = Model("cube");
+
+    Model sky = Model("skydome");
 
     Object3D monkey;
     Object3D floor[TileQuant][TileQuant];

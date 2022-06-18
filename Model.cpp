@@ -157,17 +157,19 @@ Model::Model() {
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
-
 }
 
-Model::Model(string path)
+Model::Model(string modelName)
 {
+	string path = "Resources/Models/"+modelName+"/";
+	string objfile = modelName + ".obj";
+
 	vector<Vertex> vertices;
 
 	vector<USHORT> indices;
 
 	ifstream file;
-	file.open(path);
+	file.open(path + objfile);
 	if (file.fail()) {
 		assert(0);
 	}
@@ -238,6 +240,14 @@ Model::Model(string path)
 
 				indices.emplace_back((USHORT)indices.size());
 			}
+		}
+
+		if (key == "mtllib")
+		{
+			string filename;
+			lineStream >> filename;
+
+			LoadMaterial(path, filename);
 		}
 
 	}
@@ -316,4 +326,62 @@ Model::Model(string path)
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R16_UINT;
 	ibView.SizeInBytes = sizeIB;
+}
+
+void Model::LoadMaterial(const string& path, const string& filename)
+{
+	std::ifstream file;
+
+	file.open(path + filename);
+
+	if (file.fail()) { assert(0); }
+
+	string line;
+
+	while (getline(file, line)) {
+		std::istringstream lineStream(line);
+
+		string key;
+		getline(lineStream, key, ' ');
+
+		if (key[0] == '\t') key.erase(key.begin());
+
+		if (key == "newmtl") {
+			lineStream >> material.name;
+		}
+
+		if (key == "Ka") {
+			lineStream >> material.ambient.x;
+			lineStream >> material.ambient.y;
+			lineStream >> material.ambient.z;
+		}
+
+		if (key == "Kd") {
+			lineStream >> material.diffuse.x;
+			lineStream >> material.diffuse.y;
+			lineStream >> material.diffuse.z;
+		}
+
+		if (key == "Ks") {
+			lineStream >> material.specular.x;
+			lineStream >> material.specular.y;
+			lineStream >> material.specular.z;
+		}
+
+		if (key == "map_Kd") {
+			string texName;
+			lineStream >> texName;
+			material.textureKey = wTextureManager::LoadTexture(path + texName, texName);
+		}
+	}
+
+	UpdateMaterial();
+}
+
+void Model::UpdateMaterial()
+{
+	materialCB.contents->ambient = material.ambient;
+	materialCB.contents->diffuse = material.diffuse;
+	materialCB.contents->specular = material.specular;
+	materialCB.contents->alpha = material.alpha;
 }

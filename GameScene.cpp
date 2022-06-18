@@ -92,7 +92,7 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {	
-	monkey.Draw(vproj, "white");
+	monkey.Draw(vproj);
 
 	for (size_t i = 0; i < TileQuant; i++)
 	{
@@ -105,5 +105,5 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
-	spr.Draw();
+	//spr.Draw();
 }

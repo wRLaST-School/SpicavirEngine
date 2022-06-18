@@ -6,7 +6,6 @@ class wTexture
 public:
 	//ŽÀŽ¿‚½‚¾‚Ìinit
 	void LoadTexture(string path);
-
 	
 };
 

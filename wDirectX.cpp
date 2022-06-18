@@ -7,7 +7,6 @@
 #include "wTextureManager.h"
 
 static wDirectX WDX;
-wConstBuffer<ConstBufferDataMaterial>* materialCB = nullptr;
 
 wDirectX* GetWDX()
 {
@@ -81,8 +80,6 @@ void wDirectX::Init() {
 	D3D12_COMMAND_QUEUE_DESC cmdQueueDesc{};
 
 	dev->CreateCommandQueue(&cmdQueueDesc, IID_PPV_ARGS(&cmdQueue));
-
-	materialCB = new wConstBuffer<ConstBufferDataMaterial>();
 }
 
 bool wDirectX::StartFrame()
@@ -129,8 +126,6 @@ void wDirectX::PreDrawCommands()
 	//ID3D12DescriptorHeap* ppHeaps[] = { basicDescHeap.Get()};
 	//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 	//GetWDX()->cmdList->SetGraphicsRootDescriptorTable(0, basicDescHeap->GetGPUDescriptorHandleForHeapStart());
-
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, materialCB->buffer->GetGPUVirtualAddress());
 
 	ID3D12DescriptorHeap* ppSrvHeap[] = { wTextureManager::GetInstance().srvHeap.Get()};
 	GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
