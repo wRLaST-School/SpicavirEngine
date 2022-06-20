@@ -5,7 +5,14 @@ void GameScene::Init()
 {
 	wTextureManager::Init();
 
+	model = Model("monkey");
+	cubem = Model("cube");
+
+	sky = Model("skydome");
+
 	monkey.model = &model;
+
+	skysphere.model = &sky;
 
 	float boxsize = 2;
 	for (size_t i = 0; i < TileQuant; i++)
@@ -84,6 +91,7 @@ void GameScene::Update()
 
 	spr.position = { 100, 100, 0 };
 	spr.UpdateMatrix();
+	skysphere.UpdateMatrix();
 }
 
 void GameScene::DrawBack()
@@ -92,6 +100,7 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {	
+	skysphere.Draw(vproj);
 	monkey.Draw(vproj);
 
 	for (size_t i = 0; i < TileQuant; i++)

@@ -59,17 +59,19 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 	texresdesc.Format = metadata.format;
 	texresdesc.Width = metadata.width;
 	texresdesc.Height = (UINT)metadata.height;
-	texresdesc.DepthOrArraySize = metadata.height;
+	texresdesc.DepthOrArraySize = metadata.arraySize;
 	texresdesc.MipLevels = metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
-	GetWDX()->dev->CreateCommittedResource(
+	HRESULT hr = GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&texresdesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
+
+	int hijekhuwtoyh = 1;
 
 	for (size_t i = 0; i < metadata.mipLevels; i++)
 	{

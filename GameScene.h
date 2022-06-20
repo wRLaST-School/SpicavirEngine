@@ -23,13 +23,15 @@ public:
     void DrawSprite() override;
 
 private:
-    Model model = Model("monkey");
-    Model cubem = Model("cube");
 
-    Model sky = Model("skydome");
+    Model model;
+    Model cubem;
+    Model sky;
 
     Object3D monkey;
     Object3D floor[TileQuant][TileQuant];
+
+    Object3D skysphere;
 
     Matrix vproj;
 
