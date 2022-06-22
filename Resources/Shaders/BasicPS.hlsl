@@ -9,7 +9,7 @@ float4 main(VSOutput input) : SV_TARGET
 	float light_diffuse = saturate(dot(-light, input.normal));
 	float3 shade_color = m_ambient;
 	shade_color += m_diffuse * light_diffuse;
-	float4 texcolor = tex.Sample(smp, input.uv);
+	float4 texcolor = float4(tex.Sample(smp, input.uv));
 
 	return float4(texcolor.rgb * shade_color, texcolor.a * m_alpha);
 }

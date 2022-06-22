@@ -54,7 +54,6 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
 	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
-
 	texresdesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 	texresdesc.Format = metadata.format;
 	texresdesc.Width = metadata.width;
@@ -70,8 +69,6 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
-
-	int hijekhuwtoyh = 1;
 
 	for (size_t i = 0; i < metadata.mipLevels; i++)
 	{
@@ -215,6 +212,11 @@ D3D12_GPU_DESCRIPTOR_HANDLE wTextureManager::GetGPUDescHandle(TextureKey key)
 TexMetadata wTextureManager::GetTextureMetadata(TextureKey key)
 {
 	return wTextureManager::GetInstance().texDataMap[key];
+}
+
+ID3D12Resource* wTextureManager::GetTextureBuff(TextureKey key)
+{
+	return wTextureManager::GetInstance().texBuffs[wTextureManager::GetInstance().textureMap[key]].Get();
 }
 
 wTextureManager &wTextureManager::GetInstance()

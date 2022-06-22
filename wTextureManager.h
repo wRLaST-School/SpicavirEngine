@@ -15,6 +15,7 @@ public:
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescHandle(TextureKey key);
 	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescHandle(TextureKey key);
 	static TexMetadata GetTextureMetadata(TextureKey key);
+	static ID3D12Resource* GetTextureBuff(TextureKey key);
 
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;

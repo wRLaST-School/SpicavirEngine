@@ -1,7 +1,7 @@
 #pragma once
 #include "Essentials.h"
 #include "wShader.h"
-//TODO:設計がガバすぎるのでpso,shader,rootsignatureの設計を見直す
+//TODO:設計がガバすぎるのでpso,rootsignatureの設計を見直す
 class wPSO
 {
 public:
