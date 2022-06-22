@@ -143,7 +143,7 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 	texresdesc.Format = metadata.format;
 	texresdesc.Width = metadata.width;
 	texresdesc.Height = (UINT)metadata.height;
-	texresdesc.DepthOrArraySize = metadata.height;
+	texresdesc.DepthOrArraySize = metadata.arraySize;
 	texresdesc.MipLevels = metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
