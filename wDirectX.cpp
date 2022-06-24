@@ -103,17 +103,6 @@ void wDirectX::PreDrawCommands()
 	//バックバッファ番号を取得(0か1)
 	UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
 
-	//リソースバリアーを書き込み可能状態に
-	barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
-	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	GetWDX()->cmdList->ResourceBarrier(1, &barrierDesc);
-
-	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetSCM()->rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
-		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetSCM()->heapDesc.Type));
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
-	GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
-
 	//画面クリア
 	float clearColor[] = { 0.1f, 0.25f, 0.5f, 0.0f };
 	GetWDX()->cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);

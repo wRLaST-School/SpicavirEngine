@@ -156,6 +156,9 @@
     <ClCompile Include="RenderTarget.cpp">
       <Filter>Engine\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="RTVManager.cpp">
+      <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -234,6 +237,9 @@
       <Filter>Engine\ヘッダー ファイル\2D</Filter>
     </ClInclude>
     <ClInclude Include="RenderTarget.h">
+      <Filter>Engine\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="RTVManager.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

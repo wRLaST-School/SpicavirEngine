@@ -193,6 +193,54 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 	return tryNum == 0 ? key : key + std::to_string(tryNum);
 }
 
+TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey key)
+{
+	D3D12_HEAP_PROPERTIES texHeapProp{};
+	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+	D3D12_RESOURCE_DESC textureResourceDesc{};
+	textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	textureResourceDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	textureResourceDesc.Width = width;
+	textureResourceDesc.Height = height;
+	textureResourceDesc.DepthOrArraySize = 1;
+	textureResourceDesc.MipLevels = 1;
+	textureResourceDesc.SampleDesc.Count = 1;
+
+	GetInstance().texBuffs.emplace_back(nullptr);
+
+	GetWDX()->dev->CreateCommittedResource(
+		&texHeapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&textureResourceDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
+
+	//シェーダーリソースビューの生成
+	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
+	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().nextRegisteredTextureIndex;
+
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = textureResourceDesc.Format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
+
+	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
+	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	TexMetadata& pTexMeta = wTextureManager::GetInstance().texDataMap[key];
+	pTexMeta = TexMetadata{};
+	pTexMeta.width = width;
+	pTexMeta.height = height;
+
+	wTextureManager::GetInstance().nextRegisteredTextureIndex++;
+	return key;
+}
+
 D3D12_CPU_DESCRIPTOR_HANDLE wTextureManager::GetCPUDescHandle(TextureKey key)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;

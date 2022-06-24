@@ -28,6 +28,8 @@ void GameScene::Init()
 	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/think.png", "think");
 
+	TextureKey tkg = wTextureManager::CreateDummyTexture(1920, 1080, "tamago");
+
 	spr = Sprite("think");
 }
 
