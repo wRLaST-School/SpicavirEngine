@@ -5,6 +5,7 @@
 #include "wRootSignature.h"
 #include "wConstBuffer.h"
 #include "wTextureManager.h"
+#include "RTVManager.h"
 
 static wDirectX WDX;
 
@@ -104,10 +105,13 @@ void wDirectX::PreDrawCommands()
 	UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
 
 	//‰æ–ÊƒNƒŠƒA
-	float clearColor[] = { 0.1f, 0.25f, 0.5f, 0.0f };
-	GetWDX()->cmdList->ClearRenderTargetView(rtvH, clearColor, 0, nullptr);
+	Float4 clearColor = { 0.1f, 0.25f, 0.5f, 0.0f };
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
+	RTVManager::ClearCurrentRenderTarget(clearColor);
 	GetWDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 
+	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
 	/*•`‰æˆ—*/
 	GetWDX()->cmdList->SetPipelineState(GetPSO("def"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
@@ -151,6 +155,8 @@ void wDirectX::PostDrawCommands()
 	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
 	cmdList->ResourceBarrier(1, &barrierDesc);
+
+	RTVManager::GetInstance().isAllResBarClosed = true;
 }
 
 void wDirectX::EndFrame()

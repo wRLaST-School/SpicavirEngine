@@ -195,28 +195,22 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 
 TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey key)
 {
-	D3D12_HEAP_PROPERTIES texHeapProp{};
-	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
-	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+	D3D12_HEAP_PROPERTIES texHeapProp =
+		CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 
-	D3D12_RESOURCE_DESC textureResourceDesc{};
-	textureResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
-	textureResourceDesc.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	textureResourceDesc.Width = width;
-	textureResourceDesc.Height = height;
-	textureResourceDesc.DepthOrArraySize = 1;
-	textureResourceDesc.MipLevels = 1;
-	textureResourceDesc.SampleDesc.Count = 1;
+	D3D12_RESOURCE_DESC textureResourceDesc = 
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, width, height, 1, 1, 1,0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
 	GetInstance().texBuffs.emplace_back(nullptr);
 
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R16G16B16A16_FLOAT, {0.0f, 0.0f, 0.0f, 0.0f} };
+
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
-		D3D12_HEAP_FLAG_NONE,
+		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
 		&textureResourceDesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		nullptr,
+		D3D12_RESOURCE_STATE_RENDER_TARGET,
+		&clval,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
 
 	//シェーダーリソースビューの生成
@@ -265,6 +259,11 @@ TexMetadata wTextureManager::GetTextureMetadata(TextureKey key)
 ID3D12Resource* wTextureManager::GetTextureBuff(TextureKey key)
 {
 	return wTextureManager::GetInstance().texBuffs[wTextureManager::GetInstance().textureMap[key]].Get();
+}
+
+int wTextureManager::GetIndex(TextureKey key)
+{
+	return GetInstance().textureMap[key];
 }
 
 wTextureManager &wTextureManager::GetInstance()

@@ -1,6 +1,7 @@
 #include "wSwapChainManager.h"
 #include "wWindow.h"
 #include "wDirectX.h"
+#include "RTVManager.h"
 
 wSwapChainManager scm;
 
@@ -19,18 +20,13 @@ void wSwapChainManager::Init()
 	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetwWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
 	swapchain1.As(&swapchain);
 
-	/**/
-	heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	heapDesc.NumDescriptors = 2;
-	GetWDX()->dev->CreateDescriptorHeap(&heapDesc, IID_PPV_ARGS(&rtvHeaps));
+	RTVManager::CreateHeaps();
 
 	for (int i = 0; i < 2; i++)
 	{
 		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
-		CD3DX12_CPU_DESCRIPTOR_HANDLE handle = CD3DX12_CPU_DESCRIPTOR_HANDLE(rtvHeaps->GetCPUDescriptorHandleForHeapStart(),
-			i, GetWDX()->dev->GetDescriptorHandleIncrementSize(heapDesc.Type));
 
-		GetWDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, handle);
+		GetWDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, RTVManager::GetHeapCPUHandle(RTVManager::GetInstance().numRT - 2 + i));
 	}
 
 	GetWDX()->dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));

@@ -3,13 +3,12 @@
 class wSwapChainManager
 {
 public:
-	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
-
+	//TODO:‚±‚ê‚ğRTV‚Ì•û‚ÅRT2‚Â‚ÌVector‚É•Ï‚¦‚éART‚ğResource‚ÂİŒv‚É
 	vector<ComPtr<ID3D12Resource>> backBuffers = vector<ComPtr<ID3D12Resource>>(2);
 
 	ComPtr<IDXGISwapChain4> swapchain = nullptr;
 
-	ComPtr<ID3D12DescriptorHeap> rtvHeaps = nullptr;
+	
 	ComPtr<ID3D12Fence> fence = nullptr;
 	UINT64 fenceVal = 0;
 
