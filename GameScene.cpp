@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "Input.h"
+#include "RTVManager.h"
 
 void GameScene::Init()
 {
@@ -28,9 +29,14 @@ void GameScene::Init()
 	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/think.png", "think");
 
-	TextureKey tkg = wTextureManager::CreateDummyTexture(1920, 1080, "tamago");
-
 	spr = Sprite("think");
+
+	RTVManager::CreateRenderTargetTexture(1280, 720, narrow);
+
+	RokugaAruaru.model = &cubem;
+	RokugaAruaru.posision = { 0,0,50 };
+	RokugaAruaru.scale = {10, 10, 10};
+	RokugaAruaru.UpdateMatrix();
 }
 
 void GameScene::Update()
@@ -112,6 +118,20 @@ void GameScene::Draw3D()
 			floor[i][j].Draw(vproj, "think");
 		}
 	}
+	RokugaAruaru.Draw(vproj, narrow);
+
+	RTVManager::SetRenderTargetToTexture(narrow);
+	skysphere.Draw(vproj);
+	monkey.Draw(vproj);
+
+	for (size_t i = 0; i < TileQuant; i++)
+	{
+		for (size_t j = 0; j < TileQuant; j++)
+		{
+			floor[i][j].Draw(vproj, "think");
+		}
+	}
+	RokugaAruaru.Draw(vproj, narrow);
 }
 
 void GameScene::DrawSprite()

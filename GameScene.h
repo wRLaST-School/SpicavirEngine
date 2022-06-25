@@ -36,11 +36,14 @@ private:
     Matrix vproj;
 
     TextureKey texture;
+    TextureKey narrow = "NARROWFOVE";
 
     ControllMode ctrlmode = ControllMode::BIOHAZERD;
 
     Sprite spr;
 
     Object3D camera;
+
+    Object3D RokugaAruaru;
 };
 
