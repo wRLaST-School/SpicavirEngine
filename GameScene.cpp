@@ -30,8 +30,8 @@ void GameScene::Init()
 	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/think.png", "think");
 
-	spr = Sprite("think");
 	RTVManager::CreateRenderTargetTexture(720, 720, narrow);
+	spr = Sprite(narrow);
 
 	RokugaAruaru.model = &cubem;
 	RokugaAruaru.posision = { 0,0,50 };
@@ -97,7 +97,7 @@ void GameScene::Update()
 	Matrix vMat = Matrix::ViewLookTo(eye, eyeV, up);
 	vproj = vMat * pMat;
 
-	spr.position = { 100, 100, 0 };
+	spr.position = { 1280/2, 720/2, 0 };
 	spr.UpdateMatrix();
 	skysphere.UpdateMatrix();
 }
@@ -141,5 +141,5 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
-	//spr.Draw();
+	spr.Draw();
 }
