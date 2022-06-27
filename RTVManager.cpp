@@ -6,7 +6,7 @@
 void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 {
 	CloseCurrentResBar(GetCurrentRenderTarget());
-
+	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	wDirectX* dx = GetWDX();
 	//リソースバリアーを書き込み可能状態に
 	dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
@@ -26,8 +26,8 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 
 void RTVManager::SetRenderTargetToTexture(TextureKey key)
 {
-	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	CloseCurrentResBar(GetCurrentRenderTarget());
+	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	int index = wTextureManager::GetIndex(key);
 
 	wDirectX* dx = GetWDX();

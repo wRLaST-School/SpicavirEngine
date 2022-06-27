@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "Input.h"
 #include "RTVManager.h"
+#include "wSwapChainManager.h"
 
 void GameScene::Init()
 {
@@ -106,7 +107,9 @@ void GameScene::DrawBack()
 }
 
 void GameScene::Draw3D()
-{	
+{
+
+	RTVManager::SetRenderTargetToTexture(narrow);
 	skysphere.Draw(vproj);
 	monkey.Draw(vproj);
 
@@ -119,7 +122,10 @@ void GameScene::Draw3D()
 	}
 	RokugaAruaru.Draw(vproj, narrow);
 
-	RTVManager::SetRenderTargetToTexture(narrow);
+	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+	RTVManager::ClearCurrentRenderTarget({0.0f, 0.0f, 0.0f, 0.0f});
+
+
 	skysphere.Draw(vproj);
 	monkey.Draw(vproj);
 
