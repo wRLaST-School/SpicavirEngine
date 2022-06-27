@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "Input.h"
 #include "RTVManager.h"
+#include "wSwapChainManager.h"
 
 void GameScene::Init()
 {
@@ -31,12 +32,10 @@ void GameScene::Init()
 
 	spr = Sprite("think");
 
-	RTVManager::CreateRenderTargetTexture(1280, 720, narrow);
-
-	RokugaAruaru.model = &cubem;
-	RokugaAruaru.posision = { 0,0,50 };
-	RokugaAruaru.scale = {10, 10, 10};
-	RokugaAruaru.UpdateMatrix();
+	//FOVEATED RENDERING PARAS
+	center.CreateTextureAndInit(PI / 12, 120, 120, 120, 120, "centerFove");
+	middle.CreateTextureAndInit(PI / 6, 120, 120, 240, 240, "middleFove");
+	outer.CreateTextureAndInit(PI / 2, 256, 144, 1280, 720, "outerFove");
 }
 
 void GameScene::Update()
@@ -83,9 +82,11 @@ void GameScene::Update()
 		break;
 	}
 
+	if (KeyTriggered(DIK_F)) { useFoveatedRendering = !useFoveatedRendering; }
+
 
 	Matrix pMat = Matrix::Projection(
-		PI / 4,
+		PI / 2,
 		(float)GetwWindow()->width / GetwWindow()->height,
 		0.1f, 1000.0f
 	);
@@ -94,11 +95,16 @@ void GameScene::Update()
 	Float3 eye = camera.posision;
 	Float3 up = (Vec3)camera.matWorld.ExtractAxisY();
 
-	Matrix vMat = Matrix::ViewLookTo(eye, eyeV, up);
+	vMat= Matrix::ViewLookTo(eye, eyeV, up);
 	vproj = vMat * pMat;
 
-	spr.position = { 100, 100, 0 };
+	spr.position = { 1280/2, 720/2, 0 };
 	spr.UpdateMatrix();
+
+	center.sprite.UpdateMatrix();
+	middle.sprite.UpdateMatrix();
+	outer.sprite.UpdateMatrix();
+
 	skysphere.UpdateMatrix();
 }
 
@@ -108,33 +114,115 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {	
-	skysphere.Draw(vproj);
-	monkey.Draw(vproj);
-
-	for (size_t i = 0; i < TileQuant; i++)
+	if (useFoveatedRendering)
 	{
-		for (size_t j = 0; j < TileQuant; j++)
+		/*skysphere.Draw(vproj);
+		monkey.Draw(vproj);
+
+		for (size_t i = 0; i < TileQuant; i++)
 		{
-			floor[i][j].Draw(vproj, "think");
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw(vproj, "think");
+			}
+		}*/
+
+		center.SetViewportAndScissorsRect();
+		RTVManager::SetRenderTargetToTexture(center.renderTex);
+
+		vproj = vMat * center.projection;
+
+		skysphere.Draw(vproj);
+		monkey.Draw(vproj);
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw(vproj, "think");
+			}
+		}
+
+		middle.SetViewportAndScissorsRect();
+		RTVManager::SetRenderTargetToTexture(middle.renderTex);
+
+		vproj = vMat * middle.projection;
+
+		skysphere.Draw(vproj);
+		monkey.Draw(vproj);
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw(vproj, "think");
+			}
+		}
+
+		outer.SetViewportAndScissorsRect();
+		RTVManager::SetRenderTargetToTexture(outer.renderTex);
+
+		vproj = vMat * outer.projection;
+
+		skysphere.Draw(vproj);
+		monkey.Draw(vproj);
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw(vproj, "think");
+			}
+		}
+
+		//VPortとscissorrect,RTを戻す
+		//TODO:関数化
+		D3D12_VIEWPORT viewport{};
+
+		viewport.Width = GetwWindow()->width;
+		viewport.Height = GetwWindow()->height;
+		viewport.TopLeftX = 0;
+		viewport.TopLeftY = 0;
+		viewport.MinDepth = 0.0f;
+		viewport.MaxDepth = 1.0f;
+
+		GetWDX()->cmdList->RSSetViewports(1, &viewport);
+
+		D3D12_RECT scissorrect{};
+
+		scissorrect.left = 0;                                       // 切り抜き座標左
+		scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+		scissorrect.top = 0;                                        // 切り抜き座標上
+		scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+
+		GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+
+		RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+
+	}
+
+	else {
+		skysphere.Draw(vproj);
+		monkey.Draw(vproj);
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw(vproj, "think");
+			}
 		}
 	}
-	RokugaAruaru.Draw(vproj, narrow);
-
-	RTVManager::SetRenderTargetToTexture(narrow);
-	skysphere.Draw(vproj);
-	monkey.Draw(vproj);
-
-	for (size_t i = 0; i < TileQuant; i++)
-	{
-		for (size_t j = 0; j < TileQuant; j++)
-		{
-			floor[i][j].Draw(vproj, "think");
-		}
-	}
-	RokugaAruaru.Draw(vproj, narrow);
 }
 
 void GameScene::DrawSprite()
 {
 	//spr.Draw();
+
+	if (useFoveatedRendering)
+	{
+		//outer.sprite.Draw();
+		//middle.sprite.Draw();
+		//center.sprite.Draw();
+	}
 }

@@ -4,7 +4,8 @@
 #include "Model.h"
 #include "Object3D.h"
 #include "Sprite.h"
-const int TileQuant = 10;
+#include "FoveatedRenderingParamater.h"
+const int TileQuant = 1;
 
 enum class ControllMode {
     BIOHAZERD,
@@ -36,7 +37,6 @@ private:
     Matrix vproj;
 
     TextureKey texture;
-    TextureKey narrow = "NARROWFOVE";
 
     ControllMode ctrlmode = ControllMode::BIOHAZERD;
 
@@ -44,6 +44,12 @@ private:
 
     Object3D camera;
 
-    Object3D RokugaAruaru;
+    FoveatedRenderingData center;
+    FoveatedRenderingData middle;
+    FoveatedRenderingData outer;
+
+    bool useFoveatedRendering = false;
+
+    Matrix vMat;
 };
 

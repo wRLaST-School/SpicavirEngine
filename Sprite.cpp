@@ -147,6 +147,7 @@ void Sprite::UpdateMatrix()
 {
 	world = Matrix::Identity();
 
+	world *= Matrix::Scale(scale);
 	world *= Matrix::RotZ(rot);
 	world *= Matrix::Translation(position);
 
