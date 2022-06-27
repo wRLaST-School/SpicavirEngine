@@ -221,8 +221,8 @@ void GameScene::DrawSprite()
 
 	if (useFoveatedRendering)
 	{
-		//outer.sprite.Draw();
-		//middle.sprite.Draw();
-		//center.sprite.Draw();
+		outer.sprite.Draw();
+		middle.sprite.Draw();
+		center.sprite.Draw();
 	}
 }
