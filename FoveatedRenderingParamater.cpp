@@ -12,7 +12,7 @@ void FoveatedRenderingData::CreateTextureAndInit(float fov, int renderWidth, int
 
 	aspectRatio = (float)renderWidth / (float)renderHeight;
 
-	projection = Matrix::Projection(fov, aspectRatio, 0, 1000);
+	projection = Matrix::Projection(fov, aspectRatio, 0.1f, 1000.0f);
 
 	RTVManager::CreateRenderTargetTexture(renderWidth, renderHeight, key);
 	
