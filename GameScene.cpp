@@ -30,8 +30,7 @@ void GameScene::Init()
 	wTextureManager::LoadTexture("Resources/think.png", "think");
 
 	spr = Sprite("think");
-
-	RTVManager::CreateRenderTargetTexture(1280, 720, narrow);
+	RTVManager::CreateRenderTargetTexture(720, 720, narrow);
 
 	RokugaAruaru.model = &cubem;
 	RokugaAruaru.posision = { 0,0,50 };
