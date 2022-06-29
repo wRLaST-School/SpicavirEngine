@@ -11,6 +11,11 @@ cbuffer cbuff1 : register(b1)
 	matrix mat;
 }
 
+cbuffer cbuff1 : register(b2)
+{
+	matrix vpmat;
+}
+
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;

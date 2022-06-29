@@ -2,6 +2,8 @@
 #include "Matrix.h"
 #include "wTextureManager.h"
 #include "Sprite.h"
+#include "wDirectX.h"
+
 class FoveatedRenderingData
 {
 public:
@@ -21,6 +23,8 @@ public:
 
 	Sprite sprite;
 
+	wConstBuffer<ConstBufferDataVProj> vprojCB;
+
 	void CreateTextureAndInit(
 		float fov,
 		int renderWidth,
@@ -31,5 +35,12 @@ public:
 	);
 
 	void SetViewportAndScissorsRect();
+	void SetViewProjectionMatrix(Matrix viewMat);
 };
 
+struct NormalRendering {
+	void SetVProjMatToDefault();
+	void SetDefaultVProjMat(Matrix vproj);
+
+	wConstBuffer<ConstBufferDataVProj> defaultVProj;
+};

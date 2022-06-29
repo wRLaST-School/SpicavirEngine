@@ -2,6 +2,10 @@
 #include "Essentials.h"
 #include "wWindow.h"
 
+struct ConstBufferDataVProj {
+	Matrix vproj;
+};
+
 class wDirectX
 {
 public:

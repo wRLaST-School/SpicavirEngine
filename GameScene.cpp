@@ -33,8 +33,8 @@ void GameScene::Init()
 	spr = Sprite("think");
 
 	//FOVEATED RENDERING PARAS
-	center.CreateTextureAndInit(PI / 12, 120, 120, 120, 120, "centerFove");
-	middle.CreateTextureAndInit(PI / 6, 120, 120, 240, 240, "middleFove");
+	center.CreateTextureAndInit(PI / 12, 96, 96, 96, 96, "centerFove");
+	middle.CreateTextureAndInit(PI / 6, 96, 96, 192, 192, "middleFove");
 	outer.CreateTextureAndInit(PI / 2, 256, 144, 1280, 720, "outerFove");
 }
 
@@ -129,49 +129,48 @@ void GameScene::Draw3D()
 
 		center.SetViewportAndScissorsRect();
 		RTVManager::SetRenderTargetToTexture(center.renderTex);
+		center.SetViewProjectionMatrix(vMat);
 
 		vproj = vMat * center.projection;
 
-		skysphere.Draw(vproj);
-		monkey.Draw(vproj);
+		skysphere.Draw();
+		monkey.Draw();
 
 		for (size_t i = 0; i < TileQuant; i++)
 		{
 			for (size_t j = 0; j < TileQuant; j++)
 			{
-				floor[i][j].Draw(vproj, "think");
+				floor[i][j].Draw("think");
 			}
 		}
 
 		middle.SetViewportAndScissorsRect();
 		RTVManager::SetRenderTargetToTexture(middle.renderTex);
+		middle.SetViewProjectionMatrix(vMat);
 
-		vproj = vMat * middle.projection;
-
-		skysphere.Draw(vproj);
-		monkey.Draw(vproj);
+		skysphere.Draw();
+		monkey.Draw();
 
 		for (size_t i = 0; i < TileQuant; i++)
 		{
 			for (size_t j = 0; j < TileQuant; j++)
 			{
-				floor[i][j].Draw(vproj, "think");
+				floor[i][j].Draw("think");
 			}
 		}
 
 		outer.SetViewportAndScissorsRect();
 		RTVManager::SetRenderTargetToTexture(outer.renderTex);
+		outer.SetViewProjectionMatrix(vMat);
 
-		vproj = vMat * outer.projection;
-
-		skysphere.Draw(vproj);
-		monkey.Draw(vproj);
+		skysphere.Draw();
+		monkey.Draw();
 
 		for (size_t i = 0; i < TileQuant; i++)
 		{
 			for (size_t j = 0; j < TileQuant; j++)
 			{
-				floor[i][j].Draw(vproj, "think");
+				floor[i][j].Draw("think");
 			}
 		}
 
@@ -202,14 +201,16 @@ void GameScene::Draw3D()
 	}
 
 	else {
-		skysphere.Draw(vproj);
-		monkey.Draw(vproj);
+		nrdata.SetDefaultVProjMat(vproj);
+		nrdata.SetVProjMatToDefault();
+		skysphere.Draw();
+		monkey.Draw();
 
 		for (size_t i = 0; i < TileQuant; i++)
 		{
 			for (size_t j = 0; j < TileQuant; j++)
 			{
-				floor[i][j].Draw(vproj, "think");
+				floor[i][j].Draw("think");
 			}
 		}
 	}

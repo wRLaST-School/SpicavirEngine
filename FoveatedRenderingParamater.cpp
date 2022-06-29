@@ -47,3 +47,19 @@ void FoveatedRenderingData::SetViewportAndScissorsRect()
 
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 }
+
+void FoveatedRenderingData::SetViewProjectionMatrix(Matrix viewMat)
+{
+	vprojCB.contents->vproj = viewMat * this->projection;
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, vprojCB.buffer->GetGPUVirtualAddress());
+}
+
+void NormalRendering::SetVProjMatToDefault()
+{
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, defaultVProj.buffer->GetGPUVirtualAddress());
+}
+
+void NormalRendering::SetDefaultVProjMat(Matrix vproj)
+{
+	defaultVProj.contents->vproj = vproj;
+}

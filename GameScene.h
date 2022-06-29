@@ -48,6 +48,8 @@ private:
     FoveatedRenderingData middle;
     FoveatedRenderingData outer;
 
+    NormalRendering nrdata;
+
     bool useFoveatedRendering = false;
 
     Matrix vMat;
