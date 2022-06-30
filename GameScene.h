@@ -5,7 +5,7 @@
 #include "Object3D.h"
 #include "Sprite.h"
 #include "FoveatedRenderingParamater.h"
-const int TileQuant = 1;
+const int TileQuant = 10;
 
 enum class ControllMode {
     BIOHAZERD,
@@ -50,8 +50,20 @@ private:
 
     NormalRendering nrdata;
 
-    bool useFoveatedRendering = false;
+    enum class RenderingMode {
+        normal,
+        foveated,
+        vr
+    } renderMode= RenderingMode::normal;
 
     Matrix vMat;
+
+    struct EyeResource {
+        FoveatedRenderingData center;
+        FoveatedRenderingData middle;
+        FoveatedRenderingData outer;
+    };
+
+    EyeResource eyeRes[2];
 };
 
