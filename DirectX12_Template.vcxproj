@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="FoveatedRenderingParamater.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Essentials.h" />
     <ClInclude Include="Float2.h" />
     <ClInclude Include="Float3.h" />

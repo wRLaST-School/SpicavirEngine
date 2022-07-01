@@ -5,6 +5,7 @@
 #include "Object3D.h"
 #include "Sprite.h"
 #include "FoveatedRenderingParamater.h"
+#include "Camera.h"
 const int TileQuant = 10;
 
 enum class ControllMode {
@@ -42,28 +43,8 @@ private:
 
     Sprite spr;
 
-    Object3D camera;
-
-    FoveatedRenderingData center;
-    FoveatedRenderingData middle;
-    FoveatedRenderingData outer;
-
-    NormalRendering nrdata;
-
-    enum class RenderingMode {
-        normal,
-        foveated,
-        vr
-    } renderMode= RenderingMode::normal;
+    Camera camera;
 
     Matrix vMat;
-
-    struct EyeResource {
-        FoveatedRenderingData center;
-        FoveatedRenderingData middle;
-        FoveatedRenderingData outer;
-    };
-
-    EyeResource eyeRes[2];
 };
 
