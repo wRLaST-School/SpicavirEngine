@@ -43,6 +43,7 @@ public:
 
 	float rot = 0.0f;
 	Float3 position = {};
+	Float3 scale = {1.0f, 1.0f, 1.0f};
 	Matrix world;
 
 	static Matrix proj;

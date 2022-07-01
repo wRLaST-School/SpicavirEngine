@@ -185,8 +185,8 @@ Matrix Matrix::Projection(float fov, float aspectRatio, float nearZ, float farZ)
 
 	result[1][1] = 1 / tanf(fov / 2);
 	result[0][0] = result[1][1] / aspectRatio;
-	result[2][2] = farZ / farZ - nearZ;
-	result[3][2] = farZ * -nearZ / farZ - nearZ;
+	result[2][2] = farZ / (farZ - nearZ);
+	result[3][2] = (farZ * -nearZ) / (farZ - nearZ);
 	result[2][3] = 1;
 	result[3][3] = 0;
 

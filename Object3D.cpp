@@ -21,9 +21,9 @@ void Object3D::UpdateMatrix()
 	}
 }
 
-void Object3D::Draw(const Matrix& viewProj)
+void Object3D::Draw()
 {
-	transformCB.contents->mat = matWorld * viewProj;
+	transformCB.contents->mat = matWorld;
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(model->material.textureKey));
 
@@ -38,9 +38,9 @@ void Object3D::Draw(const Matrix& viewProj)
 	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(short), 1, 0, 0, 0);
 }
 
-void Object3D::Draw(const Matrix& viewProj, TextureKey key)
+void Object3D::Draw(TextureKey key)
 {
-	transformCB.contents->mat = matWorld * viewProj;
+	transformCB.contents->mat = matWorld;
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(key));
 

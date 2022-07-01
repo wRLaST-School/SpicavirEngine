@@ -4,6 +4,7 @@
 #include "Model.h"
 #include "Object3D.h"
 #include "Sprite.h"
+#include "FoveatedRenderingParamater.h"
 const int TileQuant = 10;
 
 enum class ControllMode {
@@ -36,7 +37,6 @@ private:
     Matrix vproj;
 
     TextureKey texture;
-    TextureKey narrow = "NARROWFOVE";
 
     ControllMode ctrlmode = ControllMode::BIOHAZERD;
 
@@ -44,6 +44,26 @@ private:
 
     Object3D camera;
 
-    Object3D RokugaAruaru;
+    FoveatedRenderingData center;
+    FoveatedRenderingData middle;
+    FoveatedRenderingData outer;
+
+    NormalRendering nrdata;
+
+    enum class RenderingMode {
+        normal,
+        foveated,
+        vr
+    } renderMode= RenderingMode::normal;
+
+    Matrix vMat;
+
+    struct EyeResource {
+        FoveatedRenderingData center;
+        FoveatedRenderingData middle;
+        FoveatedRenderingData outer;
+    };
+
+    EyeResource eyeRes[2];
 };
 

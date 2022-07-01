@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Essentials.cpp" />
+    <ClCompile Include="FoveatedRenderingParamater.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IScene.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Float2.h" />
     <ClInclude Include="Float3.h" />
     <ClInclude Include="Float4.h" />
+    <ClInclude Include="FoveatedRenderingParamater.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IScene.h" />

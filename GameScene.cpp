@@ -33,10 +33,24 @@ void GameScene::Init()
 	RTVManager::CreateRenderTargetTexture(720, 720, narrow);
 	spr = Sprite(narrow);
 
-	RokugaAruaru.model = &cubem;
-	RokugaAruaru.posision = { 0,0,50 };
-	RokugaAruaru.scale = {10, 10, 10};
-	RokugaAruaru.UpdateMatrix();
+	//FOVEATED RENDERING PARAS
+	center.CreateTextureAndInit(PI / 12, 96, 96, 96, 96, "centerFove");
+	middle.CreateTextureAndInit(PI / 6, 96, 96, 192, 192, "middleFove");
+	outer.CreateTextureAndInit(PI / 2, 256, 144, 1280, 720, "outerFove");
+
+	for (int eye = 0; eye < 2; eye++)
+	{
+		eyeRes[eye].center.CreateTextureAndInit(PI / 6, 96, 96, 192, 192, "centerFoveEye" + eye);
+		eyeRes[eye].middle.CreateTextureAndInit(PI / 3, 208, 208, 416, 416, "middleFoveEye" + eye);
+		eyeRes[eye].outer.CreateTextureAndInit(PI / 2, 128, 144, 640, 720, "outerFoveEye" + eye);
+	}
+
+	eyeRes[0].center.sprite.position = (Vec3)eyeRes[0].center.sprite.position - Vec3(1280/4,0,0);
+	eyeRes[0].middle.sprite.position = (Vec3)eyeRes[0].middle.sprite.position - Vec3(1280 / 4, 0, 0);
+	eyeRes[0].outer .sprite.position = (Vec3)eyeRes[0].outer .sprite.position - Vec3(1280 / 4, 0, 0);
+	eyeRes[1].center.sprite.position = (Vec3)eyeRes[1].center.sprite.position + Vec3(1280 / 4, 0, 0);
+	eyeRes[1].middle.sprite.position = (Vec3)eyeRes[1].middle.sprite.position + Vec3(1280 / 4, 0, 0);
+	eyeRes[1].outer .sprite.position = (Vec3)eyeRes[1].outer .sprite.position + Vec3(1280 / 4, 0, 0);
 }
 
 void GameScene::Update()
@@ -83,9 +97,13 @@ void GameScene::Update()
 		break;
 	}
 
+	if (KeyTriggered(DIK_F)) { 
+		renderMode = renderMode == RenderingMode::normal ? RenderingMode::foveated : renderMode == RenderingMode::foveated ? RenderingMode::vr : RenderingMode::normal; 
+	}
+
 
 	Matrix pMat = Matrix::Projection(
-		PI / 4,
+		PI / 2,
 		(float)GetwWindow()->width / GetwWindow()->height,
 		0.1f, 1000.0f
 	);
@@ -94,11 +112,20 @@ void GameScene::Update()
 	Float3 eye = camera.posision;
 	Float3 up = (Vec3)camera.matWorld.ExtractAxisY();
 
-	Matrix vMat = Matrix::ViewLookTo(eye, eyeV, up);
+	vMat= Matrix::ViewLookTo(eye, eyeV, up);
 	vproj = vMat * pMat;
 
-	spr.position = { 1280/2, 720/2, 0 };
-	spr.UpdateMatrix();
+	center.sprite.UpdateMatrix();
+	middle.sprite.UpdateMatrix();
+	outer.sprite.UpdateMatrix();
+
+	for (int eye = 0; eye < 2; eye++)
+	{
+		eyeRes[eye].center.sprite.UpdateMatrix();
+		eyeRes[eye].middle.sprite.UpdateMatrix();
+		eyeRes[eye].outer.sprite.UpdateMatrix();
+	}
+
 	skysphere.UpdateMatrix();
 }
 
@@ -107,39 +134,212 @@ void GameScene::DrawBack()
 }
 
 void GameScene::Draw3D()
-{
-
-	RTVManager::SetRenderTargetToTexture(narrow);
-	skysphere.Draw(vproj);
-	monkey.Draw(vproj);
-
-	for (size_t i = 0; i < TileQuant; i++)
+{	
+	switch (renderMode)
 	{
-		for (size_t j = 0; j < TileQuant; j++)
-		{
-			floor[i][j].Draw(vproj, "think");
-		}
-	}
-	RokugaAruaru.Draw(vproj, narrow);
-
-	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
-	RTVManager::ClearCurrentRenderTarget({0.0f, 0.0f, 0.0f, 0.0f});
-
-
-	skysphere.Draw(vproj);
-	monkey.Draw(vproj);
-
-	for (size_t i = 0; i < TileQuant; i++)
+	case RenderingMode::foveated:
 	{
-		for (size_t j = 0; j < TileQuant; j++)
+		center.SetViewportAndScissorsRect();
+		RTVManager::SetRenderTargetToTexture(center.renderTex);
+		center.SetViewProjectionMatrix(vMat);
+
+		vproj = vMat * center.projection;
+
+		skysphere.Draw();
+		monkey.Draw();
+
+		for (size_t i = 0; i < TileQuant; i++)
 		{
-			floor[i][j].Draw(vproj, "think");
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw("think");
+			}
 		}
+
+		middle.SetViewportAndScissorsRect();
+		RTVManager::SetRenderTargetToTexture(middle.renderTex);
+		middle.SetViewProjectionMatrix(vMat);
+
+		skysphere.Draw();
+		monkey.Draw();
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw("think");
+			}
+		}
+
+		outer.SetViewportAndScissorsRect();
+		RTVManager::SetRenderTargetToTexture(outer.renderTex);
+		outer.SetViewProjectionMatrix(vMat);
+
+		skysphere.Draw();
+		monkey.Draw();
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw("think");
+			}
+		}
+
+		//VPortとscissorrect,RTを戻す
+		//TODO:関数化
+		D3D12_VIEWPORT viewport{};
+
+		viewport.Width = GetwWindow()->width;
+		viewport.Height = GetwWindow()->height;
+		viewport.TopLeftX = 0;
+		viewport.TopLeftY = 0;
+		viewport.MinDepth = 0.0f;
+		viewport.MaxDepth = 1.0f;
+
+		GetWDX()->cmdList->RSSetViewports(1, &viewport);
+
+		D3D12_RECT scissorrect{};
+
+		scissorrect.left = 0;                                       // 切り抜き座標左
+		scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+		scissorrect.top = 0;                                        // 切り抜き座標上
+		scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+
+		GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+
+		RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+		break;
 	}
-	RokugaAruaru.Draw(vproj, narrow);
+
+	case RenderingMode::normal:
+	{
+		nrdata.SetDefaultVProjMat(vproj);
+		nrdata.SetVProjMatToDefault();
+		skysphere.Draw();
+		monkey.Draw();
+
+		for (size_t i = 0; i < TileQuant; i++)
+		{
+			for (size_t j = 0; j < TileQuant; j++)
+			{
+				floor[i][j].Draw("think");
+			}
+		}
+		break;
+	}
+
+	case RenderingMode::vr:
+	{
+		for (int eye = 0; eye < 2; eye++) {
+			Float3 eyeV = camera.matWorld.ExtractAxisZ();
+			Float3 eyePos = (Vec3)camera.posision - camera.matWorld.ExtractAxisX().SetLength(0.5f) + camera.matWorld.ExtractAxisX().SetLength(1 * eye);
+			Float3 up = (Vec3)camera.matWorld.ExtractAxisY();
+
+			vMat = Matrix::ViewLookTo(eyePos, eyeV, up);
+
+			eyeRes[eye].center.SetViewportAndScissorsRect();
+			RTVManager::SetRenderTargetToTexture(eyeRes[eye].center.renderTex);
+			eyeRes[eye].center.SetViewProjectionMatrix(vMat);
+
+			vproj = vMat * eyeRes[eye].center.projection;
+
+			skysphere.Draw();
+			monkey.Draw();
+
+			for (size_t i = 0; i < TileQuant; i++)
+			{
+				for (size_t j = 0; j < TileQuant; j++)
+				{
+					floor[i][j].Draw("think");
+				}
+			}
+
+			eyeRes[eye].middle.SetViewportAndScissorsRect();
+			RTVManager::SetRenderTargetToTexture(eyeRes[eye].middle.renderTex);
+			eyeRes[eye].middle.SetViewProjectionMatrix(vMat);
+
+			skysphere.Draw();
+			monkey.Draw();
+
+			for (size_t i = 0; i < TileQuant; i++)
+			{
+				for (size_t j = 0; j < TileQuant; j++)
+				{
+					floor[i][j].Draw("think");
+				}
+			}
+
+			eyeRes[eye].outer.SetViewportAndScissorsRect();
+			RTVManager::SetRenderTargetToTexture(eyeRes[eye].outer.renderTex);
+			eyeRes[eye].outer.SetViewProjectionMatrix(vMat);
+
+			skysphere.Draw();
+			monkey.Draw();
+
+			for (size_t i = 0; i < TileQuant; i++)
+			{
+				for (size_t j = 0; j < TileQuant; j++)
+				{
+					floor[i][j].Draw("think");
+				}
+			}
+		}
+
+		//VPortとscissorrect,RTを戻す
+		//TODO:関数化
+		D3D12_VIEWPORT viewport{};
+
+		viewport.Width = GetwWindow()->width;
+		viewport.Height = GetwWindow()->height;
+		viewport.TopLeftX = 0;
+		viewport.TopLeftY = 0;
+		viewport.MinDepth = 0.0f;
+		viewport.MaxDepth = 1.0f;
+
+		GetWDX()->cmdList->RSSetViewports(1, &viewport);
+
+		D3D12_RECT scissorrect{};
+
+		scissorrect.left = 0;                                       // 切り抜き座標左
+		scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+		scissorrect.top = 0;                                        // 切り抜き座標上
+		scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+
+		GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+
+		RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+		break;
+	}
+	}
 }
 
 void GameScene::DrawSprite()
 {
-	spr.Draw();
+	//spr.Draw();
+
+	switch (renderMode)
+	{
+	case GameScene::RenderingMode::normal:
+		break;
+	case GameScene::RenderingMode::foveated:
+	{
+		outer.sprite.Draw();
+		middle.sprite.Draw();
+		center.sprite.Draw();
+
+		break;
+	}
+	case GameScene::RenderingMode::vr:
+		for (int eye = 0; eye < 2; eye++)
+		{
+			eyeRes[eye].outer.sprite.Draw();
+			eyeRes[eye].middle.sprite.Draw();
+			eyeRes[eye].center.sprite.Draw();
+		}
+		break;
+	default:
+		break;
+	}
+	
 }

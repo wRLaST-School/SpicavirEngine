@@ -11,10 +11,10 @@ class Object3D
 public:
 	Object3D() { transformCB.contents->mat = Matrix::Identity(); };
 	void UpdateMatrix();
-	void Draw(const Matrix& viewProj);
+	void Draw();
 
 	//別途読み込んだテクスチャを使う場合
-	void Draw(const Matrix& viewProj, TextureKey key);
+	void Draw(TextureKey key);
 
 	wConstBuffer<ConstBufferDataTransform> transformCB;
 
