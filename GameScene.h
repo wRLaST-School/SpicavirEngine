@@ -4,7 +4,6 @@
 #include "Model.h"
 #include "Object3D.h"
 #include "Sprite.h"
-#include "FoveatedRenderingParamater.h"
 #include "Camera.h"
 const int TileQuant = 10;
 
