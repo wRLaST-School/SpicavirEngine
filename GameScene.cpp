@@ -48,9 +48,9 @@ void GameScene::Update()
 		if (KeyTriggered(DIK_Q)) ctrlmode = ControllMode::TPS;
 
 		monkey.rotation = (Vec3)monkey.rotation + Vec3(0, PI / 144 * (KeyDown(DIK_D) - KeyDown(DIK_A)), 0);
-
+		monkey.scale = (Vec3)monkey.scale + Vec3(KeyDown(DIK_M) - KeyDown(DIK_C), KeyDown(DIK_T) - KeyDown(DIK_V), 0);
 		monkey.UpdateMatrix();
-		Vec3 front = monkey.matWorld.ExtractAxisZ();
+		Vec3 front = monkey.matWorld.ExtractAxisZ(monkey.scale.z);
 
 		Vec3 move = front.SetLength(0.25f) * (KeyDown(DIK_W) - KeyDown(DIK_S));
 		monkey.posision = (Vec3)monkey.posision + move;
