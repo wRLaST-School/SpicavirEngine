@@ -39,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	HRESULT result;
 
 	//Init Input
-	InitInput();
+	Input::Key::Init();
 
 	/*Init Draw*/
 	//ダブルバッファリングとか
@@ -80,7 +80,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	while (true)
 	{
 		if(GetWDX()->StartFrame()) break;
-		UpdateInput();
+		Input::Key::Update();
 		/*毎フレーム処理*/
 
 		/*更新処理*/

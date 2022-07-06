@@ -5,15 +5,36 @@
 #pragma comment(lib, "dinput8.lib")
 #pragma comment(lib, "dxguid.lib")
 
-void InitInput();
+namespace Input {
 
-void UpdateInput();
+	class Key
+	{
+	public:
+		static void Init();
 
-void CloseInput();
+		static void Update();
 
-//キーが押されているか
-bool KeyDown(int key);
-//キーが離された瞬間か
-bool KeyReleased(int key);
-//キーが押された瞬間か
-bool KeyTriggered(int key);
+		static void Close();
+
+		//キーが押されているか
+		static bool Down(int key);
+		//キーが離された瞬間か
+		static bool Released(int key);
+		//キーが押された瞬間か
+		static bool Triggered(int key);
+
+		static Key* GetInstance();
+	private:
+		IDirectInput8* dinput = nullptr;
+		IDirectInputDevice8* devkeyboard = nullptr;
+
+		BYTE keys[256] = {};
+		BYTE prevKeys[256] = {};
+	};
+
+	class Pad
+	{
+
+	};
+
+}

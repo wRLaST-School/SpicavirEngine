@@ -2,55 +2,60 @@
 #include "Essentials.h"
 #include "wWindow.h"
 
-IDirectInput8* dinput = nullptr;
-IDirectInputDevice8* devkeyboard = nullptr;
+using namespace Input;
 
-static BYTE keys[256] = {};
-static BYTE prevKeys[256] = {};
-
-void InitInput()
+void Key::Init()
 {
-	HRESULT rr = DirectInput8Create(GetwWindow()->w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&dinput, nullptr);
+	Key* instance = GetInstance();
+	HRESULT rr = DirectInput8Create(GetwWindow()->w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&instance->dinput, nullptr);
 
-	dinput->CreateDevice(GUID_SysKeyboard, &devkeyboard, NULL);
+	instance->dinput->CreateDevice(GUID_SysKeyboard, &instance->devkeyboard, NULL);
 
-	devkeyboard->SetDataFormat(&c_dfDIKeyboard);
+	instance->devkeyboard->SetDataFormat(&c_dfDIKeyboard);
 
-	devkeyboard->SetCooperativeLevel(GetwWindow()->hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
+	instance->devkeyboard->SetCooperativeLevel(GetwWindow()->hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 }
 
-void UpdateInput()
+void Key::Update()
 {
+	Key* instance = GetInstance();
 	for (size_t i = 0; i < 256; i++)
 	{
-		prevKeys[i] = keys[i];
+		instance->prevKeys[i] = instance->keys[i];
 	}
 
-	devkeyboard->Acquire();
+	instance->devkeyboard->Acquire();
 
-	devkeyboard->GetDeviceState(sizeof(keys), keys);
+	instance->devkeyboard->GetDeviceState(sizeof(instance->keys), instance->keys);
 }
 
-void CloseInput()
+void Key::Close()
 {
-	delete dinput;
-	delete devkeyboard;
+	Key* instance = GetInstance();
+	delete instance->dinput;
+	delete instance->devkeyboard;
 }
 
-bool KeyDown(int key)
-{
-	if (key >= 256 || key < 0) return false;
-	return (bool)keys[key];
-}
-
-bool KeyReleased(int key)
+bool Key::Down(int key)
 {
 	if (key >= 256 || key < 0) return false;
-	return (bool)(!keys[key] && prevKeys[key]);
+	return (bool)GetInstance()->keys[key];
 }
 
-bool KeyTriggered(int key)
+bool Key::Released(int key)
 {
 	if (key >= 256 || key < 0) return false;
-	return (bool)(keys[key] && !prevKeys[key]);
+	return (bool)(!GetInstance()->keys[key] && GetInstance()->prevKeys[key]);
+}
+
+bool Key::Triggered(int key)
+{
+	if (key >= 256 || key < 0) return false;
+	return (bool)(GetInstance()->keys[key] && !GetInstance()->prevKeys[key]);
+}
+
+Key* Key::GetInstance()
+{
+	static Key obj;
+	return &obj;
 }

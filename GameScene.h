@@ -5,7 +5,9 @@
 #include "Object3D.h"
 #include "Sprite.h"
 #include "Camera.h"
+#include "Input.h"
 const int TileQuant = 10;
+using namespace Input;
 
 enum class ControllMode {
     BIOHAZERD,

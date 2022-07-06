@@ -10,7 +10,7 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
-	if (KeyTriggered(DIK_R))
+	if (Input::Key::Triggered(DIK_R))
 	{
 		currentScene.release();
 		currentScene = unique_ptr<GameScene>(new GameScene());
