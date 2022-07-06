@@ -60,7 +60,6 @@ void GameScene::Update()
 	case ControllMode::TPS:
 	{
 		if (Key::Triggered(DIK_Q)) ctrlmode = ControllMode::BIOHAZERD;
-
 		//monkey.rotation = (Vec3)monkey.rotation + Vec3(PI / 144 * (KeyDown(DIK_DOWN) - KeyDown(DIK_UP)), PI / 144 * (KeyDown(DIK_RIGHT) - KeyDown(DIK_LEFT)), 0);
 
 		monkey.UpdateMatrix();

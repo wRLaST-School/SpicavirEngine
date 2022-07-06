@@ -59,3 +59,23 @@ Key* Key::GetInstance()
 	static Key obj;
 	return &obj;
 }
+
+void Input::Pad::Init()
+{
+	XInputGetState(0, &GetInstance()->padState);
+}
+
+void Input::Pad::Update()
+{
+}
+
+void Input::Pad::Close()
+{
+	//XInputEnable(false);
+}
+
+Pad* Input::Pad::GetInstance()
+{
+	static Pad obj;
+	return &obj;
+}

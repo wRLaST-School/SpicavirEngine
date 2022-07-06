@@ -40,6 +40,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init Input
 	Input::Key::Init();
+	Input::Pad::Init();
 
 	/*Init Draw*/
 	//ダブルバッファリングとか
