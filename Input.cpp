@@ -72,7 +72,7 @@ void Input::Pad::Update()
 
 void Input::Pad::Close()
 {
-	XInputEnable(false);
+	//XInputEnable(false);
 }
 
 Pad* Input::Pad::GetInstance()

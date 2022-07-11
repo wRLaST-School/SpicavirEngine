@@ -44,11 +44,11 @@ namespace Input {
 		static void Close();
 
 		//ボタンが押されているか
-		static bool Down(Button button);
+		static bool Down(UCHAR button);
 		//ボタンが離された瞬間か
-		static bool Released(Button button);
+		static bool Released(UCHAR button);
 		//ボタンが押された瞬間か
-		static bool Triggered(Button button);
+		static bool Triggered(UCHAR button);
 
 		static Pad* GetInstance();
 
