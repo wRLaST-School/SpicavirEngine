@@ -67,15 +67,30 @@ void Input::Pad::Init()
 
 void Input::Pad::Update()
 {
+	
 }
 
 void Input::Pad::Close()
 {
-	//XInputEnable(false);
+	XInputEnable(false);
 }
 
 Pad* Input::Pad::GetInstance()
 {
 	static Pad obj;
 	return &obj;
+}
+
+Input::Pad::Stick Input::Pad::GetLStick()
+{
+	short lx = GetInstance()->padState.Gamepad.sThumbLX;
+	short ly = GetInstance()->padState.Gamepad.sThumbLY;
+	return Stick{ (float)lx / 32.767f, (float)ly / 32.767f };
+}
+
+Input::Pad::Stick Input::Pad::GetRStick()
+{
+	short rx = GetInstance()->padState.Gamepad.sThumbRX;
+	short ry = GetInstance()->padState.Gamepad.sThumbRY;
+	return Stick{ (float)rx / 32.767f, (float)ry / 32.767f };
 }
