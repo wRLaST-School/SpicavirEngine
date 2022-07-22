@@ -11,6 +11,11 @@ void GameScene::Init()
 	camera.farZ = 1000.0f;
 	camera.fov = PI / 2;
 
+	topCamera.SetRenderSize(256, 256);
+	topCamera.nearZ = 0.1f;
+	topCamera.farZ = 1000.0f;
+	topCamera.fov = PI / 2;
+
 	model = Model("monkey");
 	cubem = Model("cube");
 
@@ -26,18 +31,21 @@ void GameScene::Init()
 		for (size_t j = 0; j < TileQuant; j++)
 		{
 			floor[i][j].model = &cubem;
-			floor[i][j].posision = { -boxsize * TileQuant/2 + i * boxsize, -3, -boxsize * TileQuant/2 + j * boxsize };
+			floor[i][j].position = { -boxsize * TileQuant/2 + i * boxsize, -3, -boxsize * TileQuant/2 + j * boxsize };
 			floor[i][j].UpdateMatrix();
 		}
 	}
 
 	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/think.png", "think");
+
+	RTVManager::CreateRenderTargetTexture(256, 256, "offscreen");
+	osrspr = Sprite("offscreen");
 }
 
 void GameScene::Update()
 {
-	camera.posision = (Vec3)camera.posision + Vec3((Key::Down(DIK_RIGHT) - Key::Down(DIK_LEFT)) * 0.25f, (Key::Down(DIK_SPACE) - Key::Down(DIK_LSHIFT)) * 0.25f, (Key::Down(DIK_UP) - Key::Down(DIK_DOWN)) * 0.25f);
+	camera.position = (Vec3)camera.position + Vec3((Key::Down(DIK_RIGHT) - Key::Down(DIK_LEFT)) * 0.25f, (Key::Down(DIK_SPACE) - Key::Down(DIK_LSHIFT)) * 0.25f, (Key::Down(DIK_UP) - Key::Down(DIK_DOWN)) * 0.25f);
 	camera.rotation = (Vec3)camera.rotation + Vec3((Key::Down(DIK_NUMPAD2) - Key::Down(DIK_NUMPAD8)) * 0.05f, (Key::Down(DIK_NUMPAD6) - Key::Down(DIK_NUMPAD4)) * 0.05f, 0);
 	camera.UpdateMatrix();
 
@@ -53,7 +61,7 @@ void GameScene::Update()
 		Vec3 front = monkey.matWorld.ExtractAxisZ(monkey.scale.z);
 
 		Vec3 move = front.SetLength(0.25f) * (Key::Down(DIK_W) - Key::Down(DIK_S));
-		monkey.posision = (Vec3)monkey.posision + move;
+		monkey.position = (Vec3)monkey.position + move;
 		monkey.UpdateMatrix();
 		break;
 	}
@@ -70,7 +78,7 @@ void GameScene::Update()
 		move += right.GetNorm() * (Key::Down(DIK_D) - Key::Down(DIK_A));
 		if(move.GetSquaredLength() != 0)move.SetLength(0.25f);
 
-		monkey.posision = (Vec3)monkey.posision + move;
+		monkey.position = (Vec3)monkey.position + move;
 		monkey.UpdateMatrix();
 		break;
 	}
@@ -78,7 +86,23 @@ void GameScene::Update()
 		break;
 	}
 
+	topCamera.position.x = monkey.position.x;
+	topCamera.position.y = 10;
+	topCamera.position.z = monkey.position.z;
+	topCamera.rotation = { PI / 2, 0.0f, 0.0f };
+	topCamera.UpdateMatrix();
+
+	hsv.x++;
+	Float3 rgb = ConvertHSVtoRGB(hsv);
+	color = {rgb.x, rgb.y, rgb.z, 255.0f};
+
+	monkey.brightnessCB = {color.x / 255, color.y = 255, color.z / 255, color.w / 255};
+
 	skysphere.UpdateMatrix();
+
+	osrspr.position = Float3{ 128, 128, 0 };
+	osrspr.scale = Float3{ 1.0f, 1.0f, 1.0f };
+	osrspr.UpdateMatrix();
 }
 
 void GameScene::DrawBack()
@@ -99,9 +123,25 @@ void GameScene::Draw3D()
 			floor[i][j].Draw("think");
 		}
 	}
+
+	RTVManager::SetRenderTargetToTexture("offscreen");
+	Camera::Set(topCamera);
+	skysphere.Draw();
+	monkey.Draw();
+
+	for (size_t i = 0; i < TileQuant; i++)
+	{
+		for (size_t j = 0; j < TileQuant; j++)
+		{
+			floor[i][j].Draw("think");
+		}
+	}
+
+	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
 void GameScene::DrawSprite()
 {
-	//spr.Draw();	
+	Camera::Set(camera);
+	osrspr.Draw();
 }

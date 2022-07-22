@@ -8,7 +8,7 @@ void Object3D::UpdateMatrix()
 
 	mRot = Matrix::RotRollPitchYaw(rotation);
 
-	mTrans = Matrix::Translation(posision);
+	mTrans = Matrix::Translation(position);
 
 	matWorld = Matrix::Identity();
 	matWorld *= mScale;
@@ -31,6 +31,8 @@ void Object3D::Draw()
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
 
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(4, brightnessCB.buffer->GetGPUVirtualAddress());
+
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 
 	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
@@ -47,6 +49,8 @@ void Object3D::Draw(TextureKey key)
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
+
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(4, brightnessCB.buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 

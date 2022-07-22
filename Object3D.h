@@ -9,7 +9,7 @@ struct ConstBufferDataTransform {
 class Object3D
 {
 public:
-	Object3D() { transformCB.contents->mat = Matrix::Identity(); };
+	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; };
 	void UpdateMatrix();
 	void Draw();
 
@@ -17,10 +17,11 @@ public:
 	void Draw(TextureKey key);
 
 	wConstBuffer<ConstBufferDataTransform> transformCB;
+	wConstBuffer<Float4> brightnessCB;
 
 	Float3 scale = { 1, 1, 1 };
 	Float3 rotation = { 0, 0, 0 };
-	Float3 posision = { 0, 0, 0 };
+	Float3 position = { 0, 0, 0 };
 
 	Matrix matWorld = Matrix::Identity();
 

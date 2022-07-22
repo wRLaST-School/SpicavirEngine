@@ -8,7 +8,7 @@ void wRootSignature::Init()
 {
 	D3D12_DESCRIPTOR_RANGE descRange{};
 
-	D3D12_ROOT_PARAMETER rootParams[4] = {};
+	D3D12_ROOT_PARAMETER rootParams[5] = {};
 	HRESULT result;
 
 	descRange.NumDescriptors = 1;
@@ -39,6 +39,12 @@ void wRootSignature::Init()
 	rootParams[3].Descriptor.ShaderRegister = 2;
 	rootParams[3].Descriptor.RegisterSpace = 0;
 	rootParams[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+	//定数バッファ3番
+	rootParams[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParams[4].Descriptor.ShaderRegister = 3;
+	rootParams[4].Descriptor.RegisterSpace = 0;
+	rootParams[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
 	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
 	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;

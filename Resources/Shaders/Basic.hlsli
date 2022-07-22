@@ -11,9 +11,14 @@ cbuffer cbuff1 : register(b1)
 	matrix mat;
 }
 
-cbuffer cbuff1 : register(b2)
+cbuffer cbuff2 : register(b2)
 {
 	matrix vpmat;
+}
+
+cbuffer cbuff3 : register(b3)
+{
+	float4 brightness;
 }
 
 struct VSOutput
