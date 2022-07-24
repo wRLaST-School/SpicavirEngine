@@ -56,7 +56,7 @@ void GameScene::Update()
 		if (Key::Triggered(DIK_Q)) ctrlmode = ControllMode::TPS;
 
 		monkey.rotation = (Vec3)monkey.rotation + Vec3(0, PI / 144 * (Key::Down(DIK_D) - Key::Down(DIK_A)), 0);
-		monkey.scale = (Vec3)monkey.scale + Vec3(Key::Down(DIK_M) - Key::Down(DIK_C), Key::Down(DIK_T) - Key::Down(DIK_V), 0);
+		monkey.scale = (Vec3)monkey.scale + Vec3(Key::Down(DIK_M) - Key::Down(DIK_C), Key::Down(DIK_F) - Key::Down(DIK_V), 0);
 		monkey.UpdateMatrix();
 		Vec3 front = monkey.matWorld.ExtractAxisZ(monkey.scale.z);
 
