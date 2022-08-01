@@ -114,9 +114,34 @@ Vec3& Vec3::Norm()
 	return *this;
 }
 
+Vec3& Vec3::Norm(float length)
+{
+	const float& l = length;
+	if (l) {
+		this->x /= l;
+		this->y /= l;
+		this->z /= l;
+	}
+	else {
+		this->x = 0;
+		this->y = 0;
+		this->z = 0;
+	}
+	return *this;
+}
+
 Vec3 Vec3::GetNorm() const
 {
 	float l = this->GetLength();
+	if (l)
+		return Vec3(this->x / l, this->y / l, this->z / l);
+	else
+		return Vec3();
+}
+
+Vec3 Vec3::GetNorm(float length) const
+{
+	const float& l = length;
 	if (l)
 		return Vec3(this->x / l, this->y / l, this->z / l);
 	else

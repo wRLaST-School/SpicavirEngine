@@ -6,6 +6,11 @@ enum class CameraTargetMode {
     LookTo
 };
 
+enum class ProjectionMode {
+    Orthographic,
+    Perspective
+};
+
 class Camera :
     public Object3D
 {
@@ -28,5 +33,7 @@ public:
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
     static void Set(Camera& camera);
+
+    ProjectionMode projectionMode = ProjectionMode::Perspective;
 };
 

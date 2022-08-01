@@ -15,6 +15,7 @@
 #include "SceneManager.h"
 #include "wTextureManager.h"
 #include "Sprite.h"
+#include "wDirectXDebug.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -24,6 +25,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
 		debugController->EnableDebugLayer();
+		debugController->SetEnableGPUBasedValidation(TRUE);
 	}
 #endif //  _DEBUG
 
@@ -77,6 +79,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SceneManager sceneManager = SceneManager();
 	sceneManager.Init();
 
+	/*デバッグ有効化*/
+#ifdef  _DEBUG
+	wDirectXDebug::EnableDebugOptions();
+#endif //  _DEBUG
 	/*ループ*/
 	while (true)
 	{

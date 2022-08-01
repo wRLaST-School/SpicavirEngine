@@ -82,6 +82,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{c02ae0a0-8820-45f9-ae1b-f07b6c7d505f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソース ファイル\Collider">
+      <UniqueIdentifier>{3f17e45d-9caf-4f02-85eb-7df9d2e33d14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダー ファイル\Collider">
+      <UniqueIdentifier>{58b09cfe-8b8c-46a6-a993-3b81ca846e4c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,6 +167,21 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Engine\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="wDirectXDebug.cpp">
+      <Filter>Engine\ソース ファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ICollider.cpp">
+      <Filter>Engine\ソース ファイル\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="RayCollider.cpp">
+      <Filter>Engine\ソース ファイル\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCollider.cpp">
+      <Filter>Engine\ソース ファイル\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +268,21 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Engine\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="wDirectXDebug.h">
+      <Filter>Engine\ヘッダー ファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollider.h">
+      <Filter>Engine\ヘッダー ファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="RayCollider.h">
+      <Filter>Engine\ヘッダー ファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollider.h">
+      <Filter>Engine\ヘッダー ファイル\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

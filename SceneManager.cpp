@@ -1,10 +1,14 @@
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "TestScene.h"
 #include "Input.h"
 
 void SceneManager::Init()
 {
 	currentScene = unique_ptr<GameScene>(new GameScene());
+
+	currentScene = unique_ptr<TestScene>(new TestScene());
+
 	currentScene->Init();
 }
 

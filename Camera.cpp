@@ -36,7 +36,9 @@ void Camera::Set(Camera& camera)
 		Matrix::ViewLookAt(camera.position, camera.target, camera.matWorld.ExtractAxisY()) : 
 		Matrix::ViewLookTo(camera.position, camera.matWorld.ExtractAxisZ(), camera.matWorld.ExtractAxisY());
 
-	Matrix pMat = Matrix::Projection(camera.fov, (float)camera.renderWidth / (float)camera.renderHeight, camera.nearZ, camera.farZ);
+	Matrix pMat = camera.projectionMode == ProjectionMode::Perspective ? 
+		Matrix::Projection(camera.fov, (float)camera.renderWidth / (float)camera.renderHeight, camera.nearZ, camera.farZ) :
+		Matrix::Projection((float)camera.renderWidth, (float)camera.renderHeight);
 
 	camera.cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
 

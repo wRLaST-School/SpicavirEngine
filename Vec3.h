@@ -39,9 +39,13 @@ public:
 
 	//Sqrtが呼ばれる
 	Vec3& Norm();
+	//Sqrtが呼ばれない。長さがわかっている場合に。
+	Vec3& Norm(float length);
 
 	//Sqrtが呼ばれる
 	Vec3 GetNorm() const;
+	//Sqrtが呼ばれない。長さがわかっている場合に。
+	Vec3 GetNorm(float length) const;
 
 	float GetLength() const;
 
