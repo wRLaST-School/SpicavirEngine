@@ -154,6 +154,7 @@
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="RayCollider.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="RTVManager.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="RayCollider.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="RTVManager.h" />

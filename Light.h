@@ -13,15 +13,20 @@ public:
 		Float3 dLightColor;
 	};
 
-	Light();
+	static void Init();
 
-	void Use();
+	static void Use();
 
-	void UpdateLightData();
+	static void UpdateLightData();
+
+	static Light* GetInstance();
+
+	static DirectionalLight directional;
 
 private:
 	wConstBuffer<LightCBData> lightCB;
 
-	DirectionalLight directionalLight;
+	Light(){ };
+	~Light(){ };
 };
 

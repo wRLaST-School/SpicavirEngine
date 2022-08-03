@@ -99,7 +99,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*XVˆ—‚±‚±‚Ü‚Å*/
 
 		GetWDX()->PreDrawCommands();
-		sceneManager.currentScene->pLightManager->Use();
+
+		Light::UpdateLightData();
+		Light::Use();
 
 		sceneManager.Draw3D();
 

@@ -36,9 +36,10 @@ public:
 		buffer->Unmap(0, nullptr);
 	};
 
-	void operator=(Contents c) {
-		*contents = c;
-	};
+	wConstBuffer<Contents>& operator=(const wConstBuffer<Contents>& second) {
+		*this->contents = *second.contents;
+		return *this;
+	}
 	
 public:
 	ComPtr<ID3D12Resource> buffer;

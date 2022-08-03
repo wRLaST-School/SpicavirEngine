@@ -4,7 +4,6 @@ class IScene
 {
 public:
 	IScene() { 
-		pLightManager = new Light(); 
 	};
 	virtual void Init() = 0;
 	virtual void Update() = 0;
@@ -13,10 +12,6 @@ public:
 	virtual void DrawSprite() = 0;
 
 	virtual ~IScene() { 
-		int a = 132141;
-		delete pLightManager; 
 	};
-
-	Light* pLightManager = nullptr;
 };
 

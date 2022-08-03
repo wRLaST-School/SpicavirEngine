@@ -192,6 +192,9 @@
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>Engine\ソース ファイル\Light</Filter>
     </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Engine\ソース ファイル\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -294,6 +297,9 @@
       <Filter>Engine\ヘッダー ファイル\Light</Filter>
     </ClInclude>
     <ClInclude Include="DirectionalLight.h">
+      <Filter>Engine\ヘッダー ファイル\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
       <Filter>Engine\ヘッダー ファイル\Light</Filter>
     </ClInclude>
   </ItemGroup>

@@ -134,9 +134,6 @@ void TestScene::Update()
 	{
 		*ray.brightnessCB.contents = Float4{ 1.0f, 1.0f, 1.0f, 1.0f };
 	}
-
-
-	pLightManager->UpdateLightData();
 }
 
 void TestScene::DrawBack()
