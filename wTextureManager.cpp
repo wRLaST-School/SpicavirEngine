@@ -22,6 +22,8 @@ void wTextureManager::Init()
 	GetInstance().nextRegisteredTextureIndex = 0;
 	GetInstance().textureMap.clear();
 	GetInstance().texBuffs.clear();
+
+	wTextureManager::LoadTexture("Resources/notexture.png", "notexture");
 }
 
 TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)

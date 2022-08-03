@@ -7,6 +7,7 @@
 void TestScene::Init()
 {
 	wTextureManager::Init();
+
 	camera.SetRenderSize(640, 360);
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
@@ -85,8 +86,6 @@ void TestScene::Init()
 	ray.position = { 0.0, 0.0, 10.0f };
 	ray.UpdateMatrix();
 
-	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
-
 	sky = Model("skydome");
 
 	mSphere = Model("sphere");
@@ -94,6 +93,8 @@ void TestScene::Init()
 	sphere.model = &mSphere;
 
 	skysphere.model = &sky;
+
+	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
 }
 
 void TestScene::Update()
