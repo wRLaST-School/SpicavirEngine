@@ -8,7 +8,7 @@ void wRootSignature::Init()
 {
 	D3D12_DESCRIPTOR_RANGE descRange{};
 
-	D3D12_ROOT_PARAMETER rootParams[5] = {};
+	D3D12_ROOT_PARAMETER rootParams[6] = {};
 	HRESULT result;
 
 	descRange.NumDescriptors = 1;
@@ -16,7 +16,7 @@ void wRootSignature::Init()
 	descRange.BaseShaderRegister = 0;
 	descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-	//定数バッファ0番
+	//定数バッファ0番マテリアル
 	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParams[0].Descriptor.ShaderRegister = 0;
 	rootParams[0].Descriptor.RegisterSpace = 0;
@@ -28,23 +28,29 @@ void wRootSignature::Init()
 	rootParams[1].DescriptorTable.NumDescriptorRanges = 1;
 	rootParams[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-	//定数バッファ1番
+	//定数バッファ1番ワールド行列
 	rootParams[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParams[2].Descriptor.ShaderRegister = 1;
 	rootParams[2].Descriptor.RegisterSpace = 0;
 	rootParams[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-	//定数バッファ2番
+	//定数バッファ2番ビュー・射影変換行列
 	rootParams[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParams[3].Descriptor.ShaderRegister = 2;
 	rootParams[3].Descriptor.RegisterSpace = 0;
 	rootParams[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-	//定数バッファ3番
+	//定数バッファ3番輝度
 	rootParams[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 	rootParams[4].Descriptor.ShaderRegister = 3;
 	rootParams[4].Descriptor.RegisterSpace = 0;
 	rootParams[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+	//定数バッファ4番光源
+	rootParams[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParams[5].Descriptor.ShaderRegister = 4;
+	rootParams[5].Descriptor.RegisterSpace = 0;
+	rootParams[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
 	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
 	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;

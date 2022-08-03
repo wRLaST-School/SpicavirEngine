@@ -14,11 +14,18 @@ cbuffer cbuff1 : register(b1)
 cbuffer cbuff2 : register(b2)
 {
 	matrix vpmat;
+	float3 cameraPos;
 }
 
 cbuffer cbuff3 : register(b3)
 {
 	float4 brightness;
+}
+
+cbuffer cbuff4 : register(b4)
+{
+	float3 lightVec;
+	float3 lightColor;
 }
 
 struct VSOutput

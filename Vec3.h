@@ -19,6 +19,7 @@ public:
 	Vec3 operator+(const Vec3& v2) const;
 
 	Vec3 operator-(const Vec3& v2) const;
+	Vec3 operator-() const;
 
 	Vec3 operator*(float mul) const;
 

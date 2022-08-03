@@ -15,13 +15,12 @@
 #include "SceneManager.h"
 #include "wTextureManager.h"
 #include "Sprite.h"
-#include "wDirectXDebug.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
-	ID3D12Debug* debugController;
+	ID3D12Debug1* debugController;
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
 		debugController->EnableDebugLayer();
@@ -81,7 +80,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
-	wDirectXDebug::EnableDebugOptions();
+	ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(GetWDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+	{
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+	}
 #endif //  _DEBUG
 	/*ループ*/
 	while (true)
@@ -95,6 +99,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*更新処理ここまで*/
 
 		GetWDX()->PreDrawCommands();
+		sceneManager.currentScene->pLightManager->Use();
 
 		sceneManager.Draw3D();
 

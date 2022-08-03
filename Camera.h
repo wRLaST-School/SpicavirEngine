@@ -1,6 +1,11 @@
 #pragma once
 #include "Object3D.h"
 
+struct ConstBufferDataVProj {
+    Matrix vproj;
+    Float3 cameraPos;
+};
+
 enum class CameraTargetMode {
     LookAt,
     LookTo

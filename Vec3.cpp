@@ -32,6 +32,11 @@ Vec3 Vec3::operator-(const Vec3& v2) const
 	return Vec3(this->x - v2.x, this->y - v2.y, this->z - v2.z);
 }
 
+Vec3 Vec3::operator-() const
+{
+	return Vec3(-this->x, -this->y, -this->z);
+}
+
 Vec3 Vec3::operator*(float mul) const
 {
 	return Vec3(this->x * mul, this->y * mul, this->z * mul);

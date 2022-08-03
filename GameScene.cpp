@@ -94,15 +94,17 @@ void GameScene::Update()
 
 	hsv.x++;
 	Float3 rgb = ConvertHSVtoRGB(hsv);
-	color = {rgb.x, rgb.y, rgb.z, 255.0f};
+	color = {255, 255, 255, 255.0f};
 
-	monkey.brightnessCB = {color.x / 255, color.y = 255, color.z / 255, color.w / 255};
+	monkey.brightnessCB = {color.x / 255, color.y / 255, color.z / 255, color.w / 255};
 
 	skysphere.UpdateMatrix();
 
 	osrspr.position = Float3{ 128, 128, 0 };
 	osrspr.scale = Float3{ 1.0f, 1.0f, 1.0f };
 	osrspr.UpdateMatrix();
+
+	pLightManager->UpdateLightData();
 }
 
 void GameScene::DrawBack()

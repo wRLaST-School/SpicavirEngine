@@ -41,6 +41,7 @@ void Camera::Set(Camera& camera)
 		Matrix::Projection((float)camera.renderWidth, (float)camera.renderHeight);
 
 	camera.cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
+	camera.cameraViewProjMatrixCB.contents->cameraPos = camera.position;
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, camera.cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
 }

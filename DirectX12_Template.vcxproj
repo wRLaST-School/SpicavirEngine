@@ -143,11 +143,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="ICollider.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IScene.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -164,7 +166,6 @@
     <ClCompile Include="wConstBuffer.cpp" />
     <ClCompile Include="wDepth.cpp" />
     <ClCompile Include="wDirectX.cpp" />
-    <ClCompile Include="wDirectXDebug.cpp" />
     <ClCompile Include="wMath.cpp" />
     <ClCompile Include="wPSO.cpp" />
     <ClCompile Include="wRootSignature.cpp" />
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Essentials.h" />
     <ClInclude Include="Float2.h" />
     <ClInclude Include="Float3.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="ICollider.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IScene.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object3D.h" />
@@ -199,7 +202,6 @@
     <ClInclude Include="wConstBuffer.h" />
     <ClInclude Include="wDepth.h" />
     <ClInclude Include="wDirectX.h" />
-    <ClInclude Include="wDirectXDebug.h" />
     <ClInclude Include="wMath.h" />
     <ClInclude Include="wPSO.h" />
     <ClInclude Include="wRootSignature.h" />
