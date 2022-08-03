@@ -5,22 +5,19 @@
 
 void SceneManager::Init()
 {
-	currentScene = unique_ptr<GameScene>(new GameScene());
+	//currentScene = unique_ptr<GameScene>(new GameScene());
 
-	currentScene = unique_ptr<TestScene>(new TestScene());
-
-	currentScene->Init();
+	Transition<TestScene>();
 }
 
 void SceneManager::Update()
 {
+	currentScene->Update();
+
 	if (Input::Key::Triggered(DIK_R))
 	{
-		currentScene.release();
-		currentScene = unique_ptr<GameScene>(new GameScene());
-		currentScene->Init();
+		Transition<GameScene>();
 	}
-	currentScene->Update();
 }
 
 void SceneManager::Draw3D()
@@ -36,4 +33,11 @@ void SceneManager::DrawSprite()
 void SceneManager::DrawBack()
 {
 	currentScene->DrawBack();
+}
+
+template <class NextScene> void SceneManager::Transition()
+{
+	currentScene.release();
+	currentScene = unique_ptr<NextScene>(new NextScene());
+	currentScene->Init();
 }

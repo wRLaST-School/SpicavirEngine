@@ -9,6 +9,9 @@ public:
 	void Draw3D();
 	void DrawSprite();
 	void DrawBack();
-	unique_ptr<IScene> currentScene;
+
+	template <class NextScene> void Transition();
+
+	unique_ptr<IScene> currentScene = nullptr;
 };
 
