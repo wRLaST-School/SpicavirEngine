@@ -37,7 +37,7 @@ void SceneManager::DrawBack()
 
 template <class NextScene> void SceneManager::Transition()
 {
-	currentScene.release();
+	delete currentScene.release();
 	Light::Init();
 	currentScene = unique_ptr<NextScene>(new NextScene());
 	currentScene->Init();
