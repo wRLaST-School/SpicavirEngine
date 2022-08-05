@@ -45,3 +45,17 @@ public:
 	ComPtr<ID3D12Resource> buffer;
 	Contents* contents;
 };
+
+namespace RootParamIndex {
+	enum RootParamIndex_
+	{
+		Material,
+		Texture,
+		WMatrix,
+		VPMatrix,
+		Brightness,
+		LightBasic,
+
+		Max
+	};
+}

@@ -1,6 +1,7 @@
 #include "wRootSignature.h"
 #include "wDirectX.h"
 #include "wPSO.h"
+#include "wConstBuffer.h"
 
 wRootSignature defRootSig;
 
@@ -8,13 +9,16 @@ void wRootSignature::Init()
 {
 	D3D12_DESCRIPTOR_RANGE descRange{};
 
-	D3D12_ROOT_PARAMETER rootParams[6] = {};
+	CD3DX12_ROOT_PARAMETER rootParams[RootParamIndex::Max] = {};
 	HRESULT result;
 
 	descRange.NumDescriptors = 1;
 	descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descRange.BaseShaderRegister = 0;
 	descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	CD3DX12_DESCRIPTOR_RANGE laDescRange;
+	laDescRange.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1/*NUM LIGHTS*/, 0);
 
 	//定数バッファ0番マテリアル
 	rootParams[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
