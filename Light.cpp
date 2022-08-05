@@ -7,7 +7,7 @@ void Light::Init()
 
 void Light::Use()
 {
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(5, GetInstance()->lightCB.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(RootParamIndex::LightBasic, GetInstance()->lightCB.buffer->GetGPUVirtualAddress());
 }
 
 void Light::UpdateLightData()
@@ -21,6 +21,16 @@ Light* Light::GetInstance()
 {
 	static Light obj;
 	return &obj;
+}
+
+PointLightHandle Light::CreatePointLight(Float3 position, Float3 color, Float3 attenuation)
+{
+	
+	return GetInstance()->pointLights.size() - 1;
+}
+
+void Light::RemovePointLight(PointLightHandle handle)
+{
 }
 
 DirectionalLight Light::directional;
