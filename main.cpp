@@ -90,7 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	/*ループ*/
 	while (true)
 	{
-		if(GetWDX()->StartFrame()) break;
+		if (GetWDX()->StartFrame()) break;
 		Input::Key::Update();
 		/*毎フレーム処理*/
 
@@ -100,7 +100,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		GetWDX()->PreDrawCommands();
 
-		Light::UpdateLightData();
+		try{
+			Light::UpdateLightData();
+		}
+		catch (PointLight::QuantityOverflow& e) {
+			assert(false);
+		}
+
 		Light::Use();
 
 		sceneManager.Draw3D();

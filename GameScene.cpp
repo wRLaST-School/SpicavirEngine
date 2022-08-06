@@ -41,6 +41,10 @@ void GameScene::Init()
 
 	RTVManager::CreateRenderTargetTexture(256, 256, "offscreen");
 	osrspr = Sprite("offscreen");
+
+	Light::CreatePointLight({ 2, 2, 10 }, { 1.0, 0.0, 0.5 }, { 0.3, .1, .1 }, "testLight");
+
+	pointLight = Light::GetPointLightPtr("testLight");
 }
 
 void GameScene::Update()
@@ -92,8 +96,6 @@ void GameScene::Update()
 	topCamera.rotation = { PI / 2, 0.0f, 0.0f };
 	topCamera.UpdateMatrix();
 
-	hsv.x++;
-	Float3 rgb = ConvertHSVtoRGB(hsv);
 	color = {255, 255, 255, 255.0f};
 
 	*monkey.brightnessCB.contents = {color.x / 255, color.y / 255, color.z / 255, color.w / 255};

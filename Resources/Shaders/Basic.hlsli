@@ -22,15 +22,29 @@ cbuffer cbuff3 : register(b3)
 	float4 brightness;
 }
 
+//change MAX_LIGHTS in PointLight.h aswell
+static const int MAX_PLIGHTS = 16;
+struct PointLight
+{
+	float3 lightPos;
+	float3 lightColor;
+	float3 lightAtt;
+	uint isActive;
+};
+
 cbuffer cbuff4 : register(b4)
 {
 	float3 lightVec;
 	float3 lightColor;
+
+	PointLight pointLights[MAX_PLIGHTS];
 }
 
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;
-	float4 color : COLOR;
+	//float4 color : COLOR;
+	float4 worldpos : POSITION;
+	float3 normal : NORMAL;
 	float2 uv :TEXCOORD;
 };
