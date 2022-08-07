@@ -92,6 +92,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{
 		if (GetWDX()->StartFrame()) break;
 		Input::Key::Update();
+		Input::Pad::Update();
 		/*毎フレーム処理*/
 
 		/*更新処理*/

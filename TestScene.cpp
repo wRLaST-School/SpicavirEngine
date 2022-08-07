@@ -115,6 +115,12 @@ void TestScene::Update()
 		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f		
 		);
 
+	sphere.position = (Vec3)sphere.position + Vec3(
+		(Input::Pad::GetLStick().x) * 0.0001f,
+		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
+		(Input::Pad::GetLStick().y) * 0.0001f
+	);
+
 	camera.UpdateMatrix();
 
 	cameraSpr.UpdateMatrix();

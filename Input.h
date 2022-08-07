@@ -8,6 +8,28 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "xinput.lib")
 
+enum class Button {
+	Up = 0x0001,
+	Down = 0x0002,
+	Left = 0x0004,
+	Right = 0x0008,
+	Start = 0x0010,
+	Back = 0x0020,
+	LStickButton = 0x0040,
+	RStickButton = 0x0080,
+	L = 0x0100,
+	R = 0x0200,
+	A = 0x1000,
+	B = 0x2000,
+	X = 0x4000,
+	Y = 0x8000,
+};
+
+enum class Trigger {
+	Left = 0,
+	Right = 1,
+};
+
 namespace Input {
 	class Key
 	{
@@ -44,11 +66,18 @@ namespace Input {
 		static void Close();
 
 		//ボタンが押されているか
-		static bool Down(UCHAR button);
+		static bool Down(Button button);
 		//ボタンが離された瞬間か
-		static bool Released(UCHAR button);
+		static bool Released(Button button);
 		//ボタンが押された瞬間か
-		static bool Triggered(UCHAR button);
+		static bool Triggered(Button button);
+
+		//ボタンが押されているか
+		static bool Down(Trigger side);
+		//ボタンが離された瞬間か
+		static bool Released(Trigger side);
+		//ボタンが押された瞬間か
+		static bool Triggered(Trigger side);
 
 		static Pad* GetInstance();
 
@@ -58,32 +87,24 @@ namespace Input {
 			float y;
 		};
 
-		//スティックの移動量を-100から100で返す
+		//左スティックの移動量を-1000から1000で返す
 		static Stick GetLStick();
+		//右スティックの移動量を-1000から1000で返す
 		static Stick GetRStick();
 
-		static void SetDeadZone(Stick range);
+		//デッドゾーンの範囲を設定(0から1000)
+		static void SetDeadZone(float range);
+		static float GetDeadZone();
 
 	private:
 		XINPUT_STATE padState;
 		XINPUT_STATE lastPadState;
-	};
 
-	enum class Button {
-		Up = 0x0001,
-		Down = 0x0002,
-		Left = 0x0004,
-		Right = 0x0008,
-		Start = 0x0010,
-		Back = 0x0020,
-		LStickButton = 0x0040,
-		RStickButton = 0x0080,
-		L = 0x0100,
-		R = 0x0200,
-		A = 0x1000,
-		B = 0x2000,
-		X = 0x4000,
-		Y = 0x8000
-	};
+		bool triggerState[2] = {false, false};
+		bool lastTriggerState[2] = {false, false};
 
+		float deadZone = 50;
+
+		int gamepadIndex = 1;
+	};
 }
