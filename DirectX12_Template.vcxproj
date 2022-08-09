@@ -162,6 +162,7 @@
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TextDrawer.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="Vec3.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TextDrawer.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="Vec3.h" />
