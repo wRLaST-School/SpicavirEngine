@@ -63,6 +63,11 @@ void TestScene::Init()
 	RTVManager::CreateRenderTargetTexture(640, 360, "zCamSpr");
 	zCamSpr = Sprite("zCamSpr");
 
+	camera.projectionMode = ProjectionMode::Orthographic;
+	xCam.projectionMode = ProjectionMode::Orthographic;
+	yCam.projectionMode = ProjectionMode::Orthographic;
+	zCam.projectionMode = ProjectionMode::Orthographic;
+
 	cameraSpr.position = {960, 180, 0.0f};
 	xCamSpr.position = {960, 540, 0.0f};
 	yCamSpr.position = {320, 180, 0.0f};
