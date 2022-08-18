@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <windows.h>
 namespace Util
 {
 	template<class T>
@@ -18,5 +20,7 @@ namespace Util
 	{
 		return value > max ? max : value;
 	}
+
+	std::wstring StrToWStr(std::string str, int page = CP_ACP);
 };
 
