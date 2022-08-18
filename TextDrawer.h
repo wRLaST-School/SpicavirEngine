@@ -31,10 +31,12 @@ public:
 
 class FontData
 {
-
+	GLYPHMETRICS gm;
+	TEXTMETRIC tm;
 };
 
 typedef FontData* FontHandle;
+typedef unsigned int FontNameHandle;
 
 class FontManager
 {
@@ -52,6 +54,9 @@ public:
 	static string LoadFontFromFile(string path);
 
 private:
-	list<FPTR> fontList;
+	map<FontNameHandle, map<string, FontData>> fontMap;
+	FontData* GetFontData(string fontName, string glyph);
+
+	map<string, FontNameHandle> fontNameMap;
 
 };

@@ -23,5 +23,32 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 
 	HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
 
+	const wchar_t* c = glyph.c_str();
+	UINT code = (UINT)*c;
+	TEXTMETRIC tm;
+
+	GetTextMetrics(hdc, &tm);
+
+	GLYPHMETRICS gm;
+
+	CONST MAT2 mat = { {0,1}, {0,0}, {0,0}, {0,1} };
+	BYTE* pMono = new BYTE[options.size];
+
+	DWORD size = GetGlyphOutlineW(hdc, code, options.gradFlag, &gm, options.size, pMono, &mat);
+
+	int fontWidth = gm.gmCellIncX;
+	int fontHeight = tm.tmHeight;
+
+	
+
 	return FontHandle();
+}
+
+FontData* FontManager::GetFontData(string fontName, string glyph)
+{
+	FontNameHandle handle;
+	auto itr = fontNameMap.find(fontName);
+	if ( itr == fontNameMap.end()) return nullptr;
+	handle = itr->second;
+	return &fontMap[handle][glyph];
 }
