@@ -2,7 +2,7 @@
 #include "Sprite.h"
 #include "wTextureManager.h"
 
-enum class Alignment
+enum class Align
 {
 	TopLeft,
 	TopRight,
@@ -34,7 +34,7 @@ struct StringOptions
 	FontOptions fontOptions;
 
 	//フォントサイズ(pt)
-	int size = 32;
+	int size = 64;
 
 	//行間(px)
 	int lineSpacing = 2;
@@ -64,8 +64,8 @@ class TextDrawer
 private:
 
 public:
-	static void DrawString(string str, int x, int y, Alignment alignment, StringOptions options);
-	static void DrawString(string str, int x, int y, Alignment alignment);
+	static void DrawString(string str, int x, int y, Align alignment, StringOptions options);
+	static void DrawString(string str, int x, int y, Align alignment);
 	static void SetDefaultStringOptions(StringOptions options);
 
 	static void ReleaseDrawStringData();

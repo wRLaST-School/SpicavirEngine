@@ -191,8 +191,8 @@ void TestScene::DrawSprite()
 
 	StringOptions udevGothicOpt;
 	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
-	udevGothicOpt.size = 64;
+	udevGothicOpt.size = 32;
 
-	TextDrawer::DrawString("0Ç§Ç…Ç·Å`Å`Å`Å`0", 1180, 100, Alignment::TopRight);
-	TextDrawer::DrawString("àühogeÇ¶ÉI123", 1180, 132, Alignment::TopRight, udevGothicOpt);
+	TextDrawer::DrawString("0Ç§Ç…Ç·Å`Å`Å`Å`0", 1180, 100, Align::TopRight, udevGothicOpt);
+	TextDrawer::DrawString("àühogeÇ¶ÉI123", 1180, 132, Align::TopRight);
 }

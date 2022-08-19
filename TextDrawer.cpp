@@ -40,15 +40,18 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 		pFont = &pFontDataMap->emplace(glyph, FontData()).first->second;
 	}
 
-	LOGFONT lf =
-	{
-		options.resolution, 0, 0, 0, options.weight, 0,0,0,
-		options.charSet, OUT_TT_ONLY_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY,
-		DEFAULT_PITCH | FF_MODERN,
-		*Util::StrToWStr(options.name).c_str()
-	};
+	//LOGFONT lf =
+	//{
+	//	options.resolution, 0, 0, 0, options.weight, 0,0,0,
+	//	options.charSet, OUT_TT_ONLY_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY,
+	//	DEFAULT_PITCH | FF_MODERN,
+	//	*Util::StrToWStr(options.name).c_str()
+	//};
 
-	HFONT hFont = CreateFontIndirectW(&lf);
+	wstring wfname = Util::StrToWStr(options.name);
+
+	HFONT hFont = CreateFont(options.resolution, 0, 0, 0, options.weight, false, false, false, options.charSet,
+			OUT_TT_ONLY_PRECIS, CLIP_DEFAULT_PRECIS, PROOF_QUALITY, 0, wfname.c_str());
 
 	HDC hdc = GetDC(NULL);
 
@@ -252,7 +255,7 @@ FontData* FontManager::GetFontData(string fontName, wstring glyph)
 	return &fontMap[handle][glyph];
 }
 
-void TextDrawer::DrawString(string str, int x, int y, Alignment alignment, StringOptions options)
+void TextDrawer::DrawString(string str, int x, int y, Align alignment, StringOptions options)
 {
 	StringData strData = FontManager::CreateStringTexture(str, options);
 
@@ -269,31 +272,31 @@ void TextDrawer::DrawString(string str, int x, int y, Alignment alignment, Strin
 
 	switch (alignment)
 	{
-	case Alignment::TopLeft:
+	case Align::TopLeft:
 		spr->position += {(float)strData.width/2, (float)strData.height/2, 0};
 		break;
-	case Alignment::TopRight:
+	case Align::TopRight:
 		spr->position += {(float)-strData.width / 2, (float)strData.height / 2, 0};
 		break;
-	case Alignment::BottomLeft:
+	case Align::BottomLeft:
 		spr->position += {(float)strData.width / 2, (float)-strData.height / 2, 0};
 		break;
-	case Alignment::BottomRight:
+	case Align::BottomRight:
 		spr->position += {(float)-strData.width / 2, (float)-strData.height / 2, 0};
 		break;
-	case Alignment::TopCenter:
+	case Align::TopCenter:
 		spr->position += {0, (float)strData.height / 2, 0};
 		break;
-	case Alignment::BottomCenter:
+	case Align::BottomCenter:
 		spr->position += {0, (float)-strData.height / 2, 0};
 		break;
-	case Alignment::CenterLeft:
+	case Align::CenterLeft:
 		spr->position += {(float)strData.width / 2, 0, 0};
 		break;
-	case Alignment::CenterRight:
+	case Align::CenterRight:
 		spr->position += {(float)-strData.width / 2, 0, 0};
 		break;
-	case Alignment::Center:
+	case Align::Center:
 		break;
 	default:
 		break;
@@ -306,7 +309,7 @@ void TextDrawer::DrawString(string str, int x, int y, Alignment alignment, Strin
 	GetInstance()->releaseQueue.push_back(strData.key);
 }
 
-void TextDrawer::DrawString(string str, int x, int y, Alignment alignment)
+void TextDrawer::DrawString(string str, int x, int y, Align alignment)
 {
 	DrawString(str, x, y, alignment, GetInstance()->defaultOption);
 }
