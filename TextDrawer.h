@@ -31,6 +31,7 @@ public:
 
 class FontData
 {
+public:
 	GLYPHMETRICS gm;
 	TEXTMETRIC tm;
 };
@@ -53,10 +54,13 @@ public:
 	///<returns>読み込んだフォントを使用するための名前</returns>
 	static string LoadFontFromFile(string path);
 
-private:
-	map<FontNameHandle, map<string, FontData>> fontMap;
-	FontData* GetFontData(string fontName, string glyph);
+	static FontManager* GetInstance();
 
+private:
+	map<FontNameHandle, map<wstring, FontData>> fontMap;
 	map<string, FontNameHandle> fontNameMap;
 
+	FontData* GetFontData(string fontName, wstring glyph);
+
+	int fontIndex = 0x8001;
 };
