@@ -52,9 +52,17 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 	GetTextMetrics(hdc, &pFont->tm);
 
 	CONST MAT2 mat = { {0,1}, {0,0}, {0,0}, {0,1} };
-	BYTE* pMono = new BYTE[options.size];
 
-	DWORD size = GetGlyphOutlineW(hdc, code, options.gradFlag, &pFont->gm, options.size, pMono, &mat);
+	DWORD size = GetGlyphOutlineW(hdc, code, options.gradFlag, &pFont->gm, 0, NULL, &mat);
+
+	BYTE* pMono = new BYTE[size];
+	
+	GetGlyphOutlineW(hdc, code, options.gradFlag, &pFont->gm, size, pMono, &mat);
+
+	for (int i = 0; i < size; i++)
+	{
+		pFont->bmp.emplace_back(pMono[i]);
+	}
 
 	return pFont;
 }

@@ -34,6 +34,7 @@ class FontData
 public:
 	GLYPHMETRICS gm;
 	TEXTMETRIC tm;
+	vector<BYTE> bmp;
 };
 
 typedef FontData* FontHandle;
@@ -41,9 +42,6 @@ typedef unsigned int FontNameHandle;
 
 class FontManager
 {
-private:
-	using FPTR = unique_ptr<FontData>;
-
 public:
 	static FontHandle GetGlyphTexture(FontOptions options, wstring glyph);
 
