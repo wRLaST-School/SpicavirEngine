@@ -24,3 +24,11 @@ namespace Util
 	std::wstring StrToWStr(std::string str, int page = CP_ACP);
 };
 
+struct R8G8B8A8
+{
+	byte r = 0;
+	byte g = 0;
+	byte b = 0;
+	byte a = 0;
+};
+

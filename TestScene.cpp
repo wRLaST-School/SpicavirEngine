@@ -3,6 +3,7 @@
 #include "wSwapChainManager.h"
 #include "Input.h"
 #include "RayCollider.h"
+#include "TextDrawer.h"
 
 void TestScene::Init()
 {
@@ -63,7 +64,7 @@ void TestScene::Init()
 	RTVManager::CreateRenderTargetTexture(640, 360, "zCamSpr");
 	zCamSpr = Sprite("zCamSpr");
 
-	camera.projectionMode = ProjectionMode::Orthographic;
+	camera.projectionMode = ProjectionMode::Perspective;
 	xCam.projectionMode = ProjectionMode::Orthographic;
 	yCam.projectionMode = ProjectionMode::Orthographic;
 	zCam.projectionMode = ProjectionMode::Orthographic;
@@ -94,6 +95,8 @@ void TestScene::Init()
 	sky = Model("skydome");
 
 	mSphere = Model("sphere");
+
+	FontData* fd = FontManager::GetGlyphTexture(FontOptions(), L"a");
 
 	sphere.model = &mSphere;
 
