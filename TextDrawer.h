@@ -64,13 +64,18 @@ class TextDrawer
 private:
 
 public:
-
 	static void DrawString(string str, int x, int y, Alignment alignment, StringOptions options);
 	static void DrawString(string str, int x, int y, Alignment alignment);
 	static void SetDefaultStringOptions(StringOptions options);
+
+	static void ReleaseDrawStringData();
 	static StringOptions GetDefaultStringOptions();
+
+	static TextDrawer* GetInstance();
 private:
 	vector<TextureKey> releaseQueue;
+	vector<Sprite> stringSpriteQueue;
+	StringOptions defaultOption = StringOptions();
 };
 
 typedef FontData* FontHandle;

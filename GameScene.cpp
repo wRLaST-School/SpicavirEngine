@@ -40,8 +40,6 @@ void GameScene::Init()
 	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
 	wTextureManager::LoadTexture("Resources/think.png", "think");
 
-	FontManager::CreateStringTexture("‚ hoge1123", StringOptions());
-
 	RTVManager::CreateRenderTargetTexture(256, 256, "offscreen");
 	osrspr = Sprite("offscreen");
 
@@ -131,7 +129,7 @@ void GameScene::Draw3D()
 	{
 		for (size_t j = 0; j < TileQuant; j++)
 		{
-			floor[i][j].Draw("‚ hoge1123");
+			floor[i][j].Draw("think");
 		}
 	}
 

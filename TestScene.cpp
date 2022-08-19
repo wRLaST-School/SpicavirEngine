@@ -188,4 +188,11 @@ void TestScene::DrawSprite()
 	xCamSpr.Draw();
 	yCamSpr.Draw();
 	zCamSpr.Draw();
+
+	StringOptions udevGothicOpt;
+	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
+	udevGothicOpt.size = 64;
+
+	TextDrawer::DrawString("0Ç§Ç…Ç·Å`Å`Å`Å`0", 1180, 100, Alignment::TopRight);
+	TextDrawer::DrawString("àühogeÇ¶ÉI123", 1180, 132, Alignment::TopRight, udevGothicOpt);
 }

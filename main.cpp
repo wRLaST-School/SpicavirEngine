@@ -13,8 +13,8 @@
 #include "Matrix.h"
 #include "wRootSignature.h"
 #include "SceneManager.h"
-#include "wTextureManager.h"
 #include "Sprite.h"
+#include "TextDrawer.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -93,6 +93,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (GetWDX()->StartFrame()) break;
 		Input::Key::Update();
 		Input::Pad::Update();
+
 		/*毎フレーム処理*/
 
 		/*更新処理*/
@@ -122,6 +123,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		/*毎フレーム処理ここまで*/
 		GetWDX()->EndFrame();
+
+		/*DrawString用のデータを解放*/
+		TextDrawer::ReleaseDrawStringData();
 	}
 	/*ループここまで*/
 	CloseAllwWindow();

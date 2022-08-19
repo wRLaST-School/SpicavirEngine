@@ -251,3 +251,79 @@ FontData* FontManager::GetFontData(string fontName, wstring glyph)
 	handle = itr->second;
 	return &fontMap[handle][glyph];
 }
+
+void TextDrawer::DrawString(string str, int x, int y, Alignment alignment, StringOptions options)
+{
+	StringData strData = FontManager::CreateStringTexture(str, options);
+
+	GetInstance()->stringSpriteQueue.emplace_back(strData.key);
+
+	Sprite* spr = &GetInstance()->stringSpriteQueue.back();
+
+	spr->position = { (float)x, (float)y, 0 };
+	float multiplier = (float)options.size / strData.height;
+	spr->scale = { multiplier, multiplier, 1};
+
+	strData.width *= multiplier;
+	strData.height *= multiplier;
+
+	switch (alignment)
+	{
+	case Alignment::TopLeft:
+		spr->position += {(float)strData.width/2, (float)strData.height/2, 0};
+		break;
+	case Alignment::TopRight:
+		spr->position += {(float)-strData.width / 2, (float)strData.height / 2, 0};
+		break;
+	case Alignment::BottomLeft:
+		spr->position += {(float)strData.width / 2, (float)-strData.height / 2, 0};
+		break;
+	case Alignment::BottomRight:
+		spr->position += {(float)-strData.width / 2, (float)-strData.height / 2, 0};
+		break;
+	case Alignment::TopCenter:
+		spr->position += {0, (float)strData.height / 2, 0};
+		break;
+	case Alignment::BottomCenter:
+		spr->position += {0, (float)-strData.height / 2, 0};
+		break;
+	case Alignment::CenterLeft:
+		spr->position += {(float)strData.width / 2, 0, 0};
+		break;
+	case Alignment::CenterRight:
+		spr->position += {(float)-strData.width / 2, 0, 0};
+		break;
+	case Alignment::Center:
+		break;
+	default:
+		break;
+	}
+
+	spr->UpdateMatrix();
+
+	spr->Draw();
+
+	GetInstance()->releaseQueue.push_back(strData.key);
+}
+
+void TextDrawer::DrawString(string str, int x, int y, Alignment alignment)
+{
+	DrawString(str, x, y, alignment, GetInstance()->defaultOption);
+}
+
+void TextDrawer::ReleaseDrawStringData()
+{
+	for (auto texKey : GetInstance()->releaseQueue)
+	{
+		wTextureManager::Release(texKey);
+	}
+
+	GetInstance()->releaseQueue.clear();
+	GetInstance()->stringSpriteQueue.clear();
+}
+
+TextDrawer* TextDrawer::GetInstance()
+{
+	static TextDrawer obj;
+	return &obj;
+}
