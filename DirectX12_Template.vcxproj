@@ -156,6 +156,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MonkeyScene.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="RayCollider.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="MonkeyScene.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="RayCollider.h" />
     <ClInclude Include="RenderTarget.h" />

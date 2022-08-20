@@ -228,6 +228,9 @@
     <ClCompile Include="wTextureManager.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="wTextureManager.h">
       <Filter>Engine\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
