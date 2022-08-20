@@ -7,9 +7,6 @@ void wTextureManager::Create()
 	//設定構造体
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc{};
 
-	//indexがunsigned charになってるからここを変更するならそっちも変更
-	const size_t wMaxSRVCount = 256;
-
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
 	srvHeapDesc.NumDescriptors = wMaxSRVCount;
@@ -19,18 +16,30 @@ void wTextureManager::Create()
 
 void wTextureManager::Init()
 {
-	GetInstance().nextRegisteredTextureIndex = 0;
-	GetInstance().textureMap.clear();
-	GetInstance().texBuffs.clear();
+	wTextureManager& ins = GetInstance();
+	ins.nextRegisteredTextureIndex = 0;
+
+	for (int i = 0; i < wMaxSRVCount; i++)
+	{
+		ins.isOccupied[i] = false;
+	}
+	
+	ins.textureMap.clear();
+
+	for (ComPtr<ID3D12Resource>& texbuffs : ins.texBuffs)
+	{
+		texbuffs = nullptr;
+	}
+
+	wTextureManager::LoadTexture("Resources/notexture.png", "notexture");
 }
 
 TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 {
+	wTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
 	D3D12_RESOURCE_DESC texresdesc{};
-
-	GetInstance().texBuffs.emplace_back(nullptr);
 
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
@@ -99,19 +108,27 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 	
 	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
 	wTextureManager::GetInstance().texDataMap[key] = metadata;
+	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
 
-	wTextureManager::GetInstance().nextRegisteredTextureIndex++;
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			return key;
+		}
+	}
 
+	throw std::out_of_range("out of texture resource");
 	return key;
 }
 
 TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
 {
+	wTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
 	D3D12_RESOURCE_DESC texresdesc{};
-
-	GetInstance().texBuffs.emplace_back(nullptr);
 
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
@@ -188,28 +205,41 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 	}
 	wTextureManager::GetInstance().texDataMap[tryNum == 0 ? key : key + std::to_string(tryNum)] = metadata;
 
-	wTextureManager::GetInstance().nextRegisteredTextureIndex++;
+	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	wTextureManager::GetInstance().texDataMap[key] = metadata;
+	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
+
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			return tryNum == 0 ? key : key + std::to_string(tryNum);
+		}
+	}
+
+	throw std::out_of_range("out of texture resource");
 
 	return tryNum == 0 ? key : key + std::to_string(tryNum);
 }
 
-TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey key)
+TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
 {
-	D3D12_HEAP_PROPERTIES texHeapProp =
-		CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
+	D3D12_HEAP_PROPERTIES texHeapProp{};
+	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
 	D3D12_RESOURCE_DESC textureResourceDesc = 
 		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1,0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
-	GetInstance().texBuffs.emplace_back(nullptr);
-
-	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0.0f, 0.0f, 0.0f, 0.0f} };
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
 
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
 		&textureResourceDesc,
-		D3D12_RESOURCE_STATE_RENDER_TARGET,
+		initAsRenderTarget ? D3D12_RESOURCE_STATE_RENDER_TARGET : D3D12_RESOURCE_STATE_GENERIC_READ,
 		&clval,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
 
@@ -231,8 +261,80 @@ TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey
 	pTexMeta.width = width;
 	pTexMeta.height = height;
 
-	wTextureManager::GetInstance().nextRegisteredTextureIndex++;
+	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
+
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			return key;
+		}
+	}
+
+	throw std::out_of_range("out of texture resource");
 	return key;
+}
+
+TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
+{//テクスチャバッファ
+	D3D12_HEAP_PROPERTIES texHeapProp{};
+	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+	D3D12_RESOURCE_DESC textureResourceDesc =
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
+
+	GetWDX()->dev->CreateCommittedResource(
+		&texHeapProp,
+		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
+		&textureResourceDesc,
+		initAsRenderTarget ? D3D12_RESOURCE_STATE_RENDER_TARGET : D3D12_RESOURCE_STATE_GENERIC_READ,
+		&clval,
+		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
+
+	//シェーダーリソースビューの生成
+	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
+	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().nextRegisteredTextureIndex;
+
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = textureResourceDesc.Format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
+
+	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
+	
+	int tryNum = 0;
+	bool succeeded = false;
+	string tryKey;
+	for (tryNum = 0; !succeeded; tryNum++)
+	{
+		tryKey = tryNum == 0 ? key : key + std::to_string(tryNum);
+		succeeded = wTextureManager::GetInstance().textureMap.try_emplace(tryKey, wTextureManager::GetInstance().nextRegisteredTextureIndex).second;
+	}
+	TexMetadata& pTexMeta = wTextureManager::GetInstance().texDataMap[tryKey];
+	pTexMeta = TexMetadata{};
+	pTexMeta.width = width;
+	pTexMeta.height = height;
+
+	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
+
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			return tryKey;
+		}
+	}
+
+	throw std::out_of_range("out of texture resource");
+	return tryKey;
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE wTextureManager::GetCPUDescHandle(TextureKey key)
@@ -264,6 +366,17 @@ ID3D12Resource* wTextureManager::GetTextureBuff(TextureKey key)
 int wTextureManager::GetIndex(TextureKey key)
 {
 	return GetInstance().textureMap[key];
+}
+
+void wTextureManager::Release(TextureKey key)
+{
+
+	wTextureManager& ins = GetInstance();
+	ins.texBuffs[ins.textureMap[key]] = ComPtr<ID3D12Resource>();
+	ins.isOccupied[GetIndex(key)] = false;
+	ins.textureMap.erase(key);
+	ins.texDataMap.erase(key);
+	return;
 }
 
 wTextureManager &wTextureManager::GetInstance()

@@ -13,17 +13,18 @@
 #include "Matrix.h"
 #include "wRootSignature.h"
 #include "SceneManager.h"
-#include "wTextureManager.h"
 #include "Sprite.h"
+#include "TextDrawer.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
-	ID3D12Debug* debugController;
+	ID3D12Debug1* debugController;
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
 	{
 		debugController->EnableDebugLayer();
+		debugController->SetEnableGPUBasedValidation(TRUE);
 	}
 #endif //  _DEBUG
 
@@ -77,11 +78,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	SceneManager sceneManager = SceneManager();
 	sceneManager.Init();
 
+	/*デバッグ有効化*/
+#ifdef  _DEBUG
+	ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(GetWDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+	{
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+	}
+#endif //  _DEBUG
 	/*ループ*/
 	while (true)
 	{
-		if(GetWDX()->StartFrame()) break;
+		if (GetWDX()->StartFrame()) break;
 		Input::Key::Update();
+		Input::Pad::Update();
+
 		/*毎フレーム処理*/
 
 		/*更新処理*/
@@ -89,6 +101,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*更新処理ここまで*/
 
 		GetWDX()->PreDrawCommands();
+
+		try{
+			Light::UpdateLightData();
+		}
+		catch (PointLight::QuantityOverflow& e) {
+			assert(false);
+		}
+
+		Light::Use();
 
 		sceneManager.Draw3D();
 
@@ -102,6 +123,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		/*毎フレーム処理ここまで*/
 		GetWDX()->EndFrame();
+
+		/*DrawString用のデータを解放*/
+		TextDrawer::ReleaseDrawStringData();
 	}
 	/*ループここまで*/
 	CloseAllwWindow();

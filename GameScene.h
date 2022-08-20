@@ -6,13 +6,7 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Input.h"
-const int TileQuant = 10;
 using namespace Input;
-
-enum class ControllMode {
-    BIOHAZERD,
-    TPS
-};
 
 class GameScene :
     public IScene
@@ -27,25 +21,5 @@ public:
 
 private:
 
-    Model model;
-    Model cubem;
-    Model sky;
-
-    Object3D monkey;
-    Object3D floor[TileQuant][TileQuant];
-
-    Object3D skysphere;
-
-    Matrix vproj;
-
-    TextureKey texture;
-
-    ControllMode ctrlmode = ControllMode::BIOHAZERD;
-
-    Sprite spr;
-
-    Camera camera;
-
-    Matrix vMat;
 };
 

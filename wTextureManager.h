@@ -2,7 +2,9 @@
 #include "Essentials.h"
 
 typedef std::string TextureKey;
-typedef unsigned char SRVHeapIndex;
+typedef size_t SRVHeapIndex;
+//indexÇ™unsigned charÇ…Ç»Ç¡ÇƒÇÈÇ©ÇÁÇ±Ç±ÇïœçXÇ∑ÇÈÇ»ÇÁÇªÇ¡ÇøÇ‡ïœçX
+const size_t wMaxSRVCount = 1024;
 
 class wTextureManager final
 {
@@ -11,7 +13,8 @@ public:
 	static void Init();
 	static TextureKey LoadTexture(string filePath, TextureKey key);
 	static TextureKey LoadTextureWithUniqueKey(string filePath, TextureKey key);
-	static TextureKey CreateDummyTexture(int width, int height, TextureKey key);
+	static TextureKey CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget = true);
+	static TextureKey CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget = true);
 
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescHandle(TextureKey key);
 	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescHandle(TextureKey key);
@@ -19,18 +22,20 @@ public:
 	static ID3D12Resource* GetTextureBuff(TextureKey key);
 	static int GetIndex(TextureKey key);
 
+	static void Release(TextureKey key);
+
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
 
 	static wTextureManager &GetInstance();
 
-	vector<ComPtr<ID3D12Resource>> texBuffs = {};
-
+	ComPtr<ID3D12Resource>texBuffs[wMaxSRVCount] = {};
 
 private:
-	int nextRegisteredTextureIndex = 0;
+	size_t nextRegisteredTextureIndex = 0;
 	map<TextureKey, SRVHeapIndex> textureMap = {};
 	map<TextureKey, TexMetadata> texDataMap = {};
+	bool isOccupied[wMaxSRVCount] = {};
 
 private:
 	wTextureManager() {};

@@ -199,7 +199,17 @@ Matrix Matrix::Projection(int windowWidth, int windowHeight)
 		2.0f / windowWidth, 0, 0, 0,
 		0, -2.0f / windowHeight, 0, 0,
 		0, 0, 1, 0,
-		-1 , 1, 0, 1
+		-1, 1, 0, 1
+	);
+}
+
+Matrix Matrix::ProjectionOrtho(int width, int height, float nearZ, float farZ, float multiplier)
+{
+	return Matrix(
+		2.0f * multiplier / width, 0, 0, 0,
+		0, 2.0f * multiplier / height, 0, 0,
+		0, 0, 1/(farZ - nearZ), 0,
+		0, 0, nearZ / (nearZ - farZ), 1
 	);
 }
 

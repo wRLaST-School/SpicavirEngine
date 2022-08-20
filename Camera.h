@@ -1,9 +1,19 @@
 #pragma once
 #include "Object3D.h"
 
+struct ConstBufferDataVProj {
+    Matrix vproj;
+    Float3 cameraPos;
+};
+
 enum class CameraTargetMode {
     LookAt,
     LookTo
+};
+
+enum class ProjectionMode {
+    Orthographic,
+    Perspective
 };
 
 class Camera :
@@ -28,5 +38,7 @@ public:
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
     static void Set(Camera& camera);
+
+    ProjectionMode projectionMode = ProjectionMode::Perspective;
 };
 
