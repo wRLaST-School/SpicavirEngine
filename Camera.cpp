@@ -38,7 +38,7 @@ void Camera::Set(Camera& camera)
 
 	Matrix pMat = camera.projectionMode == ProjectionMode::Perspective ? 
 		Matrix::Projection(camera.fov, (float)camera.renderWidth / (float)camera.renderHeight, camera.nearZ, camera.farZ) :
-		Matrix::ProjectionOrtho((float)camera.renderWidth, (float)camera.renderHeight, camera.nearZ, camera.farZ, 20);
+		Matrix::ProjectionOrtho((float)camera.renderWidth, (float)camera.renderHeight, camera.nearZ, camera.farZ);
 
 	camera.cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
 	camera.cameraViewProjMatrixCB.contents->cameraPos = camera.position;

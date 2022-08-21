@@ -36,6 +36,20 @@ void wTextureManager::Init()
 
 TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 {
+	for (size_t i = 0; i <= wMaxSRVCount; i++)
+	{
+		if (i == wMaxSRVCount)
+		{
+			throw std::out_of_range("out of texture resource");
+			break;
+		}
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			break;
+		}
+	}
+
 	wTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
@@ -110,21 +124,25 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 	wTextureManager::GetInstance().texDataMap[key] = metadata;
 	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
-	{
-		if (!GetInstance().isOccupied[i])
-		{
-			GetInstance().nextRegisteredTextureIndex = i;
-			return key;
-		}
-	}
-
-	throw std::out_of_range("out of texture resource");
 	return key;
 }
 
 TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
 {
+	for (size_t i = 0; i <= wMaxSRVCount; i++)
+	{
+		if (i == wMaxSRVCount)
+		{
+			throw std::out_of_range("out of texture resource");
+			break;
+		}
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			break;
+		}
+	}
+
 	wTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
@@ -209,22 +227,25 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 	wTextureManager::GetInstance().texDataMap[key] = metadata;
 	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
-	{
-		if (!GetInstance().isOccupied[i])
-		{
-			GetInstance().nextRegisteredTextureIndex = i;
-			return tryNum == 0 ? key : key + std::to_string(tryNum);
-		}
-	}
-
-	throw std::out_of_range("out of texture resource");
-
 	return tryNum == 0 ? key : key + std::to_string(tryNum);
 }
 
 TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
 {
+	for (size_t i = 0; i <= wMaxSRVCount; i++)
+	{
+		if (i == wMaxSRVCount)
+		{
+			throw std::out_of_range("out of texture resource");
+			break;
+		}
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			break;
+		}
+	}
+
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
@@ -262,22 +283,26 @@ TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey
 	pTexMeta.height = height;
 
 	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
-
-	for (size_t i = 0; i < wMaxSRVCount; i++)
-	{
-		if (!GetInstance().isOccupied[i])
-		{
-			GetInstance().nextRegisteredTextureIndex = i;
-			return key;
-		}
-	}
-
-	throw std::out_of_range("out of texture resource");
 	return key;
 }
 
 TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
 {//テクスチャバッファ
+	for (size_t i = 0; i <= wMaxSRVCount; i++)
+	{
+		if (i == wMaxSRVCount)
+		{
+			throw std::out_of_range("out of texture resource");
+			break;
+		}
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			break;
+		}
+	}
+
+	wTextureManager& ins = GetInstance();
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
@@ -324,16 +349,6 @@ TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int heigh
 
 	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
-	{
-		if (!GetInstance().isOccupied[i])
-		{
-			GetInstance().nextRegisteredTextureIndex = i;
-			return tryKey;
-		}
-	}
-
-	throw std::out_of_range("out of texture resource");
 	return tryKey;
 }
 

@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Input.h"
+#include "Player.h"
+#include "TextDrawer.h"
 using namespace Input;
 
 class GameScene :
@@ -20,6 +22,13 @@ public:
     void DrawSprite() override;
 
 private:
+    Camera camera;
 
+    Player player;
+    Model mPlayer;
+
+    Sprite background;
+
+    StringOptions stropt;
 };
 

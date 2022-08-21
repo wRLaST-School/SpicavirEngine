@@ -11,23 +11,39 @@ void Player::Update()
 	};
 
 	(this->*PUpdtArray[(int)state])();
+
+	UpdateBullets();
+}
+
+void Player::Draw()
+{
+	this->Object3D::Draw("notexture");
+
+	for (PlayerBullet& bullet : bullets)
+	{
+		bullet.Draw("notexture");
+	}
 }
 
 void Player::NormalUpdate()
 {
 	NormalMove();
+	AttackCommon();
 }
 
 void Player::NormalMove()
 {
 	Vec3 moveVec =
 	{
-		Input::Pad::GetLStick().x,
+		/*Input::Pad::GetLStick().x,*/
+		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
 		0,
-		Input::Pad::GetLStick().y,
+		/*Input::Pad::GetLStick().y,*/
+		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)
 	};
 
-	moveVec.SetLength(speed);
+	if(moveVec.GetSquaredLength() != 0)
+		moveVec.SetLength(speed);
 
 	position += moveVec;
 
@@ -37,15 +53,18 @@ void Player::NormalMove()
 void Player::SlowUpdate()
 {
 	SlowMove();
+	AttackCommon();
 }
 
 void Player::SlowMove()
 {
 	Vec3 moveVec =
 	{
-		Input::Pad::GetLStick().x,
+		/*Input::Pad::GetLStick().x,*/
+		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
 		0,
-		Input::Pad::GetLStick().y,
+		/*Input::Pad::GetLStick().y,*/
+		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)
 	};
 
 	moveVec.SetLength(slowspeed);
@@ -53,6 +72,40 @@ void Player::SlowMove()
 	position += moveVec;
 
 	UpdateMatrix();
+}
+
+void Player::UpdateBullets()
+{
+	for (auto itr = bullets.begin(); itr != bullets.end();)
+	{
+		itr->Update();
+
+		if (itr->timer >= PlayerBullet::lifetime)
+		{
+			itr = bullets.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
+}
+
+void Player::AttackCommon()
+{
+	if (attackCD <= 0)
+	{
+		if (Input::Key::Down(DIK_Z))
+		{
+			bullets.emplace_back(this->position, Vec3(8.0, 0, 0));
+			bullets.back().model = model;
+			attackCD = attackCDDef;
+		}
+	}
+	else
+	{
+		attackCD--;
+	}
 }
 
 void Player::DodgeUpdate()

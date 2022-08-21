@@ -19,9 +19,9 @@ public:
 	wConstBuffer<ConstBufferDataTransform> transformCB;
 	wConstBuffer<Float4> brightnessCB;
 
-	Float3 scale = { 1, 1, 1 };
-	Float3 rotation = { 0, 0, 0 };
-	Float3 position = { 0, 0, 0 };
+	Float3 scale = { 1.f, 1.f, 1.f };
+	Float3 rotation = { 0.f, 0.f, 0.f };
+	Float3 position = { 0.f, 0.f, 0.f };
 
 	Matrix matWorld = Matrix::Identity();
 

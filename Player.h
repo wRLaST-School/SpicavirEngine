@@ -1,16 +1,21 @@
 #pragma once
 #include "Object3D.h"
+#include "PlayerBullet.h"
 class Player :
     public Object3D
 {
 public:
-    Player();
+    Player() {};
 
     void Update();
 
-    float health;
+    void Draw();
 
-    list<PlayerBullet> pbullets;
+    float health = 3.0f;
+
+    list<PlayerBullet> bullets;
+
+    Model* bulletModel;
 
 private:
     enum class State
@@ -33,7 +38,6 @@ private:
 
     int dodgeTimer = 0;
     const int dodgeImmuneTime = 12;
-
 private:
     void NormalUpdate();
     void NormalMove();
@@ -41,6 +45,7 @@ private:
     void SlowUpdate();
     void SlowMove();
 
+    void UpdateBullets();
     void AttackCommon();
 
     void DodgeUpdate();

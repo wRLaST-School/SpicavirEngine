@@ -96,8 +96,6 @@ void TestScene::Init()
 
 	mSphere = Model("sphere");
 
-	FontData* fd = FontManager::GetGlyphTexture(FontOptions(), L"a");
-
 	sphere.model = &mSphere;
 
 	skysphere.model = &sky;
