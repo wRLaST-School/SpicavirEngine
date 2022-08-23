@@ -1,6 +1,7 @@
 #include "TextDrawer.h"
 #include "wDirectX.h"
 #include "Util.h"
+#include <chrono>
 
 FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 {
@@ -260,7 +261,6 @@ void TextDrawer::DrawString(string str, int x, int y, Align alignment, StringOpt
 	StringData strData = FontManager::CreateStringTexture(str, options);
 
 	if (strData.key == "") return;
-
 	GetInstance()->stringSpriteQueue.emplace_back(strData.key);
 
 	Sprite* spr = &GetInstance()->stringSpriteQueue.back();

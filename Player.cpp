@@ -37,9 +37,10 @@ void Player::NormalMove()
 	{
 		/*Input::Pad::GetLStick().x,*/
 		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
-		0,
+
 		/*Input::Pad::GetLStick().y,*/
-		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)
+		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S),
+		0
 	};
 
 	if(moveVec.GetSquaredLength() != 0)
@@ -97,7 +98,7 @@ void Player::AttackCommon()
 	{
 		if (Input::Key::Down(DIK_Z))
 		{
-			bullets.emplace_back(this->position, Vec3(8.0, 0, 0));
+			bullets.emplace_back(this->position, Vec3(24.0, 0, 0));
 			bullets.back().model = model;
 			attackCD = attackCDDef;
 		}

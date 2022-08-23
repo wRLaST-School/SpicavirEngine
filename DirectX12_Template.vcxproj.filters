@@ -234,6 +234,15 @@
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Application\ソースファイル\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Application\ソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Application\ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -358,6 +367,15 @@
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Application\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

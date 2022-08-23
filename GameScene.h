@@ -8,6 +8,8 @@
 #include "Input.h"
 #include "Player.h"
 #include "TextDrawer.h"
+#include "Timer.h"
+#include "Boss.h"
 using namespace Input;
 
 class GameScene :
@@ -30,5 +32,9 @@ private:
     Sprite background;
 
     StringOptions stropt;
+
+    Boss boss;
+
+    Timer timer;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "IScene.h"
 #include "Essentials.h"
+#include <chrono>
 class SceneManager
 {
 public:
@@ -13,5 +14,8 @@ public:
 	template <class NextScene> void Transition();
 
 	unique_ptr<IScene> currentScene = nullptr;
+
+private:
+	chrono::system_clock::time_point  frameend, framestart;
 };
 

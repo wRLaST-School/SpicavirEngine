@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Essentials.cpp" />
@@ -163,12 +164,14 @@
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="RTVManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TextDrawer.cpp">
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</LanguageStandard>
     </ClCompile>
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Vec2.cpp" />
@@ -186,6 +189,7 @@
     <ClCompile Include="wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Essentials.h" />
@@ -208,10 +212,12 @@
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="RTVManager.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="TextDrawer.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Vec2.h" />

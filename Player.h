@@ -31,7 +31,7 @@ private:
     const int dodgeCDDef = 60;
 
     int attackCD = 0;
-    const int attackCDDef = 12;
+    const int attackCDDef = 2;
 
     const float speed = 16;
     const float slowspeed = speed / 2;
