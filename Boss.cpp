@@ -1,9 +1,10 @@
 #include "Boss.h"
 
-Boss::Boss()
+Boss::Boss(Score* score)
 {
 	position = { 0,0,0 };
 	scale = { 100, 100, 100 };
+	this->pScore = score;
 }
 
 void Boss::Update()
@@ -18,5 +19,5 @@ void Boss::Draw()
 
 void Boss::Damage(int damage)
 {
-	this->damage += damage;
+	this->pScore->totDamage += damage;
 }

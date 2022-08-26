@@ -1,6 +1,8 @@
 #pragma once
 class Score
 {
+public:
+	int totDamage;
 
 private:
 	const int gradeS = 10000;

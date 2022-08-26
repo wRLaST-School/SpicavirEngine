@@ -2,6 +2,7 @@
 #include "IScene.h"
 #include "Essentials.h"
 #include <chrono>
+#include "Score.h"
 class SceneManager
 {
 public:
@@ -19,3 +20,7 @@ private:
 	chrono::system_clock::time_point  frameend, framestart;
 };
 
+struct GameSceneOutputs
+{
+	Score finalScore;
+};

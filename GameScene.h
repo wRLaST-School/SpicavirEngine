@@ -10,6 +10,7 @@
 #include "TextDrawer.h"
 #include "Timer.h"
 #include "Boss.h"
+#include "SceneManager.h"
 using namespace Input;
 
 class GameScene :
@@ -23,6 +24,8 @@ public:
     void Draw3D() override;
     void DrawSprite() override;
 
+    GameSceneOutputs GetTransitionData();
+
 private:
     Camera camera;
 
@@ -33,8 +36,9 @@ private:
 
     StringOptions stropt;
 
-    Boss boss;
-
     Timer timer;
+
+    Score score;
+    Boss boss = Boss(&score);
 };
 

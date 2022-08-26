@@ -1,10 +1,11 @@
 #pragma once
 #include "Object3D.h"
+#include "Score.h"
 class Boss :
     public Object3D
 {
 public:
-    Boss();
+    Boss(Score* score);
 
     void Update();
 
@@ -13,6 +14,6 @@ public:
     void Damage(int damage);
 
 private:
-    int damage = 0;
+    Score* pScore;
 };
 

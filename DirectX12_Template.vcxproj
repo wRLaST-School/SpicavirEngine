@@ -162,6 +162,7 @@
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="RayCollider.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="RTVManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Score.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="RayCollider.h" />
     <ClInclude Include="RenderTarget.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="RTVManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Score.h" />

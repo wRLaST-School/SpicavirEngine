@@ -55,3 +55,8 @@ void GameScene::DrawSprite()
 	//TextDrawer::DrawString((string)"x = " + to_string(player.position.x) + ", y = " + to_string(player.position.y), 100, 100, Align::TopLeft, stropt);
 	timer.Draw();
 }
+
+GameSceneOutputs GameScene::GetTransitionData()
+{
+	return GameSceneOutputs{this->score};
+}
