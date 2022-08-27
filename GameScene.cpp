@@ -16,14 +16,23 @@ void GameScene::Init()
 	camera.projectionMode = ProjectionMode::Orthographic;
 	camera.targetMode = CameraTargetMode::LookTo;
 
-	mPlayer = Model("cube");
+	mPlayer = Model("Player");
+	mPlayerBullet = Model("PlayerBullet");
+	mBoss = Model("Boss");
+	mBossBit = Model("BossBits");
+
+	boss.position.x += GetwWindow()->width / 4;
+	boss.UpdateMatrix();
+
+	Boss::SetCurrentBoss(&boss);
+	
 	player.model = &mPlayer;
-	player.bulletModel = &mPlayer;
+	player.bulletModel = &mPlayerBullet;
 	player.scale = { 25, 25, 25 };
 	player.position = {0.0f, 0.0f, 0.0f};
 	player.UpdateMatrix();
 
-	boss.model = &mPlayer;
+	boss.model = &mBoss;
 
 	stropt.size = 24;
 	stropt.fontOptions.name = "UDEV Gothic Regular";

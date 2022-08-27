@@ -246,6 +246,9 @@
     <ClCompile Include="ResultScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="DamageNumber.cpp">
+      <Filter>Application\ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -382,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="ResultScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageNumber.h">
+      <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

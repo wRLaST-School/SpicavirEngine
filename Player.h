@@ -46,7 +46,8 @@ private:
     void SlowMove();
 
     void UpdateBullets();
-    void AttackCommon();
+    void NormalAttack();
+    void SlowAttack();
 
     void DodgeUpdate();
 };

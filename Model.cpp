@@ -235,7 +235,7 @@ Model::Model(string modelName)
 				Vertex vertex{};
 				vertex.pos = posList[indexPosition - 1];
 				vertex.normal = normalList[indexNormal - 1];
-				vertex.uv = tcList[indexTexcoord - 1];
+				vertex.uv = indexTexcoord < 1 ? Float2{ 0.0f,0.0f } : tcList[indexTexcoord - 1];
 				vertices.emplace_back(vertex);
 
 				indices.emplace_back((USHORT)indices.size());

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DamageNumber.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -192,6 +193,7 @@
   <ItemGroup>
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="DamageNumber.h" />
     <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Essentials.h" />
     <ClInclude Include="Float2.h" />

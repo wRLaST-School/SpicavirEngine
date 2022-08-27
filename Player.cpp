@@ -3,6 +3,18 @@
 
 void Player::Update()
 {
+	if (state != State::Dodge)
+	{
+		if (Input::Key::Down(DIK_X))
+		{
+			state = State::Slow;
+		}
+		else
+		{
+			state = State::Normal;
+		}
+	}
+
 	void (Player::* PUpdtArray[]) () =
 	{
 		&Player::NormalUpdate,
@@ -28,7 +40,7 @@ void Player::Draw()
 void Player::NormalUpdate()
 {
 	NormalMove();
-	AttackCommon();
+	NormalAttack();
 }
 
 void Player::NormalMove()
@@ -54,7 +66,7 @@ void Player::NormalMove()
 void Player::SlowUpdate()
 {
 	SlowMove();
-	AttackCommon();
+	SlowAttack();
 }
 
 void Player::SlowMove()
@@ -63,12 +75,14 @@ void Player::SlowMove()
 	{
 		/*Input::Pad::GetLStick().x,*/
 		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
-		0,
+
 		/*Input::Pad::GetLStick().y,*/
-		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)
+		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S),
+		0
 	};
 
-	moveVec.SetLength(slowspeed);
+	if (moveVec.GetSquaredLength() != 0)
+		moveVec.SetLength(slowspeed);
 
 	position += moveVec;
 
@@ -92,14 +106,37 @@ void Player::UpdateBullets()
 	}
 }
 
-void Player::AttackCommon()
+void Player::NormalAttack()
 {
 	if (attackCD <= 0)
 	{
 		if (Input::Key::Down(DIK_Z))
 		{
-			bullets.emplace_back(this->position, Vec3(24.0, 0, 0));
-			bullets.back().model = model;
+			bullets.emplace_back((Vec3)this->position + Vec3(0, -15, 0), Vec3(24.0, 0, 0), true);
+			bullets.back().model = bulletModel;
+			bullets.emplace_back((Vec3)this->position + Vec3(0, 15, 0), Vec3(24.0, 0, 0), true);
+			bullets.back().model = bulletModel;
+			attackCD = attackCDDef;
+		}
+	}
+	else
+	{
+		attackCD--;
+	}
+}
+
+void Player::SlowAttack()
+{
+	if (attackCD <= 0)
+	{
+		if (Input::Key::Down(DIK_Z))
+		{
+			bullets.emplace_back((Vec3)this->position + Vec3(0, -25, 0), Vec3(24.0, 0, 0), false);
+			bullets.back().model = bulletModel;
+			bullets.emplace_back((Vec3)this->position + Vec3(0, 25, 0), Vec3(24.0, 0, 0), false);
+			bullets.back().model = bulletModel;
+			bullets.emplace_back(this->position, Vec3(24.0, 0, 0), false);
+			bullets.back().model = bulletModel;
 			attackCD = attackCDDef;
 		}
 	}

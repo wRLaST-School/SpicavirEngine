@@ -32,6 +32,10 @@ private:
     Player player;
     Model mPlayer;
 
+    Model mBoss;
+    Model mPlayerBullet;
+    Model mBossBit;
+
     Sprite background;
 
     StringOptions stropt;
