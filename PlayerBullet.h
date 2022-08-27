@@ -5,10 +5,7 @@ class PlayerBullet
 	: public Object3D
 {
 public:
-	PlayerBullet(Float3 position, Vec3 velocity, bool isHoming):velocity(velocity),isHoming(isHoming) {
-		this->scale = { 10, 10, 10 };
-		this->position = position;
-	};
+	PlayerBullet(Float3 position, Vec3 velocity, bool isHoming);
 
 	void Update();
 
@@ -19,5 +16,11 @@ public:
 	static const int lifetime = 600;
 
 	bool isHoming = false;
+
+	float r = 10.0f;
+
+	int damage = 100;
+
+	bool del = false;
 };
 

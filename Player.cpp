@@ -95,7 +95,7 @@ void Player::UpdateBullets()
 	{
 		itr->Update();
 
-		if (itr->timer >= PlayerBullet::lifetime)
+		if (itr->del || itr->timer >= PlayerBullet::lifetime)
 		{
 			itr = bullets.erase(itr);
 		}
