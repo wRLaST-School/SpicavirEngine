@@ -6,6 +6,7 @@
 void GameScene::Init()
 {
 	wTextureManager::Init();
+	wSoundManager::Init();
 	camera.SetRenderSize(GetwWindow()->width, GetwWindow()->height);
 	camera.nearZ = 0.1f;
 	camera.farZ = 10000.0f;
@@ -37,6 +38,8 @@ void GameScene::Init()
 	stropt.size = 24;
 	stropt.fontOptions.name = "UDEV Gothic Regular";
 	stropt.fontOptions.resolution = 192;
+
+	wSoundManager::LoadWave("resources/sounds/shot.wav", "shot");
 }
 
 void GameScene::Update()

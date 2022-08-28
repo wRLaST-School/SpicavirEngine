@@ -11,6 +11,7 @@
 #include "Timer.h"
 #include "Boss.h"
 #include "SceneManager.h"
+#include "wSoundManager.h"
 using namespace Input;
 
 class GameScene :

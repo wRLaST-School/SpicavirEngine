@@ -185,6 +185,7 @@
     <ClCompile Include="wPSO.cpp" />
     <ClCompile Include="wRootSignature.cpp" />
     <ClCompile Include="wShader.cpp" />
+    <ClCompile Include="wSoundManager.cpp" />
     <ClCompile Include="wSwapChainManager.cpp" />
     <ClCompile Include="wTexture.cpp" />
     <ClCompile Include="wTextureManager.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="wPSO.h" />
     <ClInclude Include="wRootSignature.h" />
     <ClInclude Include="wShader.h" />
+    <ClInclude Include="wSoundManager.h" />
     <ClInclude Include="wSwapChainManager.h" />
     <ClInclude Include="wTexture.h" />
     <ClInclude Include="wTextureManager.h" />

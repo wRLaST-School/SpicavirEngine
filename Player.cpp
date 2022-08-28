@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Input.h"
+#include "wSoundManager.h"
 
 void Player::Update()
 {
@@ -117,6 +118,7 @@ void Player::NormalAttack()
 			bullets.emplace_back((Vec3)this->position + Vec3(0, 15, 0), Vec3(24.0, 0, 0), true);
 			bullets.back().model = bulletModel;
 			attackCD = attackCDDef;
+			wSoundManager::Play("shot");
 		}
 	}
 	else
@@ -138,6 +140,7 @@ void Player::SlowAttack()
 			bullets.emplace_back(this->position, Vec3(24.0, 0, 0), false);
 			bullets.back().model = bulletModel;
 			attackCD = attackCDDef;
+			wSoundManager::Play("shot");
 		}
 	}
 	else

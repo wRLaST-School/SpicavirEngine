@@ -249,6 +249,9 @@
     <ClCompile Include="DamageNumber.cpp">
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="wSoundManager.cpp">
+      <Filter>Engine\ソースファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -388,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="DamageNumber.h">
       <Filter>Application\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="wSoundManager.h">
+      <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
