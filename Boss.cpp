@@ -31,6 +31,13 @@ void Boss::Update()
 		state = (State)Util::RNG(1, 4, true);
 	}
 
+	if (state != State::Idle && attackEnd)
+	{
+		attackEnd = false;
+		state = State::Idle;
+		secondaryState = State::Idle;
+	}
+
 	void (Boss:: * PUpdtArray[]) () =
 	{
 		&Boss::IdleUpdate,
