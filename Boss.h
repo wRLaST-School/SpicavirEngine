@@ -6,7 +6,11 @@ class Boss :
 {
 public:
     enum class State {
-        Idle
+        Idle,
+        Spread,
+        Aim,
+        Circle,
+        Marker
     };
 
     Boss(Score* score);
@@ -24,8 +28,22 @@ public:
 private:
     Score* pScore;
     State state = State::Idle;
+    State secondaryState = State::Idle;
+
     void IdleUpdate();
+    void SpreadUpdate();
+    void AimUpdate();
+    void CircleUpdate();
+    void MarkerUpdate();
 
     static Boss* pCurrentBoss;
+
+    int attackTimer = 0;
+    const int attackTime1 = 60;
+    const int attackTime2 = 120;
+
+    int tAttacks = 0;
+
+    bool attackEnd = false;
 };
 

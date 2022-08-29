@@ -10,12 +10,12 @@ public:
 	void Draw();
 
 	const float gradeMax = 100000.0f;
-
-private:
 	const float gradeS = gradeMax * 13 / 16;
 	const float gradeA = gradeMax * 10 / 16;
 	const float gradeB = gradeMax * 7 / 16;
 	const float gradeC = gradeMax * 4 / 16;
+
+private:
 
 	Sprite gaugeBG;
 	Sprite gaugeOverlay;

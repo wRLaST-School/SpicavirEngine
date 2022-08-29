@@ -22,6 +22,15 @@ namespace Util
 	}
 
 	std::wstring StrToWStr(std::string str, int page = CP_ACP);
+
+	bool Chance(int percentage);
+	/*
+	乱数を最低値と最高値を設定して返す。
+	RNG(1,3)なら1, 2, 3のどれかが返る。preciseModeをtrueにするとより精密に乱数を取る。
+	例えば、RAND_MAXの数値が100の環境で0-49の乱数を取ると0だけ確率が1.5倍(1, 51のとき1に対して0, 50, 100のとき0)になってしまうが、
+	preciseModeではこの場合100が出たらもう一度乱数を生成しなおすことで全ての数字が同じ確率で出るようにしている。
+	*/
+	int RNG(int min, int max, bool preciseMode = false);
 };
 
 struct R8G8B8A8

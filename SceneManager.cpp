@@ -65,4 +65,5 @@ template <class NextScene> void SceneManager::Transition()
 	Light::Init();
 	currentScene = unique_ptr<NextScene>(new NextScene());
 	currentScene->Init();
+	srand(time(NULL));
 }
