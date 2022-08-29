@@ -7,6 +7,7 @@ class TestScene :
     public IScene
 {
 public:
+    TestScene() { sceneId = "Test"; };
     ~TestScene() {};
     void Init() override;
     void Update() override;

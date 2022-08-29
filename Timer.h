@@ -6,7 +6,7 @@ public:
 	void Update();
 	void Draw ();
 
-	int timerSec = 90;
+	int timerSec = 60;
 private:
 	int frameTimer = 0;
 	int frameTime = 60;

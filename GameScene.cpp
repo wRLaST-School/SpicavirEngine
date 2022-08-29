@@ -7,6 +7,10 @@ void GameScene::Init()
 {
 	wTextureManager::Init();
 	wSoundManager::Init();
+
+	wTextureManager::LoadTexture("Resources/white.png", "white");
+	score.Init();
+
 	camera.SetRenderSize(GetwWindow()->width, GetwWindow()->height);
 	camera.nearZ = 0.1f;
 	camera.farZ = 10000.0f;
@@ -48,6 +52,17 @@ void GameScene::Update()
 	player.Update();
 	boss.Update();
 	timer.Update();
+	score.Update();
+
+	if (score.totDamage >= score.gradeMax)
+	{
+		endScene = true;
+	}
+
+	if (timer.timerSec < 0)
+	{
+		endScene = true;
+	}
 }
 
 void GameScene::DrawBack()
@@ -64,6 +79,7 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
+	score.Draw();
 	//TextDrawer::DrawString((string)"x = " + to_string(player.position.x) + ", y = " + to_string(player.position.y), 100, 100, Align::TopLeft, stropt);
 	timer.Draw();
 }

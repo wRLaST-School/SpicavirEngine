@@ -13,5 +13,8 @@ public:
 
 	virtual ~IScene() { 
 	};
+
+	bool endScene = false;
+	string sceneId;
 };
 

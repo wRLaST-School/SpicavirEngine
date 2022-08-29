@@ -17,6 +17,7 @@ class MonkeyScene :
     public IScene
 {
 public:
+    MonkeyScene() { sceneId = "Monkey"; };
     ~MonkeyScene() {};
     void Init() override;
     void Update() override;

@@ -1,13 +1,24 @@
 #pragma once
+#include "Sprite.h"
 class Score
 {
 public:
 	int totDamage;
 
+	void Init();
+	void Update();
+	void Draw();
+
+	const float gradeMax = 100000.0f;
+
 private:
-	const int gradeS = 10000;
-	const int gradeA = 7500;
-	const int gradeB = 4000;
-	const int gradeC = 1000;
+	const float gradeS = gradeMax * 13 / 16;
+	const float gradeA = gradeMax * 10 / 16;
+	const float gradeB = gradeMax * 7 / 16;
+	const float gradeC = gradeMax * 4 / 16;
+
+	Sprite gaugeBG;
+	Sprite gaugeOverlay;
+	Sprite gauge;
 };
 

@@ -12,8 +12,8 @@ Sprite::Sprite(TextureKey key)
 	TexMetadata texmeta = wTextureManager::GetTextureMetadata(tex);
 	this->width = texmeta.width;
 	this->height = texmeta.height;
-	float hlfw = texmeta.width / 2;
-	float hlfh = texmeta.height / 2;
+	float hlfw = (float)texmeta.width / 2;
+	float hlfh = (float)texmeta.height / 2;
 	Sprite::Vertex vertices[] = {
 		{{-hlfw, hlfh, 0}, {0.0f, 1.0f}},
 		{{-hlfw, -hlfh, 0}, {0.0f, 0.0f}},
@@ -73,8 +73,8 @@ Sprite::Sprite(string path, TextureKey newKey)
 	TexMetadata texmeta = wTextureManager::GetTextureMetadata(tex);
 	this->width = texmeta.width;
 	this->height = texmeta.height;
-	float hlfw = texmeta.width / 2;
-	float hlfh = texmeta.height / 2;
+	float hlfw = (float)texmeta.width / 2;
+	float hlfh = (float)texmeta.height / 2;
 	Sprite::Vertex vertices[] = {
 		{{-hlfw, hlfh, 0}, {0.0f, 1.0f}},
 		{{-hlfw, -hlfh, 0}, {0.0f, 0.0f}},
@@ -152,6 +152,8 @@ void Sprite::UpdateMatrix()
 	world *= Matrix::Translation(position);
 
 	constBuff.contents->mat = world;
+
+	constBuff.contents->color = brightness;
 }
 
 void Sprite::Draw()

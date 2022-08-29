@@ -6,6 +6,7 @@ class ResultScene :
     public IScene
 {
 public:
+    ResultScene() { sceneId = "Result"; };
     ~ResultScene() {};
     void Init() override;
     void Update() override;

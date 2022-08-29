@@ -18,6 +18,7 @@ class GameScene :
     public IScene
 {
 public:
+    GameScene() { sceneId = "Game"; };
     ~GameScene() {};
     void Init() override;
     void Update() override;

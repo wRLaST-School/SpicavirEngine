@@ -4,6 +4,7 @@ class TitleScene :
     public IScene
 {
 public:
+    TitleScene() { sceneId = "Title"; };
     ~TitleScene() {};
     void Init() override;
     void Update() override;

@@ -3,6 +3,7 @@
 #include "TestScene.h"
 #include "Input.h"
 #include "MonkeyScene.h"
+#include "ResultScene.h"
 
 void SceneManager::Init()
 {
@@ -28,6 +29,18 @@ void SceneManager::Update()
 	else if (Input::Key::Triggered(DIK_T))
 	{
 		Transition<TestScene>();
+	}
+
+	if (currentScene->sceneId == "Game")
+	{
+		if (currentScene->endScene)
+		{
+			GameScene& scene = dynamic_cast<GameScene&>(*currentScene);
+			GameSceneOutputs gso = scene.GetTransitionData();
+			Transition<ResultScene>();
+			ResultScene& scene2 = dynamic_cast<ResultScene&>(*currentScene);
+			scene2.GiveTransitionData(gso);
+		}
 	}
 }
 

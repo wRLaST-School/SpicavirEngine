@@ -69,7 +69,7 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 		metadata = scratchImg.GetMetadata();
 	}
 
-	metadata.format = MakeSRGB(metadata.format);
+	//metadata.format = MakeSRGB(metadata.format);
 
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
@@ -162,7 +162,7 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 		metadata = scratchImg.GetMetadata();
 	}
 
-	metadata.format = MakeSRGB(metadata.format);
+	//metadata.format = MakeSRGB(metadata.format);
 
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
