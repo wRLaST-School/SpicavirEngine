@@ -252,6 +252,9 @@
     <ClCompile Include="wSoundManager.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="BossBullet.cpp">
+      <Filter>Application\ソースファイル\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="wSoundManager.h">
       <Filter>Engine\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BossBullet.h">
+      <Filter>Application\ヘッダーファイル\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

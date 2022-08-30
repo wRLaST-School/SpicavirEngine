@@ -1,6 +1,7 @@
 #pragma once
 #include "Object3D.h"
 #include "Score.h"
+#include "BossBullet.h"
 class Boss :
     public Object3D
 {
@@ -36,14 +37,36 @@ private:
     void CircleUpdate();
     void MarkerUpdate();
 
+    void UpdateBullets();
+
     static Boss* pCurrentBoss;
 
     int attackTimer = 0;
     const int attackTime1 = 60;
     const int attackTime2 = 120;
 
+    int attackingTimer = 0;
+    const int spreadTime = 60;
+    const int aimTime = 120;
+    const int circleTime = 120;
+    const int markerTime = 240;
+
+    const int attackingTimes[4] =
+    {
+        60,//spread
+        120,//aim
+        120,//circle
+        240//marker
+    };
+
+
     int tAttacks = 0;
 
     bool attackEnd = false;
+
+    list<BossBullet> bullets;
+
+    Float3 nextPos = { 0,0,0 };
+    Float3 lastPos = { 0,0,0 };
 };
 

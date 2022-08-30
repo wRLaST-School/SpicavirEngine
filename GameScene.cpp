@@ -37,6 +37,8 @@ void GameScene::Init()
 	player.position = {0.0f, 0.0f, 0.0f};
 	player.UpdateMatrix();
 
+	Player::SetCurrentPlayer(&player);
+
 	boss.model = &mBoss;
 
 	stropt.size = 24;
@@ -60,6 +62,11 @@ void GameScene::Update()
 	}
 
 	if (timer.timerSec < 0)
+	{
+		endScene = true;
+	}
+
+	if (player.health <= 0)
 	{
 		endScene = true;
 	}

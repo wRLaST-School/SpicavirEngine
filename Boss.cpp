@@ -16,11 +16,15 @@ void Boss::Update()
 		{
 			tAttacks++;
 			attackTimer = attackTime1;
+
+			attackingTimer = 0;
 		}
 		else
 		{
 			tAttacks = 0;
 			attackTimer = attackTime2;
+
+			attackingTimer = 0;
 
 			if (pScore->totDamage > pScore->gradeA)
 			{
@@ -36,6 +40,18 @@ void Boss::Update()
 		attackEnd = false;
 		state = State::Idle;
 		secondaryState = State::Idle;
+	}
+
+	if (state != State::Idle || secondaryState != State::Idle)
+	{
+		if (state == State::Idle || attackingTimer >= attackingTimes[(int)state - 1])
+		{
+			if (secondaryState == State::Idle || attackingTimer >= attackingTimes[(int)secondaryState - 1])
+			{
+				attackEnd = true;
+			}
+		}
+		attackingTimer++;
 	}
 
 	void (Boss:: * PUpdtArray[]) () =
@@ -58,6 +74,10 @@ void Boss::Update()
 void Boss::Draw()
 {
 	this->Object3D::Draw();
+	for (auto& bullet : bullets)
+	{
+		bullet.Draw();
+	}
 }
 
 void Boss::Damage(int damage)
@@ -78,6 +98,16 @@ void Boss::SetCurrentBoss(Boss* ptr)
 void Boss::IdleUpdate()
 {
 	this->rotation.y += PIf / 60;
+	if (attackTimer == 60)
+	{
+		lastPos = position;
+		nextPos = {(float)Util::RNG(-4, 4, true) * 128, (float)Util::RNG(-3, 3, true) * 72, 0};
+	}
+	if (attackTimer <= 60)
+	{
+		Vec3 v = (Vec3)nextPos - lastPos;
+		position = (Vec3)nextPos - (v * (float)attackTimer / 60);
+	}
 	this->attackTimer--;
 	UpdateMatrix();
 }

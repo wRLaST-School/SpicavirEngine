@@ -11,6 +11,12 @@ public:
 
     void Draw();
 
+    static Player* GetCurrentPlayerPtr();
+
+    static void SetCurrentPlayer(Player* ptr);
+
+    void Damage();
+
     float health = 3.0f;
 
     list<PlayerBullet> bullets;
@@ -50,5 +56,7 @@ private:
     void SlowAttack();
 
     void DodgeUpdate();
+
+    static Player* pPlayer;
 };
 

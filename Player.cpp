@@ -38,6 +38,21 @@ void Player::Draw()
 	}
 }
 
+Player* Player::GetCurrentPlayerPtr()
+{
+	return pPlayer;
+}
+
+void Player::SetCurrentPlayer(Player* ptr)
+{
+	pPlayer = ptr;
+}
+
+void Player::Damage()
+{
+	this->health -= 1;
+}
+
 void Player::NormalUpdate()
 {
 	NormalMove();
@@ -158,3 +173,5 @@ void Player::DodgeUpdate()
 		dodgeTimer = dodgeImmuneTime;
 	}
 }
+
+Player* Player::pPlayer = nullptr;
