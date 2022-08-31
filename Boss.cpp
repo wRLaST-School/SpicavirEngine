@@ -13,6 +13,11 @@ void Boss::Update()
 {
 	if (attackTimer <= 0)
 	{
+		state = (State)Util::RNG(1, 5, true);
+		if((int)state > 4) {
+			state = State::Marker;
+		}
+
 		if (tAttacks < 2 || (tAttacks < 3 && pScore->totDamage > pScore->gradeA))
 		{
 			tAttacks++;
@@ -29,11 +34,11 @@ void Boss::Update()
 
 			if (pScore->totDamage > pScore->gradeA)
 			{
-				secondaryState = (State)Util::RNG(1, 4, true);
+				secondaryState = State::Marker;
+				state = (State)Util::RNG(1,3,true);
 			}
 		}
 
-		state = (State)Util::RNG(1, 4, true);
 	}
 
 	if (state != State::Idle && attackEnd)
@@ -125,7 +130,7 @@ void Boss::IdleUpdate()
 
 void Boss::SpreadUpdate()
 {
-	if (attackingTimer == 0)
+	if (attackingTimer == 1)
 	{
 		spreadShotCenter = (Util::RNG(0, 359) * PI / 180);
 	}
@@ -148,7 +153,7 @@ void Boss::AimUpdate()
 
 void Boss::CircleUpdate()
 {
-	if (attackingTimer == 0)
+	if (attackingTimer == 1)
 	{
 		circleShotCenter = (Util::RNG(0, 359) * PI / 180);
 	}
@@ -159,7 +164,60 @@ void Boss::MarkerUpdate()
 {
 	if (attackingTimer == 1 || attackingTimer == 121)
 	{
-		markers.emplace_back(Marker::WorldToMonitor(Player::GetCurrentPlayerPtr()->position));
+		int pattern = Util::RNG(0, 3, true);
+		switch (pattern)
+		{
+		case 0: // rand 10
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				markers.emplace_back(Float3{(float)Util::RNG(100, 1100, true), (float)Util::RNG(100, 600), 0.0f});
+			}
+			break;
+		}
+		case 1: // aim cross
+		{
+			Float3 pPos = Marker::WorldToMonitor(Player::GetCurrentPlayerPtr()->position);
+			for (int i = 0; i < 13; i++)
+			{
+				markers.emplace_back(Float3{ (float)i * 100 - 10 + 50, pPos.y, 0});
+			}
+
+			for (int i = 0; i < 8; i++)
+			{
+				markers.emplace_back(Float3{ pPos.x,(float)i * 100 - 40 + 50, 0 });
+			}
+			break;
+		}
+		case 2: // line winder
+		{
+			for (int i = 0; i < 13; i++)
+			{
+				markers.emplace_back(Float3{ (float)i * 100 - 10 + 50, 160, 0 });
+
+				markers.emplace_back(Float3{ (float)i * 100 - 10 + 50, 720 - 160, 0 });
+			}
+			break;
+		}
+		case 3: // edge
+		{
+			for (int i = 0; i < 13; i++)
+			{
+				markers.emplace_back(Float3{ (float)i * 100 - 10 + 50, 100, 0 });
+
+				markers.emplace_back(Float3{ (float)i * 100 - 10 + 50, 720 - 100, 0 });
+			}
+
+			for (int i = 0; i < 8; i++)
+			{
+				markers.emplace_back(Float3{ 100,(float)i * 100 - 40 + 50, 0 });
+				markers.emplace_back(Float3{ 1280-100,(float)i * 100 - 40 + 50, 0 });
+			}
+			break;
+		}
+		default:
+			break;
+		}
 	}
 }
 
