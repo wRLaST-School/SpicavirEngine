@@ -1,6 +1,7 @@
 #pragma once
 #include "Object3D.h"
 #include "PlayerBullet.h"
+#include "Sprite.h"
 class Player :
     public Object3D
 {
@@ -17,6 +18,9 @@ public:
 
     void Damage();
     
+    void HealthSprInit();
+    void DrawHP();
+
     float health = 3.0f;
 
     list<PlayerBullet> bullets;
@@ -26,6 +30,10 @@ public:
     float r = 8;
 
 private:
+
+    Sprite healthSpr[3];
+    Sprite healthBackSpr;
+
     enum class State
     {
         Normal,

@@ -89,6 +89,34 @@ void Player::Damage()
 	immuneTime = immuneTimeDef;
 }
 
+void Player::HealthSprInit()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		healthSpr[i] = Sprite("health");
+
+	}
+
+	healthBackSpr = Sprite("healthBack");
+}
+
+void Player::DrawHP()
+{
+	for (int i = 1; i <= health; i++)
+	{
+		healthSpr[i].position = Float3{ 100.0f + 150 * i, 620.0f, 0.0f};
+	}
+
+	int fullhealth = floorf(health);
+	float subhealth = health - fullhealth;
+
+	if (fullhealth < 3)
+	{
+		healthSpr[fullhealth].position = Float3{ 100.0f + 150 * (fullhealth - 1), 620.0f, 0.0f};
+		healthSpr->scale = Float3{ subhealth, subhealth, 1 };
+	}
+}
+
 void Player::NormalUpdate()
 {
 	NormalMove();
@@ -120,6 +148,9 @@ void Player::NormalMove()
 	}
 
 	position += moveVec;
+
+	position.x = Util::Clamp(position.x, -630.0f, 630.0f);
+	position.y = Util::Clamp(position.y, -350.0f, 350.0f);
 
 	UpdateMatrix();
 }
@@ -155,6 +186,9 @@ void Player::SlowMove()
 	}
 
 	position += moveVec;
+
+	position.x = Util::Clamp(position.x, -630.0f, 630.0f);
+	position.y = Util::Clamp(position.y, -350.0f, 350.0f);
 
 	UpdateMatrix();
 }
@@ -229,6 +263,9 @@ void Player::DodgeUpdate()
 		dodgeTimer = dodgeImmuneTime;
 		dodgeCD = dodgeCDDef;
 	}
+
+	position.x = Util::Clamp(position.x, -630.0f, 630.0f);
+	position.y = Util::Clamp(position.y, -350.0f, 350.0f);
 
 	UpdateMatrix();
 }

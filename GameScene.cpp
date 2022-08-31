@@ -52,6 +52,7 @@ void GameScene::Init()
 	stropt.fontOptions.resolution = 192;
 
 	wSoundManager::LoadWave("Resources/Sounds/shot.wav", "shot");
+	player.HealthSprInit();
 }
 
 void GameScene::Update()
@@ -96,6 +97,7 @@ void GameScene::DrawSprite()
 	score.Draw();
 	//TextDrawer::DrawString((string)"x = " + to_string(player.position.x) + ", y = " + to_string(player.position.y), 100, 100, Align::TopLeft, stropt);
 	timer.Draw();
+	player.DrawHP();
 
 	TextDrawer::DrawString(to_string(player.health), 100, 100, Align::TopLeft);
 }
