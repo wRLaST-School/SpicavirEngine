@@ -48,7 +48,7 @@ private:
 
     static Boss* pCurrentBoss;
 
-    int attackTimer = 0;
+    int attackTimer = 240;
     const int attackTime1 = 60;
     const int attackTime2 = 120;
 

@@ -24,7 +24,7 @@ void SceneManager::Update()
 
 	if (Input::Key::Triggered(DIK_R))
 	{
-		Transition<MonkeyScene>();
+		Transition<GameScene>();
 	}
 	else if (Input::Key::Triggered(DIK_T))
 	{

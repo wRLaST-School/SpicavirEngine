@@ -5,7 +5,7 @@ class PlayerBullet
 	: public Object3D
 {
 public:
-	PlayerBullet(Float3 position, Vec3 velocity, bool isHoming);
+	PlayerBullet(Float3 position, Vec3 velocity, bool isHoming, bool counter = false);
 
 	void Update();
 
@@ -22,5 +22,8 @@ public:
 	int damage = 100;
 
 	bool del = false;
+
+	bool counter = false;
+	float counterSpeed = 20;
 };
 

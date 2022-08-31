@@ -1,11 +1,18 @@
 #include "Player.h"
 #include "Input.h"
 #include "wSoundManager.h"
+#include "Util.h"
 
 void Player::Update()
 {
+	/*if(this->health < 3)*/this->health += 0.075 / 60;
+
+	if (immuneTime > 0) immuneTime--;
+
 	if (state != State::Dodge)
 	{
+		if(dodgeCD > 0)dodgeCD--;
+
 		if (Input::Key::Down(DIK_X))
 		{
 			state = State::Slow;
@@ -13,6 +20,12 @@ void Player::Update()
 		else
 		{
 			state = State::Normal;
+		}
+
+		if (Input::Key::Down(DIK_LCONTROL) && dodgeCD <= 0)
+		{
+			state = State::Dodge;
+			countered = false;
 		}
 	}
 
@@ -30,10 +43,15 @@ void Player::Update()
 
 void Player::Draw()
 {
-	this->Object3D::Draw("notexture");
+	if(immuneTime <= 0 || immuneTime % 15 <= 7)
+		this->Object3D::Draw("notexture");
 
 	for (PlayerBullet& bullet : bullets)
 	{
+		if (bullet.counter)
+		{
+			int a = 19037;
+		}
 		bullet.Draw("notexture");
 	}
 }
@@ -50,7 +68,25 @@ void Player::SetCurrentPlayer(Player* ptr)
 
 void Player::Damage()
 {
+	if (state == State::Dodge && !countered)
+	{
+		CounterAttack();
+		if (this->health < 2.25)
+		{
+			this->health += 0.75;
+		}
+		else
+		{
+			this->health = 3.0f;
+		}
+		return;
+	}
+
+	if (immuneTime > 0)
+		return;
+
 	this->health -= 1;
+	immuneTime = immuneTimeDef;
 }
 
 void Player::NormalUpdate()
@@ -185,10 +221,30 @@ void Player::SlowAttack()
 void Player::DodgeUpdate()
 {
 	dodgeTimer--;
+	this->rotation.x = (2 * PI) * ((float)dodgeTimer / dodgeImmuneTime);
+	this->position.x += speed * 1.5;
 	if (dodgeTimer <= 0)
 	{
-		state = Input::Pad::Down(Button::A) ? State::Slow : State::Normal;
+		state = State::Normal;
 		dodgeTimer = dodgeImmuneTime;
+		dodgeCD = dodgeCDDef;
+	}
+
+	UpdateMatrix();
+}
+
+void Player::CounterAttack()
+{
+	countered = true;
+
+	int counterBulletCounts = 16;
+	for (int i = 0; i < counterBulletCounts; i++)
+	{
+		int deg = Util::RNG(1, 360, true);
+		Vec3 velo = Vec2::RotToVec(deg * PI / 180);
+		bullets.emplace_back((Vec3)this->position, velo, false, true);
+		bullets.back().model = bulletModel;
+		bullets.back().damage = 125;
 	}
 }
 

@@ -114,6 +114,7 @@ void Boss::SetCurrentBoss(Boss* ptr)
 void Boss::IdleUpdate()
 {
 	this->rotation.y += PIf / 60;
+	UpdateMatrix();
 	if (attackTimer == 60)
 	{
 		lastPos = position;
@@ -130,6 +131,8 @@ void Boss::IdleUpdate()
 
 void Boss::SpreadUpdate()
 {
+	this->rotation.y -= PIf / 40;
+	UpdateMatrix();
 	if (attackingTimer == 1)
 	{
 		spreadShotCenter = (Util::RNG(0, 359) * PI / 180);
@@ -143,6 +146,8 @@ void Boss::SpreadUpdate()
 
 void Boss::AimUpdate()
 {
+	this->rotation.y -= PIf / 60;
+	UpdateMatrix();
 	if (!(attackingTimer % 12))
 	{
 		Vec3 cvel = (Vec3)Player::GetCurrentPlayerPtr()->position - this->position;
@@ -153,6 +158,8 @@ void Boss::AimUpdate()
 
 void Boss::CircleUpdate()
 {
+	this->rotation.y += PIf / 30;
+	UpdateMatrix();
 	if (attackingTimer == 1)
 	{
 		circleShotCenter = (Util::RNG(0, 359) * PI / 180);
@@ -162,6 +169,7 @@ void Boss::CircleUpdate()
 
 void Boss::MarkerUpdate()
 {
+	UpdateMatrix();
 	if (attackingTimer == 1 || attackingTimer == 121)
 	{
 		int pattern = Util::RNG(0, 3, true);
