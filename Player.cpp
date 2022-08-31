@@ -61,7 +61,7 @@ void Player::NormalUpdate()
 
 void Player::NormalMove()
 {
-	Vec3 moveVec =
+	moveVec =
 	{
 		/*Input::Pad::GetLStick().x,*/
 		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
@@ -96,7 +96,7 @@ void Player::SlowUpdate()
 
 void Player::SlowMove()
 {
-	Vec3 moveVec =
+	moveVec =
 	{
 		/*Input::Pad::GetLStick().x,*/
 		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
@@ -144,7 +144,7 @@ void Player::NormalAttack()
 {
 	if (attackCD <= 0)
 	{
-		if (Input::Key::Down(DIK_Z))
+		if (moveVec.GetSquaredLength() == 0/*Input::Key::Down(DIK_Z)*/)
 		{
 			bullets.emplace_back((Vec3)this->position + Vec3(0, -15, 0), Vec3(24.0, 0, 0), true);
 			bullets.back().model = bulletModel;
@@ -164,7 +164,7 @@ void Player::SlowAttack()
 {
 	if (attackCD <= 0)
 	{
-		if (Input::Key::Down(DIK_Z))
+		if (moveVec.GetSquaredLength() == 0/*Input::Key::Down(DIK_Z)*/)
 		{
 			bullets.emplace_back((Vec3)this->position + Vec3(0, -25, 0), Vec3(24.0, 0, 0), false);
 			bullets.back().model = bulletModel;

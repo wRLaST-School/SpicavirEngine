@@ -41,11 +41,13 @@ private:
     int attackCD = 0;
     const int attackCDDef = 2;
 
-    const float speed = 16;
+    const float speed = 8;
     const float slowspeed = speed / 2;
 
     int dodgeTimer = 0;
     const int dodgeImmuneTime = 12;
+
+    Vec3 moveVec;
 private:
     void NormalUpdate();
     void NormalMove();
