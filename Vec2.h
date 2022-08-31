@@ -56,6 +56,8 @@ public:
 
 	operator Float2() const;
 	operator Vec3() const;
+
+	static Vec2 RotToVec(float rad);
 };
 
 

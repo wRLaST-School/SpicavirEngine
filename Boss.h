@@ -39,6 +39,8 @@ private:
 
     void UpdateBullets();
 
+    void NWay(Float3 pos, int ways, float speed, float centerRad, float radDiff);
+
     static Boss* pCurrentBoss;
 
     int attackTimer = 0;

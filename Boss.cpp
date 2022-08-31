@@ -128,4 +128,20 @@ void Boss::MarkerUpdate()
 {
 }
 
+void Boss::NWay(Float3 pos, int ways, float speed, float centerRad, float radDiff)
+{
+	for (int i = 0; i < ways; i++)
+	{
+		Vec3 vel;
+
+		float rad = centerRad - radDiff * (float)ways / 2 + radDiff * i;
+
+		vel = Vec2::RotToVec(rad);
+
+		vel.SetLength(speed);
+
+		bullets.emplace_back(pos, vel);
+	}
+}
+
 Boss* Boss::pCurrentBoss = nullptr;

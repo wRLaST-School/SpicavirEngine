@@ -153,3 +153,8 @@ Vec2::operator Vec3() const
 {
 	return Vec3(x, y, 0);
 }
+
+Vec2 Vec2::RotToVec(float rad)
+{
+	return Vec2(cos(rad), sin(rad));
+}
