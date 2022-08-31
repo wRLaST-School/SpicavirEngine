@@ -4,7 +4,7 @@ class BossBullet :
     public Object3D
 {
 public:
-	BossBullet(Float3 position, Vec3 velocity);
+	BossBullet(Float3 position, Vec3 velocity, Model* model);
 
 	void Update();
 
@@ -12,7 +12,7 @@ public:
 
 	int timer = 0;
 
-	static const int lifetime = 600;
+	static const int lifetime = 120;
 
 	float r = 10.0f;
 

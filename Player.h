@@ -17,7 +17,7 @@ public:
 
     void Damage();
 
-    float health = 3.0f;
+    float health = /*3.0f*/ 3000000;
 
     list<PlayerBullet> bullets;
 

@@ -40,6 +40,7 @@ void GameScene::Init()
 	Player::SetCurrentPlayer(&player);
 
 	boss.model = &mBoss;
+	boss.bulletModel = &mPlayerBullet;
 
 	stropt.size = 24;
 	stropt.fontOptions.name = "UDEV Gothic Regular";

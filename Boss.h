@@ -26,6 +26,8 @@ public:
 
     static void SetCurrentBoss(Boss* ptr);
 
+    Model* bulletModel;
+
 private:
     Score* pScore;
     State state = State::Idle;
@@ -65,6 +67,8 @@ private:
     int tAttacks = 0;
 
     bool attackEnd = false;
+
+    float spreadShotCenter;
 
     list<BossBullet> bullets;
 

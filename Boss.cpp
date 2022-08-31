@@ -1,5 +1,6 @@
 #include "Boss.h"
 #include "Util.h"
+#include "Player.h"
 
 Boss::Boss(Score* score)
 {
@@ -69,6 +70,8 @@ void Boss::Update()
 	{
 		(this->*PUpdtArray[(int)secondaryState])();
 	}
+
+	UpdateBullets();
 }
 
 void Boss::Draw()
@@ -114,10 +117,25 @@ void Boss::IdleUpdate()
 
 void Boss::SpreadUpdate()
 {
+	if (attackingTimer == 0)
+	{
+		spreadShotCenter = (Util::RNG(0, 359) * PI / 180);
+	}
+
+	if (!(attackingTimer % 6))
+	{
+		NWay(this->position, 24, 8.0f, spreadShotCenter, 15 * PI / 180);
+	}
 }
 
 void Boss::AimUpdate()
 {
+	if (!(attackingTimer % 12))
+	{
+		Vec3 cvel = (Vec3)Player::GetCurrentPlayerPtr()->position - this->position;
+
+		NWay(this->position, pScore->totDamage > pScore->gradeA ? 5 : 3, 6.0f, atan2(cvel.y, cvel.x), PI / 8);
+	}
 }
 
 void Boss::CircleUpdate()
@@ -128,19 +146,36 @@ void Boss::MarkerUpdate()
 {
 }
 
+void Boss::UpdateBullets()
+{
+	for (auto itr = bullets.begin(); itr != bullets.end();)
+	{
+		itr->Update();
+
+		if (itr->del)
+		{
+			itr = bullets.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
+}
+
 void Boss::NWay(Float3 pos, int ways, float speed, float centerRad, float radDiff)
 {
 	for (int i = 0; i < ways; i++)
 	{
 		Vec3 vel;
 
-		float rad = centerRad - radDiff * (float)ways / 2 + radDiff * i;
+		float rad = centerRad - radDiff * ((float)ways - 1)/ 2 + radDiff * i;
 
 		vel = Vec2::RotToVec(rad);
 
 		vel.SetLength(speed);
 
-		bullets.emplace_back(pos, vel);
+		bullets.emplace_back(pos, vel, bulletModel);
 	}
 }
 
