@@ -140,6 +140,11 @@ void Boss::AimUpdate()
 
 void Boss::CircleUpdate()
 {
+	if (attackingTimer == 0)
+	{
+		circleShotCenter = (Util::RNG(0, 359) * PI / 180);
+	}
+	NWay(this->position, pScore->totDamage > pScore->gradeB ? 2 : 1, 6.0f, circleShotCenter + attackingTimer * 14 * PI / 180, PI);
 }
 
 void Boss::MarkerUpdate()

@@ -52,7 +52,7 @@ private:
     int attackingTimer = 0;
     const int spreadTime = 60;
     const int aimTime = 120;
-    const int circleTime = 120;
+    const int circleTime = 180;
     const int markerTime = 240;
 
     const int attackingTimes[4] =
@@ -69,6 +69,7 @@ private:
     bool attackEnd = false;
 
     float spreadShotCenter;
+    float circleShotCenter;
 
     list<BossBullet> bullets;
 
