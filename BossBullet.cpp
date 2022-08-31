@@ -19,7 +19,7 @@ void BossBullet::Update()
 	}
 
 	{
-		if (false)
+		if (((Vec3)position - player->position).GetSquaredLength() < (r + player->r) * (r + player->r))
 		{
 			this->del = true;
 			player->Damage();

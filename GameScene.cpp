@@ -33,7 +33,7 @@ void GameScene::Init()
 	
 	player.model = &mPlayer;
 	player.bulletModel = &mPlayerBullet;
-	player.scale = { 25, 25, 25 };
+	player.scale = { 15, 15, 15 };
 	player.position = {0.0f, 0.0f, 0.0f};
 	player.UpdateMatrix();
 
@@ -51,7 +51,7 @@ void GameScene::Init()
 	stropt.fontOptions.name = "UDEV Gothic Regular";
 	stropt.fontOptions.resolution = 192;
 
-	wSoundManager::LoadWave("Resources/sounds/shot.wav", "shot");
+	wSoundManager::LoadWave("Resources/Sounds/shot.wav", "shot");
 }
 
 void GameScene::Update()
@@ -96,6 +96,8 @@ void GameScene::DrawSprite()
 	score.Draw();
 	//TextDrawer::DrawString((string)"x = " + to_string(player.position.x) + ", y = " + to_string(player.position.y), 100, 100, Align::TopLeft, stropt);
 	timer.Draw();
+
+	TextDrawer::DrawString(to_string(player.health), 100, 100, Align::TopLeft);
 }
 
 GameSceneOutputs GameScene::GetTransitionData()
