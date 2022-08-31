@@ -49,7 +49,7 @@ void wWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 
 	hwnd = CreateWindow(w.lpszClassName,
 		title,
-		WS_OVERLAPPEDWINDOW,
+		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
 		wrc.right - wrc.left,
