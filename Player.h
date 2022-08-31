@@ -23,6 +23,8 @@ public:
 
     Model* bulletModel;
 
+    float r = 8;
+
 private:
     enum class State
     {

@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include "Score.h"
 #include "BossBullet.h"
+#include "Marker.h"
 class Boss :
     public Object3D
 {
@@ -19,6 +20,8 @@ public:
     void Update();
 
     void Draw();
+
+    void DrawMarkers();
 
     void Damage(int damage);
 
@@ -39,7 +42,7 @@ private:
     void CircleUpdate();
     void MarkerUpdate();
 
-    void UpdateBullets();
+    void UpdateBulletsAndMarkers();
 
     void NWay(Float3 pos, int ways, float speed, float centerRad, float radDiff);
 
@@ -50,16 +53,12 @@ private:
     const int attackTime2 = 120;
 
     int attackingTimer = 0;
-    const int spreadTime = 60;
-    const int aimTime = 120;
-    const int circleTime = 180;
-    const int markerTime = 240;
 
     const int attackingTimes[4] =
     {
         60,//spread
         120,//aim
-        120,//circle
+        180,//circle
         240//marker
     };
 
@@ -72,6 +71,7 @@ private:
     float circleShotCenter;
 
     list<BossBullet> bullets;
+    list<Marker> markers;
 
     Float3 nextPos = { 0,0,0 };
     Float3 lastPos = { 0,0,0 };

@@ -155,6 +155,7 @@
     <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Marker.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="MonkeyScene.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Marker.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="MonkeyScene.h" />

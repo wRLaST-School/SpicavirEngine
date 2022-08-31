@@ -71,7 +71,7 @@ void Boss::Update()
 		(this->*PUpdtArray[(int)secondaryState])();
 	}
 
-	UpdateBullets();
+	UpdateBulletsAndMarkers();
 }
 
 void Boss::Draw()
@@ -80,6 +80,14 @@ void Boss::Draw()
 	for (auto& bullet : bullets)
 	{
 		bullet.Draw();
+	}
+}
+
+void Boss::DrawMarkers()
+{
+	for (auto& marker : markers)
+	{
+		marker.Draw();
 	}
 }
 
@@ -149,9 +157,13 @@ void Boss::CircleUpdate()
 
 void Boss::MarkerUpdate()
 {
+	if (attackingTimer == 1 || attackingTimer == 121)
+	{
+		markers.emplace_back(Marker::WorldToMonitor(Player::GetCurrentPlayerPtr()->position));
+	}
 }
 
-void Boss::UpdateBullets()
+void Boss::UpdateBulletsAndMarkers()
 {
 	for (auto itr = bullets.begin(); itr != bullets.end();)
 	{
@@ -163,6 +175,19 @@ void Boss::UpdateBullets()
 		}
 		else
 		{
+			itr++;
+		}
+	}
+
+	for (auto itr = markers.begin(); itr != markers.end();)
+	{
+		if (itr->del)
+		{
+			itr = markers.erase(itr);
+		}
+		else
+		{
+			itr->Update();
 			itr++;
 		}
 	}

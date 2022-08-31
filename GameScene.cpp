@@ -42,11 +42,16 @@ void GameScene::Init()
 	boss.model = &mBoss;
 	boss.bulletModel = &mPlayerBullet;
 
+	Marker::SetMarkerTextures(
+		wTextureManager::LoadTexture("Resources/marker.png", "outerMarker"),
+		wTextureManager::LoadTexture("Resources/marker.png", "innerMarker")
+	);
+
 	stropt.size = 24;
 	stropt.fontOptions.name = "UDEV Gothic Regular";
 	stropt.fontOptions.resolution = 192;
 
-	wSoundManager::LoadWave("resources/sounds/shot.wav", "shot");
+	wSoundManager::LoadWave("Resources/sounds/shot.wav", "shot");
 }
 
 void GameScene::Update()
@@ -87,6 +92,7 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
+	boss.DrawMarkers();
 	score.Draw();
 	//TextDrawer::DrawString((string)"x = " + to_string(player.position.x) + ", y = " + to_string(player.position.y), 100, 100, Align::TopLeft, stropt);
 	timer.Draw();

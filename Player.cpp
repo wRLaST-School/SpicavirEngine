@@ -74,6 +74,15 @@ void Player::NormalMove()
 	if(moveVec.GetSquaredLength() != 0)
 		moveVec.SetLength(speed);
 
+	if (moveVec.y)
+	{
+		this->rotation.x = PI / 8;
+	}
+	else
+	{
+		this->rotation.x = 0;
+	}
+
 	position += moveVec;
 
 	UpdateMatrix();
@@ -99,6 +108,15 @@ void Player::SlowMove()
 
 	if (moveVec.GetSquaredLength() != 0)
 		moveVec.SetLength(slowspeed);
+
+	if (moveVec.y)
+	{
+		this->rotation.x = PI / 8;
+	}
+	else
+	{
+		this->rotation.x = 0;
+	}
 
 	position += moveVec;
 
