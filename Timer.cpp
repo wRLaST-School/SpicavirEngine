@@ -13,5 +13,5 @@ void Timer::Update()
 
 void Timer::Draw()
 {
-	TextDrawer::DrawString(to_string(timerSec), 1180, 100, Align::TopRight, sopt);
+	TextDrawer::DrawString(to_string(max(timerSec, 0)), 1180, 100, Align::TopRight, sopt);
 }

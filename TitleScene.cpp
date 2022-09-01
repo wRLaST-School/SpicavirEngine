@@ -23,10 +23,36 @@ void TitleScene::Init()
 
 	wSoundManager::LoadWave("Resources/Sounds/titleBGM.wav", "titleBGM");
 	bgm = wSoundManager::PlayBGM("titleBGM");
+
+	white = Sprite("Resources/white.png", "whitetr");
 }
 
 void TitleScene::Update()
 {
+	if (inTran)
+	{
+		inTranTimer++;
+
+		if (inTranTimer > 64)
+		{
+			inTran = false;
+		}
+
+		tranColor = { 0.f, 0.f, 0.f, 1.0f - (float)inTranTimer / 64 };
+	}
+
+	if (outTran)
+	{
+		outTranTimer++;
+
+		if (outTranTimer > 64)
+		{
+			endScene = true;
+		}
+
+		tranColor = { 0.f, 0.f, 0.f, (float)outTranTimer / 64 };
+	}
+
 	timer++;
 
 	titleSpr.position = Float3{ 640.0f + xPos, 335.0f + sinf(timer * PI / 120)*25 ,0 };
@@ -59,7 +85,7 @@ void TitleScene::Update()
 	if (xPos <= -1280 * 4)
 	{
 		bgm->Stop();
-		this->endScene = true;
+		this->outTran = true;
 	}
 
 	if (Input::Pad::DownAny() && !tutorialMoving)
@@ -96,4 +122,13 @@ void TitleScene::DrawSprite()
 	tut1.Draw();
 	tut2.Draw();
 	tut3.Draw();
+
+	if (inTran || outTran)
+	{
+		white.position = { 640, 360, 0 };
+		white.scale = { 2000, 2000, 1 };
+		white.brightness = tranColor;
+		white.UpdateMatrix();
+		white.Draw();
+	}
 }

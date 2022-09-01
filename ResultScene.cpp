@@ -50,10 +50,35 @@ void ResultScene::Init()
 
 	wSoundManager::LoadWave("Resources/Sounds/resultBGM.wav", "resultbgm");
 	bgm = wSoundManager::PlayBGM("resultbgm");
+
+	white = Sprite("Resources/white.png", "whitetr");
 }
 
 void ResultScene::Update()
 {
+	if (inTran)
+	{
+		inTranTimer++;
+
+		if (inTranTimer > 64)
+		{
+			inTran = false;
+		}
+
+		tranColor = { 0.f, 0.f, 0.f, 1.0f - (float)inTranTimer / 64 };
+	}
+
+	if (outTran)
+	{
+		outTranTimer++;
+
+		if (outTranTimer > 64)
+		{
+			endScene = true;
+		}
+
+		tranColor = { 0.f, 0.f, 0.f, (float)outTranTimer / 64 };
+	}
 	timerrr++;
 	backPos -= 1;
 	if (backPos <= -640) {
@@ -65,7 +90,7 @@ void ResultScene::Update()
 
 	if (timerrr > 120 && Input::Pad::DownAny())
 	{
-		endScene = true;
+		outTran = true;
 	}
 
 	back1.UpdateMatrix();
@@ -102,6 +127,15 @@ void ResultScene::DrawSprite()
 		resultSpr.Draw();
 
 		TextDrawer::DrawString(to_string(timer.timerSec), 640, 450, Align::Center, sop);
+	}
+
+	if (inTran || outTran)
+	{
+		white.position = { 640, 360, 0 };
+		white.scale = { 2000, 2000, 1 };
+		white.brightness = tranColor;
+		white.UpdateMatrix();
+		white.Draw();
 	}
 }
 

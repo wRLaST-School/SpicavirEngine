@@ -34,5 +34,14 @@ private:
     Sprite tut3;
 
     IXAudio2SourceVoice* bgm;
+
+    Sprite white;
+    Float4 tranColor = {0.f, 0.f, 0.f, 1.0f};
+    int inTranTimer = 0;
+    int outTranTimer = 0;
+
+    bool inTran = true;
+
+    bool outTran = false;
 };
 

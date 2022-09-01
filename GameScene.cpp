@@ -79,10 +79,35 @@ void GameScene::Init()
 	player.pCamera = &camera;
 
 	ope = Sprite("Resources/operation.png", "operation");
+	white = Sprite("Resources/white.png", "whitetr");
 }
 
 void GameScene::Update()
 {
+	if (inTran)
+	{
+		inTranTimer++;
+
+		if (inTranTimer > 64)
+		{
+			inTran = false;
+		}
+
+		tranColor = { 0.f, 0.f, 0.f, 1.0f - (float)inTranTimer / 64 };
+	}
+
+	if (outTran)
+	{
+		outTranTimer++;
+
+		if (outTranTimer > 64)
+		{
+			endScene = true;
+		}
+
+		tranColor = { 0.f, 0.f, 0.f, (float)outTranTimer / 64 };
+	}
+
 	backPos-= 1;
 	if (backPos <= -640) {
 		backPos = 640;
@@ -94,26 +119,29 @@ void GameScene::Update()
 	back1.UpdateMatrix();
 	back2.UpdateMatrix();
 
-	camera.UpdateShake();
-	camera.UpdateMatrix();
-	player.Update();
-	boss.Update();
-	timer.Update();
-	score.Update();
-
-	if (score.totDamage >= score.gradeMax)
+	if (!outTran)
 	{
-		endScene = true;
-	}
+		camera.UpdateShake();
+		camera.UpdateMatrix();
+		player.Update();
+		boss.Update();
+		timer.Update();
+		score.Update();
 
-	if (timer.timerSec < 0)
-	{
-		endScene = true;
-	}
+		if (score.totDamage >= score.gradeMax)
+		{
+			outTran = true;
+		}
 
-	if (player.health <= 0)
-	{
-		endScene = true;
+		if (timer.timerSec < 0)
+		{
+			outTran = true;
+		}
+
+		if (player.health <= 0)
+		{
+			outTran = true;
+		}
 	}
 
 	ope.position = {640, 360, 0};
@@ -143,6 +171,15 @@ void GameScene::DrawSprite()
 	player.DrawHP();
 
 	//TextDrawer::DrawString(to_string(player.health), 100, 100, Align::TopLeft);
+
+	if (inTran || outTran)
+	{
+		white.position = { 640, 360, 0 };
+		white.scale = { 2000, 2000, 1 };
+		white.brightness = tranColor;
+		white.UpdateMatrix();
+		white.Draw();
+	}
 }
 
 GameSceneOutputs GameScene::GetTransitionData()

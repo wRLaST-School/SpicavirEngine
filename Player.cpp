@@ -254,8 +254,10 @@ void Player::NormalAttack()
 		if (moveVec.GetSquaredLength() == 0/*Input::Key::Down(DIK_Z)*/)
 		{
 			bullets.emplace_back((Vec3)this->position + Vec3(0, -15, 0), Vec3(24.0, 0, 0), true);
+			bullets.back().damage = 75;
 			bullets.back().model = bulletModel;
 			bullets.emplace_back((Vec3)this->position + Vec3(0, 15, 0), Vec3(24.0, 0, 0), true);
+			bullets.back().damage = 75;
 			bullets.back().model = bulletModel;
 			attackCD = attackCDDef;
 			wSoundManager::Play("shot");
