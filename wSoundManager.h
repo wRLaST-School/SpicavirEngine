@@ -52,6 +52,7 @@ public:
 
 	static SoundKey LoadWave(string path, SoundKey key);
 	static void Play(SoundKey key);
+	static IXAudio2SourceVoice* PlayBGM(SoundKey key);
 
 	static void ReleaseAllSounds();
 

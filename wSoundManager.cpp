@@ -77,7 +77,7 @@ SoundKey wSoundManager::LoadWave(string path, SoundKey key)
 
 void wSoundManager::Play(SoundKey key)
 {
-    IXAudio2SourceVoice* pSourceVoice = nullptr;
+    IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚Æ~‚ß‚ç‚ê‚é
     SoundData* pSnd = &sndMap[key];
 
     xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
@@ -87,6 +87,24 @@ void wSoundManager::Play(SoundKey key)
     buf.pAudioData = pSnd->pBuffer;
     buf.AudioBytes = pSnd->bufferSize;
     buf.Flags = XAUDIO2_END_OF_STREAM;
+
+    pSourceVoice->SubmitSourceBuffer(&buf);
+    pSourceVoice->Start();
+}
+
+IXAudio2SourceVoice* wSoundManager::PlayBGM(SoundKey key)
+{
+    IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚Æ~‚ß‚ç‚ê‚é
+    SoundData* pSnd = &sndMap[key];
+
+    xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
+
+    XAUDIO2_BUFFER buf{};
+
+    buf.pAudioData = pSnd->pBuffer;
+    buf.AudioBytes = pSnd->bufferSize;
+    buf.Flags = XAUDIO2_END_OF_STREAM;
+    buf.LoopCount = XAUDIO2_LOOP_INFINITE;
 
     pSourceVoice->SubmitSourceBuffer(&buf);
     pSourceVoice->Start();
