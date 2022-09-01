@@ -241,6 +241,12 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	return strdata;
 }
 
+void FontManager::InitData()
+{
+	GetInstance()->fontMap.clear();
+	GetInstance()->fontNameMap.clear();
+}
+
 FontManager* FontManager::GetInstance()
 {
 	static FontManager obj;

@@ -27,10 +27,10 @@ void SceneManager::Update()
 	{
 		Transition<GameScene>();
 	}
-	else if (Input::Key::Triggered(DIK_T))
-	{
-		Transition<TestScene>();
-	}
+	//else if (Input::Key::Triggered(DIK_T))
+	//{
+	//	Transition<TestScene>();
+	//}
 
 	if (currentScene->sceneId == "Title")
 	{

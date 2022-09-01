@@ -7,6 +7,7 @@ void ResultScene::Init()
 {
 	wTextureManager::Init();
 	wSoundManager::Init();
+	FontManager::InitData();
 	wTextureManager::LoadTexture("Resources/back.png", "back");
 	back1 = Sprite("back");
 	back2 = Sprite("back");

@@ -93,6 +93,8 @@ public:
 	///<returns>読み込んだフォントを使用するための名前</returns>
 	static string LoadFontFromFile(string path);
 
+	static void InitData();
+
 	static FontManager* GetInstance();
 
 private:

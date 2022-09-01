@@ -8,6 +8,7 @@ void GameScene::Init()
 {
 	wTextureManager::Init();
 	wSoundManager::Init();
+	FontManager::InitData();
 
 	wSoundManager::LoadWave("Resources/Sounds/gameBGM.wav", "gameBGM");
 	bgm = wSoundManager::PlayBGM("gameBGM");
