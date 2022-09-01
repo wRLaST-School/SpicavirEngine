@@ -1,7 +1,20 @@
 #include "Camera.h"
+#include "Util.h"
 
 Camera::Camera()
 {
+}
+
+void Camera::UpdateShake()
+{
+	if (shakeTimer > 0){ 
+		this->position = {actualPosition.x + Util::RNG(-shakeTimer, shakeTimer), actualPosition.y + Util::RNG(-shakeTimer, shakeTimer), actualPosition.z };
+		shakeTimer--;
+	}
+	else
+	{
+
+	}
 }
 
 void Camera::SetRenderSize(UINT w, UINT h)
@@ -44,4 +57,11 @@ void Camera::Set(Camera& camera)
 	camera.cameraViewProjMatrixCB.contents->cameraPos = camera.position;
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, camera.cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
+}
+
+void Camera::Shake()
+{
+	actualPosition = this->position;
+
+	shakeTimer = 20;
 }

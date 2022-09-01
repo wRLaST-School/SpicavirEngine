@@ -99,6 +99,11 @@ bool Input::Pad::Triggered(Button button)
 	return !(GetInstance()->lastPadState.Gamepad.wButtons & (UINT)button) && GetInstance()->padState.Gamepad.wButtons & (UINT)button;
 }
 
+bool Input::Pad::DownAny()
+{
+	return GetInstance()->padState.Gamepad.wButtons;
+}
+
 bool Input::Pad::Down(Trigger side)
 {
 	return GetInstance()->triggerState[(int)side];

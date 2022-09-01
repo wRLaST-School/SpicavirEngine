@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include "PlayerBullet.h"
 #include "Sprite.h"
+#include "Camera.h"
 class Player :
     public Object3D
 {
@@ -29,6 +30,7 @@ public:
 
     float r = 8;
 
+    Camera* pCamera;
 private:
 
     Sprite healthSpr[3];
@@ -58,6 +60,11 @@ private:
     long long dodgeTimer = 24;
     const int dodgeImmuneTime = 24;
     bool countered = false;
+
+    int warnTimer = 0;
+    const int warnTime = 5;
+
+    Sprite warnSprite;
 
     Vec3 moveVec;
 private:

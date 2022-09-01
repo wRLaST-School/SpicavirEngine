@@ -2,9 +2,12 @@
 #include "Input.h"
 #include "wSoundManager.h"
 #include "Util.h"
+#include "Camera.h"
 
 void Player::Update()
 {
+	warnTimer--;
+	warnTimer = max(warnTimer, 0);
 	if(this->health < 3)this->health += 0.075 / 60;
 
 	if (immuneTime > 0) immuneTime--;
@@ -13,7 +16,7 @@ void Player::Update()
 	{
 		if(dodgeCD > 0)dodgeCD--;
 
-		if (Input::Key::Down(DIK_X))
+		if (Input::Key::Down(DIK_X) || Input::Pad::Down(Button::R))
 		{
 			state = State::Slow;
 		}
@@ -22,8 +25,9 @@ void Player::Update()
 			state = State::Normal;
 		}
 
-		if (Input::Key::Down(DIK_LCONTROL) && dodgeCD <= 0)
+		if ((Input::Key::Triggered(DIK_LCONTROL) || Input::Pad::Triggered(Button::L)) && dodgeCD <= 0)
 		{
+			wSoundManager::Play("dodge");
 			state = State::Dodge;
 			countered = false;
 		}
@@ -52,7 +56,7 @@ void Player::Draw()
 		{
 			int a = 19037;
 		}
-		bullet.Draw("notexture");
+		bullet.Draw("white");
 	}
 }
 
@@ -87,6 +91,9 @@ void Player::Damage()
 		return;
 
 	this->health -= 1;
+	wSoundManager::Play("damage");
+	pCamera->Shake();
+	warnTimer = warnTime;
 	immuneTime = immuneTimeDef;
 }
 
@@ -95,15 +102,15 @@ void Player::HealthSprInit()
 	for (int i = 0; i < 3; i++)
 	{
 		healthSpr[i] = Sprite("health");
-
 	}
 
 	healthBackSpr = Sprite("healthBack");
+
+	warnSprite = Sprite("warn");
 }
 
 void Player::DrawHP()
 {
-
 	int fullhealth = floorf(health);
 	for (int i = 0; i < 3; i++)
 	{
@@ -136,6 +143,14 @@ void Player::DrawHP()
 	{
 		healths.Draw();
 	}
+
+	if (warnTimer > 0)
+	{
+		warnSprite.position = { 640, 360, 0 };
+		warnSprite.UpdateMatrix();
+
+		warnSprite.Draw();
+	}
 }
 
 void Player::NormalUpdate()
@@ -148,11 +163,11 @@ void Player::NormalMove()
 {
 	moveVec =
 	{
-		/*Input::Pad::GetLStick().x,*/
-		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
+		Input::Pad::GetLStick().x + 
+			(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
 
-		/*Input::Pad::GetLStick().y,*/
-		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S),
+		Input::Pad::GetLStick().y + 
+			(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S),
 		0
 	};
 
@@ -184,27 +199,28 @@ void Player::SlowUpdate()
 
 void Player::SlowMove()
 {
-	moveVec =
-	{
-		/*Input::Pad::GetLStick().x,*/
-		(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
+	//moveVec =
+	//{
+	//	/*Input::Pad::GetLStick().x,*/
+	//	(float)Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A),
 
-		/*Input::Pad::GetLStick().y,*/
-		(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S),
-		0
-	};
+	//	/*Input::Pad::GetLStick().y,*/
+	//	(float)Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S),
+	//	0
+	//};
 
-	if (moveVec.GetSquaredLength() != 0)
-		moveVec.SetLength(slowspeed);
+	//if (moveVec.GetSquaredLength() != 0)
+	//	moveVec.SetLength(slowspeed);
 
-	if (moveVec.y)
-	{
-		this->rotation.x = PI / 8;
-	}
-	else
-	{
-		this->rotation.x = 0;
-	}
+	//if (moveVec.y)
+	//{
+	//	this->rotation.x = PI / 8;
+	//}
+	//else
+	//{
+	//	this->rotation.x = 0;
+	//}
+	moveVec = Vec3(0, 0, 0);
 
 	position += moveVec;
 
@@ -293,6 +309,7 @@ void Player::DodgeUpdate()
 
 void Player::CounterAttack()
 {
+	wSoundManager::Play("csuccess");
 	countered = true;
 
 	int counterBulletCounts = 16;

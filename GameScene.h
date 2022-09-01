@@ -45,6 +45,10 @@ private:
     Sprite back1;
     Sprite back2;
 
+    Sprite ope;
+
+    IXAudio2SourceVoice* bgm;
+
     int backPos = 0;
 
     Score score;

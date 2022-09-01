@@ -4,10 +4,11 @@
 #include "Input.h"
 #include "MonkeyScene.h"
 #include "ResultScene.h"
+#include "TitleScene.h"
 
 void SceneManager::Init()
 {
-	Transition<GameScene>();
+	Transition<TitleScene>();
 	framestart = std::chrono::system_clock::now();
 }
 
@@ -31,15 +32,35 @@ void SceneManager::Update()
 		Transition<TestScene>();
 	}
 
+	if (currentScene->sceneId == "Title")
+	{
+		if (currentScene->endScene)
+		{
+			Transition<GameScene>();
+		}
+	}
+
+	if (currentScene->sceneId == "Result")
+	{
+		if (currentScene->endScene)
+		{
+			Transition<TitleScene>();
+		}
+	}
+
 	if (currentScene->sceneId == "Game")
 	{
 		if (currentScene->endScene)
 		{
 			GameScene& scene = dynamic_cast<GameScene&>(*currentScene);
-			GameSceneOutputs gso = scene.GetTransitionData();
-			Transition<ResultScene>();
+			GameSceneOutputs gso = scene.GetTransitionData(); 
+			delete currentScene.release();
+			Light::Init();
+			currentScene = unique_ptr<ResultScene>(new ResultScene());
 			ResultScene& scene2 = dynamic_cast<ResultScene&>(*currentScene);
 			scene2.GiveTransitionData(gso);
+			currentScene->Init();
+			srand(time(NULL));
 		}
 	}
 }

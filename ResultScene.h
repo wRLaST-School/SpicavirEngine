@@ -2,6 +2,8 @@
 #include "IScene.h"
 #include "SceneManager.h"
 #include "Score.h"
+#include "Timer.h"
+#include "wSoundManager.h"
 class ResultScene :
     public IScene
 {
@@ -18,5 +20,20 @@ public:
 
 private:
     Score score;
+    Timer timer;
+
+    Sprite back1;
+    Sprite back2;
+
+    int backPos = 0;
+
+    Sprite resultSpr;
+    Sprite rankSpr;
+
+    IXAudio2SourceVoice* bgm;
+
+    StringOptions sop;
+
+    long long timerrr = 0;
 };
 

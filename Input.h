@@ -72,6 +72,8 @@ namespace Input {
 		//ボタンが押された瞬間か
 		static bool Triggered(Button button);
 
+		static bool DownAny();
+
 		//ボタンが押されているか
 		static bool Down(Trigger side);
 		//ボタンが離された瞬間か

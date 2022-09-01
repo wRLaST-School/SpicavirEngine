@@ -4,6 +4,19 @@
 PlayerBullet::PlayerBullet(Float3 position, Vec3 velocity, bool isHoming, bool counter) :velocity(velocity), isHoming(isHoming), counter(counter) {
 	this->scale = { r, r, r };
 	this->position = position;
+
+	Float4 color;
+
+	if (counter)
+	{
+		color = {1.0f, 1.0f, 0.3f, 1.0f};
+	}
+	else
+	{
+		color = {0.5, 0.5, 1.0, 1.0f};
+	}
+
+	*this->brightnessCB.contents = color;
 };
 
 void PlayerBullet::Update()

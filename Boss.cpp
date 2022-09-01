@@ -1,6 +1,7 @@
 #include "Boss.h"
 #include "Util.h"
 #include "Player.h"
+#include "wSoundManager.h"
 
 Boss::Boss(Score* score)
 {
@@ -85,7 +86,8 @@ void Boss::Draw()
 	this->Object3D::Draw("white");
 	for (auto& bullet : bullets)
 	{
-		bullet.Draw();
+		*bullet.brightnessCB.contents = Float4{1.0f, 0.1f, 0.1f, 1.0f};
+		bullet.Draw("white");
 	}
 }
 
@@ -141,6 +143,7 @@ void Boss::SpreadUpdate()
 
 	if (!(attackingTimer % 6))
 	{
+		wSoundManager::Play("eshot");
 		NWay(this->position, 24, 8.0f, spreadShotCenter, 15 * PI / 180);
 	}
 }
@@ -151,6 +154,7 @@ void Boss::AimUpdate()
 	UpdateMatrix();
 	if (!(attackingTimer % 12))
 	{
+		wSoundManager::Play("eshot");
 		Vec3 cvel = (Vec3)Player::GetCurrentPlayerPtr()->position - this->position;
 
 		NWay(this->position, pScore->totDamage > pScore->gradeA ? 5 : 3, 6.0f, atan2(cvel.y, cvel.x), PI / 8);
@@ -165,6 +169,8 @@ void Boss::CircleUpdate()
 	{
 		circleShotCenter = (Util::RNG(0, 359) * PI / 180);
 	}
+	if(attackingTimer %3 == 0 )
+		wSoundManager::Play("eshot");
 	NWay(this->position, pScore->totDamage > pScore->gradeB ? 2 : 1, 6.0f, circleShotCenter + attackingTimer * 14 * PI / 180, PI);
 }
 
@@ -173,6 +179,7 @@ void Boss::MarkerUpdate()
 	UpdateMatrix();
 	if (attackingTimer == 1 || attackingTimer == 121)
 	{
+		wSoundManager::Play("marker");
 		int pattern = Util::RNG(0, 3, true);
 		switch (pattern)
 		{

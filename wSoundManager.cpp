@@ -109,6 +109,8 @@ IXAudio2SourceVoice* wSoundManager::PlayBGM(SoundKey key)
     pSourceVoice->SubmitSourceBuffer(&buf);
     pSourceVoice->Start();
 
+    pSourceVoice->SetVolume(1.25f / 4);
+
     return pSourceVoice;
 }
 

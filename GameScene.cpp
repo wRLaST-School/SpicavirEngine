@@ -2,11 +2,15 @@
 #include "Input.h"
 #include "RTVManager.h"
 #include "wSwapChainManager.h"
+#include "wSoundManager.h"
 
 void GameScene::Init()
 {
 	wTextureManager::Init();
 	wSoundManager::Init();
+
+	wSoundManager::LoadWave("Resources/Sounds/gameBGM.wav", "gameBGM");
+	bgm = wSoundManager::PlayBGM("gameBGM");
 
 	wTextureManager::LoadTexture("Resources/white.png", "white");
 	score.Init();
@@ -52,6 +56,11 @@ void GameScene::Init()
 	stropt.fontOptions.resolution = 192;
 
 	wSoundManager::LoadWave("Resources/Sounds/shot.wav", "shot");
+	wSoundManager::LoadWave("Resources/Sounds/marker.wav", "marker");
+	wSoundManager::LoadWave("Resources/Sounds/counterSuccess.wav", "csuccess");
+	wSoundManager::LoadWave("Resources/Sounds/enShot.wav", "eshot");
+	wSoundManager::LoadWave("Resources/Sounds/dodge.wav", "dodge");
+	wSoundManager::LoadWave("Resources/Sounds/takeDamage.wav", "damage");
 
 	wTextureManager::LoadTexture("Resources/back.png", "back");
 
@@ -63,8 +72,13 @@ void GameScene::Init()
 
 	wTextureManager::LoadTexture("Resources/health.png", "health");
 	wTextureManager::LoadTexture("Resources/healthBack.png", "healthBack");
+	wTextureManager::LoadTexture("Resources/warn.png", "warn");
 
 	player.HealthSprInit();
+
+	player.pCamera = &camera;
+
+	ope = Sprite("Resources/operation.png", "operation");
 }
 
 void GameScene::Update()
@@ -80,6 +94,7 @@ void GameScene::Update()
 	back1.UpdateMatrix();
 	back2.UpdateMatrix();
 
+	camera.UpdateShake();
 	camera.UpdateMatrix();
 	player.Update();
 	boss.Update();
@@ -100,6 +115,9 @@ void GameScene::Update()
 	{
 		endScene = true;
 	}
+
+	ope.position = {640, 360, 0};
+	ope.UpdateMatrix();
 }
 
 void GameScene::DrawBack()
@@ -118,6 +136,7 @@ void GameScene::Draw3D()
 void GameScene::DrawSprite()
 {
 	boss.DrawMarkers();
+	ope.Draw();
 	score.Draw();
 	//TextDrawer::DrawString((string)"x = " + to_string(player.position.x) + ", y = " + to_string(player.position.y), 100, 100, Align::TopLeft, stropt);
 	timer.Draw();
@@ -128,5 +147,5 @@ void GameScene::DrawSprite()
 
 GameSceneOutputs GameScene::GetTransitionData()
 {
-	return GameSceneOutputs{this->score};
+	return GameSceneOutputs{this->score, this->timer};
 }

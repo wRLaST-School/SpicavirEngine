@@ -3,6 +3,7 @@
 #include "Essentials.h"
 #include <chrono>
 #include "Score.h"
+#include "Timer.h"
 class SceneManager
 {
 public:
@@ -23,4 +24,5 @@ private:
 struct GameSceneOutputs
 {
 	Score finalScore;
+	Timer timer;
 };
