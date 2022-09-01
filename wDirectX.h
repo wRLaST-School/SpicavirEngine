@@ -11,6 +11,8 @@ public:
 
 	void PreDrawCommands();
 
+	void PreDraw3D();
+
 	void PostDrawCommands();
 
 	void EndFrame();

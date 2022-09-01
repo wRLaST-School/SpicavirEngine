@@ -148,6 +148,37 @@ void wDirectX::PreDrawCommands()
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 }
 
+void wDirectX::PreDraw3D()
+{
+	/*描画処理*/
+	GetWDX()->cmdList->SetPipelineState(GetPSO("def"));
+	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
+
+	D3D12_VIEWPORT viewport{};
+
+	viewport.Width = GetwWindow()->width;
+	viewport.Height = GetwWindow()->height;
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+
+	D3D12_RECT scissorrect{};
+
+	scissorrect.left = 0;                                       // 切り抜き座標左
+	scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+	scissorrect.top = 0;                                        // 切り抜き座標上
+	scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+
+	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+
+	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+}
+
 void wDirectX::PostDrawCommands()
 {
 	//リソースバリアーを戻す

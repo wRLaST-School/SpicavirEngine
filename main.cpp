@@ -117,6 +117,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		Sprite::PostSpriteDraw();
 
+		GetWDX()->PreDraw3D();
+
 		sceneManager.Draw3D();
 
 		Sprite::PreSpriteDraw();
