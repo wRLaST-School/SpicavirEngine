@@ -31,7 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウを生成
 	{
 		wWindow wwnd;
-		wwnd.Create(L"DirectX", 1280, 720);
+		wwnd.Create(L"Exec. CounterShot", 1280, 720);
 		RegisterwWindow(wwnd, "Default");
 	}
 

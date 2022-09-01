@@ -88,7 +88,7 @@ void ResultScene::Update()
 	back1.position.x = backPos;
 	back2.position.x = backPos + 1280;
 
-	if (timerrr > 120 && Input::Pad::DownAny())
+	if (timerrr > 120 && (Input::Pad::DownAny() || Input::Key::Triggered(DIK_SPACE)))
 	{
 		outTran = true;
 	}

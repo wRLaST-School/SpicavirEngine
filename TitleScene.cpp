@@ -55,7 +55,7 @@ void TitleScene::Update()
 
 	timer++;
 
-	titleSpr.position = Float3{ 640.0f + xPos, 335.0f + sinf(timer * PI / 120)*25 ,0 };
+	titleSpr.position = Float3{ 640.0f + xPos, 335.0f + sinf(timer * PI / 120) * 25 ,0 };
 	tut1.position = Float3{ 1280.0f + 640 + xPos, 360, 0 };
 
 	tut2.position = Float3{ 2560.0f + 640 + xPos, 360, 0 };
@@ -88,7 +88,7 @@ void TitleScene::Update()
 		this->outTran = true;
 	}
 
-	if (Input::Pad::DownAny() && !tutorialMoving)
+	if ((Input::Pad::DownAny()||Input::Key::Triggered(DIK_SPACE)) && !tutorialMoving)
 	{
 		tutorialTimer++;
 		tutorialMoving = true;
