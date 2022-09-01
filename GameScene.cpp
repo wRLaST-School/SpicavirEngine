@@ -61,6 +61,9 @@ void GameScene::Init()
 	back1.position = { 0, 360, 0 };
 	back2.position = { 1280, 360, 0};
 
+	wTextureManager::LoadTexture("Resources/health.png", "health");
+	wTextureManager::LoadTexture("Resources/healthBack.png", "healthBack");
+
 	player.HealthSprInit();
 }
 
@@ -120,7 +123,7 @@ void GameScene::DrawSprite()
 	timer.Draw();
 	player.DrawHP();
 
-	TextDrawer::DrawString(to_string(player.health), 100, 100, Align::TopLeft);
+	//TextDrawer::DrawString(to_string(player.health), 100, 100, Align::TopLeft);
 }
 
 GameSceneOutputs GameScene::GetTransitionData()

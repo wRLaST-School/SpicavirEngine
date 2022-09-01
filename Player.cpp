@@ -71,9 +71,9 @@ void Player::Damage()
 	if (state == State::Dodge && !countered)
 	{
 		CounterAttack();
-		if (this->health < 2.25)
+		if (this->health < 2.50)
 		{
-			this->health += 0.75;
+			this->health += 0.50;
 		}
 		else
 		{
@@ -103,18 +103,38 @@ void Player::HealthSprInit()
 
 void Player::DrawHP()
 {
-	for (int i = 1; i <= health; i++)
-	{
-		healthSpr[i].position = Float3{ 100.0f + 150 * i, 620.0f, 0.0f};
-	}
 
 	int fullhealth = floorf(health);
+	for (int i = 0; i < 3; i++)
+	{
+		healthSpr[i].position = Float3{ 100.0f + 150 * i, 620.0f, 0.0f};
+		healthSpr[i].scale = Float3{ 1,1,1 };
+	}
+
 	float subhealth = health - fullhealth;
 
 	if (fullhealth < 3)
 	{
-		healthSpr[fullhealth].position = Float3{ 100.0f + 150 * (fullhealth - 1), 620.0f, 0.0f};
-		healthSpr->scale = Float3{ subhealth, subhealth, 1 };
+		healthSpr[fullhealth].scale = Float3{ subhealth, subhealth, 1 };
+
+		for (int i = fullhealth + 1; i < 3; i++)
+		{
+			healthSpr[i].scale = { 0.0f, 0.0f, 0.0f };
+		}
+	}
+
+	healthBackSpr.position = Float3{ 250.0f, 620.0f, 0.0f };
+
+	healthSpr[0].UpdateMatrix();
+	healthSpr[1].UpdateMatrix();
+	healthSpr[2].UpdateMatrix();
+	healthBackSpr.UpdateMatrix();
+
+	healthBackSpr.Draw();
+
+	for (auto& healths : healthSpr)
+	{
+		healths.Draw();
 	}
 }
 
@@ -282,7 +302,7 @@ void Player::CounterAttack()
 		Vec3 velo = Vec2::RotToVec(deg * PI / 180);
 		bullets.emplace_back((Vec3)this->position, velo, false, true);
 		bullets.back().model = bulletModel;
-		bullets.back().damage = 175;
+		bullets.back().damage = 250;
 	}
 }
 
