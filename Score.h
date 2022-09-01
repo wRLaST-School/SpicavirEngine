@@ -9,7 +9,7 @@ public:
 	void Update();
 	void Draw();
 
-	const float gradeMax = 100000.0f;
+	const float gradeMax = 200000.0f;
 	const float gradeS = gradeMax * 13 / 16;
 	const float gradeA = gradeMax * 10 / 16;
 	const float gradeB = gradeMax * 7 / 16;

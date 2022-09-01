@@ -81,7 +81,8 @@ void Boss::Update()
 
 void Boss::Draw()
 {
-	this->Object3D::Draw();
+	*this->brightnessCB.contents = Float4{ 1.0f, 0.25f, 0.25f, 1.0f};
+	this->Object3D::Draw("white");
 	for (auto& bullet : bullets)
 	{
 		bullet.Draw();

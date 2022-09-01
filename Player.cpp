@@ -5,7 +5,7 @@
 
 void Player::Update()
 {
-	/*if(this->health < 3)*/this->health += 0.075 / 60;
+	if(this->health < 3)this->health += 0.075 / 60;
 
 	if (immuneTime > 0) immuneTime--;
 
@@ -44,7 +44,7 @@ void Player::Update()
 void Player::Draw()
 {
 	if(immuneTime <= 0 || immuneTime % 15 <= 7)
-		this->Object3D::Draw("notexture");
+		this->Object3D::Draw();
 
 	for (PlayerBullet& bullet : bullets)
 	{
@@ -79,6 +79,7 @@ void Player::Damage()
 		{
 			this->health = 3.0f;
 		}
+		immuneTime = immuneTimeDef;
 		return;
 	}
 
@@ -281,7 +282,7 @@ void Player::CounterAttack()
 		Vec3 velo = Vec2::RotToVec(deg * PI / 180);
 		bullets.emplace_back((Vec3)this->position, velo, false, true);
 		bullets.back().model = bulletModel;
-		bullets.back().damage = 125;
+		bullets.back().damage = 175;
 	}
 }
 

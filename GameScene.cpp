@@ -52,11 +52,31 @@ void GameScene::Init()
 	stropt.fontOptions.resolution = 192;
 
 	wSoundManager::LoadWave("Resources/Sounds/shot.wav", "shot");
+
+	wTextureManager::LoadTexture("Resources/back.png", "back");
+
+	back1 = Sprite("back");
+	back2 = Sprite("back");
+
+	back1.position = { 0, 360, 0 };
+	back2.position = { 1280, 360, 0};
+
 	player.HealthSprInit();
 }
 
 void GameScene::Update()
 {
+	backPos-= 1;
+	if (backPos <= -640) {
+		backPos = 640;
+	}
+
+	back1.position.x = backPos;
+	back2.position.x = backPos + 1280;
+
+	back1.UpdateMatrix();
+	back2.UpdateMatrix();
+
 	camera.UpdateMatrix();
 	player.Update();
 	boss.Update();
@@ -81,7 +101,8 @@ void GameScene::Update()
 
 void GameScene::DrawBack()
 {
-
+	back1.Draw();
+	back2.Draw();
 }
 
 void GameScene::Draw3D()

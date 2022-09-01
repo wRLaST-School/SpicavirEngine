@@ -38,11 +38,14 @@ private:
     Model mPlayerBullet;
     Model mBossBit;
 
-    Sprite background;
-
     StringOptions stropt;
 
     Timer timer;
+
+    Sprite back1;
+    Sprite back2;
+
+    int backPos = 0;
 
     Score score;
     Boss boss = Boss(&score);

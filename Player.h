@@ -55,7 +55,7 @@ private:
     int immuneTime = 0;
     const int immuneTimeDef = 60;
 
-    long long dodgeTimer = 0;
+    long long dodgeTimer = 24;
     const int dodgeImmuneTime = 24;
     bool countered = false;
 
