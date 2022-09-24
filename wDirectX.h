@@ -7,7 +7,9 @@ class wDirectX
 public:
 	void Init();
 
-	bool StartFrame();
+	bool StartFrame(); 
+	
+	void PreDraw3D();
 
 	void PreDrawCommands();
 

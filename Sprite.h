@@ -12,7 +12,7 @@ public:
 	};
 
 	struct SpriteCBuffData {
-		Float4 color;
+		Float4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
 		Matrix mat;
 	};
 
@@ -37,6 +37,8 @@ public:
 	wConstBuffer<SpriteCBuffData> constBuff;
 
 	TextureKey tex;
+
+	Float4 brightness = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	float width;
 	float height;

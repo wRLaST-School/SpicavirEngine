@@ -111,6 +111,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		Light::Use();
 
+		Sprite::PreSpriteDraw();
+		sceneManager.DrawBack();
+
+		Sprite::PostSpriteDraw();
+
+		GetWDX()->PreDraw3D();
+
 		sceneManager.Draw3D();
 
 		Sprite::PreSpriteDraw();
