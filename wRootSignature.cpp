@@ -1,6 +1,6 @@
 #include "wRootSignature.h"
 #include "wDirectX.h"
-#include "wPSO.h"
+#include "GPipeline.h"
 #include "wConstBuffer.h"
 
 wRootSignature defRootSig;

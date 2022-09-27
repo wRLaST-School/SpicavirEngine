@@ -1,7 +1,7 @@
 #include "wDirectX.h"
 #include "wSwapChainManager.h"
 #include "wDepth.h"
-#include "wPSO.h"
+#include "GPipeline.h"
 #include "wRootSignature.h"
 #include "wConstBuffer.h"
 #include "wTextureManager.h"
@@ -113,7 +113,7 @@ void wDirectX::PreDrawCommands()
 
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
 	/*•`‰æˆ—*/
-	GetWDX()->cmdList->SetPipelineState(GetPSO("def"));
+	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
 
 	//ID3D12DescriptorHeap* ppHeaps[] = { basicDescHeap.Get()};
@@ -151,7 +151,7 @@ void wDirectX::PreDrawCommands()
 void wDirectX::PreDraw3D()
 {
 	/*•`‰æˆ—*/
-	GetWDX()->cmdList->SetPipelineState(GetPSO("def"));
+	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
 
 	D3D12_VIEWPORT viewport{};

@@ -147,6 +147,7 @@
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Essentials.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GPipelineManager.cpp" />
     <ClCompile Include="ICollider.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="IScene.cpp" />
@@ -175,7 +176,7 @@
     <ClCompile Include="wDepth.cpp" />
     <ClCompile Include="wDirectX.cpp" />
     <ClCompile Include="wMath.cpp" />
-    <ClCompile Include="wPSO.cpp" />
+    <ClCompile Include="GPipeline.cpp" />
     <ClCompile Include="wRootSignature.cpp" />
     <ClCompile Include="wShader.cpp" />
     <ClCompile Include="wSwapChainManager.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Float3.h" />
     <ClInclude Include="Float4.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GPipelineManager.h" />
     <ClInclude Include="ICollider.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="IScene.h" />
@@ -216,7 +218,7 @@
     <ClInclude Include="wDepth.h" />
     <ClInclude Include="wDirectX.h" />
     <ClInclude Include="wMath.h" />
-    <ClInclude Include="wPSO.h" />
+    <ClInclude Include="GPipeline.h" />
     <ClInclude Include="wRootSignature.h" />
     <ClInclude Include="wShader.h" />
     <ClInclude Include="wSwapChainManager.h" />

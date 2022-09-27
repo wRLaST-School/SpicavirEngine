@@ -132,7 +132,7 @@
     <ClCompile Include="wDepth.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="wPSO.cpp">
+    <ClCompile Include="GPipeline.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="wShader.cpp">
@@ -228,6 +228,9 @@
     <ClCompile Include="wTextureManager.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
+    <ClCompile Include="GPipelineManager.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -245,7 +248,7 @@
     <ClInclude Include="wDepth.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="wPSO.h">
+    <ClInclude Include="GPipeline.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="wShader.h">
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="wTextureManager.h">
       <Filter>Engine\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GPipelineManager.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

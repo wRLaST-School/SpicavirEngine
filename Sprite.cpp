@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include "wDirectX.h"
-#include "wPSO.h"
+#include "GPipeline.h"
 #include "wRootSignature.h"
 
 Sprite::Sprite(TextureKey key)
@@ -130,9 +130,8 @@ Sprite::Sprite(string path, TextureKey newKey)
 void Sprite::PreSpriteDraw()
 {
 	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
-	void* a = GetPSO("2d");
 	cl->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
-	cl->SetPipelineState(GetPSO("2d"));
+	cl->SetPipelineState(GPipeline::GetState("2d"));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
 	ID3D12DescriptorHeap* ppHeaps[] = { wTextureManager::GetInstance().srvHeap.Get() };

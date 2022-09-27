@@ -1,6 +1,6 @@
 #include "wShader.h"
 #include "wTexture.h"
-#include "wPSO.h"
+#include "GPipeline.h"
 
 map<string, wShader> shaderMap;
 

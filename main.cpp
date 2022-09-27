@@ -5,7 +5,7 @@
 #include "wSwapChainManager.h"
 #include "wDepth.h"
 #include "wShader.h"
-#include "wPSO.h"
+#include "GPipeline.h"
 #include "wTexture.h"
 #include "Vec3.h"
 #include "wConstBuffer.h"
@@ -15,6 +15,7 @@
 #include "SceneManager.h"
 #include "Sprite.h"
 #include "TextDrawer.h"
+#include "GPipelineManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -50,27 +51,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	wTextureManager::Create();
 
-	//PSO
-	RegisterAndInitShader("def", "BasicVS.hlsl", "BasicPS.hlsl");
-	RegisterAndInitPSO("def", GetShader("def"));
-
-	//2DPSO
-	RegisterAndInitShader("2d", "SpriteVS.hlsl", "SpritePS.hlsl");
-	RegisterAndInitPSOfor2D("2d", GetShader("2d"));
-
-	GetPSODesc("def")->InputLayout.pInputElementDescs = inputLayout;
-	GetPSODesc("def")->InputLayout.NumElements = _countof(inputLayout);
-
-	GetPSODesc("2d")->InputLayout.pInputElementDescs = inputLayout2D;
-	GetPSODesc("2d")->InputLayout.NumElements = _countof(inputLayout2D);
-
 	CreateAndInitRootSignature();
 
-	// パイプラインにルートシグネチャをセット
-	GetPSODesc("def")->pRootSignature = GetRootSignature()->rootsignature.Get();
-	GetPSODesc("2d")->pRootSignature = GetRootSignature()->rootsignature.Get();
-	GetWPSO("def")->Create();
-	GetWPSO("2d")->Create();
+	GPipelineManager::CreateAll();
+
 	/*Init Draw End*/
 	Sprite::InitCommon();
 
