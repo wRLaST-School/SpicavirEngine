@@ -3,6 +3,7 @@
 #include "wMath.h"
 #include "Camera.h"
 #include "Sprite.h"
+#include "Billboard.h"
 class TestScene :
     public IScene
 {
@@ -27,10 +28,11 @@ private:
     Camera finalScene;
 
     Object3D ray;
-    Object3D sphere;
+    Billboard pane;
 
     Model mSphere;
     Model mCube;
+    Model mPane;
 
     TextureKey whiteTex;
 

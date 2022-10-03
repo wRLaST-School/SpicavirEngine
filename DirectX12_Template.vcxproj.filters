@@ -26,18 +26,6 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{c02ae0a0-8820-45f9-ae1b-f07b6c7d505f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\ソースファイル\Boss">
-      <UniqueIdentifier>{ed8ba9b4-529b-4aab-b65d-f27117fc407b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\ソースファイル\Player">
-      <UniqueIdentifier>{dedfd45c-f488-4fef-93fc-b599dac15ff9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\ヘッダーファイル\Boss">
-      <UniqueIdentifier>{e4360c93-8314-480c-b981-deb239c49a92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Application\ヘッダーファイル\Player">
-      <UniqueIdentifier>{9fea74ae-106a-45f8-97b2-70419ebb6d16}</UniqueIdentifier>
-    </Filter>
     <Filter Include="未分類">
       <UniqueIdentifier>{b05c4324-06a5-447d-a8d7-e17463da3a59}</UniqueIdentifier>
     </Filter>
@@ -231,6 +219,9 @@
     <ClCompile Include="GPipelineManager.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
+    <ClCompile Include="Billboard.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wDirectX.h">
@@ -352,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="GPipelineManager.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="Billboard.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

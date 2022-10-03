@@ -9,6 +9,7 @@ void TestScene::Init()
 {
 	wTextureManager::Init();
 
+#pragma region élï™äÑâÊñ ópÉJÉÅÉâê›íË
 	camera.SetRenderSize(640, 360);
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
@@ -84,25 +85,23 @@ void TestScene::Init()
 	finalScene.position.z = -10;
 	finalScene.rotation = { 0.0f, 0.0f, 0.0f };
 	finalScene.UpdateMatrix();
+#pragma endregion
 
 	mCube = Model("cube");
-
-	ray.model = &mCube;
-	ray.scale = {0.1, 0.1, 12.5};
-	ray.position = { 0.0, 0.0, 10.0f };
-	ray.UpdateMatrix();
 
 	sky = Model("skydome");
 
 	mSphere = Model("sphere");
 
-	FontData* fd = FontManager::GetGlyphTexture(FontOptions(), L"a");
+	mPane = Model("square");
 
-	sphere.model = &mSphere;
+	pane.model = &mPane;
 
 	skysphere.model = &sky;
 
 	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
+
+	pane.camera = &camera;
 }
 
 void TestScene::Update()
@@ -117,18 +116,32 @@ void TestScene::Update()
 	yCamSpr.scale = { 1.0f, 1.0f };
 	zCamSpr.scale = { 1.0f, 1.0f };
 
-	sphere.position = (Vec3)sphere.position + Vec3(
+	pane.position = (Vec3)pane.position + Vec3(
 		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
 		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
-		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f		
-		);
+		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
+	);
 
-	sphere.position = (Vec3)sphere.position + Vec3(
+	pane.position = (Vec3)pane.position + Vec3(
 		(Input::Pad::GetLStick().x) * 0.0001f,
 		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
 		(Input::Pad::GetLStick().y) * 0.0001f
 	);
 
+	pane.scale = {1.f / 30, 1.f / 30, 1.f / 30};
+	//camera.rotation = (Vec3)camera.rotation + Vec3(0.01, 0, 0);
+
+	camera.position = (Vec3)camera.position + Vec3(
+		(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)) * 0.1f,
+		(Input::Key::Down(DIK_E) - Input::Key::Down(DIK_Q)) * 0.1f,
+		(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)) * 0.1f
+	);
+
+	camera.rotation = (Vec3)camera.rotation + Vec3(
+		(Input::Key::Down(DIK_1) - Input::Key::Down(DIK_2)) * 0.01f,
+		(Input::Key::Down(DIK_3) - Input::Key::Down(DIK_4)) * 0.01f,
+		(Input::Key::Down(DIK_5) - Input::Key::Down(DIK_6)) * 0.01f
+	);
 	camera.UpdateMatrix();
 
 	cameraSpr.UpdateMatrix();
@@ -136,19 +149,7 @@ void TestScene::Update()
 	yCamSpr.UpdateMatrix();
 	zCamSpr.UpdateMatrix();
 	skysphere.UpdateMatrix();
-	sphere.UpdateMatrix();
-
-	RayCollider rayCol = RayCollider(ray.matWorld.ExtractAxisZ(ray.scale.z).SetLength(25), (Vec3)ray.position - Vec3(0,0,12.5));
-	SphereCollider sphereCol = SphereCollider(sphere.position, 1.0f);
-
-	if (rayCol.Collide(sphereCol))
-	{
-		*ray.brightnessCB.contents = Float4{1.0f, 0.0f, 0.0f, 1.0f};
-	}
-	else
-	{
-		*ray.brightnessCB.contents = Float4{ 1.0f, 1.0f, 1.0f, 1.0f };
-	}
+	pane.UpdateMatrix();
 }
 
 void TestScene::DrawBack()
@@ -159,23 +160,23 @@ void TestScene::Draw3D()
 {
 	RTVManager::SetRenderTargetToTexture("camSpr");
 	Camera::Set(camera);
-	ray.Draw(whiteTex); skysphere.Draw();
-	sphere.Draw();
+	skysphere.Draw();
+	pane.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
-	ray.Draw(whiteTex); skysphere.Draw();
-	sphere.Draw();
+	skysphere.Draw();
+	pane.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
-	ray.Draw(whiteTex); skysphere.Draw();
-	sphere.Draw();
+	skysphere.Draw();
+	pane.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
-	ray.Draw(whiteTex); skysphere.Draw();
-	sphere.Draw();
+	skysphere.Draw();
+	pane.Draw();
 
 	Camera::Set(finalScene);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
@@ -193,6 +194,6 @@ void TestScene::DrawSprite()
 	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
 	udevGothicOpt.size = 32;
 
-	TextDrawer::DrawString("0Ç§Ç…Ç·Å`Å`Å`Å`0", 1180, 100, Align::TopRight, udevGothicOpt);
-	TextDrawer::DrawString("àühogeÇ¶ÉI123", 1180, 132, Align::TopRight);
+	//TextDrawer::DrawString("0Ç§Ç…Ç·Å`Å`Å`Å`0", 1180, 100, Align::TopRight, udevGothicOpt);
+	//TextDrawer::DrawString("àühogeÇ¶ÉI123", 1180, 132, Align::TopRight);
 }
