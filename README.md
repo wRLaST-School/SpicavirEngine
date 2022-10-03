@@ -6,7 +6,7 @@
 の形式でタグをつけています。
 
 
-Code > Tags(画像参照)から、
+Code > Tags(画像参照)から評価対象のタグを選択し、
 
 ![image](https://user-images.githubusercontent.com/103230447/193510905-db7a8bff-52b8-469a-b35c-10b7b6ca1d7b.png)
 
