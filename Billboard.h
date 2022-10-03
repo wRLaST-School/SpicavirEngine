@@ -12,6 +12,19 @@ public:
 
     void UpdateMatrix();
 
-    Camera* camera;
+    Camera* camera = nullptr;
 };
 
+class BillboardY :
+    public Billboard
+{
+public:
+    BillboardY()
+    {
+        Billboard::Billboard();
+    }
+
+    void UpdateMatrix();
+
+    Vec3 upVec = { 0.f, 1.f, 0.f };
+};

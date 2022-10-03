@@ -220,7 +220,7 @@
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="Billboard.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+      <Filter>Engine\ソースファイル\3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,7 +345,7 @@
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="Billboard.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+      <Filter>Engine\ヘッダーファイル\3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

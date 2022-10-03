@@ -28,7 +28,7 @@ private:
     Camera finalScene;
 
     Object3D ray;
-    Billboard pane;
+    BillboardY pane;
 
     Model mSphere;
     Model mCube;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Vec3.h"
+#include "Float4.h"
 
 struct Float3
 {
@@ -22,4 +23,10 @@ struct Float3
 	};
 
 	operator Vec3() const { return Vec3(x, y, z); }
+
+
+	operator Float4()
+	{
+		return { x, y, z, 0 };
+	}
 };
