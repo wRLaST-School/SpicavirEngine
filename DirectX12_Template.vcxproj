@@ -78,9 +78,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -143,90 +147,88 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Billboard.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="DirectionalLight.cpp" />
-    <ClCompile Include="Essentials.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="GPipelineManager.cpp" />
-    <ClCompile Include="ICollider.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="IScene.cpp" />
-    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="MonkeyScene.cpp" />
-    <ClCompile Include="Object3D.cpp" />
-    <ClCompile Include="PointLight.cpp" />
-    <ClCompile Include="RayCollider.cpp" />
-    <ClCompile Include="RenderTarget.cpp" />
-    <ClCompile Include="RTVManager.cpp" />
-    <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TestScene.cpp" />
-    <ClCompile Include="TextDrawer.cpp">
-      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</LanguageStandard>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Util.cpp" />
-    <ClCompile Include="Vec2.cpp" />
-    <ClCompile Include="Vec3.cpp" />
-    <ClCompile Include="wConstBuffer.cpp" />
-    <ClCompile Include="wDepth.cpp" />
-    <ClCompile Include="wDirectX.cpp" />
-    <ClCompile Include="wMath.cpp" />
-    <ClCompile Include="GPipeline.cpp" />
-    <ClCompile Include="wRootSignature.cpp" />
-    <ClCompile Include="wShader.cpp" />
-    <ClCompile Include="wSwapChainManager.cpp" />
-    <ClCompile Include="wTexture.cpp" />
-    <ClCompile Include="wTextureManager.cpp" />
-    <ClCompile Include="wWindow.cpp" />
+    <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
+    <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp" />
+    <ClCompile Include="SrcEngine\2D\Sprite.cpp" />
+    <ClCompile Include="SrcEngine\3D\Billboard.cpp" />
+    <ClCompile Include="SrcEngine\3D\Camera.cpp" />
+    <ClCompile Include="SrcEngine\3D\Model.cpp" />
+    <ClCompile Include="SrcEngine\3D\Object3D.cpp" />
+    <ClCompile Include="SrcEngine\Collider\ICollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\RayCollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\SphereCollider.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\GPipelineManager.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wConstBuffer.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wDepth.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wDirectX.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wRootSignature.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wShader.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wSwapChainManager.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\wTexture.cpp" />
+    <ClCompile Include="SrcEngine\Light\DirectionalLight.cpp" />
+    <ClCompile Include="SrcEngine\Light\Light.cpp" />
+    <ClCompile Include="SrcEngine\Light\PointLight.cpp" />
+    <ClCompile Include="SrcEngine\Math\Matrix.cpp" />
+    <ClCompile Include="SrcEngine\Math\Vec2.cpp" />
+    <ClCompile Include="SrcEngine\Math\Vec3.cpp" />
+    <ClCompile Include="SrcEngine\Math\wMath.cpp" />
+    <ClCompile Include="SrcEngine\Others\Essentials.cpp" />
+    <ClCompile Include="SrcEngine\Others\Input.cpp" />
+    <ClCompile Include="SrcEngine\Others\RenderTarget.cpp" />
+    <ClCompile Include="SrcEngine\Others\RTVManager.cpp" />
+    <ClCompile Include="SrcEngine\Others\TextDrawer.cpp" />
+    <ClCompile Include="SrcEngine\Others\Util.cpp" />
+    <ClCompile Include="SrcEngine\Others\wTextureManager.cpp" />
+    <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
+    <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Billboard.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="DirectionalLight.h" />
-    <ClInclude Include="Essentials.h" />
-    <ClInclude Include="Float2.h" />
-    <ClInclude Include="Float3.h" />
-    <ClInclude Include="Float4.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="GPipelineManager.h" />
-    <ClInclude Include="ICollider.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="IScene.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="Matrix.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="MonkeyScene.h" />
-    <ClInclude Include="Object3D.h" />
-    <ClInclude Include="PointLight.h" />
-    <ClInclude Include="RayCollider.h" />
-    <ClInclude Include="RenderTarget.h" />
-    <ClInclude Include="RTVManager.h" />
-    <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="TestScene.h" />
-    <ClInclude Include="TextDrawer.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Util.h" />
-    <ClInclude Include="Vec2.h" />
-    <ClInclude Include="Vec3.h" />
-    <ClInclude Include="wConstBuffer.h" />
-    <ClInclude Include="wDepth.h" />
-    <ClInclude Include="wDirectX.h" />
-    <ClInclude Include="wMath.h" />
-    <ClInclude Include="GPipeline.h" />
-    <ClInclude Include="wRootSignature.h" />
-    <ClInclude Include="wShader.h" />
-    <ClInclude Include="wSwapChainManager.h" />
-    <ClInclude Include="wTexture.h" />
-    <ClInclude Include="wTextureManager.h" />
-    <ClInclude Include="wWindow.h" />
+    <ClInclude Include="SrcApplication\Scene\GameScene.h" />
+    <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
+    <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
+    <ClInclude Include="SrcApplication\Scene\TestScene.h" />
+    <ClInclude Include="SrcApplication\Scene\TitleScene.h" />
+    <ClInclude Include="SrcEngine\2D\Sprite.h" />
+    <ClInclude Include="SrcEngine\3D\Billboard.h" />
+    <ClInclude Include="SrcEngine\3D\Camera.h" />
+    <ClInclude Include="SrcEngine\3D\Model.h" />
+    <ClInclude Include="SrcEngine\3D\Object3D.h" />
+    <ClInclude Include="SrcEngine\Collider\ICollider.h" />
+    <ClInclude Include="SrcEngine\Collider\RayCollider.h" />
+    <ClInclude Include="SrcEngine\Collider\SphereCollider.h" />
+    <ClInclude Include="SrcEngine\DirectX\GPipeline.h" />
+    <ClInclude Include="SrcEngine\DirectX\GPipelineManager.h" />
+    <ClInclude Include="SrcEngine\DirectX\wConstBuffer.h" />
+    <ClInclude Include="SrcEngine\DirectX\wDepth.h" />
+    <ClInclude Include="SrcEngine\DirectX\wDirectX.h" />
+    <ClInclude Include="SrcEngine\DirectX\wRootSignature.h" />
+    <ClInclude Include="SrcEngine\DirectX\wShader.h" />
+    <ClInclude Include="SrcEngine\DirectX\wSwapChainManager.h" />
+    <ClInclude Include="SrcEngine\DirectX\wTexture.h" />
+    <ClInclude Include="SrcEngine\Light\DirectionalLight.h" />
+    <ClInclude Include="SrcEngine\Light\Light.h" />
+    <ClInclude Include="SrcEngine\Light\PointLight.h" />
+    <ClInclude Include="SrcEngine\Math\Float2.h" />
+    <ClInclude Include="SrcEngine\Math\Float3.h" />
+    <ClInclude Include="SrcEngine\Math\Float4.h" />
+    <ClInclude Include="SrcEngine\Math\Matrix.h" />
+    <ClInclude Include="SrcEngine\Math\Vec2.h" />
+    <ClInclude Include="SrcEngine\Math\Vec3.h" />
+    <ClInclude Include="SrcEngine\Math\wMath.h" />
+    <ClInclude Include="SrcEngine\Others\Essentials.h" />
+    <ClInclude Include="SrcEngine\Others\Input.h" />
+    <ClInclude Include="SrcEngine\Others\RenderTarget.h" />
+    <ClInclude Include="SrcEngine\Others\RTVManager.h" />
+    <ClInclude Include="SrcEngine\Others\TextDrawer.h" />
+    <ClInclude Include="SrcEngine\Others\Util.h" />
+    <ClInclude Include="SrcEngine\Others\wTextureManager.h" />
+    <ClInclude Include="SrcEngine\Scene\IScene.h" />
+    <ClInclude Include="SrcEngine\Windows\wWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">

@@ -64,9 +64,6 @@
     <Filter Include="Engine\ソースファイル\Math\Float">
       <UniqueIdentifier>{0587a4ec-b495-483f-a142-7b859d287295}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ソースファイル\Math\Vector">
-      <UniqueIdentifier>{9bc98f0f-6297-451c-a188-ebfc365d911d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ソースファイル\Scene">
       <UniqueIdentifier>{780367ae-f2b8-4dea-bc42-81d806a5e6df}</UniqueIdentifier>
     </Filter>
@@ -103,249 +100,258 @@
     <Filter Include="Engine\ヘッダーファイル\Window">
       <UniqueIdentifier>{5a0d396e-e43e-493c-bf6d-e227653459cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Others">
+      <UniqueIdentifier>{b2ed4006-0dea-4b9a-8ee5-24d8e6553667}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Others">
+      <UniqueIdentifier>{305f3d18-e9aa-4d85-99e5-70fe967c0c55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Math\Vector">
+      <UniqueIdentifier>{5bf791d8-0730-4baa-a8a9-038cb67f5d38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="wDirectX.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="wWindow.cpp">
-      <Filter>Engine\ソースファイル\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="wMath.cpp">
-      <Filter>Engine\ソースファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="wConstBuffer.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="wDepth.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="GPipeline.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="wShader.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="wSwapChainManager.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="wTexture.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="Object3D.cpp">
-      <Filter>Engine\ソースファイル\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>Engine\ソースファイル\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec3.cpp">
-      <Filter>Engine\ソースファイル\Math\Vector</Filter>
-    </ClCompile>
-    <ClCompile Include="Vec2.cpp">
-      <Filter>Engine\ソースファイル\Math\Vector</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Engine\ソースファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="wRootSignature.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="IScene.cpp">
-      <Filter>Engine\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="ICollider.cpp">
-      <Filter>Engine\ソースファイル\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="RayCollider.cpp">
-      <Filter>Engine\ソースファイル\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>Engine\ソースファイル\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Engine\ソースファイル\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
-      <Filter>Engine\ソースファイル\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLight.cpp">
-      <Filter>Engine\ソースファイル\Light</Filter>
-    </ClCompile>
-    <ClCompile Include="MonkeyScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Essentials.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Engine\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="RenderTarget.cpp">
-      <Filter>Engine\ソースファイル</Filter>
+    <ClCompile Include="SrcEngine\Others\Input.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="RTVManager.cpp">
-      <Filter>Engine\ソースファイル</Filter>
+    <ClCompile Include="SrcEngine\Others\RenderTarget.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="TextDrawer.cpp">
-      <Filter>Engine\ソースファイル</Filter>
+    <ClCompile Include="SrcEngine\Others\RTVManager.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Engine\ソースファイル</Filter>
+    <ClCompile Include="SrcEngine\Others\TextDrawer.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="wTextureManager.cpp">
-      <Filter>Engine\ソースファイル</Filter>
+    <ClCompile Include="SrcEngine\Others\Util.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="GPipelineManager.cpp">
+    <ClCompile Include="SrcEngine\Others\wTextureManager.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Others\Essentials.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\3D\Billboard.cpp">
+      <Filter>Engine\ソースファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\3D\Camera.cpp">
+      <Filter>Engine\ソースファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\3D\Model.cpp">
+      <Filter>Engine\ソースファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\3D\Object3D.cpp">
+      <Filter>Engine\ソースファイル\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\2D\Sprite.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Collider\ICollider.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Collider\RayCollider.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Collider\SphereCollider.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Light\DirectionalLight.cpp">
+      <Filter>Engine\ソースファイル\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Light\Light.cpp">
+      <Filter>Engine\ソースファイル\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Light\PointLight.cpp">
+      <Filter>Engine\ソースファイル\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Math\Matrix.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Math\wMath.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Math\Vec2.cpp">
+      <Filter>Engine\ソースファイル\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Math\Vec3.cpp">
+      <Filter>Engine\ソースファイル\Math\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Scene\IScene.cpp">
+      <Filter>Engine\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Windows\wWindow.cpp">
+      <Filter>Engine\ソースファイル\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\GameScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\TestScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="Billboard.cpp">
-      <Filter>Engine\ソースファイル\3D</Filter>
+    <ClCompile Include="SrcEngine\DirectX\GPipelineManager.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wConstBuffer.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wDepth.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wDirectX.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wRootSignature.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wShader.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wSwapChainManager.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\wTexture.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wDirectX.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    <ClInclude Include="SrcEngine\Others\Essentials.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="wWindow.h">
-      <Filter>Engine\ヘッダーファイル\Window</Filter>
+    <ClInclude Include="SrcEngine\Others\Input.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="wMath.h">
-      <Filter>Engine\ヘッダーファイル\Math</Filter>
+    <ClInclude Include="SrcEngine\Others\RenderTarget.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="wConstBuffer.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    <ClInclude Include="SrcEngine\Others\RTVManager.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="wDepth.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    <ClInclude Include="SrcEngine\Others\TextDrawer.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="GPipeline.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    <ClInclude Include="SrcEngine\Others\Util.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="wShader.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    <ClInclude Include="SrcEngine\Others\wTextureManager.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="wSwapChainManager.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="wTexture.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="Float4.h">
-      <Filter>Engine\ヘッダーファイル\Math\Float</Filter>
-    </ClInclude>
-    <ClInclude Include="Float3.h">
-      <Filter>Engine\ヘッダーファイル\Math\Float</Filter>
-    </ClInclude>
-    <ClInclude Include="Float2.h">
-      <Filter>Engine\ヘッダーファイル\Math\Float</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec3.h">
-      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Vec2.h">
-      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix.h">
-      <Filter>Engine\ヘッダーファイル\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="wRootSignature.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="IScene.h">
-      <Filter>Engine\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Object3D.h">
+    <ClInclude Include="SrcEngine\3D\Billboard.h">
       <Filter>Engine\ヘッダーファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="SrcEngine\3D\Camera.h">
       <Filter>Engine\ヘッダーファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    <ClInclude Include="SrcEngine\3D\Model.h">
+      <Filter>Engine\ヘッダーファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    <ClInclude Include="SrcEngine\3D\Object3D.h">
+      <Filter>Engine\ヘッダーファイル\3D</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="SrcEngine\2D\Sprite.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ICollider.h">
+    <ClInclude Include="SrcEngine\Collider\ICollider.h">
       <Filter>Engine\ヘッダーファイル\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="RayCollider.h">
+    <ClInclude Include="SrcEngine\Collider\RayCollider.h">
       <Filter>Engine\ヘッダーファイル\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="SphereCollider.h">
+    <ClInclude Include="SrcEngine\Collider\SphereCollider.h">
       <Filter>Engine\ヘッダーファイル\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
+    <ClInclude Include="SrcEngine\Light\DirectionalLight.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
+    <ClInclude Include="SrcEngine\Light\PointLight.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h">
+    <ClInclude Include="SrcEngine\Light\Light.h">
       <Filter>Engine\ヘッダーファイル\Light</Filter>
     </ClInclude>
-    <ClInclude Include="MonkeyScene.h">
+    <ClInclude Include="SrcEngine\Math\Float2.h">
+      <Filter>Engine\ヘッダーファイル\Math\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Float3.h">
+      <Filter>Engine\ヘッダーファイル\Math\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Float4.h">
+      <Filter>Engine\ヘッダーファイル\Math\Float</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Matrix.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\wMath.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Vec2.h">
+      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Vec3.h">
+      <Filter>Engine\ヘッダーファイル\Math\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Scene\IScene.h">
+      <Filter>Engine\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Windows\wWindow.h">
+      <Filter>Engine\ヘッダーファイル\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\GameScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
+    <ClInclude Include="SrcApplication\Scene\MonkeyScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
+    <ClInclude Include="SrcApplication\Scene\SceneManager.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Essentials.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
+    <ClInclude Include="SrcApplication\Scene\TestScene.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
+    <ClInclude Include="SrcApplication\Scene\TitleScene.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="RenderTarget.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TextDrawer.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="RTVManager.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="wTextureManager.h">
-      <Filter>Engine\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GPipelineManager.h">
+    <ClInclude Include="SrcEngine\DirectX\GPipeline.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="Billboard.h">
-      <Filter>Engine\ヘッダーファイル\3D</Filter>
+    <ClInclude Include="SrcEngine\DirectX\GPipelineManager.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wConstBuffer.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wDepth.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wDirectX.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wRootSignature.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wShader.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wSwapChainManager.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\wTexture.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
