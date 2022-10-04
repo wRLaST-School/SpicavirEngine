@@ -85,18 +85,7 @@ void wDirectX::Init() {
 
 bool wDirectX::StartFrame()
 {
-	if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-
-	if (msg.message == WM_QUIT)
-	{
-		return true;
-	}
-
-	return false;
+	return GetwWindow()->ProcessMessage();
 }
 
 void wDirectX::PreDrawCommands()

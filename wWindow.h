@@ -8,6 +8,8 @@ public:
 	void Create(LPCWSTR title, int windowWidth, int windowHeight);
 	void Close();
 
+	bool ProcessMessage();
+
 	HWND hwnd;
 	WNDCLASSEX  w{};
 

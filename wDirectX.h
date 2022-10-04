@@ -26,8 +26,6 @@ public:
 
 	D3D12_RESOURCE_BARRIER barrierDesc{};
 
-	MSG msg{};
-
 private:
 };
 
