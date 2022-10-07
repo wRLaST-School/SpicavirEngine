@@ -102,6 +102,7 @@ void TestScene::Init()
 
 void TestScene::Update()
 {
+#pragma region 四分割画面用カメラ設定
 	cameraSpr.position = { 960, 180 };
 	xCamSpr.position = { 960, 540 };
 	yCamSpr.position = { 320, 180 };
@@ -125,11 +126,14 @@ void TestScene::Update()
 	);
 
 	camera.UpdateMatrix();
+#pragma endregion
 
+	//Lerpで移動
 	timer++;
 	timer = min(timer, 300);
 	box.position = Vec3::Lerp(Vec3(0, 0, 0), Vec3(-3, 1, 10), (float)timer / 300);
 
+	//行列更新
 	cameraSpr.UpdateMatrix();
 	xCamSpr.UpdateMatrix();
 	yCamSpr.UpdateMatrix();
