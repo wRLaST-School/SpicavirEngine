@@ -78,12 +78,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -185,6 +185,7 @@
     <ClCompile Include="SrcEngine\Others\Util.cpp" />
     <ClCompile Include="SrcEngine\Others\wTextureManager.cpp" />
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
+    <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +229,7 @@
     <ClInclude Include="SrcEngine\Others\Util.h" />
     <ClInclude Include="SrcEngine\Others\wTextureManager.h" />
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
+    <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\wWindow.h" />
   </ItemGroup>
   <ItemGroup>

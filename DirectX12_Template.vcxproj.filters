@@ -109,6 +109,12 @@
     <Filter Include="Engine\ソースファイル\Math\Vector">
       <UniqueIdentifier>{5bf791d8-0730-4baa-a8a9-038cb67f5d38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Sound">
+      <UniqueIdentifier>{1598a9bc-b0de-4927-a8c4-a8a30e48df18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Sound">
+      <UniqueIdentifier>{a45ec72f-19a2-448e-a2d9-f19d6bd72d0a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -227,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\DirectX\wTexture.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Sound\SoundManager.cpp">
+      <Filter>Engine\ソースファイル\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\DirectX\wTexture.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Sound\SoundManager.h">
+      <Filter>Engine\ヘッダーファイル\Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
