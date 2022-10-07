@@ -1,8 +1,7 @@
 #include "SceneManager.h"
-#include "GameScene.h"
 #include "TestScene.h"
 #include "Input.h"
-#include "MonkeyScene.h"
+#include <FrameRate.h>
 
 void SceneManager::Init()
 {
@@ -11,6 +10,7 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
+	FrameRate::FrameStartWithWait();
 	currentScene->Update();
 
 	if (Input::Key::Triggered(DIK_R))
@@ -40,4 +40,5 @@ template <class NextScene> void SceneManager::Transition()
 	Light::Init();
 	currentScene = unique_ptr<NextScene>(new NextScene());
 	currentScene->Init();
+	FrameRate::InitMark();
 }

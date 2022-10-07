@@ -192,19 +192,10 @@
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp">
       <Filter>Engine\ソースファイル\Window</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\GameScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp">
@@ -236,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp">
       <Filter>Engine\ソースファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameRate.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,19 +314,10 @@
     <ClInclude Include="SrcEngine\Windows\wWindow.h">
       <Filter>Engine\ヘッダーファイル\Window</Filter>
     </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\GameScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\MonkeyScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SrcApplication\Scene\SceneManager.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\TestScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\TitleScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h">
@@ -364,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\Sound\SoundManager.h">
       <Filter>Engine\ヘッダーファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameRate.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -93,15 +93,11 @@ void TestScene::Init()
 
 	mSphere = Model("sphere");
 
-	mPane = Model("square");
-
-	pane.model = &mPane;
-
 	skysphere.model = &sky;
 
 	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
 
-	pane.camera = &camera;
+	box.model = &mCube;
 }
 
 void TestScene::Update()
@@ -116,21 +112,6 @@ void TestScene::Update()
 	yCamSpr.scale = { 1.0f, 1.0f };
 	zCamSpr.scale = { 1.0f, 1.0f };
 
-	pane.position = (Vec3)pane.position + Vec3(
-		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
-		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
-		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
-	);
-
-	pane.position = (Vec3)pane.position + Vec3(
-		(Input::Pad::GetLStick().x) * 0.0001f,
-		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
-		(Input::Pad::GetLStick().y) * 0.0001f
-	);
-
-	pane.scale = {1.f / 30, 1.f / 30, 1.f / 30};
-	//camera.rotation = (Vec3)camera.rotation + Vec3(0.01, 0, 0);
-
 	camera.position = (Vec3)camera.position + Vec3(
 		(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)) * 0.1f,
 		(Input::Key::Down(DIK_E) - Input::Key::Down(DIK_Q)) * 0.1f,
@@ -142,6 +123,7 @@ void TestScene::Update()
 		(Input::Key::Down(DIK_3) - Input::Key::Down(DIK_4)) * 0.01f,
 		(Input::Key::Down(DIK_5) - Input::Key::Down(DIK_6)) * 0.01f
 	);
+
 	camera.UpdateMatrix();
 
 	cameraSpr.UpdateMatrix();
@@ -149,7 +131,7 @@ void TestScene::Update()
 	yCamSpr.UpdateMatrix();
 	zCamSpr.UpdateMatrix();
 	skysphere.UpdateMatrix();
-	pane.UpdateMatrix();
+	box.UpdateMatrix();
 }
 
 void TestScene::DrawBack()
@@ -161,22 +143,22 @@ void TestScene::Draw3D()
 	RTVManager::SetRenderTargetToTexture("camSpr");
 	Camera::Set(camera);
 	skysphere.Draw();
-	pane.Draw();
+	box.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
-	pane.Draw();
+	box.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
-	pane.Draw();
+	box.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
-	pane.Draw();
+	box.Draw();
 
 	Camera::Set(finalScene);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
@@ -190,10 +172,17 @@ void TestScene::DrawSprite()
 	yCamSpr.Draw();
 	zCamSpr.Draw();
 
-	StringOptions udevGothicOpt;
-	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
-	udevGothicOpt.size = 32;
+	StringOptions arialOpt;
+	arialOpt.fontOptions.name = "Arial";
+	arialOpt.size = 32;
+	arialOpt.fontOptions.resolution = 128;
 
-	//TextDrawer::DrawString("0Ç§Ç…Ç·Å`Å`Å`Å`0", 1180, 100, Align::TopRight, udevGothicOpt);
-	//TextDrawer::DrawString("àühogeÇ¶ÉI123", 1180, 132, Align::TopRight);
+	string str("");
+	str += to_string(box.position.x);
+	str += ", "; str += to_string(box.position.y);
+	str += ", "; str += to_string(box.position.z);
+	str += ", T = "; str += to_string(timer);
+	TextDrawer::DrawString( str, 32, 32, Align::TopLeft, arialOpt);
+
+	TextDrawer::DrawString("Press R to Reload", 32, 64, Align::TopLeft, arialOpt);
 }
