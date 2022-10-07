@@ -48,12 +48,15 @@ public:
 	//Sqrt‚ªŒÄ‚Î‚ê‚È‚¢B’·‚³‚ª‚í‚©‚Á‚Ä‚¢‚éê‡‚ÉB
 	Vec3 GetNorm(float length) const;
 
+
 	float GetLength() const;
 
 	float GetSquaredLength() const;
 
 	float Dot(const Vec3& v2) const;
 	Vec3 Cross(const Vec3& v2) const;
+
+	static Vec3 Lerp(const Vec3& start, const Vec3& end, const float t);
 
 	operator Float3() const;
 	operator Vec2() const;

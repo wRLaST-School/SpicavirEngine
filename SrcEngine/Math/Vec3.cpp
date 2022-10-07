@@ -153,6 +153,12 @@ Vec3 Vec3::GetNorm(float length) const
 		return Vec3();
 }
 
+Vec3 Vec3::Lerp(const Vec3& start, const Vec3& end, const float t)
+{
+	Vec3 diff = end - start;
+	return start + diff * t;
+}
+
 float Vec3::GetLength() const
 {
 	return sqrtf(this->GetSquaredLength());
