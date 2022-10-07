@@ -97,7 +97,7 @@ void TestScene::Init()
 
 	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
 
-	box.model = &mCube;
+	sphere.model = &mSphere;
 }
 
 void TestScene::Update()
@@ -131,7 +131,7 @@ void TestScene::Update()
 	//Lerp‚ÅˆÚ“®
 	timer++;
 	timer = min(timer, 300);
-	box.position = Vec3::Lerp(Vec3(0, 0, 0), Vec3(-3, 1, 10), (float)timer / 300);
+	sphere.position = Vec3::Lerp(Vec3(0, 0, 0), Vec3(-3, 1, 10), (float)timer / 300);
 
 	//s—ñXV
 	cameraSpr.UpdateMatrix();
@@ -139,7 +139,7 @@ void TestScene::Update()
 	yCamSpr.UpdateMatrix();
 	zCamSpr.UpdateMatrix();
 	skysphere.UpdateMatrix();
-	box.UpdateMatrix();
+	sphere.UpdateMatrix();
 }
 
 void TestScene::DrawBack()
@@ -151,22 +151,22 @@ void TestScene::Draw3D()
 	RTVManager::SetRenderTargetToTexture("camSpr");
 	Camera::Set(camera);
 	skysphere.Draw();
-	box.Draw();
+	sphere.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
-	box.Draw();
+	sphere.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
-	box.Draw();
+	sphere.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
-	box.Draw();
+	sphere.Draw();
 
 	Camera::Set(finalScene);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
@@ -186,9 +186,9 @@ void TestScene::DrawSprite()
 	arialOpt.fontOptions.resolution = 128;
 
 	string str("");
-	str += to_string(box.position.x);
-	str += ", "; str += to_string(box.position.y);
-	str += ", "; str += to_string(box.position.z);
+	str += to_string(sphere.position.x);
+	str += ", "; str += to_string(sphere.position.y);
+	str += ", "; str += to_string(sphere.position.z);
 	str += ", T = "; str += to_string(timer);
 	TextDrawer::DrawString( str, 32, 32, Align::TopLeft, arialOpt);
 

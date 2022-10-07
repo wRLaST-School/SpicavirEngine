@@ -36,7 +36,7 @@ private:
 
     Object3D skysphere;
 
-    Object3D box;
+    Object3D sphere;
 
     int timer = 0;
 };
