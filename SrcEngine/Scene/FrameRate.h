@@ -10,3 +10,4 @@ public:
 private:
 	static chrono::system_clock::time_point  frameend, framestart;
 };
+

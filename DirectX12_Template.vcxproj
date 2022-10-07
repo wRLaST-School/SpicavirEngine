@@ -148,7 +148,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
@@ -188,7 +187,6 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameRate.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
     <ClInclude Include="SrcEngine\2D\Sprite.h" />
