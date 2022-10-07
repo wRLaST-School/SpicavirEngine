@@ -27,17 +27,17 @@ private:
 
     Camera finalScene;
 
-    Object3D ray;
-    Object3D pane;
-
     Model mSphere;
     Model mCube;
-    Model mPane;
 
     TextureKey whiteTex;
 
     Model sky;
 
     Object3D skysphere;
+
+    Object3D sphere;
+
+    int timer = 0;
 };
 
