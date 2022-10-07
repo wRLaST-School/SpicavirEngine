@@ -237,6 +237,9 @@
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp">
       <Filter>Engine\ソースファイル\Sound</Filter>
     </ClCompile>
+    <ClCompile Include="SrcEngine\Scene\FrameRate.cpp">
+      <Filter>Engine\ソースファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\Sound\SoundManager.h">
       <Filter>Engine\ヘッダーファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Scene\FrameRate.h">
+      <Filter>Engine\ヘッダーファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
