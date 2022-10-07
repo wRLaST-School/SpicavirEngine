@@ -139,6 +139,10 @@ void TestScene::Update()
 	);
 	camera.UpdateMatrix();
 
+	timer++;
+	timer = min(timer, 300);
+	box.position = Vec3::Lerp(Vec3(0, 0, 0), Vec3(-3, 1, 10), (float)timer / 300);
+
 	cameraSpr.UpdateMatrix();
 	xCamSpr.UpdateMatrix();
 	yCamSpr.UpdateMatrix();
