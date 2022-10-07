@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
@@ -182,12 +181,12 @@
     <ClCompile Include="SrcEngine\Others\TextDrawer.cpp" />
     <ClCompile Include="SrcEngine\Others\Util.cpp" />
     <ClCompile Include="SrcEngine\Others\wTextureManager.cpp" />
+    <ClCompile Include="SrcEngine\Scene\FrameRate.cpp" />
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\wWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FrameRate.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
     <ClInclude Include="SrcEngine\2D\Sprite.h" />
@@ -224,6 +223,7 @@
     <ClInclude Include="SrcEngine\Others\TextDrawer.h" />
     <ClInclude Include="SrcEngine\Others\Util.h" />
     <ClInclude Include="SrcEngine\Others\wTextureManager.h" />
+    <ClInclude Include="SrcEngine\Scene\FrameRate.h" />
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\wWindow.h" />
