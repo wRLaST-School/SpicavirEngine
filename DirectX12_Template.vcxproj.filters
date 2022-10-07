@@ -192,19 +192,10 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp">
       <Filter>Engine\ソースファイル\Window</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\GameScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp">
@@ -320,19 +311,10 @@
     <ClInclude Include="SrcEngine\Windows\SpWindow.h">
       <Filter>Engine\ヘッダーファイル\Window</Filter>
     </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\GameScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\MonkeyScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SrcApplication\Scene\SceneManager.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\TestScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\TitleScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h">

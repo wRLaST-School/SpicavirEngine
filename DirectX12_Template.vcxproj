@@ -148,12 +148,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FrameRate.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
-    <ClCompile Include="SrcApplication\Scene\MonkeyScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
-    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp" />
     <ClCompile Include="SrcEngine\2D\Sprite.cpp" />
     <ClCompile Include="SrcEngine\3D\Billboard.cpp" />
     <ClCompile Include="SrcEngine\3D\Camera.cpp" />
@@ -190,11 +188,9 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SrcApplication\Scene\GameScene.h" />
-    <ClInclude Include="SrcApplication\Scene\MonkeyScene.h" />
+    <ClInclude Include="FrameRate.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
-    <ClInclude Include="SrcApplication\Scene\TitleScene.h" />
     <ClInclude Include="SrcEngine\2D\Sprite.h" />
     <ClInclude Include="SrcEngine\3D\Billboard.h" />
     <ClInclude Include="SrcEngine\3D\Camera.h" />
