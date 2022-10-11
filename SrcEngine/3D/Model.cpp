@@ -371,7 +371,7 @@ void Model::LoadMaterial(const string& path, const string& filename)
 		if (key == "map_Kd") {
 			string texName;
 			lineStream >> texName;
-			material.textureKey = wTextureManager::LoadTexture(path + texName, texName);
+			material.textureKey = SpTextureManager::LoadTexture(path + texName, texName);
 		}
 	}
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "ICollider.h"
-#include "wMath.h"
+#include "SpMath.h"
 class SphereCollider :
     public ICollider
 {

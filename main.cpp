@@ -1,17 +1,16 @@
 #include "Essentials.h"
-#include "wWindow.h"
-#include "wDirectX.h"
+#include "SpWindow.h"
+#include "SpDirectX.h"
 #include "Input.h"
-#include "wSwapChainManager.h"
-#include "wDepth.h"
-#include "wShader.h"
+#include "SpSwapChainManager.h"
+#include "SpDepth.h"
+#include "SpShader.h"
 #include "GPipeline.h"
-#include "wTexture.h"
 #include "Vec3.h"
-#include "wConstBuffer.h"
+#include "SpConstBuffer.h"
 #include "Object3D.h"
 #include "Matrix.h"
-#include "wRootSignature.h"
+#include "SpRootSignature.h"
 #include "SceneManager.h"
 #include "Sprite.h"
 #include "TextDrawer.h"
@@ -31,7 +30,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//ウィンドウを生成
 	{
-		wWindow wwnd;
+		SpWindow wwnd;
 		wwnd.Create(L"DirectX", 1280, 720);
 		RegisterwWindow(wwnd, "Default");
 	}
@@ -49,7 +48,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	InitWSCM();
 	InitWDepth();
 
-	wTextureManager::Create();
+	SpTextureManager::Create();
 
 	CreateAndInitRootSignature();
 

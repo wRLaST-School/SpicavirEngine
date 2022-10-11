@@ -135,7 +135,7 @@
     <ClCompile Include="SrcEngine\Others\Util.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Others\wTextureManager.cpp">
+    <ClCompile Include="SrcEngine\Others\SpTextureManager.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\Others\Essentials.cpp">
@@ -177,7 +177,7 @@
     <ClCompile Include="SrcEngine\Math\Matrix.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Math\wMath.cpp">
+    <ClCompile Include="SrcEngine\Math\SpMath.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\Math\Vec2.cpp">
@@ -189,7 +189,7 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp">
       <Filter>Engine\ソースファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Windows\wWindow.cpp">
+    <ClCompile Include="SrcEngine\Windows\SpWindow.cpp">
       <Filter>Engine\ソースファイル\Window</Filter>
     </ClCompile>
     <ClCompile Include="SrcApplication\Scene\GameScene.cpp">
@@ -213,25 +213,22 @@
     <ClCompile Include="SrcEngine\DirectX\GPipelineManager.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wConstBuffer.cpp">
+    <ClCompile Include="SrcEngine\DirectX\SpConstBuffer.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wDepth.cpp">
+    <ClCompile Include="SrcEngine\DirectX\SpDepth.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wDirectX.cpp">
+    <ClCompile Include="SrcEngine\DirectX\SpDirectX.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wRootSignature.cpp">
+    <ClCompile Include="SrcEngine\DirectX\SpRootSignature.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wShader.cpp">
+    <ClCompile Include="SrcEngine\DirectX\SpShader.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wSwapChainManager.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\DirectX\wTexture.cpp">
+    <ClCompile Include="SrcEngine\DirectX\SpSwapChainManager.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp">
@@ -260,7 +257,7 @@
     <ClInclude Include="SrcEngine\Others\Util.h">
       <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\Others\wTextureManager.h">
+    <ClInclude Include="SrcEngine\Others\SpTextureManager.h">
       <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\3D\Billboard.h">
@@ -308,7 +305,7 @@
     <ClInclude Include="SrcEngine\Math\Matrix.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\Math\wMath.h">
+    <ClInclude Include="SrcEngine\Math\SpMath.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\Math\Vec2.h">
@@ -320,7 +317,7 @@
     <ClInclude Include="SrcEngine\Scene\IScene.h">
       <Filter>Engine\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\Windows\wWindow.h">
+    <ClInclude Include="SrcEngine\Windows\SpWindow.h">
       <Filter>Engine\ヘッダーファイル\Window</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\GameScene.h">
@@ -344,25 +341,22 @@
     <ClInclude Include="SrcEngine\DirectX\GPipelineManager.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wConstBuffer.h">
+    <ClInclude Include="SrcEngine\DirectX\SpConstBuffer.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wDepth.h">
+    <ClInclude Include="SrcEngine\DirectX\SpDepth.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wDirectX.h">
+    <ClInclude Include="SrcEngine\DirectX\SpDirectX.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wRootSignature.h">
+    <ClInclude Include="SrcEngine\DirectX\SpRootSignature.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wShader.h">
+    <ClInclude Include="SrcEngine\DirectX\SpShader.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wSwapChainManager.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\DirectX\wTexture.h">
+    <ClInclude Include="SrcEngine\DirectX\SpSwapChainManager.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\Sound\SoundManager.h">

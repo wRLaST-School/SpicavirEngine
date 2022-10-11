@@ -1,6 +1,6 @@
 #pragma once
 #include "IScene.h"
-#include "wMath.h"
+#include "SpMath.h"
 #include "Camera.h"
 #include "Sprite.h"
 #include "Billboard.h"
@@ -28,7 +28,7 @@ private:
     Camera finalScene;
 
     Object3D ray;
-    BillboardY pane;
+    Object3D pane;
 
     Model mSphere;
     Model mCube;

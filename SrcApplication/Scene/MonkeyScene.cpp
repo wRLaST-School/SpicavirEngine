@@ -1,12 +1,12 @@
 #include "MonkeyScene.h"
 #include "Input.h"
 #include "RTVManager.h"
-#include "wSwapChainManager.h"
+#include "SpSwapChainManager.h"
 #include "TextDrawer.h"
 
 void MonkeyScene::Init()
 {
-	wTextureManager::Init();
+	SpTextureManager::Init();
 	camera.SetRenderSize(GetwWindow()->width, GetwWindow()->height);
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
@@ -37,8 +37,8 @@ void MonkeyScene::Init()
 		}
 	}
 
-	texture = wTextureManager::LoadTexture("Resources/white.png", "white");
-	wTextureManager::LoadTexture("Resources/think.png", "think");
+	texture = SpTextureManager::LoadTexture("Resources/white.png", "white");
+	SpTextureManager::LoadTexture("Resources/think.png", "think");
 
 	RTVManager::CreateRenderTargetTexture(256, 256, "offscreen");
 	osrspr = Sprite("offscreen");
@@ -109,8 +109,8 @@ void MonkeyScene::Update()
 
 	if (Input::Key::Triggered(DIK_B))
 	{
-		wTextureManager::Release("think");
-		wTextureManager::LoadTexture("Resources/think2.png", "think");
+		SpTextureManager::Release("think");
+		SpTextureManager::LoadTexture("Resources/think2.png", "think");
 	}
 }
 

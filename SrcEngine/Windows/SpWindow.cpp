@@ -1,19 +1,19 @@
-#include "wWindow.h"
+#include "SpWindow.h"
 
 static string defWndID = "Default";
-map<string, wWindow> wWindowList;
-wWindow* GetwWindow(string ID)
+map<string, SpWindow> wWindowList;
+SpWindow* GetwWindow(string ID)
 {
     auto res = wWindowList.find(ID);
     return res != wWindowList.end() ? &res->second : nullptr;
 }
 
-wWindow* GetwWindow()
+SpWindow* GetwWindow()
 {
     return GetwWindow(defWndID);
 }
 
-void RegisterwWindow(wWindow wwnd, string ID)
+void RegisterwWindow(SpWindow wwnd, string ID)
 {
     wWindowList[ID] = wwnd;
 }
@@ -31,7 +31,7 @@ void CloseAllwWindow()
 	}
 }
 
-void wWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
+void SpWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 	width = windowWidth;
 	height = windowHeight;
 
@@ -62,12 +62,12 @@ void wWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 	ShowWindow(hwnd, SW_SHOW);
 }
 
-void wWindow::Close()
+void SpWindow::Close()
 {
 	UnregisterClass(w.lpszClassName, w.hInstance);
 }
 
-bool wWindow::ProcessMessage()
+bool SpWindow::ProcessMessage()
 {
 	MSG msg{};
 

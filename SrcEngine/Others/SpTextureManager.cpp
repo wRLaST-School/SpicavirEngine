@@ -1,7 +1,7 @@
-#include "wTextureManager.h"
-#include "wDirectX.h"
+#include "SpTextureManager.h"
+#include "SpDirectX.h"
 
-void wTextureManager::Create()
+void SpTextureManager::Create()
 {
 	GetInstance().nextRegisteredTextureIndex = 0;
 	//設定構造体
@@ -14,9 +14,9 @@ void wTextureManager::Create()
 	GetWDX()->dev->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&GetInstance().srvHeap));
 }
 
-void wTextureManager::Init()
+void SpTextureManager::Init()
 {
-	wTextureManager& ins = GetInstance();
+	SpTextureManager& ins = GetInstance();
 	ins.nextRegisteredTextureIndex = 0;
 
 	for (int i = 0; i < wMaxSRVCount; i++)
@@ -31,12 +31,12 @@ void wTextureManager::Init()
 		texbuffs = nullptr;
 	}
 
-	wTextureManager::LoadTexture("Resources/notexture.png", "notexture");
+	SpTextureManager::LoadTexture("Resources/notexture.png", "notexture");
 }
 
-TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
+TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 {
-	wTextureManager& ins = GetInstance();
+	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
 	D3D12_RESOURCE_DESC texresdesc{};
@@ -95,8 +95,8 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextRegisteredTextureIndex;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = texresdesc.Format;
@@ -106,8 +106,8 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
 	
-	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
-	wTextureManager::GetInstance().texDataMap[key] = metadata;
+	SpTextureManager::GetInstance().textureMap[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
+	SpTextureManager::GetInstance().texDataMap[key] = metadata;
 	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
 
 	for (size_t i = 0; i < wMaxSRVCount; i++)
@@ -123,9 +123,9 @@ TextureKey wTextureManager::LoadTexture(string filePath, TextureKey key)
 	return key;
 }
 
-TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
+TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
 {
-	wTextureManager& ins = GetInstance();
+	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
 	D3D12_RESOURCE_DESC texresdesc{};
@@ -185,8 +185,8 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextRegisteredTextureIndex;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = texresdesc.Format;
@@ -201,12 +201,12 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 	for (tryNum = 0; !succeeded; tryNum++)
 	{
 		string tryKey = tryNum == 0 ? key : key + std::to_string(tryNum);
-		succeeded = wTextureManager::GetInstance().textureMap.try_emplace(tryKey, wTextureManager::GetInstance().nextRegisteredTextureIndex).second;
+		succeeded = SpTextureManager::GetInstance().textureMap.try_emplace(tryKey, SpTextureManager::GetInstance().nextRegisteredTextureIndex).second;
 	}
-	wTextureManager::GetInstance().texDataMap[tryNum == 0 ? key : key + std::to_string(tryNum)] = metadata;
+	SpTextureManager::GetInstance().texDataMap[tryNum == 0 ? key : key + std::to_string(tryNum)] = metadata;
 
-	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
-	wTextureManager::GetInstance().texDataMap[key] = metadata;
+	SpTextureManager::GetInstance().textureMap[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
+	SpTextureManager::GetInstance().texDataMap[key] = metadata;
 	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
 
 	for (size_t i = 0; i < wMaxSRVCount; i++)
@@ -223,7 +223,7 @@ TextureKey wTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey
 	return tryNum == 0 ? key : key + std::to_string(tryNum);
 }
 
-TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
+TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
 {
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
@@ -245,8 +245,8 @@ TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey
 
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextRegisteredTextureIndex;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = textureResourceDesc.Format;
@@ -255,8 +255,8 @@ TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey
 	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
 
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
-	wTextureManager::GetInstance().textureMap[key] = wTextureManager::GetInstance().nextRegisteredTextureIndex;
-	TexMetadata& pTexMeta = wTextureManager::GetInstance().texDataMap[key];
+	SpTextureManager::GetInstance().textureMap[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
+	TexMetadata& pTexMeta = SpTextureManager::GetInstance().texDataMap[key];
 	pTexMeta = TexMetadata{};
 	pTexMeta.width = width;
 	pTexMeta.height = height;
@@ -276,7 +276,7 @@ TextureKey wTextureManager::CreateDummyTexture(int width, int height, TextureKey
 	return key;
 }
 
-TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
+TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
 {//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
@@ -298,8 +298,8 @@ TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int heigh
 
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().nextRegisteredTextureIndex;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextRegisteredTextureIndex;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = textureResourceDesc.Format;
@@ -315,9 +315,9 @@ TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int heigh
 	for (tryNum = 0; !succeeded; tryNum++)
 	{
 		tryKey = tryNum == 0 ? key : key + std::to_string(tryNum);
-		succeeded = wTextureManager::GetInstance().textureMap.try_emplace(tryKey, wTextureManager::GetInstance().nextRegisteredTextureIndex).second;
+		succeeded = SpTextureManager::GetInstance().textureMap.try_emplace(tryKey, SpTextureManager::GetInstance().nextRegisteredTextureIndex).second;
 	}
-	TexMetadata& pTexMeta = wTextureManager::GetInstance().texDataMap[tryKey];
+	TexMetadata& pTexMeta = SpTextureManager::GetInstance().texDataMap[tryKey];
 	pTexMeta = TexMetadata{};
 	pTexMeta.width = width;
 	pTexMeta.height = height;
@@ -337,41 +337,41 @@ TextureKey wTextureManager::CreateDummyTextureWithUniqueKey(int width, int heigh
 	return tryKey;
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE wTextureManager::GetCPUDescHandle(TextureKey key)
+D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = wTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().textureMap[key];
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().textureMap[key];
 	return heapHandle;
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE wTextureManager::GetGPUDescHandle(TextureKey key)
+D3D12_GPU_DESCRIPTOR_HANDLE SpTextureManager::GetGPUDescHandle(TextureKey key)
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = wTextureManager::GetInstance().srvHeap->GetGPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * wTextureManager::GetInstance().textureMap[key];
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetGPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().textureMap[key];
 	return heapHandle;
 }
 
-TexMetadata wTextureManager::GetTextureMetadata(TextureKey key)
+TexMetadata SpTextureManager::GetTextureMetadata(TextureKey key)
 {
-	return wTextureManager::GetInstance().texDataMap[key];
+	return SpTextureManager::GetInstance().texDataMap[key];
 }
 
-ID3D12Resource* wTextureManager::GetTextureBuff(TextureKey key)
+ID3D12Resource* SpTextureManager::GetTextureBuff(TextureKey key)
 {
-	return wTextureManager::GetInstance().texBuffs[wTextureManager::GetInstance().textureMap[key]].Get();
+	return SpTextureManager::GetInstance().texBuffs[SpTextureManager::GetInstance().textureMap[key]].Get();
 }
 
-int wTextureManager::GetIndex(TextureKey key)
+int SpTextureManager::GetIndex(TextureKey key)
 {
 	return GetInstance().textureMap[key];
 }
 
-void wTextureManager::Release(TextureKey key)
+void SpTextureManager::Release(TextureKey key)
 {
 
-	wTextureManager& ins = GetInstance();
+	SpTextureManager& ins = GetInstance();
 	ins.texBuffs[ins.textureMap[key]] = ComPtr<ID3D12Resource>();
 	ins.isOccupied[GetIndex(key)] = false;
 	ins.textureMap.erase(key);
@@ -379,8 +379,8 @@ void wTextureManager::Release(TextureKey key)
 	return;
 }
 
-wTextureManager &wTextureManager::GetInstance()
+SpTextureManager &SpTextureManager::GetInstance()
 {
-	static wTextureManager obj;
+	static SpTextureManager obj;
 	return obj;
 }

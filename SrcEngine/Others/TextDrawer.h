@@ -1,6 +1,6 @@
 #pragma once
 #include "Sprite.h"
-#include "wTextureManager.h"
+#include "SpTextureManager.h"
 
 enum class Align
 {

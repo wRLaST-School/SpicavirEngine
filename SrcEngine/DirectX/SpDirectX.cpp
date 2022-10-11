@@ -1,15 +1,15 @@
-#include "wDirectX.h"
-#include "wSwapChainManager.h"
-#include "wDepth.h"
+#include "SpDirectX.h"
+#include "SpSwapChainManager.h"
+#include "SpDepth.h"
 #include "GPipeline.h"
-#include "wRootSignature.h"
-#include "wConstBuffer.h"
-#include "wTextureManager.h"
+#include "SpRootSignature.h"
+#include "SpConstBuffer.h"
+#include "SpTextureManager.h"
 #include "RTVManager.h"
 
-static wDirectX WDX;
+static SpDirectX WDX;
 
-wDirectX* GetWDX()
+SpDirectX* GetWDX()
 {
 	return &WDX;
 }
@@ -19,7 +19,7 @@ void InitWDX()
 	WDX.Init();
 }
 
-void wDirectX::Init() {
+void SpDirectX::Init() {
 	result = CreateDXGIFactory1(IID_PPV_ARGS(&dxgiFactory));
 	vector< ComPtr<IDXGIAdapter1>> adapters;
 
@@ -83,12 +83,12 @@ void wDirectX::Init() {
 	dev->CreateCommandQueue(&cmdQueueDesc, IID_PPV_ARGS(&cmdQueue));
 }
 
-bool wDirectX::StartFrame()
+bool SpDirectX::StartFrame()
 {
 	return GetwWindow()->ProcessMessage();
 }
 
-void wDirectX::PreDrawCommands()
+void SpDirectX::PreDrawCommands()
 {
 	//バックバッファ番号を取得(0か1)
 	UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
@@ -109,7 +109,7 @@ void wDirectX::PreDrawCommands()
 	//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 	//GetWDX()->cmdList->SetGraphicsRootDescriptorTable(0, basicDescHeap->GetGPUDescriptorHandleForHeapStart());
 
-	ID3D12DescriptorHeap* ppSrvHeap[] = { wTextureManager::GetInstance().srvHeap.Get()};
+	ID3D12DescriptorHeap* ppSrvHeap[] = { SpTextureManager::GetInstance().srvHeap.Get()};
 	GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
 
 	D3D12_VIEWPORT viewport{};
@@ -137,7 +137,7 @@ void wDirectX::PreDrawCommands()
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 }
 
-void wDirectX::PreDraw3D()
+void SpDirectX::PreDraw3D()
 {
 	/*描画処理*/
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
@@ -168,7 +168,7 @@ void wDirectX::PreDraw3D()
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 }
 
-void wDirectX::PostDrawCommands()
+void SpDirectX::PostDrawCommands()
 {
 	//リソースバリアーを戻す
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -179,7 +179,7 @@ void wDirectX::PostDrawCommands()
 	RTVManager::GetInstance().isAllResBarClosed = true;
 }
 
-void wDirectX::EndFrame()
+void SpDirectX::EndFrame()
 {	
 	//命令を実行して描画
 	cmdList->Close();

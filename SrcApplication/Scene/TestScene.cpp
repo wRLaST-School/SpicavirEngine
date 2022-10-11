@@ -1,13 +1,13 @@
 #include "TestScene.h"
 #include "RTVManager.h"
-#include "wSwapChainManager.h"
+#include "SpSwapChainManager.h"
 #include "Input.h"
 #include "RayCollider.h"
 #include "TextDrawer.h"
 
 void TestScene::Init()
 {
-	wTextureManager::Init();
+	SpTextureManager::Init();
 
 #pragma region élï™äÑâÊñ ópÉJÉÅÉâê›íË
 	camera.SetRenderSize(640, 360);
@@ -95,13 +95,11 @@ void TestScene::Init()
 
 	mPane = Model("square");
 
-	pane.model = &mPane;
+	pane.model = &mSphere;
 
 	skysphere.model = &sky;
 
-	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
-
-	pane.camera = &camera;
+	whiteTex = SpTextureManager::LoadTexture("Resources/white.png", "white");
 }
 
 void TestScene::Update()
@@ -127,9 +125,6 @@ void TestScene::Update()
 		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
 		(Input::Pad::GetLStick().y) * 0.0001f
 	);
-
-	pane.scale = {1.f / 30, 1.f / 30, 1.f / 30};
-	//camera.rotation = (Vec3)camera.rotation + Vec3(0.01, 0, 0);
 
 	camera.position = (Vec3)camera.position + Vec3(
 		(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)) * 0.1f,

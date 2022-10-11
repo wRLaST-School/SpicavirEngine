@@ -1,10 +1,9 @@
-#include "wShader.h"
-#include "wTexture.h"
+#include "SpShader.h"
 #include "GPipeline.h"
 
-map<string, wShader> shaderMap;
+map<string, SpShader> shaderMap;
 
-void wShader::Init(string vsPath, string psPath)
+void SpShader::Init(string vsPath, string psPath)
 {
 	string shaderFolder = "Resources/Shaders/";
 	vsPath = shaderFolder + vsPath;
@@ -64,11 +63,11 @@ void wShader::Init(string vsPath, string psPath)
 
 void RegisterAndInitShader(string id, string vsPath, string psPath)
 {
-	shaderMap[id] = wShader();
+	shaderMap[id] = SpShader();
 	shaderMap[id].Init(vsPath, psPath);
 }
 
-wShader* GetShader(string id)
+SpShader* GetShader(string id)
 {
 	return &shaderMap[id];
 }

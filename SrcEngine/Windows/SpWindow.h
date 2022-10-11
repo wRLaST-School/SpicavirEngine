@@ -2,7 +2,7 @@
 #include "Essentials.h"
 
 
-class wWindow
+class SpWindow
 {
 public:
 	void Create(LPCWSTR title, int windowWidth, int windowHeight);
@@ -24,10 +24,10 @@ private:
 /// </summary>
 /// <param name="ID">stringå^ÇÃID</param>
 /// <returns>ê¨å˜:wWindowÇ÷ÇÃÉ|ÉCÉìÉ^,é∏îs:nullptr</returns>
-wWindow* GetwWindow(string ID);
-wWindow* GetwWindow();
-extern map<string, wWindow> wWindowList;
-void RegisterwWindow(wWindow wwnd, string ID);
+SpWindow* GetwWindow(string ID);
+SpWindow* GetwWindow();
+extern map<string, SpWindow> wWindowList;
+void RegisterwWindow(SpWindow wwnd, string ID);
 void SetDefaultWindowID(string ID);
 
 void CloseAllwWindow();

@@ -1,9 +1,9 @@
 #pragma once
 #include "Essentials.h"
-#include "wDirectX.h"
+#include "SpDirectX.h"
 #include "Vec3.h"
-#include "wTextureManager.h"
-#include "wConstBuffer.h"
+#include "SpTextureManager.h"
+#include "SpConstBuffer.h"
 //TODO:頂点データを読み込めるようにする
 
 struct Vertex
@@ -79,5 +79,5 @@ public:
 
 	Material material;
 
-	wConstBuffer<ConstBufferDataMaterial> materialCB;
+	SpConstBuffer<ConstBufferDataMaterial> materialCB;
 };

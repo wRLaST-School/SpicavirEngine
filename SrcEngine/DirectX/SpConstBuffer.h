@@ -1,11 +1,11 @@
 #pragma once
 #include "Essentials.h"
-#include "wDirectX.h"
-template <class Contents> class wConstBuffer
+#include "SpDirectX.h"
+template <class Contents> class SpConstBuffer
 {
 public:
 	//ConstBufferを生成してマッピング
-	wConstBuffer() {
+	SpConstBuffer() {
 		//ヒープ設定
 		D3D12_HEAP_PROPERTIES cbheapprop{};
 		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
@@ -32,11 +32,11 @@ public:
 		buffer->Map(0, nullptr, (void**)&contents);
 	};
 
-	~wConstBuffer() {
+	~SpConstBuffer() {
 		buffer->Unmap(0, nullptr);
 	};
 
-	wConstBuffer<Contents>& operator=(const wConstBuffer<Contents>& second) {
+	SpConstBuffer<Contents>& operator=(const SpConstBuffer<Contents>& second) {
 		*this->contents = *second.contents;
 		return *this;
 	}

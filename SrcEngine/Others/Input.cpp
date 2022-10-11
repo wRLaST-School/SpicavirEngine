@@ -1,6 +1,6 @@
 #include "Input.h"
 #include "Essentials.h"
-#include "wWindow.h"
+#include "SpWindow.h"
 #include "Util.h"
 
 using namespace Input;

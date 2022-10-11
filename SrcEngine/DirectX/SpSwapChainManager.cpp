@@ -1,11 +1,11 @@
-#include "wSwapChainManager.h"
-#include "wWindow.h"
-#include "wDirectX.h"
+#include "SpSwapChainManager.h"
+#include "SpWindow.h"
+#include "SpDirectX.h"
 #include "RTVManager.h"
 
-wSwapChainManager scm;
+SpSwapChainManager scm;
 
-void wSwapChainManager::Init()
+void SpSwapChainManager::Init()
 {
 	swapchainDesc.Width = GetwWindow()->width;
 	swapchainDesc.Height = GetwWindow()->height;
@@ -32,7 +32,7 @@ void wSwapChainManager::Init()
 	GetWDX()->dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 
-void wSwapChainManager::WaitForRender()
+void SpSwapChainManager::WaitForRender()
 {
 	//描画コマンドが終わったら次のフレームの準備
 	GetWDX()->cmdQueue->Signal(fence.Get(), ++fenceVal);
@@ -53,7 +53,7 @@ void InitWSCM()
 	scm.Init();
 }
 
-wSwapChainManager* GetSCM()
+SpSwapChainManager* GetSCM()
 {
 	return &scm;
 }

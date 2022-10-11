@@ -1,6 +1,6 @@
 #pragma once
 #include "Essentials.h"
-class wRootSignature
+class SpRootSignature
 {
 public:
 	void Init();
@@ -8,7 +8,7 @@ public:
 	ComPtr<ID3D12RootSignature> rootsignature;
 };
 
-wRootSignature* GetRootSignature();
-void SetRootSignature(wRootSignature rs);
+SpRootSignature* GetRootSignature();
+void SetRootSignature(SpRootSignature rs);
 void CreateAndInitRootSignature();
 

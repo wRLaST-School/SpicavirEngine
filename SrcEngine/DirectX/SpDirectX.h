@@ -1,8 +1,8 @@
 #pragma once
 #include "Essentials.h"
-#include "wWindow.h"
+#include "SpWindow.h"
 
-class wDirectX
+class SpDirectX
 {
 public:
 	void Init();
@@ -29,6 +29,6 @@ public:
 private:
 };
 
-wDirectX* GetWDX();
+SpDirectX* GetWDX();
 void InitWDX();
 

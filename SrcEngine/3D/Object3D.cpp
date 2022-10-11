@@ -25,7 +25,7 @@ void Object3D::Draw()
 {
 	transformCB.contents->mat = matWorld;
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(model->material.textureKey));
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(model->material.textureKey));
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
 
@@ -44,7 +44,7 @@ void Object3D::Draw(TextureKey key)
 {
 	transformCB.contents->mat = matWorld;
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(key));
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(key));
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
 

@@ -1,7 +1,7 @@
 #include "GPipelineManager.h"
-#include "wShader.h"
+#include "SpShader.h"
 #include "GPipeline.h"
-#include "wRootSignature.h"
+#include "SpRootSignature.h"
 #include "Model.h"
 #include "Sprite.h"
 

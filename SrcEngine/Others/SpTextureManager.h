@@ -6,7 +6,7 @@ typedef size_t SRVHeapIndex;
 //index‚ªunsigned char‚É‚È‚Á‚Ä‚é‚©‚ç‚±‚±‚ğ•ÏX‚·‚é‚È‚ç‚»‚Á‚¿‚à•ÏX
 const size_t wMaxSRVCount = 1024;
 
-class wTextureManager final
+class SpTextureManager
 {
 public:
 	static void Create();
@@ -27,7 +27,7 @@ public:
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
 
-	static wTextureManager &GetInstance();
+	static SpTextureManager &GetInstance();
 
 	ComPtr<ID3D12Resource>texBuffs[wMaxSRVCount] = {};
 
@@ -38,8 +38,8 @@ private:
 	bool isOccupied[wMaxSRVCount] = {};
 
 private:
-	wTextureManager() {};
-	wTextureManager(const wTextureManager&) = delete;
-	wTextureManager& operator= (const wTextureManager&) = delete;
-	~wTextureManager() {};
+	SpTextureManager() {};
+	SpTextureManager(const SpTextureManager&) = delete;
+	SpTextureManager& operator= (const SpTextureManager&) = delete;
+	~SpTextureManager() {};
 };
