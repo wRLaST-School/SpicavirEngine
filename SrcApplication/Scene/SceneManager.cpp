@@ -1,8 +1,6 @@
 #include "SceneManager.h"
-#include "GameScene.h"
 #include "TestScene.h"
 #include "Input.h"
-#include "MonkeyScene.h"
 #include "FrameRate.h"
 
 void SceneManager::Init()
