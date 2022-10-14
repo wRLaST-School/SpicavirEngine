@@ -24,6 +24,7 @@
     <ProjectGuid>{44ac3038-21f4-4d3a-b846-3091b26d74cc}</ProjectGuid>
     <RootNamespace>DirectX12Template</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>SpicavirEngineGame</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
