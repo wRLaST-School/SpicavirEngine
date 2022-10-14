@@ -38,6 +38,8 @@ private:
 
     Object3D sphere;
 
+    Object3D points[4];
+
     int timer = 0;
 };
 

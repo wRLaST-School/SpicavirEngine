@@ -15,10 +15,14 @@ void TestScene::Init()
 	camera.farZ = 1000.0f;
 	camera.fov = PI / 2;
 
-	camera.position.x = -3;
-	camera.position.y = 3;
-	camera.position.z = -3;
+	camera.position.x = -10;
+	camera.position.y = 10;
+	camera.position.z = -10;
 	camera.UpdateMatrix();
+
+	camera.target = { 0, 0, 0 };
+
+	camera.targetMode = CameraTargetMode::LookAt;
 
 	RTVManager::CreateRenderTargetTexture(640, 360, "camSpr");
 	cameraSpr = Sprite("camSpr");
@@ -95,7 +99,14 @@ void TestScene::Init()
 
 	skysphere.model = &sky;
 
-	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
+	whiteTex = SpTextureManager::LoadTexture("Resources/white.png", "white");
+
+	for (auto& p : points) {
+		p.model = &mSphere;
+		p.scale = { 0.3f, 0.3f, 0.3f };
+		*p.brightnessCB.contents = { 1.f, 0.f, 0.f, 1.f };
+		p.UpdateMatrix();
+	}
 
 	sphere.model = &mSphere;
 }
@@ -127,10 +138,35 @@ void TestScene::Update()
 	camera.UpdateMatrix();
 #pragma endregion
 
-	//Lerpで移動
 	timer++;
 	timer = min(timer, 300);
-	sphere.position = Vec3::Lerp(Vec3(0, 0, 0), Vec3(-3, 1, 10), (float)timer / 300);
+
+	float t = (float)timer / 300;
+	
+	//制御点
+	Float3 p[4] = {
+		{-7.f, -0.f, 2.f},
+		{-1.f, -6.f, -4.f},
+		{1.5f, 4.f, 3.f},
+		{6.f, 0.f, -4.f}
+	};
+
+	for (int i = 0; i < 4; i++)
+	{
+		points[i].position = p[i];
+		points[i].UpdateMatrix();
+	}
+
+	//2次ベジェを2つ生成
+	Vec3 a = Vec3::Lerp(p[0], p[1], t);
+	Vec3 b = Vec3::Lerp(p[1], p[2], t);
+	Vec3 pos1 = Vec3::Lerp(a, b, t);
+
+	Vec3 c = Vec3::Lerp(p[2], p[3], t);
+	Vec3 pos2 = Vec3::Lerp(b, c, t);
+
+	//最終的な座標
+	sphere.position = Vec3::Lerp(pos1, pos2, t);
 
 	//行列更新
 	cameraSpr.UpdateMatrix();
@@ -151,21 +187,25 @@ void TestScene::Draw3D()
 	Camera::Set(camera);
 	skysphere.Draw();
 	sphere.Draw();
+	for (auto& p : points) p.Draw("white");
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
 	sphere.Draw();
+	for (auto& p : points) p.Draw("white");
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
 	sphere.Draw();
+	for (auto& p : points) p.Draw("white");
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
 	sphere.Draw();
+	for (auto& p : points) p.Draw("white");
 
 	Camera::Set(finalScene);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
