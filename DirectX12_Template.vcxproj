@@ -122,6 +122,9 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,6 +142,9 @@
       <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp14</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -181,6 +187,10 @@
     <ClCompile Include="SrcEngine\Others\Input.cpp" />
     <ClCompile Include="SrcEngine\Others\RenderTarget.cpp" />
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp" />
+    <ClCompile Include="SrcEngine\Others\stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="SrcEngine\Others\TextDrawer.cpp" />
     <ClCompile Include="SrcEngine\Others\Util.cpp" />
     <ClCompile Include="SrcEngine\Others\SpTextureManager.cpp" />
@@ -225,6 +235,7 @@
     <ClInclude Include="SrcEngine\Others\Input.h" />
     <ClInclude Include="SrcEngine\Others\RenderTarget.h" />
     <ClInclude Include="SrcEngine\Others\RTVManager.h" />
+    <ClInclude Include="SrcEngine\Others\stdafx.h" />
     <ClInclude Include="SrcEngine\Others\TextDrawer.h" />
     <ClInclude Include="SrcEngine\Others\Util.h" />
     <ClInclude Include="SrcEngine\Others\SpTextureManager.h" />

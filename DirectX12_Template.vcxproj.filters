@@ -237,6 +237,9 @@
     <ClCompile Include="SrcEngine\Scene\FrameRate.cpp">
       <Filter>Engine\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="SrcEngine\Others\stdafx.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\Scene\FrameRate.h">
       <Filter>Engine\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Others\stdafx.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
