@@ -168,7 +168,7 @@ void Sprite::Draw()
 
 void Sprite::InitCommon()
 {
-	proj = Matrix::Projection(GetwWindow()->width, GetwWindow()->height);
+	proj = Matrix::Projection(GetSpWindow()->width, GetSpWindow()->height);
 }
 
 

@@ -7,7 +7,7 @@
 void MonkeyScene::Init()
 {
 	SpTextureManager::Init();
-	camera.SetRenderSize(GetwWindow()->width, GetwWindow()->height);
+	camera.SetRenderSize(GetSpWindow()->width, GetSpWindow()->height);
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
 	camera.fov = PI / 2;

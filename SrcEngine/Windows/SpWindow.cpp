@@ -2,18 +2,18 @@
 
 static string defWndID = "Default";
 map<string, SpWindow> wWindowList;
-SpWindow* GetwWindow(string ID)
+SpWindow* GetSpWindow(string ID)
 {
     auto res = wWindowList.find(ID);
     return res != wWindowList.end() ? &res->second : nullptr;
 }
 
-SpWindow* GetwWindow()
+SpWindow* GetSpWindow()
 {
-    return GetwWindow(defWndID);
+    return GetSpWindow(defWndID);
 }
 
-void RegisterwWindow(SpWindow wwnd, string ID)
+void RegisterSpWindow(SpWindow wwnd, string ID)
 {
     wWindowList[ID] = wwnd;
 }
@@ -23,7 +23,7 @@ void SetDefaultWindowID(string ID)
     defWndID = ID;
 }
 
-void CloseAllwWindow()
+void CloseAllSpWindow()
 {
 	for (auto itr = wWindowList.begin(); itr != wWindowList.end(); itr++)
 	{

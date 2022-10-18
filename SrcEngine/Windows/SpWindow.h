@@ -19,15 +19,15 @@ private:
 };
 
 /// <summary>
-///	wWindowリストから指定IDのwWindowを探して返す。
+///	SpWindowリストから指定IDのSpWindowを探して返す。
 /// IDを指定しない場合はSetDefaultWindowIDで指定したIDを使う。
 /// </summary>
 /// <param name="ID">string型のID</param>
-/// <returns>成功:wWindowへのポインタ,失敗:nullptr</returns>
-SpWindow* GetwWindow(string ID);
-SpWindow* GetwWindow();
+/// <returns>成功:SpWindowへのポインタ,失敗:nullptr</returns>
+SpWindow* GetSpWindow(string ID);
+SpWindow* GetSpWindow();
 extern map<string, SpWindow> wWindowList;
-void RegisterwWindow(SpWindow wwnd, string ID);
+void RegisterSpWindow(SpWindow spwnd, string ID);
 void SetDefaultWindowID(string ID);
 
-void CloseAllwWindow();
+void CloseAllSpWindow();

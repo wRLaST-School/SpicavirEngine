@@ -85,7 +85,7 @@ void SpDirectX::Init() {
 
 bool SpDirectX::StartFrame()
 {
-	return GetwWindow()->ProcessMessage();
+	return GetSpWindow()->ProcessMessage();
 }
 
 void SpDirectX::PreDrawCommands()
@@ -114,8 +114,8 @@ void SpDirectX::PreDrawCommands()
 
 	D3D12_VIEWPORT viewport{};
 
-	viewport.Width = GetwWindow()->width;
-	viewport.Height = GetwWindow()->height;
+	viewport.Width = GetSpWindow()->width;
+	viewport.Height = GetSpWindow()->height;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -126,9 +126,9 @@ void SpDirectX::PreDrawCommands()
 	D3D12_RECT scissorrect{};
 
 	scissorrect.left = 0;                                       // 切り抜き座標左
-	scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // 切り抜き座標右
 	scissorrect.top = 0;                                        // 切り抜き座標上
-	scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // 切り抜き座標下
 
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
@@ -145,8 +145,8 @@ void SpDirectX::PreDraw3D()
 
 	D3D12_VIEWPORT viewport{};
 
-	viewport.Width = GetwWindow()->width;
-	viewport.Height = GetwWindow()->height;
+	viewport.Width = GetSpWindow()->width;
+	viewport.Height = GetSpWindow()->height;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -157,9 +157,9 @@ void SpDirectX::PreDraw3D()
 	D3D12_RECT scissorrect{};
 
 	scissorrect.left = 0;                                       // 切り抜き座標左
-	scissorrect.right = scissorrect.left + GetwWindow()->width;        // 切り抜き座標右
+	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // 切り抜き座標右
 	scissorrect.top = 0;                                        // 切り抜き座標上
-	scissorrect.bottom = scissorrect.top + GetwWindow()->height;       // 切り抜き座標下
+	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // 切り抜き座標下
 
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
