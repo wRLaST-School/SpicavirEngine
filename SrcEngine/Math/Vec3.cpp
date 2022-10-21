@@ -165,7 +165,7 @@ Vec3 Vec3::Spline(const std::vector<Vec3>& points, float t)
 	if (points.size() <= 2) { return Vec3(0,0,0); }
 	t = Util::Clamp(t, 0.f, 1.f);
 
-	float perSegment = 1.f / (points.size() - 3);
+	float perSegment = 1.f / (points.size() - 1);
 	int currentIndex = t / perSegment;
 
 	if (t == 1.0f)
@@ -176,10 +176,12 @@ Vec3 Vec3::Spline(const std::vector<Vec3>& points, float t)
 	t = t - currentIndex * perSegment;
 	t = t / perSegment;
 
-	const Vec3& p0 = points.at(currentIndex);
+	currentIndex -= 1;
+
+	const Vec3& p0 = points.at(currentIndex < 0 ? 0 : currentIndex);
 	const Vec3& p1 = points.at(currentIndex + 1);
 	const Vec3& p2 = points.at(currentIndex + 2);
-	const Vec3& p3 = points.at(currentIndex + 3);
+	const Vec3& p3 = points.at(currentIndex + 3 >= points.size() ? points.size() - 1 : currentIndex + 3);
 
 	return (p1 * 2 + (-p0 + p2) * t +
 		(p0 * 2 - p1 * 5 + p2 * 4 - p3) * t * t +
