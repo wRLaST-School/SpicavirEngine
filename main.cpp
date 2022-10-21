@@ -32,7 +32,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	{
 		SpWindow wwnd;
 		wwnd.Create(L"DirectX", 1280, 720);
-		RegisterwWindow(wwnd, "Default");
+		RegisterSpWindow(wwnd, "Default");
 	}
 
 	/*DirectX‰Šú‰»ˆ—*/
@@ -118,7 +118,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		TextDrawer::ReleaseDrawStringData();
 	}
 	/*ƒ‹[ƒv‚±‚±‚Ü‚Å*/
-	CloseAllwWindow();
+	CloseAllSpWindow();
 
 	return 0;
 }

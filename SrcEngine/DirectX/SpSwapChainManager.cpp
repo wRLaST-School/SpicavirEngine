@@ -7,8 +7,8 @@ SpSwapChainManager scm;
 
 void SpSwapChainManager::Init()
 {
-	swapchainDesc.Width = GetwWindow()->width;
-	swapchainDesc.Height = GetwWindow()->height;
+	swapchainDesc.Width = GetSpWindow()->width;
+	swapchainDesc.Height = GetSpWindow()->height;
 	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //êFèÓïÒÇÃèëéÆ
 	swapchainDesc.SampleDesc.Count = 1;
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
@@ -17,7 +17,7 @@ void SpSwapChainManager::Init()
 	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	ComPtr<IDXGISwapChain1> swapchain1;
-	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetwWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
+	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetSpWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
 	swapchain1.As(&swapchain);
 
 	RTVManager::CreateHeaps();
