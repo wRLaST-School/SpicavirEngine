@@ -38,7 +38,7 @@ private:
 
     Object3D sphere;
 
-    Object3D points[4];
+    Object3D points[5];
 
     int timer = 0;
 };

@@ -144,29 +144,22 @@ void TestScene::Update()
 	float t = (float)timer / 300;
 	
 	//制御点
-	Float3 p[4] = {
+	vector<Vec3> p = {
 		{-7.f, -0.f, 2.f},
 		{-1.f, -6.f, -4.f},
 		{1.5f, 4.f, 3.f},
-		{6.f, 0.f, -4.f}
+		{6.f, 0.f, -4.f},
+		{10.f, 0.f, -5.f}
 	};
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		points[i].position = p[i];
 		points[i].UpdateMatrix();
 	}
 
-	//2次ベジェを2つ生成
-	Vec3 a = Vec3::Lerp(p[0], p[1], t);
-	Vec3 b = Vec3::Lerp(p[1], p[2], t);
-	Vec3 pos1 = Vec3::Lerp(a, b, t);
-
-	Vec3 c = Vec3::Lerp(p[2], p[3], t);
-	Vec3 pos2 = Vec3::Lerp(b, c, t);
-
 	//最終的な座標
-	sphere.position = Vec3::Lerp(pos1, pos2, t);
+	sphere.position = Vec3::Spline(p, t);
 
 	//行列更新
 	cameraSpr.UpdateMatrix();

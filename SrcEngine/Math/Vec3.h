@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 struct Float3;
 class Vec2;
@@ -57,6 +58,7 @@ public:
 	Vec3 Cross(const Vec3& v2) const;
 
 	static Vec3 Lerp(const Vec3& start, const Vec3& end, const float t);
+	static Vec3 Spline(const std::vector<Vec3>& points, float t);
 
 	operator Float3() const;
 	operator Vec2() const;
