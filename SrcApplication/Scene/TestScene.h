@@ -29,6 +29,7 @@ private:
 
     Object3D ray;
     BillboardY pane;
+    Billboard pane2;
 
     Model mSphere;
     Model mCube;

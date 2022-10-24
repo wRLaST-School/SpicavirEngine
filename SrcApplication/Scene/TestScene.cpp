@@ -96,12 +96,14 @@ void TestScene::Init()
 	mPane = Model("square");
 
 	pane.model = &mPane;
+	pane2.model = &mPane;
 
 	skysphere.model = &sky;
 
 	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
 
 	pane.camera = &camera;
+	pane2.camera = &camera;
 }
 
 void TestScene::Update()
@@ -129,6 +131,22 @@ void TestScene::Update()
 	);
 
 	pane.scale = {1.f / 30, 1.f / 30, 1.f / 30};
+
+	pane2.position = (Vec3)pane.position + Vec3(
+		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
+		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
+		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
+	);
+
+	pane2.position = (Vec3)pane.position + Vec3(
+		(Input::Pad::GetLStick().x) * 0.0001f,
+		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
+		(Input::Pad::GetLStick().y) * 0.0001f
+	);
+
+	pane2.position.x -= 6;
+
+	pane2.scale = { 1.f / 30, 1.f / 30, 1.f / 30 };
 	//camera.rotation = (Vec3)camera.rotation + Vec3(0.01, 0, 0);
 
 	camera.position = (Vec3)camera.position + Vec3(
@@ -150,6 +168,7 @@ void TestScene::Update()
 	zCamSpr.UpdateMatrix();
 	skysphere.UpdateMatrix();
 	pane.UpdateMatrix();
+	pane2.UpdateMatrix();
 }
 
 void TestScene::DrawBack()
@@ -162,21 +181,25 @@ void TestScene::Draw3D()
 	Camera::Set(camera);
 	skysphere.Draw();
 	pane.Draw();
+	pane2.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
 	pane.Draw();
+	pane2.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
 	pane.Draw();
+	pane2.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
 	pane.Draw();
+	pane2.Draw();
 
 	Camera::Set(finalScene);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
