@@ -1,5 +1,5 @@
 #pragma once
-#include "wMath.h"
+#include "SpMath.h"
 #include "Essentials.h"
 class PointLight
 {

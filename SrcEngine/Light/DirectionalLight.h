@@ -1,5 +1,5 @@
 #pragma once
-#include "wMath.h"
+#include "SpMath.h"
 class DirectionalLight
 {
 public:

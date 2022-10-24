@@ -1,11 +1,11 @@
-#include "wRootSignature.h"
-#include "wDirectX.h"
+#include "SpRootSignature.h"
+#include "SpDirectX.h"
 #include "GPipeline.h"
-#include "wConstBuffer.h"
+#include "SpConstBuffer.h"
 
-wRootSignature defRootSig;
+SpRootSignature defRootSig;
 
-void wRootSignature::Init()
+void SpRootSignature::Init()
 {
 	D3D12_DESCRIPTOR_RANGE descRange{};
 
@@ -81,19 +81,19 @@ void wRootSignature::Init()
 	result = GetWDX()->dev->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
 }
 
-wRootSignature* GetRootSignature()
+SpRootSignature* GetRootSignature()
 {
 	return &defRootSig;
 }
 
-void SetRootSignature(wRootSignature rs)
+void SetRootSignature(SpRootSignature rs)
 {
 	defRootSig = rs;
 }
 
 void CreateAndInitRootSignature()
 {
-	wRootSignature rs;
+	SpRootSignature rs;
 	rs.Init();
 	defRootSig = rs;
 }

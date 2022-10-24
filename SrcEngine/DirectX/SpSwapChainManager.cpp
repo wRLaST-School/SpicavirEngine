@@ -1,14 +1,14 @@
-#include "wSwapChainManager.h"
-#include "wWindow.h"
-#include "wDirectX.h"
+#include "SpSwapChainManager.h"
+#include "SpWindow.h"
+#include "SpDirectX.h"
 #include "RTVManager.h"
 
-wSwapChainManager scm;
+SpSwapChainManager scm;
 
-void wSwapChainManager::Init()
+void SpSwapChainManager::Init()
 {
-	swapchainDesc.Width = GetwWindow()->width;
-	swapchainDesc.Height = GetwWindow()->height;
+	swapchainDesc.Width = GetSpWindow()->width;
+	swapchainDesc.Height = GetSpWindow()->height;
 	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //色情報の書式
 	swapchainDesc.SampleDesc.Count = 1;
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
@@ -17,7 +17,7 @@ void wSwapChainManager::Init()
 	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	ComPtr<IDXGISwapChain1> swapchain1;
-	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetwWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
+	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetSpWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
 	swapchain1.As(&swapchain);
 
 	RTVManager::CreateHeaps();
@@ -32,7 +32,7 @@ void wSwapChainManager::Init()
 	GetWDX()->dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 
-void wSwapChainManager::WaitForRender()
+void SpSwapChainManager::WaitForRender()
 {
 	//描画コマンドが終わったら次のフレームの準備
 	GetWDX()->cmdQueue->Signal(fence.Get(), ++fenceVal);
@@ -53,7 +53,7 @@ void InitWSCM()
 	scm.Init();
 }
 
-wSwapChainManager* GetSCM()
+SpSwapChainManager* GetSCM()
 {
 	return &scm;
 }

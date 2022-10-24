@@ -1,15 +1,15 @@
-#include "wDepth.h"
-#include "wWindow.h"
-#include "wDirectX.h"
+#include "SpDepth.h"
+#include "SpWindow.h"
+#include "SpDirectX.h"
 
-wDepth wdp;
+SpDepth wdp;
 
-void wDepth::Init()
+void SpDepth::Init()
 {
 	D3D12_RESOURCE_DESC dResDesc = CD3DX12_RESOURCE_DESC::Tex2D(
 		DXGI_FORMAT_D32_FLOAT,
-		GetwWindow()->width,
-		GetwWindow()->height,
+		GetSpWindow()->width,
+		GetSpWindow()->height,
 		1, 0, 1, 0,
 		D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL
 		);
@@ -41,7 +41,7 @@ void InitWDepth()
 	wdp.Init();
 }
 
-wDepth* GetWDepth()
+SpDepth* GetWDepth()
 {
 	return &wdp;
 }

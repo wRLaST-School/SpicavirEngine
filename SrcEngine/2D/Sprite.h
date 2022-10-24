@@ -1,7 +1,7 @@
 #pragma once
 #include "Essentials.h"
-#include "wTextureManager.h"
-#include "wConstBuffer.h"
+#include "SpTextureManager.h"
+#include "SpConstBuffer.h"
 class Sprite
 {
 public:
@@ -34,7 +34,7 @@ public:
 
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 
-	wConstBuffer<SpriteCBuffData> constBuff;
+	SpConstBuffer<SpriteCBuffData> constBuff;
 
 	TextureKey tex;
 

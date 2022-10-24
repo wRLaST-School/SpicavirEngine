@@ -1,6 +1,6 @@
 #include "Input.h"
 #include "Essentials.h"
-#include "wWindow.h"
+#include "SpWindow.h"
 #include "Util.h"
 
 using namespace Input;
@@ -8,13 +8,13 @@ using namespace Input;
 void Key::Init()
 {
 	Key* instance = GetInstance();
-	HRESULT rr = DirectInput8Create(GetwWindow()->w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&instance->dinput, nullptr);
+	HRESULT rr = DirectInput8Create(GetSpWindow()->w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&instance->dinput, nullptr);
 
 	instance->dinput->CreateDevice(GUID_SysKeyboard, &instance->devkeyboard, NULL);
 
 	instance->devkeyboard->SetDataFormat(&c_dfDIKeyboard);
 
-	instance->devkeyboard->SetCooperativeLevel(GetwWindow()->hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
+	instance->devkeyboard->SetCooperativeLevel(GetSpWindow()->hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 }
 
 void Key::Update()

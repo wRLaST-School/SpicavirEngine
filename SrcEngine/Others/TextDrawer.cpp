@@ -1,5 +1,5 @@
 #include "TextDrawer.h"
-#include "wDirectX.h"
+#include "SpDirectX.h"
 #include "Util.h"
 
 FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
@@ -161,7 +161,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	}
 
 	//ダミーテクスチャ
-	strdata.key = wTextureManager::CreateDummyTextureWithUniqueKey(strdata.width, strdata.height, str, false);
+	strdata.key = SpTextureManager::CreateDummyTextureWithUniqueKey(strdata.width, strdata.height, str, false);
 
 	int drawOriginX = 0;
 	int drawOriginY = 0;
@@ -227,7 +227,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 		}
 	}
 
-	wTextureManager::GetTextureBuff(strdata.key)->WriteToSubresource(
+	SpTextureManager::GetTextureBuff(strdata.key)->WriteToSubresource(
 		0,
 		nullptr,
 		finalTexImageData,
@@ -318,7 +318,7 @@ void TextDrawer::ReleaseDrawStringData()
 {
 	for (auto texKey : GetInstance()->releaseQueue)
 	{
-		wTextureManager::Release(texKey);
+		SpTextureManager::Release(texKey);
 	}
 
 	GetInstance()->releaseQueue.clear();

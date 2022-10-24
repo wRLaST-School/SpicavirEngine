@@ -1,6 +1,6 @@
 #pragma once
 #include "Essentials.h"
-class wSwapChainManager
+class SpSwapChainManager
 {
 public:
 	//TODO:‚±‚ê‚ğRTV‚Ì•û‚ÅRT2‚Â‚ÌVector‚É•Ï‚¦‚éART‚ğResource‚ÂİŒv‚É
@@ -22,4 +22,4 @@ private:
 };
 
 void InitWSCM();
-wSwapChainManager* GetSCM();
+SpSwapChainManager* GetSCM();

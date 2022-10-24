@@ -1,15 +1,15 @@
 #include "Sprite.h"
 #include <fstream>
 #include <sstream>
-#include "wDirectX.h"
+#include "SpDirectX.h"
 #include "GPipeline.h"
-#include "wRootSignature.h"
+#include "SpRootSignature.h"
 
 Sprite::Sprite(TextureKey key)
 {
 	this->tex = key;
 
-	TexMetadata texmeta = wTextureManager::GetTextureMetadata(tex);
+	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
 	this->width = texmeta.width;
 	this->height = texmeta.height;
 	float hlfw = (float)texmeta.width / 2;
@@ -68,9 +68,9 @@ Sprite::Sprite(TextureKey key)
 
 Sprite::Sprite(string path, TextureKey newKey)
 {
-	this->tex = wTextureManager::LoadTexture(path, newKey);
+	this->tex = SpTextureManager::LoadTexture(path, newKey);
 
-	TexMetadata texmeta = wTextureManager::GetTextureMetadata(tex);
+	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
 	this->width = texmeta.width;
 	this->height = texmeta.height;
 	float hlfw = texmeta.width / 2;
@@ -134,7 +134,7 @@ void Sprite::PreSpriteDraw()
 	cl->SetPipelineState(GPipeline::GetState("2d"));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
-	ID3D12DescriptorHeap* ppHeaps[] = { wTextureManager::GetInstance().srvHeap.Get() };
+	ID3D12DescriptorHeap* ppHeaps[] = { SpTextureManager::GetInstance().srvHeap.Get() };
 	cl->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 }
 
@@ -158,7 +158,7 @@ void Sprite::UpdateMatrix()
 void Sprite::Draw()
 {
 	constBuff.contents->mat = constBuff.contents->mat * proj;
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, wTextureManager::GetGPUDescHandle(tex));
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, this->constBuff.buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
@@ -168,7 +168,7 @@ void Sprite::Draw()
 
 void Sprite::InitCommon()
 {
-	proj = Matrix::Projection(GetwWindow()->width, GetwWindow()->height);
+	proj = Matrix::Projection(GetSpWindow()->width, GetSpWindow()->height);
 }
 
 

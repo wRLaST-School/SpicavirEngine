@@ -1,7 +1,7 @@
 #pragma once
 #include "Essentials.h"
-#include "wDirectX.h"
-class wShader
+#include "SpDirectX.h"
+class SpShader
 {
 public:
 	void Init(string vsPath, string psPath);
@@ -11,5 +11,5 @@ public:
 };
 
 void RegisterAndInitShader(string id, string vsPath, string psPath);
-wShader* GetShader(string id);
+SpShader* GetShader(string id);
 

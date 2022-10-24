@@ -1,13 +1,13 @@
 #include "RTVManager.h"
-#include "wDirectX.h"
-#include "wSwapChainManager.h"
-#include "wDepth.h"
+#include "SpDirectX.h"
+#include "SpSwapChainManager.h"
+#include "SpDepth.h"
 
 void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 {
 	CloseCurrentResBar(GetCurrentRenderTarget());
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
-	wDirectX* dx = GetWDX();
+	SpDirectX* dx = GetWDX();
 	//リソースバリアーを書き込み可能状態に
 	dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
 	dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
@@ -28,11 +28,11 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key)
 {
 	CloseCurrentResBar(GetCurrentRenderTarget());
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
-	int index = wTextureManager::GetIndex(key);
+	int index = SpTextureManager::GetIndex(key);
 
-	wDirectX* dx = GetWDX();
+	SpDirectX* dx = GetWDX();
 	//リソースバリアーを書き込み可能状態に
-	dx->barrierDesc.Transition.pResource = wTextureManager::GetTextureBuff(key);
+	dx->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 	dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	dx->cmdList->ResourceBarrier(1, &dx->barrierDesc);
@@ -50,16 +50,16 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key)
 
 void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key)
 {
-	key = wTextureManager::CreateDummyTexture(width, height, key);
+	key = SpTextureManager::CreateDummyTexture(width, height, key);
 
-	if (wTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
+	if (SpTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
 
-	GetWDX()->dev->CreateRenderTargetView(wTextureManager::GetTextureBuff(key), nullptr,
-		GetHeapCPUHandle(wTextureManager::GetIndex(key)));
+	GetWDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(key), nullptr,
+		GetHeapCPUHandle(SpTextureManager::GetIndex(key)));
 
 	//デフォルトのリソースバリアをセット
 	ID3D12Resource* lastRes = GetWDX()->barrierDesc.Transition.pResource;
-	GetWDX()->barrierDesc.Transition.pResource = wTextureManager::GetTextureBuff(key);
+	GetWDX()->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 	GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 

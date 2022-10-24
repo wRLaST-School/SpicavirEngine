@@ -33,7 +33,7 @@ public:
     float nearZ;
     float farZ;
 
-    wConstBuffer<ConstBufferDataVProj> cameraViewProjMatrixCB;
+    SpConstBuffer<ConstBufferDataVProj> cameraViewProjMatrixCB;
 
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 

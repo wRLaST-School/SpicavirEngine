@@ -1,6 +1,6 @@
 #pragma once
 #include "Essentials.h"
-class wDepth
+class SpDepth
 {
 public:
 	void Init();
@@ -10,5 +10,5 @@ public:
 };
 
 void InitWDepth();
-wDepth* GetWDepth();
+SpDepth* GetWDepth();
 

@@ -1,11 +1,11 @@
 #pragma once
 #include "Essentials.h"
-#include "wShader.h"
+#include "SpShader.h"
 //TODO:İŒv‚ªƒKƒo‚·‚¬‚é‚Ì‚Åpso,rootsignature‚ÌİŒv‚ğŒ©’¼‚·
 struct PipelineDesc
 {
 	struct Shader {
-		wShader* pShader;
+		SpShader* pShader;
 	} Shader;
 
 	struct Blend {

@@ -1,7 +1,7 @@
 #pragma once
 #include "Essentials.h"
-#include "wMath.h"
-#include "wConstBuffer.h"
+#include "SpMath.h"
+#include "SpConstBuffer.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
 class Light
@@ -44,7 +44,7 @@ public:
 	static DirectionalLight directional;
 
 private:
-	wConstBuffer<LightCBData> lightCB;
+	SpConstBuffer<LightCBData> lightCB;
 
 	map<PointLightKey, PointLight> pointLights;
 

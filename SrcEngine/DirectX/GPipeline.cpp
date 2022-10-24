@@ -1,5 +1,5 @@
 #include "GPipeline.h"
-#include "wRootSignature.h"
+#include "SpRootSignature.h"
 map<string, GPipeline> psoMap;
 
 void GPipeline::InitDesc(PipelineDesc desc)

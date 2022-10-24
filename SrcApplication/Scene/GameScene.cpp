@@ -1,12 +1,12 @@
 #include "GameScene.h"
 #include "Input.h"
 #include "RTVManager.h"
-#include "wSwapChainManager.h"
+#include "SpSwapChainManager.h"
 #include "TextDrawer.h"
 
 void GameScene::Init()
 {
-	wTextureManager::Init();
+	SpTextureManager::Init();
 }
 
 void GameScene::Update()

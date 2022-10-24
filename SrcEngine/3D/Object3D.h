@@ -1,7 +1,7 @@
 #pragma once
-#include "wConstBuffer.h"
+#include "SpConstBuffer.h"
 #include "Model.h"
-#include "wTextureManager.h"
+#include "SpTextureManager.h"
 struct ConstBufferDataTransform {
 	Matrix mat;//3D変換行列
 };
@@ -16,8 +16,8 @@ public:
 	//別途読み込んだテクスチャを使う場合
 	void Draw(TextureKey key);
 
-	wConstBuffer<ConstBufferDataTransform> transformCB;
-	wConstBuffer<Float4> brightnessCB;
+	SpConstBuffer<ConstBufferDataTransform> transformCB;
+	SpConstBuffer<Float4> brightnessCB;
 
 	Float3 scale = { 1, 1, 1 };
 	Float3 rotation = { 0, 0, 0 };

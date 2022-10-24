@@ -1,7 +1,7 @@
 #pragma once
 #include "ICollider.h"
 #include "SphereCollider.h"
-#include "wMath.h"
+#include "SpMath.h"
 class RayCollider :
     public ICollider
 {
