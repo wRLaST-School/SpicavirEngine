@@ -1,7 +1,12 @@
 #include "SpWindow.h"
+#include <SpSwapChainManager.h>
+#include <SpDepth.h>
 
 static string defWndID = "Default";
 map<string, SpWindow> wWindowList;
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 SpWindow* GetSpWindow(string ID)
 {
     auto res = wWindowList.find(ID);
@@ -36,7 +41,7 @@ void SpWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 	height = windowHeight;
 
 	w.cbSize = sizeof(WNDCLASSEX);
-	w.lpfnWndProc = (WNDPROC)WindowProc;
+	w.lpfnWndProc = WndProc;
 	w.lpszClassName = title;
 	w.hInstance = GetModuleHandle(nullptr);
 	w.hCursor = LoadCursor(NULL, IDC_ARROW);
@@ -76,11 +81,44 @@ bool SpWindow::ProcessMessage()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
-
 	if (msg.message == WM_QUIT)
 	{
 		return true;
 	}
 
 	return false;
+}
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch (msg)
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+
+	case WM_SIZE:
+		{
+			SpWindow* spw = GetSpWindow();
+			if (spw != nullptr)
+			{
+				spw->width = LOWORD(lParam);
+				spw->height = HIWORD(lParam);
+			}
+
+			if (GetSCM()->swapchain.Get() != nullptr)
+			{
+				GetSCM()->ResizeAllBuffers();
+			}
+
+			if (GetWDepth()->depthBuffer != nullptr)
+			{
+				GetWDepth()->Resize();
+			}
+
+			return 0;
+		}
+	}
+
+	return DefWindowProc(hwnd, msg, wParam, lParam);
 }

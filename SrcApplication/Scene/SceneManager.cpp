@@ -2,6 +2,7 @@
 #include "TestScene.h"
 #include "Input.h"
 #include "FrameRate.h"
+#include <SingleCamTestScene.h>
 
 void SceneManager::Init()
 {
@@ -16,6 +17,11 @@ void SceneManager::Update()
 	if (Input::Key::Triggered(DIK_R))
 	{
 		Transition<TestScene>();
+	}
+
+	if (Input::Key::Triggered(DIK_T))
+	{
+		Transition<SingleCamTestScene>();
 	}
 }
 

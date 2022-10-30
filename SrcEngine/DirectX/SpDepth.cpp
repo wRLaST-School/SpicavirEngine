@@ -36,6 +36,12 @@ void SpDepth::Init()
 	GetWDX()->dev->CreateDepthStencilView(depthBuffer.Get(), &dsvDesc, dsvHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
+void SpDepth::Resize()
+{
+	depthBuffer->Release();
+	Init();
+}
+
 void InitWDepth()
 {
 	wdp.Init();

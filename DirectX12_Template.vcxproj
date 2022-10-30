@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
+    <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
     <ClCompile Include="SrcEngine\2D\Sprite.cpp" />
     <ClCompile Include="SrcEngine\3D\Billboard.cpp" />
@@ -198,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
+    <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
     <ClInclude Include="SrcEngine\2D\Sprite.h" />
     <ClInclude Include="SrcEngine\3D\Billboard.h" />
