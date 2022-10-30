@@ -1,13 +1,13 @@
 #include "TestScene.h"
 #include "RTVManager.h"
-#include "wSwapChainManager.h"
+#include "SpSwapChainManager.h"
 #include "Input.h"
 #include "RayCollider.h"
 #include "TextDrawer.h"
 
 void TestScene::Init()
 {
-	wTextureManager::Init();
+	SpTextureManager::Init();
 
 #pragma region l•ªŠ„‰æ–Ê—pƒJƒƒ‰İ’è
 	camera.SetRenderSize(640, 360);
@@ -100,7 +100,7 @@ void TestScene::Init()
 
 	skysphere.model = &sky;
 
-	whiteTex = wTextureManager::LoadTexture("Resources/white.png", "white");
+	whiteTex = SpTextureManager::LoadTexture("Resources/white.png", "white");
 
 	pane.camera = &camera;
 	pane2.camera = &camera;

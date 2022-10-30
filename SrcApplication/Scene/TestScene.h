@@ -1,6 +1,6 @@
 #pragma once
 #include "IScene.h"
-#include "wMath.h"
+#include "SpMath.h"
 #include "Camera.h"
 #include "Sprite.h"
 #include "Billboard.h"

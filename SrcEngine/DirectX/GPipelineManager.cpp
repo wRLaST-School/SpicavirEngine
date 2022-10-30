@@ -8,7 +8,10 @@
 void GPipelineManager::CreateAll()
 {
 #pragma region デフォルト3D
-	RegisterAndInitShader("def", "BasicVS.hlsl", "BasicPS.hlsl");
+	RegisterShader("def");
+	InitVS("def", "BasicVS.hlsl");
+	InitGS("def", "BasicGS.hlsl");
+	InitPS("def", "BasicPS.hlsl");
 
 	PipelineDesc defDesc;
 	defDesc.Render.InputLayout.pInputElementDescs = ModelCommon::inputLayout;
@@ -22,7 +25,9 @@ void GPipelineManager::CreateAll()
 #pragma endregion
 
 #pragma region デフォルト2D
-	RegisterAndInitShader("2d", "SpriteVS.hlsl", "SpritePS.hlsl");
+	RegisterShader("2d");
+	InitVS("2d", "BasicVS.hlsl");
+	InitPS("2d", "BasicPS.hlsl");
 
 	PipelineDesc pl2dDesc;
 	pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;

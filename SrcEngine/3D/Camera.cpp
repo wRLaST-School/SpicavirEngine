@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include <SpDirectX.h>
+
 Camera::Camera()
 {
 }
