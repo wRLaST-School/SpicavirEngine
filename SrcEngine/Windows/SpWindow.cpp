@@ -1,7 +1,7 @@
 #include "SpWindow.h"
 #include <SpSwapChainManager.h>
 #include <SpDepth.h>
-
+#include <Sprite.h>
 static string defWndID = "Default";
 map<string, SpWindow> wWindowList;
 
@@ -104,6 +104,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			{
 				spw->width = LOWORD(lParam);
 				spw->height = HIWORD(lParam);
+				Sprite::InitCommon();
 			}
 
 			if (GetSCM()->swapchain.Get() != nullptr)

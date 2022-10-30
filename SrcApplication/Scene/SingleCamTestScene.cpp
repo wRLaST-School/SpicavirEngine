@@ -38,5 +38,5 @@ void SingleCamTestScene::Draw3D()
 
 void SingleCamTestScene::DrawSprite()
 {
-	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
+	TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
 }
