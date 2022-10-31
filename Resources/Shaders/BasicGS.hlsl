@@ -1,4 +1,5 @@
 #include "Basic.hlsli"
+
 [maxvertexcount(3)]
 void main(
 	triangle VSOutput input[3] : SV_POSITION, 
