@@ -6,14 +6,35 @@ Camera::Camera()
 {
 }
 
-void Camera::SetRenderSize(UINT w, UINT h)
+void Camera::SetRenderSize(float w, float h)
 {
 	renderWidth = w;
 	renderHeight = h;
 }
 
+void Camera::UseDefaultParams()
+{
+	useWindowSize = true;
+	nearZ = .1f;
+	farZ = 1000.f;
+
+	position = { 0.f, 0.f, -10.f };
+	rotation = { 0.f, 0.f, 0.f };
+
+	fov = PIf / 2;
+	nearZ = 0.1f;
+	farZ = 1000.0f;
+}
+
 void Camera::Set(Camera& camera)
 {
+	if (camera.useWindowSize)
+	{
+		SpWindow* wnd = GetSpWindow();
+		camera.renderWidth = wnd->width;
+		camera.renderHeight = wnd->height;
+	}
+
 	D3D12_VIEWPORT viewport{};
 
 	viewport.Width = camera.renderWidth;

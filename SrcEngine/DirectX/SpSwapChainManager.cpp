@@ -9,7 +9,7 @@ void SpSwapChainManager::Init()
 {
 	swapchainDesc.Width = GetSpWindow()->width;
 	swapchainDesc.Height = GetSpWindow()->height;
-	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //色情報の書式
+	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //色情報の書式(SpSwapChainManager::ResizeAllBuffers()にも同じものを書く)
 	swapchainDesc.SampleDesc.Count = 1;
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
 	swapchainDesc.BufferCount = 2;
@@ -46,6 +46,25 @@ void SpSwapChainManager::WaitForRender()
 
 	GetWDX()->cmdAllocator->Reset();
 	GetWDX()->cmdList->Reset(GetWDX()->cmdAllocator.Get(), nullptr);
+}
+
+void SpSwapChainManager::ResizeAllBuffers()
+{
+	SpWindow* spw = GetSpWindow();
+	for (auto& bb : backBuffers)
+	{
+		bb.Reset();
+	}
+
+	swapchain->ResizeBuffers(0, spw->width, spw->height, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
+
+	//リサイズ後にバックバッファーを再生成
+	for (int i = 0; i < 2; i++)
+	{
+		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
+
+		GetWDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, RTVManager::GetHeapCPUHandle(RTVManager::GetInstance().numRT - 2 + i));
+	}
 }
 
 void InitWSCM()

@@ -4,6 +4,7 @@ class SpDepth
 {
 public:
 	void Init();
+	void Resize();
 
 	ComPtr<ID3D12Resource> depthBuffer;
 	ComPtr<ID3D12DescriptorHeap> dsvHeap = nullptr;

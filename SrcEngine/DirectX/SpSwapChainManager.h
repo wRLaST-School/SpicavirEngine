@@ -18,6 +18,8 @@ public:
 	void Init();
 	void WaitForRender();
 
+	void ResizeAllBuffers();
+
 private:
 };
 

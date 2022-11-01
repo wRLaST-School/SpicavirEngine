@@ -21,17 +21,20 @@ class Camera :
 {
 public:
     Camera();
-    void SetRenderSize(UINT w, UINT h);
+    void SetRenderSize(float w, float h);
+    void UseDefaultParams();
 
     Float3 target = {0.0f, 0.0f, 0.0f};
 
-    float fov;
+    //レンダーサイズ
+    float renderWidth;
+    float renderHeight;
 
-    UINT renderWidth;
-    UINT renderHeight;
+    bool useWindowSize = false;
 
     float nearZ;
     float farZ;
+    float fov;
 
     SpConstBuffer<ConstBufferDataVProj> cameraViewProjMatrixCB;
 
