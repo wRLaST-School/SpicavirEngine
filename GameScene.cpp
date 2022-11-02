@@ -4,6 +4,7 @@
 
 void GameScene::Init()
 {
+	SpTextureManager::Init();
 	camera.UseDefaultParams();
 	camera.renderWidth = 300;
 	camera.renderHeight = 600;
