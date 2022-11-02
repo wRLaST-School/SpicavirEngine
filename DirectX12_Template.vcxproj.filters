@@ -234,6 +234,9 @@
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -357,6 +360,9 @@
       <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>

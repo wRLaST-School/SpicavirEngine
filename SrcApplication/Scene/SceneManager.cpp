@@ -3,10 +3,11 @@
 #include "Input.h"
 #include "FrameRate.h"
 #include <SingleCamTestScene.h>
+#include <GameScene.h>
 
 void SceneManager::Init()
 {
-	Transition<TestScene>();
+	Transition<GameScene>();
 }
 
 void SceneManager::Update()
@@ -14,14 +15,14 @@ void SceneManager::Update()
 	FrameRate::FrameStartWithWait();
 	currentScene->Update();
 
-	if (Input::Key::Triggered(DIK_R))
+	if (Input::Key::Triggered(DIK_T))
 	{
 		Transition<TestScene>();
 	}
 
-	if (Input::Key::Triggered(DIK_T))
+	if (Input::Key::Triggered(DIK_R))
 	{
-		Transition<SingleCamTestScene>();
+		Transition<GameScene>();
 	}
 }
 
