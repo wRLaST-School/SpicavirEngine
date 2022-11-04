@@ -17,7 +17,7 @@ void GPipelineManager::CreateAll()
 	defDesc.Render.InputLayout.pInputElementDescs = ModelCommon::inputLayout;
 	defDesc.Render.InputLayout.NumElements = _countof(ModelCommon::inputLayout);
 
-	defDesc.RootSignature.ptr = GetRootSignature()->rootsignature.Get();
+	defDesc.RootSignature.ptr = SpRootSignature::Get("3D")->rootsignature.Get();
 
 	defDesc.Shader.pShader = GetShader("def");
 
@@ -33,7 +33,7 @@ void GPipelineManager::CreateAll()
 	pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
 	pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
 
-	pl2dDesc.RootSignature.ptr = GetRootSignature()->rootsignature.Get();
+	pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
 
 	pl2dDesc.Shader.pShader = GetShader("2d");
 

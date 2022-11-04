@@ -7,7 +7,6 @@ class Billboard :
 public:
     Billboard()
     {
-        Object3D::Object3D();
     };
 
     void UpdateMatrix();
@@ -21,7 +20,6 @@ class BillboardY :
 public:
     BillboardY()
     {
-        Billboard::Billboard();
     }
 
     void UpdateMatrix();

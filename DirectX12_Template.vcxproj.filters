@@ -234,6 +234,9 @@
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="RootSignatureManager.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -358,6 +361,9 @@
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="RootSignatureManager.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

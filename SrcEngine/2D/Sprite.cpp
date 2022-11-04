@@ -4,6 +4,7 @@
 #include "SpDirectX.h"
 #include "GPipeline.h"
 #include "SpRootSignature.h"
+#include <RootSignatureManager.h>
 
 Sprite::Sprite(TextureKey key)
 {
@@ -130,7 +131,7 @@ Sprite::Sprite(string path, TextureKey newKey)
 void Sprite::PreSpriteDraw()
 {
 	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
-	cl->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
+	cl->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
 	cl->SetPipelineState(GPipeline::GetState("2d"));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
@@ -159,7 +160,7 @@ void Sprite::Draw()
 {
 	constBuff.contents->mat = constBuff.contents->mat * proj;
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, this->constBuff.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 

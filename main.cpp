@@ -15,6 +15,7 @@
 #include "Sprite.h"
 #include "TextDrawer.h"
 #include "GPipelineManager.h"
+#include <RootSignatureManager.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -50,7 +51,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	SpTextureManager::Create();
 
-	CreateAndInitRootSignature();
+	RootSignatureManager::RegisterAllRS();
 
 	GPipelineManager::CreateAll();
 
@@ -85,7 +86,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		GetWDX()->PreDrawCommands();
 
-		try{
+		Sprite::PreSpriteDraw();
+		sceneManager.DrawBack();
+
+		Sprite::PostSpriteDraw();
+
+		GetWDX()->PreDraw3D();
+
+		try {
 			Light::UpdateLightData();
 		}
 		catch (PointLight::QuantityOverflow& e) {
@@ -93,13 +101,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 
 		Light::Use();
-
-		Sprite::PreSpriteDraw();
-		sceneManager.DrawBack();
-
-		Sprite::PostSpriteDraw();
-
-		GetWDX()->PreDraw3D();
 
 		sceneManager.Draw3D();
 

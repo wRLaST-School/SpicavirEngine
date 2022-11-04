@@ -207,7 +207,6 @@ void TestScene::Draw3D()
 
 void TestScene::DrawSprite()
 {
-	Camera::Set(finalScene);
 	cameraSpr.Draw();
 	xCamSpr.Draw();
 	yCamSpr.Draw();
