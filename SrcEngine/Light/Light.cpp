@@ -1,4 +1,5 @@
 #include "Light.h"
+#include <SpDirectX.h>
 
 void Light::Init()
 {

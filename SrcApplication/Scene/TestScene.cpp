@@ -15,14 +15,10 @@ void TestScene::Init()
 	camera.farZ = 1000.0f;
 	camera.fov = PI / 2;
 
-	camera.position.x = -10;
-	camera.position.y = 10;
-	camera.position.z = -10;
+	camera.position.x = -3;
+	camera.position.y = 3;
+	camera.position.z = -3;
 	camera.UpdateMatrix();
-
-	camera.target = { 0, 0, 0 };
-
-	camera.targetMode = CameraTargetMode::LookAt;
 
 	RTVManager::CreateRenderTargetTexture(640, 360, "camSpr");
 	cameraSpr = Sprite("camSpr");
@@ -97,23 +93,21 @@ void TestScene::Init()
 
 	mSphere = Model("sphere");
 
+	mPane = Model("square");
+
+	pane.model = &mPane;
+	pane2.model = &mPane;
+
 	skysphere.model = &sky;
 
 	whiteTex = SpTextureManager::LoadTexture("Resources/white.png", "white");
 
-	for (auto& p : points) {
-		p.model = &mSphere;
-		p.scale = { 0.3f, 0.3f, 0.3f };
-		*p.brightnessCB.contents = { 1.f, 0.f, 0.f, 1.f };
-		p.UpdateMatrix();
-	}
-
-	sphere.model = &mSphere;
+	pane.camera = &camera;
+	pane2.camera = &camera;
 }
 
 void TestScene::Update()
 {
-#pragma region 四分割画面用カメラ設定
 	cameraSpr.position = { 960, 180 };
 	xCamSpr.position = { 960, 540 };
 	yCamSpr.position = { 320, 180 };
@@ -123,6 +117,37 @@ void TestScene::Update()
 	xCamSpr.scale = { 1.0f, 1.0f };
 	yCamSpr.scale = { 1.0f, 1.0f };
 	zCamSpr.scale = { 1.0f, 1.0f };
+
+	pane.position = (Vec3)pane.position + Vec3(
+		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
+		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
+		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
+	);
+
+	pane.position = (Vec3)pane.position + Vec3(
+		(Input::Pad::GetLStick().x) * 0.0001f,
+		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
+		(Input::Pad::GetLStick().y) * 0.0001f
+	);
+
+	pane.scale = {1.f / 30, 1.f / 30, 1.f / 30};
+
+	pane2.position = (Vec3)pane.position + Vec3(
+		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
+		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
+		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
+	);
+
+	pane2.position = (Vec3)pane.position + Vec3(
+		(Input::Pad::GetLStick().x) * 0.0001f,
+		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
+		(Input::Pad::GetLStick().y) * 0.0001f
+	);
+
+	pane2.position.x -= 6;
+
+	pane2.scale = { 1.f / 30, 1.f / 30, 1.f / 30 };
+	//camera.rotation = (Vec3)camera.rotation + Vec3(0.01, 0, 0);
 
 	camera.position = (Vec3)camera.position + Vec3(
 		(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)) * 0.1f,
@@ -136,38 +161,14 @@ void TestScene::Update()
 		(Input::Key::Down(DIK_5) - Input::Key::Down(DIK_6)) * 0.01f
 	);
 	camera.UpdateMatrix();
-#pragma endregion
 
-	timer++;
-	timer = min(timer, 300);
-
-	float t = (float)timer / 300;
-	
-	//制御点
-	vector<Vec3> p = {
-		{-7.f, -0.f, 2.f},
-		{-1.f, -6.f, -4.f},
-		{1.5f, 4.f, 3.f},
-		{6.f, 0.f, -4.f},
-		{10.f, 0.f, -5.f}
-	};
-
-	for (int i = 0; i < 5; i++)
-	{
-		points[i].position = p[i];
-		points[i].UpdateMatrix();
-	}
-
-	//最終的な座標
-	sphere.position = Vec3::Spline(p, t);
-
-	//行列更新
 	cameraSpr.UpdateMatrix();
 	xCamSpr.UpdateMatrix();
 	yCamSpr.UpdateMatrix();
 	zCamSpr.UpdateMatrix();
 	skysphere.UpdateMatrix();
-	sphere.UpdateMatrix();
+	pane.UpdateMatrix();
+	pane2.UpdateMatrix();
 }
 
 void TestScene::DrawBack()
@@ -179,26 +180,26 @@ void TestScene::Draw3D()
 	RTVManager::SetRenderTargetToTexture("camSpr");
 	Camera::Set(camera);
 	skysphere.Draw();
-	sphere.Draw();
-	for (auto& p : points) p.Draw("white");
+	pane.Draw();
+	pane2.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
-	sphere.Draw();
-	for (auto& p : points) p.Draw("white");
+	pane.Draw();
+	pane2.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
-	sphere.Draw();
-	for (auto& p : points) p.Draw("white");
+	pane.Draw();
+	pane2.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
-	sphere.Draw();
-	for (auto& p : points) p.Draw("white");
+	pane.Draw();
+	pane2.Draw();
 
 	Camera::Set(finalScene);
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
@@ -206,23 +207,14 @@ void TestScene::Draw3D()
 
 void TestScene::DrawSprite()
 {
-	Camera::Set(finalScene);
 	cameraSpr.Draw();
 	xCamSpr.Draw();
 	yCamSpr.Draw();
 	zCamSpr.Draw();
 
-	StringOptions arialOpt;
-	arialOpt.fontOptions.name = "Arial";
-	arialOpt.size = 32;
-	arialOpt.fontOptions.resolution = 128;
-
-	string str("");
-	str += to_string(sphere.position.x);
-	str += ", "; str += to_string(sphere.position.y);
-	str += ", "; str += to_string(sphere.position.z);
-	str += ", T = "; str += to_string(timer);
-	TextDrawer::DrawString( str, 32, 32, Align::TopLeft, arialOpt);
+	StringOptions udevGothicOpt;
+	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
+	udevGothicOpt.size = 32;
 
 	//TextDrawer::DrawString("0うにゃ～～～～0", 1180, 100, Align::TopRight, udevGothicOpt);
 	//TextDrawer::DrawString("亜hogeえオ123", 1180, 132, Align::TopRight);

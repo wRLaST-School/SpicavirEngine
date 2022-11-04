@@ -10,6 +10,11 @@ void GPipeline::InitDesc(PipelineDesc desc)
 	psod.PS.pShaderBytecode = desc.Shader.pShader->psBlob->GetBufferPointer();
 	psod.PS.BytecodeLength = desc.Shader.pShader->psBlob->GetBufferSize();
 
+	if (desc.Shader.pShader->gsBlob != nullptr)
+	{
+		psod.GS.pShaderBytecode = desc.Shader.pShader->gsBlob->GetBufferPointer();
+		psod.GS.BytecodeLength = desc.Shader.pShader->gsBlob->GetBufferSize();
+	}
 	psod.PrimitiveTopologyType = desc.Render.PrimitiveTopologyType;
 
 	psod.SampleMask = desc.Render.SampleMask;

@@ -234,8 +234,8 @@
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
+    <ClCompile Include="RootSignatureManager.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -362,8 +362,8 @@
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    <ClInclude Include="RootSignatureManager.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,6 +377,9 @@
       <Filter>Shaders</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\SpriteVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
   </ItemGroup>

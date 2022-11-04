@@ -103,7 +103,7 @@ void SpDirectX::PreDrawCommands()
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
 	/*•`‰æˆ—*/
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
+	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 
 	//ID3D12DescriptorHeap* ppHeaps[] = { basicDescHeap.Get()};
 	//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
@@ -141,7 +141,7 @@ void SpDirectX::PreDraw3D()
 {
 	/*•`‰æˆ—*/
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(GetRootSignature()->rootsignature.Get());
+	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 
 	D3D12_VIEWPORT viewport{};
 

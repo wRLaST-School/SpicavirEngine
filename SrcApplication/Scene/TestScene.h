@@ -27,19 +27,18 @@ private:
 
     Camera finalScene;
 
+    Object3D ray;
+    BillboardY pane;
+    Billboard pane2;
+
     Model mSphere;
     Model mCube;
+    Model mPane;
 
     TextureKey whiteTex;
 
     Model sky;
 
     Object3D skysphere;
-
-    Object3D sphere;
-
-    Object3D points[5];
-
-    int timer = 0;
 };
 

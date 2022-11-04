@@ -8,13 +8,16 @@
 void GPipelineManager::CreateAll()
 {
 #pragma region デフォルト3D
-	RegisterAndInitShader("def", "BasicVS.hlsl", "BasicPS.hlsl");
+	RegisterShader("def");
+	InitVS("def", "BasicVS.hlsl");
+	InitGS("def", "BasicGS.hlsl");
+	InitPS("def", "BasicPS.hlsl");
 
 	PipelineDesc defDesc;
 	defDesc.Render.InputLayout.pInputElementDescs = ModelCommon::inputLayout;
 	defDesc.Render.InputLayout.NumElements = _countof(ModelCommon::inputLayout);
 
-	defDesc.RootSignature.ptr = GetRootSignature()->rootsignature.Get();
+	defDesc.RootSignature.ptr = SpRootSignature::Get("3D")->rootsignature.Get();
 
 	defDesc.Shader.pShader = GetShader("def");
 
@@ -22,13 +25,15 @@ void GPipelineManager::CreateAll()
 #pragma endregion
 
 #pragma region デフォルト2D
-	RegisterAndInitShader("2d", "SpriteVS.hlsl", "SpritePS.hlsl");
+	RegisterShader("2d");
+	InitVS("2d", "BasicVS.hlsl");
+	InitPS("2d", "BasicPS.hlsl");
 
 	PipelineDesc pl2dDesc;
 	pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
 	pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
 
-	pl2dDesc.RootSignature.ptr = GetRootSignature()->rootsignature.Get();
+	pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
 
 	pl2dDesc.Shader.pShader = GetShader("2d");
 

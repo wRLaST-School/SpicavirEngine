@@ -99,25 +99,28 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	case WM_SIZE:
 		{
-			SpWindow* spw = GetSpWindow();
-			if (spw != nullptr)
+			if (LOWORD(lParam) && HIWORD(lParam))
 			{
-				spw->width = LOWORD(lParam);
-				spw->height = HIWORD(lParam);
-				Sprite::InitCommon();
-			}
+				SpWindow* spw = GetSpWindow();
+				if (spw != nullptr)
+				{
+					spw->width = LOWORD(lParam);
+					spw->height = HIWORD(lParam);
+					Sprite::InitCommon();
+				}
 
-			if (GetSCM()->swapchain.Get() != nullptr)
-			{
-				GetSCM()->ResizeAllBuffers();
-			}
+				if (GetSCM()->swapchain.Get() != nullptr)
+				{
+					GetSCM()->ResizeAllBuffers();
+				}
 
-			if (GetWDepth()->depthBuffer != nullptr)
-			{
-				GetWDepth()->Resize();
-			}
+				if (GetWDepth()->depthBuffer != nullptr)
+				{
+					GetWDepth()->Resize();
+				}
 
-			return 0;
+				return 0;
+			}
 		}
 	}
 
