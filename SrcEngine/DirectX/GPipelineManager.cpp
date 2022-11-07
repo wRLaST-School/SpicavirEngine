@@ -26,8 +26,8 @@ void GPipelineManager::CreateAll()
 
 #pragma region デフォルト2D
 	RegisterShader("2d");
-	InitVS("2d", "BasicVS.hlsl");
-	InitPS("2d", "BasicPS.hlsl");
+	InitVS("2d", "SpriteVS.hlsl");
+	InitPS("2d", "SpritePS.hlsl");
 
 	PipelineDesc pl2dDesc;
 	pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
