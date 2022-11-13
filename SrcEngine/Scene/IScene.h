@@ -5,6 +5,8 @@ class IScene
 public:
 	IScene() { 
 	};
+
+	virtual void LoadResources() = 0;
 	virtual void Init() = 0;
 	virtual void Update() = 0;
 	virtual void DrawBack() = 0;

@@ -115,6 +115,7 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 		if (!GetInstance().isOccupied[i])
 		{
 			GetInstance().nextRegisteredTextureIndex = i;
+			perSceneTextures[currentSceneResIndex].push_back(key);
 			return key;
 		}
 	}
@@ -214,6 +215,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 		if (!GetInstance().isOccupied[i])
 		{
 			GetInstance().nextRegisteredTextureIndex = i;
+			perSceneTextures[currentSceneResIndex].push_back(tryNum == 0 ? key : key + std::to_string(tryNum));
 			return tryNum == 0 ? key : key + std::to_string(tryNum);
 		}
 	}
@@ -268,6 +270,7 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 		if (!GetInstance().isOccupied[i])
 		{
 			GetInstance().nextRegisteredTextureIndex = i;
+			perSceneTextures[currentSceneResIndex].push_back(key);
 			return key;
 		}
 	}
@@ -329,6 +332,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 		if (!GetInstance().isOccupied[i])
 		{
 			GetInstance().nextRegisteredTextureIndex = i;
+			perSceneTextures[currentSceneResIndex].push_back(tryKey);
 			return tryKey;
 		}
 	}
@@ -379,8 +383,38 @@ void SpTextureManager::Release(TextureKey key)
 	return;
 }
 
+void SpTextureManager::ReleasePerSceneTexture()
+{
+	int lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+	for (auto itr = perSceneTextures[lastSceneResIndex].begin(); itr != perSceneTextures[lastSceneResIndex].end(); itr++)
+	{
+		bool usingInCurrentScene = false;
+		for (auto key : perSceneTextures[currentSceneResIndex])
+		{
+			if (key == *itr)
+			{
+				usingInCurrentScene = true;
+			}
+		}
+
+		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
+		{
+			Release(*itr);
+		}
+	}
+	perSceneTextures[lastSceneResIndex].clear();
+}
+
+void SpTextureManager::PreLoadNewScene()
+{
+	currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+}
+
 SpTextureManager &SpTextureManager::GetInstance()
 {
 	static SpTextureManager obj;
 	return obj;
 }
+
+list<TextureKey> SpTextureManager::perSceneTextures[2] = {};
+int SpTextureManager::currentSceneResIndex = 0;

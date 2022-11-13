@@ -154,7 +154,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RootSignatureManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />

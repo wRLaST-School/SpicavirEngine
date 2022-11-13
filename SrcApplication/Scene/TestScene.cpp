@@ -5,10 +5,26 @@
 #include "RayCollider.h"
 #include "TextDrawer.h"
 
+void TestScene::LoadResources()
+{
+	RTVManager::CreateRenderTargetTexture(640, 360, "camSpr");
+	RTVManager::CreateRenderTargetTexture(640, 360, "xCamSpr");
+	RTVManager::CreateRenderTargetTexture(640, 360, "yCamSpr");
+	RTVManager::CreateRenderTargetTexture(640, 360, "zCamSpr");
+
+	SpTextureManager::LoadTexture("Resources/white.png", "white");
+
+	ModelManager::Register("cube", "Cube");
+
+	ModelManager::Register("skydome", "Sky");
+
+	ModelManager::Register("sphere", "Sphere");
+
+	ModelManager::Register("square", "Square");
+}
+
 void TestScene::Init()
 {
-	SpTextureManager::Init();
-
 #pragma region élï™äÑâÊñ ópÉJÉÅÉâê›íË
 	camera.SetRenderSize(640, 360);
 	camera.nearZ = 0.1f;
@@ -20,7 +36,6 @@ void TestScene::Init()
 	camera.position.z = -3;
 	camera.UpdateMatrix();
 
-	RTVManager::CreateRenderTargetTexture(640, 360, "camSpr");
 	cameraSpr = Sprite("camSpr");
 
 	xCam.SetRenderSize(640, 360);
@@ -34,7 +49,6 @@ void TestScene::Init()
 	xCam.rotation = { 0.0f, PI / 2, 0.0f };
 	xCam.UpdateMatrix();
 
-	RTVManager::CreateRenderTargetTexture(640, 360, "xCamSpr");
 	xCamSpr = Sprite("xCamSpr");
 
 	yCam.SetRenderSize(640, 360);
@@ -48,7 +62,6 @@ void TestScene::Init()
 	yCam.rotation = { PI / 2, 0.0f, 0.0f };
 	yCam.UpdateMatrix();
 
-	RTVManager::CreateRenderTargetTexture(640, 360, "yCamSpr");
 	yCamSpr = Sprite("yCamSpr");
 
 	zCam.SetRenderSize(640, 360);
@@ -62,7 +75,6 @@ void TestScene::Init()
 	zCam.rotation = { 0.0f, 0.0f, 0.0f };
 	zCam.UpdateMatrix();
 
-	RTVManager::CreateRenderTargetTexture(640, 360, "zCamSpr");
 	zCamSpr = Sprite("zCamSpr");
 
 	camera.projectionMode = ProjectionMode::Perspective;
@@ -87,20 +99,12 @@ void TestScene::Init()
 	finalScene.UpdateMatrix();
 #pragma endregion
 
-	mCube = Model("cube");
+	pane.model = ModelManager::GetModel("Square");
+	pane2.model = ModelManager::GetModel("Square");
 
-	sky = Model("skydome");
+	skysphere.model = ModelManager::GetModel("Sky");
 
-	mSphere = Model("sphere");
-
-	mPane = Model("square");
-
-	pane.model = &mPane;
-	pane2.model = &mPane;
-
-	skysphere.model = &sky;
-
-	whiteTex = SpTextureManager::LoadTexture("Resources/white.png", "white");
+	whiteTex = "white";
 
 	pane.camera = &camera;
 	pane2.camera = &camera;

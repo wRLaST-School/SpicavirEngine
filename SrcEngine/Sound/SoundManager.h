@@ -63,10 +63,16 @@ public:
 	static void StopBGM(SoundKey key);
 
 	static void ReleaseAllSounds();
+	static void ReleasePerSceneSounds();
+	static void PreLoadNewScene();
 
 private:
 	static ComPtr<IXAudio2> xAudio2;
 	static IXAudio2MasteringVoice* masterVoice;
 	static map<SoundKey, SoundData> sndMap;
+
+private:
+	static list<SoundKey> perSceneSounds[2];
+	static int currentSceneResIndex;
 
 };

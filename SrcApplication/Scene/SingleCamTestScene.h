@@ -7,6 +7,7 @@ class SingleCamTestScene :
 {
 public:
     ~SingleCamTestScene() {};
+    void LoadResources() override;
     void Init() override;
     void Update() override;
     void DrawBack() override;
@@ -15,10 +16,8 @@ public:
 
 private:
     Object3D obj;
-    Model mCube;
 
     Object3D sky;
-    Model mSky;
 
     Camera camera;
 };

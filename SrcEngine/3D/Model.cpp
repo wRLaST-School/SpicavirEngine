@@ -385,3 +385,51 @@ void Model::UpdateMaterial()
 	materialCB.contents->specular = material.specular;
 	materialCB.contents->alpha = material.alpha;
 }
+
+void ModelManager::Register(string modelName, ModelKey key)
+{
+	models.emplace(key, Model(modelName));
+}
+
+Model* ModelManager::GetModel(ModelKey key)
+{
+	return &models.find(key)->second;
+}
+
+void ModelManager::ReleasePerSceneModel()
+{
+	int lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+	for (auto itr = perSceneModels[lastSceneResIndex].begin(); itr != perSceneModels[lastSceneResIndex].end(); itr++)
+	{
+		bool usingInCurrentScene = false;
+		for (auto key : perSceneModels[currentSceneResIndex])
+		{
+			if (key == *itr)
+			{
+				usingInCurrentScene = true;
+			}
+		}
+
+		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
+		{
+			models.erase(*itr);
+		}
+	}
+
+	perSceneModels[lastSceneResIndex].clear();
+}
+
+void ModelManager::ReleaseAllModels()
+{
+	models.clear();
+}
+
+void ModelManager::PreLoadNewScene()
+{
+	currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+}
+
+
+map<ModelKey, Model> ModelManager::models;
+list<ModelKey> ModelManager::perSceneModels[2];
+int ModelManager::currentSceneResIndex = 0;

@@ -71,6 +71,7 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
     soundData.bufferSize = data.size;
 
     sndMap.emplace(key, soundData);
+    perSceneSounds[currentSceneResIndex].push_back(key);
 
     return key;
 }
@@ -118,6 +119,11 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
     return pSnd;
 }
 
+SoundData* SoundManager::GetSoundData(SoundKey key)
+{
+    return &sndMap.find(key)->second;
+}
+
 void SoundManager::StopBGM(SoundKey key)
 {
     SoundData* pSnd = &sndMap[key];
@@ -133,6 +139,36 @@ void SoundManager::ReleaseAllSounds()
     sndMap.clear();
 }
 
+void SoundManager::ReleasePerSceneSounds()
+{
+    int lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+    for (auto itr = perSceneSounds[lastSceneResIndex].begin(); itr != perSceneSounds[lastSceneResIndex].end(); itr++)
+    {
+        bool usingInCurrentScene = false;
+        for (auto key : perSceneSounds[currentSceneResIndex])
+        {
+            if (key == *itr)
+            {
+                usingInCurrentScene = true;
+            }
+        }
+
+        if (!usingInCurrentScene) //今のシーンで使われていないならリリース
+        {
+            GetSoundData(*itr)->Release();
+        }
+    }
+
+    perSceneSounds[lastSceneResIndex].clear();
+}
+
+void SoundManager::PreLoadNewScene()
+{
+    currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+}
+
 ComPtr<IXAudio2> SoundManager::xAudio2;
 IXAudio2MasteringVoice* SoundManager::masterVoice;
 map<SoundKey, SoundData> SoundManager::sndMap;
+list<SoundKey> SoundManager::perSceneSounds[2];
+int SoundManager::currentSceneResIndex;

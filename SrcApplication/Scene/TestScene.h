@@ -9,6 +9,7 @@ class TestScene :
 {
 public:
     ~TestScene() {};
+    void LoadResources();
     void Init() override;
     void Update() override;
     void DrawBack() override;
@@ -30,10 +31,6 @@ private:
     Object3D ray;
     BillboardY pane;
     Billboard pane2;
-
-    Model mSphere;
-    Model mCube;
-    Model mPane;
 
     TextureKey whiteTex;
 

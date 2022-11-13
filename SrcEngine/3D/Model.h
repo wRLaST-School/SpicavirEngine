@@ -4,7 +4,6 @@
 #include "Vec3.h"
 #include "SpTextureManager.h"
 #include "SpConstBuffer.h"
-//TODO:頂点データを読み込めるようにする
 
 struct Vertex
 {
@@ -80,4 +79,25 @@ public:
 	Material material;
 
 	SpConstBuffer<ConstBufferDataMaterial> materialCB;
+};
+
+typedef std::string ModelKey;
+
+class ModelManager
+{
+public:
+	static void Register(string modelName, ModelKey key);
+
+	static Model* GetModel(ModelKey key);
+
+	static void ReleasePerSceneModel();
+
+	static void ReleaseAllModels();
+
+	static void PreLoadNewScene();
+
+private:
+	static map<ModelKey, Model> models;
+	static list<ModelKey> perSceneModels[2];
+	static int currentSceneResIndex;
 };
