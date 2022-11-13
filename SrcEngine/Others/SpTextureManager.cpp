@@ -394,7 +394,13 @@ void SpTextureManager::ReleasePerSceneTexture()
 			if (key == *itr)
 			{
 				usingInCurrentScene = true;
+				break;
 			}
+		}
+
+		if (*itr == "notexture")
+		{
+			usingInCurrentScene = true;
 		}
 
 		if (!usingInCurrentScene) //今のシーンで使われていないならリリース

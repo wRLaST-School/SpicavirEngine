@@ -25,6 +25,12 @@ void SceneManager::Update()
 		Transition();
 	}
 
+	if (Input::Key::Triggered(DIK_N))
+	{
+		LoadScene<SingleCamTestScene>();
+		Transition();
+	}
+
 	if (Input::Key::Triggered(DIK_R))
 	{
 		InstantTransition<SingleCamTestScene>();
