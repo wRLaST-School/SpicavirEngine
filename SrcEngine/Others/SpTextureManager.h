@@ -1,5 +1,6 @@
 #pragma once
 #include "Essentials.h"
+#include <exc_unordered_map.h>
 
 typedef std::string TextureKey;
 typedef size_t SRVHeapIndex;
@@ -36,8 +37,8 @@ public:
 
 private:
 	size_t nextRegisteredTextureIndex = 0;
-	map<TextureKey, SRVHeapIndex> textureMap = {};
-	map<TextureKey, TexMetadata> texDataMap = {};
+	exc_unordered_map<TextureKey, SRVHeapIndex> textureMap = {};
+	exc_unordered_map<TextureKey, TexMetadata> texDataMap = {};
 	bool isOccupied[wMaxSRVCount] = {};
 
 	static list<TextureKey> perSceneTextures[2];

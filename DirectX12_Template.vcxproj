@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="exc_unordered_map.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RootSignatureManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="exc_unordered_map.h" />
     <ClInclude Include="RootSignatureManager.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
