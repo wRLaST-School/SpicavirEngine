@@ -62,6 +62,51 @@ void RootSignatureManager::RegisterAllRS()
 	}
 #pragma endregion
 
+#pragma region 3D Particle
+	{
+		SpRootSignature* rsparticle = SpRootSignature::Register("Particle");
+
+		rsparticle->UseDefaultSettings();
+
+		D3D12_DESCRIPTOR_RANGE descRange{};
+		descRange.NumDescriptors = 1;
+		descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+		descRange.BaseShaderRegister = 0;
+		descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+		//定数バッファ0番マテリアル
+		rsparticle->params.emplace_back();
+		rsparticle->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rsparticle->params[0].Descriptor.ShaderRegister = 0;
+		rsparticle->params[0].Descriptor.RegisterSpace = 0;
+		rsparticle->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//テクスチャレジスタ0番
+		rsparticle->params.emplace_back();
+		rsparticle->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+		rsparticle->params[1].DescriptorTable.pDescriptorRanges = &descRange;
+		rsparticle->params[1].DescriptorTable.NumDescriptorRanges = 1;
+		rsparticle->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+
+		//定数バッファ1番輝度
+		rsparticle->params.emplace_back();
+		rsparticle->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rsparticle->params[2].Descriptor.ShaderRegister = 1;
+		rsparticle->params[2].Descriptor.RegisterSpace = 0;
+		rsparticle->params[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//定数バッファ2番ビュー・射影変換行列
+		rsparticle->params.emplace_back();
+		rsparticle->params[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rsparticle->params[3].Descriptor.ShaderRegister = 2;
+		rsparticle->params[3].Descriptor.RegisterSpace = 0;
+		rsparticle->params[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		rsparticle->Create();
+	}
+#pragma endregion
+
 #pragma region 2D Default RS
 	{
 		SpRootSignature* rs2d = SpRootSignature::Register("2D");

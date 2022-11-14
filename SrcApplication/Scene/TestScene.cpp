@@ -182,26 +182,31 @@ void TestScene::Draw3D()
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	particle.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	particle.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	particle.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	particle.Draw();
 
 	Camera::Set(finalScene);
+	Camera::UseCurrent();
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 

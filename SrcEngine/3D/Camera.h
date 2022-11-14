@@ -41,6 +41,8 @@ public:
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
     static void Set(Camera& camera);
+    static Camera* current;
+    static void UseCurrent();
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 };

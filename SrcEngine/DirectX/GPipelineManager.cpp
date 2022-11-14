@@ -4,6 +4,7 @@
 #include "SpRootSignature.h"
 #include "Model.h"
 #include "Sprite.h"
+#include <Particle.h>
 
 void GPipelineManager::CreateAll()
 {
@@ -22,6 +23,25 @@ void GPipelineManager::CreateAll()
 	defDesc.Shader.pShader = GetShader("def");
 
 	GPipeline::Create(defDesc, "def");
+#pragma endregion
+
+#pragma region パーティクル3D
+	RegisterShader("particle");
+	InitVS("particle", "ParticleVS.hlsl");
+	InitGS("particle", "ParticleGS.hlsl");
+	InitPS("particle", "ParticlePS.hlsl");
+
+	PipelineDesc particleDesc;
+	particleDesc.Render.InputLayout.pInputElementDescs = ParticleCommon::inputLayout;
+	particleDesc.Render.InputLayout.NumElements = _countof(ParticleCommon::inputLayout);
+
+	particleDesc.Render.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_POINT;
+
+	particleDesc.RootSignature.ptr = SpRootSignature::Get("Particle")->rootsignature.Get();
+
+	particleDesc.Shader.pShader = GetShader("particle");
+
+	GPipeline::Create(particleDesc, "particle");
 #pragma endregion
 
 #pragma region デフォルト2D

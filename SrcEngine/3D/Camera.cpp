@@ -28,17 +28,22 @@ void Camera::UseDefaultParams()
 
 void Camera::Set(Camera& camera)
 {
-	if (camera.useWindowSize)
+	current = &camera;
+}
+
+void Camera::UseCurrent()
+{
+	if (current->useWindowSize)
 	{
 		SpWindow* wnd = GetSpWindow();
-		camera.renderWidth = wnd->width;
-		camera.renderHeight = wnd->height;
+		current->renderWidth = wnd->width;
+		current->renderHeight = wnd->height;
 	}
 
 	D3D12_VIEWPORT viewport{};
 
-	viewport.Width = camera.renderWidth;
-	viewport.Height = camera.renderHeight;
+	viewport.Width = current->renderWidth;
+	viewport.Height = current->renderHeight;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -49,22 +54,24 @@ void Camera::Set(Camera& camera)
 	D3D12_RECT scissorrect{};
 
 	scissorrect.left = 0;                                       // 切り抜き座標左
-	scissorrect.right = scissorrect.left + camera.renderWidth;        // 切り抜き座標右
+	scissorrect.right = scissorrect.left + current->renderWidth;        // 切り抜き座標右
 	scissorrect.top = 0;                                        // 切り抜き座標上
-	scissorrect.bottom = scissorrect.top + camera.renderHeight;       // 切り抜き座標下
+	scissorrect.bottom = scissorrect.top + current->renderHeight;       // 切り抜き座標下
 
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
-	Matrix vMat = camera.targetMode == CameraTargetMode::LookAt ? 
-		Matrix::ViewLookAt(camera.position, camera.target, camera.matWorld.ExtractAxisY()) : 
-		Matrix::ViewLookTo(camera.position, camera.matWorld.ExtractAxisZ(), camera.matWorld.ExtractAxisY());
+	Matrix vMat = current->targetMode == CameraTargetMode::LookAt ?
+		Matrix::ViewLookAt(current->position, current->target, current->matWorld.ExtractAxisY()) :
+		Matrix::ViewLookTo(current->position, current->matWorld.ExtractAxisZ(), current->matWorld.ExtractAxisY());
 
-	Matrix pMat = camera.projectionMode == ProjectionMode::Perspective ? 
-		Matrix::Projection(camera.fov, (float)camera.renderWidth / (float)camera.renderHeight, camera.nearZ, camera.farZ) :
-		Matrix::ProjectionOrtho((float)camera.renderWidth, (float)camera.renderHeight, camera.nearZ, camera.farZ, 20);
+	Matrix pMat = current->projectionMode == ProjectionMode::Perspective ?
+		Matrix::Projection(current->fov, (float)current->renderWidth / (float)current->renderHeight, current->nearZ, current->farZ) :
+		Matrix::ProjectionOrtho((float)current->renderWidth, (float)current->renderHeight, current->nearZ, current->farZ, 20);
 
-	camera.cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
-	camera.cameraViewProjMatrixCB.contents->cameraPos = camera.position;
+	current->cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
+	current->cameraViewProjMatrixCB.contents->cameraPos = current->position;
 
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, camera.cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, current->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
 }
+
+Camera* Camera::current = nullptr;
