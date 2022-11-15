@@ -24,7 +24,7 @@ void SpTextureManager::Init()
 		ins.isOccupied[i] = false;
 	}
 	
-	ins.textureMap.Access([&](auto map) {
+	ins.textureMap.Access([&](auto& map) {
 		map.clear();
 		});
 
@@ -109,13 +109,13 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
 	
 	SpTextureManager::GetInstance().textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			map[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
 		}
 	);
 
 	SpTextureManager::GetInstance().texDataMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			map[key] = metadata;
 		}
 	);
@@ -215,20 +215,20 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	{
 		string tryKey = tryNum == 0 ? key : key + std::to_string(tryNum);
 		SpTextureManager::GetInstance().textureMap.Access(
-			[&](auto map) {
+			[&](auto& map) {
 				succeeded = map.try_emplace(tryKey, SpTextureManager::GetInstance().nextRegisteredTextureIndex).second;
 			}
 		);
 	}
 
 	ins.textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			map[tryNum == 0 ? key : key + std::to_string(tryNum)] = ins.nextRegisteredTextureIndex;
 		}
 	);
 
 	ins.texDataMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			map[tryNum == 0 ? key : key + std::to_string(tryNum)] = metadata;
 		}
 	);
@@ -284,13 +284,13 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
 
 	SpTextureManager::GetInstance().textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			map[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
 		}
 	);
 	
 	SpTextureManager::GetInstance().texDataMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			TexMetadata& pTexMeta = map[key];
 			pTexMeta = TexMetadata{};
 			pTexMeta.width = width;
@@ -354,13 +354,13 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	{
 		tryKey = tryNum == 0 ? key : key + std::to_string(tryNum);
 		SpTextureManager::GetInstance().textureMap.Access(
-			[&](auto map) {
+			[&](auto& map) {
 				succeeded = map.try_emplace(tryKey, SpTextureManager::GetInstance().nextRegisteredTextureIndex).second;
 			}
 		);
 	}
 	SpTextureManager::GetInstance().texDataMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			TexMetadata& pTexMeta = map[key];
 			pTexMeta = TexMetadata{};
 			pTexMeta.width = width;
@@ -389,7 +389,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
 	GetInstance().textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * map[key];
 
 		}
@@ -402,7 +402,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE SpTextureManager::GetGPUDescHandle(TextureKey key)
 	D3D12_GPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetGPUDescriptorHandleForHeapStart();
 	GetInstance().textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * map[key];
 
 		}
@@ -414,7 +414,7 @@ TexMetadata SpTextureManager::GetTextureMetadata(TextureKey key)
 {
 	TexMetadata meta;
 	GetInstance().texDataMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			meta = map[key];
 		}
 	);
@@ -425,7 +425,7 @@ ID3D12Resource* SpTextureManager::GetTextureBuff(TextureKey key)
 {
 	SRVHeapIndex index = 114514;
 	GetInstance().textureMap.Access(
-		[&](unordered_map<TextureKey, SRVHeapIndex> map) {
+		[&](auto& map) {
 			index = map[key];
 		}
 	);
@@ -436,7 +436,7 @@ int SpTextureManager::GetIndex(TextureKey key)
 {
 	int ret;
 	GetInstance().textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			ret = map[key];
 		}
 	);
@@ -449,14 +449,14 @@ void SpTextureManager::Release(TextureKey key)
 
 	ins.isOccupied[GetIndex(key)] = false;
 	ins.textureMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			ins.texBuffs[map[key]] = ComPtr<ID3D12Resource>();
 			map.erase(key);
 		}
 	);
 
 	ins.texDataMap.Access(
-		[&](auto map) {
+		[&](auto& map) {
 			map.erase(key);
 		}
 	);
