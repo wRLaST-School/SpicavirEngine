@@ -388,12 +388,23 @@ void Model::UpdateMaterial()
 
 void ModelManager::Register(string modelName, ModelKey key)
 {
-	models.emplace(key, Model(modelName));
+	models.Access(
+		[&](auto& map) {
+			map.emplace(key, Model(modelName));
+		}
+	);
 }
 
 Model* ModelManager::GetModel(ModelKey key)
 {
-	return &models.find(key)->second;
+	Model* ret;
+	models.Access(
+		[&](auto& map) {
+			ret = &map.find(key)->second;
+		}
+	);
+
+	return ret;
 }
 
 void ModelManager::ReleasePerSceneModel()
@@ -412,7 +423,11 @@ void ModelManager::ReleasePerSceneModel()
 
 		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
 		{
-			models.erase(*itr);
+			models.Access(
+				[&](auto& map) {
+					map.erase(*itr);
+				}
+			);
 		}
 	}
 
@@ -430,6 +445,6 @@ void ModelManager::PreLoadNewScene()
 }
 
 
-map<ModelKey, Model> ModelManager::models;
+exc_unordered_map<ModelKey, Model> ModelManager::models;
 list<ModelKey> ModelManager::perSceneModels[2];
 int ModelManager::currentSceneResIndex = 0;

@@ -4,6 +4,7 @@
 #include "Vec3.h"
 #include "SpTextureManager.h"
 #include "SpConstBuffer.h"
+#include <exc_unordered_map.h>
 
 struct Vertex
 {
@@ -97,7 +98,7 @@ public:
 	static void PreLoadNewScene();
 
 private:
-	static map<ModelKey, Model> models;
+	static exc_unordered_map<ModelKey, Model> models;
 	static list<ModelKey> perSceneModels[2];
 	static int currentSceneResIndex;
 };

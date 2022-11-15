@@ -70,7 +70,11 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
     soundData.pBuffer = reinterpret_cast<BYTE*>(pBuffer);
     soundData.bufferSize = data.size;
 
-    sndMap.emplace(key, soundData);
+    sndMap.Access(
+        [&](auto& map) {
+            map.emplace(key, soundData);
+        }
+    );
     perSceneSounds[currentSceneResIndex].push_back(key);
 
     return key;
@@ -79,7 +83,13 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
 void SoundManager::Play(SoundKey key)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
-    SoundData* pSnd = &sndMap[key];
+    
+    SoundData* pSnd;
+    sndMap.Access(
+        [&](auto& map) {
+            pSnd = &map[key];
+        }
+    );
 
     xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
 
@@ -95,7 +105,12 @@ void SoundManager::Play(SoundKey key)
 SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
-    SoundData* pSnd = &sndMap[key];
+    SoundData* pSnd;
+    sndMap.Access(
+        [&](auto& map) {
+            pSnd = &map[key];
+        }
+    );
 
     if (pSnd->sound != nullptr)
     {
@@ -121,21 +136,36 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
 
 SoundData* SoundManager::GetSoundData(SoundKey key)
 {
-    return &sndMap.find(key)->second;
+    SoundData* pSnd;
+    sndMap.Access(
+        [&](auto& map) {
+            pSnd = &map[key];
+        }
+    );
+    return pSnd;
 }
 
 void SoundManager::StopBGM(SoundKey key)
 {
-    SoundData* pSnd = &sndMap[key];
+    SoundData* pSnd;
+    sndMap.Access(
+        [&](auto& map) {
+            pSnd = &map[key];
+        }
+    );
     pSnd->sound->Stop();
 }
 
 void SoundManager::ReleaseAllSounds()
 {
-    for (auto itr = sndMap.begin(); itr != sndMap.end(); itr++)
-    {
-        itr->second.Release();
-    }
+    sndMap.Access(
+        [&](auto& map) {
+            for (auto itr = map.begin(); itr != map.end(); itr++)
+            {
+                itr->second.Release();
+            }
+        }
+    );
     sndMap.clear();
 }
 
@@ -169,6 +199,6 @@ void SoundManager::PreLoadNewScene()
 
 ComPtr<IXAudio2> SoundManager::xAudio2;
 IXAudio2MasteringVoice* SoundManager::masterVoice;
-map<SoundKey, SoundData> SoundManager::sndMap;
+exc_unordered_map<SoundKey, SoundData> SoundManager::sndMap;
 list<SoundKey> SoundManager::perSceneSounds[2];
 int SoundManager::currentSceneResIndex;
