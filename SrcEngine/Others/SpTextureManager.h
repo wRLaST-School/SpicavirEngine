@@ -1,5 +1,6 @@
 #pragma once
 #include "Essentials.h"
+#include <exc_unordered_map.h>
 
 typedef std::string TextureKey;
 typedef size_t SRVHeapIndex;
@@ -23,6 +24,9 @@ public:
 	static int GetIndex(TextureKey key);
 
 	static void Release(TextureKey key);
+	//前のシーンで使われていて今のシーンで使われていないテクスチャをリリース
+	static void ReleasePerSceneTexture();
+	static void PreLoadNewScene();
 
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc = {};
 	ComPtr<ID3D12DescriptorHeap> srvHeap = nullptr;
@@ -33,10 +37,12 @@ public:
 
 private:
 	size_t nextRegisteredTextureIndex = 0;
-	map<TextureKey, SRVHeapIndex> textureMap = {};
-	map<TextureKey, TexMetadata> texDataMap = {};
+	exc_unordered_map<TextureKey, SRVHeapIndex> textureMap = {};
+	exc_unordered_map<TextureKey, TexMetadata> texDataMap = {};
 	bool isOccupied[wMaxSRVCount] = {};
 
+	static list<TextureKey> perSceneTextures[2];
+	static int currentSceneResIndex;
 private:
 	SpTextureManager() {};
 	SpTextureManager(const SpTextureManager&) = delete;
