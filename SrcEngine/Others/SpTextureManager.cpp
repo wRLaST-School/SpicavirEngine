@@ -266,7 +266,7 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 		&texHeapProp,
 		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
 		&textureResourceDesc,
-		initAsRenderTarget ? D3D12_RESOURCE_STATE_RENDER_TARGET : D3D12_RESOURCE_STATE_GENERIC_READ,
+		initAsRenderTarget ? D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE : D3D12_RESOURCE_STATE_GENERIC_READ,
 		&clval,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
 
@@ -330,7 +330,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 		&texHeapProp,
 		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
 		&textureResourceDesc,
-		initAsRenderTarget ? D3D12_RESOURCE_STATE_RENDER_TARGET : D3D12_RESOURCE_STATE_GENERIC_READ,
+		initAsRenderTarget ? D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE : D3D12_RESOURCE_STATE_GENERIC_READ,
 		&clval,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
 
