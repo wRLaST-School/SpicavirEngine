@@ -2,12 +2,11 @@
 #include "IScene.h"
 #include <Object3D.h>
 #include <Camera.h>
-class SingleCamTestScene :
+class GameScene :
     public IScene
 {
 public:
-    ~SingleCamTestScene() {};
-    void LoadResources() override;
+    ~GameScene() {};
     void Init() override;
     void Update() override;
     void DrawBack() override;
@@ -16,8 +15,10 @@ public:
 
 private:
     Object3D obj;
+    Model mCube;
 
     Object3D sky;
+    Model mSky;
 
     Camera camera;
 };

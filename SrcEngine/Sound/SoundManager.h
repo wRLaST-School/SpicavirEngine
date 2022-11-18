@@ -4,6 +4,7 @@
 #pragma comment(lib, "xaudio2.lib")
 
 #include <fstream>
+#include <exc_unordered_map.h>
 
 typedef string SoundKey;
 
@@ -63,10 +64,16 @@ public:
 	static void StopBGM(SoundKey key);
 
 	static void ReleaseAllSounds();
+	static void ReleasePerSceneSounds();
+	static void PreLoadNewScene();
 
 private:
 	static ComPtr<IXAudio2> xAudio2;
 	static IXAudio2MasteringVoice* masterVoice;
-	static map<SoundKey, SoundData> sndMap;
+	static exc_unordered_map<SoundKey, SoundData> sndMap;
+
+private:
+	static list<SoundKey> perSceneSounds[2];
+	static int currentSceneResIndex;
 
 };

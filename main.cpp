@@ -58,9 +58,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	/*Init Draw End*/
 	Sprite::InitCommon();
 
+	//Init Textures
+	SpTextureManager::Init();
+
 	//Init Scene
-	SceneManager sceneManager = SceneManager();
-	sceneManager.Init();
+	SceneManager::Init();
 
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
@@ -81,13 +83,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*毎フレーム処理*/
 
 		/*更新処理*/
-		sceneManager.Update();
+		SceneManager::Update();
 		/*更新処理ここまで*/
 
 		GetWDX()->PreDrawCommands();
 
 		Sprite::PreSpriteDraw();
-		sceneManager.DrawBack();
+		SceneManager::DrawBack();
 
 		Sprite::PostSpriteDraw();
 
@@ -102,11 +104,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		Light::Use();
 
-		sceneManager.Draw3D();
+		SceneManager::Draw3D();
 
 		Sprite::PreSpriteDraw();
 
-		sceneManager.DrawSprite();
+		SceneManager::DrawSprite();
 
 		Sprite::PostSpriteDraw();
 

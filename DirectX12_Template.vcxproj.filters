@@ -239,6 +239,9 @@
     </ClCompile>
     <ClCompile Include="Particle.cpp">
       <Filter>Engine\ソースファイル\3D</Filter>
+	</ClCompile>
+    <ClCompile Include="exc_unordered_map.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Engine\ヘッダーファイル\3D</Filter>
+	</ClInclude>
+    <ClInclude Include="exc_unordered_map.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

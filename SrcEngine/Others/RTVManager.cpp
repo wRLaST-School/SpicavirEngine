@@ -58,14 +58,14 @@ void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key
 		GetHeapCPUHandle(SpTextureManager::GetIndex(key)));
 
 	//デフォルトのリソースバリアをセット
-	ID3D12Resource* lastRes = GetWDX()->barrierDesc.Transition.pResource;
-	GetWDX()->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
-	GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	//ID3D12Resource* lastRes = GetWDX()->barrierDesc.Transition.pResource;
+	//GetWDX()->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
+	//GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	//GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 
-	GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
+	//GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
 
-	GetWDX()->barrierDesc.Transition.pResource = lastRes;
+	//GetWDX()->barrierDesc.Transition.pResource = lastRes;
 }
 
 void RTVManager::CreateHeaps()

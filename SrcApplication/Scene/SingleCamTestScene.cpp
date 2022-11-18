@@ -2,6 +2,12 @@
 #include "SingleCamTestScene.h"
 #include <TextDrawer.h>
 
+void SingleCamTestScene::LoadResources()
+{
+	ModelManager::Register("cube", "Cube");
+	ModelManager::Register("skydome", "Sky");
+}
+
 void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
@@ -9,11 +15,8 @@ void SingleCamTestScene::Init()
 	camera.renderWidth = 300;
 	camera.renderHeight = 600;
 
-	mCube = Model("cube");
-	mSky = Model("skydome");
-
-	obj.model = &mCube;
-	sky.model = &mSky;
+	obj.model = ModelManager::GetModel("Cube");
+	sky.model = ModelManager::GetModel("Sky");
 }
 
 void SingleCamTestScene::Update()
@@ -38,5 +41,5 @@ void SingleCamTestScene::Draw3D()
 
 void SingleCamTestScene::DrawSprite()
 {
-	TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
+	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
 }
