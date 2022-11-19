@@ -239,8 +239,14 @@
     </ClCompile>
     <ClCompile Include="Particle.cpp">
       <Filter>Engine\ソースファイル\3D</Filter>
-	</ClCompile>
+    </ClCompile>
     <ClCompile Include="exc_unordered_map.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="IParticle.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -373,8 +379,17 @@
     </ClInclude>
     <ClInclude Include="Particle.h">
       <Filter>Engine\ヘッダーファイル\3D</Filter>
-	</ClInclude>
+    </ClInclude>
     <ClInclude Include="exc_unordered_map.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="IParticle.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Emitter.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
