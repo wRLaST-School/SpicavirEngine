@@ -74,4 +74,14 @@ void Camera::UseCurrent()
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, current->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
 }
 
+Matrix Camera::GetCurrentCameraBillboardMat()
+{
+	Matrix camRot = current->targetMode == CameraTargetMode::LookAt ?
+		Matrix::ViewLookAt(current->position, current->target, current->matWorld.ExtractAxisY()) :
+		Matrix::ViewLookTo(current->position, current->matWorld.ExtractAxisZ(), current->matWorld.ExtractAxisY());
+	camRot[3] = { 0,0,0,1 };
+
+	return -camRot;
+}
+
 Camera* Camera::current = nullptr;

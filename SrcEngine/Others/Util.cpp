@@ -20,3 +20,22 @@ std::wstring Util::StrToWStr(std::string str, int page)
     // •ÏŠ·Œ‹‰Ê‚ð•Ô‚·
     return ret;
 }
+
+bool Util::Chance(int percentage)
+{
+    return (Util::RNG(0, 99, true) < percentage);
+}
+
+int Util::RNG(int min, int max, bool preciseMode)
+{
+    if (!preciseMode) {
+        return (rand() % (max + 1 - min) + min);
+    }
+
+    int ret = 0;
+    do {
+        ret = rand();
+    } while (ret >= RAND_MAX - RAND_MAX % (max + 1 - min));
+    ret = ret % (max + 1 - min) + min;
+    return ret;
+}

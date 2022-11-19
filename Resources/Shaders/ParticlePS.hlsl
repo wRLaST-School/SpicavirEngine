@@ -5,5 +5,5 @@ SamplerState smp : register(s0);
 
 float4 main(GSOutput input) : SV_TARGET
 {
-    return tex.Sample(smp, input.uv) * brightness * input.color;
+    return tex.Sample(smp, input.uv) * input.color;
 }

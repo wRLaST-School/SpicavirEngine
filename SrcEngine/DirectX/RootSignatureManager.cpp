@@ -88,7 +88,7 @@ void RootSignatureManager::RegisterAllRS()
 		rsparticle->params[1].DescriptorTable.NumDescriptorRanges = 1;
 		rsparticle->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//定数バッファ1番輝度
+		//定数バッファ1番ビルボード
 		rsparticle->params.emplace_back();
 		rsparticle->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rsparticle->params[2].Descriptor.ShaderRegister = 1;

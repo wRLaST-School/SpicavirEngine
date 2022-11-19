@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,11 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="exc_unordered_map.cpp" />
-    <ClCompile Include="IParticle.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
-    <ClCompile Include="RootSignatureManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
@@ -173,6 +169,7 @@
     <ClCompile Include="SrcEngine\Collider\SphereCollider.cpp" />
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp" />
     <ClCompile Include="SrcEngine\DirectX\GPipelineManager.cpp" />
+    <ClCompile Include="SrcEngine\DirectX\RootSignatureManager.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpConstBuffer.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpDepth.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpDirectX.cpp" />
@@ -197,18 +194,16 @@
     <ClCompile Include="SrcEngine\Others\TextDrawer.cpp" />
     <ClCompile Include="SrcEngine\Others\Util.cpp" />
     <ClCompile Include="SrcEngine\Others\SpTextureManager.cpp" />
+    <ClCompile Include="SrcEngine\Particle\IParticle.cpp" />
+    <ClCompile Include="SrcEngine\Particle\Particle.cpp" />
+    <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp" />
     <ClCompile Include="SrcEngine\Scene\FrameRate.cpp" />
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Emitter.h" />
-    <ClInclude Include="IParticle.h" />
-    <ClInclude Include="Particle.h" />
     <ClInclude Include="exc_unordered_map.h" />
-    <ClInclude Include="ParticleManager.h" />
-    <ClInclude Include="RootSignatureManager.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
@@ -222,6 +217,7 @@
     <ClInclude Include="SrcEngine\Collider\SphereCollider.h" />
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h" />
     <ClInclude Include="SrcEngine\DirectX\GPipelineManager.h" />
+    <ClInclude Include="SrcEngine\DirectX\RootSignatureManager.h" />
     <ClInclude Include="SrcEngine\DirectX\SpConstBuffer.h" />
     <ClInclude Include="SrcEngine\DirectX\SpDepth.h" />
     <ClInclude Include="SrcEngine\DirectX\SpDirectX.h" />
@@ -246,6 +242,10 @@
     <ClInclude Include="SrcEngine\Others\TextDrawer.h" />
     <ClInclude Include="SrcEngine\Others\Util.h" />
     <ClInclude Include="SrcEngine\Others\SpTextureManager.h" />
+    <ClInclude Include="SrcEngine\Particle\Emitter.h" />
+    <ClInclude Include="SrcEngine\Particle\IParticle.h" />
+    <ClInclude Include="SrcEngine\Particle\Particle.h" />
+    <ClInclude Include="SrcEngine\Particle\ParticleManager.h" />
     <ClInclude Include="SrcEngine\Scene\FrameRate.h" />
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />

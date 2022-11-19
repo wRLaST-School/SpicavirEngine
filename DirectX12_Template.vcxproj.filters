@@ -115,6 +115,12 @@
     <Filter Include="Engine\ソースファイル\DirectX">
       <UniqueIdentifier>{c25a2f10-50c4-4476-8fc5-f91b99251afc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Particle">
+      <UniqueIdentifier>{11113da1-fe85-4a84-b1d8-bdf010a6e004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Particle">
+      <UniqueIdentifier>{808e5e7f-7af3-4c65-b01b-064740ad2176}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -234,20 +240,20 @@
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="RootSignatureManager.cpp">
-      <Filter>Engine\ソースファイル\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Engine\ソースファイル\3D</Filter>
-    </ClCompile>
     <ClCompile Include="exc_unordered_map.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="IParticle.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+    <ClCompile Include="SrcEngine\DirectX\RootSignatureManager.cpp">
+      <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleManager.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+    <ClCompile Include="SrcEngine\Particle\IParticle.cpp">
+      <Filter>Engine\ソースファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Particle\Particle.cpp">
+      <Filter>Engine\ソースファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp">
+      <Filter>Engine\ソースファイル\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,23 +380,23 @@
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="RootSignatureManager.h">
-      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>Engine\ヘッダーファイル\3D</Filter>
-    </ClInclude>
     <ClInclude Include="exc_unordered_map.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="IParticle.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\DirectX\RootSignatureManager.h">
+      <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleManager.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\Particle\IParticle.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Emitter.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\Particle\Particle.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Particle\ParticleManager.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Particle\Emitter.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

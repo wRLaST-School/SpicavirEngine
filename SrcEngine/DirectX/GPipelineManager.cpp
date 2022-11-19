@@ -37,6 +37,8 @@ void GPipelineManager::CreateAll()
 
 	particleDesc.Render.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_POINT;
 
+	particleDesc.Blend.Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Add);
+
 	particleDesc.RootSignature.ptr = SpRootSignature::Get("Particle")->rootsignature.Get();
 
 	particleDesc.Shader.pShader = GetShader("particle");

@@ -26,8 +26,8 @@ void main(
     GSOutput element;
     for (uint i = 0; i < vnum; i++)
     {
-        element.svpos = input[0].svpos + offset_array[i];
-        element.svpos = element.svpos * input[0].scale;
+        element.svpos = input[0].svpos + mul(billboard, offset_array[i] * input[0].scale);
+        element.svpos = element.svpos;
         element.svpos = mul(vpmat, element.svpos);
         element.uv = uv_array[i];
         element.color = input[0].color;

@@ -14,7 +14,7 @@ cbuffer cbuff2 : register(b2)
 
 cbuffer cbuff3 : register(b1)
 {
-    float4 brightness;
+    matrix billboard;
 }
 
 struct VSOutput

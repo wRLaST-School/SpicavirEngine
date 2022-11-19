@@ -21,7 +21,7 @@ public:
 		Float4 color;
 	};
 
-private:
+protected:
 	const int vertexCount = 1024;
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
@@ -29,7 +29,8 @@ private:
 
 	int activeCount = 0;
 
-	SpConstBuffer<Float4> brightness;
-
 	TextureKey texture = "notexture";
+
+private:
+	SpConstBuffer<Matrix> billboard;
 };

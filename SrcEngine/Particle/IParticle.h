@@ -1,9 +1,12 @@
 #pragma once
 #include <Essentials.h>
-
+#include <SpTextureManager.h>
 class IParticle
 {
-protected:
+public:
+	IParticle(Float3 pos):position(pos) 
+	{	};
+
 	void Init() {
 		time = 0;
 	}
@@ -15,7 +18,12 @@ protected:
 	};
 
 	Float4 color;
+	Float3 position;
+	float scale;
+
 	int time;
 	int maxTime;
 	bool active;
+
+	static TextureKey texture;
 };

@@ -72,7 +72,7 @@ struct PipelineDesc
 	} RootSignature;
 };
 
-class PipelineUtil
+namespace PipelineUtil
 {
 	enum class BlendMode
 	{
@@ -86,7 +86,6 @@ class PipelineUtil
 	public:
 		static PipelineDesc::Blend::BlendDesc GetBlendMode(BlendMode blendMode);
 	};
-
 };
 
 class GPipeline

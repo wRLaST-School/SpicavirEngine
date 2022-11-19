@@ -44,6 +44,8 @@ public:
     static Camera* current;
     static void UseCurrent();
 
+    static Matrix GetCurrentCameraBillboardMat();
+
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 };
 

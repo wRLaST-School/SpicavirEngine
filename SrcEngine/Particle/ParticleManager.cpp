@@ -47,17 +47,17 @@ ParticleManager::ParticleManager()
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Vertex);
-
-	*brightness.contents = {1.f, 1.f, 1.f, 1.f};
 }
 
 void ParticleManager::Draw()
 {
+	*this->billboard.contents = Camera::GetCurrentCameraBillboardMat();
+
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("particle"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, this->brightness.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, this->billboard.buffer->GetGPUVirtualAddress());
 
 	Camera::UseCurrent();
 
