@@ -9,10 +9,11 @@ cbuffer cbuff0 : register(b0)
 cbuffer cbuff2 : register(b2)
 {
     matrix vpmat;
+    matrix billboardMat;
     float3 cameraPos;
 }
 
-cbuffer cbuff3 : register(b1)
+cbuffer cbuff1 : register(b1)
 {
     matrix billboard;
 }

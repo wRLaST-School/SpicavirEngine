@@ -20,7 +20,6 @@ public:
 		float scale;
 		Float4 color;
 	};
-
 protected:
 	const int vertexCount = 1024;
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
@@ -32,5 +31,4 @@ protected:
 	TextureKey texture = "notexture";
 
 private:
-	SpConstBuffer<Matrix> billboard;
 };

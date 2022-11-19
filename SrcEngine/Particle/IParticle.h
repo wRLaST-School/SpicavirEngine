@@ -17,13 +17,13 @@ public:
 		if (time > maxTime) active = false;
 	};
 
-	Float4 color;
+	Float4 color = {1.f, 1.f, 1.f, 1.f};
 	Float3 position;
-	float scale;
+	float scale = 1.0f;
 
-	int time;
-	int maxTime;
-	bool active;
+	int time = 0;
+	int maxTime = 120;
+	bool active = true;
 
 	static TextureKey texture;
 };

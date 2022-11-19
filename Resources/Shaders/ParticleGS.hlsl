@@ -26,7 +26,7 @@ void main(
     GSOutput element;
     for (uint i = 0; i < vnum; i++)
     {
-        element.svpos = input[0].svpos + mul(billboard, offset_array[i] * input[0].scale);
+        element.svpos = input[0].svpos + mul(billboardMat, offset_array[i] * input[0].scale);
         element.svpos = element.svpos;
         element.svpos = mul(vpmat, element.svpos);
         element.uv = uv_array[i];

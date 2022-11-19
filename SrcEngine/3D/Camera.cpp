@@ -26,6 +26,16 @@ void Camera::UseDefaultParams()
 	farZ = 1000.0f;
 }
 
+Matrix Camera::GetBillboardMat()
+{
+	Matrix camRot = targetMode == CameraTargetMode::LookAt ?
+		Matrix::ViewLookAt(position, target, matWorld.ExtractAxisY()) :
+		Matrix::ViewLookTo(position, matWorld.ExtractAxisZ(), matWorld.ExtractAxisY());
+	camRot[3] = { 0,0,0,1 };
+
+	return -camRot;
+}
+
 void Camera::Set(Camera& camera)
 {
 	current = &camera;
@@ -70,6 +80,8 @@ void Camera::UseCurrent()
 
 	current->cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
 	current->cameraViewProjMatrixCB.contents->cameraPos = current->position;
+
+	current->cameraViewProjMatrixCB.contents->billboardMat = GetCurrentCameraBillboardMat();
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, current->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
 }

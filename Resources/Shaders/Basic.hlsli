@@ -14,6 +14,7 @@ cbuffer cbuff1 : register(b1)
 cbuffer cbuff2 : register(b2)
 {
 	matrix vpmat;
+    matrix billboardMat;
 	float3 cameraPos;
 }
 

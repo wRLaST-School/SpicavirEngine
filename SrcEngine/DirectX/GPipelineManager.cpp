@@ -43,6 +43,8 @@ void GPipelineManager::CreateAll()
 
 	particleDesc.Shader.pShader = GetShader("particle");
 
+	particleDesc.Depth.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+
 	GPipeline::Create(particleDesc, "particle");
 #pragma endregion
 

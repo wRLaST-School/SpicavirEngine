@@ -37,12 +37,6 @@ ParticleManager::ParticleManager()
 	// GPU上のバッファに対応した仮想メモリを取得
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	//// 全頂点に対して
-	//for (int i = 0; i < vertices.size(); i++)
-	//{
-	//	vertMap[i] = vertices[i];   // 座標をコピー
-	//}
-
 	// 頂点バッファビューの作成
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
@@ -51,13 +45,10 @@ ParticleManager::ParticleManager()
 
 void ParticleManager::Draw()
 {
-	*this->billboard.contents = Camera::GetCurrentCameraBillboardMat();
-
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("particle"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, this->billboard.buffer->GetGPUVirtualAddress());
 
 	Camera::UseCurrent();
 

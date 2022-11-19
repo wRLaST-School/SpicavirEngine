@@ -3,6 +3,7 @@
 
 struct ConstBufferDataVProj {
     Matrix vproj;
+    Matrix billboardMat;
     Float3 cameraPos;
 };
 
@@ -23,6 +24,8 @@ public:
     Camera();
     void SetRenderSize(float w, float h);
     void UseDefaultParams();
+
+    Matrix GetBillboardMat();
 
     Float3 target = {0.0f, 0.0f, 0.0f};
 

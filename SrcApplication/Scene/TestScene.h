@@ -37,7 +37,7 @@ private:
 
     Model sky;
 
-    Particle particle;
+    Emitter<IParticle> emitter;
 
     Object3D skysphere;
 };

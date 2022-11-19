@@ -106,6 +106,11 @@ void TestScene::Init()
 
 	whiteTex = "white";
 
+	emitter.position = { 0, 0, 0 };
+	emitter.radius = { 3.f, 3.f, 3.f };
+
+	emitter.quantity = 1;
+
 	pane.camera = &camera;
 	pane2.camera = &camera;
 }
@@ -166,6 +171,8 @@ void TestScene::Update()
 	);
 	camera.UpdateMatrix();
 
+	emitter.Update();
+
 	cameraSpr.UpdateMatrix();
 	xCamSpr.UpdateMatrix();
 	yCamSpr.UpdateMatrix();
@@ -186,28 +193,28 @@ void TestScene::Draw3D()
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
-	particle.Draw();
+	emitter.Draw();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
-	particle.Draw();
+	emitter.Draw();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
-	particle.Draw();
+	emitter.Draw();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
-	particle.Draw();
+	emitter.Draw();
 
 	Camera::Set(finalScene);
 	Camera::UseCurrent();
