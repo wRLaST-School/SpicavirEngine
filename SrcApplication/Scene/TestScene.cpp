@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "RayCollider.h"
 #include "TextDrawer.h"
+#include <LineDrawer.h>
 
 void TestScene::LoadResources()
 {
@@ -172,6 +173,7 @@ void TestScene::Update()
 	camera.UpdateMatrix();
 
 	emitter.Update();
+	emitter.DrawEmitArea();
 
 	cameraSpr.UpdateMatrix();
 	xCamSpr.UpdateMatrix();
@@ -194,6 +196,7 @@ void TestScene::Draw3D()
 	pane.Draw();
 	pane2.Draw();
 	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
@@ -201,6 +204,7 @@ void TestScene::Draw3D()
 	pane.Draw();
 	pane2.Draw();
 	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
@@ -208,6 +212,7 @@ void TestScene::Draw3D()
 	pane.Draw();
 	pane2.Draw();
 	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
@@ -215,6 +220,7 @@ void TestScene::Draw3D()
 	pane.Draw();
 	pane2.Draw();
 	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	Camera::Set(finalScene);
 	Camera::UseCurrent();

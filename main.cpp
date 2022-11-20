@@ -16,6 +16,7 @@
 #include "TextDrawer.h"
 #include "GPipelineManager.h"
 #include <RootSignatureManager.h>
+#include <LineDrawer.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -60,6 +61,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init Textures
 	SpTextureManager::Init();
+
+	//Init Line Drawer
+	LineDrawer::Init();
 
 	//Init Scene
 	SceneManager::Init();
@@ -119,6 +123,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		/*DrawString用のデータを解放*/
 		TextDrawer::ReleaseDrawStringData();
+		LineDrawer::ClearLineData();
 	}
 	/*ループここまで*/
 	CloseAllSpWindow();

@@ -5,6 +5,7 @@
 #include "Model.h"
 #include "Sprite.h"
 #include <Particle.h>
+#include <LineDrawer.h>
 
 void GPipelineManager::CreateAll()
 {
@@ -45,7 +46,32 @@ void GPipelineManager::CreateAll()
 
 	particleDesc.Depth.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 
+	particleDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+
 	GPipeline::Create(particleDesc, "particle");
+#pragma endregion
+
+#pragma region ライン表示
+	RegisterShader("line");
+	InitVS("line", "LineVS.hlsl");
+	InitGS("line", "LineGS.hlsl");
+	InitPS("line", "LinePS.hlsl");
+
+	PipelineDesc lineDesc;
+	lineDesc.Render.InputLayout.pInputElementDescs = LineDrawerCommon::inputLayout;
+	lineDesc.Render.InputLayout.NumElements = _countof(LineDrawerCommon::inputLayout);
+
+	lineDesc.Render.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_POINT;
+
+	lineDesc.RootSignature.ptr = SpRootSignature::Get("Particle")->rootsignature.Get();
+
+	lineDesc.Shader.pShader = GetShader("line");
+
+	lineDesc.Depth.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+
+	lineDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+
+	GPipeline::Create(lineDesc, "line");
 #pragma endregion
 
 #pragma region デフォルト2D

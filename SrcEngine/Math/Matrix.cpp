@@ -493,3 +493,12 @@ Matrix Matrix::Translation(Float3 t)
 
 	return ret;
 }
+
+Vec3& operator*=(Vec3& v, Matrix m)
+{
+	return Vec3(
+		m[0][0] * v.x + m[1][0] * v.y + m[2][0] * v.z,
+		m[0][1] * v.x + m[1][1] * v.y + m[2][1] * v.z,
+		m[0][2] * v.x + m[1][2] * v.y + m[2][2] * v.z
+	);
+}

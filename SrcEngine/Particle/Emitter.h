@@ -3,6 +3,7 @@
 #include <IParticle.h>
 #include "Essentials.h"
 #include <Util.h>
+#include <LineDrawer.h>
 
 template <class ParticleType>
 class Emitter : public ParticleManager
@@ -40,6 +41,21 @@ public:
 			}
 		}
 	}
+
+	void DrawEmitArea()
+	{
+		switch (shape)
+		{
+		case Shape::Cube:
+			LineDrawer::DrawCube(position, radius, { 1.f, 1.f, 1.f, 1.f });
+			break;
+
+		case Shape::Sphere:
+			break;
+		default:
+			break;
+		}
+	};
 
 	//エミッタの座標
 	Float3 position;
