@@ -157,6 +157,8 @@
     <ClCompile Include="exc_unordered_map.cpp" />
     <ClCompile Include="LineDrawer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ParticleSample1.cpp" />
+    <ClCompile Include="ParticleSample2.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
@@ -206,6 +208,8 @@
   <ItemGroup>
     <ClInclude Include="exc_unordered_map.h" />
     <ClInclude Include="LineDrawer.h" />
+    <ClInclude Include="ParticleSample1.h" />
+    <ClInclude Include="ParticleSample2.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />

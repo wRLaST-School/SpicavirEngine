@@ -3,6 +3,8 @@
 #include <Object3D.h>
 #include <Camera.h>
 #include <Particle.h>
+#include <ParticleSample1.h>
+#include <ParticleSample2.h>
 class SingleCamTestScene :
     public IScene
 {
@@ -20,9 +22,9 @@ private:
 
     Object3D sky;
 
-    Emitter<IParticle> e1;
+    Emitter<ParticleSample1> e1;
 
-    Emitter<IParticle> e2;
+    Emitter<ParticleSample2> e2;
 
     Camera camera;
 };
