@@ -1,6 +1,6 @@
 #pragma once
-#include "Vec3.h"
 #include "Float4.h"
+#include <Vec3.h>
 
 struct Float3
 {

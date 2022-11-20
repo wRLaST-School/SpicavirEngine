@@ -2,6 +2,8 @@
 #include "Float4.h"
 #include "Float3.h"
 #include "Float2.h"
+#include <Vec3.h>
+
 class Matrix
 {
 private:
@@ -95,3 +97,5 @@ private:
 	Row r[4];
 };
 
+
+Vec3& operator *=(Vec3& v, Matrix m);

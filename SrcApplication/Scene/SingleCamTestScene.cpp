@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SingleCamTestScene.h"
 #include <TextDrawer.h>
+#include <LineDrawer.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -35,8 +36,11 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	obj.Draw();
-	sky.Draw();
+	//obj.Draw();
+	//sky.Draw();
+
+	LineDrawer::DrawCube({0, 0, 5}, {2,2,2}, {1,1,1,1});
+	LineDrawer::DrawAllLines();
 }
 
 void SingleCamTestScene::DrawSprite()

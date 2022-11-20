@@ -21,6 +21,15 @@ namespace Util
 		return value > max ? max : value;
 	}
 
+	//percentage %の確率でtrueを返す
+	bool Chance(int percentage);
+
+	/*
+	乱数を最低値と最高値を設定して返す。
+	RNG(1,3)なら1, 2, 3のどれかが返る。preciseModeをtrueにするとより精密に乱数を取る。
+	*/
+	int RNG(int min, int max, bool preciseMode = false);
+
 	std::wstring StrToWStr(std::string str, int page = CP_ACP);
 };
 

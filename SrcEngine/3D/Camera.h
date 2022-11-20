@@ -3,6 +3,7 @@
 
 struct ConstBufferDataVProj {
     Matrix vproj;
+    Matrix billboardMat;
     Float3 cameraPos;
 };
 
@@ -24,6 +25,8 @@ public:
     void SetRenderSize(float w, float h);
     void UseDefaultParams();
 
+    Matrix GetBillboardMat();
+
     Float3 target = {0.0f, 0.0f, 0.0f};
 
     //レンダーサイズ
@@ -41,6 +44,10 @@ public:
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
     static void Set(Camera& camera);
+    static Camera* current;
+    static void UseCurrent();
+
+    static Matrix GetCurrentCameraBillboardMat();
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 };

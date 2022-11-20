@@ -115,6 +115,12 @@
     <Filter Include="Engine\ソースファイル\DirectX">
       <UniqueIdentifier>{c25a2f10-50c4-4476-8fc5-f91b99251afc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Particle">
+      <UniqueIdentifier>{11113da1-fe85-4a84-b1d8-bdf010a6e004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Particle">
+      <UniqueIdentifier>{808e5e7f-7af3-4c65-b01b-064740ad2176}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -234,10 +240,22 @@
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="RootSignatureManager.cpp">
+    <ClCompile Include="exc_unordered_map.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\DirectX\RootSignatureManager.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="exc_unordered_map.cpp">
+    <ClCompile Include="SrcEngine\Particle\IParticle.cpp">
+      <Filter>Engine\ソースファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Particle\Particle.cpp">
+      <Filter>Engine\ソースファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp">
+      <Filter>Engine\ソースファイル\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="LineDrawer.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -365,10 +383,25 @@
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="RootSignatureManager.h">
+    <ClInclude Include="exc_unordered_map.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\DirectX\RootSignatureManager.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="exc_unordered_map.h">
+    <ClInclude Include="SrcEngine\Particle\IParticle.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Particle\Particle.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Particle\ParticleManager.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Particle\Emitter.h">
+      <Filter>Engine\ヘッダーファイル\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="LineDrawer.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -388,12 +421,36 @@
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\ParticleGS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ParticlePS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\ParticleVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\LineGS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\LinePS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\LineVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\Sprite.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\Particle.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\Line.hlsli">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
