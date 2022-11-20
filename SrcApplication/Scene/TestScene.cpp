@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "RayCollider.h"
 #include "TextDrawer.h"
+#include <LineDrawer.h>
 
 void TestScene::LoadResources()
 {
@@ -106,6 +107,11 @@ void TestScene::Init()
 
 	whiteTex = "white";
 
+	emitter.position = { 0, 0, 0 };
+	emitter.radius = { 3.f, 3.f, 3.f };
+
+	emitter.quantity = 1;
+
 	pane.camera = &camera;
 	pane2.camera = &camera;
 }
@@ -166,6 +172,9 @@ void TestScene::Update()
 	);
 	camera.UpdateMatrix();
 
+	emitter.Update();
+	emitter.DrawEmitArea();
+
 	cameraSpr.UpdateMatrix();
 	xCamSpr.UpdateMatrix();
 	yCamSpr.UpdateMatrix();
@@ -186,26 +195,35 @@ void TestScene::Draw3D()
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToTexture("xCamSpr");
 	Camera::Set(xCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToTexture("yCamSpr");
 	Camera::Set(yCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToTexture("zCamSpr");
 	Camera::Set(zCam);
 	skysphere.Draw();
 	pane.Draw();
 	pane2.Draw();
+	emitter.Draw();
+	LineDrawer::DrawAllLines();
 
 	Camera::Set(finalScene);
+	Camera::UseCurrent();
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 

@@ -11,7 +11,7 @@ static future<void> ftr;
 
 void SceneManager::Init()
 {
-	InstantTransition<TestScene>();
+	InstantTransition<SingleCamTestScene>();
 }
 
 void SceneManager::Update()
@@ -29,11 +29,6 @@ void SceneManager::Update()
 	{
 		LoadScene<SingleCamTestScene>();
 		Transition();
-	}
-
-	if (Input::Key::Triggered(DIK_R))
-	{
-		InstantTransition<SingleCamTestScene>();
 	}
 
 	currentScene->Update();

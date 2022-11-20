@@ -35,7 +35,7 @@ public:
 				vertMap[activeCount].position = itr->position;
 				vertMap[activeCount].scale = itr->scale;
 				vertMap[activeCount].color = itr->color;
-				
+
 				activeCount++;
 				itr++;
 			}
@@ -51,6 +51,7 @@ public:
 			break;
 
 		case Shape::Sphere:
+			LineDrawer::DrawCube(position, { radius.x, radius.x, radius.x }, { 1.f, 1.f, 1.f, 1.f });
 			break;
 		default:
 			break;
@@ -84,6 +85,8 @@ private:
 			particlePos.x = (float)Util::RNG(0, RAND_MAX) / RAND_MAX * radius.x * (Util::Chance(50) ? 1 : -1);
 			particlePos.y = (float)Util::RNG(0, RAND_MAX) / RAND_MAX * radius.y * (Util::Chance(50) ? 1 : -1);
 			particlePos.z = (float)Util::RNG(0, RAND_MAX) / RAND_MAX * radius.z * (Util::Chance(50) ? 1 : -1);
+
+			particlePos = (Vec3)particlePos + position;
 			break;
 		case Shape::Sphere:
 			do {
@@ -93,6 +96,8 @@ private:
 			} while (
 				((Vec3)particlePos).GetSquaredLength() > radius.x * radius.x
 				);
+
+			particlePos = (Vec3)particlePos + position;
 			break;
 		default:
 			break;

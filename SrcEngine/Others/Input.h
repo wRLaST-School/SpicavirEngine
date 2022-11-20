@@ -105,6 +105,6 @@ namespace Input {
 
 		float deadZone = 50;
 
-		int gamepadIndex = 1;
+		int gamepadIndex = 0;
 	};
 }
