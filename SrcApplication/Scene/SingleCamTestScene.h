@@ -2,6 +2,7 @@
 #include "IScene.h"
 #include <Object3D.h>
 #include <Camera.h>
+#include <Particle.h>
 class SingleCamTestScene :
     public IScene
 {
@@ -15,9 +16,13 @@ public:
     void DrawSprite() override;
 
 private:
-    Object3D obj;
+    Object3D pane;
 
     Object3D sky;
+
+    Emitter<IParticle> e1;
+
+    Emitter<IParticle> e2;
 
     Camera camera;
 };
