@@ -1,7 +1,7 @@
 #pragma once
 #include "IScene.h"
 #include "Essentials.h"
-class SceneManager
+class SceneManager final
 {
 public:
 	static void Init();
@@ -38,5 +38,11 @@ private:
 public:
 	//非同期でのシーン読み込みを行わずに直接シーン切り替えをする(バグ起きがちなので注意)
 	template <class NextScene> static void InstantTransition();
+
+private:
+	SceneManager();
+	~SceneManager() {};
+	SceneManager(const SceneManager& a) = delete;
+	SceneManager& operator=(const SceneManager& a) = delete;
 };
 
