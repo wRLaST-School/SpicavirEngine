@@ -79,12 +79,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcEngine\ImGuiLibs;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcApplication;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcEngine\ImGuiLibs;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcApplication;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -145,6 +145,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <Optimization>MaxSpeed</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,10 +156,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="exc_unordered_map.cpp" />
+    <ClCompile Include="ImGuiStyle.cpp" />
     <ClCompile Include="LineDrawer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleSample1.cpp" />
     <ClCompile Include="ParticleSample2.cpp" />
+    <ClCompile Include="SpImGui.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
@@ -179,11 +182,6 @@
     <ClCompile Include="SrcEngine\DirectX\SpRootSignature.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpShader.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpSwapChainManager.cpp" />
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui.cpp" />
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_demo.cpp" />
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_draw.cpp" />
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_tables.cpp" />
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_widgets.cpp" />
     <ClCompile Include="SrcEngine\Light\DirectionalLight.cpp" />
     <ClCompile Include="SrcEngine\Light\Light.cpp" />
     <ClCompile Include="SrcEngine\Light\PointLight.cpp" />
@@ -212,9 +210,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exc_unordered_map.h" />
+    <ClInclude Include="ImGuiStyle.h" />
     <ClInclude Include="LineDrawer.h" />
     <ClInclude Include="ParticleSample1.h" />
     <ClInclude Include="ParticleSample2.h" />
+    <ClInclude Include="SpImGui.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
@@ -235,12 +235,6 @@
     <ClInclude Include="SrcEngine\DirectX\SpRootSignature.h" />
     <ClInclude Include="SrcEngine\DirectX\SpShader.h" />
     <ClInclude Include="SrcEngine\DirectX\SpSwapChainManager.h" />
-    <ClInclude Include="SrcEngine\ImGuiLibs\imconfig.h" />
-    <ClInclude Include="SrcEngine\ImGuiLibs\imgui.h" />
-    <ClInclude Include="SrcEngine\ImGuiLibs\imgui_internal.h" />
-    <ClInclude Include="SrcEngine\ImGuiLibs\imstb_rectpack.h" />
-    <ClInclude Include="SrcEngine\ImGuiLibs\imstb_textedit.h" />
-    <ClInclude Include="SrcEngine\ImGuiLibs\imstb_truetype.h" />
     <ClInclude Include="SrcEngine\Light\DirectionalLight.h" />
     <ClInclude Include="SrcEngine\Light\Light.h" />
     <ClInclude Include="SrcEngine\Light\PointLight.h" />
@@ -345,6 +339,9 @@
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcImgui\imgui\imgui.vcxproj">
+      <Project>{3650decb-313b-4c2d-88db-9e59a8234b8d}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

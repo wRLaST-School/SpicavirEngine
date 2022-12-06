@@ -124,14 +124,8 @@
     <Filter Include="Engine\ソースファイル\ImGui">
       <UniqueIdentifier>{031d5c08-306d-4aaa-94f5-443312d22822}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ソースファイル\ImGuiLibs">
-      <UniqueIdentifier>{4a202c20-a431-4b5a-ac04-87ae18776384}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ヘッダーファイル\ImGui">
       <UniqueIdentifier>{a70ac5bc-ade6-4eac-8723-80a9989f742f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ヘッダーファイル\ImGuiLibs">
-      <UniqueIdentifier>{9126cb08-3b69-4cb6-9b5a-9fdd68574142}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,20 +270,11 @@
     <ClCompile Include="ParticleSample2.cpp">
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_widgets.cpp">
-      <Filter>Engine\ソースファイル\ImGuiLibs</Filter>
+    <ClCompile Include="SpImGui.cpp">
+      <Filter>Engine\ソースファイル\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_tables.cpp">
-      <Filter>Engine\ソースファイル\ImGuiLibs</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_draw.cpp">
-      <Filter>Engine\ソースファイル\ImGuiLibs</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui_demo.cpp">
-      <Filter>Engine\ソースファイル\ImGuiLibs</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\ImGuiLibs\imgui.cpp">
-      <Filter>Engine\ソースファイル\ImGuiLibs</Filter>
+    <ClCompile Include="ImGuiStyle.cpp">
+      <Filter>Engine\ソースファイル\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,23 +428,11 @@
     <ClInclude Include="ParticleSample2.h">
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\ImGuiLibs\imgui_internal.h">
-      <Filter>Engine\ヘッダーファイル\ImGuiLibs</Filter>
+    <ClInclude Include="SpImGui.h">
+      <Filter>Engine\ヘッダーファイル\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\ImGuiLibs\imgui.h">
-      <Filter>Engine\ヘッダーファイル\ImGuiLibs</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\ImGuiLibs\imconfig.h">
-      <Filter>Engine\ソースファイル\ImGuiLibs</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\ImGuiLibs\imstb_rectpack.h">
-      <Filter>Engine\ヘッダーファイル\ImGuiLibs</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\ImGuiLibs\imstb_textedit.h">
-      <Filter>Engine\ヘッダーファイル\ImGuiLibs</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\ImGuiLibs\imstb_truetype.h">
-      <Filter>Engine\ヘッダーファイル\ImGuiLibs</Filter>
+    <ClInclude Include="ImGuiStyle.h">
+      <Filter>Engine\ヘッダーファイル\ImGui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

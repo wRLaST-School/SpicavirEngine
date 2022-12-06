@@ -17,6 +17,7 @@
 #include "GPipelineManager.h"
 #include <RootSignatureManager.h>
 #include <LineDrawer.h>
+#include <SpImGui.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -64,6 +65,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init Line Drawer
 	LineDrawer::Init();
+
+	//Init ImGui
+	SpImGui::Init();
 
 	//Init Scene
 	SceneManager::Init();
