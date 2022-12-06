@@ -122,6 +122,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		GetWDX()->PostDrawCommands();
 
+		SpImGui::Draw();
+
 		/*毎フレーム処理ここまで*/
 		GetWDX()->EndFrame();
 
@@ -129,7 +131,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		TextDrawer::ReleaseDrawStringData();
 		LineDrawer::ClearLineData();
 	}
+
 	/*ループここまで*/
+	SpImGui::Shutdown();
 	CloseAllSpWindow();
 
 	return 0;

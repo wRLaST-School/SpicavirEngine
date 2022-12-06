@@ -3,6 +3,7 @@
 #include <TextDrawer.h>
 #include <LineDrawer.h>
 #include <Input.h>
+#include <SpImGui.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -75,6 +76,8 @@ void SingleCamTestScene::Update()
 	camera.UpdateMatrix();
 	pane.UpdateMatrix();
 	sky.UpdateMatrix();
+
+	SpImGui::Command([&]() { ImGui::ShowDemoWindow(); });
 }
 
 void SingleCamTestScene::DrawBack()

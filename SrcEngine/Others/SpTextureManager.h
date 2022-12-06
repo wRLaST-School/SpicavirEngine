@@ -17,6 +17,8 @@ public:
 	static TextureKey CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget = true);
 	static TextureKey CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget = true);
 
+	static TextureKey CreatePlainSRV(TextureKey key);
+
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescHandle(TextureKey key);
 	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescHandle(TextureKey key);
 	static TexMetadata GetTextureMetadata(TextureKey key);
@@ -39,7 +41,7 @@ public:
 	ComPtr<ID3D12Resource>texBuffs[wMaxSRVCount] = {};
 
 private:
-	size_t nextRegisteredTextureIndex = 0;
+	size_t nextTexIndex = 0;
 	exc_unordered_map<TextureKey, SRVHeapIndex> textureMap = {};
 	exc_unordered_map<TextureKey, TexMetadata> texDataMap = {};
 	bool isOccupied[wMaxSRVCount] = {};
