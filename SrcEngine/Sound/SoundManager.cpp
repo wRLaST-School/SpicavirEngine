@@ -15,6 +15,11 @@ void SoundManager::Init()
 
 SoundKey SoundManager::LoadWave(string path, SoundKey key)
 {
+    sndMap.Access(
+        [&](auto& map) {
+            if (map.count(key) <= 0) { return; }
+        }
+    );
     ifstream file;
 
     file.open(path, std::ios_base::binary);
@@ -83,7 +88,7 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
 void SoundManager::Play(SoundKey key)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//これ保存しとくと止められる
-    
+
     SoundData* pSnd;
     sndMap.Access(
         [&](auto& map) {
@@ -91,7 +96,7 @@ void SoundManager::Play(SoundKey key)
         }
     );
 
-    xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
+    HRESULT res = xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
 
     XAUDIO2_BUFFER buf{};
 
@@ -101,6 +106,7 @@ void SoundManager::Play(SoundKey key)
 
     pSourceVoice->SubmitSourceBuffer(&buf);
     pSourceVoice->Start();
+    pSnd->sound = pSourceVoice;
 }
 SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
 {
@@ -124,7 +130,7 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
     buf.pAudioData = pSnd->pBuffer;
     buf.AudioBytes = pSnd->bufferSize;
     buf.Flags = XAUDIO2_END_OF_STREAM;
-    if(loopFlag) buf.LoopCount = XAUDIO2_LOOP_INFINITE;
+    if (loopFlag) buf.LoopCount = XAUDIO2_LOOP_INFINITE;
 
     pSourceVoice->SubmitSourceBuffer(&buf);
     pSourceVoice->Start();
@@ -153,6 +159,7 @@ void SoundManager::StopBGM(SoundKey key)
             pSnd = &map[key];
         }
     );
+    if (pSnd->sound == nullptr) return;
     pSnd->sound->Stop();
 }
 
@@ -185,7 +192,13 @@ void SoundManager::ReleasePerSceneSounds()
 
         if (!usingInCurrentScene) //今のシーンで使われていないならリリース
         {
+            StopBGM(*itr);
             GetSoundData(*itr)->Release();
+            sndMap.Access(
+                [&](auto& map) {
+                    map.erase(*itr);
+                }
+            );
         }
     }
 

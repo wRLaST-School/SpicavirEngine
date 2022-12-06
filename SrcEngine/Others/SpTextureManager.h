@@ -23,6 +23,9 @@ public:
 	static ID3D12Resource* GetTextureBuff(TextureKey key);
 	static int GetIndex(TextureKey key);
 
+	//シーンを超えて使用するリソースとして設定
+	static void AddMasterTextureKey(TextureKey key);
+
 	static void Release(TextureKey key);
 	//前のシーンで使われていて今のシーンで使われていないテクスチャをリリース
 	static void ReleasePerSceneTexture();
@@ -43,6 +46,8 @@ private:
 
 	static list<TextureKey> perSceneTextures[2];
 	static int currentSceneResIndex;
+
+	static list<TextureKey> masterTextures;
 private:
 	SpTextureManager() {};
 	SpTextureManager(const SpTextureManager&) = delete;

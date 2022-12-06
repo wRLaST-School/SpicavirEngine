@@ -1,6 +1,8 @@
 #include "SpTextureManager.h"
 #include "SpDirectX.h"
 
+#define SPTEX_NOTEXTURE_FOUND_ -1024
+
 void SpTextureManager::Create()
 {
 	GetInstance().nextRegisteredTextureIndex = 0;
@@ -23,7 +25,7 @@ void SpTextureManager::Init()
 	{
 		ins.isOccupied[i] = false;
 	}
-	
+
 	ins.textureMap.Access([&](auto& map) {
 		map.clear();
 		});
@@ -34,10 +36,23 @@ void SpTextureManager::Init()
 	}
 
 	SpTextureManager::LoadTexture("Resources/notexture.png", "notexture");
+	AddMasterTextureKey("notexture");
 }
 
 TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 {
+	perSceneTextures[currentSceneResIndex].push_back(key);
+	bool alreadyRegistered = false;
+	GetInstance().textureMap.Access(
+		[&](auto& map) {
+			if (map.count(key) != 0) alreadyRegistered = true;
+		});
+	if (alreadyRegistered)
+	{
+		OutputDebugStringA((string("Texture : ") + key + string(" already exists. skipping.") + string("\n")).c_str());
+		return key;
+	}
+	OutputDebugStringA((string("Loading : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextRegisteredTextureIndex) + string(")\n")).c_str());
 	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
@@ -107,7 +122,7 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	srvDesc.Texture2D.MipLevels = texresdesc.MipLevels;
 
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
-	
+
 	SpTextureManager::GetInstance().textureMap.Access(
 		[&](auto& map) {
 			map[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
@@ -127,7 +142,6 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 		if (!GetInstance().isOccupied[i])
 		{
 			GetInstance().nextRegisteredTextureIndex = i;
-			perSceneTextures[currentSceneResIndex].push_back(key);
 			return key;
 		}
 	}
@@ -138,6 +152,7 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 
 TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
 {
+	OutputDebugStringA((string("Loading Unique : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextRegisteredTextureIndex) + string(")\n")).c_str());
 	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage scratchImg{};
@@ -252,70 +267,30 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 
 TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
 {
-	D3D12_HEAP_PROPERTIES texHeapProp{};
-	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
-	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
-	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
-
-	D3D12_RESOURCE_DESC textureResourceDesc = 
-		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1,0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
-
-	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
-
-	GetWDX()->dev->CreateCommittedResource(
-		&texHeapProp,
-		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
-		&textureResourceDesc,
-		initAsRenderTarget ? D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE : D3D12_RESOURCE_STATE_GENERIC_READ,
-		&clval,
-		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
-
-	//シェーダーリソースビューの生成
-	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextRegisteredTextureIndex;
-
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = textureResourceDesc.Format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
-
-	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
-
-	SpTextureManager::GetInstance().textureMap.Access(
-		[&](auto& map) {
-			map[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
-		}
-	);
-	
-	SpTextureManager::GetInstance().texDataMap.Access(
-		[&](auto& map) {
-			TexMetadata& pTexMeta = map[key];
-			pTexMeta = TexMetadata{};
-			pTexMeta.width = width;
-			pTexMeta.height = height;
-		}
-	);
-
-	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
-
+	perSceneTextures[currentSceneResIndex].push_back(key);
 	for (size_t i = 0; i < wMaxSRVCount; i++)
 	{
-		if (!GetInstance().isOccupied[i])
+		if (!GetInstance().isOccupied[i] && i <= 253)
 		{
 			GetInstance().nextRegisteredTextureIndex = i;
 			perSceneTextures[currentSceneResIndex].push_back(key);
-			return key;
+			break;
 		}
 	}
 
-	throw std::out_of_range("out of texture resource");
-	return key;
-}
+	bool alreadyRegistered = false;
+	GetInstance().textureMap.Access(
+		[&](auto& map) {
+			if (map.count(key) != 0) alreadyRegistered = true;
+		});
 
-TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
-{//テクスチャバッファ
+	if (alreadyRegistered)
+	{
+		OutputDebugStringA((string("Texture : ") + key + string(" already exist. skipping.") + string("\n")).c_str());
+		return key;
+	}
+
+	OutputDebugStringA((string("Creating Dummy Tex U: ") + key + string(" on ") + to_string(GetInstance().nextRegisteredTextureIndex) + string("\n")).c_str());
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
@@ -346,7 +321,80 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
 
 	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
-	
+
+	SpTextureManager::GetInstance().textureMap.Access(
+		[&](auto& map) {
+			map[key] = SpTextureManager::GetInstance().nextRegisteredTextureIndex;
+		}
+	);
+
+	SpTextureManager::GetInstance().texDataMap.Access(
+		[&](auto& map) {
+			TexMetadata& pTexMeta = map[key];
+			pTexMeta = TexMetadata{};
+			pTexMeta.width = width;
+			pTexMeta.height = height;
+		}
+	);
+
+	GetInstance().isOccupied[GetInstance().nextRegisteredTextureIndex] = true;
+
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied[i])
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			return key;
+		}
+	}
+
+	throw std::out_of_range("out of texture resource");
+	return key;
+}
+
+TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
+{//テクスチャバッファ
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied[i] && i <= 253)
+		{
+			GetInstance().nextRegisteredTextureIndex = i;
+			perSceneTextures[currentSceneResIndex].push_back(key);
+			break;
+		}
+	}
+	OutputDebugStringA((string("Creating Dummy Tex U: ") + key + string(" on ") + to_string(GetInstance().nextRegisteredTextureIndex) + string("\n")).c_str());
+	D3D12_HEAP_PROPERTIES texHeapProp{};
+	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+	D3D12_RESOURCE_DESC textureResourceDesc =
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
+
+	GetWDX()->dev->CreateCommittedResource(
+		&texHeapProp,
+		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
+		&textureResourceDesc,
+		initAsRenderTarget ? D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE : D3D12_RESOURCE_STATE_GENERIC_READ,
+		&clval,
+		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex]));
+
+	//シェーダーリソースビューの生成
+	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextRegisteredTextureIndex;
+
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = textureResourceDesc.Format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
+
+	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextRegisteredTextureIndex].Get(), &srvDesc, heapHandle);
+
 	int tryNum = 0;
 	bool succeeded = false;
 	string tryKey;
@@ -406,7 +454,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE SpTextureManager::GetGPUDescHandle(TextureKey key)
 			heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * map[key];
 
 		}
-	); 
+	);
 	return heapHandle;
 }
 
@@ -434,18 +482,32 @@ ID3D12Resource* SpTextureManager::GetTextureBuff(TextureKey key)
 
 int SpTextureManager::GetIndex(TextureKey key)
 {
-	int ret;
+	int ret = 0;
 	GetInstance().textureMap.Access(
 		[&](auto& map) {
-			ret = map[key];
+			auto itr = map.find(key);
+			if (itr == map.end()) ret = SPTEX_NOTEXTURE_FOUND_;
+			else ret = itr->second;
 		}
 	);
+
 	return ret;
+}
+
+void SpTextureManager::AddMasterTextureKey(TextureKey key)
+{
+	masterTextures.push_back(key);
 }
 
 void SpTextureManager::Release(TextureKey key)
 {
 	SpTextureManager& ins = GetInstance();
+
+	OutputDebugStringA((string("Unloading : ") + key + string(" (Heap Index : ") + to_string(GetIndex(key)) + string("\n")).c_str());
+	if (GetIndex(key) == SPTEX_NOTEXTURE_FOUND_) {
+		OutputDebugStringA("No Texture Found.\n");
+		return;
+	}
 
 	ins.isOccupied[GetIndex(key)] = false;
 	ins.textureMap.Access(
@@ -469,6 +531,7 @@ void SpTextureManager::ReleasePerSceneTexture()
 	for (auto itr = perSceneTextures[lastSceneResIndex].begin(); itr != perSceneTextures[lastSceneResIndex].end(); itr++)
 	{
 		bool usingInCurrentScene = false;
+		//次のシーンでも使われるかチェック
 		for (auto key : perSceneTextures[currentSceneResIndex])
 		{
 			if (key == *itr)
@@ -478,9 +541,13 @@ void SpTextureManager::ReleasePerSceneTexture()
 			}
 		}
 
-		if (*itr == "notexture")
+		//マスターテクスチャかチェック
+		for (auto& tk : masterTextures)
 		{
-			usingInCurrentScene = true;
+			if (*itr == tk)
+			{
+				usingInCurrentScene = true;
+			}
 		}
 
 		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
@@ -496,7 +563,7 @@ void SpTextureManager::PreLoadNewScene()
 	currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
 }
 
-SpTextureManager &SpTextureManager::GetInstance()
+SpTextureManager& SpTextureManager::GetInstance()
 {
 	static SpTextureManager obj;
 	return obj;
@@ -504,3 +571,5 @@ SpTextureManager &SpTextureManager::GetInstance()
 
 list<TextureKey> SpTextureManager::perSceneTextures[2] = {};
 int SpTextureManager::currentSceneResIndex = 0;
+
+list<TextureKey> SpTextureManager::masterTextures;
