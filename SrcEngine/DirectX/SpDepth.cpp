@@ -22,6 +22,7 @@ void SpDepth::Init()
 		&CD3DX12_CLEAR_VALUE(DXGI_FORMAT_D32_FLOAT, 1.0f, 0),
 		IID_PPV_ARGS(&depthBuffer)
 	);
+	depthBuffer->SetName(L"DEPTH BUFF");
 
 	//cr HeapDesc
 	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc{};

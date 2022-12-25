@@ -18,6 +18,7 @@
 #include <RootSignatureManager.h>
 #include <LineDrawer.h>
 #include <SpImGui.h>
+#include <assimp/Importer.hpp>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -81,6 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
 	}
 #endif //  _DEBUG
+
 	/*ÉãÅ[Év*/
 	while (true)
 	{

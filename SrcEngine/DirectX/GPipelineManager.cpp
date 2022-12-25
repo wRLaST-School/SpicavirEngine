@@ -22,6 +22,7 @@ void GPipelineManager::CreateAll()
 	defDesc.RootSignature.ptr = SpRootSignature::Get("3D")->rootsignature.Get();
 
 	defDesc.Shader.pShader = GetShader("def");
+	defDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 
 	GPipeline::Create(defDesc, "def");
 #pragma endregion
