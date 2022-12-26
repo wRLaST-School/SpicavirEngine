@@ -29,7 +29,7 @@ void RootSignatureManager::RegisterAllRS()
 		rs3d->params[1].DescriptorTable.pDescriptorRanges = &descRange;
 		rs3d->params[1].DescriptorTable.NumDescriptorRanges = 1;
 		rs3d->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
-
+		
 		//定数バッファ1番ワールド行列
 		rs3d->params.emplace_back();
 		rs3d->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
