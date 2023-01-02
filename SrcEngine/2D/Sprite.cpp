@@ -46,6 +46,8 @@ Sprite::Sprite(TextureKey key)
 		IID_PPV_ARGS(&vertBuff)
 	);
 
+	vertBuff->SetName(L"SPRITE VERT BUFF");
+
 	// GPU上のバッファに対応した仮想メモリを取得
 	Sprite::Vertex* vertMap = nullptr;
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
@@ -107,6 +109,7 @@ Sprite::Sprite(string path, TextureKey newKey)
 		IID_PPV_ARGS(&vertBuff)
 	);
 
+	vertBuff->SetName(L"SPRITE VERT BUFF");
 	// GPU上のバッファに対応した仮想メモリを取得
 	Sprite::Vertex* vertMap = nullptr;
 	vertBuff->Map(0, nullptr, (void**)&vertMap);

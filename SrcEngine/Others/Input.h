@@ -87,9 +87,9 @@ namespace Input {
 			float y;
 		};
 
-		//左スティックの移動量を-1000から1000で返す
+		//左スティックの移動量を-1から1で返す
 		static Stick GetLStick();
-		//右スティックの移動量を-1000から1000で返す
+		//右スティックの移動量を-1から1で返す
 		static Stick GetRStick();
 
 		//デッドゾーンの範囲を設定(0から1000)
@@ -105,6 +105,6 @@ namespace Input {
 
 		float deadZone = 50;
 
-		int gamepadIndex = 1;
+		int gamepadIndex = 0;
 	};
 }

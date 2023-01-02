@@ -96,6 +96,13 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 		nullptr,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextTexIndex]));
 
+	if (hr != S_OK)
+	{
+		return string("notexture");
+	};
+
+	GetInstance().texBuffs[GetInstance().nextTexIndex]->SetName(L"TEXTURE_BUFFER");
+
 	for (size_t i = 0; i < metadata.mipLevels; i++)
 	{
 		const Image* img = scratchImg.GetImage(i, 0, 0);
@@ -189,7 +196,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	texresdesc.MipLevels = metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
-	GetWDX()->dev->CreateCommittedResource(
+	HRESULT res = GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&texresdesc,
@@ -309,6 +316,8 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 		&clval,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextTexIndex]));
 
+	GetInstance().texBuffs[GetInstance().nextTexIndex]->SetName(L"TEXTURE_BUFFER");
+
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
@@ -382,6 +391,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 		&clval,
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextTexIndex]));
 
+	GetInstance().texBuffs[GetInstance().nextTexIndex]->SetName(L"TEXTURE_BUFFER");
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();

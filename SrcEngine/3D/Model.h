@@ -67,6 +67,7 @@ class Model
 public:
 	Model();
 	Model(string modelName);
+	Model(string fileName, bool useAssimp);
 
 	void LoadMaterial(const string& path, const string& filename);
 	void UpdateMaterial();
@@ -77,9 +78,11 @@ public:
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> indexBuff = nullptr;
 
-	Material material;
+	vector<Material> material;
 
-	SpConstBuffer<ConstBufferDataMaterial> materialCB;
+	vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
+
+	Model operator= (Model& m) = delete;
 };
 
 typedef std::string ModelKey;
@@ -88,6 +91,7 @@ class ModelManager
 {
 public:
 	static void Register(string modelName, ModelKey key);
+	static void Register(string modelPath, ModelKey key, bool useAssimp);
 
 	static Model* GetModel(ModelKey key);
 

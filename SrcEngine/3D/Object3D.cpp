@@ -3,6 +3,7 @@
 #include <GPipeline.h>
 #include <Light.h>
 #include <Camera.h>
+#include <SpMath.h>
 
 void Object3D::UpdateMatrix()
 {
@@ -28,6 +29,7 @@ void Object3D::UpdateMatrix()
 void Object3D::Draw()
 {
 	transformCB.contents->mat = matWorld;
+	ID3D12Resource* res = nullptr;
 
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
@@ -35,9 +37,16 @@ void Object3D::Draw()
 	Light::Use();
 	Camera::UseCurrent();
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(model->material.textureKey));
+	if (model->material.size())
+	{
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(model->material.front().textureKey));
+	}
+	else
+	{
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle("notexture"));
+	}
 
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCBs.back().buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
 
@@ -49,7 +58,7 @@ void Object3D::Draw()
 
 	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(short), 1, 0, 0, 0);
+	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
 }
 
 void Object3D::Draw(TextureKey key)
@@ -64,7 +73,7 @@ void Object3D::Draw(TextureKey key)
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(key));
 
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCB.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, model->materialCBs.front().buffer->GetGPUVirtualAddress());
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
 
@@ -76,5 +85,5 @@ void Object3D::Draw(TextureKey key)
 
 	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(short), 1, 0, 0, 0);
+	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
 }

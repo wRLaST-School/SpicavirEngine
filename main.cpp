@@ -18,6 +18,7 @@
 #include <RootSignatureManager.h>
 #include <LineDrawer.h>
 #include <SpImGui.h>
+#include <assimp/Importer.hpp>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -81,6 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
 	}
 #endif //  _DEBUG
+
 	/*ループ*/
 	while (true)
 	{
@@ -120,9 +122,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		Sprite::PostSpriteDraw();
 
-		GetWDX()->PostDrawCommands();
-
 		SpImGui::Draw();
+
+		GetWDX()->PostDrawCommands();
 
 		/*毎フレーム処理ここまで*/
 		GetWDX()->EndFrame();

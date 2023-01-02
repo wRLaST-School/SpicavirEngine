@@ -8,8 +8,11 @@
 void SingleCamTestScene::LoadResources()
 {
 	ModelManager::Register("cube", "Cube");
+	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
+	//ModelManager::Register("Resources/Models/Minion/Minion_FBX.fbx", "fbxtest", true);
+	ModelManager::Register("Resources/Models/fbxtest/fbxtest.fbx", "fbxtest", true);
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
@@ -19,7 +22,7 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("Pane");
+	pane.model = ModelManager::GetModel("fbxtest");
 	sky.model = ModelManager::GetModel("Sky");
 
 	e1.position.x = 6;
@@ -70,14 +73,16 @@ void SingleCamTestScene::Update()
 		e2.DrawEmitArea();
 	}
 
-	pane.scale = { 0.02f, 0.02f, 0.02f};
+	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };
+
+	pane.rotation = (Vec3(0, 0.03 * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
 
 	camera.UpdateMatrix();
 	pane.UpdateMatrix();
 	sky.UpdateMatrix();
 
-	SpImGui::Command([&]() { ImGui::ShowDemoWindow(); });
+	SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
 }
 
 void SingleCamTestScene::DrawBack()

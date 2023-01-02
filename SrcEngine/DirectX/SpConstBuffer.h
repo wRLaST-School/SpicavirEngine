@@ -29,6 +29,8 @@ public:
 			nullptr,
 			IID_PPV_ARGS(&buffer));
 
+		buffer->SetName(L"CB_TEMPLATE");
+
 		buffer->Map(0, nullptr, (void**)&contents);
 	};
 

@@ -31,6 +31,8 @@ void LineDrawer::Init()
 		IID_PPV_ARGS(&vertBuff)
 	);
 
+	vertBuff->SetName(L"LINE VERT BUFF");
+
 	// GPU上のバッファに対応した仮想メモリを取得
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
