@@ -18,5 +18,5 @@ public:
 
 	static void Effect(TextureKey baseTex, TextureKey targetTex);
 
-	virtual void SetExclusiveCBV() = 0; // 専用の定数バッファをセットするコマンド用(継承先のEffect関数の実装内で呼び出し推奨)
+	virtual void SetExclusiveCBV() = 0; // 専用の定数バッファをセットするコマンド用(継承先のEffect関数の実装内で呼び出し推奨)、0番の定数バッファ
 };

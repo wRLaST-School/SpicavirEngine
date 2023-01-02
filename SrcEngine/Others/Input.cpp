@@ -129,7 +129,7 @@ Input::Pad::Stick Input::Pad::GetLStick()
 	if (Vec2(lx, ly).GetSquaredLength() <= (instance->deadZone * 32.767f) * (instance->deadZone * 32.767f))
 		return Stick{ 0,0 };
 
-	return Stick{ (float)lx / 32.767f, (float)ly / 32.767f };
+	return Stick{ (float)lx / 32767.f, (float)ly / 32767.f };
 }
 
 Input::Pad::Stick Input::Pad::GetRStick()
@@ -141,7 +141,7 @@ Input::Pad::Stick Input::Pad::GetRStick()
 	if (Vec2(rx, ry).GetSquaredLength() <= (instance->deadZone * 32.767f) * (instance->deadZone * 32.767f))
 		return Stick{ 0,0 };
 
-	return Stick{ (float)rx / 32.767f, (float)ry / 32.767f };
+	return Stick{ (float)rx / 32767.f, (float)ry / 32767.f };
 }
 
 void Input::Pad::SetDeadZone(float range)
