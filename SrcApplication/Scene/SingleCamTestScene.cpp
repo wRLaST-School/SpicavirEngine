@@ -82,7 +82,7 @@ void SingleCamTestScene::Update()
 	pane.UpdateMatrix();
 	sky.UpdateMatrix();
 
-	//SpImGui::Command([&]() { ImGui::ShowDemoWindow(); });
+	SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
 }
 
 void SingleCamTestScene::DrawBack()

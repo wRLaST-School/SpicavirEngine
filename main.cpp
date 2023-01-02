@@ -122,9 +122,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		Sprite::PostSpriteDraw();
 
-		GetWDX()->PostDrawCommands();
-
 		SpImGui::Draw();
+
+		GetWDX()->PostDrawCommands();
 
 		/*–ˆƒtƒŒ[ƒ€ˆ—‚±‚±‚Ü‚Å*/
 		GetWDX()->EndFrame();
