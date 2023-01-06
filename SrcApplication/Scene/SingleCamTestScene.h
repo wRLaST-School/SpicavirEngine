@@ -5,6 +5,7 @@
 #include <Particle.h>
 #include <ParticleSample1.h>
 #include <ParticleSample2.h>
+#include <Light.h>
 class SingleCamTestScene :
     public IScene
 {
@@ -27,5 +28,7 @@ private:
     Emitter<ParticleSample2> e2;
 
     Camera camera;
+
+    PointLight* light1;
 };
 

@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include "Billboard.h"
 #include <Particle.h>
+
 class TestScene :
     public IScene
 {

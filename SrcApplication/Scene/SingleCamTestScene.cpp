@@ -12,7 +12,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
 	//ModelManager::Register("Resources/Models/Minion/Minion_FBX.fbx", "fbxtest", true);
-	ModelManager::Register("Resources/Models/fbxtest/fbxtest.fbx", "fbxtest", true);
+	//ModelManager::Register("Resources/Models/fbxtest/fbxtest.fbx", "fbxtest", true);
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
@@ -22,7 +22,7 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("fbxtest");
+	pane.model = ModelManager::GetModel("20s");
 	sky.model = ModelManager::GetModel("Sky");
 
 	e1.position.x = 6;
@@ -33,6 +33,8 @@ void SingleCamTestScene::Init()
 	e2.position.z = 3;
 	e2.radius = { 3.f, 3.f, 3.f };
 	e2.shape = Emitter<ParticleSample2>::Shape::Sphere;
+
+	light1 = Light::GetPointLightPtr(Light::CreatePointLight({0.f, 0.f, 0.f}, {1.f, 1.f, 1.f}, {.1f, .1f, .1f}, "light1"));
 }
 
 void SingleCamTestScene::Update()
@@ -82,7 +84,34 @@ void SingleCamTestScene::Update()
 	pane.UpdateMatrix();
 	sky.UpdateMatrix();
 
+	//style editor
 	SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
+
+	//Object
+	SpImGui::Command([&]() { 
+		if (ImGui::Begin("Object Editor"))
+		{
+			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
+			ImGui::SliderFloat3("Scale", &pane.scale.x, 0.f, 1.f);
+			ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 1.f);
+
+			ImGui::End();
+		}
+	});
+
+	//light
+	SpImGui::Command([&]() { 
+		if (ImGui::Begin("Light Editor"))
+		{
+			ImGui::SliderFloat3("Position", &light1->pos.x, -30.f, 30.f);
+			ImGui::SliderFloat3("Color", &light1->color.x, 0.f, 1.f);
+			ImGui::SliderFloat3("Attenuation", &light1->att.x, 0.f, 1.f);
+
+			ImGui::End();
+		}
+	});
+
+
 }
 
 void SingleCamTestScene::DrawBack()
