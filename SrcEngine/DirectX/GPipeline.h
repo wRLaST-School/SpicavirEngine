@@ -42,7 +42,7 @@ struct PipelineDesc
 		};
 
 		UINT NumRenderTargets = 1;
-		DXGI_FORMAT RTVFormat = DXGI_FORMAT_R8G8B8A8_UNORM;
+		DXGI_FORMAT RTVFormat = DXGI_FORMAT_R16G16B16A16_FLOAT;
 		DXGI_SAMPLE_DESC SampleDesc = DXGI_SAMPLE_DESC{
 			1,
 			0

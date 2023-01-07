@@ -3,6 +3,7 @@
 #include <GPipeline.h>
 #include <SpRootSignature.h>
 #include <Sprite.h>
+#include <SpSwapChainManager.h>
 
 void IPostEffector::RegisterPipeline()
 {
@@ -62,7 +63,87 @@ void IPostEffector::RegisterRS()
 
 void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex)
 {
-	
+	if (targetTex == "CurrentBuffer")
+	{
+		RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+	}
+	else
+	{
+		RTVManager::SetRenderTargetToTexture(targetTex);
+	}
+
+	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
+	cl->SetGraphicsRootSignature(SpRootSignature::Get(name)->rootsignature.Get());
+	cl->SetPipelineState(GPipeline::GetState(name));
+	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+	ID3D12DescriptorHeap* ppHeaps[] = { SpTextureManager::GetInstance().srvHeap.Get() };
+	cl->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
+	//GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
+
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+
+	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }
 
-string IPostEffector::name;
+//string IPostEffector::name;
+string IPostEffector::name = "Bloom";
+
+D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::vbView{};
+
+ComPtr<ID3D12Resource> PostEffectCommon::vertBuff = nullptr;
+
+void PostEffectCommon::Init()
+{
+	Sprite::Vertex vertices[] = {
+			{{-1, 1, 0}, {0.0f, 0.0f}},
+			{{-1, -1, 0}, {0.0f, 1.0f}},
+			{{1, 1, 0}, {1.0f, 0.0f}},
+			{{1, -1, 0}, {1.0f, 1.0f}},
+	};
+
+	UINT sizeVB = static_cast<UINT>(sizeof(Sprite::Vertex) * _countof(vertices));
+
+	////頂点バッファの設定
+	D3D12_HEAP_PROPERTIES heapprop{};
+	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
+
+	D3D12_RESOURCE_DESC resdesc{};
+	resdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	resdesc.Width = sizeVB;
+	resdesc.Height = 1;
+	resdesc.DepthOrArraySize = 1;
+	resdesc.MipLevels = 1;
+	resdesc.SampleDesc.Count = 1;
+	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	GetWDX()->dev->CreateCommittedResource(
+		&heapprop,
+		D3D12_HEAP_FLAG_NONE,
+		&resdesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&vertBuff)
+	);
+
+	vertBuff->SetName(L"POST EFFECT VERT BUFF");
+	// GPU上のバッファに対応した仮想メモリを取得
+	Sprite::Vertex* vertMap = nullptr;
+	vertBuff->Map(0, nullptr, (void**)&vertMap);
+
+	// 全頂点に対して
+	for (int i = 0; i < _countof(vertices); i++)
+	{
+		vertMap[i] = vertices[i];   // 座標をコピー
+	}
+
+	// マップを解除
+	vertBuff->Unmap(0, nullptr);
+
+	// 頂点バッファビューの作成
+	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
+	vbView.SizeInBytes = sizeVB;
+	vbView.StrideInBytes = sizeof(Sprite::Vertex);
+}

@@ -6,6 +6,7 @@
 #include <ParticleSample1.h>
 #include <ParticleSample2.h>
 #include <Light.h>
+#include <IPostEffector.h>
 class SingleCamTestScene :
     public IScene
 {

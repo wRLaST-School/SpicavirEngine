@@ -19,6 +19,7 @@
 #include <LineDrawer.h>
 #include <SpImGui.h>
 #include <assimp/Importer.hpp>
+#include <IPostEffector.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -35,13 +36,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウを生成
 	{
 		SpWindow wwnd;
-		wwnd.Create(L"DirectX", 1280, 720);
+		wwnd.Create(L"DirectX", 1920, 1080);
 		RegisterSpWindow(wwnd, "Default");
 	}
 
 	/*DirectX初期化処理*/
 	InitWDX();
-	HRESULT result;
+
+	/*デバッグ有効化*/
+#ifdef  _DEBUG
+	ComPtr<ID3D12InfoQueue> infoQueue;
+	if (SUCCEEDED(GetWDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
+	{
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
+	}
+#endif //  _DEBUG
 
 	//Init Input
 	Input::Key::Init();
@@ -61,6 +71,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	/*Init Draw End*/
 	Sprite::InitCommon();
 
+	//Init PostEffecter
+	PostEffectCommon::Init();
+
 	//Init Textures
 	SpTextureManager::Init();
 
@@ -72,16 +85,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init Scene
 	SceneManager::Init();
-
-	/*デバッグ有効化*/
-#ifdef  _DEBUG
-	ComPtr<ID3D12InfoQueue> infoQueue;
-	if (SUCCEEDED(GetWDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
-	{
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
-	}
-#endif //  _DEBUG
 
 	/*ループ*/
 	while (true)

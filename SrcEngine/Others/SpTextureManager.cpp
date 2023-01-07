@@ -55,24 +55,33 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	OutputDebugStringA((string("Loading : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextTexIndex) + string(")\n")).c_str());
 	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
-	ScratchImage scratchImg{};
+	ScratchImage srcImg{};
 	D3D12_RESOURCE_DESC texresdesc{};
 
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, scratchImg);
+	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
 
 	ScratchImage mipChain{};
 
-	HRESULT result = GenerateMipMaps(scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+	HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
 
 	if (SUCCEEDED(result)) {
-		scratchImg = move(mipChain);
-		metadata = scratchImg.GetMetadata();
+		srcImg = move(mipChain);
+		metadata = srcImg.GetMetadata();
 	}
 
 	//metadata.format = MakeSRGB(metadata.format);
+	ScratchImage scratchImg;
+	result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
+		srcImg.GetMetadata(),
+		DXGI_FORMAT_R16G16B16A16_FLOAT, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
+		scratchImg);
+
+	if (SUCCEEDED(result)) {
+		metadata = scratchImg.GetMetadata();
+	}
 
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
@@ -162,24 +171,33 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	OutputDebugStringA((string("Loading Unique : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextTexIndex) + string(")\n")).c_str());
 	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
-	ScratchImage scratchImg{};
+	ScratchImage srcImg{};
 	D3D12_RESOURCE_DESC texresdesc{};
 
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, scratchImg);
+	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
 
 	ScratchImage mipChain{};
 
-	HRESULT result = GenerateMipMaps(scratchImg.GetImages(), scratchImg.GetImageCount(), scratchImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+	HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
 
 	if (SUCCEEDED(result)) {
-		scratchImg = move(mipChain);
-		metadata = scratchImg.GetMetadata();
+		srcImg = move(mipChain);
+		metadata = srcImg.GetMetadata();
 	}
 
 	//metadata.format = MakeSRGB(metadata.format);
+	ScratchImage scratchImg;
+	result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
+		srcImg.GetMetadata(),
+		DXGI_FORMAT_R16G16B16A16_FLOAT, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
+		scratchImg);
+
+	if (SUCCEEDED(result)) {
+		metadata = scratchImg.GetMetadata();
+	}
 
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
@@ -304,9 +322,9 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
 	D3D12_RESOURCE_DESC textureResourceDesc =
-		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
-	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R16G16B16A16_FLOAT, {0, 0, 0, 0} };
 
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
@@ -379,9 +397,9 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
 	D3D12_RESOURCE_DESC textureResourceDesc =
-		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
-	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R16G16B16A16_FLOAT, {0, 0, 0, 0} };
 
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,

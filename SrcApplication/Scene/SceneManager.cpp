@@ -6,11 +6,14 @@
 #include <future>
 #include <thread>
 #include <SoundManager.h>
+#include <IPostEffector.h>
 
 static future<void> ftr;
 
 void SceneManager::Init()
 {
+	IPostEffector::RegisterRS();
+	IPostEffector::RegisterPipeline();
 	InstantTransition<SingleCamTestScene>();
 }
 

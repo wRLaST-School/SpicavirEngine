@@ -481,6 +481,12 @@
     <FxCompile Include="Resources\Shaders\LineVS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\BloomPS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\BloomVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -493,6 +499,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\Line.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\Bloom.hlsli">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

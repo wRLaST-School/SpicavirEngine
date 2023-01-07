@@ -4,6 +4,7 @@
 #include <LineDrawer.h>
 #include <Input.h>
 #include <SpImGui.h>
+#include <SpSwapChainManager.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -16,6 +17,9 @@ void SingleCamTestScene::LoadResources()
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
+
+	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
+	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
 }
 
 void SingleCamTestScene::Init()
@@ -123,15 +127,22 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
+	RTVManager::SetRenderTargetToTexture("BloomBefore");
+
 	pane.Draw();
 	sky.Draw();
 	e1.Draw();
 	e2.Draw();
 
 	LineDrawer::DrawAllLines();
+
+	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+
+	IPostEffector::Effect("BloomBefore", "CurrentBuffer");
 }
 
 void SingleCamTestScene::DrawSprite()
 {
+
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
 }
