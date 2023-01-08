@@ -153,3 +153,39 @@ float Input::Pad::GetDeadZone()
 {
 	return GetInstance()->deadZone;
 }
+
+void Input::Pad::Vibration(int power, int frame)
+{
+	XINPUT_VIBRATION vibration;
+	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+	vibration.wLeftMotorSpeed = power; // use any value between 0-65535 here
+	vibration.wRightMotorSpeed = power; // use any value between 0-65535 here
+	XInputSetState(GetInstance()->gamepadIndex, &vibration);
+
+	vibTimer = frame;
+	vibTimerMax = frame;
+}
+
+void Input::Pad::Vibration(int leftpower, int rightpower, int frame)
+{
+	XINPUT_VIBRATION vibration;
+	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+	vibration.wLeftMotorSpeed = leftpower; // use any value between 0-65535 here
+	vibration.wRightMotorSpeed = rightpower; // use any value between 0-65535 here
+	XInputSetState(GetInstance()->gamepadIndex, &vibration);
+
+	vibTimer = frame;
+	vibTimerMax = frame;
+}
+
+void Input::Pad::StopVibration()
+{
+	XINPUT_VIBRATION vibration;
+	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
+	vibration.wLeftMotorSpeed = 0; // use any value between 0-65535 here
+	vibration.wRightMotorSpeed = 0; // use any value between 0-65535 here
+	XInputSetState(GetInstance()->gamepadIndex, &vibration);
+}
+
+int Input::Pad::vibTimer = 0;
+int Input::Pad::vibTimerMax = 0;

@@ -7,13 +7,14 @@
 #include <thread>
 #include <SoundManager.h>
 #include <IPostEffector.h>
+#include <Bloom.h>
 
 static future<void> ftr;
 
 void SceneManager::Init()
 {
-	IPostEffector::RegisterRS();
-	IPostEffector::RegisterPipeline();
+	BloomP1::Init();
+	BloomP2::Init();
 	InstantTransition<SingleCamTestScene>();
 }
 

@@ -5,6 +5,7 @@
 #include <Input.h>
 #include <SpImGui.h>
 #include <SpSwapChainManager.h>
+#include <Bloom.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -19,7 +20,8 @@ void SingleCamTestScene::LoadResources()
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
 
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
-	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
+	RTVManager::CreateRenderTargetTexture(960, 1080, "BloomAfter");
+	RTVManager::CreateRenderTargetTexture(960, 540, "Bloom2ndAfter");
 }
 
 void SingleCamTestScene::Init()
@@ -108,14 +110,21 @@ void SingleCamTestScene::Update()
 		if (ImGui::Begin("Light Editor"))
 		{
 			ImGui::SliderFloat3("Position", &light1->pos.x, -30.f, 30.f);
-			ImGui::SliderFloat3("Color", &light1->color.x, 0.f, 1.f);
+			ImGui::SliderFloat3("Color", &light1->color.x, 0.f, 3.f);
 			ImGui::SliderFloat3("Attenuation", &light1->att.x, 0.f, 1.f);
 
 			ImGui::End();
 		}
 	});
 
+	SpImGui::Command([&]() {
+		if (ImGui::Begin("GamePad"))
+		{
+			ImGui::InputInt("Index", &Input::Pad::GetInstance()->gamepadIndex);
 
+			ImGui::End();
+		}
+	});
 }
 
 void SingleCamTestScene::DrawBack()
@@ -138,7 +147,20 @@ void SingleCamTestScene::Draw3D()
 
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 
-	IPostEffector::Effect("BloomBefore", "CurrentBuffer");
+	
+	//BloomP1::Effect("BloomBefore", "CurrentBuffer");
+
+	if (Input::Key::Down(DIK_P))
+	{
+		BloomP2::Effect("BloomBefore", "BloomAfter");
+		BloomP2::Effect("BloomAfter", "Bloom2ndAfter");
+		BloomP2::Effect("Bloom2ndAfter", "BloomBefore");
+		BloomP2::Effect("BloomBefore", "CurrentBuffer");
+	}
+	else
+	{
+		BloomP2::Effect("BloomBefore", "CurrentBuffer");
+	}
 }
 
 void SingleCamTestScene::DrawSprite()

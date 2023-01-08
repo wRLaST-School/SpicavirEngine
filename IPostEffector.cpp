@@ -5,7 +5,7 @@
 #include <Sprite.h>
 #include <SpSwapChainManager.h>
 
-void IPostEffector::RegisterPipeline()
+void IPostEffector::RegisterPipeline(string name)
 {
 	RegisterShader(name);
 	InitVS(name, name + "VS.hlsl");
@@ -28,7 +28,7 @@ void IPostEffector::RegisterPipeline()
 	GPipeline::Create(pl2dDesc, name);
 }
 
-void IPostEffector::RegisterRS()
+void IPostEffector::RegisterRS(string name)
 {
 #pragma region 2D Default RS
 	{
@@ -61,7 +61,7 @@ void IPostEffector::RegisterRS()
 #pragma endregion
 }
 
-void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex)
+void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name)
 {
 	if (targetTex == "CurrentBuffer")
 	{
@@ -77,6 +77,38 @@ void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex)
 	cl->SetPipelineState(GPipeline::GetState(name));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 
+	D3D12_VIEWPORT viewport{};
+	D3D12_RECT scissorrect{};
+
+	if (targetTex == "CurrentBuffer")
+	{
+		viewport.Width = GetSpWindow()->width;
+		viewport.Height = GetSpWindow()->height;
+		scissorrect.left = 0;                                       // 切り抜き座標左
+		scissorrect.right = scissorrect.left + viewport.Width;        // 切り抜き座標右
+		scissorrect.top = 0;                                        // 切り抜き座標上
+		scissorrect.bottom = scissorrect.top + viewport.Height;       // 切り抜き座標下
+	}
+	else
+	{
+		TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
+		viewport.Width = md.width;
+		viewport.Height = md.height;
+		scissorrect.left = 0;                                       // 切り抜き座標左
+		scissorrect.right = scissorrect.left + md.width;        // 切り抜き座標右
+		scissorrect.top = 0;                                        // 切り抜き座標上
+		scissorrect.bottom = scissorrect.top + md.height;       // 切り抜き座標下
+	}
+
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+
+	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+
 	ID3D12DescriptorHeap* ppHeaps[] = { SpTextureManager::GetInstance().srvHeap.Get() };
 	cl->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
@@ -87,9 +119,6 @@ void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex)
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }
-
-//string IPostEffector::name;
-string IPostEffector::name = "Bloom";
 
 D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::vbView{};
 

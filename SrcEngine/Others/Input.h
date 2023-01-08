@@ -96,6 +96,16 @@ namespace Input {
 		static void SetDeadZone(float range);
 		static float GetDeadZone();
 
+		//0-65535 for power, -1 for infinity frame
+		static void Vibration(int power, int frame = -1);
+
+		//0-65535 for power, -1 for infinity frame
+		static void Vibration(int leftpower, int rightpower, int frame);
+
+		static void StopVibration();
+
+		int gamepadIndex = 0;
+
 	private:
 		XINPUT_STATE padState;
 		XINPUT_STATE lastPadState;
@@ -105,6 +115,7 @@ namespace Input {
 
 		float deadZone = 50;
 
-		int gamepadIndex = 0;
+		static int vibTimer;
+		static int vibTimerMax;
 	};
 }
