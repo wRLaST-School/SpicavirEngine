@@ -14,7 +14,7 @@ public:
 	static void RegisterPipeline(string name);
 	static void RegisterRS(string name);
 
-	static void Effect(TextureKey baseTex, TextureKey targetTex, string name);
+	static void Effect(TextureKey baseTex, TextureKey targetTex, string name, std::function<void(void)> commands = [](void) {return; });
 
 	virtual void SetExclusiveCBV() = 0; // 専用の定数バッファをセットするコマンド用(継承先のEffect関数の実装内で呼び出し推奨)、0番の定数バッファ
 };

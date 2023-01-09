@@ -1,4 +1,4 @@
-#include "Sprite.hlsli"
+#include "BloomP1.hlsli"
 
 VSOutput main(float4 pos : POSITION, float2 uv : TEXCOORD)
 {

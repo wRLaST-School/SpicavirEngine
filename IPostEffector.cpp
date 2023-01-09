@@ -61,7 +61,7 @@ void IPostEffector::RegisterRS(string name)
 #pragma endregion
 }
 
-void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name)
+void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name, std::function<void(void)> commands)
 {
 	if (targetTex == "CurrentBuffer")
 	{
@@ -76,6 +76,8 @@ void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name
 	cl->SetGraphicsRootSignature(SpRootSignature::Get(name)->rootsignature.Get());
 	cl->SetPipelineState(GPipeline::GetState(name));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+	commands();
 
 	D3D12_VIEWPORT viewport{};
 	D3D12_RECT scissorrect{};

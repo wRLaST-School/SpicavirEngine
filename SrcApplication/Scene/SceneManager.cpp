@@ -15,6 +15,8 @@ void SceneManager::Init()
 {
 	BloomP1::Init();
 	BloomP2::Init();
+	BloomP3::Init();
+	BloomFin::Init();
 	InstantTransition<SingleCamTestScene>();
 }
 

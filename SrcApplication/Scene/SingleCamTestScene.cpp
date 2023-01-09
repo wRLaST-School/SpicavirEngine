@@ -20,8 +20,9 @@ void SingleCamTestScene::LoadResources()
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
 
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
-	RTVManager::CreateRenderTargetTexture(960, 1080, "BloomAfter");
-	RTVManager::CreateRenderTargetTexture(960, 540, "Bloom2ndAfter");
+	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
+	RTVManager::CreateRenderTargetTexture(960, 1080, "Bloom2ndAfter");
+	RTVManager::CreateRenderTargetTexture(960, 540, "Bloom3rdAfter");
 }
 
 void SingleCamTestScene::Init()
@@ -136,8 +137,10 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	RTVManager::SetRenderTargetToTexture("BloomBefore");
-
+	if (Input::Key::Down(DIK_P))
+	{
+		RTVManager::SetRenderTargetToTexture("BloomBefore");
+	}
 	pane.Draw();
 	sky.Draw();
 	e1.Draw();
@@ -152,14 +155,10 @@ void SingleCamTestScene::Draw3D()
 
 	if (Input::Key::Down(DIK_P))
 	{
-		BloomP2::Effect("BloomBefore", "BloomAfter");
+		BloomP1::Effect("BloomBefore", "BloomAfter");
 		BloomP2::Effect("BloomAfter", "Bloom2ndAfter");
-		BloomP2::Effect("Bloom2ndAfter", "BloomBefore");
-		BloomP2::Effect("BloomBefore", "CurrentBuffer");
-	}
-	else
-	{
-		BloomP2::Effect("BloomBefore", "CurrentBuffer");
+		BloomP3::Effect("Bloom2ndAfter", "Bloom3rdAfter");
+		BloomFin::Effect("BloomBefore","Bloom3rdAfter", "CurrentBuffer");
 	}
 }
 
