@@ -4,6 +4,6 @@ class DirectionalLight
 {
 public:
 	Vec3 direction = Vec3(1,0,0);
-	Float3 color = { 1.0f, 1.0f, 1.0f };
+	Float3 color = { 0.35f, 0.35f, 0.35f };
 };
 

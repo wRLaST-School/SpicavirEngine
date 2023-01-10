@@ -77,6 +77,11 @@ public:
 	int timeBetweenEmit = 1;
 private:
 	void Emit() {
+		if (!active)
+		{
+			return;
+		}
+
 		Float3 particlePos = {};
 
 		switch (shape)
@@ -109,4 +114,6 @@ private:
 	vector<ParticleType> particles;
 
 	int timer = 0;
+
+	bool active = true;
 };

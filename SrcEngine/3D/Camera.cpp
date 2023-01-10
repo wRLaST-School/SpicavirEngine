@@ -72,7 +72,7 @@ void Camera::UseCurrent()
 
 	Matrix vMat = current->targetMode == CameraTargetMode::LookAt ?
 		Matrix::ViewLookAt(current->position, current->target, current->matWorld.ExtractAxisY()) :
-		Matrix::ViewLookTo(current->position, current->matWorld.ExtractAxisZ(), current->matWorld.ExtractAxisY());
+		Matrix::ViewLookTo({ current->matWorld[3][0], current->matWorld[3][1], current->matWorld[3][2] }, current->matWorld.ExtractAxisZ(), current->matWorld.ExtractAxisY());
 
 	Matrix pMat = current->projectionMode == ProjectionMode::Perspective ?
 		Matrix::Projection(current->fov, (float)current->renderWidth / (float)current->renderHeight, current->nearZ, current->farZ) :

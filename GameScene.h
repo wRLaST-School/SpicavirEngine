@@ -1,12 +1,18 @@
 #pragma once
 #include "IScene.h"
 #include <Object3D.h>
+#include <ParticleSample1.h>
+#include <ParticleSample2.h>
+#include <Emitter.h>
 #include <Camera.h>
+#include <Player.h>
+#include <Boss.h>
 class GameScene :
     public IScene
 {
 public:
     ~GameScene() {};
+    void LoadResources() override;
     void Init() override;
     void Update() override;
     void DrawBack() override;
@@ -14,12 +20,19 @@ public:
     void DrawSprite() override;
 
 private:
-    Object3D obj;
-    Model mCube;
+    Player player;
+
+    Boss boss;
 
     Object3D sky;
-    Model mSky;
+    Object3D floor;
+
+    Emitter<ParticleSample1> e1;
+
+    Emitter<ParticleSample2> e2;
 
     Camera camera;
+
+    PointLight* light1;
 };
 

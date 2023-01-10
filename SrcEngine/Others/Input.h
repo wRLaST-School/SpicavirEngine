@@ -104,7 +104,7 @@ namespace Input {
 
 		static void StopVibration();
 
-		int gamepadIndex = 0;
+		int gamepadIndex = 1;
 
 	private:
 		XINPUT_STATE padState;

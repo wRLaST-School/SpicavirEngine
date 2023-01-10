@@ -8,6 +8,7 @@
 #include <SoundManager.h>
 #include <IPostEffector.h>
 #include <Bloom.h>
+#include <GameScene.h>
 
 static future<void> ftr;
 
@@ -17,7 +18,7 @@ void SceneManager::Init()
 	BloomP2::Init();
 	BloomP3::Init();
 	BloomFin::Init();
-	InstantTransition<SingleCamTestScene>();
+	InstantTransition<GameScene>();
 }
 
 void SceneManager::Update()

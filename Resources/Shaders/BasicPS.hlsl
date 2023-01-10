@@ -46,8 +46,15 @@ float4 main(GSOutput input) : SV_TARGET
 
 			float3 specular = specular = pow(saturate(dot(reflect, eyeDir)), luster) * m_specular;
 
-			shadecolor.rgb += att * (diffuse + specular) * pointLights[i].lightColor;
-		}
+            float3 color = att * (diffuse + specular) * pointLights[i].lightColor;
+            if (color.x < 0)
+                color.x = 0;
+            if (color.y < 0)
+                color.y = 0;
+            if (color.z < 0)
+                color.z = 0;
+            shadecolor.rgb += color;
+        }
 	}
 
 	return shadecolor * texcolor * brightness;
