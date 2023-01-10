@@ -11,7 +11,25 @@ public:
 	static void DrawBack();
 
 	//非同期で次のシーンの読み込みを開始する
-	template <class NextScene> static void LoadScene();
+	template<class NextScene>
+	static void LoadScene()
+	{
+		if (loadState != LoadState::NotInProgress)
+		{
+			return;
+		}
+
+		nextScene = unique_ptr<IScene>(new NextScene());
+
+		ftr = std::async(std::launch::async, [&] {
+			SpTextureManager::PreLoadNewScene();
+		ModelManager::PreLoadNewScene();
+		SoundManager::PreLoadNewScene();
+		nextScene->LoadResources();
+		loadFinished = true;
+			});
+		loadState = LoadState::Loading;
+	}
 
 	//読み込みが終わっていたらシーンを切り替え、終わっていないなら何もしない
 	static void Transition();

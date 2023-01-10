@@ -90,26 +90,6 @@ template <class NextScene> void SceneManager::InstantTransition()
 	FrameRate::InitMark();
 }
 
-template<class NextScene>
-void SceneManager::LoadScene()
-{
-	if(loadState != LoadState::NotInProgress)
-	{
-		return;
-	}
-
-	nextScene = unique_ptr<IScene>(new NextScene());
-
-	ftr = std::async(std::launch::async, [&] {
-			SpTextureManager::PreLoadNewScene();
-			ModelManager::PreLoadNewScene();
-			SoundManager::PreLoadNewScene();
-			nextScene->LoadResources();
-			loadFinished = true;
-		});
-	loadState = LoadState::Loading;
-}
-
 void SceneManager::UpdateLoadState()
 {
 	if (loadState == LoadState::Loading && loadFinished)
