@@ -35,6 +35,7 @@ void Player::Draw()
 			ImGui::SliderFloat3("Position", &position.x, -30.f, 30.f);
 			ImGui::SliderFloat3("Scale", &scale.x, 0.f, 1.f);
 			ImGui::SliderFloat3("Rotation", &rotation.x, 0.f, 1.f);
+			ImGui::InputInt("Health", &health);
 
 			ImGui::End();
 		}
@@ -50,6 +51,11 @@ Player* Player::Get()
 void Player::Set(Player* p)
 {
 	current = p;
+}
+
+void Player::Damage()
+{
+	health--;
 }
 
 Player* Player::current = nullptr;

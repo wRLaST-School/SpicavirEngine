@@ -17,5 +17,9 @@ public:
     static void Set(Player* p);
 
     static Player* current;
+
+    int health = 10;
+
+    void Damage();
 };
 
