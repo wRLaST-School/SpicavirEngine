@@ -7,7 +7,7 @@ public:
     void Update();
     void Draw();
 
-    float speed = 0.8f;
+    float speed = 0.25f;
     float dodgespd = 1.8f;
     
     int immuneTimer;

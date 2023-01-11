@@ -9,8 +9,9 @@
 #include <IPostEffector.h>
 #include <Bloom.h>
 #include <GameScene.h>
+#include <TitleScene.h>
 
-static future<void> ftr;
+future<void> SceneManager::ftr;
 
 void SceneManager::Init()
 {
@@ -18,7 +19,7 @@ void SceneManager::Init()
 	BloomP2::Init();
 	BloomP3::Init();
 	BloomFin::Init();
-	InstantTransition<GameScene>();
+	InstantTransition<TitleScene>();
 }
 
 void SceneManager::Update()

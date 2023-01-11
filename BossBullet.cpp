@@ -5,6 +5,11 @@
 void BossBullet::Update()
 {
 	position += vel;
+
+	*brightnessCB.contents = { 3.0f, 0.0f, 0.0f, 1.0f };
+
+	scale = { 0.5f, .5f, .5f };
+
 	UpdateMatrix();
 
 	totalTimer++;
@@ -22,4 +27,6 @@ void BossBullet::Update()
 		this->del = true;
 		pl->Damage();
 	}
+
+	em->position = position;
 }

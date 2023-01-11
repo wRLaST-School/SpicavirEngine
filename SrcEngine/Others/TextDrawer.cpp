@@ -153,7 +153,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	}
 
 	UINT64 imageDataCount = strdata.width * strdata.height;
-	R8G8B8A8* finalTexImageData = new R8G8B8A8[imageDataCount];
+	R16G16B16A16_FLOAT* finalTexImageData = new R16G16B16A16_FLOAT[imageDataCount];
 
 	for (UINT64 i = 0; i < imageDataCount; i++)
 	{
@@ -202,11 +202,11 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 				float alpha = (float)glyph->bmp[i * glyph->gm.gmBlackBoxX + j] / (float)glyph->grad * 255;
 				//Float4 pixelColor = { alpha, alpha, alpha, alpha };
 
-				R8G8B8A8 finalColor = {
-					(BYTE)(alpha + finalTexImageData[index].r * (255 - alpha)),
-					(BYTE)(alpha + finalTexImageData[index].g * (255 - alpha)),
-					(BYTE)(alpha + finalTexImageData[index].b * (255 - alpha)),
-					(BYTE)(alpha + finalTexImageData[index].a * (255 - alpha))
+				R16G16B16A16_FLOAT finalColor = {
+					(DirectX::PackedVector::HALF)(alpha + finalTexImageData[index].r * (1.f - alpha)),
+					(DirectX::PackedVector::HALF)(alpha + finalTexImageData[index].g * (1.f - alpha)),
+					(DirectX::PackedVector::HALF)(alpha + finalTexImageData[index].b * (1.f - alpha)),
+					(DirectX::PackedVector::HALF)(alpha + finalTexImageData[index].a * (1.f - alpha))
 				};
 
 				//èëÇ´çûÇ›
@@ -231,8 +231,8 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 		0,
 		nullptr,
 		finalTexImageData,
-		sizeof(R8G8B8A8) * strdata.width,
-		sizeof(R8G8B8A8) * imageDataCount
+		sizeof(R16G16B16A16_FLOAT) * strdata.width,
+		sizeof(R16G16B16A16_FLOAT) * imageDataCount
 	);
 
 	delete[] finalTexImageData;

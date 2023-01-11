@@ -12,6 +12,7 @@ void GameScene::LoadResources()
 	ModelManager::Register("Boss", "Boss");
 	ModelManager::Register("sphere", "BBullet");
 	ModelManager::Register("Floor", "Floor");
+	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
 
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
@@ -76,9 +77,9 @@ void GameScene::Draw3D()
 	RTVManager::SetRenderTargetToTexture("BloomBefore");
 
 	sky.Draw();
+	floor.Draw("white");
 	player.Draw();
 	boss.Draw();
-	floor.Draw("white");
 
 	LineDrawer::DrawAllLines();
 

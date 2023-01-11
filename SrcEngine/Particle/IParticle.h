@@ -22,7 +22,7 @@ public:
 	float scale = 1.0f;
 
 	int time = 0;
-	int maxTime = 120;
+	int maxTime;
 	bool active = true;
 
 	static TextureKey texture;

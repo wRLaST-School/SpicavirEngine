@@ -4,6 +4,7 @@
 #ifdef _DEBUG
 #include <SpImGui.h>
 #endif // DEBUG
+#include <Util.h>
 
 
 void Player::Update()
@@ -13,6 +14,9 @@ void Player::Update()
 	Matrix cm = Matrix::RotRollPitchYaw(rotation);
 	Vec3 front = cm.ExtractAxisZ();
 	Vec3 right = cm.ExtractAxisX();
+	front.y = 0;
+	right.y = 0;
+
 	Vec3 up = cm.ExtractAxisY();
 
 	Vec3 move =
@@ -20,6 +24,10 @@ void Player::Update()
 		right.SetLength((Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A) + (Input::Pad::GetLStick()).x) * speed);
 
 	position = move + position;
+
+	position.x = Util::Clamp(position.x, -16.0f + scale.x, 16.0f - scale.x);
+	position.z = Util::Clamp(position.z, -16.0f + scale.z, 16.0f - scale.z);
+	position.y = scale.y;
 
 	UpdateMatrix();
 }

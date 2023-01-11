@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <windows.h>
+#include <DirectXPackedVector.h>
 namespace Util
 {
 	template<class T>
@@ -41,3 +42,10 @@ struct R8G8B8A8
 	byte a = 0;
 };
 
+struct R16G16B16A16_FLOAT
+{
+	 DirectX::PackedVector::HALF r = 0.f;
+	 DirectX::PackedVector::HALF g = 0.f;
+	 DirectX::PackedVector::HALF b = 0.f;
+	 DirectX::PackedVector::HALF a = 0.f;
+};

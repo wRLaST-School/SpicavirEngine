@@ -1,6 +1,9 @@
 #pragma once
 #include "IScene.h"
 #include "Essentials.h"
+#include <future>
+#include <thread>
+#include <SoundManager.h>
 class SceneManager final
 {
 public:
@@ -62,5 +65,7 @@ private:
 	~SceneManager() {};
 	SceneManager(const SceneManager& a) = delete;
 	SceneManager& operator=(const SceneManager& a) = delete;
+
+	static future<void> ftr;
 };
 

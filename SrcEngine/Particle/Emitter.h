@@ -75,6 +75,8 @@ public:
 
 	//”­¶ŠÔŠu(ƒtƒŒ[ƒ€)
 	int timeBetweenEmit = 1;
+
+	bool active = true;
 private:
 	void Emit() {
 		if (!active)
@@ -114,6 +116,4 @@ private:
 	vector<ParticleType> particles;
 
 	int timer = 0;
-
-	bool active = true;
 };

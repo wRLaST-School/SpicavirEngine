@@ -8,6 +8,7 @@ class Boss :
 public:
     Boss() {
         Light::CreatePointLight(position, {3.f, 3.f, 3.f}, {0.1f, 0.1f, 0.01f}, "BossLight");
+        for (auto& p : em) p.active = false;
     };
     void Update();
 
@@ -40,5 +41,8 @@ public:
     int totalTimer = 0;
 
     list<BossBullet> bullets;
+
+    Emitter<ParticleSample1> em[100];
+    int emIndex = 0;
 };
 

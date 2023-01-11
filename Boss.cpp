@@ -44,17 +44,24 @@ void Boss::Update()
 			itr++;
 		}
 	}
+
+
+	for(auto& p : em) p.Update();
 }
 
 void Boss::Draw()
 {
 	Object3D::Draw("white");
 
-	for (auto& b : bullets) b.Draw();
+	for (auto& b : bullets) b.Draw("white");
+
+	for (auto& p : em) p.Draw();
 }
 
 void Boss::Shot(Vec3 vel)
 {
-	bullets.emplace_back(vel);
+	bullets.emplace_back(vel, &em[emIndex]);
+	emIndex++;
+	if (emIndex >= 100) emIndex = 0;
 	bullets.back().position = position;
 }
