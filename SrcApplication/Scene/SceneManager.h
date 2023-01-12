@@ -59,6 +59,7 @@ private:
 public:
 	//非同期でのシーン読み込みを行わずに直接シーン切り替えをする(バグ起きがちなので注意)
 	template <class NextScene> static void InstantTransition();
+	static void TransitionConfirm();
 
 private:
 	SceneManager();
@@ -67,5 +68,6 @@ private:
 	SceneManager& operator=(const SceneManager& a) = delete;
 
 	static future<void> ftr;
+	static bool transitionQueued;
 };
 

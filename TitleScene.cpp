@@ -8,11 +8,13 @@
 
 void TitleScene::LoadResources()
 {
+	SpTextureManager::LoadTexture("Resources/title.png", "Title");
 }
 
 void TitleScene::Init()
 {
-
+	title = Sprite("Title");
+	title.position = { 960, 540 };
 }
 
 void TitleScene::Update()
@@ -24,6 +26,10 @@ void TitleScene::Update()
 	}
 
 	SceneManager::Transition();
+
+	title.position.y = 540 + sin((float)timer / 50 ) * 10;
+
+	title.UpdateMatrix();
 }
 
 void TitleScene::DrawBack()
@@ -38,6 +44,7 @@ void TitleScene::Draw3D()
 void TitleScene::DrawSprite()
 {
 	
+	title.Draw();
 
 	if (SceneManager::GetLoadState() == SceneManager::LoadState::Loading)
 	{

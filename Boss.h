@@ -14,7 +14,7 @@ public:
 
     void Draw();
 
-    void Shot(Vec3 vel);
+    void Shot(Vec3 vel, bool usePlayerY = false);
 
     int health;
     static const int maxhealth = 100;

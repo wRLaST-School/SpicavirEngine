@@ -86,6 +86,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//Init Scene
 	SceneManager::Init();
 
+	SoundManager::Init();
+
 	/*ループ*/
 	while (true)
 	{
@@ -135,6 +137,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		/*DrawString用のデータを解放*/
 		TextDrawer::ReleaseDrawStringData();
 		LineDrawer::ClearLineData();
+
+		SceneManager::TransitionConfirm();
 	}
 
 	/*ループここまで*/

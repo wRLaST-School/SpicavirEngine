@@ -94,7 +94,7 @@ void SpDirectX::PreDrawCommands()
 	UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
 
 	//‰æ–ÊƒNƒŠƒA
-	Float4 clearColor = { 0.1f, 0.25f, 0.5f, 0.0f };
+	Float4 clearColor = { 0.0f, 0.f, 0.f, 0.0f };
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
 	RTVManager::ClearCurrentRenderTarget(clearColor);

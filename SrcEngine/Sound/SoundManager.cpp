@@ -1,4 +1,5 @@
 #include "SoundManager.h"
+#include <SceneManager.h>
 
 SoundManager* SoundManager::GetInstance()
 {
@@ -87,6 +88,7 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
 
 void SoundManager::Play(SoundKey key)
 {
+    if (SceneManager::GetLoadState() == SceneManager::LoadState::Loading) return;
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
 
     SoundData* pSnd;

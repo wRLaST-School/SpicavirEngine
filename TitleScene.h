@@ -15,5 +15,7 @@ public:
     void DrawSprite() override;
 
 private:
-    int timer = 0;
+    long long timer = 0;
+
+    Sprite title;
 };

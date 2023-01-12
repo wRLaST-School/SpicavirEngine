@@ -2,6 +2,7 @@
 #include <Bloom.h>
 #include <Input.h>
 #include <SpImGui.h>
+#include <SceneManager.h>
 
 void GameScene::LoadResources()
 {
@@ -12,7 +13,16 @@ void GameScene::LoadResources()
 	ModelManager::Register("Boss", "Boss");
 	ModelManager::Register("sphere", "BBullet");
 	ModelManager::Register("Floor", "Floor");
+	ModelManager::Register("cube", "Cube");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
+
+	SpTextureManager::AddMasterTextureKey("SpicavirSky.png");
+	SpTextureManager::AddMasterTextureKey("triTex.png");
+
+	SoundManager::LoadWave("Resources/Sounds/counterSuccess.wav", "counterSuccess");
+	SoundManager::LoadWave("Resources/Sounds/enShot.wav", "enShot");
+	SoundManager::LoadWave("Resources/Sounds/PlayerDamaged.wav", "PlayerDamaged");
+	SoundManager::LoadWave("Resources/Sounds/TP.wav", "Dodge");
 
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
@@ -33,6 +43,8 @@ void GameScene::Init()
 	sky.model = ModelManager::GetModel("Sky");
 	boss.model = ModelManager::GetModel("Boss");
 	floor.model = ModelManager::GetModel("Floor");
+	hp.model = ModelManager::GetModel("Cube");
+	bossHP.model = ModelManager::GetModel("Cube");
 
 	Player::Set(&player);
 }
@@ -40,7 +52,9 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	player.Update();
+	hp.Update();
 	boss.Update();
+	bossHP.Update();
 
 	sky.scale = { 5,5,5 };
 
@@ -48,6 +62,7 @@ void GameScene::Update()
 	*floor.brightnessCB.contents = {.1f, .1f, .1f, 1.f};
 	floor.UpdateMatrix();
 
+#ifdef _DEBUG
 	SpImGui::Command([&] {
 		if (ImGui::Begin("Main"))
 		{
@@ -55,7 +70,7 @@ void GameScene::Update()
 
 			ImGui::End();
 		}
-	});
+		});
 
 	SpImGui::Command([&]() {
 		if (ImGui::Begin("GamePad"))
@@ -65,6 +80,9 @@ void GameScene::Update()
 			ImGui::End();
 		}
 	});
+#endif // _DEBUG
+
+	SceneManager::Transition();
 }
 
 void GameScene::DrawBack()
@@ -79,6 +97,8 @@ void GameScene::Draw3D()
 	sky.Draw();
 	floor.Draw("white");
 	player.Draw();
+	hp.Draw("white");
+	bossHP.Draw("white");
 	boss.Draw();
 
 	LineDrawer::DrawAllLines();

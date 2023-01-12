@@ -106,9 +106,6 @@
     <Filter Include="Engine\ソースファイル\Math\Vector">
       <UniqueIdentifier>{5bf791d8-0730-4baa-a8a9-038cb67f5d38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ソースファイル\Sound">
-      <UniqueIdentifier>{1598a9bc-b0de-4927-a8c4-a8a30e48df18}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ヘッダーファイル\Sound">
       <UniqueIdentifier>{a45ec72f-19a2-448e-a2d9-f19d6bd72d0a}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="Engine\ヘッダーファイル\PostEffect">
       <UniqueIdentifier>{5df9233d-3387-4ffb-b03e-75beef98df81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Sound">
+      <UniqueIdentifier>{1598a9bc-b0de-4927-a8c4-a8a30e48df18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +307,12 @@
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="HP.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHP.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -492,6 +498,12 @@
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ResultScene.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="HP.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHP.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

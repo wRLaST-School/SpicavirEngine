@@ -59,21 +59,7 @@ void SceneManager::DrawBack()
 
 void SceneManager::Transition()
 {
-	if (loadState == LoadState::Loaded)
-	{
-		delete currentScene.release();
-		currentScene.swap(nextScene);
-
-		currentScene->Init();
-
-		loadState = LoadState::NotInProgress;
-
-		ftr = std::async(std::launch::async, [&] {
-				SpTextureManager::ReleasePerSceneTexture();
-				ModelManager::ReleasePerSceneModel();
-				SoundManager::ReleasePerSceneSounds();
-			});
-	}
+	transitionQueued = true;
 }
 
 SceneManager::LoadState SceneManager::GetLoadState()
@@ -104,3 +90,23 @@ unique_ptr<IScene> SceneManager::currentScene = nullptr;
 unique_ptr<IScene> SceneManager::nextScene = nullptr;
 SceneManager::LoadState SceneManager::loadState = SceneManager::LoadState::NotInProgress;
 bool SceneManager::loadFinished = false;
+bool SceneManager::transitionQueued = false;
+
+void SceneManager::TransitionConfirm()
+{
+	if (loadState == LoadState::Loaded && transitionQueued)
+	{
+		delete currentScene.release();
+		currentScene.swap(nextScene);
+
+		currentScene->Init();
+
+		loadState = LoadState::NotInProgress;
+
+		SpTextureManager::ReleasePerSceneTexture();
+		ModelManager::ReleasePerSceneModel();
+		SoundManager::ReleasePerSceneSounds();
+	}
+
+	transitionQueued = false;
+};

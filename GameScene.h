@@ -7,6 +7,8 @@
 #include <Camera.h>
 #include <Player.h>
 #include <Boss.h>
+#include <HP.h>
+#include <BossHP.h>
 class GameScene :
     public IScene
 {
@@ -26,6 +28,9 @@ private:
 
     Object3D sky;
     Object3D floor;
+
+    HP hp;
+    BossHP bossHP;
 
     Emitter<ParticleSample1> e1;
 

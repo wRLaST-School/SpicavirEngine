@@ -107,8 +107,10 @@
     <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossBullet.cpp" />
+    <ClCompile Include="BossHP.cpp" />
     <ClCompile Include="exc_unordered_map.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="HP.cpp" />
     <ClCompile Include="ImGuiStyle.cpp" />
     <ClCompile Include="IPostEffector.cpp" />
     <ClCompile Include="LineDrawer.cpp" />
@@ -170,8 +172,10 @@
     <ClInclude Include="Bloom.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossBullet.h" />
+    <ClInclude Include="BossHP.h" />
     <ClInclude Include="exc_unordered_map.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="HP.h" />
     <ClInclude Include="ImGuiStyle.h" />
     <ClInclude Include="IPostEffector.h" />
     <ClInclude Include="LineDrawer.h" />
