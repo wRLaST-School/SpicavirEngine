@@ -344,7 +344,7 @@ Model::Model(string filePath, bool ignore)
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType |
 		aiProcess_ConvertToLeftHanded |
-		aiProcess_GenNormals |
+		aiProcess_GenSmoothNormals |
 		aiProcess_FixInfacingNormals |
 		aiProcess_FlipUVs
 	);

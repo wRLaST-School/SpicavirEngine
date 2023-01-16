@@ -14,7 +14,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
 	//ModelManager::Register("Resources/Models/Minion/Minion_FBX.fbx", "fbxtest", true);
-	//ModelManager::Register("Resources/Models/fbxtest/fbxtest.fbx", "fbxtest", true);
+	ModelManager::Register("Resources/Models/fbxtest/fbxtest.fbx", "fbxtest", true);
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
@@ -29,7 +29,7 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("20s");
+	pane.model = ModelManager::GetModel("fbxtest");
 	sky.model = ModelManager::GetModel("Sky");
 
 	e1.position.x = 6;
@@ -141,7 +141,7 @@ void SingleCamTestScene::Draw3D()
 	{
 		RTVManager::SetRenderTargetToTexture("BloomBefore");
 	}
-	pane.Draw();
+	pane.Draw("white");
 	sky.Draw();
 	e1.Draw();
 	e2.Draw();
