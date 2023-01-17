@@ -31,5 +31,8 @@ private:
     Camera camera;
 
     PointLight* light1;
+
+    bool enableBloom = true;
+    bool enableGauss = false;
 };
 

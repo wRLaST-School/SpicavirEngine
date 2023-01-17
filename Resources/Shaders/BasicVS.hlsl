@@ -6,7 +6,7 @@ VSOutput main(float4 pos : POSITION, float3 normal : NORMAL, float2 uv : TEXCOOR
 	//float3 lightColor = float3(1.0f, 1.0f, 1.0f);
 
 	float4 wnormal = normalize(mul(mat, float4(normal, 0)));
-    //float4 wnormal = normal;
+    //float4 wnormal = float4(normal, 0);
 	float4 wpos = mul(mat, pos);
 
 	VSOutput output;

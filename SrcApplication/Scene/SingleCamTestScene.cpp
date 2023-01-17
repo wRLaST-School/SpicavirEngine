@@ -15,8 +15,14 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("skydome", "Sky");
 	//ModelManager::Register("Resources/Models/Minion/Minion_FBX.fbx", "fbxtest", true);
 	ModelManager::Register("Resources/Models/fbxtest/fbxtest.fbx", "fbxtest", true);
+	ModelManager::Register("Resources/Models/fbxtest/fbxtest2.fbx", "fbxtest3", false);
+	ModelManager::Register("ICO", "ssTest2");
+
+	ModelManager::Register("Resources/Models/testOBJ/testFBX.fbx", "fbxtest2", false);
+	ModelManager::Register("testOBJ", "ssTest");
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
+	SpTextureManager::LoadTexture("Resources/black.png", "black");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
 
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
@@ -99,9 +105,33 @@ void SingleCamTestScene::Update()
 		if (ImGui::Begin("Object Editor"))
 		{
 			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
-			ImGui::SliderFloat3("Scale", &pane.scale.x, 0.f, 1.f);
-			ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 1.f);
+			ImGui::SliderFloat3("Scale", &pane.scale.x, -1.f, 1.f);
+			ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 2.f * PIf);
 
+			if (ImGui::Button("UseSmooth"))
+			{
+				pane.model = ModelManager::GetModel("fbxtest");
+			}
+
+			if (ImGui::Button("UseFlat"))
+			{
+				pane.model = ModelManager::GetModel("fbxtest2");
+			}
+
+			if (ImGui::Button("UseObj"))
+			{
+				pane.model = ModelManager::GetModel("ssTest");
+			}
+
+			if (ImGui::Button("UseICO fbx"))
+			{
+				pane.model = ModelManager::GetModel("fbxtest3");
+			}
+
+			if (ImGui::Button("UseICO obj"))
+			{
+				pane.model = ModelManager::GetModel("ssTest2");
+			}
 			ImGui::End();
 		}
 	});
@@ -113,6 +143,7 @@ void SingleCamTestScene::Update()
 			ImGui::SliderFloat3("Position", &light1->pos.x, -30.f, 30.f);
 			ImGui::SliderFloat3("Color", &light1->color.x, 0.f, 3.f);
 			ImGui::SliderFloat3("Attenuation", &light1->att.x, 0.f, 1.f);
+			ImGui::Checkbox("Active", &light1->isActive);
 
 			ImGui::End();
 		}
@@ -123,6 +154,15 @@ void SingleCamTestScene::Update()
 		{
 			ImGui::InputInt("Index", &Input::Pad::GetInstance()->gamepadIndex);
 
+			ImGui::End();
+		}
+	});
+
+	SpImGui::Command([&]() {
+		if (ImGui::Begin("Post Effect"))
+		{
+			ImGui::Checkbox("Bloom", &enableBloom);
+			ImGui::Checkbox("Gauss", &enableGauss);
 			ImGui::End();
 		}
 	});
@@ -137,10 +177,11 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	if (Input::Key::Down(DIK_P))
+	if (enableBloom || enableGauss)
 	{
 		RTVManager::SetRenderTargetToTexture("BloomBefore");
 	}
+
 	pane.Draw("white");
 	sky.Draw();
 	e1.Draw();
@@ -153,12 +194,19 @@ void SingleCamTestScene::Draw3D()
 	
 	//BloomP1::Effect("BloomBefore", "CurrentBuffer");
 
-	if (Input::Key::Down(DIK_P))
+	if (enableBloom)
 	{
 		BloomP1::Effect("BloomBefore", "BloomAfter");
 		BloomP2::Effect("BloomAfter", "Bloom2ndAfter");
 		BloomP3::Effect("Bloom2ndAfter", "Bloom3rdAfter");
 		BloomFin::Effect("BloomBefore","Bloom3rdAfter", "CurrentBuffer");
+	}
+
+	if (enableGauss)
+	{
+		BloomP2::Effect("BloomBefore", "BloomAfter");
+		BloomP3::Effect("BloomAfter", "Bloom2ndAfter");
+		BloomFin::Effect("black", "Bloom2ndAfter", "CurrentBuffer");
 	}
 }
 
