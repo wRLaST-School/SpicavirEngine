@@ -19,7 +19,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("ICO", "ssTest2");
 
 	ModelManager::Register("Resources/Models/testOBJ/testFBX.fbx", "fbxtest2", false);
-	ModelManager::Register("testOBJ", "ssTest");
+	ModelManager::Register("Resources/Models/testOBJ/testOBJ.obj", "ssTest", false);
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
