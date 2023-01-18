@@ -584,6 +584,7 @@ void Model::LoadMaterial(const string& path, const string& filename)
 			string texName;
 			lineStream >> texName;
 			material.back().textureKey = SpTextureManager::LoadTexture(path + texName, texName);
+			SpTextureManager::AddMasterTextureKey(texName);
 		}
 	}
 
@@ -667,7 +668,6 @@ void ModelManager::PreLoadNewScene()
 {
 	currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
 }
-
 
 exc_unordered_map<ModelKey, Model> ModelManager::models;
 list<ModelKey> ModelManager::perSceneModels[2];

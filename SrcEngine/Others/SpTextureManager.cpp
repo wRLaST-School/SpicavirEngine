@@ -517,6 +517,11 @@ TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
 	return key;
 }
 
+void SpTextureManager::AddPerSceneTexture(TextureKey key)
+{
+	perSceneTextures[currentSceneResIndex].push_back(key);
+}
+
 D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
@@ -638,6 +643,10 @@ void SpTextureManager::ReleasePerSceneTexture()
 		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
 		{
 			Release(*itr);
+		}
+		else
+		{
+			OutputDebugStringA(string((*itr) + " is used in current scene. skipping.\n").c_str());
 		}
 	}
 	perSceneTextures[lastSceneResIndex].clear();
