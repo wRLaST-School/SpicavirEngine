@@ -166,6 +166,20 @@ void SingleCamTestScene::Update()
 			ImGui::End();
 		}
 	});
+
+	SpImGui::Command([&] {
+		if (ImGui::Begin("MT Test"))
+		{
+			Vec3 base(0.f, 1.f, 0.f);
+			Quaternion q(Vec3(0.f, 0.f, 1.f), PIf / 2);
+			Vec3 res = base * q;
+			ImGui::DragFloat4("Q", &q.w);
+			ImGui::DragFloat3("R", &res.x);/*
+			ImGui::DragFloat4("S", &s.w);
+			ImGui::DragFloat4("T", &t.w);*/
+		}
+		ImGui::End();
+	});
 }
 
 void SingleCamTestScene::DrawBack()

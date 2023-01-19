@@ -112,6 +112,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ParticleSample1.cpp" />
     <ClCompile Include="ParticleSample2.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="SpImGui.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="LineDrawer.h" />
     <ClInclude Include="ParticleSample1.h" />
     <ClInclude Include="ParticleSample2.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="SpImGui.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
