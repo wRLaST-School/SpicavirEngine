@@ -46,14 +46,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(SolutionDir)assimp\include;$(SolutionDir)assimp;$(SolutionDir)assimp/code;$(ProjectDir)SrcEngine\PostEffect;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcEngine\ImGuiLibs;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcApplication;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(SolutionDir)assimp\include;$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ProjectDir)SrcEngine\PostEffect;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
@@ -104,15 +104,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bloom.cpp" />
-    <ClCompile Include="exc_unordered_map.cpp" />
-    <ClCompile Include="ImGuiStyle.cpp" />
-    <ClCompile Include="IPostEffector.cpp" />
-    <ClCompile Include="LineDrawer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ParticleSample1.cpp" />
-    <ClCompile Include="ParticleSample2.cpp" />
-    <ClCompile Include="SpImGui.cpp" />
+    <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp" />
+    <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
@@ -133,6 +127,10 @@
     <ClCompile Include="SrcEngine\DirectX\SpRootSignature.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpShader.cpp" />
     <ClCompile Include="SrcEngine\DirectX\SpSwapChainManager.cpp" />
+    <ClCompile Include="SrcEngine\Drawer\LineDrawer.cpp" />
+    <ClCompile Include="SrcEngine\Drawer\TextDrawer.cpp" />
+    <ClCompile Include="SrcEngine\ImGui\ImGuiStyle.cpp" />
+    <ClCompile Include="SrcEngine\ImGui\SpImGui.cpp" />
     <ClCompile Include="SrcEngine\Light\DirectionalLight.cpp" />
     <ClCompile Include="SrcEngine\Light\Light.cpp" />
     <ClCompile Include="SrcEngine\Light\PointLight.cpp" />
@@ -141,6 +139,7 @@
     <ClCompile Include="SrcEngine\Math\Vec3.cpp" />
     <ClCompile Include="SrcEngine\Math\SpMath.cpp" />
     <ClCompile Include="SrcEngine\Others\Essentials.cpp" />
+    <ClCompile Include="SrcEngine\Others\exc_unordered_map.cpp" />
     <ClCompile Include="SrcEngine\Others\Input.cpp" />
     <ClCompile Include="SrcEngine\Others\RenderTarget.cpp" />
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp" />
@@ -148,26 +147,21 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Others\TextDrawer.cpp" />
     <ClCompile Include="SrcEngine\Others\Util.cpp" />
     <ClCompile Include="SrcEngine\Others\SpTextureManager.cpp" />
     <ClCompile Include="SrcEngine\Particle\IParticle.cpp" />
     <ClCompile Include="SrcEngine\Particle\Particle.cpp" />
     <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp" />
+    <ClCompile Include="SrcEngine\PostEffect\Bloom.cpp" />
+    <ClCompile Include="SrcEngine\PostEffect\IPostEffector.cpp" />
     <ClCompile Include="SrcEngine\Scene\FrameRate.cpp" />
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bloom.h" />
-    <ClInclude Include="exc_unordered_map.h" />
-    <ClInclude Include="ImGuiStyle.h" />
-    <ClInclude Include="IPostEffector.h" />
-    <ClInclude Include="LineDrawer.h" />
-    <ClInclude Include="ParticleSample1.h" />
-    <ClInclude Include="ParticleSample2.h" />
-    <ClInclude Include="SpImGui.h" />
+    <ClInclude Include="SrcApplication\Particle\ParticleSample1.h" />
+    <ClInclude Include="SrcApplication\Particle\ParticleSample2.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
@@ -188,6 +182,10 @@
     <ClInclude Include="SrcEngine\DirectX\SpRootSignature.h" />
     <ClInclude Include="SrcEngine\DirectX\SpShader.h" />
     <ClInclude Include="SrcEngine\DirectX\SpSwapChainManager.h" />
+    <ClInclude Include="SrcEngine\Drawer\LineDrawer.h" />
+    <ClInclude Include="SrcEngine\Drawer\TextDrawer.h" />
+    <ClInclude Include="SrcEngine\ImGui\ImGuiStyle.h" />
+    <ClInclude Include="SrcEngine\ImGui\SpImGui.h" />
     <ClInclude Include="SrcEngine\Light\DirectionalLight.h" />
     <ClInclude Include="SrcEngine\Light\Light.h" />
     <ClInclude Include="SrcEngine\Light\PointLight.h" />
@@ -199,17 +197,19 @@
     <ClInclude Include="SrcEngine\Math\Vec3.h" />
     <ClInclude Include="SrcEngine\Math\SpMath.h" />
     <ClInclude Include="SrcEngine\Others\Essentials.h" />
+    <ClInclude Include="SrcEngine\Others\exc_unordered_map.h" />
     <ClInclude Include="SrcEngine\Others\Input.h" />
     <ClInclude Include="SrcEngine\Others\RenderTarget.h" />
     <ClInclude Include="SrcEngine\Others\RTVManager.h" />
     <ClInclude Include="SrcEngine\Others\stdafx.h" />
-    <ClInclude Include="SrcEngine\Others\TextDrawer.h" />
     <ClInclude Include="SrcEngine\Others\Util.h" />
     <ClInclude Include="SrcEngine\Others\SpTextureManager.h" />
     <ClInclude Include="SrcEngine\Particle\Emitter.h" />
     <ClInclude Include="SrcEngine\Particle\IParticle.h" />
     <ClInclude Include="SrcEngine\Particle\Particle.h" />
     <ClInclude Include="SrcEngine\Particle\ParticleManager.h" />
+    <ClInclude Include="SrcEngine\PostEffect\Bloom.h" />
+    <ClInclude Include="SrcEngine\PostEffect\IPostEffector.h" />
     <ClInclude Include="SrcEngine\Scene\FrameRate.h" />
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />

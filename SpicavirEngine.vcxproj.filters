@@ -133,6 +133,12 @@
     <Filter Include="Engine\ヘッダーファイル\PostEffect">
       <UniqueIdentifier>{5df9233d-3387-4ffb-b03e-75beef98df81}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\DrawHelper">
+      <UniqueIdentifier>{268c6b82-7efb-4718-a9d8-b70e08344787}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\DrawHelper">
+      <UniqueIdentifier>{8373f9bc-f667-4d77-9775-e6caef5a883b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -145,9 +151,6 @@
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp">
-      <Filter>Engine\ソースファイル\Others</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\Others\TextDrawer.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\Others\Util.cpp">
@@ -252,9 +255,6 @@
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
       <Filter>Application\ソースファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="exc_unordered_map.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\DirectX\RootSignatureManager.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
     </ClCompile>
@@ -267,26 +267,32 @@
     <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="LineDrawer.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSample1.cpp">
+    <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp">
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleSample2.cpp">
+    <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp">
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SpImGui.cpp">
-      <Filter>Engine\ソースファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="ImGuiStyle.cpp">
-      <Filter>Engine\ソースファイル\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="IPostEffector.cpp">
+    <ClCompile Include="SrcEngine\PostEffect\Bloom.cpp">
       <Filter>Engine\ソースファイル\PostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Bloom.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+    <ClCompile Include="SrcEngine\PostEffect\IPostEffector.cpp">
+      <Filter>Engine\ソースファイル\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Others\exc_unordered_map.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\ImGui\SpImGui.cpp">
+      <Filter>Engine\ソースファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\ImGui\ImGuiStyle.cpp">
+      <Filter>Engine\ソースファイル\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Drawer\LineDrawer.cpp">
+      <Filter>Engine\ソースファイル\DrawHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Drawer\TextDrawer.cpp">
+      <Filter>Engine\ソースファイル\DrawHelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +306,6 @@
       <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\Others\RTVManager.h">
-      <Filter>Engine\ヘッダーファイル\Others</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\Others\TextDrawer.h">
       <Filter>Engine\ヘッダーファイル\Others</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\Others\Util.h">
@@ -413,9 +416,6 @@
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
       <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="exc_unordered_map.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SrcEngine\DirectX\RootSignatureManager.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
@@ -431,26 +431,32 @@
     <ClInclude Include="SrcEngine\Particle\Emitter.h">
       <Filter>Engine\ヘッダーファイル\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSample1.h">
+    <ClInclude Include="SrcApplication\Particle\ParticleSample2.h">
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSample2.h">
+    <ClInclude Include="SrcApplication\Particle\ParticleSample1.h">
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SpImGui.h">
-      <Filter>Engine\ヘッダーファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGuiStyle.h">
-      <Filter>Engine\ヘッダーファイル\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="LineDrawer.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="IPostEffector.h">
+    <ClInclude Include="SrcEngine\PostEffect\Bloom.h">
       <Filter>Engine\ヘッダーファイル\PostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Bloom.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\PostEffect\IPostEffector.h">
+      <Filter>Engine\ヘッダーファイル\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Others\exc_unordered_map.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\ImGui\SpImGui.h">
+      <Filter>Engine\ヘッダーファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\ImGui\ImGuiStyle.h">
+      <Filter>Engine\ヘッダーファイル\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Drawer\LineDrawer.h">
+      <Filter>Engine\ヘッダーファイル\DrawHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Drawer\TextDrawer.h">
+      <Filter>Engine\ヘッダーファイル\DrawHelper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
