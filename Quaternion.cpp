@@ -32,6 +32,11 @@ Quaternion Quaternion::operator*(const Quaternion& o) const
 	);
 }
 
+Quaternion Quaternion::operator*(const float& o) const
+{
+	return Quaternion(w * o, v * o);
+}
+
 Quaternion& Quaternion::operator*=(const Quaternion& o)
 {
 	Quaternion t = *this * o;
@@ -65,6 +70,18 @@ Quaternion Quaternion::GetInverse(const Quaternion& q)
 	Quaternion conj = Conjugate(q);
 
 	return Quaternion(conj.w / norm, Vec3(conj.v.x / norm, conj.v.y / norm, conj.v.z / norm));
+}
+
+Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, const float& t)
+{
+	float theta = acos(zero.Dot(one));
+	Quaternion zerot = zero * (sin((1.f - t) * theta) / sin(theta));
+	Quaternion onet = (one * (sin(t * theta) / sin(theta)));
+	Quaternion result;
+	
+	result.w = zerot.w + onet.w;
+	result.v = zerot.v + onet.v;
+	return result;
 }
 
 float Quaternion::GetNorm() const
@@ -114,6 +131,11 @@ Matrix Quaternion::GetRotMat()
 
 		0, 0, 0, 1
 	);
+}
+
+float Quaternion::Dot(const Quaternion& o) const
+{
+	return v.x * o.v.x + v.y * o.v.y + v.z * o.v.z + w * o.w;
 }
 
 Vec3 operator*(Vec3 v, Quaternion q)

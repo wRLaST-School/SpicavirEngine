@@ -12,11 +12,14 @@ public:
 	Quaternion(Vec3 v);
 
 	Quaternion operator* (const Quaternion& o) const;
+	Quaternion operator* (const float& o) const;
 	Quaternion& operator*= (const Quaternion& o);
 	float GetNorm() const;
 	Quaternion& Normalize();
 	Quaternion& Inverse();
 	Matrix GetRotMat();
+
+	float Dot(const Quaternion& o) const;
 private:
 
 public:
@@ -24,6 +27,7 @@ public:
 	static Quaternion Conjugate(const Quaternion& q);
 	static Quaternion GetNormalized(const Quaternion& q);
 	static Quaternion GetInverse(const Quaternion& q);
+	static Quaternion Slerp(const Quaternion& zero, const Quaternion& one, const float& t);
 };
 
 Vec3 operator *(Vec3 v, Quaternion q);

@@ -171,12 +171,18 @@ void SingleCamTestScene::Update()
 		if (ImGui::Begin("MT Test"))
 		{
 			Vec3 base(0.f, 1.f, 0.f);
-			Quaternion q(Vec3(0.f, 0.f, 1.f), PIf / 2);
-			Vec3 res = base * q;
+			Quaternion a = Quaternion(Vec3(0.71f, 0.71f, 0.0f), 0.3f);
+			a.Normalize();
+			Quaternion b = Quaternion(Vec3(0.71f, 0.f, 0.71f), PIf);
+			b.Normalize();
+			Quaternion q = Quaternion::Slerp(a, b, 0.0f);
+			Quaternion r = Quaternion::Slerp(a, b, 0.3f);
+			Quaternion s = Quaternion::Slerp(a, b, 0.5f);
+			Quaternion t = Quaternion::Slerp(a, b, 0.7f);
 			ImGui::DragFloat4("Q", &q.w);
-			ImGui::DragFloat3("R", &res.x);/*
+			ImGui::DragFloat4("R", &r.w);
 			ImGui::DragFloat4("S", &s.w);
-			ImGui::DragFloat4("T", &t.w);*/
+			ImGui::DragFloat4("T", &t.w);
 		}
 		ImGui::End();
 	});
