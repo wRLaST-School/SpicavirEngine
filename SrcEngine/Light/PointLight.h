@@ -10,6 +10,9 @@ public:
 	Float3 color;
 	Float3 att;
 
+	void DrawFrame();
+	void DrawLightEditor();
+
 	bool isActive = false;
 
 public:
@@ -32,6 +35,11 @@ public:
 		int limit;
 		int actual;
 	};
+
+	string name = "unnamed";
+
+private:
+	bool showFrame = false;
 };
 
 typedef string PointLightKey;

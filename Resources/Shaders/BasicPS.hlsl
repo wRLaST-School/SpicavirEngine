@@ -22,7 +22,8 @@ float4 main(GSOutput input) : SV_TARGET
 		float3 reflect = normalize(-lightVec + 2 * dotLightNormal * input.normal);
 		float3 specular = pow(saturate(dot(reflect, eyeDir)), luster) * m_specular;
 
-		shadecolor.rgb = (ambient + diffuse + specular) * lightColor;
+        float3 color = (ambient + diffuse + specular) * lightColor;
+        shadecolor.xyz = color;
 		shadecolor.a = m_alpha;
 	}
 
@@ -49,12 +50,12 @@ float4 main(GSOutput input) : SV_TARGET
 			//shadecolor.rgb += att * (diffuse + specular) * pointLights[i].lightColor;
 			
             float3 color = att * (diffuse + specular) * pointLights[i].lightColor;
-            if (color.x < 0)
-                color.x = 0;
-            if (color.y < 0)
-                color.y = 0;
-            if (color.z < 0)
-                color.z = 0;
+            if (color.x < 0.f)
+                color.x = 0.f;
+            if (color.y < 0.f)
+                color.y = 0.f;
+            if (color.z < 0.f)
+                color.z = 0.f;
             shadecolor.rgb += color;
         }
 		

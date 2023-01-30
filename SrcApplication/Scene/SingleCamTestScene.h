@@ -24,13 +24,10 @@ private:
 
     Object3D sky;
 
-    Emitter<ParticleSample1> e1;
-
-    Emitter<ParticleSample2> e2;
-
     Camera camera;
 
     PointLight* light1;
+    PointLight* light2;
 
     bool enableBloom = true;
     bool enableGauss = false;

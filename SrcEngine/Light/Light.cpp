@@ -58,8 +58,7 @@ Light* Light::GetInstance()
 
 PointLightKey Light::CreatePointLight(Float3 position, Float3 color, Float3 attenuation, PointLightKey key)
 {
-	GetInstance()->pointLights.emplace(key, PointLight(position, color, attenuation));
-
+	GetInstance()->pointLights.emplace(key, PointLight(position, color, attenuation)).first->second.name = key;
 	return key;
 }
 
