@@ -6,6 +6,7 @@
 #include <SpImGui.h>
 #include <SpSwapChainManager.h>
 #include <Bloom.h>
+#include <SoundManager.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -25,6 +26,8 @@ void SingleCamTestScene::LoadResources()
 	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
 	RTVManager::CreateRenderTargetTexture(960, 1080, "Bloom2ndAfter");
 	RTVManager::CreateRenderTargetTexture(960, 540, "Bloom3rdAfter");
+
+	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
 }
 
 void SingleCamTestScene::Init()
@@ -61,6 +64,11 @@ void SingleCamTestScene::Update()
 	camera.position = move + camera.position;
 
 #pragma endregion
+
+	if (Input::Key::Triggered(DIK_B))
+	{
+		SoundManager::Play("Laser");
+	}
 
 	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };

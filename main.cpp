@@ -20,6 +20,7 @@
 #include <SpImGui.h>
 #include <assimp/Importer.hpp>
 #include <IPostEffector.h>
+#include <SoundManager.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -83,6 +84,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//Init ImGui
 	SpImGui::Init();
 
+	//Init Sounds
+	SoundManager::Init();
+
 	//Init Scene
 	SceneManager::Init();
 
@@ -139,6 +143,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	}
 
 	/*ÉãÅ[ÉvÇ±Ç±Ç‹Ç≈*/
+	SoundManager::ReleaseAllSounds();
 	SpImGui::Shutdown();
 	CloseAllSpWindow();
 
