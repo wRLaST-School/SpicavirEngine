@@ -29,7 +29,6 @@ void Object3D::UpdateMatrix()
 void Object3D::Draw()
 {
 	transformCB.contents->mat = matWorld;
-	ID3D12Resource* res = nullptr;
 
 	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());

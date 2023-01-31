@@ -55,7 +55,7 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 
 	HDC hdc = GetDC(NULL);
 
-	HFONT oldFont = (HFONT)SelectObject(hdc, hFont);
+	/*HFONT oldFont =*/ (HFONT)SelectObject(hdc, hFont);
 
 	const wchar_t* c = glyph.c_str();
 	UINT code = (UINT)*c;
@@ -76,15 +76,15 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 	BYTE* finalGlyph = new BYTE[pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY];
 
 	//幅をBlackBoxに合わせる
-	for (int i = 0; i < pFont->gm.gmBlackBoxX; i++)
+	for (unsigned int i = 0; i < pFont->gm.gmBlackBoxX; i++)
 	{
-		for (int j = 0; j < pFont->gm.gmBlackBoxY; j++)
+		for (unsigned int j = 0; j < pFont->gm.gmBlackBoxY; j++)
 		{
 			finalGlyph[j * pFont->gm.gmBlackBoxX + i] = pMono[j * bmpX + i];
 		}
 	}
 
-	for (int i = 0; i < pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY; i++)
+	for (unsigned int i = 0; i < pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY; i++)
 	{
 		pFont->bmp.emplace_back(finalGlyph[i]);
 	}
@@ -189,9 +189,9 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 		}
 
 		//ビットマップを埋める
-		for (int i = 0; i < glyph->gm.gmBlackBoxY; i++)
+		for (unsigned int i = 0; i < glyph->gm.gmBlackBoxY; i++)
 		{
-			for (int j = 0; j < glyph->gm.gmBlackBoxX; j++)
+			for (unsigned int j = 0; j < glyph->gm.gmBlackBoxX; j++)
 			{
 				//indexの計算
 				int x = drawOriginX + j;
@@ -231,8 +231,8 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 		0,
 		nullptr,
 		finalTexImageData,
-		sizeof(R8G8B8A8) * strdata.width,
-		sizeof(R8G8B8A8) * imageDataCount
+		(UINT)sizeof(R8G8B8A8) * strdata.width,
+		(UINT)sizeof(R8G8B8A8) * (UINT)imageDataCount
 	);
 
 	delete[] finalTexImageData;
@@ -267,8 +267,8 @@ void TextDrawer::DrawString(string str, int x, int y, Align alignment, StringOpt
 	float multiplier = (float)options.size / strData.height;
 	spr->scale = { multiplier, multiplier, 1};
 
-	strData.width *= multiplier;
-	strData.height *= multiplier;
+	strData.width = static_cast<int>(strData.width * multiplier);
+	strData.height *= static_cast<int>(strData.height * multiplier);
 
 	switch (alignment)
 	{

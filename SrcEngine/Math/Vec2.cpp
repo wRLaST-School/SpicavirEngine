@@ -11,14 +11,14 @@ Vec2::Vec2(float x, float y) : x(x), y(y)
 {
 }
 
-void Vec2::SetX(float x)
+void Vec2::SetX(float x_)
 {
-	this->x = x;
+	this->x = x_;
 }
 
-void Vec2::SetY(float y)
+void Vec2::SetY(float y_)
 {
-	this->y = y;
+	this->y = y_;
 }
 
 void Vec2::SetLength(float l)

@@ -141,7 +141,7 @@ void LineDrawer::DrawAllLines()
 
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-	GetWDX()->cmdList->DrawInstanced(lines.size(), 1, 0, 0);
+	GetWDX()->cmdList->DrawInstanced(static_cast<UINT>(lines.size()), 1, 0, 0);
 }
 
 void LineDrawer::ClearLineData()

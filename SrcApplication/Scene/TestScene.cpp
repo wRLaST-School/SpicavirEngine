@@ -30,7 +30,7 @@ void TestScene::Init()
 	camera.SetRenderSize(640, 360);
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
-	camera.fov = PI / 2;
+	camera.fov = PIf / 2.f;
 
 	camera.position.x = -3;
 	camera.position.y = 3;
@@ -42,12 +42,12 @@ void TestScene::Init()
 	xCam.SetRenderSize(640, 360);
 	xCam.nearZ = 0.1f;
 	xCam.farZ = 1000.0f;
-	xCam.fov = PI / 2;
+	xCam.fov = PIf / 2.f;
 
 	xCam.position.x = -10;
 	xCam.position.y = 0;
 	xCam.position.z = 0;
-	xCam.rotation = { 0.0f, PI / 2, 0.0f };
+	xCam.rotation = { 0.0f, PIf / 2, 0.0f };
 	xCam.UpdateMatrix();
 
 	xCamSpr = Sprite("xCamSpr");
@@ -55,12 +55,12 @@ void TestScene::Init()
 	yCam.SetRenderSize(640, 360);
 	yCam.nearZ = 0.1f;
 	yCam.farZ = 1000.0f;
-	yCam.fov = PI / 2;
+	yCam.fov = PIf / 2.f;
 
 	yCam.position.x = 0;
 	yCam.position.y = 10;
 	yCam.position.z = 0;
-	yCam.rotation = { PI / 2, 0.0f, 0.0f };
+	yCam.rotation = { PIf / 2, 0.0f, 0.0f };
 	yCam.UpdateMatrix();
 
 	yCamSpr = Sprite("yCamSpr");
@@ -68,7 +68,7 @@ void TestScene::Init()
 	zCam.SetRenderSize(640, 360);
 	zCam.nearZ = 0.1f;
 	zCam.farZ = 1000.0f;
-	zCam.fov = PI / 2;
+	zCam.fov = PIf / 2.f;
 
 	zCam.position.x = 0;
 	zCam.position.y = 0;
@@ -91,7 +91,7 @@ void TestScene::Init()
 	finalScene.SetRenderSize(1280, 720);
 	finalScene.nearZ = 0.1f;
 	finalScene.farZ = 1000.0f;
-	finalScene.fov = PI / 2;
+	finalScene.fov = PIf / 2.f;
 
 	finalScene.position.x = 0;
 	finalScene.position.y = 0;

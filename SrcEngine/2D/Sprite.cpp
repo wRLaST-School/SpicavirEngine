@@ -11,8 +11,8 @@ Sprite::Sprite(TextureKey key)
 	this->tex = key;
 
 	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
-	this->width = texmeta.width;
-	this->height = texmeta.height;
+	this->width = (float)texmeta.width;
+	this->height = (float)texmeta.height;
 	float hlfw = (float)texmeta.width / 2;
 	float hlfh = (float)texmeta.height / 2;
 	Sprite::Vertex vertices[] = {
@@ -74,10 +74,10 @@ Sprite::Sprite(string path, TextureKey newKey)
 	this->tex = SpTextureManager::LoadTexture(path, newKey);
 
 	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
-	this->width = texmeta.width;
-	this->height = texmeta.height;
-	float hlfw = texmeta.width / 2;
-	float hlfh = texmeta.height / 2;
+	this->width = (float)texmeta.width;
+	this->height = (float)texmeta.height;
+	float hlfw = (float)texmeta.width / 2;
+	float hlfh = (float)texmeta.height / 2;
 	Sprite::Vertex vertices[] = {
 		{{-hlfw, hlfh, 0}, {0.0f, 1.0f}},
 		{{-hlfw, -hlfh, 0}, {0.0f, 0.0f}},

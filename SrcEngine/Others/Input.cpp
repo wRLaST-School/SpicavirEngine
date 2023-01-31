@@ -8,7 +8,7 @@ using namespace Input;
 void Key::Init()
 {
 	Key* instance = GetInstance();
-	HRESULT rr = DirectInput8Create(GetSpWindow()->w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&instance->dinput, nullptr);
+	DirectInput8Create(GetSpWindow()->w.hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&instance->dinput, nullptr);
 
 	instance->dinput->CreateDevice(GUID_SysKeyboard, &instance->devkeyboard, NULL);
 
@@ -33,8 +33,8 @@ void Key::Update()
 void Key::Close()
 {
 	Key* instance = GetInstance();
-	delete instance->dinput;
-	delete instance->devkeyboard;
+	instance->dinput->Release();
+	instance->devkeyboard->Release();
 }
 
 bool Key::Down(int key)
@@ -158,8 +158,8 @@ void Input::Pad::Vibration(int power, int frame)
 {
 	XINPUT_VIBRATION vibration;
 	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = power; // use any value between 0-65535 here
-	vibration.wRightMotorSpeed = power; // use any value between 0-65535 here
+	vibration.wLeftMotorSpeed = (WORD)power; // use any value between 0-65535 here
+	vibration.wRightMotorSpeed = (WORD)power; // use any value between 0-65535 here
 	XInputSetState(GetInstance()->gamepadIndex, &vibration);
 
 	vibTimer = frame;
@@ -170,8 +170,8 @@ void Input::Pad::Vibration(int leftpower, int rightpower, int frame)
 {
 	XINPUT_VIBRATION vibration;
 	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = leftpower; // use any value between 0-65535 here
-	vibration.wRightMotorSpeed = rightpower; // use any value between 0-65535 here
+	vibration.wLeftMotorSpeed = (WORD)leftpower; // use any value between 0-65535 here
+	vibration.wRightMotorSpeed = (WORD)rightpower; // use any value between 0-65535 here
 	XInputSetState(GetInstance()->gamepadIndex, &vibration);
 
 	vibTimer = frame;

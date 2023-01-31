@@ -65,7 +65,7 @@ void SingleCamTestScene::Update()
 	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };
 
-	pane.rotation = (Vec3(0, 0.03 * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
+	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
 
 	camera.UpdateMatrix();
 	pane.UpdateMatrix();

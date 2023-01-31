@@ -89,7 +89,7 @@ void GPipeline::Create(PipelineDesc desc, string id)
 
 void GPipeline::Create()
 {
-	HRESULT hr = GetWDX()->dev->CreateGraphicsPipelineState(&psod, IID_PPV_ARGS(&pso));
+	GetWDX()->dev->CreateGraphicsPipelineState(&psod, IID_PPV_ARGS(&pso));
 }
 
 D3D12_GRAPHICS_PIPELINE_STATE_DESC* GPipeline::GetDesc(string id)

@@ -84,22 +84,22 @@ void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name
 
 	if (targetTex == "CurrentBuffer")
 	{
-		viewport.Width = GetSpWindow()->width;
-		viewport.Height = GetSpWindow()->height;
+		viewport.Width = (FLOAT)GetSpWindow()->width;
+		viewport.Height = (FLOAT)GetSpWindow()->height;
 		scissorrect.left = 0;                                       // 切り抜き座標左
-		scissorrect.right = scissorrect.left + viewport.Width;        // 切り抜き座標右
+		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // 切り抜き座標右
 		scissorrect.top = 0;                                        // 切り抜き座標上
-		scissorrect.bottom = scissorrect.top + viewport.Height;       // 切り抜き座標下
+		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // 切り抜き座標下
 	}
 	else
 	{
 		TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
-		viewport.Width = md.width;
-		viewport.Height = md.height;
+		viewport.Width = (FLOAT)md.width;
+		viewport.Height = (FLOAT)md.height;
 		scissorrect.left = 0;                                       // 切り抜き座標左
-		scissorrect.right = scissorrect.left + md.width;        // 切り抜き座標右
+		scissorrect.right = scissorrect.left + (LONG)md.width;        // 切り抜き座標右
 		scissorrect.top = 0;                                        // 切り抜き座標上
-		scissorrect.bottom = scissorrect.top + md.height;       // 切り抜き座標下
+		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // 切り抜き座標下
 	}
 
 	viewport.TopLeftX = 0;

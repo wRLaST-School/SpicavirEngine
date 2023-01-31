@@ -45,18 +45,18 @@ struct StringOptions
 struct StringData
 {
 	TextureKey key;
-	int width;
-	int height;
+	int width = 0;
+	int height = 0;
 };
 
 class FontData
 {
 public:
-	GLYPHMETRICS gm;
+	GLYPHMETRICS gm = {};
 	TEXTMETRIC tm;
 	vector<BYTE> bmp;
 	int resolution;
-	int grad;
+	int grad = 0;
 };
 
 class TextDrawer

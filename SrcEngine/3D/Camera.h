@@ -35,9 +35,9 @@ public:
 
     bool useWindowSize = false;
 
-    float nearZ;
-    float farZ;
-    float fov;
+    float nearZ = 0.f;
+    float farZ = 0.f;
+    float fov = 0.f;
 
     SpConstBuffer<ConstBufferDataVProj> cameraViewProjMatrixCB;
 

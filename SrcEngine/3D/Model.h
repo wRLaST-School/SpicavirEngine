@@ -23,7 +23,7 @@ struct Material
 	TextureKey textureKey;
 
 	Material() {
-		ambient = {0.3, 0.3, 0.3};
+		ambient = {0.3f, 0.3f, 0.3f};
 		diffuse = {0.0f, 0.0f, 0.0f};
 		specular = {0.0f, 0.0f, 0.0f};
 		alpha = 1.0f;

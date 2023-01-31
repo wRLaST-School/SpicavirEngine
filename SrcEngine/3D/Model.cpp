@@ -334,7 +334,7 @@ Model::Model(string modelName)
 	ibView.SizeInBytes = sizeIB;
 }
 
-Model::Model(string filePath, bool ignore)
+Model::Model(string filePath, bool useSmoothShading)
 {
 	Assimp::Importer importer;
 
@@ -344,7 +344,7 @@ Model::Model(string filePath, bool ignore)
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_SortByPType |
 		aiProcess_ConvertToLeftHanded |
-		(ignore ? aiProcess_GenSmoothNormals : aiProcess_GenNormals) |
+		(useSmoothShading ? aiProcess_GenSmoothNormals : aiProcess_GenNormals) |
 		aiProcess_FixInfacingNormals
 	);
 
@@ -363,7 +363,7 @@ Model::Model(string filePath, bool ignore)
 
 	//ノードごとの処理
 	std::function<void(aiNode*)>fNode = [&](aiNode* cur) {
-		for (int i = 0; i < cur->mNumChildren; i++)
+		for (unsigned int i = 0; i < cur->mNumChildren; i++)
 		{
 			fNode(cur->mChildren[i]);
 		}
@@ -378,14 +378,14 @@ Model::Model(string filePath, bool ignore)
 		aiMatrix4x4 wt = calcMat(cur);
 
 		//ノードごとのメッシュについて
-		for (int k = 0; k < cur->mNumMeshes; k++) {
+		for (unsigned int k = 0; k < cur->mNumMeshes; k++) {
 			//メッシュごとの処理
-			int i = cur->mMeshes[k];
+			unsigned int i = cur->mMeshes[k];
 			aiMesh* mesh = scene->mMeshes[i];
 
 			UINT lastMaxIndex = backIndex;
 
-			for (int j = 0; j < mesh->mNumVertices; j++) {
+			for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
 				//頂点ごと
 				aiVector3D vertex = mesh->mVertices[j];
 				vertex *= wt;
@@ -408,12 +408,12 @@ Model::Model(string filePath, bool ignore)
 				vertices.emplace_back(Vertex{ posList.back(), normalList.back(), tcList.back() });
 			}
 
-			for (int j = 0; j < mesh->mNumFaces; j++) {
+			for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
 				//ポリゴンごと)
 				aiFace face = mesh->mFaces[j];
-				for (int k = 0; k < face.mNumIndices; k++) {
+				for (unsigned int l = 0; l < face.mNumIndices; l++) {
 					//インデックスごと
-					UINT ind = face.mIndices[k];
+					UINT ind = face.mIndices[l];
 
 					indices.emplace_back(ind + lastMaxIndex);
 				}
@@ -424,7 +424,7 @@ Model::Model(string filePath, bool ignore)
 	//ノードごとの処理呼び出し
 	fNode(scene->mRootNode);	
 
-	for (int i = 0; i < scene->mNumMaterials; i++)
+	for (unsigned int i = 0; i < scene->mNumMaterials; i++)
 	{
 		//マテリアルごと
 		material.emplace_back();
@@ -449,8 +449,8 @@ Model::Model(string filePath, bool ignore)
 		//Textrue
 		aimtr->GetTexture(aiTextureType_DIFFUSE, 0, &tempstr);
 		//TODO:埋め込みテクスチャの場合の処理		
-		int pti = filePath.find_last_of("\\");
-		int pti2 = filePath.find_last_of("/");
+		int pti = (int)filePath.find_last_of("\\");
+		int pti2 = (int)filePath.find_last_of("/");
 		string filedir = filePath.substr(0, max(pti, pti2));
 
 		mtr->textureKey = SpTextureManager::LoadTexture(filedir + string("/") + string(tempstr.C_Str()), string("asmptex:") + filedir + string(tempstr.C_Str()));
@@ -614,7 +614,7 @@ void ModelManager::Register(string modelPath, ModelKey key, bool useAssimp)
 		[&](auto& map) {
 			map.emplace(std::piecewise_construct,
 				std::forward_as_tuple(key),
-				std::forward_as_tuple(modelPath, true));
+				std::forward_as_tuple(modelPath, useAssimp));
 		}
 	);
 }

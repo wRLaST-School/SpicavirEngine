@@ -114,8 +114,8 @@ void SpDirectX::PreDrawCommands()
 
 	D3D12_VIEWPORT viewport{};
 
-	viewport.Width = GetSpWindow()->width;
-	viewport.Height = GetSpWindow()->height;
+	viewport.Width = (FLOAT)GetSpWindow()->width;
+	viewport.Height = (FLOAT)GetSpWindow()->height;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -145,8 +145,8 @@ void SpDirectX::PreDraw3D()
 
 	D3D12_VIEWPORT viewport{};
 
-	viewport.Width = GetSpWindow()->width;
-	viewport.Height = GetSpWindow()->height;
+	viewport.Width = (FLOAT)GetSpWindow()->width;
+	viewport.Height = (FLOAT)GetSpWindow()->height;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;

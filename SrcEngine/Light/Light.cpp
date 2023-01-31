@@ -24,7 +24,7 @@ void Light::UpdateLightData()
 
 	if (instance->pointLights.size() > PointLight::MAX_LIGHTS) 
 	{
-		throw PointLight::QuantityOverflow(PointLight::MAX_LIGHTS, instance->pointLights.size());
+		throw PointLight::QuantityOverflow(PointLight::MAX_LIGHTS, (int)instance->pointLights.size());
 	};
 
 	for (auto itr = instance->pointLights.begin(); itr != instance->pointLights.end(); itr++)

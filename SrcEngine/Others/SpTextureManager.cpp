@@ -93,8 +93,8 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	texresdesc.Format = metadata.format;
 	texresdesc.Width = metadata.width;
 	texresdesc.Height = (UINT)metadata.height;
-	texresdesc.DepthOrArraySize = metadata.arraySize;
-	texresdesc.MipLevels = metadata.mipLevels;
+	texresdesc.DepthOrArraySize = (UINT16)metadata.arraySize;
+	texresdesc.MipLevels = (UINT16)metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
 	HRESULT hr = GetWDX()->dev->CreateCommittedResource(
@@ -103,20 +103,20 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 		&texresdesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextTexIndex]));
+		IID_PPV_ARGS(&ins.texBuffs[ins.nextTexIndex]));
 
 	if (hr != S_OK)
 	{
 		return string("notexture");
 	};
 
-	GetInstance().texBuffs[GetInstance().nextTexIndex]->SetName(L"TEXTURE_BUFFER");
+	ins.texBuffs[ins.nextTexIndex]->SetName(L"TEXTURE_BUFFER");
 
 	for (size_t i = 0; i < metadata.mipLevels; i++)
 	{
 		const Image* img = scratchImg.GetImage(i, 0, 0);
 
-		HRESULT hr = GetInstance().texBuffs[GetInstance().nextTexIndex]->WriteToSubresource(
+		ins.texBuffs[ins.nextTexIndex]->WriteToSubresource(
 			(UINT)i,
 			nullptr,
 			img->pixels,
@@ -128,7 +128,7 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle = ins.srvHeap->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
@@ -137,33 +137,32 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = texresdesc.MipLevels;
 
-	GetWDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextTexIndex].Get(), &srvDesc, heapHandle);
+	GetWDX()->dev->CreateShaderResourceView(ins.texBuffs[ins.nextTexIndex].Get(), &srvDesc, heapHandle);
 
-	SpTextureManager::GetInstance().textureMap.Access(
+	ins.textureMap.Access(
 		[&](auto& map) {
-			map[key] = SpTextureManager::GetInstance().nextTexIndex;
+			map[key] = ins.nextTexIndex;
 		}
 	);
 
-	SpTextureManager::GetInstance().texDataMap.Access(
+	ins.texDataMap.Access(
 		[&](auto& map) {
 			map[key] = metadata;
 		}
 	);
 
-	GetInstance().isOccupied[GetInstance().nextTexIndex] = true;
+	ins.isOccupied[ins.nextTexIndex] = true;
 
 	for (size_t i = 0; i < wMaxSRVCount; i++)
 	{
-		if (!GetInstance().isOccupied[i])
+		if (!ins.isOccupied[i])
 		{
-			GetInstance().nextTexIndex = i;
+			ins.nextTexIndex = i;
 			return key;
 		}
 	}
 
 	throw std::out_of_range("out of texture resource");
-	return key;
 }
 
 TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
@@ -210,11 +209,11 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	texresdesc.Format = metadata.format;
 	texresdesc.Width = metadata.width;
 	texresdesc.Height = (UINT)metadata.height;
-	texresdesc.DepthOrArraySize = metadata.arraySize;
-	texresdesc.MipLevels = metadata.mipLevels;
+	texresdesc.DepthOrArraySize = (UINT16)metadata.arraySize;
+	texresdesc.MipLevels = (UINT16)metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
-	HRESULT res = GetWDX()->dev->CreateCommittedResource(
+	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&texresdesc,
@@ -286,8 +285,6 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	}
 
 	throw std::out_of_range("out of texture resource");
-
-	return tryNum == 0 ? key : key + std::to_string(tryNum);
 }
 
 TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
@@ -376,7 +373,6 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 	}
 
 	throw std::out_of_range("out of texture resource");
-	return key;
 }
 
 TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget)
@@ -457,7 +453,6 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	}
 
 	throw std::out_of_range("out of texture resource");
-	return tryKey;
 }
 
 TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
@@ -497,8 +492,8 @@ TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
 		[&](auto& map) {
 			TexMetadata& pTexMeta = map[key];
 			pTexMeta = TexMetadata{};
-			pTexMeta.width = -1;
-			pTexMeta.height = -1;
+			pTexMeta.width = 0;
+			pTexMeta.height = 0;
 		}
 	);
 
@@ -514,7 +509,6 @@ TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
 	}
 
 	throw std::out_of_range("out of texture resource");
-	return key;
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
@@ -572,7 +566,7 @@ int SpTextureManager::GetIndex(TextureKey key)
 		[&](auto& map) {
 			auto itr = map.find(key);
 			if (itr == map.end()) ret = SPTEX_NOTEXTURE_FOUND_;
-			else ret = itr->second;
+			else ret = (int)itr->second;
 		}
 	);
 

@@ -35,7 +35,14 @@ public:
 	};
 
 	SpConstBuffer(bool empty) {
-
+		if (empty)
+		{
+			buffer = nullptr;
+		}
+		else
+		{
+			SpConstBuffer();
+		}
 	}
 
 	void Create() {		

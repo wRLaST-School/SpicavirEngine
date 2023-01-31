@@ -7,7 +7,7 @@ VSOutput main(float4 pos : POSITION, float2 uv : TEXCOORD)
     
     float2 tex = uv;
     
-    float2 texSize = (960, 1080);
+    float2 texSize = float2(960, 1080);
     float level;
     //sceneTexture.GetDimensions(0, texSize.x, texSize.y, level);
     

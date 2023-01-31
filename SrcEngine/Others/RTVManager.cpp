@@ -28,7 +28,7 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key)
 {
 	CloseCurrentResBar(GetCurrentRenderTarget());
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
-	int index = SpTextureManager::GetIndex(key);
+	int index = (int)SpTextureManager::GetIndex(key);
 
 	SpDirectX* dx = GetWDX();
 	//リソースバリアーを書き込み可能状態に
@@ -41,7 +41,10 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key)
 
 	//TODO:専用のDSVを用意
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
-	GetWDX()->cmdList->OMSetRenderTargets(1, &GetInstance().GetHeapCPUHandle(index), false, &dsvH);
+
+	auto cpuhnd = (GetInstance().GetHeapCPUHandle(index));
+	D3D12_CPU_DESCRIPTOR_HANDLE* pcpuhnd = &cpuhnd;
+	GetWDX()->cmdList->OMSetRenderTargets(1, pcpuhnd, false, &dsvH);
 
 	GetInstance().currentRTIndex = index;
 
@@ -55,7 +58,7 @@ void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key
 	if (SpTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
 
 	GetWDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(key), nullptr,
-		GetHeapCPUHandle(SpTextureManager::GetIndex(key)));
+		GetHeapCPUHandle((int)SpTextureManager::GetIndex(key)));
 
 	//デフォルトのリソースバリアをセット
 	//ID3D12Resource* lastRes = GetWDX()->barrierDesc.Transition.pResource;

@@ -2,7 +2,7 @@
 
 SoundManager* SoundManager::GetInstance()
 {
-    SoundManager obj;
+    static SoundManager obj;
     return &obj;
 }
 
@@ -96,7 +96,7 @@ void SoundManager::Play(SoundKey key)
         }
     );
 
-    HRESULT res = xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
+    xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
 
     XAUDIO2_BUFFER buf{};
 

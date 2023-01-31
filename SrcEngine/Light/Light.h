@@ -21,9 +21,7 @@ public:
 
 	static void Use();
 
-	static void UpdateLightData() throw (
-		PointLight::QuantityOverflow
-		);
+	static void UpdateLightData();
 
 	static Light* GetInstance();
 

@@ -112,6 +112,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			Light::UpdateLightData();
 		}
 		catch (PointLight::QuantityOverflow& e) {
+			OutputDebugStringA((string("Too Many PointLights Registered. Limit: ") + to_string(e.limit) + string(", Used: ") + to_string(e.actual)).c_str());
 			assert(false);
 		}
 
