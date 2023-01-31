@@ -225,7 +225,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	{
 		const Image* img = scratchImg.GetImage(i, 0, 0);
 
-		HRESULT hr = GetInstance().texBuffs[GetInstance().nextTexIndex]->WriteToSubresource(
+		GetInstance().texBuffs[GetInstance().nextTexIndex]->WriteToSubresource(
 			(UINT)i,
 			nullptr,
 			img->pixels,
