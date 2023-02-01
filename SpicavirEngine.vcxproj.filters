@@ -139,6 +139,12 @@
     <Filter Include="Engine\ソースファイル\DrawHelper">
       <UniqueIdentifier>{8373f9bc-f667-4d77-9775-e6caef5a883b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Renderer">
+      <UniqueIdentifier>{b8517267-3b9a-4ec3-900d-cec402ed3719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Renderer">
+      <UniqueIdentifier>{768cdb3b-d890-42f6-acb5-933617d03490}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -293,6 +299,27 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\Drawer\TextDrawer.cpp">
       <Filter>Engine\ソースファイル\DrawHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="SpRenderer.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrOpaqueStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrAddStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrAlphaStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrImGuiStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrPostEffectStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrSpriteStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -458,6 +485,30 @@
     <ClInclude Include="SrcEngine\Drawer\TextDrawer.h">
       <Filter>Engine\ヘッダーファイル\DrawHelper</Filter>
     </ClInclude>
+    <ClInclude Include="SpRenderer.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrOpaqueStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrAddStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrAlphaStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrImGuiStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrSpriteStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrPostEffectStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
@@ -517,6 +568,12 @@
     <FxCompile Include="Resources\Shaders\FinalizeVS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\NoLightPS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\NoLightVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -541,6 +598,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\Finalize.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\NoLight.hlsli">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

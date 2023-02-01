@@ -27,6 +27,13 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(defDesc, "def");
 #pragma endregion
 
+#pragma region ライトなし描画用シェーダーのコンパイル
+	RegisterShader("lightless");
+	InitVS("lightless", "BasicVS.hlsl");
+	InitGS("lightless", "BasicGS.hlsl");
+	InitPS("lightless", "BasicPS.hlsl");
+#pragma endregion
+
 #pragma region パーティクル3D
 	RegisterShader("particle");
 	InitVS("particle", "ParticleVS.hlsl");

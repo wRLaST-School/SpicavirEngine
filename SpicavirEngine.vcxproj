@@ -109,6 +109,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SpRenderer.cpp" />
+    <ClCompile Include="SrAddStage.cpp" />
+    <ClCompile Include="SrAlphaStage.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
@@ -162,8 +165,16 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
+    <ClCompile Include="SrImGuiStage.cpp" />
+    <ClCompile Include="SrOpaqueStage.cpp" />
+    <ClCompile Include="SrPostEffectStage.cpp" />
+    <ClCompile Include="SrSpriteStage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IRenderStage.h" />
+    <ClInclude Include="SpRenderer.h" />
+    <ClInclude Include="SrAddStage.h" />
+    <ClInclude Include="SrAlphaStage.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample1.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample2.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
@@ -218,6 +229,10 @@
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
+    <ClInclude Include="SrImGuiStage.h" />
+    <ClInclude Include="SrOpaqueStage.h" />
+    <ClInclude Include="SrPostEffectStage.h" />
+    <ClInclude Include="SrSpriteStage.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
@@ -297,6 +312,18 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\NoLightPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\NoLightVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\ParticleGS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -343,6 +370,7 @@
     <None Include="Resources\Shaders\BloomP3.hlsli" />
     <None Include="Resources\Shaders\Finalize.hlsli" />
     <None Include="Resources\Shaders\Line.hlsli" />
+    <None Include="Resources\Shaders\NoLight.hlsli" />
     <None Include="Resources\Shaders\Particle.hlsli">
       <FileType>Document</FileType>
     </None>

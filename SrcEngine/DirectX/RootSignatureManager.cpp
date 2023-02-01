@@ -62,6 +62,57 @@ void RootSignatureManager::RegisterAllRS()
 	}
 #pragma endregion
 
+#pragma region 3D NoLight RS
+	{
+		SpRootSignature* rs3d = SpRootSignature::Register("NoLight3D");
+
+		rs3d->UseDefaultSettings();
+
+		D3D12_DESCRIPTOR_RANGE descRange{};
+		descRange.NumDescriptors = 1;
+		descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+		descRange.BaseShaderRegister = 0;
+		descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+		//定数バッファ0番マテリアル
+		rs3d->params.emplace_back();
+		rs3d->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rs3d->params[0].Descriptor.ShaderRegister = 0;
+		rs3d->params[0].Descriptor.RegisterSpace = 0;
+		rs3d->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//テクスチャレジスタ0番
+		rs3d->params.emplace_back();
+		rs3d->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+		rs3d->params[1].DescriptorTable.pDescriptorRanges = &descRange;
+		rs3d->params[1].DescriptorTable.NumDescriptorRanges = 1;
+		rs3d->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//定数バッファ1番ワールド行列
+		rs3d->params.emplace_back();
+		rs3d->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rs3d->params[2].Descriptor.ShaderRegister = 1;
+		rs3d->params[2].Descriptor.RegisterSpace = 0;
+		rs3d->params[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//定数バッファ2番ビュー・射影変換行列
+		rs3d->params.emplace_back();
+		rs3d->params[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rs3d->params[3].Descriptor.ShaderRegister = 2;
+		rs3d->params[3].Descriptor.RegisterSpace = 0;
+		rs3d->params[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//定数バッファ3番輝度
+		rs3d->params.emplace_back();
+		rs3d->params[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rs3d->params[4].Descriptor.ShaderRegister = 3;
+		rs3d->params[4].Descriptor.RegisterSpace = 0;
+		rs3d->params[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		rs3d->Create();
+	}
+#pragma endregion
+
 #pragma region 3D Particle
 	{
 		SpRootSignature* rsparticle = SpRootSignature::Register("Particle");

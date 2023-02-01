@@ -22,11 +22,6 @@ void SingleCamTestScene::LoadResources()
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
 
-	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomBefore");
-	RTVManager::CreateRenderTargetTexture(1920, 1080, "BloomAfter");
-	RTVManager::CreateRenderTargetTexture(960, 1080, "Bloom2ndAfter");
-	RTVManager::CreateRenderTargetTexture(960, 540, "Bloom3rdAfter");
-
 	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
 }
 
