@@ -232,7 +232,6 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 			(UINT)img->rowPitch,
 			(UINT)img->slicePitch
 		);
-		assert(SUCCEEDED(hr));
 	}
 
 	//シェーダーリソースビューの生成

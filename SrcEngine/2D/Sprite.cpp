@@ -5,6 +5,7 @@
 #include "GPipeline.h"
 #include "SpRootSignature.h"
 #include <RootSignatureManager.h>
+#include <SpRenderer.h>
 
 Sprite::Sprite(TextureKey key)
 {
@@ -162,12 +163,14 @@ void Sprite::UpdateMatrix()
 void Sprite::Draw()
 {
 	constBuff.contents->mat = constBuff.contents->mat * proj;
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
+	SpRenderer::DrawCommand([&] {
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
+		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+		}, SpRenderer::Stage::Sprite);
 }
 
 void Sprite::InitCommon()

@@ -21,6 +21,7 @@
 #include <assimp/Importer.hpp>
 #include <IPostEffector.h>
 #include <SoundManager.h>
+#include <SpRenderer.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -84,6 +85,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//Init ImGui
 	SpImGui::Init();
 
+	//Init Renderer
+	SpRenderer::Init();
+
 	//Init Sounds
 	SoundManager::Init();
 
@@ -103,14 +107,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		SceneManager::Update();
 		/*XVˆ—‚±‚±‚Ü‚Å*/
 
-		GetWDX()->PreDrawCommands();
-
-		Sprite::PreSpriteDraw();
 		SceneManager::DrawBack();
 
-		Sprite::PostSpriteDraw();
+		SceneManager::Draw3D();
 
-		GetWDX()->PreDraw3D();
+		SceneManager::DrawSprite();
+		
+		GetWDX()->PreDrawCommands();
 
 		try {
 			Light::UpdateLightData();
@@ -120,17 +123,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			assert(false);
 		}
 
-		Light::Use();
-
-		SceneManager::Draw3D();
-
-		Sprite::PreSpriteDraw();
-
-		SceneManager::DrawSprite();
-
-		Sprite::PostSpriteDraw();
-
-		SpImGui::Draw();
+		SpRenderer::Render();
 
 		GetWDX()->PostDrawCommands();
 

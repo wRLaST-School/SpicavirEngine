@@ -30,6 +30,7 @@ void SingleCamTestScene::Init()
 	camera.UseDefaultParams();
 
 	pane.model = ModelManager::GetModel("SmoothSphere");
+	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
 	light1 = Light::GetPointLightPtr(Light::CreatePointLight({5.f, 1.f, -5.f}, {1.f, 1.f, 1.f}, {.05f, .0f, .02f}, "light1"));
@@ -69,6 +70,9 @@ void SingleCamTestScene::Update()
 	sky.scale = { 5,5,5 };
 
 	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
+
+	*pane2.brightnessCB.contents = Float4{ 0.f, 1.f, 1.f, .2f };
+	pane2.UpdateMatrix();
 
 	camera.UpdateMatrix();
 	pane.UpdateMatrix();
@@ -136,36 +140,16 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	if (enableBloom || enableGauss)
-	{
-		RTVManager::SetRenderTargetToTexture("BloomBefore");
-	}
-
+	pane2.DrawAlpha("white");
 	pane.Draw("white");
 	sky.Draw();
 
 	LineDrawer::DrawAllLines();
 
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
-
-	if (enableBloom)
-	{
-		BloomP1::Effect("BloomBefore", "BloomAfter");
-		BloomP2::Effect("BloomAfter", "Bloom2ndAfter");
-		BloomP3::Effect("Bloom2ndAfter", "Bloom3rdAfter");
-		BloomFin::Effect("BloomBefore","Bloom3rdAfter", "CurrentBuffer");
-	}
-
-	if (enableGauss)
-	{
-		BloomP2::Effect("BloomBefore", "BloomAfter");
-		BloomP3::Effect("BloomAfter", "Bloom2ndAfter");
-		BloomFin::Effect("black", "Bloom2ndAfter", "CurrentBuffer");
-	}
 }
 
 void SingleCamTestScene::DrawSprite()
 {
-
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
 }

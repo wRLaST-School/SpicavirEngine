@@ -11,10 +11,21 @@ class Object3D
 public:
 	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; };
 	void UpdateMatrix();
-	void Draw();
 
+	void Draw();
 	//別途読み込んだテクスチャを使う場合
 	void Draw(TextureKey key);
+
+	void DrawCommands(TextureKey key);
+
+	//加算合成
+	void DrawAdd();
+	//加算合成
+	void DrawAdd(TextureKey key);
+
+	//透過表示用
+	void DrawAlpha();
+	void DrawAlpha(TextureKey key);
 
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;
@@ -28,5 +39,8 @@ public:
 	Object3D* parent = nullptr;
 
 	Model* model = nullptr;
+
+	float distanceToCam = 0;
+	TextureKey alphaTexKey;
 };
 

@@ -22,6 +22,8 @@ public:
 private:
     Object3D pane;
 
+    Object3D pane2;
+
     Object3D sky;
 
     Camera camera;

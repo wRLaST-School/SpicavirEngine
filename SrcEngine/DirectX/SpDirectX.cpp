@@ -137,37 +137,6 @@ void SpDirectX::PreDrawCommands()
 	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 }
 
-void SpDirectX::PreDraw3D()
-{
-	/*描画処理*/
-	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
-
-	D3D12_VIEWPORT viewport{};
-
-	viewport.Width = (FLOAT)GetSpWindow()->width;
-	viewport.Height = (FLOAT)GetSpWindow()->height;
-	viewport.TopLeftX = 0;
-	viewport.TopLeftY = 0;
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
-
-	GetWDX()->cmdList->RSSetViewports(1, &viewport);
-
-	D3D12_RECT scissorrect{};
-
-	scissorrect.left = 0;                                       // 切り抜き座標左
-	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // 切り抜き座標右
-	scissorrect.top = 0;                                        // 切り抜き座標上
-	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // 切り抜き座標下
-
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
-
-	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
-}
-
 void SpDirectX::PostDrawCommands()
 {
 	//リソースバリアーを戻す

@@ -29,9 +29,8 @@ void GPipelineManager::CreateAll()
 
 #pragma region ライトなし描画用シェーダーのコンパイル
 	RegisterShader("lightless");
-	InitVS("lightless", "BasicVS.hlsl");
-	InitGS("lightless", "BasicGS.hlsl");
-	InitPS("lightless", "BasicPS.hlsl");
+	InitVS("lightless", "NoLightVS.hlsl");
+	InitPS("lightless", "NoLightPS.hlsl");
 #pragma endregion
 
 #pragma region パーティクル3D

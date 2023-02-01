@@ -4,8 +4,12 @@ class SrImGuiStage :
     public IRenderStage
 {
 public:
-    void Init();
-    void PreDraw();
-    void PostDraw();
+    void Init() override;
+    void PreDraw() override;
+    void Render() override;
+    void PostDraw() override;
+
+    void DrawCommands(function<void(void)> cmd) override;
+private:
 };
 

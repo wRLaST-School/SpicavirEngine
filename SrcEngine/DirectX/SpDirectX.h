@@ -8,8 +8,6 @@ public:
 	void Init();
 
 	bool StartFrame(); 
-	
-	void PreDraw3D();
 
 	void PreDrawCommands();
 

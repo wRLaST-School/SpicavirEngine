@@ -16,7 +16,19 @@ public:
 	static void Init();
 	static void Render();
 
-	static SpRenderer* GetInstance();
+	static SpRenderer* GetInstance(); 
+	
+	enum class Stage {
+		Opaque,
+		Add,
+		Alpha,
+		PostEffect,
+		Sprite,
+		ImGui
+	};
+
+	static void DrawCommand(function<void()> cmd, Stage stg);
+	static void RegisterAlphaObj(Object3D* obj);
 private:
 	unique_ptr<IRenderStage> stages[6] = {
 		make_unique<SrOpaqueStage>(),
@@ -25,15 +37,6 @@ private:
 		make_unique<SrPostEffectStage>(),
 		make_unique<SrSpriteStage>(),
 		make_unique<SrImGuiStage>()
-	};
-
-	enum class StageTable {
-		Opaque,
-		Add,
-		Alpha,
-		PostEffect,
-		Sprite,
-		ImGui
 	};
 };
 
