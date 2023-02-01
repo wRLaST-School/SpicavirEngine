@@ -60,10 +60,10 @@ void SrAlphaStage::PostDraw()
 
 void SrAlphaStage::Render()
 {
-	for (auto so : sortedObj)
+	for (auto itr = sortedObj.rbegin(); itr != sortedObj.rend(); ++itr)
 	{
-		so->DrawCommands(so->alphaTexKey);
-	}
+		(*itr)->DrawCommands((*itr)->alphaTexKey);
+	} 
 	objects.clear();
 	sortedObj.clear();
 }
