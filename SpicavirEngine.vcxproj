@@ -109,6 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SpRenderer.cpp" />
     <ClCompile Include="SrAddStage.cpp" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IRenderStage.h" />
+    <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SpRenderer.h" />
     <ClInclude Include="SrAddStage.h" />

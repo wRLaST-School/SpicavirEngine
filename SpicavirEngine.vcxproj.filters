@@ -327,6 +327,9 @@
     <ClCompile Include="Ray.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneCollider.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -520,6 +523,9 @@
     </ClInclude>
     <ClInclude Include="Ray.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneCollider.h">
+      <Filter>Engine\ヘッダーファイル\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
