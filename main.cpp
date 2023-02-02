@@ -58,6 +58,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//Init Input
 	Input::Key::Init();
 	Input::Pad::Init();
+	Input::Mouse::Init();
 
 	/*Init Draw*/
 	//ダブルバッファリングとか
@@ -100,6 +101,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		if (GetWDX()->StartFrame()) break;
 		Input::Key::Update();
 		Input::Pad::Update();
+		Input::Mouse::Update();
 
 		/*毎フレーム処理*/
 

@@ -16,6 +16,11 @@ void SrPostEffectStage::Init()
 	SpTextureManager::AddMasterTextureKey("BloomAfter");
 	SpTextureManager::AddMasterTextureKey("Bloom2ndAfter");
 	SpTextureManager::AddMasterTextureKey("Bloom3rdAfter");
+
+	BloomP1::Init();
+	BloomP2::Init();
+	BloomP3::Init();
+	BloomFin::Init();
 }
 
 void SrPostEffectStage::PreDraw(){};

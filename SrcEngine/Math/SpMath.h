@@ -15,3 +15,12 @@
 #define PIf 3.14159265359f
 #endif
 
+#ifndef EPSILON
+#define EPSILON 0.000001f
+#endif
+
+//ラジアンから角度
+float ConvertRadianToAngle(float radian);
+
+//角度からラジアン
+float ConvertAngleToRadian(float angle);

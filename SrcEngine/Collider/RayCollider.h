@@ -6,11 +6,12 @@ class RayCollider :
     public ICollider
 {
 public:
-    RayCollider(Vec3 ray, Float3 origin = { 0, 0, 0 }) :ray(ray), origin(origin) {};
+    RayCollider(Vec3 ray, Float3 origin = { 0, 0, 0 }) :r(ray, origin){};
+    RayCollider(const Ray& r) : r(r) {};
 
     bool Collide(const SphereCollider& other)const;
+    bool Collide(const PlaneCollider& other, Vec3* intersectionOut = nullptr) const;
 public:
-    Vec3 ray;
-    Float3 origin;
+    Ray r;
     bool checkLength = true;
 };
