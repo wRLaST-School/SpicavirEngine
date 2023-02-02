@@ -25,9 +25,12 @@ public:
     void SetRenderSize(float w, float h);
     void UseDefaultParams();
 
+    Float3 GetWorldPosFromScreen(Float2 screen, float depth);
+    Ray GetScreenPosRay(Float2 screen);
+
     Matrix GetBillboardMat();
 
-    Float3 target = {0.0f, 0.0f, 0.0f};
+    Float3 target = { 0.0f, 0.0f, 0.0f };
 
     //レンダーサイズ
     float renderWidth;
@@ -35,9 +38,9 @@ public:
 
     bool useWindowSize = false;
 
-    float nearZ = 0.f;
-    float farZ = 0.f;
-    float fov = 0.f;
+    float nearZ;
+    float farZ;
+    float fov;
 
     SpConstBuffer<ConstBufferDataVProj> cameraViewProjMatrixCB;
 
@@ -51,4 +54,3 @@ public:
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 };
-

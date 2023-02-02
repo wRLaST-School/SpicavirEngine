@@ -10,6 +10,7 @@
 #include <SrSpriteStage.h>
 #include <SrPostEffectStage.h>
 #include <SrImGuiStage.h>
+#include <SrParticleStage.h>
 class SpRenderer
 {
 public:
@@ -21,6 +22,7 @@ public:
 	enum class Stage {
 		Opaque,
 		Add,
+		Particle,
 		Alpha,
 		PostEffect,
 		Sprite,
@@ -30,9 +32,10 @@ public:
 	static void DrawCommand(function<void()> cmd, Stage stg);
 	static void RegisterAlphaObj(Object3D* obj);
 private:
-	unique_ptr<IRenderStage> stages[6] = {
+	unique_ptr<IRenderStage> stages[7] = {
 		make_unique<SrOpaqueStage>(),
 		make_unique<SrAddStage>(),
+		make_unique<SrParticleStage>(),
 		make_unique<SrAlphaStage>(),
 		make_unique<SrPostEffectStage>(),
 		make_unique<SrSpriteStage>(),

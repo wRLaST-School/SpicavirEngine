@@ -109,6 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SpRenderer.cpp" />
     <ClCompile Include="SrAddStage.cpp" />
     <ClCompile Include="SrAlphaStage.cpp" />
@@ -167,11 +168,13 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
     <ClCompile Include="SrImGuiStage.cpp" />
     <ClCompile Include="SrOpaqueStage.cpp" />
+    <ClCompile Include="SrParticleStage.cpp" />
     <ClCompile Include="SrPostEffectStage.cpp" />
     <ClCompile Include="SrSpriteStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IRenderStage.h" />
+    <ClInclude Include="Ray.h" />
     <ClInclude Include="SpRenderer.h" />
     <ClInclude Include="SrAddStage.h" />
     <ClInclude Include="SrAlphaStage.h" />
@@ -231,6 +234,7 @@
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
     <ClInclude Include="SrImGuiStage.h" />
     <ClInclude Include="SrOpaqueStage.h" />
+    <ClInclude Include="SrParticleStage.h" />
     <ClInclude Include="SrPostEffectStage.h" />
     <ClInclude Include="SrSpriteStage.h" />
   </ItemGroup>

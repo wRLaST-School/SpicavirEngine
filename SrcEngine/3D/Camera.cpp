@@ -98,4 +98,127 @@ Matrix Camera::GetCurrentCameraBillboardMat()
 	return -camRot;
 }
 
+Float3 Camera::GetWorldPosFromScreen(Float2 screen, float depth)
+{
+	if (useWindowSize)
+	{
+		SpWindow* wnd = GetSpWindow();
+		renderWidth = (float)wnd->width;
+		renderHeight = (float)wnd->height;
+	}
+
+	Matrix vMat = targetMode == CameraTargetMode::LookAt ?
+		Matrix::ViewLookAt(position, target, matWorld.ExtractAxisY()) :
+		Matrix::ViewLookTo(position, matWorld.ExtractAxisZ(), matWorld.ExtractAxisY());
+
+	Matrix pMat = projectionMode == ProjectionMode::Perspective ?
+		Matrix::Projection(fov, (float)renderWidth / (float)renderHeight, nearZ, farZ) :
+		Matrix::ProjectionOrtho((int)renderWidth, (int)renderHeight, nearZ, farZ, 20);
+
+	Matrix vport(
+		(float)GetSpWindow()->width / 2, 0.f, 0.f, 0.f,
+		0.f, (float)-GetSpWindow()->height / 2, 0.f, 0.f,
+		0.f, 0.f, 1.f, 0.f,
+		(float)GetSpWindow()->width / 2, (float)GetSpWindow()->height / 2, 0, 1
+	);
+
+	/*depth /= farZ - nearZ;*/
+
+	Matrix wMat = Matrix::Identity();
+	wMat[3][0] = screen.x;
+	wMat[3][1] = screen.y;
+	wMat[3][2] = 0.f;
+
+	Matrix vpvpMat = vMat * pMat * vport;
+	Matrix invMat = -vpvpMat;
+
+	Matrix result = wMat * (-vpvpMat);
+
+	result[3][0] /= result[3][3];
+	result[3][1] /= result[3][3];
+	result[3][2] /= result[3][3];
+
+	Vec3 nearPos(result[3][0], result[3][1], result[3][2]);
+
+	wMat = Matrix::Identity();
+	wMat[3][0] = screen.x;
+	wMat[3][1] = screen.y;
+	wMat[3][2] = 1.f;
+
+	result = wMat * (-vpvpMat);
+
+	result[3][0] /= result[3][3];
+	result[3][1] /= result[3][3];
+	result[3][2] /= result[3][3];
+
+	Vec3 farPos(result[3][0], result[3][1], result[3][2]);
+
+	Vec3 ray = farPos - nearPos;
+
+	return nearPos + ray.SetLength(depth);
+}
+
+Ray Camera::GetScreenPosRay(Float2 screen)
+{
+	if (useWindowSize)
+	{
+		SpWindow* wnd = GetSpWindow();
+		renderWidth = (float)wnd->width;
+		renderHeight = (float)wnd->height;
+	}
+
+	Matrix vMat = targetMode == CameraTargetMode::LookAt ?
+		Matrix::ViewLookAt(position, target, matWorld.ExtractAxisY()) :
+		Matrix::ViewLookTo(position, matWorld.ExtractAxisZ(), matWorld.ExtractAxisY());
+
+	Matrix pMat = projectionMode == ProjectionMode::Perspective ?
+		Matrix::Projection(fov, (float)renderWidth / (float)renderHeight, nearZ, farZ) :
+		Matrix::ProjectionOrtho((int)renderWidth, (int)renderHeight, nearZ, farZ, 20);
+
+	Matrix vport(
+		(float)GetSpWindow()->width / 2, 0.f, 0.f, 0.f,
+		0.f, -(float)GetSpWindow()->height / 2, 0.f, 0.f,
+		0.f, 0.f, 1.f, 0.f,
+		(float)GetSpWindow()->width / 2, (float)GetSpWindow()->height / 2, 0, 1
+	);
+
+	/*depth /= farZ - nearZ;*/
+
+	Matrix wMat = Matrix::Identity();
+	wMat[3][0] = screen.x;
+	wMat[3][1] = screen.y;
+	wMat[3][2] = 0.f;
+
+	Matrix vpvpMat = vMat * pMat * vport;
+	Matrix invMat = -vpvpMat;
+
+	Matrix result = wMat * (-vpvpMat);
+
+	result[3][0] /= result[3][3];
+	result[3][1] /= result[3][3];
+	result[3][2] /= result[3][3];
+
+	Vec3 nearPos(result[3][0], result[3][1], result[3][2]);
+
+	wMat = Matrix::Identity();
+	wMat[3][0] = screen.x;
+	wMat[3][1] = screen.y;
+	wMat[3][2] = 1.f;
+
+	result = wMat * (-vpvpMat);
+
+	result[3][0] /= result[3][3];
+	result[3][1] /= result[3][3];
+	result[3][2] /= result[3][3];
+
+	Vec3 farPos(result[3][0], result[3][1], result[3][2]);
+
+	Vec3 ray = farPos - nearPos;
+
+	Ray r;
+	r.ray = ray;
+	r.origin = nearPos;
+	return r;
+}
+
 Camera* Camera::current = nullptr;

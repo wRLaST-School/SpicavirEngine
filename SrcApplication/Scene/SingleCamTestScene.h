@@ -30,8 +30,5 @@ private:
 
     PointLight* light1;
     PointLight* light2;
-
-    bool enableBloom = true;
-    bool enableGauss = false;
 };
 

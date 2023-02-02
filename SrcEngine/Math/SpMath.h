@@ -5,6 +5,7 @@
 #include "Float3.h"
 #include "Float4.h"
 #include "Matrix.h"
+#include "Ray.h"
 
 #ifndef PI
 #define PI 3.14159265359

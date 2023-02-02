@@ -7,6 +7,7 @@
 #include <SpRootSignature.h>
 #include <GPipeline.h>
 #include <Camera.h>
+#include <SpRenderer.h>
 
 ParticleManager::ParticleManager()
 {
@@ -46,16 +47,18 @@ ParticleManager::ParticleManager()
 
 void ParticleManager::Draw()
 {
-	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("particle"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
+	if (activeCount == 0)
+	{
+		return;
+	}
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
+	SpRenderer::DrawCommand([&] {
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
 
-	Camera::UseCurrent();
+		Camera::UseCurrent();
 
-	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
-
-	GetWDX()->cmdList->DrawInstanced(activeCount, 1, 0, 0);
+		GetWDX()->cmdList->DrawInstanced(activeCount, 1, 0, 0);
+	}, SpRenderer::Stage::Particle);
 }

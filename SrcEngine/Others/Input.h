@@ -25,6 +25,13 @@ enum class Button {
 	Y = 0x8000,
 };
 
+enum class Click {
+	Left = 0,
+	Right = 1,
+	Middle = 2,
+	MB4 = 3
+};
+
 enum class Trigger {
 	Left = 0,
 	Right = 1,
@@ -54,6 +61,40 @@ namespace Input {
 
 		BYTE keys[256] = {};
 		BYTE prevKeys[256] = {};
+
+		friend IDirectInput8* GetDInput();
+	};
+
+	class Mouse {
+	public:
+
+		static void Init();
+
+		static void Update();
+
+		static void Close();
+
+		static bool Down(Click b);
+
+		static bool Triggered(Click b);
+
+		static bool Released(Click b);
+
+		//マウスの移動量
+		static Float2 GetVel();
+
+		//マウスの座標
+		static Float2 GetPos();
+
+		static Mouse* GetInstance();
+
+	private:
+		IDirectInputDevice8* devmouse = nullptr;
+
+		Float2 cursor;
+
+		DIMOUSESTATE state;
+		DIMOUSESTATE prevState;
 	};
 
 	class Pad
@@ -96,26 +137,14 @@ namespace Input {
 		static void SetDeadZone(float range);
 		static float GetDeadZone();
 
-		//0-65535 for power, -1 for infinity frame
-		static void Vibration(int power, int frame = -1);
-
-		//0-65535 for power, -1 for infinity frame
-		static void Vibration(int leftpower, int rightpower, int frame);
-
-		static void StopVibration();
-
 		int gamepadIndex = 0;
-
 	private:
 		XINPUT_STATE padState;
 		XINPUT_STATE lastPadState;
 
-		bool triggerState[2] = {false, false};
-		bool lastTriggerState[2] = {false, false};
+		bool triggerState[2] = { false, false };
+		bool lastTriggerState[2] = { false, false };
 
 		float deadZone = 50;
-
-		static int vibTimer;
-		static int vibTimerMax;
 	};
 }

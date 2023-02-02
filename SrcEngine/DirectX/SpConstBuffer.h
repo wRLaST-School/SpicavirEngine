@@ -75,7 +75,7 @@ public:
 	}
 
 	~SpConstBuffer() {
-		buffer->Unmap(0, nullptr);
+		/*buffer->Unmap(0, nullptr);*/
 	};
 
 	SpConstBuffer<Contents>& operator=(const SpConstBuffer<Contents>& second) {

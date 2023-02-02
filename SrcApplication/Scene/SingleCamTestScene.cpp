@@ -114,17 +114,6 @@ void SingleCamTestScene::Update()
 		ImGui::End();
 	});
 
-	SpImGui::Command([&]() {
-		ImGui::SetNextWindowPos(ImVec2(100, 420));
-		ImGui::SetNextWindowSize(ImVec2(300, 100));
-		if (ImGui::Begin("Post Effect"))
-		{
-			ImGui::Checkbox("Bloom", &enableBloom);
-			ImGui::Checkbox("Gauss", &enableGauss);
-		}
-		ImGui::End();
-	});
-
 	light1->DrawFrame();
 	light2->DrawFrame();
 	light1->DrawLightEditor();

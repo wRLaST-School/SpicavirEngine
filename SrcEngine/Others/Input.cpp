@@ -3,6 +3,10 @@
 #include "SpWindow.h"
 #include "Util.h"
 
+#ifdef _DEBUG
+#include <SpImGui.h>
+#endif
+
 using namespace Input;
 
 void Key::Init()
@@ -26,7 +30,6 @@ void Key::Update()
 	}
 
 	instance->devkeyboard->Acquire();
-
 	instance->devkeyboard->GetDeviceState(sizeof(instance->keys), instance->keys);
 }
 
@@ -63,7 +66,7 @@ Key* Key::GetInstance()
 
 void Input::Pad::Init()
 {
-	
+
 }
 
 void Input::Pad::Update()
@@ -154,38 +157,70 @@ float Input::Pad::GetDeadZone()
 	return GetInstance()->deadZone;
 }
 
-void Input::Pad::Vibration(int power, int frame)
+void Input::Mouse::Init()
 {
-	XINPUT_VIBRATION vibration;
-	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = (WORD)power; // use any value between 0-65535 here
-	vibration.wRightMotorSpeed = (WORD)power; // use any value between 0-65535 here
-	XInputSetState(GetInstance()->gamepadIndex, &vibration);
+	Mouse* instance = GetInstance();
+	GetDInput()->CreateDevice(GUID_SysMouse, &instance->devmouse, NULL);
+	instance->devmouse->SetDataFormat(&c_dfDIMouse);
 
-	vibTimer = frame;
-	vibTimerMax = frame;
+	instance->devmouse->SetCooperativeLevel(GetSpWindow()->hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 }
 
-void Input::Pad::Vibration(int leftpower, int rightpower, int frame)
+void Input::Mouse::Update()
 {
-	XINPUT_VIBRATION vibration;
-	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = (WORD)leftpower; // use any value between 0-65535 here
-	vibration.wRightMotorSpeed = (WORD)rightpower; // use any value between 0-65535 here
-	XInputSetState(GetInstance()->gamepadIndex, &vibration);
+	Mouse* ins = GetInstance();
+	ins->prevState = ins->state;
 
-	vibTimer = frame;
-	vibTimerMax = frame;
+	ins->devmouse->Acquire();
+	ins->devmouse->Poll();
+	ins->devmouse->GetDeviceState(sizeof(DIMOUSESTATE), &ins->state);
+
+	POINT pos;
+	GetCursorPos(&pos);
+
+	ScreenToClient(GetSpWindow()->hwnd, &pos);
+
+	ins->cursor = { (float)pos.x, (float)pos.y };
 }
 
-void Input::Pad::StopVibration()
+void Input::Mouse::Close()
 {
-	XINPUT_VIBRATION vibration;
-	ZeroMemory(&vibration, sizeof(XINPUT_VIBRATION));
-	vibration.wLeftMotorSpeed = 0; // use any value between 0-65535 here
-	vibration.wRightMotorSpeed = 0; // use any value between 0-65535 here
-	XInputSetState(GetInstance()->gamepadIndex, &vibration);
+	Mouse* ins = GetInstance();
+	ins->devmouse->Release();
 }
 
-int Input::Pad::vibTimer = 0;
-int Input::Pad::vibTimerMax = 0;
+bool Input::Mouse::Down(Click b)
+{
+	return GetInstance()->state.rgbButtons[(int)b] & (0x80);
+}
+
+bool Input::Mouse::Triggered(Click b)
+{
+	return (!(GetInstance()->prevState.rgbButtons[(int)b] & (0x80))) && (GetInstance()->state.rgbButtons[(int)b] & (0x80));
+}
+
+bool Input::Mouse::Released(Click b)
+{
+	return (!(GetInstance()->state.rgbButtons[(int)b] & (0x80))) && (GetInstance()->prevState.rgbButtons[(int)b] & (0x80));
+}
+
+Float2 Input::Mouse::GetVel()
+{
+	return { (float)GetInstance()->state.lX , (float)GetInstance()->state.lY };
+}
+
+Float2 Input::Mouse::GetPos()
+{
+	return GetInstance()->cursor;
+}
+
+Mouse* Input::Mouse::GetInstance()
+{
+	static Mouse obj;
+	return &obj;
+}
+
+IDirectInput8* Input::GetDInput()
+{
+	return Key::GetInstance()->dinput;
+}

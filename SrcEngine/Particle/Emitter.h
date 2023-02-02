@@ -9,9 +9,37 @@ template <class ParticleType>
 class Emitter : public ParticleManager
 {
 public:
+	//エミッタの座標
+	Float3 position;
+
+	//出現範囲の半径、shapeがsphereならxのみ使用
+	Float3 radius;
+
+	//出現範囲の形状
+	enum class Shape {
+		Cube,
+		Sphere
+	} shape = Shape::Cube;
+
+	//同時に発生する数
+	int quantity = 1;
+
+	//発生間隔(フレーム)
+	int timeBetweenEmit = 1;
+
+	//trueならパーティクルを生成する
+	bool active = false;
+
+	//trueならパーティクルを一度生成すると自動的にactiveをfalseに
+	bool emitOnce = false;
+
+public:
 	Emitter() {
 		this->texture = ParticleType::texture;
 	}
+
+	void Activate() { active = true; };
+	void Deactivate() { active = false; };
 
 	void Update() {
 		timer++;
@@ -19,6 +47,8 @@ public:
 			timer = 0;
 
 			for (int i = 0; i < quantity; i++) { Emit(); }
+
+			if (emitOnce) { active = false; }
 		}
 
 		activeCount = 0;
@@ -58,25 +88,13 @@ public:
 		}
 	};
 
-	//エミッタの座標
-	Float3 position;
-
-	//出現範囲の半径、shapeがsphereならxのみ使用
-	Float3 radius;
-
-	//出現範囲の形状
-	enum class Shape {
-		Cube,
-		Sphere
-	} shape = Shape::Cube;
-
-	//同時に発生する数
-	int quantity = 1;
-
-	//発生間隔(フレーム)
-	int timeBetweenEmit = 1;
 private:
 	void Emit() {
+		if (!active)
+		{
+			return;
+		}
+
 		Float3 particlePos = {};
 
 		switch (shape)
