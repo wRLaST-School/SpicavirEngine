@@ -28,11 +28,9 @@ void SingleCamTestScene::Init()
 	camera.UseDefaultParams();
 
 	sphere.model = ModelManager::GetModel("SmoothSphere");
-	pane2.model = ModelManager::GetModel("Cube");
-	sky.model = ModelManager::GetModel("Sky");
+	floor.model = ModelManager::GetModel("Pane");
 
-	light1 = Light::GetPointLightPtr(Light::CreatePointLight({5.f, 1.f, -5.f}, {1.f, 1.f, 1.f}, {.05f, .0f, .02f}, "light1"));
-	light2 = Light::GetPointLightPtr(Light::CreatePointLight({ -10.f, 0.f, 0.f }, { 1.f, 1.f, 1.f }, { .05f, .0f, .02f }, "light2"));
+	sky.model = ModelManager::GetModel("Sky");
 }
 
 void SingleCamTestScene::Update()
@@ -59,63 +57,38 @@ void SingleCamTestScene::Update()
 
 #pragma endregion
 
-	if (Input::Key::Triggered(DIK_B))
-	{
-		SoundManager::Play("Laser");
-	}
-
-	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };
 
-	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
+	floor.position = { 0.f, -0.75f, 0.f};
+	floor.rotation.x = PIf / 2.f;
+	sphere.position = {0.f, sinf((float)timer / 60), 0.f};
+	spCol.pos = sphere.position;
+	spCol.r = sphere.scale.x;
+	plCol.norm = Vec3(0.f, 1.f, 0.f);
+	plCol.distance = floor.position.y;
 
-	*pane2.brightnessCB.contents = Float4{ 0.f, 1.f, 1.f, .2f };
-	pane2.UpdateMatrix();
+	ray.origin = Vec3(2.0f, 1.f, -sinf((float)timer / 60));
+	ray.ray = Vec3(0, -1.f, 0);
+
+	rCol.r = ray;
+
+	*floor.brightnessCB.contents = {1.f, 1.f, 1.f, 0.35f};
+	//“–‚½‚è”»’è
+	if (spCol.Collide(plCol))
+	{
+		*sphere.brightnessCB.contents = { 1.f, 0.f, 0.f, 1.f };
+	}
+	else
+	{
+		*sphere.brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
+	}
 
 	camera.UpdateMatrix();
-	pane.UpdateMatrix();
+	floor.UpdateMatrix();
+	sphere.UpdateMatrix();
 	sky.UpdateMatrix();
 
-	////style editor
-	//SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
-
-	//Object
-	SpImGui::Command([&]() {
-		ImGui::SetNextWindowPos(ImVec2(100, 220));
-		ImGui::SetNextWindowSize(ImVec2(300, 200));
-		if (ImGui::Begin("Object Editor"))
-		{
-			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
-			ImGui::SliderFloat3("Scale", &pane.scale.x, -1.f, 1.f);
-			ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 2.f * PIf);
-
-			if (ImGui::Button("UseSmooth"))
-			{
-				pane.model = ModelManager::GetModel("SmoothSphere");
-			}
-
-			if (ImGui::Button("UseFlat"))
-			{
-				pane.model = ModelManager::GetModel("FlatSphere");
-			}
-		}
-	ImGui::End();
-	});
-
-	SpImGui::Command([&]() {
-		ImGui::SetNextWindowPos(ImVec2(100, 160));
-		ImGui::SetNextWindowSize(ImVec2(100, 60));
-		if (ImGui::Begin("GamePad"))
-		{
-			ImGui::InputInt("Index", &Input::Pad::GetInstance()->gamepadIndex);
-		}
-		ImGui::End();
-	});
-
-	light1->DrawFrame();
-	light2->DrawFrame();
-	light1->DrawLightEditor();
-	light2->DrawLightEditor();
+	timer++;
 }
 
 void SingleCamTestScene::DrawBack()
@@ -127,9 +100,15 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	pane2.DrawAlpha("white");
-	pane.Draw("white");
+	sphere.Draw("white");
+	floor.Draw("white");
 	sky.Draw();
+
+	LineDrawer::DrawLine(ray.origin, ray.origin + ray.ray * 100, {1.f, 0.f, 0.f, 1.f});
+
+	Vec3 hit;
+	rCol.Collide(plCol, &hit);
+	LineDrawer::DrawCube(hit, { 0.5f, 0.5f, 0.5f }, { 1.f, 0.f, 0.f, 1.0f });
 
 	LineDrawer::DrawAllLines();
 

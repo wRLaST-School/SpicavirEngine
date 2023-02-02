@@ -6,6 +6,7 @@ class SphereCollider :
     public ICollider
 {
 public:
+    SphereCollider() { pos = {}; r = 0; };
     SphereCollider(Float3 pos, float r) :pos(pos), r(r) {};
 
     bool Collide(PlaneCollider other);

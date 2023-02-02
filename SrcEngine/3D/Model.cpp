@@ -256,6 +256,13 @@ Model::Model(string modelName)
 	}
 	file.close();
 
+	if (material.size() == 0)
+	{
+		material.emplace_back();
+		material.back().name = "DefaultMaterial";
+		UpdateMaterial();
+	}
+
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertices.size());
 
 	////頂点バッファの設定

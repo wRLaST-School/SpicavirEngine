@@ -40,4 +40,3 @@ struct R8G8B8A8
 	byte b = 0;
 	byte a = 0;
 };
-

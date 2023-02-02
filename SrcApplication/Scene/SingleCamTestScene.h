@@ -14,6 +14,7 @@ class SingleCamTestScene :
     public IScene
 {
 public:
+    SingleCamTestScene() {};
     ~SingleCamTestScene() {};
     void LoadResources() override;
     void Init() override;
@@ -35,7 +36,6 @@ private:
 
     Camera camera;
 
-    PointLight* light1;
-    PointLight* light2;
+    long long timer;
 };
 
