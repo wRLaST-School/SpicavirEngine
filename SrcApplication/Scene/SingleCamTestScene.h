@@ -7,6 +7,9 @@
 #include <ParticleSample2.h>
 #include <Light.h>
 #include <IPostEffector.h>
+#include <PlaneCollider.h>
+#include <SphereCollider.h>
+#include <RayCollider.h>
 class SingleCamTestScene :
     public IScene
 {
@@ -20,9 +23,13 @@ public:
     void DrawSprite() override;
 
 private:
-    Object3D pane;
+    Object3D floor;
+    PlaneCollider plCol;
+    Object3D sphere;
+    SphereCollider spCol;
 
-    Object3D pane2;
+    Ray ray;
+    RayCollider rCol;
 
     Object3D sky;
 

@@ -21,15 +21,13 @@ void SingleCamTestScene::LoadResources()
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
-
-	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
 }
 
 void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("SmoothSphere");
+	sphere.model = ModelManager::GetModel("SmoothSphere");
 	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
