@@ -84,6 +84,25 @@ Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, cons
 	return result;
 }
 
+Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to)
+{
+	Vec3 f = from;
+	Vec3 t = to;
+
+	f.Norm();
+	t.Norm();
+
+	float dot = f.Dot(t);
+
+	Vec3 cross = f.Cross(t);
+
+	Vec3 axis = cross.Norm();
+
+	float theta = acos(dot);
+
+	return Quaternion(axis, theta);
+}
+
 float Quaternion::GetNorm() const
 {
 	return sqrt(w * w + v.x * v.x + v.y * v.y + v.z * v.z);
