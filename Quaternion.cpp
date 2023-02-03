@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Quaternion.h"
+#include <Util.h>
 
 Quaternion::Quaternion()
 {
@@ -99,6 +100,27 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to)
 	Vec3 axis = cross.Norm();
 
 	float theta = acos(dot);
+
+	return Quaternion(axis, theta);
+}
+
+Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float maxRad)
+{
+	Vec3 f = from;
+	Vec3 t = to;
+
+	f.Norm();
+	t.Norm();
+
+	float dot = f.Dot(t);
+
+	Vec3 cross = f.Cross(t);
+
+	Vec3 axis = cross.Norm();
+
+	float theta = acos(dot);
+
+	Util::Clamp(theta, 0.f, maxRad);
 
 	return Quaternion(axis, theta);
 }

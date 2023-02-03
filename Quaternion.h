@@ -29,6 +29,7 @@ public:
 	static Quaternion GetInverse(const Quaternion& q);
 	static Quaternion Slerp(const Quaternion& zero, const Quaternion& one, const float& t);
 	static Quaternion DirToDir(const Vec3& from, const Vec3& to);
+	static Quaternion DirToDir(const Vec3& from, const Vec3& to, const float maxRad);
 };
 
 Vec3 operator *(Vec3 v, Quaternion q);
