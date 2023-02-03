@@ -1,9 +1,21 @@
 #include "stdafx.h"
 #include "BossBullet.h"
 #include <Player.h>
+#include <Quaternion.h>
 
 void BossBullet::Update()
 {
+	if (doesHome)
+	{
+		float l = vel.GetLength();
+		Vec3 norm = vel.GetNorm();
+		Vec3 plv = (Vec3)Player::Get()->position - position;
+		plv.Norm();
+		Quaternion rot = Quaternion::DirToDir(norm, plv, maxHomeAngle);
+		vel = norm * rot;
+		vel *= l;
+	}
+	
 	position += vel;
 
 	*brightnessCB.contents = { 3.0f, 0.0f, 0.0f, 1.0f };
@@ -13,7 +25,7 @@ void BossBullet::Update()
 	UpdateMatrix();
 
 	totalTimer++;
-	if (totalTimer >= 300 || ((Vec3)position).GetSquaredLength() >= 32.f * 32.f) {
+	if (totalTimer >= 180 || ((Vec3)position).GetSquaredLength() >= 32.f * 32.f) {
 		this->del = true;
 	}
 

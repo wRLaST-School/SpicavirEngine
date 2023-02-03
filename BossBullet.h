@@ -18,5 +18,8 @@ public:
 
     Emitter<ParticleSample1>* em;
 
+    bool doesHome = false;
+    float maxHomeAngle = PIf / 180;
+
     ~BossBullet() { em->active = false; }
 };

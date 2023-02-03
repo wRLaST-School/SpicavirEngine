@@ -119,6 +119,7 @@
     <ClCompile Include="ParticleSample2.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SpImGui.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="ParticleSample2.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="Quaternion.h" />
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SpImGui.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />

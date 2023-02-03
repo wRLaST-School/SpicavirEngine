@@ -112,6 +112,10 @@ void Boss::Shot(Vec3 vel, bool usePlayerY)
 	if (usePlayerY)
 	{
 		bullets.back().position.y = Player::Get()->position.y;
+		bullets.back().doesHome = true;
+	}
+	else
+	{
 	}
 
 	SoundManager::Play("enShot");
