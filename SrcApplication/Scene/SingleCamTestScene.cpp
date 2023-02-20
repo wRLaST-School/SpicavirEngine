@@ -133,8 +133,6 @@ void SingleCamTestScene::Draw3D()
 	pane.Draw("white");
 	sky.Draw();
 
-	LineDrawer::DrawAllLines();
-
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
