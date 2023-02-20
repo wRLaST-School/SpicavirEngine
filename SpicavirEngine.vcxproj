@@ -108,6 +108,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -174,6 +175,8 @@
     <ClCompile Include="SrSpriteStage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Anchor.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Ray.h" />
