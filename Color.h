@@ -23,5 +23,5 @@ class Color
 	void AddHue(float);
 
 	void ShowImGUIEditor();
-}
+};
 
