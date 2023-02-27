@@ -58,7 +58,6 @@ void SingleCamTestScene::Update()
 		up.SetLength((Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT) + Input::Pad::Down(Button::L) - Input::Pad::Down(Trigger::Left)) * spd);
 
 	camera.position = move + camera.position;
-
 #pragma endregion
 
 	if (Input::Key::Triggered(DIK_B))
