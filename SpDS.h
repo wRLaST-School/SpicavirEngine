@@ -2,6 +2,7 @@
 #include <SpTextureManager.h>
 #include <Anchor.h>
 #include <Color.h>
+#include <SpConstBuffer.h>
 class SpDS
 {
 public:
@@ -12,6 +13,7 @@ public:
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
 	static void DrawLine(int start, int end, Color color);
 
+	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();
 	static void Render();
 
@@ -28,22 +30,41 @@ private:
 	};
 
 	struct Graph {
-		int x;
-		int y;
-		int rx;
-		int ry;
-		float rot;
+		Matrix wMat;
+		TextureKey key;
+	};
+
+	struct GraphGPUData {
+		SpConstBuffer<Matrix> matcb;
+		bool used = false;
 		TextureKey key;
 	};
 
 	static vector<Line> lines;
+
+	static D3D12_VERTEX_BUFFER_VIEW vbView;
+	static ComPtr<ID3D12Resource> vertBuff;
+	static Line* vertMap;
+
 	static vector<Graph> graphs;
+	static GraphGPUData ggpu;
+	static D3D12_VERTEX_BUFFER_VIEW gvbView;
+	static ComPtr<ID3D12Resource> gvertBuff;
+	static float* gvertMap;
 };
 
 namespace SpDSLayouts {
+	const static D3D12_INPUT_ELEMENT_DESC graphLayout[] = {
+		{
+				"DUMMY", 0,
+				DXGI_FORMAT_R32_FLOAT, 0,
+				D3D12_APPEND_ALIGNED_ELEMENT,
+				D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+	};
 
 	// DrawLine2D用頂点レイアウト
-	const static D3D12_INPUT_ELEMENT_DESC graphLayout[] = {
+	const static D3D12_INPUT_ELEMENT_DESC lineLayout[] = {
 			{
 				"FROM", 0,
 				DXGI_FORMAT_R32G32B32_FLOAT, 0,
