@@ -19,6 +19,12 @@ public:
 
 	operator ColorInt();
 	operator Float4();
+
+	Float4 f4;
+
+	void ShowImGUIEditor(std::string windowTitle);
+
+	//ˆÈ‰º–¢ŽÀ‘•
 	operator int();
 	Float3 GetHSV();
 
@@ -30,10 +36,6 @@ public:
 	void Set(int hexcolor);
 
 	void AddHue(float h);
-
-	Float4 f4;
-
-	void ShowImGUIEditor(std::string windowTitle);
 
 public:
 	const static Color White;
