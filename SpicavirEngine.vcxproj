@@ -74,7 +74,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -109,8 +109,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monotone.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SpDS.cpp" />
     <ClCompile Include="SpRenderer.cpp" />
@@ -178,8 +181,11 @@
   <ItemGroup>
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="IRenderStage.h" />
+    <ClInclude Include="Monotone.h" />
     <ClInclude Include="PlaneCollider.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SpDS.h" />
     <ClInclude Include="SpRenderer.h" />

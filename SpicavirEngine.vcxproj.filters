@@ -17,9 +17,6 @@
     <Filter Include="Application\ヘッダーファイル">
       <UniqueIdentifier>{696e5b68-a0d6-4c59-afe6-217a87ecf169}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application\ソースファイル\Scene">
-      <UniqueIdentifier>{0e2716fc-b7ca-4f9b-ba71-858431f72756}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Application\ヘッダーファイル\Scene">
       <UniqueIdentifier>{513ea112-f226-46a2-b3de-f54f3e92ca0a}</UniqueIdentifier>
     </Filter>
@@ -145,6 +142,21 @@
     <Filter Include="Engine\ヘッダーファイル\Renderer">
       <UniqueIdentifier>{768cdb3b-d890-42f6-acb5-933617d03490}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\テスト用・参考用">
+      <UniqueIdentifier>{32c22431-8e47-4ba5-99d0-2254beef282d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\テスト用・参考用\Scene">
+      <UniqueIdentifier>{0e2716fc-b7ca-4f9b-ba71-858431f72756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ソースファイル\Scene">
+      <UniqueIdentifier>{f02d369d-8c09-4932-b72b-66073dbc12a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ヘッダーファイル\Player">
+      <UniqueIdentifier>{f337df1e-a39e-456d-8ae9-f26051e908e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\ソースファイル\Player">
+      <UniqueIdentifier>{70e97515-bc93-415f-8e53-3500c1c99b05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -219,11 +231,8 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp">
       <Filter>Engine\ソースファイル\Window</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
+      <Filter>Application\テスト用・参考用\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
@@ -259,7 +268,7 @@
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
+      <Filter>Application\テスト用・参考用\Scene</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\DirectX\RootSignatureManager.cpp">
       <Filter>Engine\ソースファイル\DirectX</Filter>
@@ -335,6 +344,18 @@
     </ClCompile>
     <ClCompile Include="SpDS.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Application\ソースファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Application\ソースファイル\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monotone.cpp">
+      <Filter>Engine\ソースファイル\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -416,12 +437,6 @@
     <ClInclude Include="SrcEngine\Windows\SpWindow.h">
       <Filter>Engine\ヘッダーファイル\Window</Filter>
     </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\SceneManager.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\TestScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
     </ClInclude>
@@ -454,9 +469,6 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\Others\stdafx.h">
       <Filter>Engine\ヘッダーファイル\Others</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\DirectX\RootSignatureManager.h">
       <Filter>Engine\ヘッダーファイル\DirectX</Filter>
@@ -524,9 +536,6 @@
     <ClInclude Include="SrPostEffectStage.h">
       <Filter>Engine\ヘッダーファイル\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="SrParticleStage.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Ray.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
@@ -541,6 +550,27 @@
     </ClInclude>
     <ClInclude Include="SpDS.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
+      <Filter>Application\テスト用・参考用\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\TestScene.h">
+      <Filter>Application\テスト用・参考用\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\SceneManager.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Application\ヘッダーファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrParticleStage.h">
+      <Filter>Application\ヘッダーファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Application\ヘッダーファイル\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Monotone.h">
+      <Filter>Engine\ヘッダーファイル\PostEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

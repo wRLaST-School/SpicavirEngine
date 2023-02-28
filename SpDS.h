@@ -6,8 +6,10 @@
 class SpDS
 {
 public:
-	//定義作ってそれぞれで描画コマンドをキューする
-	static void DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor = Anchor::Center, Color brightness = Color(0xffffff));
+	static void DrawRotaGraph(int x, int y, float dx, float dy, float rot,
+								TextureKey key, Anchor anchor = Anchor::Center,
+									Color brightness = Color(0xffffff));
+
 	static void DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawBoxLine(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);

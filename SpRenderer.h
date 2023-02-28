@@ -24,8 +24,8 @@ public:
 		Add,
 		Particle,
 		Alpha,
-		PostEffect,
 		Sprite,
+		PostEffect,
 		ImGui
 	};
 
@@ -37,8 +37,8 @@ private:
 		make_unique<SrAddStage>(),
 		make_unique<SrParticleStage>(),
 		make_unique<SrAlphaStage>(),
-		make_unique<SrPostEffectStage>(),
 		make_unique<SrSpriteStage>(),
+		make_unique<SrPostEffectStage>(),
 		make_unique<SrImGuiStage>()
 	};
 };

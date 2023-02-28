@@ -75,6 +75,7 @@ void SrAlphaStage::RegisterAlphaObject(Object3D* obj)
 
 void SrAlphaStage::SortObjects()
 {
+	if (!Camera::current) return;
 	Vec3 cam = Camera::current->position;
 	for (auto o : objects)
 	{

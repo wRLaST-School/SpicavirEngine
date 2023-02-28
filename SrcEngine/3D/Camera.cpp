@@ -45,6 +45,7 @@ void Camera::Set(Camera& camera)
 
 void Camera::UseCurrent()
 {
+	if (!current) return;
 	if (current->useWindowSize)
 	{
 		SpWindow* wnd = GetSpWindow();
