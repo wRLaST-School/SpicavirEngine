@@ -637,6 +637,12 @@
     <FxCompile Include="Resources\Shaders\NoLightVS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\MonotonePS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\MonotoneVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -664,6 +670,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\NoLight.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\Monotone.hlsli">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
