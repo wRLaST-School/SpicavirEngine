@@ -7,6 +7,7 @@
 #include <ParticleSample2.h>
 #include <Light.h>
 #include <IPostEffector.h>
+#include <SpDS.h>
 class SingleCamTestScene :
     public IScene
 {

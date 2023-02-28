@@ -22,6 +22,7 @@
 #include <IPostEffector.h>
 #include <SoundManager.h>
 #include <SpRenderer.h>
+#include <SpDS.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -88,6 +89,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init Renderer
 	SpRenderer::Init();
+
+	//Init DS
+	SpDS::CreateBuffers();
 
 	//Init Sounds
 	SoundManager::Init();

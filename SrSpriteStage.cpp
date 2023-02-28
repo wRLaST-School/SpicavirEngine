@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SrSpriteStage.h"
 #include <Sprite.h>
+#include <SpDS.h>
 
 void SrSpriteStage::DrawCommands(std::function<void(void)> cmd)
 {
@@ -28,4 +29,6 @@ void SrSpriteStage::Render()
 		cmd();
 	}
 	commands.clear();
+
+	SpDS::Render();
 }

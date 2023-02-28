@@ -7,7 +7,7 @@ class SpDS
 {
 public:
 	//定義作ってそれぞれで描画コマンドをキューする
-	static void DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor = Anchor::Center);
+	static void DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor = Anchor::Center, Color brightness = Color(0xffffff));
 	static void DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawBoxLine(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
@@ -18,7 +18,7 @@ public:
 	static void Render();
 
 private:
-	const static int graphBuffNum = 2048;
+	const static int graphBuffNum = 4096;
 	const static int lineBuffNum = 2048;
 
 	static void RenderGraph();
@@ -32,32 +32,48 @@ private:
 	struct Graph {
 		Matrix wMat;
 		TextureKey key;
+		Color brightness;
+	};
+
+	struct GraphCBData {
+		Float4 brightness;
+		Matrix mat;
 	};
 
 	struct GraphGPUData {
-		SpConstBuffer<Matrix> matcb;
+		SpConstBuffer<GraphCBData> matcb;
 		bool used = false;
 		TextureKey key;
 	};
 
+	struct GraphVertData {
+		Float3 pos;
+		Float2 uv;
+	};
+
 	static vector<Line> lines;
 
-	static D3D12_VERTEX_BUFFER_VIEW vbView;
-	static ComPtr<ID3D12Resource> vertBuff;
-	static Line* vertMap;
+	/*static D3D12_VERTEX_BUFFER_VIEW vbView;
+	static ComPtr<ID3D12Resource> vertBuff;*/
+	//static Line* vertMap;
 
 	static vector<Graph> graphs;
-	static GraphGPUData ggpu;
+	static list<GraphGPUData> ggpu;
 	static D3D12_VERTEX_BUFFER_VIEW gvbView;
 	static ComPtr<ID3D12Resource> gvertBuff;
-	static float* gvertMap;
 };
 
 namespace SpDSLayouts {
 	const static D3D12_INPUT_ELEMENT_DESC graphLayout[] = {
 		{
-				"DUMMY", 0,
-				DXGI_FORMAT_R32_FLOAT, 0,
+				"POSITION", 0,
+				DXGI_FORMAT_R32G32B32_FLOAT, 0,
+				D3D12_APPEND_ALIGNED_ELEMENT,
+				D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+		{
+				"TEXCOORD", 0,
+				DXGI_FORMAT_R32G32_FLOAT, 0,
 				D3D12_APPEND_ALIGNED_ELEMENT,
 				D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
 		},
