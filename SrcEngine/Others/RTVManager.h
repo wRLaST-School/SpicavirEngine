@@ -5,7 +5,7 @@ class RTVManager
 {
 public:
 	static void SetRenderTargetToBackBuffer(UINT bbIndex);
-	static void SetRenderTargetToTexture(TextureKey key);
+	static void SetRenderTargetToTexture(TextureKey key, bool clear = true);
 
 	static void CreateRenderTargetTexture(int width, int height, TextureKey key);
 	static void CreateHeaps();

@@ -128,6 +128,10 @@ PipelineDesc::Blend::BlendDesc PipelineUtil::Blend::GetBlendMode(BlendMode blend
 		desc.BlendOp = D3D12_BLEND_OP_REV_SUBTRACT;
 		desc.SrcBlend = D3D12_BLEND_ONE;
 		desc.DestBlend = D3D12_BLEND_ONE;
+
+		desc.BlendOpAlpha = D3D12_BLEND_OP_REV_SUBTRACT;
+		desc.SrcBlendAlpha = D3D12_BLEND_ONE;
+		desc.DestBlendAlpha = D3D12_BLEND_ONE;
 		break;
 
 	case PipelineUtil::BlendMode::Inv:

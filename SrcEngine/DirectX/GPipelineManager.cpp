@@ -85,22 +85,68 @@ void GPipelineManager::CreateAll()
 	RegisterShader("2d");
 	InitVS("2d", "SpriteVS.hlsl");
 	InitPS("2d", "SpritePS.hlsl");
+	{
+		PipelineDesc pl2dDesc;
+		pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
+		pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
 
-	PipelineDesc pl2dDesc;
-	pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
-	pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
+		pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
 
-	pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
+		pl2dDesc.Shader.pShader = GetShader("2d");
 
-	pl2dDesc.Shader.pShader = GetShader("2d");
+		pl2dDesc.Depth.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+		pl2dDesc.Depth.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_ALWAYS;
+		pl2dDesc.Depth.DepthStencilState.DepthEnable = false;
+		pl2dDesc.Render.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+		pl2dDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 
-	pl2dDesc.Depth.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
-	pl2dDesc.Depth.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_ALWAYS;
-	pl2dDesc.Depth.DepthStencilState.DepthEnable = false;
-	pl2dDesc.Render.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-	pl2dDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+		GPipeline::Create(pl2dDesc, "2d");
+	}
+#pragma endregion
 
-	GPipeline::Create(pl2dDesc, "2d");
+#pragma region 加算2D
+	{
+		PipelineDesc pl2dDesc;
+		pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
+		pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
+
+		pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
+
+		pl2dDesc.Shader.pShader = GetShader("2d");
+
+		pl2dDesc.Depth.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+		pl2dDesc.Depth.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_ALWAYS;
+		pl2dDesc.Depth.DepthStencilState.DepthEnable = false;
+		pl2dDesc.Render.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+		pl2dDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+
+		pl2dDesc.Blend.BlendEnable = true;
+		pl2dDesc.Blend.Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Add);
+
+		GPipeline::Create(pl2dDesc, "2dAdd");
+	}
+#pragma endregion
+
+#pragma region 減算2D
+	{
+		PipelineDesc pl2dDesc;
+		pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
+		pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
+
+		pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
+
+		pl2dDesc.Shader.pShader = GetShader("2d");
+
+		pl2dDesc.Depth.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
+		pl2dDesc.Depth.DepthStencilState.DepthFunc = D3D12_COMPARISON_FUNC_ALWAYS;
+		pl2dDesc.Depth.DepthStencilState.DepthEnable = false;
+		pl2dDesc.Render.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
+		pl2dDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+
+		pl2dDesc.Blend.BlendEnable = true;
+		pl2dDesc.Blend.Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Sub);
+		GPipeline::Create(pl2dDesc, "2dSub");
+	}
 #pragma endregion
 
 #pragma region 追加用（追加するときに下にコピペ）

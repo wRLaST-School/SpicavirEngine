@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "SpDS.h"
 #include <Sprite.h>
+#include <RTVManager.h>
+#include <SpSwapChainManager.h>
+#include <GPipeline.h>
+#include <SpRootSignature.h>
 
 void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color brightness)
 {
@@ -41,11 +45,68 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 	g.brightness = brightness;
 
 	graphs.push_back(g);
+
+	graphCount++;
 }
 
 void SpDS::DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor)
 {
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
+}
+
+void SpDS::SetBlendMode(Blend blendMode)
+{
+	switch (blendMode) {
+	case Blend::Alpha:
+		commands.insert(pair<int, function<void(void)>>(graphCount, [&] {
+			//パイプライン変更
+			auto dx = GetWDX();
+
+			dx->cmdList->SetPipelineState(GPipeline::GetState("2d"));
+			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+			}));
+		break;
+
+	case Blend::Sub:
+		commands.insert(pair<int, function<void(void)>>(graphCount, [&] {
+			//パイプライン変更
+			auto dx = GetWDX();
+
+			dx->cmdList->SetPipelineState(GPipeline::GetState("2dSub"));
+			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+			}));
+		break;
+
+	case Blend::Add:
+		commands.insert(pair<int, function<void(void)>>(graphCount, [&] {
+			//パイプライン変更
+			auto dx = GetWDX();
+			dx->cmdList->SetPipelineState(GPipeline::GetState("2dAdd"));
+			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+			}));
+		
+		break;
+	}
+	
+}
+
+void SpDS::SetRenderTarget(TextureKey key)
+{
+	commands.insert(
+		pair<int, function<void(void)>>(graphCount, [&, key] {
+			//レンダーターゲット変更
+			if (key == "CurrentBuffer")
+			{
+				RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+				return;
+			}
+			RTVManager::SetRenderTargetToTexture(key, false);
+		}));
+}
+
+void SpDS::SetPreDrawFunc(function<void(void)> prop)
+{
+	commands.insert(pair<int, function<void(void)>>(graphCount, prop));
 }
 
 void SpDS::CreateBuffers()
@@ -111,6 +172,8 @@ void SpDS::CreateBuffers()
 void SpDS::Render()
 {
 	RenderGraph();
+
+	graphCount = 0;
 }
 
 void SpDS::RenderGraph()
@@ -131,16 +194,41 @@ void SpDS::RenderGraph()
 	}
 	graphs.clear();
 
+	int dGraphIndex = 0;
 	for (auto& ggp : ggpu)
 	{
 		if (!ggp.used) continue;
+
+		//グラフインデックスに対応したコマンドがあったら実行
+		for (auto& c : commands)
+		{
+			if (c.first == dGraphIndex)
+			{
+				c.second();
+			}
+		}
+
+		//描画
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());
 
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &gvbView);
 
 		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+
+		dGraphIndex++;
 	}
+
+	//グラフインデックスに対応したコマンドがあったら実行
+	for (auto& c : commands)
+	{
+		if (c.first == dGraphIndex)
+		{
+			c.second();
+		}
+	}
+
+	commands.clear();
 }
 
 vector<SpDS::Line> SpDS::lines;
@@ -153,3 +241,6 @@ vector<SpDS::Graph> SpDS::graphs;
 list<SpDS::GraphGPUData> SpDS::ggpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;
+int SpDS::graphCount = 0;
+
+unordered_multimap<int, function<void(void)>> SpDS::commands;

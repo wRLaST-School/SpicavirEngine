@@ -6,11 +6,22 @@
 class SpDS
 {
 public:
+	enum class Blend {
+		Alpha,
+		Add,
+		Sub
+	};
+
 	static void DrawRotaGraph(int x, int y, float dx, float dy, float rot,
 								TextureKey key, Anchor anchor = Anchor::Center,
 									Color brightness = Color(0xffffff));
 
 	static void DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
+	
+	static void SetBlendMode(Blend blendMode);
+	static void SetRenderTarget(TextureKey key);
+	static void SetPreDrawFunc(function<void(void)> prop);
+	
 	static void DrawBoxLine(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
 	static void DrawLine(int start, int end, Color color);
@@ -35,6 +46,7 @@ private:
 		Matrix wMat;
 		TextureKey key;
 		Color brightness;
+		bool isRenderTarget = false;
 	};
 
 	struct GraphCBData {
@@ -63,6 +75,8 @@ private:
 	static list<GraphGPUData> ggpu;
 	static D3D12_VERTEX_BUFFER_VIEW gvbView;
 	static ComPtr<ID3D12Resource> gvertBuff;
+	static int graphCount;
+	static unordered_multimap<int, function<void(void)>> commands;
 };
 
 namespace SpDSLayouts {

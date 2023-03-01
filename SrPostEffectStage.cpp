@@ -31,12 +31,12 @@ void SrPostEffectStage::PreDraw(){};
 void SrPostEffectStage::PostDraw(){};
 void SrPostEffectStage::Render()
 {
-	//BloomP1::Effect("BloomBefore", "BloomAfter");
-	//BloomP2::Effect("BloomAfter", "Bloom2ndAfter");
-	//BloomP3::Effect("Bloom2ndAfter", "Bloom3rdAfter");
-	//BloomFin::Effect("BloomBefore", "Bloom3rdAfter", "CurrentBuffer");
+	BloomP1::Effect("BloomBefore", "BloomAfter");
+	BloomP2::Effect("BloomAfter", "Bloom2ndAfter");
+	BloomP3::Effect("Bloom2ndAfter", "Bloom3rdAfter");
+	BloomFin::Effect("BloomBefore", "Bloom3rdAfter", "CurrentBuffer");
 
-	Monotone::Effect("BloomBefore", "CurrentBuffer");
+	/*Monotone::Effect("BloomBefore", "CurrentBuffer");*/
 
 }
 

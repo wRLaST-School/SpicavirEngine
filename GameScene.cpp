@@ -3,12 +3,15 @@
 #include <Player.h>
 #include <SpDS.h>
 #include <Util.h>
+#include <Monotone.h>
 
 void GameScene::LoadResources()
 {
 	Player::Load();
 	SpTextureManager::LoadTexture("Resources/overlay.png", "overlay");
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
+	SpTextureManager::LoadTexture("Resources/think.png", "think");
+	SpTextureManager::LoadTexture("Resources/circleLight.png", "circle");
 }
 
 void GameScene::Init()
@@ -46,5 +49,15 @@ void GameScene::DrawSprite()
 
 	//main
 	Player::Get()->Draw();
-	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1920.f / GetSpWindow()->width, 1920.f / GetSpWindow()->width, 0, "overlay");
+	SpDS::SetBlendMode(SpDS::Blend::Sub);
+
+	//‰~Œ`”ÍˆÍŠO‚Ì‚Ýƒ‚ƒmƒg[ƒ“‚É
+	SpDS::SetPreDrawFunc([] {Monotone::Effect("BloomBefore", "Mono"); });
+	SpDS::SetRenderTarget("Mono");
+	SpDS::SetBlendMode(SpDS::Blend::Sub);
+	SpDS::DrawRotaGraph(Player::Get()->pos.x, Player::Get()->pos.y, 1.f, 1.f, 0.f, "circle");
+
+	SpDS::SetRenderTarget("BloomBefore");
+	SpDS::SetBlendMode(SpDS::Blend::Alpha);
+	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1.f, 1.f, 0.f, "Mono");
 }
