@@ -6,7 +6,9 @@ SamplerState smp : register(s0);
 float4 main(VSOutput input) : SV_TARGET
 {
     float4 color = tex.Sample(smp, input.uv);
-    color.xyz = color.xyz * float3(0.3f, 0.6f, 0.1f);
+    color.xyz = color.xyz * float3(0.25f, 0.55f, 0.1f);
+    float t = color.x + color.y + color.z;
+    color.xyz = float3(t, t, t);
     
     return color;
 }

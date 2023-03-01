@@ -21,7 +21,7 @@ void Player::Draw()
 
 void Player::Load()
 {
-    SpTextureManager::LoadTexture("Resources/think.png", "Player");
+    SpTextureManager::LoadTexture("Resources/candle_player.png", "Player");
 }
 
 void Player::Init()
@@ -30,7 +30,7 @@ void Player::Init()
     current.pos.x = GetSpWindow()->width / 2;
     current.pos.y = GetSpWindow()->height / 2;
 
-    current.size = Vec2(0.25f, 0.25f);
+    current.size = Vec2(0.125f, 0.125f);
 }
 
 Player* Player::Get()
