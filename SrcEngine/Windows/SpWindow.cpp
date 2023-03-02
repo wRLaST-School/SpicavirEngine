@@ -125,6 +125,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					GetWDepth()->Resize();
 				}
 
+				SpTextureManager::ResizeScreenTextures();
+
 				return 0;
 			}
 		}

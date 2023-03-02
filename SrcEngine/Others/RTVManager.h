@@ -8,6 +8,7 @@ public:
 	static void SetRenderTargetToTexture(TextureKey key, bool clear = true);
 
 	static void CreateRenderTargetTexture(int width, int height, TextureKey key);
+	static void CreateRenderTargetTexture(float width, float height, TextureKey key, bool useScreenRatio = false);
 	static void CreateHeaps();
 
 	static int GetCurrentRenderTarget();

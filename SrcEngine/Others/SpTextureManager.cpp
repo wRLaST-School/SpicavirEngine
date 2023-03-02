@@ -1,5 +1,6 @@
 #include "SpTextureManager.h"
 #include "SpDirectX.h"
+#include <RTVManager.h>
 
 #define SPTEX_NOTEXTURE_FOUND_ -1024
 
@@ -147,7 +148,7 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 
 	ins.texDataMap.Access(
 		[&](auto& map) {
-			map[key] = metadata;
+			map[key].meta = metadata;
 		}
 	);
 
@@ -267,7 +268,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 
 	ins.texDataMap.Access(
 		[&](auto& map) {
-			map[tryNum == 0 ? key : key + std::to_string(tryNum)] = metadata;
+			map[tryNum == 0 ? key : key + std::to_string(tryNum)].meta = metadata;
 		}
 	);
 
@@ -286,7 +287,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKey key, bool initAsRenderTarget)
+TextureKey SpTextureManager::CreateDummyTexture(float width, float height, TextureKey key, bool initAsRenderTarget, bool useRatio)
 {
 	perSceneTextures[currentSceneResIndex].push_back(key);
 	for (size_t i = 0; i < wMaxSRVCount; i++)
@@ -314,8 +315,19 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 	OutputDebugStringA((string("Creating Dummy Tex U: ") + key + string(" on ") + to_string(GetInstance().nextTexIndex) + string("\n")).c_str());
 	CD3DX12_HEAP_PROPERTIES texHeapProp = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 
-	D3D12_RESOURCE_DESC textureResourceDesc =
-		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+	D3D12_RESOURCE_DESC textureResourceDesc;
+	
+	if (useRatio)
+	{
+		Float2 ratio = { width, height };
+		textureResourceDesc =
+			CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, (UINT)(ratio.x * GetSpWindow()->width), (UINT)(ratio.y * GetSpWindow()->height), 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+
+	}
+	else {
+		textureResourceDesc =
+			CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, (UINT)width, (UINT)height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+	}
 
 	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R16G16B16A16_FLOAT, {0, 0, 0, 0} };
 
@@ -348,14 +360,29 @@ TextureKey SpTextureManager::CreateDummyTexture(int width, int height, TextureKe
 		}
 	);
 
-	SpTextureManager::GetInstance().texDataMap.Access(
-		[&](auto& map) {
-			TexMetadata& pTexMeta = map[key];
-			pTexMeta = TexMetadata{};
-			pTexMeta.width = width;
-			pTexMeta.height = height;
-		}
-	);
+	if (useRatio)
+	{
+		SpTextureManager::GetInstance().texDataMap.Access(
+			[&](auto& map) {
+				TexData& pTexData = map[key];
+				pTexData.meta = TexMetadata{};
+				pTexData.meta.width = (size_t)(width * GetSpWindow()->width);
+				pTexData.meta.height = (size_t)(height * GetSpWindow()->height);
+
+				pTexData.ratio = {width, height};
+			}
+		);
+	}
+	else {
+		SpTextureManager::GetInstance().texDataMap.Access(
+			[&](auto& map) {
+				TexMetadata& pTexMeta = map[key].meta;
+		pTexMeta = TexMetadata{};
+		pTexMeta.width = (size_t)width;
+		pTexMeta.height = (size_t)height;
+			}
+		);
+	}
 
 	GetInstance().isOccupied[GetInstance().nextTexIndex] = true;
 
@@ -426,7 +453,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	}
 	SpTextureManager::GetInstance().texDataMap.Access(
 		[&](auto& map) {
-			TexMetadata& pTexMeta = map[key];
+			TexMetadata& pTexMeta = map[key].meta;
 			pTexMeta = TexMetadata{};
 			pTexMeta.width = width;
 			pTexMeta.height = height;
@@ -483,7 +510,7 @@ TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
 
 	SpTextureManager::GetInstance().texDataMap.Access(
 		[&](auto& map) {
-			TexMetadata& pTexMeta = map[key];
+			TexMetadata& pTexMeta = map[key].meta;
 			pTexMeta = TexMetadata{};
 			pTexMeta.width = 0;
 			pTexMeta.height = 0;
@@ -502,6 +529,30 @@ TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
 	}
 
 	throw std::out_of_range("out of texture resource");
+}
+
+void SpTextureManager::ResizeScreenTextures()
+{
+	unordered_map<TextureKey, TexData> resizing;
+	GetInstance().texDataMap.Access(
+		[&](auto& map) {
+			for (auto& c : map)
+			{
+				if (c.second.ratio.x != 0)
+				{
+					resizing.insert(c);
+				}
+			}
+		}
+	);
+
+	for (auto& r : resizing)
+	{
+		Release(r.first);
+		CreateDummyTexture(r.second.ratio.x, r.second.ratio.y, r.first, true, true);
+		GetWDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(r.first), nullptr,
+			RTVManager::GetHeapCPUHandle((int)SpTextureManager::GetIndex(r.first)));
+	}
 }
 
 D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
@@ -535,10 +586,21 @@ TexMetadata SpTextureManager::GetTextureMetadata(TextureKey key)
 	TexMetadata meta;
 	GetInstance().texDataMap.Access(
 		[&](auto& map) {
-			meta = map[key];
+			meta = map[key].meta;
 		}
 	);
 	return meta;
+}
+
+SpTextureManager::TexData SpTextureManager::GetTextureData(TextureKey key)
+{
+	TexData data = {};
+	GetInstance().texDataMap.Access(
+		[&](auto& map) {
+			data = map[key];
+		}
+	);
+	return data;
 }
 
 ID3D12Resource* SpTextureManager::GetTextureBuff(TextureKey key)
