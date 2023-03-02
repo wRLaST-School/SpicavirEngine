@@ -30,7 +30,7 @@ void Player::Init()
     current.pos.x = GetSpWindow()->width / 2;
     current.pos.y = GetSpWindow()->height / 2;
 
-    current.size = Vec2(0.125f, 0.125f);
+    current.size = Vec2(0.1f, 0.1f);
 }
 
 Player* Player::Get()

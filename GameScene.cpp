@@ -49,6 +49,16 @@ void GameScene::DrawSprite()
 
 	//main
 	Player::Get()->Draw();
+	for (int i = 0; i < 18; i++)
+	{
+		for (int j = 0; j < 32; j++)
+		{
+			if (mapchip[i][j])
+			{
+				SpDS::DrawBox(30 + j * mapsize, 30 + i * mapsize, mapsize, mapsize, 0, 0x00ff44);
+			}
+		}
+	}
 	SpDS::SetBlendMode(SpDS::Blend::Sub);
 
 	//‰~Œ`”ÍˆÍŠO‚Ì‚Ýƒ‚ƒmƒg[ƒ“‚É
