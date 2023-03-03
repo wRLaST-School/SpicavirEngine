@@ -126,7 +126,7 @@ namespace Input {
 		{
 			float x;
 			float y;
-			operator Vec2() { return Vec2(x, y); };
+			operator Vec2() { return Vec2(x, y); }; // vec2
 		};
 
 		//左スティックの移動量を-1から1で返す
