@@ -138,5 +138,5 @@ void SingleCamTestScene::Draw3D()
 void SingleCamTestScene::DrawSprite()
 {
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
-	SpDS::DrawRotaGraph(600, 600, 1, 1, 0, "particle1", Anchor::Center, Color(0xffffff));
+	SpDS::DrawRotaGraph(0, 0, 1, 1, 0, "particle1", Anchor::TopLeft, Color(0xffffff));
 }
