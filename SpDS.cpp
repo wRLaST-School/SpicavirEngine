@@ -27,13 +27,13 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 	{
 		ancmY -= halfsize.y;
 	}
-	m = Matrix::Translation({ancmX, ancmY, 0.f});
+	m = Matrix();//Matrix::Translation({ancmX, ancmY, 0.f});
 
 	m *= Matrix::Scale({ dx * halfsize.x * 2, dy * halfsize.y * 2, 1.f });
 
 	m *= Matrix::RotZ(rot);
 
-	m *= Matrix::Translation({(float)x, (float)y, 0.f});
+	m *= Matrix::Translation({(float)x + ancmX * dx, (float)y + ancmY * dx, 0.f});
 
 	Graph g;
 	g.wMat = m;
