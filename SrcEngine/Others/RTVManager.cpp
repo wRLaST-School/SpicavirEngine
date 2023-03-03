@@ -53,7 +53,12 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key)
 
 void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key)
 {
-	key = SpTextureManager::CreateDummyTexture(width, height, key);
+	CreateRenderTargetTexture((float)width, (float)height, key, false);
+}
+
+void RTVManager::CreateRenderTargetTexture(float width, float height, TextureKey key, bool useScreenRatio)
+{
+	key = SpTextureManager::CreateDummyTexture(width, height, key, true, useScreenRatio);
 
 	if (SpTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
 
