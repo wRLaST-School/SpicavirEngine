@@ -22,8 +22,11 @@ public:
 	static TextureKey CreateDummyTexture(float width, float height, TextureKey key, bool initAsRenderTarget = true, bool useRatio = false);
 	static TextureKey CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget = true);
 
-	static TextureKey CreatePlainSRV(TextureKey key);
+	static void LoadDiv(string filePath, int widthPer, int heightPer, int qx, int qy, const vector<TextureKey>& keys);
+	static TextureKey LoadSingleDiv(string filePath, int originX, int originY, int width, int height, TextureKey key);
 
+	static TextureKey CreatePlainSRV(TextureKey key);
+	
 	static void ResizeScreenTextures();
 
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescHandle(TextureKey key);

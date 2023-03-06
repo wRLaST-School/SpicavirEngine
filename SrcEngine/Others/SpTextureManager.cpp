@@ -475,6 +475,160 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	throw std::out_of_range("out of texture resource");
 }
 
+void SpTextureManager::LoadDiv(string filePath, int widthPer, int heightPer, int qx, int qy, const vector<TextureKey>& keys)
+{
+
+}
+
+TextureKey SpTextureManager::LoadSingleDiv(string filePath, int originX, int originY, int width, int height, TextureKey key)
+{
+	perSceneTextures[currentSceneResIndex].push_back(key);
+	bool alreadyRegistered = false;
+	GetInstance().textureMap.Access(
+		[&](auto& map) {
+			if (map.count(key) != 0) alreadyRegistered = true;
+		});
+	if (alreadyRegistered)
+	{
+		OutputDebugStringA((string("Texture : ") + key + string(" already exists. skipping.") + string("\n")).c_str());
+		return key;
+	}
+	OutputDebugStringA((string("Loading : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextTexIndex) + string(")\n")).c_str());
+	SpTextureManager& ins = GetInstance();
+	TexMetadata metadata{};
+	ScratchImage srcImg{};
+	D3D12_RESOURCE_DESC texresdesc{};
+
+	wstring wstrpath = wstring(filePath.begin(), filePath.end());
+	const wchar_t* wpath = wstrpath.c_str();
+
+	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+
+	ScratchImage trimed{};
+
+	trimed.Initialize2D(srcImg.GetMetadata().format, width, height, srcImg.GetMetadata().arraySize, srcImg.GetMetadata().mipLevels);
+	trimed.GetImage(0,0,0)->pixels[0] = srcImg.GetImage(0,0,0)->pixels[0];
+
+	//size_t srcWidth = srcImg.GetMetadata().width;
+	for (int x = 0; x < width; x++) {
+		for (int y = 0; y < height; y++) {
+			trimed.GetImage(0, 0, 0)->pixels[x * 4 + y * trimed.GetImage(0,0,0)->rowPitch] =
+				srcImg.GetImage(0, 0, 0)->pixels[(x + originX) * 4 + (y + originY) * srcImg.GetImage(0,0,0)->rowPitch];
+
+			trimed.GetImage(0, 0, 0)->pixels[x * 4 + y * trimed.GetImage(0, 0, 0)->rowPitch + 1] =
+				srcImg.GetImage(0, 0, 0)->pixels[(x + originX) * 4 + (y + originY) * srcImg.GetImage(0, 0, 0)->rowPitch + 1];
+
+			trimed.GetImage(0, 0, 0)->pixels[x * 4 + y * trimed.GetImage(0, 0, 0)->rowPitch + 2] =
+				srcImg.GetImage(0, 0, 0)->pixels[(x + originX) * 4 + (y + originY) * srcImg.GetImage(0, 0, 0)->rowPitch + 2];
+
+			trimed.GetImage(0, 0, 0)->pixels[x * 4 + y * trimed.GetImage(0, 0, 0)->rowPitch + 3] =
+				srcImg.GetImage(0, 0, 0)->pixels[(x + originX) * 4 + (y + originY) * srcImg.GetImage(0, 0, 0)->rowPitch + 3];
+		}
+	}
+	srcImg = move(trimed);
+
+	ScratchImage mipChain{};
+
+	HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+
+	if (SUCCEEDED(result)) {
+		srcImg = move(mipChain);
+		metadata = srcImg.GetMetadata();
+	}
+
+	//metadata.format = MakeSRGB(metadata.format);
+	ScratchImage scratchImg;
+	result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
+		srcImg.GetMetadata(),
+		DXGI_FORMAT_R16G16B16A16_FLOAT, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
+		scratchImg);
+
+	if (SUCCEEDED(result)) {
+		metadata = scratchImg.GetMetadata();
+	}
+
+	//テクスチャバッファ
+	D3D12_HEAP_PROPERTIES texHeapProp{};
+	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
+	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+	texresdesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	texresdesc.Format = metadata.format;
+	texresdesc.Width = metadata.width;
+	texresdesc.Height = (UINT)metadata.height;
+	texresdesc.DepthOrArraySize = (UINT16)metadata.arraySize;
+	texresdesc.MipLevels = (UINT16)metadata.mipLevels;
+	texresdesc.SampleDesc.Count = 1;
+
+	HRESULT hr = GetWDX()->dev->CreateCommittedResource(
+		&texHeapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&texresdesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&ins.texBuffs[ins.nextTexIndex]));
+
+	if (hr != S_OK)
+	{
+		return string("notexture");
+	};
+
+	ins.texBuffs[ins.nextTexIndex]->SetName(L"TEXTURE_BUFFER");
+
+	for (size_t i = 0; i < metadata.mipLevels; i++)
+	{
+		const Image* img = scratchImg.GetImage(i, 0, 0);
+
+		ins.texBuffs[ins.nextTexIndex]->WriteToSubresource(
+			(UINT)i,
+			nullptr,
+			img->pixels,
+			(UINT)img->rowPitch,
+			(UINT)img->slicePitch
+		);
+		assert(SUCCEEDED(hr));
+	}
+
+	//シェーダーリソースビューの生成
+	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
+	heapHandle = ins.srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex;
+
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = texresdesc.Format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = texresdesc.MipLevels;
+
+	GetWDX()->dev->CreateShaderResourceView(ins.texBuffs[ins.nextTexIndex].Get(), &srvDesc, heapHandle);
+
+	ins.textureMap.Access(
+		[&](auto& map) {
+			map[key] = ins.nextTexIndex;
+		}
+	);
+
+	ins.texDataMap.Access(
+		[&](auto& map) {
+			map[key].meta = metadata;
+		}
+	);
+
+	ins.isOccupied[ins.nextTexIndex] = true;
+
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!ins.isOccupied[i])
+		{
+			ins.nextTexIndex = i;
+			return key;
+		}
+	}
+
+	throw std::out_of_range("out of texture resource");
+}
+
 TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
 {
 	perSceneTextures[currentSceneResIndex].push_back(key);

@@ -20,7 +20,8 @@ void SingleCamTestScene::LoadResources()
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
-	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
+	SpTextureManager::LoadSingleDiv("Resources/Cerra.png", 100, 100, 100, 200, "particle1");
+	//SpTextureManager::LoadTexture("Resources/Cerra.png", "particle1");
 
 	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
 }
@@ -138,5 +139,5 @@ void SingleCamTestScene::Draw3D()
 void SingleCamTestScene::DrawSprite()
 {
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
-	SpDS::DrawRotaGraph(0, 0, 1, 1, 0, "particle1", Anchor::TopLeft, Color(0xffffff));
+	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, 0, "particle1", Anchor::Center, Color(0xffffff));
 }
