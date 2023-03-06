@@ -336,6 +336,9 @@
     <ClCompile Include="SpDS.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
+    <ClCompile Include="Animation2D.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -540,6 +543,9 @@
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SpDS.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation2D.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
     </ClInclude>
   </ItemGroup>
