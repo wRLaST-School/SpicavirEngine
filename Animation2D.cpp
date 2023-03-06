@@ -19,6 +19,8 @@ void Animation2D::Update()
 	if (current->timer >= current->cooltime)
 	{
 		current->timer = 0;
+
+		current->currentIndex++;
 		if (current->currentIndex >= current->maxIndex)
 		{
 			if (current->loop)
@@ -28,11 +30,8 @@ void Animation2D::Update()
 			else
 			{
 				animationEnd = true;
+				current->currentIndex = current->maxIndex - 1;
 			}
-		}
-		else
-		{
-			current->currentIndex++;
 		}
 	}
 }
