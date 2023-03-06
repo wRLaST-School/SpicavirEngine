@@ -8,6 +8,7 @@
 #include <Light.h>
 #include <IPostEffector.h>
 #include <SpDS.h>
+#include <Animation2D.h>
 class SingleCamTestScene :
     public IScene
 {
@@ -31,5 +32,7 @@ private:
 
     PointLight* light1;
     PointLight* light2;
+
+    //Animation2D anim;
 };
 
