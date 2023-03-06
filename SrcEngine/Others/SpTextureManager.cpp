@@ -477,7 +477,27 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 
 void SpTextureManager::LoadDiv(string filePath, int widthPer, int heightPer, int qx, int qy, const vector<TextureKey>& keys)
 {
-
+	auto& itr = keys.begin();
+	int end = 0;
+	for (int x = 0; x < qx; x++)
+	{
+		for (int y = 0; y < qy; y++)
+		{
+			if (end)
+			{
+				LoadSingleDiv(filePath, widthPer * x, heightPer * y, widthPer, heightPer, *itr + to_string(end));
+				end++;
+			}
+			else {
+				LoadSingleDiv(filePath, widthPer * x, heightPer * y, widthPer, heightPer, *itr);
+				itr++;
+				if (itr == keys.end()) {
+					end = 1;
+					itr--;
+				}
+			}
+		}
+	}
 }
 
 TextureKey SpTextureManager::LoadSingleDiv(string filePath, int originX, int originY, int width, int height, TextureKey key)
