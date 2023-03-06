@@ -20,8 +20,7 @@ void SingleCamTestScene::LoadResources()
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
-	SpTextureManager::LoadSingleDiv("Resources/Cerra.png", 100, 100, 100, 200, "particle1");
-	//SpTextureManager::LoadTexture("Resources/Cerra.png", "particle1");
+	SpTextureManager::LoadSingleDiv("Resources/circleParticle.png", 100, 100, 100, 200, "particle1");
 
 	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
 }
