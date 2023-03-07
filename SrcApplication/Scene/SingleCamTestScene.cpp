@@ -20,9 +20,22 @@ void SingleCamTestScene::LoadResources()
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
-	SpTextureManager::LoadTexture("Resources/circleParticle.png", "particle1");
+	SpTextureManager::LoadSingleDiv("Resources/circleParticle.png", 100, 100, 100, 200, "particle1");
 
 	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
+
+	/*vector<TextureKey> boss3Keys{
+		"boss1",
+		"boss2",
+		"boss3",
+		"boss4",
+		"boss5",
+		"boss6"
+	};
+
+	SpTextureManager::LoadDiv("Resources/boss3_rest.png", 300, 350, 6, 1, boss3Keys);
+
+	anim.Register(boss3Keys, 3, true, "def");*/
 }
 
 void SingleCamTestScene::Init()
@@ -117,6 +130,8 @@ void SingleCamTestScene::Update()
 	light2->DrawFrame();
 	light1->DrawLightEditor();
 	light2->DrawLightEditor();
+
+	//anim.Update();
 }
 
 void SingleCamTestScene::DrawBack()
@@ -138,5 +153,5 @@ void SingleCamTestScene::Draw3D()
 void SingleCamTestScene::DrawSprite()
 {
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
-	SpDS::DrawRotaGraph(600, 600, 1, 1, 0, "particle1", Anchor::Center, Color(0xffffff));
+	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, 0, "particle1", Anchor::Center, Color(0xffffff));
 }
