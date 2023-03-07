@@ -110,6 +110,7 @@
   <ItemGroup>
     <ClCompile Include="Animation2D.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="EditorScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monotone.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="Animation2D.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="EditorScene.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="Monotone.h" />

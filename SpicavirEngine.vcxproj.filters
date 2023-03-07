@@ -157,6 +157,12 @@
     <Filter Include="Application\ソースファイル\Player">
       <UniqueIdentifier>{70e97515-bc93-415f-8e53-3500c1c99b05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Editor">
+      <UniqueIdentifier>{19056a11-d2f6-4aa8-9a71-91d83240590a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Editor\Scene">
+      <UniqueIdentifier>{69eab610-ed85-4a04-853d-de5af14ffc25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -282,12 +288,6 @@
     <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp">
       <Filter>Engine\ソースファイル\Particle</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp">
-      <Filter>Application\ソースファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp">
-      <Filter>Application\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\PostEffect\Bloom.cpp">
       <Filter>Engine\ソースファイル\PostEffect</Filter>
     </ClCompile>
@@ -362,6 +362,15 @@
     </ClCompile>
     <ClCompile Include="Animation2D.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp">
+      <Filter>Application\テスト用・参考用</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp">
+      <Filter>Application\テスト用・参考用</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorScene.cpp">
+      <Filter>!Editor\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -583,6 +592,9 @@
     </ClInclude>
     <ClInclude Include="Animation2D.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorScene.h">
+      <Filter>!Editor\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
