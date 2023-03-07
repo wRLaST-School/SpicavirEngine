@@ -23,6 +23,7 @@
 #include <SoundManager.h>
 #include <SpRenderer.h>
 #include <SpDS.h>
+#include <TimeManager.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -99,10 +100,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//Init Scene
 	SceneManager::Init();
 
+	//Init TimeManager
+	TimeManager::Init();
+
 	/*ƒ‹[ƒv*/
 	while (true)
 	{
 		if (GetWDX()->StartFrame()) break;
+		TimeManager::FrameStart();
 		Input::Key::Update();
 		Input::Pad::Update();
 		Input::Mouse::Update();
