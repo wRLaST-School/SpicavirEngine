@@ -36,6 +36,8 @@ void FileSaver::Save()
 
 	//セーブ処理
 	OutputDebugStringA("保存が呼び出されました\n");
+
+    //filePathに最後に開いた情報があるんでそれ使っていい感じに保存
 }
 
 void FileSaver::Overwrite()
