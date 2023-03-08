@@ -1,5 +1,7 @@
 #pragma once
 #include "IScene.h"
+#include <Camera2D.h>
+
 class EditorScene :
     public IScene
 {
@@ -13,6 +15,6 @@ public:
     void DrawSprite() override;
 
 private:
-
+    Camera2D cam;
 };
 
