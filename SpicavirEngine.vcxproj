@@ -111,6 +111,7 @@
     <ClCompile Include="Animation2D.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="EditorScene.cpp" />
+    <ClCompile Include="FileSaver.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monotone.cpp" />
@@ -180,18 +181,21 @@
     <ClCompile Include="SrPostEffectStage.cpp" />
     <ClCompile Include="SrSpriteStage.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="Toolbar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="Animation2D.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="EditorScene.h" />
+    <ClInclude Include="FileSaver.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="Monotone.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
+    <ClInclude Include="resource3.h" />
     <ClInclude Include="SpDS.h" />
     <ClInclude Include="SpRenderer.h" />
     <ClInclude Include="SrAddStage.h" />
@@ -256,6 +260,7 @@
     <ClInclude Include="SrPostEffectStage.h" />
     <ClInclude Include="SrSpriteStage.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="Toolbar.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
@@ -407,6 +412,9 @@
       <FileType>Document</FileType>
     </None>
     <None Include="Resources\Shaders\Sprite.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SpicavirEngineGame.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

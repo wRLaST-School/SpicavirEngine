@@ -163,6 +163,12 @@
     <Filter Include="!Editor\Scene">
       <UniqueIdentifier>{69eab610-ed85-4a04-853d-de5af14ffc25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Editor\Toolbar">
+      <UniqueIdentifier>{43840145-7814-408a-acc0-1c9b7b51f27c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Editor\File">
+      <UniqueIdentifier>{38394ee0-5035-473f-a50f-abebbe63c5bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -371,6 +377,12 @@
     </ClCompile>
     <ClCompile Include="EditorScene.cpp">
       <Filter>!Editor\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolbar.cpp">
+      <Filter>!Editor\Toolbar</Filter>
+    </ClCompile>
+    <ClCompile Include="FileSaver.cpp">
+      <Filter>!Editor\File</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -596,6 +608,15 @@
     <ClInclude Include="EditorScene.h">
       <Filter>!Editor\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Toolbar.h">
+      <Filter>!Editor\Toolbar</Filter>
+    </ClInclude>
+    <ClInclude Include="resource3.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="FileSaver.h">
+      <Filter>!Editor\File</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
@@ -699,5 +720,10 @@
     <None Include="Resources\Shaders\Monotone.hlsli">
       <Filter>Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SpicavirEngineGame.rc">
+      <Filter>Application\リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

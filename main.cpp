@@ -24,6 +24,7 @@
 #include <SpRenderer.h>
 #include <SpDS.h>
 #include <TimeManager.h>
+#include <Toolbar.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -40,7 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	//ウィンドウを生成
 	{
 		SpWindow wwnd;
-		wwnd.Create(L"DirectX", 1920, 1080);
+		wwnd.Create(L"DirectX", 1280, 720);
 		RegisterSpWindow(wwnd, "Default");
 	}
 

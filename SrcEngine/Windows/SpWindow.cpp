@@ -3,6 +3,8 @@
 #include <SpDepth.h>
 #include <Sprite.h>
 #include <imgui_impl_win32.h>
+#include <Toolbar.h>
+#include <resource3.h>
 static string defWndID = "Default";
 map<string, SpWindow> wWindowList;
 
@@ -48,6 +50,7 @@ void SpWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
 	w.lpszClassName = title;
 	w.hInstance = GetModuleHandle(nullptr);
 	w.hCursor = LoadCursor(NULL, IDC_ARROW);
+	w.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);
 
 	RegisterClassEx(&w);
 
@@ -128,6 +131,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				SpTextureManager::ResizeScreenTextures();
 
 				return 0;
+			}
+		}
+
+	case WM_COMMAND:
+		{
+			if (!lParam)
+			{
+				Toolbar::ProcessMessage(wParam);
 			}
 		}
 	}
