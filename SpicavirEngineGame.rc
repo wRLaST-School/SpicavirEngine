@@ -66,23 +66,23 @@ BEGIN
     BEGIN
         POPUP "マップチップ"
         BEGIN
-            MENUITEM "0",                           ID_40006
-            MENUITEM "1",                           ID_40007
-            MENUITEM "2",                           ID_40008
-            MENUITEM "3",                           ID_40009
-            MENUITEM "4",                           ID_40010
-            MENUITEM "5",                           ID_40011
-            MENUITEM "6",                           ID_40012
-            MENUITEM "7",                           ID_40013
-            MENUITEM "8",                           ID_40014
-            MENUITEM "9",                           ID_40015
-            MENUITEM "10",                          ID_40016
-            MENUITEM "11",                          ID_40017
-            MENUITEM "12",                          ID_40018
-            MENUITEM "13",                          ID_40019
-            MENUITEM "14",                          ID_40020
-            MENUITEM "15",                          ID_40021
-            MENUITEM "16",                          0
+            MENUITEM "0",                           ID_CHIP1
+            MENUITEM "1",                           ID_CHIP1
+            MENUITEM "2",                           ID_CHIP2
+            MENUITEM "3",                           ID_CHIP3
+            MENUITEM "4",                           ID_CHIP4
+            MENUITEM "5",                           ID_CHIP5
+            MENUITEM "6",                           ID_CHIP6
+            MENUITEM "7",                           ID_CHIP7
+            MENUITEM "8",                           ID_CHIP8
+            MENUITEM "9",                           ID_CHIP9
+            MENUITEM "10",                          ID_CHIP10
+            MENUITEM "11",                          ID_CHIP11
+            MENUITEM "12",                          ID_CHIP12
+            MENUITEM "13",                          ID_CHIP13
+            MENUITEM "14",                          ID_CHIP14
+            MENUITEM "15",                          ID_CHIP15
+            MENUITEM "16",                          40046
         END
         MENUITEM "移動床",                         ID_40005
     END

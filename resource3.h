@@ -34,13 +34,29 @@
 #define ID_40029                        40029
 #define ID_40030                        40030
 #define ID_OPEN                         40031
+#define ID_CHIP1                        40032
+#define ID_CHIP2                        40033
+#define ID_CHIP3                        40034
+#define ID_CHIP4                        40035
+#define ID_CHIP5                        40036
+#define ID_CHIP6                        40037
+#define ID_CHIP7                        40038
+#define ID_CHIP8                        40039
+#define ID_CHIP9                        40040
+#define ID_CHIP10                       40041
+#define ID_CHIP11                       40042
+#define ID_CHIP12                       40043
+#define ID_CHIP13                       40044
+#define ID_CHIP15                       40045
+#define ID_CHIP16                       40046
+#define ID_CHIP14                       40047
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        102
-#define _APS_NEXT_COMMAND_VALUE         40032
+#define _APS_NEXT_COMMAND_VALUE         40048
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

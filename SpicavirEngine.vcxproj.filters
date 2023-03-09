@@ -403,7 +403,13 @@
       <Filter>!Editor</Filter>
     </ClCompile>
     <ClCompile Include="IToolMode.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+      <Filter>!Editor\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="MapChipTool.cpp">
+      <Filter>!Editor\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolManager.cpp">
+      <Filter>!Editor\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -648,7 +654,13 @@
       <Filter>!Editor</Filter>
     </ClInclude>
     <ClInclude Include="IToolMode.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+      <Filter>!Editor\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="MapChipTool.h">
+      <Filter>!Editor\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolManager.h">
+      <Filter>!Editor\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -13,6 +13,7 @@ Camera2D* Camera2D::Get()
 
 void Camera2D::Set(Camera2D* camera)
 {
+	current = camera;
 }
 
 Camera2D* Camera2D::current = nullptr;

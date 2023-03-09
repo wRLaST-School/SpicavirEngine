@@ -118,6 +118,7 @@
     <ClCompile Include="IToolMode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChip.cpp" />
+    <ClCompile Include="MapChipTool.cpp" />
     <ClCompile Include="Monotone.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="SrSpriteStage.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Toolbar.cpp" />
+    <ClCompile Include="ToolManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anchor.h" />
@@ -199,6 +201,7 @@
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="IToolMode.h" />
     <ClInclude Include="MapChip.h" />
+    <ClInclude Include="MapChipTool.h" />
     <ClInclude Include="Monotone.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />
@@ -269,6 +272,7 @@
     <ClInclude Include="SrSpriteStage.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Toolbar.h" />
+    <ClInclude Include="ToolManager.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">

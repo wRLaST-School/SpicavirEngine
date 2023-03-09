@@ -1,6 +1,7 @@
 #pragma once
 class IToolMode
 {
-	static void Update();
+public:
+	virtual void Update() = 0;
 };
 
