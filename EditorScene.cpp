@@ -10,6 +10,7 @@ void EditorScene::LoadResources()
 {
 	SpTextureManager::LoadTexture("Resources/think.png", "hoge");
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
+	MapChip::LoadResource();
 }
 
 void EditorScene::Init()

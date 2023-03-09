@@ -6,9 +6,15 @@ vector<vector<int>> MapChip::map;
 
 int MapChip::mapSizeX = 0;
 int MapChip::mapSizeY = 0;
+const float MapChip::tileMult = (float)tileSize / 60.f;
 
 void MapChip::LoadResource()
 {
+	SpTextureManager::LoadTexture("Resources/bookshelf.png", "Bookshelf");
+	SpTextureManager::LoadTexture("Resources/woodbox.png", "WoodenBox");
+
+	mapKeys.push_back("WoodenBox");
+	mapKeys.push_back("Bookshelf");
 }
 
 void MapChip::Init(int sizeX, int sizeY)
@@ -87,8 +93,10 @@ void MapChip::Draw()
 		{
 			if (map.at(y).at(x))
 			{
-				SpDS::DrawBox(x * tileSize - cam->x, y * tileSize - cam->y, tileSize, tileSize, 0, Color(0xffc7f5), Anchor::TopLeft);
+				SpDS::DrawRotaGraph(x * tileSize - cam->x, y * tileSize - cam->y, tileMult, tileMult, 0, mapKeys.at(map.at(y).at(x) - 1), Anchor::TopLeft, Color(0xffffff));
 			}
 		}
 	}
 }
+
+vector<TextureKey> MapChip::mapKeys;

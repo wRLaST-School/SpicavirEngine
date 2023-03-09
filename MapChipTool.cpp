@@ -28,7 +28,7 @@ void MapChipTool::Update()
 		x = ((int)(mouse.x + Camera2D::Get()->x)) / MapChip::tileSize;
 		y = ((int)(mouse.y + Camera2D::Get()->y)) / MapChip::tileSize;
 
-		if (x >= 0 && x < MapChip::mapSizeY && y >= 0 && y < MapChip::mapSizeY)
+		if (x >= 0 && x < MapChip::mapSizeX && y >= 0 && y < MapChip::mapSizeY)
 		{
 			MapChip::map.at(y).at(x) = 0;
 		};

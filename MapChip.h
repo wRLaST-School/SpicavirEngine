@@ -1,5 +1,6 @@
 #pragma once
 #include <Essentials.h>
+#include <SpTextureManager.h>
 class MapChip
 {
 public:
@@ -11,6 +12,8 @@ public:
 	static void Draw();
 	static vector<vector<int>>map;
 	static const int tileSize = 48;
+	static const float tileMult;
 	static int mapSizeX;
 	static int mapSizeY;
+	static vector<TextureKey> mapKeys;
 };
