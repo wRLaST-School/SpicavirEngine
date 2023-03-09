@@ -5,6 +5,7 @@
 #include <FileSaver.h>
 #include <resource3.h>
 #include <ToolManager.h>
+#include <MapChip.h>
 
 HMENU Toolbar::hm;
 
@@ -13,6 +14,7 @@ void Toolbar::ProcessMessage(WPARAM wp)
 	switch (wp) {
 		case ID_NEWFILE:
 		{
+			MapChip::Init(32, 18);
 			return;
 		};
 
