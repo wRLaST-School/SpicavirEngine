@@ -16,6 +16,7 @@ void Toolbar::ProcessMessage(WPARAM wp)
 		case ID_NEWFILE:
 		{
 			MapChip::Init(32, 18);
+			FileSaver::ResetPath();
 			return;
 		};
 
