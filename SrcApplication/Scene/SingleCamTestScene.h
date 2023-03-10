@@ -33,6 +33,8 @@ private:
     PointLight* light1;
     PointLight* light2;
 
+    long long timer;
+
     //Animation2D anim;
 };
 

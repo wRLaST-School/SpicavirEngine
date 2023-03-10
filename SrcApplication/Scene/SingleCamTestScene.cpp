@@ -132,6 +132,8 @@ void SingleCamTestScene::Update()
 	light2->DrawLightEditor();
 
 	//anim.Update();
+
+	timer++;
 }
 
 void SingleCamTestScene::DrawBack()
@@ -153,5 +155,6 @@ void SingleCamTestScene::Draw3D()
 void SingleCamTestScene::DrawSprite()
 {
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
-	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, 0, "particle1", Anchor::Center, Color(0xffffff));
+	SpDS::DrawLine(1000, 500, (int)Input::Mouse::GetPos().x, (int)Input::Mouse::GetPos().y, Color(0xffffff), 5);
+	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, (float)timer * PIf / 180 * 10, "particle1", Anchor::TopLeft, Color(0xffffff));
 }

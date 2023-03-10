@@ -54,6 +54,8 @@ public:
 
 	float GetSquaredLength() const;
 
+	static float VecToVec(Vec2 from, Vec2 to);
+
 	operator Float2() const;
 	operator Vec3() const;
 };

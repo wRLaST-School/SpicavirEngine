@@ -109,6 +109,13 @@ void SpDS::SetPreDrawFunc(function<void(void)> prop)
 	commands.insert(pair<int, function<void(void)>>(graphCount, prop));
 }
 
+void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
+{
+	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);
+	float l = ray.GetLength();
+	DrawBox(startX + (int)(ray.x * 0.5f), startY + (int)(ray.y * 0.5f), thickness, (int)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
+}
+
 void SpDS::CreateBuffers()
 {
 	//graph—p
