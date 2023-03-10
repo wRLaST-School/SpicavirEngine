@@ -6,6 +6,7 @@
 #include <resource3.h>
 #include <ToolManager.h>
 #include <MapChip.h>
+#include <Grid.h>
 
 HMENU Toolbar::hm;
 
@@ -120,6 +121,27 @@ void Toolbar::ProcessMessage(WPARAM wp)
 		case ID_CHIP16:
 		{
 			ToolManager::SetMapTool(16);
+			return;
+		}
+		case ID_GRID_TRANS:
+		{
+			Grid::gridMode = Grid::GridMode::Trasparent;
+			return;
+		}
+		case ID_GRID_BACK:
+		{
+			Grid::gridMode = Grid::GridMode::Back;
+			return;
+		}
+		case ID_GRID_FRONT:
+		{
+			Grid::gridMode = Grid::GridMode::Front;
+			return;
+		}
+
+		case ID_GRID_DISABLE:
+		{
+			Grid::gridMode = Grid::GridMode::Disable;
 			return;
 		}
 	}

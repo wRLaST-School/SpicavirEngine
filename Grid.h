@@ -5,7 +5,8 @@ public:
 	static enum class GridMode {
 		Back,
 		Trasparent,
-		Front
+		Front,
+		Disable
 	} gridMode;
 
 	static void Draw();

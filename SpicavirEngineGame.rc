@@ -86,6 +86,13 @@ BEGIN
         END
         MENUITEM "移動床",                         ID_40005
     END
+    POPUP "グリッド"
+    BEGIN
+        MENUITEM "後面",                          ID_GRID_BACK
+        MENUITEM "前面",                          ID_GRID_FRONT
+        MENUITEM "前面(半透明)",                     ID_GRID_TRANS
+        MENUITEM "オフ",                          ID_GRID_DISABLE
+    END
 END
 
 #endif    // 日本語 (日本) resources

@@ -50,13 +50,21 @@
 #define ID_CHIP15                       40045
 #define ID_CHIP16                       40046
 #define ID_CHIP14                       40047
+#define ID_40048                        40048
+#define ID_40049                        40049
+#define ID_40050                        40050
+#define ID_GRID_TRANS                   40051
+#define ID_GRID_FRONT                   40052
+#define ID_GRID_BACK                    40053
+#define ID_40054                        40054
+#define ID_GRID_DISABLE                 40055
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        102
-#define _APS_NEXT_COMMAND_VALUE         40048
+#define _APS_NEXT_COMMAND_VALUE         40056
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
