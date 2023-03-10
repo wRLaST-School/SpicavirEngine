@@ -11,7 +11,7 @@ public:
 	static void DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawBoxLine(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
-	static void DrawLine(int start, int end, Color color);
+	static void DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness = 1);
 
 	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();

@@ -48,6 +48,13 @@ void SpDS::DrawBox(int x, int y, int width, int height, float rot, Color color, 
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
 }
 
+void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
+{
+	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);
+	float l = ray.GetLength();
+	DrawBox(startX + (int)(ray.x * 0.5f), startY + (int)(ray.y * 0.5f), thickness, (int)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
+}
+
 void SpDS::CreateBuffers()
 {
 	//graph—p
