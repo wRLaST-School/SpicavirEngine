@@ -114,6 +114,7 @@
     <ClCompile Include="EditorScene.cpp" />
     <ClCompile Include="FileSaver.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="IEditorObject.cpp" />
     <ClCompile Include="IToolMode.cpp" />
     <ClCompile Include="main.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="EditorScene.h" />
     <ClInclude Include="FileSaver.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="IEditorObject.h" />
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="IToolMode.h" />

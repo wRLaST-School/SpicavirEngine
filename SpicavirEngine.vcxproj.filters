@@ -411,6 +411,9 @@
     <ClCompile Include="ToolManager.cpp">
       <Filter>!Editor\Tool</Filter>
     </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>!Editor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -661,6 +664,9 @@
     </ClInclude>
     <ClInclude Include="ToolManager.h">
       <Filter>!Editor\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>!Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

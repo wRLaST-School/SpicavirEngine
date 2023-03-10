@@ -5,6 +5,7 @@
 #include <SpImGui.h>
 #include <ToolManager.h>
 #include <MapChip.h>
+#include <Grid.h>
 
 void EditorScene::LoadResources()
 {
@@ -33,6 +34,12 @@ void EditorScene::Update()
 
 void EditorScene::DrawSprite()
 {
+	Grid::Draw();
+
+
 	//cam.DrawRotaGraphCam(0, 0, 1, 1.f, 0.f, "hoge");
 	MapChip::Draw();
+
+
+	Grid::DrawOver();
 }
