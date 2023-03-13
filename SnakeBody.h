@@ -6,6 +6,7 @@ public:
 	int x, y;
 	int id;
 	int order;
+	bool showImGui = false;
 
 	void Draw();
 
