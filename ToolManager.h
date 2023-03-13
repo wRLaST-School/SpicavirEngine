@@ -10,6 +10,7 @@ public:
 	static void SetTool(Tool name);
 	static void SetMapTool(int chipID);
 	static void Update();
+	static void Draw();
 
 	static unique_ptr<IToolMode> tool;
 };

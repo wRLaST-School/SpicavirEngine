@@ -168,6 +168,7 @@ void Input::Mouse::Init()
 
 void Input::Mouse::Update()
 {
+	if (ImGui::GetIO().WantCaptureMouse) return;
 	Mouse* ins = GetInstance();
 	ins->prevState = ins->state;
 

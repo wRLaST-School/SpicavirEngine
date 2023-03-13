@@ -3,6 +3,7 @@
 #include <Input.h>
 #include <MapChip.h>
 #include <Camera2D.h>
+#include <SpImGui.h>
 
 void MapChipTool::Update()
 {
@@ -33,6 +34,16 @@ void MapChipTool::Update()
 			MapChip::map.at(y).at(x) = 0;
 		};
 	}
+}
+
+void MapChipTool::Draw()
+{
+	SpImGui::Command([&] {
+		if (ImGui::Begin("MapChip Tool")) {
+			ImGui::InputInt("Map Chip Number", &chipNum);
+		}
+		ImGui::End();
+	});
 }
 
 int MapChipTool::chipNum = 1;

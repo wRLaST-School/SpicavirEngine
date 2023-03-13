@@ -1,12 +1,13 @@
 #pragma once
 #include "IToolMode.h"
-class MapChipTool :
+class SnakeBodyTool :
     public IToolMode
 {
 public:
-    MapChipTool(int chipID) { chipNum = chipID; };
     void Update() override;
     void Draw() override;
-    static int chipNum;
+
+    int id;
+    int order;
 };
 

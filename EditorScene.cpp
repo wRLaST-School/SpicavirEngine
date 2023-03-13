@@ -42,4 +42,6 @@ void EditorScene::DrawSprite()
 
 
 	Grid::DrawOver();
+
+	ToolManager::Draw();
 }

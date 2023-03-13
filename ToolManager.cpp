@@ -19,4 +19,9 @@ void ToolManager::Update()
 	tool->Update();
 }
 
+void ToolManager::Draw()
+{
+	tool->Draw();
+}
+
 unique_ptr<IToolMode> ToolManager::tool = unique_ptr<IToolMode>(new MapChipTool(0));

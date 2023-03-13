@@ -169,14 +169,14 @@
     <Filter Include="!Editor\File">
       <UniqueIdentifier>{38394ee0-5035-473f-a50f-abebbe63c5bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="!Editor\EditorObject">
-      <UniqueIdentifier>{ccf4966c-84e2-48da-a157-a5e9348ba162}</UniqueIdentifier>
-    </Filter>
     <Filter Include="!Editor\MapChip">
       <UniqueIdentifier>{31c5fc19-4f66-4611-a2b2-a50166b8074f}</UniqueIdentifier>
     </Filter>
     <Filter Include="!Editor\Tool">
       <UniqueIdentifier>{195281aa-8bcc-4963-801e-eb2dcff9366f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Editor\Snake">
+      <UniqueIdentifier>{3c505015-b83d-41df-8226-27c50ffebb6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -393,9 +393,6 @@
     <ClCompile Include="FileSaver.cpp">
       <Filter>!Editor\File</Filter>
     </ClCompile>
-    <ClCompile Include="IEditorObject.cpp">
-      <Filter>!Editor\EditorObject</Filter>
-    </ClCompile>
     <ClCompile Include="MapChip.cpp">
       <Filter>!Editor\MapChip</Filter>
     </ClCompile>
@@ -413,6 +410,21 @@
     </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>!Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeHead.cpp">
+      <Filter>!Editor\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeBody.cpp">
+      <Filter>!Editor\Snake</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeNumberTool.cpp">
+      <Filter>!Editor\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeHeadTool.cpp">
+      <Filter>!Editor\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeBodyTool.cpp">
+      <Filter>!Editor\Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -647,9 +659,6 @@
     <ClInclude Include="FileSaver.h">
       <Filter>!Editor\File</Filter>
     </ClInclude>
-    <ClInclude Include="IEditorObject.h">
-      <Filter>!Editor\EditorObject</Filter>
-    </ClInclude>
     <ClInclude Include="MapChip.h">
       <Filter>!Editor\MapChip</Filter>
     </ClInclude>
@@ -667,6 +676,21 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>!Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeHead.h">
+      <Filter>!Editor\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeBody.h">
+      <Filter>!Editor\Snake</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeNumberTool.h">
+      <Filter>!Editor\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeHeadTool.h">
+      <Filter>!Editor\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeBodyTool.h">
+      <Filter>!Editor\Tool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
