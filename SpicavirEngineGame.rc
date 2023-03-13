@@ -85,6 +85,12 @@ BEGIN
             MENUITEM "16",                          40046
         END
         MENUITEM "移動床",                         ID_40005
+        POPUP "へびブロック"
+        BEGIN
+            MENUITEM "原点",                          ID_SNAKE_HEAD
+            MENUITEM "体",                           ID_SNAKE_BODY
+            MENUITEM "番号振り",                        ID_SNAKE_ORDER
+        END
     END
     POPUP "グリッド"
     BEGIN

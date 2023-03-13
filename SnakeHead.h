@@ -15,10 +15,11 @@ public:
 	void OnClick();
 
 	static void DrawAll();
-
+	static void Init();
 	static void OnClickSt();
+	static SnakeHead* GetMouseTile();
+	static vector<SnakeHead> heads;
 
 private:
-	static vector<SnakeHead> heads;
 };
 

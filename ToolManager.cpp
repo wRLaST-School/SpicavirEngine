@@ -1,11 +1,19 @@
 #include "stdafx.h"
 #include "ToolManager.h"
+#include <MapChipTool.h>
+#include <SnakeHeadTool.h>
+#include <SnakeBodyTool.h>
 
 void ToolManager::SetTool(Tool name)
 {
+	switch (name) {//選ばれたツールによって分岐
+		case Tool::SnakeHead:
+			tool = unique_ptr<IToolMode>(new SnakeHeadTool());
+			break;
 
-	switch (name) {
-		//選ばれたツールによって分岐
+		case Tool::SnakeBody:
+			tool = unique_ptr<IToolMode>(new SnakeBodyTool());
+			break;
 	};
 }
 

@@ -3,10 +3,12 @@
 #include <SpImGui.h>
 #include <SpWindow.h>
 #include <FileSaver.h>
-#include <resource3.h>
 #include <ToolManager.h>
 #include <MapChip.h>
 #include <Grid.h>
+#include <resource3.h>
+#include <SnakeBody.h>
+#include <SnakeHead.h>
 
 HMENU Toolbar::hm;
 
@@ -16,6 +18,8 @@ void Toolbar::ProcessMessage(WPARAM wp)
 		case ID_NEWFILE:
 		{
 			MapChip::Init(32, 18);
+			SnakeHead::Init();
+			SnakeBody::Init();
 			FileSaver::ResetPath();
 			return;
 		};
@@ -122,6 +126,16 @@ void Toolbar::ProcessMessage(WPARAM wp)
 		case ID_CHIP16:
 		{
 			ToolManager::SetMapTool(16);
+			return;
+		}
+		case ID_SNAKE_HEAD:
+		{
+			ToolManager::SetTool(ToolManager::Tool::SnakeHead);
+			return;
+		}
+		case ID_SNAKE_BODY:
+		{
+			ToolManager::SetTool(ToolManager::Tool::SnakeBody);
 			return;
 		}
 		case ID_GRID_TRANS:

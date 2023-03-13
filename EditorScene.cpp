@@ -6,6 +6,8 @@
 #include <ToolManager.h>
 #include <MapChip.h>
 #include <Grid.h>
+#include <SnakeBody.h>
+#include <SnakeHead.h>
 
 void EditorScene::LoadResources()
 {
@@ -36,10 +38,11 @@ void EditorScene::DrawSprite()
 {
 	Grid::Draw();
 
-
 	//cam.DrawRotaGraphCam(0, 0, 1, 1.f, 0.f, "hoge");
 	MapChip::Draw();
 
+	SnakeHead::DrawAll();
+	SnakeBody::DrawAll();
 
 	Grid::DrawOver();
 

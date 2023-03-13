@@ -4,7 +4,8 @@
 #include <MapChip.h>
 #include <SpImGui.h>
 #include <Input.h>
-
+#include <Camera2D.h>
+vector<SnakeHead> SnakeHead::heads;
 SnakeHead::SnakeHead(int x, int y, int id)
 {
 	this->x = x;
@@ -14,7 +15,7 @@ SnakeHead::SnakeHead(int x, int y, int id)
 
 void SnakeHead::Draw()
 {
-	SpDS::DrawBox(x, y, MapChip::tileSize, MapChip::tileSize, 0, Color(0xdd3333));
+	SpDS::DrawBox(x - Camera2D::Get()->x, y - Camera2D::Get()->y, MapChip::tileSize, MapChip::tileSize, 0, Color(0xdd3333));
 
 	if (showImGui)
 	{
@@ -23,7 +24,7 @@ void SnakeHead::Draw()
 			{
 				ImGui::InputInt2("Pos", &x);
 				ImGui::InputInt("ID", &id);
-				if (ImGui::ColorButton("Close", {0.8f, 0.2f, 0.2f, 1.0f}))
+				if (ImGui::Button("Close"))
 				{
 					showImGui = false;
 				}
@@ -45,13 +46,35 @@ void SnakeHead::DrawAll()
 	}
 }
 
+void SnakeHead::Init()
+{
+	heads.clear();
+}
+
 void SnakeHead::OnClickSt()
 {
 	for (auto& h : heads) {
 		Float2 mp = Input::Mouse::GetPos();
+		mp.x += Camera2D::Get()->x;
+		mp.y += Camera2D::Get()->y;
 		if (abs(h.x - mp.x) < MapChip::tileSize / 2 && abs(h.y - mp.y) < MapChip::tileSize / 2)
 		{
 			h.OnClick();
 		}
 	}
+}
+
+SnakeHead* SnakeHead::GetMouseTile()
+{
+	for (auto& h : heads) {
+		Float2 mp = Input::Mouse::GetPos();
+		mp.x += Camera2D::Get()->x;
+		mp.y += Camera2D::Get()->y;
+		if (abs(h.x - mp.x) < MapChip::tileSize / 2 && abs(h.y - mp.y) < MapChip::tileSize / 2)
+		{
+			return &h;
+		}
+	}
+
+	return nullptr;
 }

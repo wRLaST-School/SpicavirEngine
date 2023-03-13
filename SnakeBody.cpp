@@ -4,10 +4,14 @@
 #include <Input.h>
 #include <SpDS.h>
 #include <SpImGui.h>
-
+#include <Camera2D.h>
+vector<SnakeBody> SnakeBody::bodies;
+SnakeBody::SnakeBody(int x, int y, int id, int order):x(x), y(y), id(id), order(order)
+{
+}
 void SnakeBody::Draw()
 {
-	SpDS::DrawBox(x, y, MapChip::tileSize, MapChip::tileSize, 0, Color(0x33dddd));
+	SpDS::DrawBox(x - Camera2D::Get()->x, y - Camera2D::Get()->y, MapChip::tileSize, MapChip::tileSize, 0, Color(0x33dddd));
 
 	if (showImGui)
 	{
@@ -17,13 +21,13 @@ void SnakeBody::Draw()
 				ImGui::InputInt2("Pos", &x);
 				ImGui::InputInt("ID", &id);
 				ImGui::InputInt("Order", &order);
-				if (ImGui::ColorButton("Close", { 0.8f, 0.2f, 0.2f, 1.0f }))
+				if (ImGui::Button("Close"))
 				{
 					showImGui = false;
 				}
 			}
 			ImGui::End();
-			});
+		});
 	}
 }
 
@@ -37,6 +41,11 @@ void SnakeBody::DrawAll()
 	for (auto& b : bodies) {
 		b.Draw();
 	}
+}
+
+void SnakeBody::Init()
+{
+	bodies.clear();
 }
 
 void SnakeBody::OnClickSt()
