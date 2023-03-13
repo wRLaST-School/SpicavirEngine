@@ -5,7 +5,7 @@ class SnakeBody
 public:
 	int x, y;
 	int id;
-	int order
+	int order;
 
 	void Draw();
 

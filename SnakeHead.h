@@ -6,6 +6,9 @@ class SnakeHead
 public:
 	int x, y;
 	int id;
+	bool showImGui = false;
+	
+	SnakeHead(int x, int y, int id);
 
 	void Draw();
 
