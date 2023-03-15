@@ -18,12 +18,20 @@ void SnakeBody::Draw()
 		SpImGui::Command([&] {
 			if (ImGui::Begin("Snake Body"))
 			{
-				ImGui::InputInt2("Pos", &x);
-				ImGui::InputInt("ID", &id);
-				ImGui::InputInt("Order", &order);
-				if (ImGui::Button("Close"))
+				ImGui::InputInt2(u8"ç¿ïW", &x);
+				ImGui::InputInt(u8"ID", &id);
+				ImGui::InputInt(u8"èáî‘", &order);
+				if (ImGui::Button(u8"ï¬Ç∂ÇÈ"))
 				{
 					showImGui = false;
+				}
+				if (ImGui::Button(u8"çÌèú"))
+				{
+					for(auto itr = bodies.begin(); itr != bodies.end(); itr ++)
+						if (&(*itr) == this) {
+							SnakeBody::bodies.erase(itr);
+							break;
+						}
 				}
 			}
 			ImGui::End();
@@ -33,6 +41,7 @@ void SnakeBody::Draw()
 
 void SnakeBody::OnClick()
 {
+	for (auto& b : bodies) b.showImGui = false;
 	showImGui = true;
 }
 

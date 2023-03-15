@@ -38,9 +38,9 @@ void SnakeBodyTool::Update()
 void SnakeBodyTool::Draw()
 {
 	SpImGui::Command([&] {
-		if (ImGui::Begin("SnakeHead Tool")) {
-			ImGui::InputInt("Snake ID", &id);
-			ImGui::InputInt("Snake Body Order", &order);
+		if (ImGui::Begin("SnakeBody Tool")) {
+			ImGui::InputInt("ID", &id);
+			ImGui::InputInt(u8"èáî‘", &order);
 		}
 		ImGui::End();
 	});

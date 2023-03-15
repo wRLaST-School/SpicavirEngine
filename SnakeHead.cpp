@@ -22,11 +22,19 @@ void SnakeHead::Draw()
 		SpImGui::Command([&] {
 			if (ImGui::Begin("Snake Head"))
 			{
-				ImGui::InputInt2("Pos", &x);
-				ImGui::InputInt("ID", &id);
-				if (ImGui::Button("Close"))
+				ImGui::InputInt2(u8"ç¿ïW", &x);
+				ImGui::InputInt(u8"ID", &id);
+				if (ImGui::Button(u8"ï¬Ç∂ÇÈ"))
 				{
 					showImGui = false;
+				}
+				if (ImGui::Button(u8"çÌèú"))
+				{
+					for (auto itr = heads.begin(); itr != heads.end(); itr++)
+						if (&(*itr) == this) {
+							SnakeHead::heads.erase(itr);
+							break;
+						}
 				}
 			}
 			ImGui::End();
@@ -36,6 +44,7 @@ void SnakeHead::Draw()
 
 void SnakeHead::OnClick()
 {
+	for (auto& h : heads) h.showImGui = false;
 	showImGui = true;
 }
 

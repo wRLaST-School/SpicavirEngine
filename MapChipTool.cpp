@@ -40,7 +40,7 @@ void MapChipTool::Draw()
 {
 	SpImGui::Command([&] {
 		if (ImGui::Begin("MapChip Tool")) {
-			ImGui::InputInt("Map Chip Number", &chipNum);
+			ImGui::InputInt(u8"É}ÉbÉvî‘çÜ", &chipNum);
 		}
 		ImGui::End();
 	});

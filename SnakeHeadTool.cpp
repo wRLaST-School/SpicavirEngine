@@ -35,7 +35,7 @@ void SnakeHeadTool::Draw()
 {
 	SpImGui::Command([&] {
 		if (ImGui::Begin("SnakeHead Tool")) {
-			ImGui::InputInt("Snake ID", &id);
+			ImGui::InputInt("ID", &id);
 		}
 		ImGui::End();
 	});
