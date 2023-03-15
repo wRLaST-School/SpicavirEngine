@@ -178,6 +178,9 @@
     <Filter Include="!Editor\Snake">
       <UniqueIdentifier>{3c505015-b83d-41df-8226-27c50ffebb6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Editor\MoveBlock">
+      <UniqueIdentifier>{aafdac77-820b-468d-88c1-5c47823646d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -424,6 +427,12 @@
       <Filter>!Editor\Tool</Filter>
     </ClCompile>
     <ClCompile Include="SnakeBodyTool.cpp">
+      <Filter>!Editor\Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBlock.cpp">
+      <Filter>!Editor\MoveBlock</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveBlockTool.cpp">
       <Filter>!Editor\Tool</Filter>
     </ClCompile>
   </ItemGroup>
@@ -690,6 +699,12 @@
       <Filter>!Editor\Tool</Filter>
     </ClInclude>
     <ClInclude Include="SnakeBodyTool.h">
+      <Filter>!Editor\Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBlock.h">
+      <Filter>!Editor\MoveBlock</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveBlockTool.h">
       <Filter>!Editor\Tool</Filter>
     </ClInclude>
   </ItemGroup>

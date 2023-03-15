@@ -120,6 +120,8 @@
     <ClCompile Include="MapChip.cpp" />
     <ClCompile Include="MapChipTool.cpp" />
     <ClCompile Include="Monotone.cpp" />
+    <ClCompile Include="MoveBlock.cpp" />
+    <ClCompile Include="MoveBlockTool.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -208,6 +210,8 @@
     <ClInclude Include="MapChip.h" />
     <ClInclude Include="MapChipTool.h" />
     <ClInclude Include="Monotone.h" />
+    <ClInclude Include="MoveBlock.h" />
+    <ClInclude Include="MoveBlockTool.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
