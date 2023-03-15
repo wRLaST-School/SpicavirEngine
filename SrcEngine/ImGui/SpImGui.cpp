@@ -26,13 +26,13 @@ void SpImGui::Init()
 
 	ImGuiIO& io = ImGui::GetIO();
 
-	io.Fonts->AddFontFromFileTTF("SrcImgui\\imgui\\ImGuiLibs\\Resources\\UDEVGothicLG-Bold.ttf", 14);
+	io.Fonts->AddFontFromFileTTF("Resources\\Fonts\\HackGen-Bold.ttf", 16.f, nullptr, io.Fonts->GetGlyphRangesJapanese());
 }
 
 void SpImGui::InitDirectXForImGui()
 {
 	SpTextureManager::CreatePlainSRV("imgui_srv");
-	SpTextureManager::AddMasterTextureKey("imgui_srv_");
+	SpTextureManager::AddMasterTextureKey("imgui_srv");
 }
 
 void SpImGui::Command(std::function<void(void)> command)
