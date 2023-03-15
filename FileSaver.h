@@ -8,6 +8,14 @@ public:
 	static void Open();
 	static void ResetPath();
 
+	static void SaveMapChip(wstring filePath);
+	static void SaveSnakeHead(wstring filePath);
+	static void SaveSnakeBody(wstring filePath);
+
+	static void LoadMapChip(wstring filePath);
+	static void LoadSnakeHead(wstring filePath);
+	static void LoadSnakeBody(wstring filePath);
+
 	static wstring filePath; 
 };
 

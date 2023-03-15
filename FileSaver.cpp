@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <MapChip.h>
+#include <SnakeHead.h>
+#include <SnakeBody.h>
 
 wstring FileSaver::filePath = L"";
 
@@ -35,7 +37,7 @@ void FileSaver::Save()
         ofn.lpstrFile = szFile;       // 選択ファイル格納
         ofn.nMaxFile = MAX_PATH;
         ofn.lpstrDefExt = L".csv";
-        ofn.lpstrFilter = TEXT("マップチップファイル(*.csv)\0*.csv\0")
+        ofn.lpstrFilter = TEXT("マップマスタファイル(*.sps)\0*.sps\0")
             TEXT("すべてのファイル(*.*)\0*.*\0");
         ofn.lpstrTitle = TEXT("開く");
         ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
@@ -58,16 +60,11 @@ void FileSaver::Save()
     //filePathに最後に開いた情報があるんでそれ使っていい感じに保存
     ofstream file;
     file.open(filePath, ios::out);
-    for (int y = 0; y < MapChip::mapSizeY; y++)
-    {
-        for (int x = 0; x < MapChip::mapSizeX; x++)
-        {
-            file << MapChip::map.at(y).at(x) << ",";
-        }
-        file << endl;
-    }
-
     file.close();
+
+    SaveMapChip(filePath);
+    SaveSnakeHead(filePath);
+    SaveSnakeBody(filePath);
 }
 
 void FileSaver::Overwrite()
@@ -81,19 +78,13 @@ void FileSaver::Overwrite()
         return Save();
     }
     //filePathに最後に開いた情報があるんでそれ使っていい感じに保存
-
     ofstream file;
     file.open(filePath, ios::out);
-    for (int y = 0; y < MapChip::mapSizeY; y++)
-    {
-        for (int x = 0; x < MapChip::mapSizeX; x++)
-        {
-            file << MapChip::map.at(y).at(x) << ",";
-        }
-        file << endl;
-    }
-
     file.close();
+
+    SaveMapChip(filePath);
+    SaveSnakeHead(filePath);
+    SaveSnakeBody(filePath);
 }
 
 void FileSaver::Open()
@@ -112,7 +103,7 @@ void FileSaver::Open()
         ofn.lpstrInitialDir = filePath == L"" ? szFolder : filePath.c_str();       // 初期フォルダ位置
         ofn.lpstrFile = szFile;       // 選択ファイル格納
         ofn.nMaxFile = MAX_PATH;
-        ofn.lpstrFilter = TEXT("マップチップファイル(*.csv)\0*.csv\0")
+        ofn.lpstrFilter = TEXT("マップマスタファイル(*.sps)\0*.sps\0")
                             TEXT("すべてのファイル(*.*)\0*.*\0");
         ofn.lpstrTitle = TEXT("開く");
         ofn.Flags = OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
@@ -130,8 +121,59 @@ void FileSaver::Open()
     OutputDebugStringW(filePath.c_str());
 
     //filePathにパスが入ってるのでいい感じに読み込む
+    LoadMapChip(filePath);
+    LoadSnakeHead(filePath);
+    LoadSnakeBody(filePath);
+}
 
-    std::ifstream ifs(filePath);	// 読み込み用のストリーム
+void FileSaver::ResetPath()
+{
+    filePath = L"";
+}
+
+void FileSaver::SaveMapChip(wstring filePath)
+{
+    ofstream file;
+    file.open(filePath + wstring(L"00.stg"), ios::out);
+    for (int y = 0; y < MapChip::mapSizeY; y++)
+    {
+        for (int x = 0; x < MapChip::mapSizeX; x++)
+        {
+            file << MapChip::map.at(y).at(x) << ",";
+        }
+        file << endl;
+    }
+
+    file.close();
+}
+
+void FileSaver::SaveSnakeHead(wstring filePath)
+{
+    ofstream file;
+    file.open(filePath + wstring(L"10.stg"), ios::out);
+    for (int y = 0; y < SnakeHead::heads.size(); y++)
+    {
+        file << SnakeHead::heads.at(y).x << "," << SnakeHead::heads.at(y).y << "," << SnakeHead::heads.at(y).id << "," << endl;
+    }
+
+    file.close();
+}
+
+void FileSaver::SaveSnakeBody(wstring filePath)
+{
+    ofstream file;
+    file.open(filePath + wstring(L"11.stg"), ios::out);
+    for (int y = 0; y < SnakeBody::bodies.size(); y++)
+    {
+        file << SnakeBody::bodies.at(y).x << "," << SnakeBody::bodies.at(y).y << "," << SnakeBody::bodies.at(y).id << "," << SnakeBody::bodies.at(y).order << "," << endl;
+    }
+
+    file.close();
+}
+
+void FileSaver::LoadMapChip(wstring filePath)
+{
+    std::ifstream ifs(filePath + wstring(L"00.stg"));	// 読み込み用のストリーム
 
     if (ifs)
     {
@@ -155,7 +197,47 @@ void FileSaver::Open()
     }
 }
 
-void FileSaver::ResetPath()
+void FileSaver::LoadSnakeHead(wstring filePath)
 {
-    filePath = L"";
+    std::ifstream ifs(filePath + wstring(L"10.stg"));	// 読み込み用のストリーム
+
+    if (ifs)
+    {
+        std::string line;
+
+        SnakeHead::Init();
+
+        while (getline(ifs, line))
+        {
+            std::vector<int> datvec;
+            std::vector<std::string> strvec = split(line, ',');
+            SnakeHead::heads.emplace_back(
+                stoi(strvec.at(0)),
+                stoi(strvec.at(1)),
+                stoi(strvec.at(2)));
+        }
+    }
+}
+
+void FileSaver::LoadSnakeBody(wstring filePath)
+{
+    std::ifstream ifs(filePath + wstring(L"11.stg"));	// 読み込み用のストリーム
+
+    if (ifs)
+    {
+        std::string line;
+
+        SnakeBody::Init();
+
+        while (getline(ifs, line))
+        {
+            std::vector<int> datvec;
+            std::vector<std::string> strvec = split(line, ',');
+            SnakeBody::bodies.emplace_back(
+                stoi(strvec.at(0)),
+                stoi(strvec.at(1)),
+                stoi(strvec.at(2)),
+                stoi(strvec.at(3)));
+        }
+    }
 }
