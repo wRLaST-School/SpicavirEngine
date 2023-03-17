@@ -33,7 +33,6 @@ void SnakeBody::Draw()
 							break;
 						}
 				}
-				ImGui::Checkbox("IS CLIENT ACTIVE", &GetSpWindow()->isClientActive);
 			}
 			ImGui::End();
 		});
