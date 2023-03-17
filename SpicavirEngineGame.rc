@@ -84,7 +84,7 @@ BEGIN
             MENUITEM "15",                          ID_CHIP15
             MENUITEM "16",                          40046
         END
-        MENUITEM "移動床",                         ID_40005
+        MENUITEM "移動床",                         ID_MOVEBLOCK
         POPUP "へびブロック"
         BEGIN
             MENUITEM "原点",                          ID_SNAKE_HEAD

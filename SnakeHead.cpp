@@ -79,7 +79,7 @@ SnakeHead* SnakeHead::GetMouseTile()
 		Float2 mp = Input::Mouse::GetPos();
 		mp.x += Camera2D::Get()->x;
 		mp.y += Camera2D::Get()->y;
-		if (abs(h.x - mp.x) < MapChip::tileSize / 2 && abs(h.y - mp.y) < MapChip::tileSize / 2)
+		if (abs(h.x - (mp.x + Camera2D::Get()->x)) < MapChip::tileSize / 2 && abs(h.y - (mp.y + Camera2D::Get()->y)) < MapChip::tileSize / 2)
 		{
 			return &h;
 		}

@@ -138,6 +138,10 @@ void Toolbar::ProcessMessage(WPARAM wp)
 			ToolManager::SetTool(ToolManager::Tool::SnakeBody);
 			return;
 		}
+		case ID_MOVEBLOCK:
+		{
+			ToolManager::SetTool(ToolManager::Tool::MoveBlock);
+		}
 		case ID_GRID_TRANS:
 		{
 			Grid::gridMode = Grid::GridMode::Trasparent;

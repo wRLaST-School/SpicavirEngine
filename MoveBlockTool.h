@@ -8,7 +8,7 @@ public:
     void Update() override;
     void Draw() override;
 
-    int width, height;
+    int width = 60, height = 60;
     MoveBlock::Direction dir;
 };
 

@@ -8,6 +8,7 @@
 #include <Grid.h>
 #include <SnakeBody.h>
 #include <SnakeHead.h>
+#include <MoveBlock.h>
 
 void EditorScene::LoadResources()
 {
@@ -43,6 +44,7 @@ void EditorScene::DrawSprite()
 
 	SnakeHead::DrawAll();
 	SnakeBody::DrawAll();
+	MoveBlock::DrawAll();
 
 	Grid::DrawOver();
 

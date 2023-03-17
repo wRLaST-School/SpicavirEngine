@@ -15,6 +15,7 @@ public:
 
 	int width = 1280;
 	int height = 720;
+	bool isClientActive = true;
 private:
 };
 

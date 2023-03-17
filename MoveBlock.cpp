@@ -12,12 +12,12 @@ MoveBlock::MoveBlock(int x, int y, Direction dir, int width, int height) : x(x),
 
 void MoveBlock::Draw()
 {
-	SpDS::DrawBox(x - Camera2D::Get()->x, y - Camera2D::Get()->y, width, height, 0, Color(0xdddddd));
+	SpDS::DrawBox(x - Camera2D::Get()->x, y - Camera2D::Get()->y, width * MapChip::tileMult, height * MapChip::tileMult, 0, Color(0xdddddd));
 
 	if (showImGui)
 	{
 		SpImGui::Command([&] {
-			if (ImGui::Begin("Snake Body"))
+			if (ImGui::Begin("Move Block"))
 			{
 				ImGui::InputInt2(u8"ç¿ïW", &x);
 				ImGui::InputInt(u8"ï˚å¸", (int*)&dir);
@@ -62,7 +62,7 @@ void MoveBlock::OnClickSt()
 {
 	for (auto& b : blocks) {
 		Float2 mp = Input::Mouse::GetPos();
-		if (abs(b.x - mp.x) < b.width / 2 && abs(b.y - mp.y) < b.height/ 2)
+		if (abs(b.x - (mp.x + Camera2D::Get()->x)) < b.width / 2 && abs(b.y - (mp.y + Camera2D::Get()->y)) < b.height/ 2)
 		{
 			b.OnClick();
 		}

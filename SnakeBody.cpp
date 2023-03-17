@@ -33,6 +33,7 @@ void SnakeBody::Draw()
 							break;
 						}
 				}
+				ImGui::Checkbox("IS CLIENT ACTIVE", &GetSpWindow()->isClientActive);
 			}
 			ImGui::End();
 		});
@@ -61,7 +62,7 @@ void SnakeBody::OnClickSt()
 {
 	for (auto& b : bodies) {
 		Float2 mp = Input::Mouse::GetPos();
-		if (abs(b.x - mp.x) < MapChip::tileSize / 2 && abs(b.y - mp.y) < MapChip::tileSize / 2)
+		if (abs(b.x - (mp.x + Camera2D::Get()->x)) < MapChip::tileSize / 2 && abs(b.y - (mp.y + Camera2D::Get()->y)) < MapChip::tileSize / 2)
 		{
 			b.OnClick();
 		}

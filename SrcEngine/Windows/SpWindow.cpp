@@ -141,6 +141,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 				Toolbar::ProcessMessage(wParam);
 			}
 		}
+	
+	case WM_ACTIVATE:
+		{if (GetSpWindow())
+			GetSpWindow()->isClientActive = true;
+		}
+	case WM_NCACTIVATE:
+	{
+		if (GetSpWindow())
+			GetSpWindow()->isClientActive = false;
+	}
 	}
 
 	return DefWindowProc(hwnd, msg, wParam, lParam);

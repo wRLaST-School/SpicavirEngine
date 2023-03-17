@@ -6,7 +6,8 @@ class ToolManager
 public:
 	enum class Tool {
 		SnakeHead,
-		SnakeBody
+		SnakeBody,
+		MoveBlock
 	};
 	static void SetTool(Tool name);
 	static void SetMapTool(int chipID);
@@ -14,5 +15,6 @@ public:
 	static void Draw();
 
 	static unique_ptr<IToolMode> tool;
+	static bool isMouseActive;
 };
 

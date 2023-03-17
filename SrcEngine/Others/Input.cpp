@@ -2,6 +2,7 @@
 #include "Essentials.h"
 #include "SpWindow.h"
 #include "Util.h"
+#include <ToolManager.h>
 
 #ifdef _DEBUG
 #include <SpImGui.h>
@@ -192,12 +193,12 @@ void Input::Mouse::Close()
 
 bool Input::Mouse::Down(Click b)
 {
-	return GetInstance()->state.rgbButtons[(int)b] & (0x80);
+	return GetInstance()->state.rgbButtons[(int)b] & (0x80) && ToolManager::isMouseActive;
 }
 
 bool Input::Mouse::Triggered(Click b)
 {
-	return (!(GetInstance()->prevState.rgbButtons[(int)b] & (0x80))) && (GetInstance()->state.rgbButtons[(int)b] & (0x80));
+	return (!(GetInstance()->prevState.rgbButtons[(int)b] & (0x80))) && (GetInstance()->state.rgbButtons[(int)b] & (0x80)) && ToolManager::isMouseActive;
 }
 
 bool Input::Mouse::Released(Click b)
