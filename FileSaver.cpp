@@ -7,6 +7,7 @@
 #include <MapChip.h>
 #include <SnakeHead.h>
 #include <SnakeBody.h>
+#include <MoveBlock.h>
 
 wstring FileSaver::filePath = L"";
 
@@ -171,6 +172,19 @@ void FileSaver::SaveSnakeBody(wstring filePath)
     file.close();
 }
 
+void FileSaver::SaveMoveBlock(wstring filePath)
+{
+    ofstream file;
+    file.open(filePath + wstring(L"20.stg"), ios::out);
+    for (int y = 0; y < MoveBlock::blocks.size(); y++)
+
+    {
+        file << MoveBlock::blocks.at(y).x << "," << MoveBlock::blocks.at(y).y << "," << MoveBlock::blocks.at(y).width << ","  << MoveBlock::blocks.at(y).height << "," << (int)MoveBlock::blocks.at(y).dir << "," << endl;
+    }
+
+    file.close();
+}
+
 void FileSaver::LoadMapChip(wstring filePath)
 {
     std::ifstream ifs(filePath + wstring(L"00.stg"));	// 読み込み用のストリーム
@@ -236,6 +250,30 @@ void FileSaver::LoadSnakeBody(wstring filePath)
             SnakeBody::bodies.emplace_back(
                 stoi(strvec.at(0)),
                 stoi(strvec.at(1)),
+                stoi(strvec.at(2)),
+                stoi(strvec.at(3)));
+        }
+    }
+}
+
+void FileSaver::LoadMoveBlock(wstring filePath)
+{
+    std::ifstream ifs(filePath + wstring(L"11.stg"));	// 読み込み用のストリーム
+
+    if (ifs)
+    {
+        std::string line;
+
+        MoveBlock::Init();
+
+        while (getline(ifs, line))
+        {
+            std::vector<int> datvec;
+            std::vector<std::string> strvec = split(line, ',');
+            MoveBlock::blocks.emplace_back(
+                stoi(strvec.at(0)),
+                stoi(strvec.at(1)),
+                (MoveBlock::Direction)stoi(strvec.at(4)),
                 stoi(strvec.at(2)),
                 stoi(strvec.at(3)));
         }
