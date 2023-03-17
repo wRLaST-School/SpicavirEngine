@@ -258,7 +258,7 @@ void FileSaver::LoadSnakeBody(wstring filePath)
 
 void FileSaver::LoadMoveBlock(wstring filePath)
 {
-    std::ifstream ifs(filePath + wstring(L"11.stg"));	// 読み込み用のストリーム
+    std::ifstream ifs(filePath + wstring(L"20.stg"));	// 読み込み用のストリーム
 
     if (ifs)
     {
