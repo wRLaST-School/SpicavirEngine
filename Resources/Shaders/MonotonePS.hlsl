@@ -8,7 +8,7 @@ float4 main(VSOutput input) : SV_TARGET
     float4 color = tex.Sample(smp, input.uv);
     color.xyz = color.xyz * float3(0.25f, 0.55f, 0.1f);
     float t = color.x + color.y + color.z;
-    color.xyz = float3(color.x + t / 2.f, color.x + t / 2.f, color.x + t /2.f);
+    color.xyz = float3((color.x + t) / 2.f, (color.y + t) / 2.f, (color.z + t) /2.f);
     
     return color;
 }

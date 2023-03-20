@@ -4,6 +4,7 @@
 #include <SpDS.h>
 #include <Util.h>
 #include <Monotone.h>
+#include <SpImGui.h>
 
 void GameScene::LoadResources()
 {
@@ -12,6 +13,7 @@ void GameScene::LoadResources()
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/think.png", "think");
 	SpTextureManager::LoadTexture("Resources/circleLight.png", "circle");
+	SpTextureManager::LoadTexture("Resources/Sample.png", "sample");
 	back.Load();
 }
 
@@ -35,6 +37,14 @@ void GameScene::Update()
 {
 	back.Update();
 	Player::Get()->Update();
+
+	SpImGui::Command([&]{
+		if (ImGui::Begin("Sample"))
+		{
+			ImGui::Checkbox("Use Sample", &useSample);
+		}
+		ImGui::End();
+	});
 }
 
 void GameScene::DrawSprite()
@@ -42,20 +52,27 @@ void GameScene::DrawSprite()
 	back.Draw();
 
 	//main
-	Player::Get()->Draw();
-	for (int i = 0; i < 18; i++)
+	if (useSample)
 	{
-		for (int j = 0; j < 32; j++)
+		SpDS::DrawRotaGraph(0, 0, 2.f, 2.f, 0.f, "sample", Anchor::TopLeft);
+	}
+	Player::Get()->Draw();
+	if (!useSample) {
+		for (int i = 0; i < 18; i++)
 		{
-			if (mapchip[i][j])
+			for (int j = 0; j < 32; j++)
 			{
-				SpDS::DrawBox(30 + j * mapsize, 30 + i * mapsize, mapsize, mapsize, 0, 0x00ff44);
+				if (mapchip[i][j])
+				{
+					SpDS::DrawBox(30 + j * mapsize, 30 + i * mapsize, mapsize, mapsize, 0, Color(0x864a2b));
+				}
 			}
 		}
 	}
-	SpDS::SetBlendMode(SpDS::Blend::Sub);
 
 	//‰~Œ`”ÍˆÍŠO‚Ì‚Ýƒ‚ƒmƒg[ƒ“‚É
+	SpDS::SetBlendMode(SpDS::Blend::Sub);
+
 	SpDS::SetPreDrawFunc([] {Monotone::Effect("BloomBefore", "Mono"); });
 	SpDS::SetRenderTarget("Mono");
 	SpDS::SetBlendMode(SpDS::Blend::Sub);

@@ -43,6 +43,7 @@ private:
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     };
     int mapsize = 60;
+    bool useSample = false;
 
     Background back;
 };
