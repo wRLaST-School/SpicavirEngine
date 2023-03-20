@@ -149,7 +149,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 			strdata.width += glyphList.back()->gm.gmptGlyphOrigin.x + glyphList.back()->gm.gmBlackBoxX;
 		}
 
-		strdata.height = max(strdata.height, (*itr)->tm.tmHeight);
+		strdata.height = max(strdata.height, (int)(*itr)->tm.tmHeight);
 	}
 
 	UINT64 imageDataCount = strdata.width * strdata.height;

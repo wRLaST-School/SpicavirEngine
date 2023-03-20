@@ -51,14 +51,14 @@ private:
 		Float2 uv;
 	};
 
-	static vector<Line> lines;
+	static eastl::vector<Line> lines;
 
 	/*static D3D12_VERTEX_BUFFER_VIEW vbView;
 	static ComPtr<ID3D12Resource> vertBuff;*/
 	//static Line* vertMap;
 
-	static vector<Graph> graphs;
-	static list<GraphGPUData> ggpu;
+	static eastl::vector<Graph> graphs;
+	static eastl::list<GraphGPUData> ggpu;
 	static D3D12_VERTEX_BUFFER_VIEW gvbView;
 	static ComPtr<ID3D12Resource> gvertBuff;
 };

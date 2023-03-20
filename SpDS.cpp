@@ -150,13 +150,13 @@ void SpDS::RenderGraph()
 	}
 }
 
-vector<SpDS::Line> SpDS::lines;
+eastl::vector<SpDS::Line> SpDS::lines;
 
 /*static D3D12_VERTEX_BUFFER_VIEW vbView;
 static ComPtr<ID3D12Resource> vertBuff;*/
 //static Line* vertMap;
 
-vector<SpDS::Graph> SpDS::graphs;
-list<SpDS::GraphGPUData> SpDS::ggpu;
+eastl::vector<SpDS::Graph> SpDS::graphs;
+eastl::list<SpDS::GraphGPUData> SpDS::ggpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;
