@@ -144,6 +144,11 @@ float Vec2::GetSquaredLength() const
 	return this->x * this->x + this->y * this->y;
 }
 
+float Vec2::VecToVec(Vec2 from, Vec2 to)
+{
+	return atan2f(to.y, to.x) - atan2f(from.y, from.x);
+}
+
 Vec2::operator Float2() const
 {
 	return Float2{ x, y };

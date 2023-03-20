@@ -24,7 +24,7 @@ public:
 	
 	static void DrawBoxLine(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
-	static void DrawLine(int start, int end, Color color);
+	static void DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness = 1);
 
 	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();
@@ -65,14 +65,14 @@ private:
 		Float2 uv;
 	};
 
-	static vector<Line> lines;
+	static eastl::vector<Line> lines;
 
 	/*static D3D12_VERTEX_BUFFER_VIEW vbView;
 	static ComPtr<ID3D12Resource> vertBuff;*/
 	//static Line* vertMap;
 
-	static vector<Graph> graphs;
-	static list<GraphGPUData> ggpu;
+	static eastl::vector<Graph> graphs;
+	static eastl::list<GraphGPUData> ggpu;
 	static D3D12_VERTEX_BUFFER_VIEW gvbView;
 	static ComPtr<ID3D12Resource> gvertBuff;
 	static int graphCount;

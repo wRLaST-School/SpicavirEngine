@@ -109,6 +109,13 @@ void SpDS::SetPreDrawFunc(function<void(void)> prop)
 	commands.insert(pair<int, function<void(void)>>(graphCount, prop));
 }
 
+void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
+{
+	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);
+	float l = ray.GetLength();
+	DrawBox(startX + (int)(ray.x * 0.5f), startY + (int)(ray.y * 0.5f), thickness, (int)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
+}
+
 void SpDS::CreateBuffers()
 {
 	//graph—p
@@ -231,14 +238,14 @@ void SpDS::RenderGraph()
 	commands.clear();
 }
 
-vector<SpDS::Line> SpDS::lines;
+eastl::vector<SpDS::Line> SpDS::lines;
 
 /*static D3D12_VERTEX_BUFFER_VIEW vbView;
 static ComPtr<ID3D12Resource> vertBuff;*/
 //static Line* vertMap;
 
-vector<SpDS::Graph> SpDS::graphs;
-list<SpDS::GraphGPUData> SpDS::ggpu;
+eastl::vector<SpDS::Graph> SpDS::graphs;
+eastl::list<SpDS::GraphGPUData> SpDS::ggpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;
 int SpDS::graphCount = 0;
