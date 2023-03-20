@@ -157,6 +157,21 @@
     <Filter Include="Application\ソースファイル\Player">
       <UniqueIdentifier>{70e97515-bc93-415f-8e53-3500c1c99b05}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Game">
+      <UniqueIdentifier>{48c1487d-f0ad-46ab-9b42-f6bbc3d068b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Game\Scene">
+      <UniqueIdentifier>{fe82146e-77b3-48d5-a886-f9d14de06f65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Game\SceneManager">
+      <UniqueIdentifier>{413634bb-2ee4-4aee-97db-700c71458aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Game\Player">
+      <UniqueIdentifier>{4a381ea3-06dc-4994-96f4-8e332fd5cb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Game\Background">
+      <UniqueIdentifier>{4f3160eb-2a16-43a7-a76d-ede26b0339bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -345,15 +360,6 @@
     <ClCompile Include="SpDS.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Application\ソースファイル\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Application\ソースファイル\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Monotone.cpp">
       <Filter>Engine\ソースファイル\PostEffect</Filter>
     </ClCompile>
@@ -362,6 +368,18 @@
     </ClCompile>
     <ClCompile Include="Animation2D.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>!Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\SceneManager.cpp">
+      <Filter>!Game\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>!Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>!Game\Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -563,17 +581,8 @@
     <ClInclude Include="SrcApplication\Scene\TestScene.h">
       <Filter>Application\テスト用・参考用\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\SceneManager.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Application\ヘッダーファイル\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SrParticleStage.h">
       <Filter>Application\ヘッダーファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Application\ヘッダーファイル\Player</Filter>
     </ClInclude>
     <ClInclude Include="Monotone.h">
       <Filter>Engine\ヘッダーファイル\PostEffect</Filter>
@@ -583,6 +592,18 @@
     </ClInclude>
     <ClInclude Include="Animation2D.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>!Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\SceneManager.h">
+      <Filter>!Game\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>!Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>!Game\Background</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

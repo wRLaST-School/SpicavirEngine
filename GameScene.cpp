@@ -12,6 +12,7 @@ void GameScene::LoadResources()
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/think.png", "think");
 	SpTextureManager::LoadTexture("Resources/circleLight.png", "circle");
+	back.Load();
 }
 
 void GameScene::Init()
@@ -27,25 +28,18 @@ void GameScene::Init()
 	}
 
 	Player::Init();
+	back.Init();
 }
 
 void GameScene::Update()
 {
+	back.Update();
 	Player::Get()->Update();
 }
 
 void GameScene::DrawSprite()
 {
-	//back
-	SpDS::DrawBox(GetSpWindow()->width / 2, GetSpWindow()->height / 2, GetSpWindow()->width, GetSpWindow()->height, 0, Color(0x332288));
-
-	int basebgpsize = 30;
-	Vec2 win(GetSpWindow()->width, GetSpWindow()->height);
-	for (int i = 0; i < maxbackp; i++)
-	{
-		Vec2& p = backpos[i];
-		SpDS::DrawBox(p.x, p.y, basebgpsize * 1920 / win.x, basebgpsize * 1080 / win.y,0, backcolor[i]);
-	}
+	back.Draw();
 
 	//main
 	Player::Get()->Draw();

@@ -1,6 +1,7 @@
 #pragma once
 #include "IScene.h"
 #include "Color.h"
+#include <Background.h>
 class GameScene :
     public IScene
 {
@@ -42,5 +43,7 @@ private:
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     };
     int mapsize = 60;
+
+    Background back;
 };
 
