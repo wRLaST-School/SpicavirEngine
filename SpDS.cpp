@@ -58,7 +58,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 {
 	switch (blendMode) {
 	case Blend::Alpha:
-		commands.insert(pair<int, function<void(void)>>(graphCount, [&] {
+		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
 			//パイプライン変更
 			auto dx = GetWDX();
 
@@ -68,7 +68,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 		break;
 
 	case Blend::Sub:
-		commands.insert(pair<int, function<void(void)>>(graphCount, [&] {
+		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
 			//パイプライン変更
 			auto dx = GetWDX();
 
@@ -78,7 +78,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 		break;
 
 	case Blend::Add:
-		commands.insert(pair<int, function<void(void)>>(graphCount, [&] {
+		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
 			//パイプライン変更
 			auto dx = GetWDX();
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2dAdd"));
@@ -93,7 +93,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 void SpDS::SetRenderTarget(TextureKey key)
 {
 	commands.insert(
-		pair<int, function<void(void)>>(graphCount, [&, key] {
+		eastl::pair<int, function<void(void)>>(graphCount, [&, key] {
 			//レンダーターゲット変更
 			if (key == "CurrentBuffer")
 			{
@@ -106,7 +106,7 @@ void SpDS::SetRenderTarget(TextureKey key)
 
 void SpDS::SetPreDrawFunc(function<void(void)> prop)
 {
-	commands.insert(pair<int, function<void(void)>>(graphCount, prop));
+	commands.insert(eastl::pair<int, function<void(void)>>(graphCount, prop));
 }
 
 void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
@@ -250,4 +250,4 @@ D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;
 int SpDS::graphCount = 0;
 
-unordered_multimap<int, function<void(void)>> SpDS::commands;
+eastl::multimap<int, function<void(void)>> SpDS::commands;

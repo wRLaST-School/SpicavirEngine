@@ -76,7 +76,7 @@ private:
 	static D3D12_VERTEX_BUFFER_VIEW gvbView;
 	static ComPtr<ID3D12Resource> gvertBuff;
 	static int graphCount;
-	static unordered_multimap<int, function<void(void)>> commands;
+	static eastl::multimap<int, function<void(void)>> commands;
 };
 
 namespace SpDSLayouts {
