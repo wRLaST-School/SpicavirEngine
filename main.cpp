@@ -24,6 +24,7 @@
 #include <SpRenderer.h>
 #include <SpDS.h>
 #include <TimeManager.h>
+#include <Camera2D.h>
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -102,6 +103,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Init TimeManager
 	TimeManager::Init();
+
+	//Init Cam2D
+	Camera2D::CoInit();
 
 	/*ÉãÅ[Év*/
 	while (true)

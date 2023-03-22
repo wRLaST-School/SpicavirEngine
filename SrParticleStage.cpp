@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SrParticleStage.h"
-#include <Camera.h>
+#include <Camera2D.h>
 
 void SrParticleStage::Init()
 {
@@ -36,7 +36,7 @@ void SrParticleStage::PreDraw()
 
 	dx->cmdList->RSSetScissorRects(1, &scissorrect);
 
-	Camera::UseCurrent();
+	Camera2D::SetVPMatCB(3);
 }
 
 void SrParticleStage::PostDraw()

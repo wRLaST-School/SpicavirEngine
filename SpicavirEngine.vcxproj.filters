@@ -381,6 +381,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>!Game\Background</Filter>
     </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>!Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -604,6 +607,9 @@
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>!Game\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>!Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
