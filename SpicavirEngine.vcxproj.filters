@@ -172,6 +172,12 @@
     <Filter Include="!Game\Background">
       <UniqueIdentifier>{4f3160eb-2a16-43a7-a76d-ede26b0339bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Enum/Struct">
+      <UniqueIdentifier>{e2577bcf-c330-4542-b30f-58dc410463d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Enum/Struct">
+      <UniqueIdentifier>{f7c8a359-1b6b-4ceb-a579-bfeea5182023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -324,50 +330,17 @@
     <ClCompile Include="SrcEngine\Drawer\TextDrawer.cpp">
       <Filter>Engine\ソースファイル\DrawHelper</Filter>
     </ClCompile>
-    <ClCompile Include="SpRenderer.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrOpaqueStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrAddStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrAlphaStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrImGuiStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrPostEffectStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrSpriteStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrParticleStage.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Ray.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
     <ClCompile Include="PlaneCollider.cpp">
       <Filter>Engine\ソースファイル\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SpDS.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
-    </ClCompile>
     <ClCompile Include="Monotone.cpp">
       <Filter>Engine\ソースファイル\PostEffect</Filter>
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation2D.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>!Game\Scene</Filter>
@@ -381,8 +354,41 @@
     <ClCompile Include="Background.cpp">
       <Filter>!Game\Background</Filter>
     </ClCompile>
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>!Game</Filter>
+    <ClCompile Include="SrcEngine\EnumStruct\Color.cpp">
+      <Filter>Engine\ソースファイル\Enum/Struct</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SpRenderer.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrAddStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrAlphaStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrImGuiStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrOpaqueStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrParticleStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrPostEffectStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrSpriteStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\2D\Camera2D.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\2D\SpDS.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\2D\Animation2D.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -539,44 +545,11 @@
     <ClInclude Include="SrcEngine\Drawer\TextDrawer.h">
       <Filter>Engine\ヘッダーファイル\DrawHelper</Filter>
     </ClInclude>
-    <ClInclude Include="SpRenderer.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="IRenderStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrOpaqueStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrAddStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrAlphaStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrImGuiStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrSpriteStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrPostEffectStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Ray.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
     <ClInclude Include="PlaneCollider.h">
       <Filter>Engine\ヘッダーファイル\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Anchor.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SpDS.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h">
       <Filter>Application\テスト用・参考用\Scene</Filter>
@@ -584,17 +557,11 @@
     <ClInclude Include="SrcApplication\Scene\TestScene.h">
       <Filter>Application\テスト用・参考用\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SrParticleStage.h">
-      <Filter>Application\ヘッダーファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Monotone.h">
       <Filter>Engine\ヘッダーファイル\PostEffect</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation2D.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>!Game\Scene</Filter>
@@ -608,8 +575,47 @@
     <ClInclude Include="Background.h">
       <Filter>!Game\Background</Filter>
     </ClInclude>
-    <ClInclude Include="Camera2D.h">
-      <Filter>!Game</Filter>
+    <ClInclude Include="SrcEngine\EnumStruct\Anchor.h">
+      <Filter>Engine\ヘッダーファイル\Enum/Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\EnumStruct\Color.h">
+      <Filter>Engine\ヘッダーファイル\Enum/Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrSpriteStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SpRenderer.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrAddStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrAlphaStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrImGuiStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrOpaqueStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrPostEffectStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrParticleStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\2D\Camera2D.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\2D\SpDS.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\2D\Animation2D.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\IRenderStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
