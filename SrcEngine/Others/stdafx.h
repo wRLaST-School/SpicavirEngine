@@ -20,6 +20,7 @@
 #include <EASTL/list.h>
 #include <EASTL/string.h>
 #include <EASTL/array.h>
+#include <EASTL/unordered_map.h>
 
 #include <wrl.h>
 #include <stdexcept>

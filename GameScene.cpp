@@ -31,6 +31,7 @@ void GameScene::Init()
 
 	Player::Init();
 	back.Init();
+	Camera2D::Set(&cam);
 }
 
 void GameScene::Update()

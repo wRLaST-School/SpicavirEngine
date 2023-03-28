@@ -2,6 +2,7 @@
 #include "IScene.h"
 #include "Color.h"
 #include <Background.h>
+#include <Camera2D.h>
 class GameScene :
     public IScene
 {
@@ -46,5 +47,6 @@ private:
     bool useSample = false;
 
     Background back;
+    Camera2D cam;
 };
 
