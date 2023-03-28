@@ -22,7 +22,7 @@ public:
 	static void SetRenderTarget(TextureKey key);
 	static void SetPreDrawFunc(function<void(void)> prop);
 	
-	static void DrawBoxLine(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
+	static void DrawBoxLine(int x, int y, int width, int height, Color color, float thickness, Anchor anchor = Anchor::Center);
 	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
 	static void DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness = 1);
 

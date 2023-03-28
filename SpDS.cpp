@@ -109,6 +109,19 @@ void SpDS::SetPreDrawFunc(function<void(void)> prop)
 	commands.insert(eastl::pair<int, function<void(void)>>(graphCount, prop));
 }
 
+void SpDS::DrawBoxLine(int x, int y, int width, int height, Color color, float thickness, Anchor anchor)
+{
+	int x1 = x - width / 2;
+	int x2 = x + width / 2;
+	int y1 = y - height / 2;
+	int y2 = y + height / 2;
+
+	DrawLine(x1, y1, x1, y2, color, thickness);
+	DrawLine(x1, y1, x2, y1, color, thickness);
+	DrawLine(x1, y2, x2, y2, color, thickness);
+	DrawLine(x2, y1, x2, y2, color, thickness);
+}
+
 void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
 {
 	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);

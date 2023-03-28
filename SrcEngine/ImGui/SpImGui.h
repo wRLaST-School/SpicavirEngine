@@ -10,7 +10,7 @@ public:
 
 	static void Command(std::function<void(void)> command);
 
-	static void Window(string windowTitle, std::function<void(void)> command);
+	static void Window(std::string windowTitle, std::function<void(void)> command);
 
 	static void Draw();
 
