@@ -40,6 +40,17 @@ void SpImGui::Command(std::function<void(void)> command)
 	commands.push_back(command);
 }
 
+void SpImGui::Window(string windowTitle, std::function<void(void)> command)
+{
+	commands.push_back([&] {
+		if (ImGui::Begin(windowTitle.c_str()))
+		{
+			command();
+		}
+	ImGui::End();
+	});
+}
+
 void SpImGui::Draw()
 {
 	ImGui_ImplDX12_NewFrame();
