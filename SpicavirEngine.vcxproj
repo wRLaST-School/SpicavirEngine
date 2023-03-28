@@ -112,6 +112,7 @@
     <ClCompile Include="Animation2D.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Easing.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monotone.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Animation2D.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Easing.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="Monotone.h" />

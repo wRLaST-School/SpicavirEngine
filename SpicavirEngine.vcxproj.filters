@@ -172,6 +172,9 @@
     <Filter Include="!Game\Background">
       <UniqueIdentifier>{4f3160eb-2a16-43a7-a76d-ede26b0339bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Game\Easing">
+      <UniqueIdentifier>{bdc2a971-1a45-4754-8c6c-6661838aafd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -380,6 +383,9 @@
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>!Game\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -604,6 +610,9 @@
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>!Game\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
