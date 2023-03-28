@@ -70,8 +70,6 @@ void GameScene::DrawSprite()
 		}
 	}
 
-	SpDS::DrawBoxLine(300, 300, 100, 100, Color(0xffc7f5), 4);
-
 	//円形範囲外のみモノトーンに
 	SpDS::SetBlendMode(SpDS::Blend::Sub);
 
