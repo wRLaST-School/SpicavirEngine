@@ -178,6 +178,12 @@
     <Filter Include="Engine\ソースファイル\Enum/Struct">
       <UniqueIdentifier>{f7c8a359-1b6b-4ceb-a579-bfeea5182023}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Game\Collider">
+      <UniqueIdentifier>{db4b0164-4f56-486c-aca8-7b23e94b8dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="!Game\MapChip">
+      <UniqueIdentifier>{cc9d1618-dd8f-46be-bbbe-d63c5b00b219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -392,6 +398,12 @@
     </ClCompile>
     <ClCompile Include="Easing.cpp">
       <Filter>!Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Colliders.cpp">
+      <Filter>!Game\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="MapChip.cpp">
+      <Filter>!Game\MapChip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -622,6 +634,12 @@
     </ClInclude>
     <ClInclude Include="Easing.h">
       <Filter>!Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Colliders.h">
+      <Filter>!Game\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="MapChip.h">
+      <Filter>!Game\MapChip</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
