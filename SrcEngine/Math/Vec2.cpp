@@ -36,7 +36,7 @@ Vec2 Vec2::operator+(const Vec2& v2) const
 
 Vec2 Vec2::operator-(const Vec2& v2) const
 {
-	return Vec2(this->x + v2.x, this->y + v2.y);
+	return Vec2(this->x - v2.x, this->y - v2.y);
 }
 
 Vec2 Vec2::operator*(float mul) const
