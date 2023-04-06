@@ -27,13 +27,13 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 	{
 		ancmY -= halfsize.y;
 	}
-	m = Matrix::Translation({ancmX, ancmY, 0.f});
+	m = Matrix();//Matrix::Translation({ancmX, ancmY, 0.f});
 
 	m *= Matrix::Scale({ dx * halfsize.x * 2, dy * halfsize.y * 2, 1.f });
 
 	m *= Matrix::RotZ(rot);
 
-	m *= Matrix::Translation({(float)x, (float)y, 0.f});
+	m *= Matrix::Translation({(float)x + ancmX * dx, (float)y + ancmY * dx, 0.f});
 
 	Graph g;
 	g.wMat = m;
@@ -46,6 +46,13 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 void SpDS::DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor)
 {
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
+}
+
+void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
+{
+	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);
+	float l = ray.GetLength();
+	DrawBox(startX + (int)(ray.x * 0.5f), startY + (int)(ray.y * 0.5f), thickness, (int)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
 }
 
 void SpDS::CreateBuffers()
@@ -143,13 +150,13 @@ void SpDS::RenderGraph()
 	}
 }
 
-vector<SpDS::Line> SpDS::lines;
+eastl::vector<SpDS::Line> SpDS::lines;
 
 /*static D3D12_VERTEX_BUFFER_VIEW vbView;
 static ComPtr<ID3D12Resource> vertBuff;*/
 //static Line* vertMap;
 
-vector<SpDS::Graph> SpDS::graphs;
-list<SpDS::GraphGPUData> SpDS::ggpu;
+eastl::vector<SpDS::Graph> SpDS::graphs;
+eastl::list<SpDS::GraphGPUData> SpDS::ggpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;

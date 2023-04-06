@@ -102,7 +102,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
-
+	case WM_CREATE:
+		//SetWindowLong(hwnd, GWL_STYLE, WS_POPUP | WS_BORDER); //ボーダーレスならコメントアウト解除
+		return DefWindowProc(hwnd, msg, wParam, lParam);
 	case WM_SIZE:
 		{
 			if (LOWORD(lParam) && HIWORD(lParam))
