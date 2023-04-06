@@ -7,6 +7,7 @@
 #ifdef _DEBUG
 #include <SpImGui.h>
 #endif
+#include <imgui.h>
 
 using namespace Input;
 

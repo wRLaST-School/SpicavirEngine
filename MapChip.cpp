@@ -10,11 +10,20 @@ const float MapChip::tileMult = (float)tileSize / 60.f;
 
 void MapChip::LoadResource()
 {
-	SpTextureManager::LoadTexture("Resources/bookshelf.png", "Bookshelf");
-	SpTextureManager::LoadTexture("Resources/woodbox.png", "WoodenBox");
+	vector<TextureKey> mapKeyst = {
+		"RedSolid",
+		"BlueSolid",
+		"RedOutline",
+		"BlueOutline"
+	};
 
-	mapKeys.push_back("WoodenBox");
-	mapKeys.push_back("Bookshelf");
+	SpTextureManager::LoadDiv("Resources/mapchip.png", 60, 60, 4, 1, mapKeyst);
+
+	mapKeys.push_back("RedSolid");
+	mapKeys.push_back("BlueSolid");
+
+	mapKeys.push_back("RedOutline");
+	mapKeys.push_back("BlueOutline");
 }
 
 void MapChip::Init(int sizeX, int sizeY)
