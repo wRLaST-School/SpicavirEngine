@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MapChip.h"
 #include <Camera2D.h>
+#include <SpImGui.h>
 
 vector<vector<int>> MapChip::map;
 
@@ -84,13 +85,11 @@ void MapChip::Resize(int newX, int newY)
 	{
 		for (int y = 0; y < mapSizeY - newY; y++)
 		{
-			map.push_back(vector<int>());
-			for (int x = 0; x < mapSizeX; x++)
-			{
-				map.back().pop_back();
-			}
+			map.pop_back();
 		}
 	}
+
+	mapSizeY = newY;
 }
 
 void MapChip::Draw()
@@ -106,6 +105,31 @@ void MapChip::Draw()
 			}
 		}
 	}
+
+	if (showSizeImGui) {
+		SpImGui::Command([&] {
+			ImGui::SetNextWindowPos(ImVec2(GetSpWindow()->width / 2, GetSpWindow()->height / 2));
+			if (ImGui::Begin(u8"マップサイズ")) {
+				ImGui::InputInt(u8"幅", &newx);
+				ImGui::InputInt(u8"高さ", &newy);
+
+				if (ImGui::Button(u8"決定")) {
+					Resize(newx, newy);
+					showSizeImGui = false;
+				}
+
+				if (ImGui::Button(u8"キャンセル")) {
+					newx = mapSizeX;
+					newy = mapSizeY;
+					showSizeImGui = false;
+				}
+			}
+
+			ImGui::End();
+		});
+	}
 }
 
 vector<TextureKey> MapChip::mapKeys;
+bool MapChip::showSizeImGui = false;
+int MapChip::newx = 32, MapChip::newy = 18;

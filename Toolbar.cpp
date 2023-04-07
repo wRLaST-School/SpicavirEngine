@@ -163,5 +163,10 @@ void Toolbar::ProcessMessage(WPARAM wp)
 			Grid::gridMode = Grid::GridMode::Disable;
 			return;
 		}
+		case ID_RESIZE:
+		{
+			MapChip::showSizeImGui = true;
+			return;
+		}
 	}
 }

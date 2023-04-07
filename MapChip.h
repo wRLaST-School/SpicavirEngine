@@ -16,4 +16,8 @@ public:
 	static int mapSizeX;
 	static int mapSizeY;
 	static vector<TextureKey> mapKeys;
+
+	static int newx, newy;
+
+	static bool showSizeImGui;
 };

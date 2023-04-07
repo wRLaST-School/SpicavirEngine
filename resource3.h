@@ -66,13 +66,15 @@
 #define ID_SNAKE_BODY                   40061
 #define ID_SNAKE_ORDER                  40062
 #define ID_MOVEBLOCK                    40063
+#define ID_40064                        40064
+#define ID_RESIZE                       40065
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        102
-#define _APS_NEXT_COMMAND_VALUE         40064
+#define _APS_NEXT_COMMAND_VALUE         40066
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

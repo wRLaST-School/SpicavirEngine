@@ -69,27 +69,6 @@ BEGIN
             MENUITEM "0",                           ID_CHIP1
             MENUITEM "1",                           ID_CHIP1
             MENUITEM "2",                           ID_CHIP2
-            MENUITEM "3",                           ID_CHIP3
-            MENUITEM "4",                           ID_CHIP4
-            MENUITEM "5",                           ID_CHIP5
-            MENUITEM "6",                           ID_CHIP6
-            MENUITEM "7",                           ID_CHIP7
-            MENUITEM "8",                           ID_CHIP8
-            MENUITEM "9",                           ID_CHIP9
-            MENUITEM "10",                          ID_CHIP10
-            MENUITEM "11",                          ID_CHIP11
-            MENUITEM "12",                          ID_CHIP12
-            MENUITEM "13",                          ID_CHIP13
-            MENUITEM "14",                          ID_CHIP14
-            MENUITEM "15",                          ID_CHIP15
-            MENUITEM "16",                          40046
-        END
-        MENUITEM "移動床",                         ID_MOVEBLOCK
-        POPUP "へびブロック"
-        BEGIN
-            MENUITEM "原点",                          ID_SNAKE_HEAD
-            MENUITEM "体",                           ID_SNAKE_BODY
-            MENUITEM "番号振り",                        ID_SNAKE_ORDER
         END
     END
     POPUP "グリッド"
@@ -98,6 +77,10 @@ BEGIN
         MENUITEM "前面",                          ID_GRID_FRONT
         MENUITEM "前面(半透明)",                     ID_GRID_TRANS
         MENUITEM "オフ",                          ID_GRID_DISABLE
+    END
+    POPUP "キャンバス"
+    BEGIN
+        MENUITEM "サイズ変更",                       ID_RESIZE
     END
 END
 
