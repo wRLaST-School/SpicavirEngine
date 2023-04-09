@@ -40,7 +40,7 @@ void MapChipTool::Draw()
 {
 	SpImGui::Command([&] {
 		if (ImGui::Begin("MapChip Tool")) {
-			ImGui::Combo(u8"ツール", &chipNum, u8"消しゴム\0赤ブロック\0青ブロック\0バグブロック(使用禁止)\0青点線(使用禁止)\0赤点線(使用禁止)\0黒ブロック\0落とし穴");
+			ImGui::Combo(u8"ツール", &chipNum, u8"消しゴム\0赤ブロック\0青ブロック\0バグブロック(使用禁止)\0青点線(使用禁止)\0赤点線(使用禁止)\0黒ブロック\0落とし穴\0Sideスタート\0Topスタート\0ゴール");
 		}
 		ImGui::End();
 	});
