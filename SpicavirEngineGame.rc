@@ -66,9 +66,11 @@ BEGIN
     BEGIN
         POPUP "マップチップ"
         BEGIN
-            MENUITEM "0",                           ID_CHIP1
-            MENUITEM "1",                           ID_CHIP1
-            MENUITEM "2",                           ID_CHIP2
+            MENUITEM "消しゴム",                        ID_CHIP1
+            MENUITEM "赤ブロック",                       ID_CHIP1
+            MENUITEM "青ブロック",                       ID_CHIP2
+            MENUITEM "黒ブロック",                       ID_CHIP6
+            MENUITEM "落とし穴",                        ID_CHIP7
         END
     END
     POPUP "グリッド"

@@ -15,16 +15,22 @@ void MapChip::LoadResource()
 		"RedSolid",
 		"BlueSolid",
 		"RedOutline",
-		"BlueOutline"
+		"BlueOutline",
+		"BlackSolid",
+		"Trapfall"
 	};
 
-	SpTextureManager::LoadDiv("Resources/mapchip.png", 60, 60, 4, 1, mapKeyst);
+	SpTextureManager::LoadDiv("Resources/mapchip.png", 60, 60, 6, 1, mapKeyst);
 
 	mapKeys.push_back("RedSolid");
 	mapKeys.push_back("BlueSolid");
 
 	mapKeys.push_back("RedOutline");
 	mapKeys.push_back("BlueOutline");
+	mapKeys.push_back("RedOutline");
+
+	mapKeys.push_back("BlackSolid");
+	mapKeys.push_back("Trapfall");
 }
 
 void MapChip::Init(int sizeX, int sizeY)
