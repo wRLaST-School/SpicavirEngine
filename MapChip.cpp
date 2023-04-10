@@ -19,10 +19,11 @@ void MapChip::LoadResource()
 		"BlackSolid",
 		"Trapfall",
 		"Start",
-		"Goal"
+		"Goal",
+		"TopStart"
 	};
 
-	SpTextureManager::LoadDiv("Resources/mapchip.png", 60, 60, 8, 1, mapKeyst);
+	SpTextureManager::LoadDiv("Resources/mapchip.png", 60, 60, 9, 1, mapKeyst);
 
 	mapKeys.push_back("RedSolid");
 	mapKeys.push_back("BlueSolid");
@@ -34,7 +35,7 @@ void MapChip::LoadResource()
 	mapKeys.push_back("BlackSolid");
 	mapKeys.push_back("Trapfall");
 	mapKeys.push_back("Start");
-	mapKeys.push_back("Start");
+	mapKeys.push_back("TopStart");
 	mapKeys.push_back("Goal");
 
 }
