@@ -194,6 +194,7 @@ void Input::Mouse::Close()
 
 bool Input::Mouse::Down(Click b)
 {
+	if (GetActiveWindow() != GetSpWindow()->hwnd) return false;
 	return GetInstance()->state.rgbButtons[(int)b] & (0x80) && ToolManager::isMouseActive;
 }
 
