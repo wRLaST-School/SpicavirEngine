@@ -1,12 +1,16 @@
 #include "stdafx.h"
 #include "SpDS.h"
 #include <Sprite.h>
+#include <RTVManager.h>
+#include <SpSwapChainManager.h>
+#include <GPipeline.h>
+#include <SpRootSignature.h>
 
 void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color brightness)
 {
 	Matrix m;
 	auto meta = SpTextureManager::GetTextureMetadata(key);
-	Float2 halfsize = {(float)meta.width / 2, (float)meta.height / 2};
+	Float2 halfsize = { (float)meta.width / 2, (float)meta.height / 2 };
 
 	//アンカーポイントに応じて移動
 	float ancmX = 0;
@@ -33,7 +37,7 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 
 	m *= Matrix::RotZ(rot);
 
-	m *= Matrix::Translation({(float)x + ancmX * dx, (float)y + ancmY * dx, 0.f});
+	m *= Matrix::Translation({ (float)x + ancmX * dx, (float)y + ancmY * dx, 0.f });
 
 	Graph g;
 	g.wMat = m;
@@ -41,11 +45,90 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 	g.brightness = brightness;
 
 	graphs.push_back(g);
+
+	graphCount++;
 }
 
 void SpDS::DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor)
 {
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
+}
+
+void SpDS::DrawBox(int x0, int y0, int x1, int y1, Color color)
+{
+	int sizeX = x1 - x0;
+	int sizeY = y1 - y0;
+
+	DrawBox(x0 + sizeX / 2, y0 + sizeY / 2, sizeX, sizeY, 0.f, color);
+}
+
+void SpDS::SetBlendMode(Blend blendMode)
+{
+	switch (blendMode) {
+	case Blend::Alpha:
+		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
+			//パイプライン変更
+			auto dx = GetWDX();
+
+			dx->cmdList->SetPipelineState(GPipeline::GetState("2d"));
+			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+			}));
+		break;
+
+	case Blend::Sub:
+		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
+			//パイプライン変更
+			auto dx = GetWDX();
+
+			dx->cmdList->SetPipelineState(GPipeline::GetState("2dSub"));
+			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+			}));
+		break;
+
+	case Blend::Add:
+		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
+			//パイプライン変更
+			auto dx = GetWDX();
+			dx->cmdList->SetPipelineState(GPipeline::GetState("2dAdd"));
+			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+			}));
+
+		break;
+	}
+
+}
+
+void SpDS::SetRenderTarget(TextureKey key)
+{
+	commands.insert(
+		eastl::pair<int, function<void(void)>>(graphCount, [&, key] {
+			//レンダーターゲット変更
+			if (key == "CurrentBuffer")
+			{
+				RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+				return;
+			}
+			RTVManager::SetRenderTargetToTexture(key, false);
+			}));
+}
+
+void SpDS::SetPreDrawFunc(function<void(void)> prop)
+{
+	commands.insert(eastl::pair<int, function<void(void)>>(graphCount, prop));
+}
+
+void SpDS::DrawBoxLine(int x, int y, int width, int height, Color color, float thickness, Anchor anchor)
+{
+	anchor;
+	int x1 = x - width / 2;
+	int x2 = x + width / 2;
+	int y1 = y - height / 2;
+	int y2 = y + height / 2;
+
+	DrawLine(x1, y1, x2, y1, color, (int)thickness);
+	DrawLine(x1, y1, x1, y2, color, (int)thickness);
+	DrawLine(x1, y2, x2, y2, color, (int)thickness);
+	DrawLine(x2, y1, x2, y2, color, (int)thickness);
 }
 
 void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
@@ -118,6 +201,8 @@ void SpDS::CreateBuffers()
 void SpDS::Render()
 {
 	RenderGraph();
+
+	graphCount = 0;
 }
 
 void SpDS::RenderGraph()
@@ -138,16 +223,41 @@ void SpDS::RenderGraph()
 	}
 	graphs.clear();
 
+	int dGraphIndex = 0;
 	for (auto& ggp : ggpu)
 	{
 		if (!ggp.used) continue;
+
+		//グラフインデックスに対応したコマンドがあったら実行
+		for (auto& c : commands)
+		{
+			if (c.first == dGraphIndex)
+			{
+				c.second();
+			}
+		}
+
+		//描画
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());
 
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &gvbView);
 
 		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+
+		dGraphIndex++;
 	}
+
+	//グラフインデックスに対応したコマンドがあったら実行
+	for (auto& c : commands)
+	{
+		if (c.first == dGraphIndex)
+		{
+			c.second();
+		}
+	}
+
+	commands.clear();
 }
 
 eastl::vector<SpDS::Line> SpDS::lines;
@@ -160,3 +270,6 @@ eastl::vector<SpDS::Graph> SpDS::graphs;
 eastl::list<SpDS::GraphGPUData> SpDS::ggpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;
+int SpDS::graphCount = 0;
+
+eastl::multimap<int, function<void(void)>> SpDS::commands;

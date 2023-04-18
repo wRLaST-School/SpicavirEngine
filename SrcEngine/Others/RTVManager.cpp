@@ -24,7 +24,7 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 	GetInstance().currentRTIndex = GetInstance().numRT - 2 + bbIndex;
 }
 
-void RTVManager::SetRenderTargetToTexture(TextureKey key)
+void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
 {
 	CloseCurrentResBar(GetCurrentRenderTarget());
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
@@ -48,7 +48,7 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key)
 
 	GetInstance().currentRTIndex = index;
 
-	ClearCurrentRenderTarget({0, 0, 0, 0});
+	if (clear)ClearCurrentRenderTarget({ 0, 0, 0, 0 });
 }
 
 void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key)
@@ -90,7 +90,7 @@ int RTVManager::GetCurrentRenderTarget()
 
 void RTVManager::ClearCurrentRenderTarget(Float4 color)
 {
-	float colour[] = {color.x, color.y, color.z, color.w};
+	float colour[] = { color.x, color.y, color.z, color.w };
 	GetWDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(GetCurrentRenderTarget()), colour, 0, nullptr);
 }
 
@@ -110,7 +110,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int index)
 
 void RTVManager::CloseCurrentResBar(int index)
 {
-	if (index < 0 ) return;
+	if (index < 0) return;
 
 	if (GetInstance().isAllResBarClosed)
 	{

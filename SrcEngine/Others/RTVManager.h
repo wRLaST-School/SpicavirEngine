@@ -5,7 +5,7 @@ class RTVManager
 {
 public:
 	static void SetRenderTargetToBackBuffer(UINT bbIndex);
-	static void SetRenderTargetToTexture(TextureKey key);
+	static void SetRenderTargetToTexture(TextureKey key, bool clear = true);
 
 	static void CreateRenderTargetTexture(int width, int height, TextureKey key);
 	static void CreateRenderTargetTexture(float width, float height, TextureKey key, bool useScreenRatio = false);
@@ -14,7 +14,7 @@ public:
 	static int GetCurrentRenderTarget();
 
 	static void ClearCurrentRenderTarget(Float4 color);
-	
+
 	static RTVManager& GetInstance();
 
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetHeapCPUHandle(int index);

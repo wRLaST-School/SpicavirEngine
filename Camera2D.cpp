@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Camera2D.h"
 
-void Camera2D::DrawRotaGraphCam(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color color)
+void Camera2D::DrawRotaGraphCam(int cx, int cy, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color color)
 {
-	SpDS::DrawRotaGraph(x - this->x, y - this->y, dx, dy, rot, key, anchor, color);
+	SpDS::DrawRotaGraph(cx - this->x, cy - this->y, dx, dy, rot, key, anchor, color);
 }
 
 Camera2D* Camera2D::Get()
