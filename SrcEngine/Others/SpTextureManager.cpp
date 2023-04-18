@@ -97,7 +97,11 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	texresdesc.DepthOrArraySize = (UINT16)metadata.arraySize;
 	texresdesc.MipLevels = (UINT16)metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
-
+	if (!texresdesc.Height || !texresdesc.Width || !texresdesc.DepthOrArraySize)
+	{
+		OutputDebugStringW(L"Texture Size or Depth Appeared to be Zero. Texture was not Loaded.\n");
+		return "notexture";
+	}
 	HRESULT hr = GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_NONE,
@@ -214,6 +218,11 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	texresdesc.MipLevels = (UINT16)metadata.mipLevels;
 	texresdesc.SampleDesc.Count = 1;
 
+	if (!texresdesc.Height || !texresdesc.Width || !texresdesc.DepthOrArraySize)
+	{
+		OutputDebugStringW(L"Texture Size or Depth Appeared to be Zero. Texture was not Loaded.\n");
+		return "notexture";
+	}
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
 		D3D12_HEAP_FLAG_NONE,
