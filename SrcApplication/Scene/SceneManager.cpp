@@ -3,35 +3,33 @@
 #include "Input.h"
 #include "FrameRate.h"
 #include <SingleCamTestScene.h>
-#include <future>
-#include <thread>
-#include <SoundManager.h>
 #include <IPostEffector.h>
 #include <Bloom.h>
 
-static future<void> ftr;
+future<void> SceneManager::ftr;
+bool SceneManager::transitionQueued = false;
 
 void SceneManager::Init()
 {
-	BloomP1::Init();
-	BloomP2::Init();
-	BloomP3::Init();
-	BloomFin::Init();
 	InstantTransition<SingleCamTestScene>();
+	//InstantTransition<GameScene>();
 }
 
 void SceneManager::Update()
 {
+	ConfirmTransition();
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
 
-	if (Input::Key::Triggered(DIK_T))
+	Transition();
+
+	if (Input::Key::Triggered(DIK_T) && Input::Key::Down(DIK_LSHIFT))
 	{
 		LoadScene<TestScene>();
 		Transition();
 	}
 
-	if (Input::Key::Triggered(DIK_N))
+	if (Input::Key::Triggered(DIK_N) && Input::Key::Down(DIK_LSHIFT))
 	{
 		LoadScene<SingleCamTestScene>();
 		Transition();
@@ -59,6 +57,14 @@ void SceneManager::Transition()
 {
 	if (loadState == LoadState::Loaded)
 	{
+		transitionQueued = true;
+	}
+}
+
+void SceneManager::ConfirmTransition()
+{
+	if (transitionQueued)
+	{
 		delete currentScene.release();
 		currentScene.swap(nextScene);
 
@@ -66,11 +72,11 @@ void SceneManager::Transition()
 
 		loadState = LoadState::NotInProgress;
 
-		ftr = std::async(std::launch::async, [&] {
-				SpTextureManager::ReleasePerSceneTexture();
-				ModelManager::ReleasePerSceneModel();
-				SoundManager::ReleasePerSceneSounds();
-			});
+		SpTextureManager::ReleasePerSceneTexture();
+		ModelManager::ReleasePerSceneModel();
+		SoundManager::ReleasePerSceneSounds();
+
+		transitionQueued = false;
 	}
 }
 
@@ -87,26 +93,6 @@ template <class NextScene> void SceneManager::InstantTransition()
 	currentScene->LoadResources();
 	currentScene->Init();
 	FrameRate::InitMark();
-}
-
-template<class NextScene>
-void SceneManager::LoadScene()
-{
-	if(loadState != LoadState::NotInProgress)
-	{
-		return;
-	}
-
-	nextScene = unique_ptr<IScene>(new NextScene());
-
-	ftr = std::async(std::launch::async, [&] {
-			SpTextureManager::PreLoadNewScene();
-			ModelManager::PreLoadNewScene();
-			SoundManager::PreLoadNewScene();
-			nextScene->LoadResources();
-			loadFinished = true;
-		});
-	loadState = LoadState::Loading;
 }
 
 void SceneManager::UpdateLoadState()

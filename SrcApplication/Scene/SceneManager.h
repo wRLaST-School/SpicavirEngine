@@ -1,6 +1,9 @@
 #pragma once
 #include "IScene.h"
 #include "Essentials.h"
+#include <future>
+#include <thread>
+#include <SoundManager.h>
 class SceneManager final
 {
 public:
@@ -11,10 +14,29 @@ public:
 	static void DrawBack();
 
 	//非同期で次のシーンの読み込みを開始する
-	template <class NextScene> static void LoadScene();
+	template <class NextScene> static void LoadScene()
+	{
+		if (loadState != LoadState::NotInProgress)
+		{
+			return;
+		}
+
+		nextScene = make_unique<NextScene>();
+
+		ftr = std::async(std::launch::async, [&] {
+			SpTextureManager::PreLoadNewScene();
+			ModelManager::PreLoadNewScene();
+			SoundManager::PreLoadNewScene();
+			nextScene->LoadResources();
+			loadFinished = true;
+			});
+		loadState = LoadState::Loading;
+	};
 
 	//読み込みが終わっていたらシーンを切り替え、終わっていないなら何もしない
 	static void Transition();
+
+	static void ConfirmTransition();
 
 	enum class LoadState {
 		NotInProgress,
@@ -33,8 +55,9 @@ private:
 	//こっちはリアルタイム更新、次フレームの最初にリセット
 	static bool loadFinished;
 	static void UpdateLoadState();
+	static bool transitionQueued;
 
-//以下基本使用禁止
+	//以下基本使用禁止
 public:
 	//非同期でのシーン読み込みを行わずに直接シーン切り替えをする(バグ起きがちなので注意)
 	template <class NextScene> static void InstantTransition();
@@ -44,5 +67,5 @@ private:
 	~SceneManager() {};
 	SceneManager(const SceneManager& a) = delete;
 	SceneManager& operator=(const SceneManager& a) = delete;
+	static future<void> ftr;
 };
-
