@@ -205,6 +205,7 @@ void RTVManager::CloseCurrentResBar()
 		if (index >= GetInstance().numRT - 2)
 		{
 			//リソースバリアーを戻す
+			GetWDX()->barrierDesc.Transition.pResource = GetSCM()->backBuffers[index - GetInstance().numRT + 2].Get();
 			GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 			GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
@@ -213,6 +214,7 @@ void RTVManager::CloseCurrentResBar()
 		}
 
 		//リソースバリアーを戻す
+		GetWDX()->barrierDesc.Transition.pResource = SpTextureManager::GetInstance().texBuffs[index].Get();
 		GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 		GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 
