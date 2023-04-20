@@ -45,7 +45,7 @@ void GPipelineManager::CreateAll()
 
 	particleDesc.Render.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_POINT;
 
-	particleDesc.Blend.Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Add);
+	particleDesc.Blend[0].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Add);
 
 	particleDesc.RootSignature.ptr = SpRootSignature::Get("Particle")->rootsignature.Get();
 
@@ -103,8 +103,31 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(pl2dDesc, "2d");
 #pragma endregion
 
+#pragma region レンダーターゲット2つ
+	//RegisterShader("def");
+	//InitVS("def", "BasicVS.hlsl");
+	//InitGS("def", "BasicGS.hlsl");
+	//InitPS("def", "BasicPS.hlsl");
+
+	PipelineDesc doubleDesc;
+	doubleDesc.Render.InputLayout.pInputElementDescs = ModelCommon::inputLayout;
+	doubleDesc.Render.InputLayout.NumElements = _countof(ModelCommon::inputLayout);
+
+	doubleDesc.RootSignature.ptr = SpRootSignature::Get("3D")->rootsignature.Get();
+
+	doubleDesc.Shader.pShader = GetShader("def");
+	doubleDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
+
+	doubleDesc.Render.NumRenderTargets = 2;
+	doubleDesc.Render.RTVFormat[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+	doubleDesc.Blend[0].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Alpha);
+	doubleDesc.Blend[1].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Inv);
+
+	GPipeline::Create(doubleDesc, "double");
+#pragma endregion
+
 #pragma region 追加用（追加するときに下にコピペ）
 
 #pragma endregion
-
 }

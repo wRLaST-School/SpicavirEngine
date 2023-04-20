@@ -20,19 +20,39 @@ void GPipeline::InitDesc(PipelineDesc desc)
 	psod.SampleMask = desc.Render.SampleMask;
 	psod.RasterizerState = desc.Render.RasterizerState;
 
-	D3D12_RENDER_TARGET_BLEND_DESC& blendDesc = psod.BlendState.RenderTarget[0];
-	blendDesc.RenderTargetWriteMask = desc.Blend.RenderTargetWriteMask;
-	blendDesc.BlendEnable = desc.Blend.BlendEnable;
-	blendDesc.BlendOpAlpha = desc.Blend.Desc.BlendOpAlpha;
-	blendDesc.SrcBlendAlpha = desc.Blend.Desc.SrcBlendAlpha;
-	blendDesc.DestBlendAlpha = desc.Blend.Desc.DestBlendAlpha;
+	D3D12_RENDER_TARGET_BLEND_DESC* blendDesc[8] = {
+		& psod.BlendState.RenderTarget[0],
+		& psod.BlendState.RenderTarget[1],
+		& psod.BlendState.RenderTarget[2],
+		& psod.BlendState.RenderTarget[3],
+		& psod.BlendState.RenderTarget[4],
+		& psod.BlendState.RenderTarget[5],
+		& psod.BlendState.RenderTarget[6],
+		& psod.BlendState.RenderTarget[7],
+	};
 
-	blendDesc.BlendOp = desc.Blend.Desc.BlendOp;
-	blendDesc.SrcBlend = desc.Blend.Desc.SrcBlend;
-	blendDesc.DestBlend = desc.Blend.Desc.DestBlend;
+	for (int i = 0; i < 8; i++)
+	{
+		blendDesc[i]->RenderTargetWriteMask = desc.Blend[i].RenderTargetWriteMask;
+		blendDesc[i]->BlendEnable = desc.Blend[i].BlendEnable;
+		blendDesc[i]->BlendOpAlpha = desc.Blend[i].Desc.BlendOpAlpha;
+		blendDesc[i]->SrcBlendAlpha = desc.Blend[i].Desc.SrcBlendAlpha;
+		blendDesc[i]->DestBlendAlpha = desc.Blend[i].Desc.DestBlendAlpha;
+
+		blendDesc[i]->BlendOp = desc.Blend[i].Desc.BlendOp;
+		blendDesc[i]->SrcBlend = desc.Blend[i].Desc.SrcBlend;
+		blendDesc[i]->DestBlend = desc.Blend[i].Desc.DestBlend;
+	}
 
 	psod.NumRenderTargets = desc.Render.NumRenderTargets;
-	psod.RTVFormats[0] = desc.Render.RTVFormat;
+	psod.RTVFormats[0] = desc.Render.RTVFormat[0];
+	psod.RTVFormats[1] = desc.Render.RTVFormat[1];
+	psod.RTVFormats[2] = desc.Render.RTVFormat[2];
+	psod.RTVFormats[3] = desc.Render.RTVFormat[3];
+	psod.RTVFormats[4] = desc.Render.RTVFormat[4];
+	psod.RTVFormats[5] = desc.Render.RTVFormat[5];
+	psod.RTVFormats[6] = desc.Render.RTVFormat[6];
+	psod.RTVFormats[7] = desc.Render.RTVFormat[7];
 	psod.SampleDesc = desc.Render.SampleDesc;
 
 	//Depth

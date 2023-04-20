@@ -196,7 +196,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	ScratchImage scratchImg;
 	result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
 		srcImg.GetMetadata(),
-		DXGI_FORMAT_R16G16B16A16_FLOAT, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
+		DXGI_FORMAT_R8G8B8A8_UNORM, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
 		scratchImg);
 
 	if (SUCCEEDED(result)) {
@@ -330,15 +330,15 @@ TextureKey SpTextureManager::CreateDummyTexture(float width, float height, Textu
 	{
 		Float2 ratio = { width, height };
 		textureResourceDesc =
-			CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, (UINT)(ratio.x * GetSpWindow()->width), (UINT)(ratio.y * GetSpWindow()->height), 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+			CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, (UINT)(ratio.x * GetSpWindow()->width), (UINT)(ratio.y * GetSpWindow()->height), 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
 	}
 	else {
 		textureResourceDesc =
-			CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, (UINT)width, (UINT)height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+			CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, (UINT)width, (UINT)height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 	}
 
-	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R16G16B16A16_FLOAT, {0, 0, 0, 0} };
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
 
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,
@@ -422,9 +422,9 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int width, int heig
 	CD3DX12_HEAP_PROPERTIES texHeapProp = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_DEFAULT);
 
 	D3D12_RESOURCE_DESC textureResourceDesc =
-		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R16G16B16A16_FLOAT, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
-	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R16G16B16A16_FLOAT, {0, 0, 0, 0} };
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
 
 	GetWDX()->dev->CreateCommittedResource(
 		&texHeapProp,

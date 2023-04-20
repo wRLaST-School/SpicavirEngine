@@ -5,7 +5,7 @@
 
 void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 {
-	CloseCurrentResBar(GetCurrentRenderTarget());
+	CloseCurrentResBar();
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	SpDirectX* dx = GetWDX();
 	//リソースバリアーを書き込み可能状態に
@@ -21,12 +21,17 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
-	GetInstance().currentRTIndex = GetInstance().numRT - 2 + bbIndex;
+	GetInstance().currentRTIndex[0] = GetInstance().numRT - 2 + bbIndex;
+
+	for (int i = 1; i < 8; i++)
+	{
+		GetInstance().currentRTIndex[i] = -1;
+	}
 }
 
 void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
 {
-	CloseCurrentResBar(GetCurrentRenderTarget());
+	CloseCurrentResBar();
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	int index = (int)SpTextureManager::GetIndex(key);
 
@@ -46,9 +51,80 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
 	D3D12_CPU_DESCRIPTOR_HANDLE* pcpuhnd = &cpuhnd;
 	GetWDX()->cmdList->OMSetRenderTargets(1, pcpuhnd, false, &dsvH);
 
-	GetInstance().currentRTIndex = index;
+	GetInstance().currentRTIndex[0] = index;
+	for (int i = 1; i < 8; i++)
+	{
+		GetInstance().currentRTIndex[i] = -1;
+	}
 
 	if (clear)ClearCurrentRenderTarget({ 0, 0, 0, 0 });
+}
+
+void RTVManager::SetRenderTargets(vector<TextureKey> keys)
+{
+	CloseCurrentResBar();
+	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	
+	for (auto& key : keys)
+	{
+		if (key == "CurrentBuffer")
+		{
+			SpDirectX* dx = GetWDX();
+			//リソースバリアーを書き込み可能状態に
+			dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[GetSCM()->swapchain->GetCurrentBackBufferIndex()].Get();
+			dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+			dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+			dx->cmdList->ResourceBarrier(1, &dx->barrierDesc);
+		}
+
+		else
+		{
+			SpDirectX* dx = GetWDX();
+			//リソースバリアーを書き込み可能状態に
+			dx->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
+			dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+			dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+			dx->cmdList->ResourceBarrier(1, &dx->barrierDesc);
+
+			GetInstance().isAllResBarClosed = false;
+		}
+	}
+
+	//TODO:専用のDSVを用意
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+
+	vector<D3D12_CPU_DESCRIPTOR_HANDLE> pcpuhnds;
+	for (auto& key : keys)
+	{
+		if (key == "CurrentBuffer")
+		{
+			CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetInstance().GetHeapCPUHandle(GetInstance().numRT - 2),
+				GetSCM()->swapchain->GetCurrentBackBufferIndex(), GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc.Type));
+			pcpuhnds.push_back(rtvH);
+		}
+		else
+		{
+			auto cpuhnd = (GetInstance().GetHeapCPUHandle(SpTextureManager::GetIndex(key)));
+			pcpuhnds.push_back(cpuhnd);
+		}
+	}
+
+	GetWDX()->cmdList->OMSetRenderTargets((UINT)keys.size(), &pcpuhnds.front(), false, &dsvH);
+
+	for (int i = 0; i < 8; i++)
+	{
+		if (i >= keys.size())
+		{
+			GetInstance().currentRTIndex[i] = -1;
+			continue;
+		}
+		GetInstance().currentRTIndex[i] = SpTextureManager::GetIndex(keys.at(i));
+	}
+}
+
+void RTVManager::SetRenderTargetToCurrentBB()
+{
+	SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
 void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key)
@@ -85,13 +161,19 @@ void RTVManager::CreateHeaps()
 
 int RTVManager::GetCurrentRenderTarget()
 {
-	return GetInstance().currentRTIndex;
+	return GetInstance().currentRTIndex[0];
 }
 
 void RTVManager::ClearCurrentRenderTarget(Float4 color)
 {
 	float colour[] = { color.x, color.y, color.z, color.w };
-	GetWDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(GetCurrentRenderTarget()), colour, 0, nullptr);
+	for (int i = 0; i < 8; i++)
+	{
+		int index = GetInstance().currentRTIndex[i];
+		if (index < 0) continue;
+
+		GetWDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(index), colour, 0, nullptr);
+	}
 }
 
 RTVManager& RTVManager::GetInstance()
@@ -108,29 +190,33 @@ D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int index)
 	return heapHandle;
 }
 
-void RTVManager::CloseCurrentResBar(int index)
+void RTVManager::CloseCurrentResBar()
 {
-	if (index < 0) return;
-
-	if (GetInstance().isAllResBarClosed)
+	for (int i = 0; i < 8; i++)
 	{
-		return;
-	}
+		int index = GetInstance().currentRTIndex[i];
+		if (index < 0) continue;
 
-	if (index >= GetInstance().numRT - 2)
-	{
+		if (GetInstance().isAllResBarClosed)
+		{
+			continue;
+		}
+
+		if (index >= GetInstance().numRT - 2)
+		{
+			//リソースバリアーを戻す
+			GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+			GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+
+			GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
+			continue;
+		}
+
 		//リソースバリアーを戻す
 		GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-		GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+		GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 
 		GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
-		return;
 	}
-
-	//リソースバリアーを戻す
-	GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-
-	GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
 
 }

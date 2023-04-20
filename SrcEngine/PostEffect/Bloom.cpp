@@ -72,7 +72,7 @@ void BloomFin::Init()
 	pl2dDesc.Render.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
 	pl2dDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 
-	pl2dDesc.Blend.Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Add);
+	pl2dDesc.Blend[0].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Add);
 
 	GPipeline::Create(pl2dDesc, name+string("Add"));
 }

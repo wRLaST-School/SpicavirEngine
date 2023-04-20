@@ -19,7 +19,7 @@ void SpImGui::Init()
 
 	InitDirectXForImGui();
 
-	ImGui_ImplDX12_Init(GetWDX()->dev.Get(), SpSwapChainManager::bbNum, DXGI_FORMAT_R16G16B16A16_FLOAT,
+	ImGui_ImplDX12_Init(GetWDX()->dev.Get(), SpSwapChainManager::bbNum, DXGI_FORMAT_R8G8B8A8_UNORM,
 		SpTextureManager::GetInstance().srvHeap.Get(),
 		SpTextureManager::GetCPUDescHandle("imgui_srv"),
 		SpTextureManager::GetGPUDescHandle("imgui_srv"));
