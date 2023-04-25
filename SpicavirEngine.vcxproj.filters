@@ -625,6 +625,12 @@
     <FxCompile Include="Resources\Shaders\BasicInvVS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\MultiTexturePS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\MultiTextureVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -655,6 +661,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\BasicInv.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\MultiTexture.hlsli">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
