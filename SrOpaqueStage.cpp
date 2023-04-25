@@ -11,7 +11,7 @@ void SrOpaqueStage::Init()
 void SrOpaqueStage::PreDraw()
 {
 	SpDirectX* dx = GetWDX();
-	dx->cmdList->SetPipelineState(GPipeline::GetState("def"));
+	dx->cmdList->SetPipelineState(GPipeline::GetState("double"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 
 	D3D12_VIEWPORT viewport{};
@@ -36,12 +36,10 @@ void SrOpaqueStage::PreDraw()
 
 	dx->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	dx->cmdList->RSSetScissorRects(1, &scissorrect);
-
 	Light::Use();
 	Camera::UseCurrent();
 
-	RTVManager::SetRenderTargetToTexture("BloomBefore");
+	//RTVManager::SetRenderTargetToTexture("BloomBefore");
 
 	vector<TextureKey> rts = { "normalTest", "inverseTest" };
 	RTVManager::SetRenderTargets(rts);

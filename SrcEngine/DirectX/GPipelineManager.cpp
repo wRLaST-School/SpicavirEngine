@@ -104,10 +104,9 @@ void GPipelineManager::CreateAll()
 #pragma endregion
 
 #pragma region レンダーターゲット2つ
-	//RegisterShader("def");
-	//InitVS("def", "BasicVS.hlsl");
-	//InitGS("def", "BasicGS.hlsl");
-	//InitPS("def", "BasicPS.hlsl");
+	RegisterShader("defd");
+	InitVS("defd", "BasicInvVS.hlsl");
+	InitPS("defd", "BasicInvPS.hlsl");
 
 	PipelineDesc doubleDesc;
 	doubleDesc.Render.InputLayout.pInputElementDescs = ModelCommon::inputLayout;
@@ -115,14 +114,14 @@ void GPipelineManager::CreateAll()
 
 	doubleDesc.RootSignature.ptr = SpRootSignature::Get("3D")->rootsignature.Get();
 
-	doubleDesc.Shader.pShader = GetShader("def");
+	doubleDesc.Shader.pShader = GetShader("defd");
 	doubleDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 
 	doubleDesc.Render.NumRenderTargets = 2;
 	doubleDesc.Render.RTVFormat[1] = DXGI_FORMAT_R8G8B8A8_UNORM;
 
 	doubleDesc.Blend[0].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Alpha);
-	doubleDesc.Blend[1].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Inv);
+	doubleDesc.Blend[1].Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Alpha);
 
 	GPipeline::Create(doubleDesc, "double");
 #pragma endregion

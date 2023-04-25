@@ -619,6 +619,12 @@
     <FxCompile Include="Resources\Shaders\NoLightVS.hlsl">
       <Filter>Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\BasicInvPS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\BasicInvVS.hlsl">
+      <Filter>Shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Basic.hlsli">
@@ -646,6 +652,9 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Resources\Shaders\NoLight.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Resources\Shaders\BasicInv.hlsli">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
