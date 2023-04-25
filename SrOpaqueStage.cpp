@@ -11,7 +11,7 @@ void SrOpaqueStage::Init()
 void SrOpaqueStage::PreDraw()
 {
 	SpDirectX* dx = GetWDX();
-	dx->cmdList->SetPipelineState(GPipeline::GetState("double"));
+	dx->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 
 	D3D12_VIEWPORT viewport{};
@@ -39,10 +39,10 @@ void SrOpaqueStage::PreDraw()
 	Light::Use();
 	Camera::UseCurrent();
 
-	//RTVManager::SetRenderTargetToTexture("BloomBefore");
+	RTVManager::SetRenderTargetToTexture("BloomBefore");
 
-	vector<TextureKey> rts = { "normalTest", "inverseTest" };
-	RTVManager::SetRenderTargets(rts);
+	//vector<TextureKey> rts = { "normalTest", "inverseTest" };
+	//RTVManager::SetRenderTargets(rts);
 }
 
 void SrOpaqueStage::PostDraw()
