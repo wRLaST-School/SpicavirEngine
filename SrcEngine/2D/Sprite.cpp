@@ -14,13 +14,13 @@ Sprite::Sprite(TextureKey key)
 	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
 	this->width = (float)texmeta.width;
 	this->height = (float)texmeta.height;
-	float hlfw = (float)texmeta.width / 2;
-	float hlfh = (float)texmeta.height / 2;
+	/*float hlfw = (float)texmeta.width / 2;
+	float hlfh = (float)texmeta.height / 2;*/
 	Sprite::Vertex vertices[] = {
-		{{-hlfw, hlfh, 0}, {0.0f, 1.0f}},
-		{{-hlfw, -hlfh, 0}, {0.0f, 0.0f}},
-		{{hlfw, hlfh, 0}, {1.0f, 1.0f}},
-		{{hlfw, -hlfh, 0}, {1.0f, 0.0f}},
+		{{-1.0, 1.0, 0}, {0.0f, 0.0f}},
+		{{-1.0, -1.0, 0}, {0.0f, 1.0f}},
+		{{1.0, 1.0, 0}, {1.0f, 0.0f}},
+		{{1.0, -1.0, 0}, {1.0f, 1.0f}},
 	};
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Sprite::Vertex) * _countof(vertices));
@@ -135,7 +135,7 @@ Sprite::Sprite(string path, TextureKey newKey)
 void Sprite::PreSpriteDraw()
 {
 	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
-	cl->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
+	cl->SetGraphicsRootSignature(SpRootSignature::Get("2D2tex")->rootsignature.Get());
 	cl->SetPipelineState(GPipeline::GetState("2d"));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 

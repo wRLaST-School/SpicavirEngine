@@ -187,4 +187,46 @@ void RootSignatureManager::RegisterAllRS()
 	}
 #pragma endregion
 
+#pragma region 2D 2Texture
+	{
+		SpRootSignature* rs2d = SpRootSignature::Register("2D2tex");
+
+		rs2d->UseDefaultSettings();
+
+		D3D12_DESCRIPTOR_RANGE descRange{};
+		descRange.NumDescriptors = 1;
+		descRange.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+		descRange.BaseShaderRegister = 0;
+		descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+		D3D12_DESCRIPTOR_RANGE descRange2{};
+		descRange2.NumDescriptors = 1;
+		descRange2.RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+		descRange2.BaseShaderRegister = 1;
+		descRange2.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+		//定数バッファ0番スプライト用
+		rs2d->params.emplace_back();
+		rs2d->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rs2d->params[0].Descriptor.ShaderRegister = 0;
+		rs2d->params[0].Descriptor.RegisterSpace = 0;
+		rs2d->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//テクスチャレジスタ0番
+		rs2d->params.emplace_back();
+		rs2d->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+		rs2d->params[1].DescriptorTable.pDescriptorRanges = &descRange;
+		rs2d->params[1].DescriptorTable.NumDescriptorRanges = 1;
+		rs2d->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		//テクスチャレジスタ1番
+		rs2d->params.emplace_back();
+		rs2d->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+		rs2d->params[2].DescriptorTable.pDescriptorRanges = &descRange2;
+		rs2d->params[2].DescriptorTable.NumDescriptorRanges = 1;
+		rs2d->params[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
+		rs2d->Create();
+	}
+#pragma endregion
 }

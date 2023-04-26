@@ -83,14 +83,14 @@ void GPipelineManager::CreateAll()
 
 #pragma region デフォルト2D
 	RegisterShader("2d");
-	InitVS("2d", "SpriteVS.hlsl");
-	InitPS("2d", "SpritePS.hlsl");
+	InitVS("2d", "MultiTextureVS.hlsl");
+	InitPS("2d", "MultiTexturePS.hlsl");
 
 	PipelineDesc pl2dDesc;
 	pl2dDesc.Render.InputLayout.pInputElementDescs = SpriteCommon::inputLayout2D;
 	pl2dDesc.Render.InputLayout.NumElements = _countof(SpriteCommon::inputLayout2D);
 
-	pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D")->rootsignature.Get();
+	pl2dDesc.RootSignature.ptr = SpRootSignature::Get("2D2tex")->rootsignature.Get();
 
 	pl2dDesc.Shader.pShader = GetShader("2d");
 

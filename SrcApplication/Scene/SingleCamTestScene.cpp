@@ -7,6 +7,7 @@
 #include <SpSwapChainManager.h>
 #include <Bloom.h>
 #include <SoundManager.h>
+#include <SpRenderer.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -44,6 +45,8 @@ void SingleCamTestScene::LoadResources()
 void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
+
+	spr = Sprite("normalTest");
 
 	pane.model = ModelManager::GetModel("SmoothSphere");
 	pane2.model = ModelManager::GetModel("Cube");
@@ -158,8 +161,19 @@ void SingleCamTestScene::Draw3D()
 void SingleCamTestScene::DrawSprite()
 {
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
-	SpDS::DrawLine(1000, 500, (int)Input::Mouse::GetPos().x, (int)Input::Mouse::GetPos().y, Color(0xffffff), 5);
-	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, (float)timer * PIf / 180 * 10, "particle1", Anchor::TopLeft, Color(0xffffff));
-	SpDS::DrawRotaGraph(0, 0, 0.5f, 0.5f, 0, "normalTest", Anchor::TopLeft);
-	SpDS::DrawRotaGraph(1920, 1080, 0.5f, 0.5f, 0, "inverseTest", Anchor::BottomRight);
+	//SpDS::DrawLine(1000, 500, (int)Input::Mouse::GetPos().x, (int)Input::Mouse::GetPos().y, Color(0xffffff), 5);
+	//SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, (float)timer * PIf / 180 * 10, "particle1", Anchor::TopLeft, Color(0xffffff));
+	//SpDS::DrawRotaGraph(0, 0, 0.5f, 0.5f, 0, "normalTest", Anchor::TopLeft);
+	//SpDS::DrawRotaGraph(1920, 1080, 0.5f, 0.5f, 0, "inverseTest", Anchor::BottomRight);
+
+	SpRenderer::DrawCommand([&] {
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle("Bloom3rdAfter"));
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(2, SpTextureManager::GetGPUDescHandle("inverseTest"));
+
+		//GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, spr.constBuff.buffer->GetGPUVirtualAddress());
+
+		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &spr.vbView);
+
+		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+	}, SpRenderer::Stage::Sprite);
 }
