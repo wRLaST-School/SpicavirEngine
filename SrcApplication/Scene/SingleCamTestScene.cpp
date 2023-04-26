@@ -118,6 +118,8 @@ void SingleCamTestScene::Update()
 			{
 				pane.model = ModelManager::GetModel("FlatSphere");
 			}
+
+			ImGui::Checkbox("Bloom", &useBloom);
 		}
 	ImGui::End();
 	});
@@ -165,9 +167,9 @@ void SingleCamTestScene::DrawSprite()
 	//SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, (float)timer * PIf / 180 * 10, "particle1", Anchor::TopLeft, Color(0xffffff));
 	//SpDS::DrawRotaGraph(0, 0, 0.5f, 0.5f, 0, "normalTest", Anchor::TopLeft);
 	//SpDS::DrawRotaGraph(1920, 1080, 0.5f, 0.5f, 0, "inverseTest", Anchor::BottomRight);
-
-	SpRenderer::DrawCommand([&] {
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle("Bloom3rdAfter"));
+	if(!useBloom)
+		SpRenderer::DrawCommand([&] {
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle("Gauss3rdAfter"));
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(2, SpTextureManager::GetGPUDescHandle("inverseTest"));
 
 		//GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, spr.constBuff.buffer->GetGPUVirtualAddress());
@@ -175,5 +177,6 @@ void SingleCamTestScene::DrawSprite()
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &spr.vbView);
 
 		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
-	}, SpRenderer::Stage::Sprite);
+			}, SpRenderer::Stage::Sprite);
+
 }

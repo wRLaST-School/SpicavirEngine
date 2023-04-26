@@ -38,6 +38,8 @@ private:
 
     long long timer;
 
+    bool useBloom = false;
+
     //Animation2D anim;
 };
 
