@@ -36,6 +36,10 @@ void MapChip::LoadResource()
 	mapKeys.push_back("Start");
 	mapKeys.push_back("Start");
 	mapKeys.push_back("Goal");
+	mapKeys.push_back("Trapfall");
+	mapKeys.push_back("Trapfall");
+	mapKeys.push_back("Trapfall");
+	mapKeys.push_back("Trapfall");
 
 }
 
