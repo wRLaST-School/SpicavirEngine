@@ -27,17 +27,17 @@ void SceneManager::Update()
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
 
-	if (Input::Key::Triggered(DIK_T))
-	{
-		LoadScene<TestScene>();
-		Transition();
-	}
+	//if (Input::Key::Triggered(DIK_T))
+	//{
+	//	LoadScene<TestScene>();
+	//	Transition();
+	//}
 
-	if (Input::Key::Triggered(DIK_N))
-	{
-		LoadScene<SingleCamTestScene>();
-		Transition();
-	}
+	//if (Input::Key::Triggered(DIK_N))
+	//{
+	//	LoadScene<SingleCamTestScene>();
+	//	Transition();
+	//}
 
 	currentScene->Update();
 }
