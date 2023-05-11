@@ -148,7 +148,7 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	pane2.DrawAlpha("white");
+	//pane2.DrawAlpha("white");
 	pane.Draw("white");
 	sky.Draw();
 
@@ -158,8 +158,8 @@ void SingleCamTestScene::Draw3D()
 void SingleCamTestScene::DrawSprite()
 {
 	//TextDrawer::DrawString("HOGE", 0, 0, Align::TopLeft);
-	SpDS::DrawLine(1000, 500, (int)Input::Mouse::GetPos().x, (int)Input::Mouse::GetPos().y, Color(0xffffff), 5);
-	SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, (float)timer * PIf / 180 * 10, "particle1", Anchor::TopLeft, Color(0xffffff));
+	//SpDS::DrawLine(1000, 500, (int)Input::Mouse::GetPos().x, (int)Input::Mouse::GetPos().y, Color(0xffffff), 5);
+	//SpDS::DrawRotaGraph(GetSpWindow()->width / 2, GetSpWindow()->height / 2, 1, 1, (float)timer * PIf / 180 * 10, "particle1", Anchor::TopLeft, Color(0xffffff));
 	//SpDS::DrawRotaGraph(0, 0, 0.5f, 0.5f, 0, "normalTest", Anchor::TopLeft);
 	//SpDS::DrawRotaGraph(1920, 1080, 0.5f, 0.5f, 0, "inverseTest", Anchor::BottomRight);
 }
