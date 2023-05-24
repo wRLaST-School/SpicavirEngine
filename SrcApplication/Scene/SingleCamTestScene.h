@@ -22,16 +22,9 @@ public:
     void DrawSprite() override;
 
 private:
-    Object3D pane;
-
-    Object3D pane2;
-
     Object3D sky;
 
     Camera camera;
-
-    PointLight* light1;
-    PointLight* light2;
 
     long long timer;
 

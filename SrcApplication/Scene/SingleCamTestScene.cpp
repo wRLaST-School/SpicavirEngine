@@ -7,6 +7,7 @@
 #include <SpSwapChainManager.h>
 #include <Bloom.h>
 #include <SoundManager.h>
+#include <LevelManager.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -45,12 +46,9 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("SmoothSphere");
-	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
-	light1 = Light::GetPointLightPtr(Light::CreatePointLight({5.f, 1.f, -5.f}, {1.f, 1.f, 1.f}, {.05f, .0f, .02f}, "light1"));
-	light2 = Light::GetPointLightPtr(Light::CreatePointLight({ -10.f, 0.f, 0.f }, { 1.f, 1.f, 1.f }, { .05f, .0f, .02f }, "light2"));
+	LevelManager::Init();
 }
 
 void SingleCamTestScene::Update()
@@ -76,48 +74,12 @@ void SingleCamTestScene::Update()
 	camera.position = move + camera.position;
 #pragma endregion
 
-	if (Input::Key::Triggered(DIK_B))
-	{
-		SoundManager::Play("Laser");
-	}
-
-	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };
 
-	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
-
-	*pane2.brightnessCB.contents = Float4{ 0.f, 1.f, 1.f, .2f };
-	pane2.UpdateMatrix();
-
 	camera.UpdateMatrix();
-	pane.UpdateMatrix();
 	sky.UpdateMatrix();
 
-	////style editor
-	//SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
 
-	//Object
-	SpImGui::Command([&]() {
-		ImGui::SetNextWindowPos(ImVec2(100, 220));
-		ImGui::SetNextWindowSize(ImVec2(300, 200));
-		if (ImGui::Begin("Object Editor"))
-		{
-			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
-			ImGui::SliderFloat3("Scale", &pane.scale.x, -1.f, 1.f);
-			ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 2.f * PIf);
-
-			if (ImGui::Button("UseSmooth"))
-			{
-				pane.model = ModelManager::GetModel("SmoothSphere");
-			}
-
-			if (ImGui::Button("UseFlat"))
-			{
-				pane.model = ModelManager::GetModel("FlatSphere");
-			}
-		}
-	ImGui::End();
-	});
 
 	SpImGui::Command([&]() {
 		ImGui::SetNextWindowPos(ImVec2(100, 160));
@@ -129,14 +91,10 @@ void SingleCamTestScene::Update()
 		ImGui::End();
 	});
 
-	light1->DrawFrame();
-	light2->DrawFrame();
-	light1->DrawLightEditor();
-	light2->DrawLightEditor();
-
 	//anim.Update();
 
 	timer++;
+	LevelManager::Update();
 }
 
 void SingleCamTestScene::DrawBack()
@@ -147,10 +105,8 @@ void SingleCamTestScene::DrawBack()
 void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
-
-	//pane2.DrawAlpha("white");
-	pane.Draw("white");
 	sky.Draw();
+	LevelManager::Draw();
 
 	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }

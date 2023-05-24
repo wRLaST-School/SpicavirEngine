@@ -1,0 +1,119 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Cube.001",
+            "transform": {
+                "translation": [
+                    3.736588954925537,
+                    -4.331134796142578,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube"
+        },
+        {
+            "type": "MESH",
+            "name": "Cube.002",
+            "transform": {
+                "translation": [
+                    5.028230667114258,
+                    3.8362855911254883,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "Cube",
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "Cube",
+                    "transform": {
+                        "translation": [
+                            -5.028230667114258,
+                            -3.8362855911254883,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scaling": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "file_name": "Cube"
+                },
+                {
+                    "type": "MESH",
+                    "name": "Cube.004",
+                    "transform": {
+                        "translation": [
+                            -5.028230667114258,
+                            -0.023523330688476562,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scaling": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "file_name": "Cube",
+                    "children": [
+                        {
+                            "type": "MESH",
+                            "name": "Cube.003",
+                            "transform": {
+                                "translation": [
+                                    5.028230667114258,
+                                    3.8362855911254883,
+                                    0.0
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    0.0
+                                ],
+                                "scaling": [
+                                    1.0,
+                                    1.0,
+                                    1.0
+                                ]
+                            },
+                            "file_name": "Cube"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
