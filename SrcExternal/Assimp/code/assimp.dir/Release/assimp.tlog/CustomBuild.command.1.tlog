@@ -1,0 +1,10 @@
+^C:\K021G1251\SPICAVIRENGINE\SPICAVIRENGINE\SRCEXTERNAL\ASSIMP\CODE\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\export --check-stamp-file C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\export/code/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
