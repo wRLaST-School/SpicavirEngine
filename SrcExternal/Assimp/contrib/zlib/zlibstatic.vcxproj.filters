@@ -83,9 +83,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Header Files">
       <UniqueIdentifier>{BC86FC5A-905A-3326-BC2D-80678403BA69}</UniqueIdentifier>
     </Filter>
