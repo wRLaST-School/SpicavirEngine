@@ -1736,9 +1736,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\k021g1251\Assimp\assimp-5.2.5\code\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\code\res\assimp.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
