@@ -13,9 +13,6 @@
     <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\thread_support.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="$(SolutionDir)SrcExternal\EASTL\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{D10FD074-E8F0-3BB6-A1AA-5CD2464F5E12}</UniqueIdentifier>
     </Filter>
