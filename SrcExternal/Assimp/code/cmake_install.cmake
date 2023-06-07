@@ -34,13 +34,13 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "libassimp5.2.4-dev" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/Assimp/assimp-5.2.5/export/lib/Debug/assimp-vc143-mtd.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/lib/Debug/assimp-vc143-mtd.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/Assimp/assimp-5.2.5/export/lib/Release/assimp-vc143-mt.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/lib/Release/assimp-vc143-mt.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/Assimp/assimp-5.2.5/export/lib/MinSizeRel/assimp-vc143-mt.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/lib/MinSizeRel/assimp-vc143-mt.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/Assimp/assimp-5.2.5/export/lib/RelWithDebInfo/assimp-vc143-mt.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/lib/RelWithDebInfo/assimp-vc143-mt.lib")
   endif()
 endif()
 
@@ -52,7 +52,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "assimp-dev" OR NOT CMAKE_INSTALL_COMPONENT)
     "C:/k021g1251/Assimp/assimp-5.2.5/code/../include/assimp/camera.h"
     "C:/k021g1251/Assimp/assimp-5.2.5/code/../include/assimp/color4.h"
     "C:/k021g1251/Assimp/assimp-5.2.5/code/../include/assimp/color4.inl"
-    "C:/k021g1251/Assimp/assimp-5.2.5/export/code/../include/assimp/config.h"
+    "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/code/../include/assimp/config.h"
     "C:/k021g1251/Assimp/assimp-5.2.5/code/../include/assimp/ColladaMetaData.h"
     "C:/k021g1251/Assimp/assimp-5.2.5/code/../include/assimp/commonMetaData.h"
     "C:/k021g1251/Assimp/assimp-5.2.5/code/../include/assimp/defs.h"
@@ -144,13 +144,13 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "C:/k021g1251/Assimp/assimp-5.2.5/export/code/Debug/assimp-vc143-mtd.pdb")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/code/Debug/assimp-vc143-mtd.pdb")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "C:/k021g1251/Assimp/assimp-5.2.5/export/code/RelWithDebInfo/assimp-vc143-mt.pdb")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE FILE FILES "C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/code/RelWithDebInfo/assimp-vc143-mt.pdb")
   endif()
 endif()
 

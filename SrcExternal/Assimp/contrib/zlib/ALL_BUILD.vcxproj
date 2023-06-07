@@ -25,7 +25,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6A83A63B-080F-3905-B81D-AB68F83D1DC6}</ProjectGuid>
+    <ProjectGuid>{449D8E8F-8EA8-3EF2-8EFA-1FF13798737D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -69,7 +69,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\assimp-5.2.5\export\include;C:\k021g1251\Assimp\assimp-5.2.5\export;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -79,7 +79,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\assimp-5.2.5\export\include;C:\k021g1251\Assimp\assimp-5.2.5\export;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -89,7 +89,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\assimp-5.2.5\export\include;C:\k021g1251\Assimp\assimp-5.2.5\export;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -99,7 +99,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\assimp-5.2.5\export\include;C:\k021g1251\Assimp\assimp-5.2.5\export;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -112,7 +112,7 @@
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/k021g1251/Assimp/assimp-5.2.5/contrib/zlib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/Assimp/assimp-5.2.5/export --check-stamp-file C:/k021g1251/Assimp/assimp-5.2.5/export/contrib/zlib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp --check-stamp-file C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/contrib/zlib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -121,11 +121,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.26\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\Internal\CheckSourceCompiles.cmake;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zconf.h.cmakein;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zlib.pc.cmakein;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/k021g1251/Assimp/assimp-5.2.5/contrib/zlib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/Assimp/assimp-5.2.5/export --check-stamp-file C:/k021g1251/Assimp/assimp-5.2.5/export/contrib/zlib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp --check-stamp-file C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/contrib/zlib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -134,11 +134,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.26\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\Internal\CheckSourceCompiles.cmake;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zconf.h.cmakein;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zlib.pc.cmakein;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/k021g1251/Assimp/assimp-5.2.5/contrib/zlib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/Assimp/assimp-5.2.5/export --check-stamp-file C:/k021g1251/Assimp/assimp-5.2.5/export/contrib/zlib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp --check-stamp-file C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/contrib/zlib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -147,11 +147,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.26\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\Internal\CheckSourceCompiles.cmake;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zconf.h.cmakein;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zlib.pc.cmakein;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/k021g1251/Assimp/assimp-5.2.5/contrib/zlib/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/Assimp/assimp-5.2.5/export --check-stamp-file C:/k021g1251/Assimp/assimp-5.2.5/export/contrib/zlib/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/assimp-5.2.5 -BC:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp --check-stamp-file C:/k021g1251/SpicavirEngine/SpicavirEngine/SrcExternal/Assimp/contrib/zlib/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -160,21 +160,21 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.26\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckFunctionExists.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.26\Modules\Internal\CheckSourceCompiles.cmake;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zconf.h.cmakein;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zlib.pc.cmakein;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\k021g1251\Assimp\assimp-5.2.5\export\ZERO_CHECK.vcxproj">
-      <Project>{227C4DB0-3725-3106-8182-484D7AD0E158}</Project>
+    <ProjectReference Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\ZERO_CHECK.vcxproj">
+      <Project>{55F3F377-33A0-3236-9F26-33DA24E4B71E}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\k021g1251\Assimp\assimp-5.2.5\export\contrib\zlib\zlibstatic.vcxproj">
-      <Project>{B5B5A607-B88E-392D-BA9A-DCD3F57CEE52}</Project>
+    <ProjectReference Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{3CB96FA5-4373-35F7-92DF-15C7AB400326}</Project>
       <Name>zlibstatic</Name>
     </ProjectReference>
   </ItemGroup>

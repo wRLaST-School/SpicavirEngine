@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\k021g1251\Assimp\assimp-5.2.5\export\CMakeFiles\247cf42f54cc0f9e78c8cd38c868d69a\INSTALL_force.rule">
+    <CustomBuild Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\CMakeFiles\e784ba50441359d3346dc5405d6c3f39\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{441D953C-6D37-3F80-89B1-DA22F65335B8}</UniqueIdentifier>
+      <UniqueIdentifier>{2E8EB858-5EFC-392A-B949-54A55E096771}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

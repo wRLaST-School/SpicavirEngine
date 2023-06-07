@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\CMakeFiles\d8817f3d15b88032b2471f78129bc33a\generate.stamp.rule">
+    <CustomBuild Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\CMakeFiles\d8817f3d15b88032b2471f78129bc33a\INSTALL_force.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
