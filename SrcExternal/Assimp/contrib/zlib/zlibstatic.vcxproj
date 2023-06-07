@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">zlibstatic.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">zlibstaticd</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">zlibstatic.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">zlibstatic</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">zlibstatic.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">zlibstatic</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">zlibstatic.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">zlibstatic</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -99,10 +99,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,7 +115,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>4131;4127;4244;4244</DisableSpecificWarnings>
@@ -136,10 +136,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -152,7 +152,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>4131;4127;4244;4244</DisableSpecificWarnings>
@@ -173,10 +173,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -189,7 +189,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -209,10 +209,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\include;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp;C:\k021g1251\Assimp\assimp-5.2.5\include;C:\k021g1251\Assimp\assimp-5.2.5\code;C:\k021g1251\Assimp\assimp-5.2.5\.;C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib;C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -224,35 +224,35 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\adler32.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\compress.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\crc32.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\deflate.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\gzclose.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\gzlib.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\gzread.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\gzwrite.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inflate.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\infback.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inftrees.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inffast.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\trees.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\uncompr.c" />
-    <ClCompile Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zutil.c" />
-    <ClInclude Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\contrib\zlib\zconf.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zlib.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\crc32.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\deflate.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\gzguts.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inffast.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inffixed.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inflate.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\inftrees.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\trees.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\assimp-5.2.5\contrib\zlib\zutil.h" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\adler32.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\compress.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\crc32.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\deflate.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\gzclose.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\gzlib.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\gzread.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\gzwrite.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inflate.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\infback.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inftrees.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inffast.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\trees.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\uncompr.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\zutil.c" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\zconf.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\zlib.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\crc32.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\deflate.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\gzguts.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inffast.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inffixed.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inflate.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\inftrees.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\trees.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\zutil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\Assimp\ZERO_CHECK.vcxproj">
+    <ProjectReference Include="$(SolutionDir)SrcExternal\Assimp\ZERO_CHECK.vcxproj">
       <Project>{55F3F377-33A0-3236-9F26-33DA24E4B71E}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
