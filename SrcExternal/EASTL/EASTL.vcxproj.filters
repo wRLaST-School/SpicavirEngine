@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\allocator_eastl.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\assert.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\atomic.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\fixed_pool.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\hashtable.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\intrusive_list.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\numeric_limits.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\red_black_tree.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\string.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\EASTL\source\thread_support.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(SolutionDir)SrcExternal\EASTL\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{D10FD074-E8F0-3BB6-A1AA-5CD2464F5E12}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
