@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\adler32.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\compress.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\crc32.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\deflate.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\gzclose.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\gzlib.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\gzread.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\gzwrite.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inflate.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\infback.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inftrees.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inffast.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\trees.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\uncompr.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\zutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)SrcExternal\Assimp\contrib\zlib\zconf.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\zlib.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\crc32.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\deflate.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\gzguts.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inffast.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inffixed.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inflate.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\inftrees.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\trees.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\zutil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(SolutionDir)SrcExternal/Assimp/contrib\zlib\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{B4E8C02C-5E11-3A93-A26C-2850E661CFA8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{EDF93A22-6403-3C61-B8E0-9EE82974E3C8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

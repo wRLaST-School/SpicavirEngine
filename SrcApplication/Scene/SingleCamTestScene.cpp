@@ -45,7 +45,7 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("SmoothSphere");
+	pane.model = ModelManager::GetModel("FlatSphere");
 	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
