@@ -18,7 +18,6 @@
 #include <RootSignatureManager.h>
 #include <LineDrawer.h>
 #include <SpImGui.h>
-#include <assimp/Importer.hpp>
 #include <IPostEffector.h>
 #include <SoundManager.h>
 #include <SpRenderer.h>

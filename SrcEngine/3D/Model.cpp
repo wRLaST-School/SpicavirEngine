@@ -1,9 +1,13 @@
 #include "Model.h"
 #include <fstream>
 #include <sstream>
+#pragma warning(push)
+#pragma warning(disable:26800)
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#pragma warning(pop)
+
 Model::Model() {
 }
 
