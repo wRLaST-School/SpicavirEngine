@@ -65,7 +65,8 @@ void SceneManager::ConfirmTransition()
 {
 	if (transitionQueued)
 	{
-		delete currentScene.release();
+		currentScene.release();
+		currentScene = nullptr;
 		currentScene.swap(nextScene);
 
 		currentScene->Init();
@@ -87,9 +88,10 @@ SceneManager::LoadState SceneManager::GetLoadState()
 
 template <class NextScene> void SceneManager::InstantTransition()
 {
-	delete currentScene.release();
+	currentScene.release();
+	currentScene = nullptr;
 	Light::Init();
-	currentScene = unique_ptr<IScene>(new NextScene());
+	currentScene = make_unique<NextScene>();
 	currentScene->LoadResources();
 	currentScene->Init();
 	FrameRate::InitMark();
