@@ -372,8 +372,6 @@ SrcExternal/Assimp/export
 SrcExternal/EASTL/export
 SrcExternal/Assimp/CMakeFiles
 SrcExternal/code/CMakeFiles
-SrcExternal/test/CMakeFiles
-SrcExternal/test/headercheck/CMakeFiles
 
 *.cmake
 *.stamp
