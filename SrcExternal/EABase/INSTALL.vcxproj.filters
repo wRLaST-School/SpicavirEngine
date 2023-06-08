@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\k021g1251\SpicavirEngine\SpicavirEngine\SrcExternal\EASTL\export\CMakeFiles\cc039e7497772e70bec256f498a7279f\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{285586F0-99DA-3F6B-B161-E1D2118CB6E8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
