@@ -39,7 +39,7 @@ void CloseAllSpWindow()
 	}
 }
 
-void SpWindow::Create(LPCWSTR title, int windowWidth, int windowHeight) {
+void SpWindow::Create(LPCWSTR title, int32_t windowWidth, int32_t windowHeight) {
 	width = windowWidth;
 	height = windowHeight;
 

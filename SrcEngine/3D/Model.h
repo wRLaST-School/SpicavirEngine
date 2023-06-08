@@ -104,5 +104,5 @@ public:
 private:
 	static exc_unordered_map<ModelKey, Model> models;
 	static list<ModelKey> perSceneModels[2];
-	static int currentSceneResIndex;
+	static int32_t currentSceneResIndex;
 };

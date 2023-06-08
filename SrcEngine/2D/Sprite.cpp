@@ -54,7 +54,7 @@ Sprite::Sprite(TextureKey key)
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
 	// 全頂点に対して
-	for (int i = 0; i < _countof(vertices); i++)
+	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
 		vertMap[i] = vertices[i];   // 座標をコピー
 	}
@@ -116,7 +116,7 @@ Sprite::Sprite(string path, TextureKey newKey)
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
 	// 全頂点に対して
-	for (int i = 0; i < _countof(vertices); i++)
+	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
 		vertMap[i] = vertices[i];   // 座標をコピー
 	}

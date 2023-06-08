@@ -23,7 +23,7 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 
 	GetInstance().currentRTIndex[0] = GetInstance().numRT - 2 + bbIndex;
 
-	for (int i = 1; i < 8; i++)
+	for (int32_t i = 1; i < 8; i++)
 	{
 		GetInstance().currentRTIndex[i] = -1;
 	}
@@ -33,7 +33,7 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
 {
 	CloseCurrentResBar();
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
-	int index = (int)SpTextureManager::GetIndex(key);
+	int32_t index = (int32_t)SpTextureManager::GetIndex(key);
 
 	SpDirectX* dx = GetWDX();
 	//リソースバリアーを書き込み可能状態に
@@ -52,7 +52,7 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
 	GetWDX()->cmdList->OMSetRenderTargets(1, pcpuhnd, false, &dsvH);
 
 	GetInstance().currentRTIndex[0] = index;
-	for (int i = 1; i < 8; i++)
+	for (int32_t i = 1; i < 8; i++)
 	{
 		GetInstance().currentRTIndex[i] = -1;
 	}
@@ -111,7 +111,7 @@ void RTVManager::SetRenderTargets(vector<TextureKey> keys)
 
 	GetWDX()->cmdList->OMSetRenderTargets((UINT)keys.size(), &pcpuhnds.front(), false, &dsvH);
 
-	for (int i = 0; i < 8; i++)
+	for (int32_t i = 0; i < 8; i++)
 	{
 		if (i >= keys.size())
 		{
@@ -127,7 +127,7 @@ void RTVManager::SetRenderTargetToCurrentBB()
 	SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
-void RTVManager::CreateRenderTargetTexture(int width, int height, TextureKey key)
+void RTVManager::CreateRenderTargetTexture(int32_t width, int32_t height, TextureKey key)
 {
 	CreateRenderTargetTexture((float)width, (float)height, key, false);
 }
@@ -139,7 +139,7 @@ void RTVManager::CreateRenderTargetTexture(float width, float height, TextureKey
 	if (SpTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
 
 	GetWDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(key), nullptr,
-		GetHeapCPUHandle((int)SpTextureManager::GetIndex(key)));
+		GetHeapCPUHandle((int32_t)SpTextureManager::GetIndex(key)));
 
 	//デフォルトのリソースバリアをセット
 	//ID3D12Resource* lastRes = GetWDX()->barrierDesc.Transition.pResource;
@@ -159,7 +159,7 @@ void RTVManager::CreateHeaps()
 	GetWDX()->dev->CreateDescriptorHeap(&GetInstance().heapDesc, IID_PPV_ARGS(GetInstance().rtvHeaps.GetAddressOf()));
 }
 
-int RTVManager::GetCurrentRenderTarget()
+int32_t RTVManager::GetCurrentRenderTarget()
 {
 	return GetInstance().currentRTIndex[0];
 }
@@ -167,9 +167,9 @@ int RTVManager::GetCurrentRenderTarget()
 void RTVManager::ClearCurrentRenderTarget(Float4 color)
 {
 	float colour[] = { color.x, color.y, color.z, color.w };
-	for (int i = 0; i < 8; i++)
+	for (int32_t i = 0; i < 8; i++)
 	{
-		int index = GetInstance().currentRTIndex[i];
+		int32_t index = GetInstance().currentRTIndex[i];
 		if (index < 0) continue;
 
 		GetWDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(index), colour, 0, nullptr);
@@ -182,7 +182,7 @@ RTVManager& RTVManager::GetInstance()
 	return obj;
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int index)
+D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int32_t index)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = GetInstance().rtvHeaps->GetCPUDescriptorHandleForHeapStart();
@@ -192,9 +192,9 @@ D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int index)
 
 void RTVManager::CloseCurrentResBar()
 {
-	for (int i = 0; i < 8; i++)
+	for (int32_t i = 0; i < 8; i++)
 	{
-		int index = GetInstance().currentRTIndex[i];
+		int32_t index = GetInstance().currentRTIndex[i];
 		if (index < 0) continue;
 
 		if (GetInstance().isAllResBarClosed)

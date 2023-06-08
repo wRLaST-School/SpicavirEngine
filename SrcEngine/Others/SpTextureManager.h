@@ -20,10 +20,10 @@ public:
 	static TextureKey LoadTexture(string filePath, TextureKey key);
 	static TextureKey LoadTextureWithUniqueKey(string filePath, TextureKey key);
 	static TextureKey CreateDummyTexture(float width, float height, TextureKey key, bool initAsRenderTarget = true, bool useRatio = false);
-	static TextureKey CreateDummyTextureWithUniqueKey(int width, int height, TextureKey key, bool initAsRenderTarget = true);
+	static TextureKey CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, TextureKey key, bool initAsRenderTarget = true);
 
-	static void LoadDiv(string filePath, int widthPer, int heightPer, int qx, int qy, const vector<TextureKey>& keys);
-	static TextureKey LoadSingleDiv(string filePath, int originX, int originY, int width, int height, TextureKey key);
+	static void LoadDiv(string filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const vector<TextureKey>& keys);
+	static TextureKey LoadSingleDiv(string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, TextureKey key);
 
 	static TextureKey CreatePlainSRV(TextureKey key);
 	
@@ -34,7 +34,7 @@ public:
 	static TexMetadata GetTextureMetadata(TextureKey key);
 	static TexData GetTextureData(TextureKey key);
 	static ID3D12Resource* GetTextureBuff(TextureKey key);
-	static int GetIndex(TextureKey key);
+	static int32_t GetIndex(TextureKey key);
 
 	//シーンを超えて使用するリソースとして設定
 	static void AddMasterTextureKey(TextureKey key);
@@ -58,7 +58,7 @@ private:
 	bool isOccupied[wMaxSRVCount] = {};
 
 	static list<TextureKey> perSceneTextures[2];
-	static int currentSceneResIndex;
+	static int32_t currentSceneResIndex;
 
 	static list<TextureKey> masterTextures;
 private:

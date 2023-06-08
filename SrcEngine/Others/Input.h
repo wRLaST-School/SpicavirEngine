@@ -48,11 +48,11 @@ namespace Input {
 		static void Close();
 
 		//キーが押されているか
-		static bool Down(int key);
+		static bool Down(int32_t key);
 		//キーが離された瞬間か
-		static bool Released(int key);
+		static bool Released(int32_t key);
 		//キーが押された瞬間か
-		static bool Triggered(int key);
+		static bool Triggered(int32_t key);
 
 		static Key* GetInstance();
 	private:
@@ -138,7 +138,7 @@ namespace Input {
 		static void SetDeadZone(float range);
 		static float GetDeadZone();
 
-		int gamepadIndex = 0;
+		int32_t gamepadIndex = 0;
 	private:
 		XINPUT_STATE padState;
 		XINPUT_STATE lastPadState;

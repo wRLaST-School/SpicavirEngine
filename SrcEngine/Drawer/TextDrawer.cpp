@@ -72,19 +72,19 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 
 	pFont->resolution = options.resolution;
 
-	int bmpX = (pFont->gm.gmBlackBoxX + 3) / 4 * 4;
+	int32_t bmpX = (pFont->gm.gmBlackBoxX + 3) / 4 * 4;
 	BYTE* finalGlyph = new BYTE[pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY];
 
 	//幅をBlackBoxに合わせる
-	for (unsigned int i = 0; i < pFont->gm.gmBlackBoxX; i++)
+	for (uint32_t i = 0; i < pFont->gm.gmBlackBoxX; i++)
 	{
-		for (unsigned int j = 0; j < pFont->gm.gmBlackBoxY; j++)
+		for (uint32_t j = 0; j < pFont->gm.gmBlackBoxY; j++)
 		{
 			finalGlyph[j * pFont->gm.gmBlackBoxX + i] = pMono[j * bmpX + i];
 		}
 	}
 
-	for (unsigned int i = 0; i < pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY; i++)
+	for (uint32_t i = 0; i < pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY; i++)
 	{
 		pFont->bmp.emplace_back(finalGlyph[i]);
 	}
@@ -122,7 +122,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	
 	list<FontData*> glyphList;
 
-	for (int i = 0; i < wStr.size(); i++)
+	for (int32_t i = 0; i < wStr.size(); i++)
 	{
 		glyphList.push_back(GetGlyphTexture(options.fontOptions, wStr.substr(i, 1)));
 	}
@@ -149,7 +149,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 			strdata.width += glyphList.back()->gm.gmptGlyphOrigin.x + glyphList.back()->gm.gmBlackBoxX;
 		}
 
-		strdata.height = max(strdata.height, (int)(*itr)->tm.tmHeight);
+		strdata.height = max(strdata.height, (int32_t)(*itr)->tm.tmHeight);
 	}
 
 	UINT64 imageDataCount = strdata.width * strdata.height;
@@ -163,9 +163,9 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	//ダミーテクスチャ
 	strdata.key = SpTextureManager::CreateDummyTextureWithUniqueKey(strdata.width, strdata.height, str, false);
 
-	int drawOriginX = 0;
-	int drawOriginY = 0;
-	int cellX = 0;
+	int32_t drawOriginX = 0;
+	int32_t drawOriginY = 0;
+	int32_t cellX = 0;
 
 	//最後の文字のcellXに最後の文字のgmCellIncXを足した位置にさらにgmptGlyphOriginを足した位置が描画始点X
 	//tmAscentからgmptGlyphOrigin.Yを引いた数値が文字の描画始点Y
@@ -189,13 +189,13 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 		}
 
 		//ビットマップを埋める
-		for (unsigned int i = 0; i < glyph->gm.gmBlackBoxY; i++)
+		for (uint32_t i = 0; i < glyph->gm.gmBlackBoxY; i++)
 		{
-			for (unsigned int j = 0; j < glyph->gm.gmBlackBoxX; j++)
+			for (uint32_t j = 0; j < glyph->gm.gmBlackBoxX; j++)
 			{
 				//indexの計算
-				int x = drawOriginX + j;
-				int y = drawOriginY + i;
+				int32_t x = drawOriginX + j;
+				int32_t y = drawOriginY + i;
 				UINT64 index = y * strdata.width + x;
 
 				//色を計算
@@ -255,7 +255,7 @@ FontData* FontManager::GetFontData(string fontName, wstring glyph)
 	return &fontMap[handle][glyph];
 }
 
-void TextDrawer::DrawString(string str, int x, int y, Align alignment, StringOptions options)
+void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, StringOptions options)
 {
 	StringData strData = FontManager::CreateStringTexture(str, options);
 
@@ -267,8 +267,8 @@ void TextDrawer::DrawString(string str, int x, int y, Align alignment, StringOpt
 	float multiplier = (float)options.size / strData.height;
 	spr->scale = { multiplier, multiplier, 1};
 
-	strData.width = static_cast<int>(strData.width * multiplier);
-	strData.height *= static_cast<int>(strData.height * multiplier);
+	strData.width = static_cast<int32_t>(strData.width * multiplier);
+	strData.height *= static_cast<int32_t>(strData.height * multiplier);
 
 	switch (alignment)
 	{
@@ -309,7 +309,7 @@ void TextDrawer::DrawString(string str, int x, int y, Align alignment, StringOpt
 	GetInstance()->releaseQueue.push_back(strData.key);
 }
 
-void TextDrawer::DrawString(string str, int x, int y, Align alignment)
+void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment)
 {
 	DrawString(str, x, y, alignment, GetInstance()->defaultOption);
 }

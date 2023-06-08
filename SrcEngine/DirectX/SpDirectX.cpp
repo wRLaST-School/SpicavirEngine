@@ -26,7 +26,7 @@ void SpDirectX::Init() {
 	ComPtr<IDXGIAdapter1> tmpAdapter = nullptr;
 
 	//グラボ君の面接しま～～す
-	for (int i = 0; dxgiFactory->EnumAdapters1(i, &tmpAdapter) != DXGI_ERROR_NOT_FOUND; i++)
+	for (int32_t i = 0; dxgiFactory->EnumAdapters1(i, &tmpAdapter) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(tmpAdapter);
 	}
@@ -62,7 +62,7 @@ void SpDirectX::Init() {
 
 	D3D_FEATURE_LEVEL featureLevel;
 
-	for (int i = 0; i < _countof(levels); i++)
+	for (int32_t i = 0; i < _countof(levels); i++)
 	{
 		//採用したアダプターでデバイスを生成
 		result = D3D12CreateDevice(tmpAdapter.Get(), levels[i], IID_PPV_ARGS(&dev));

@@ -22,10 +22,10 @@ public:
 	} shape = Shape::Cube;
 
 	//同時に発生する数
-	int quantity = 1;
+	int32_t quantity = 1;
 
 	//発生間隔(フレーム)
-	int timeBetweenEmit = 1;
+	int32_t timeBetweenEmit = 1;
 
 	//trueならパーティクルを生成する
 	bool active = false;
@@ -46,7 +46,7 @@ public:
 		if (timer > timeBetweenEmit) {
 			timer = 0;
 
-			for (int i = 0; i < quantity; i++) { Emit(); }
+			for (int32_t i = 0; i < quantity; i++) { Emit(); }
 
 			if (emitOnce) { active = false; }
 		}
@@ -126,5 +126,5 @@ private:
 
 	vector<ParticleType> particles;
 
-	int timer = 0;
+	int32_t timer = 0;
 };

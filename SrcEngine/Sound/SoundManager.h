@@ -33,7 +33,7 @@ public:
 
 	BYTE* pBuffer;
 
-	unsigned int bufferSize;
+	uint32_t bufferSize;
 
 	IXAudio2SourceVoice* sound;
 
@@ -74,6 +74,6 @@ private:
 
 private:
 	static list<SoundKey> perSceneSounds[2];
-	static int currentSceneResIndex;
+	static int32_t currentSceneResIndex;
 
 };

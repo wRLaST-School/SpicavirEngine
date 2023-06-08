@@ -6,7 +6,7 @@
 #include <GPipeline.h>
 #include <SpRootSignature.h>
 
-void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color brightness)
+void SpDS::DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color brightness)
 {
 	Matrix m;
 	auto meta = SpTextureManager::GetTextureMetadata(key);
@@ -49,15 +49,15 @@ void SpDS::DrawRotaGraph(int x, int y, float dx, float dy, float rot, TextureKey
 	graphCount++;
 }
 
-void SpDS::DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor)
+void SpDS::DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, Color color, Anchor anchor)
 {
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
 }
 
-void SpDS::DrawBox(int x0, int y0, int x1, int y1, Color color)
+void SpDS::DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, Color color)
 {
-	int sizeX = x1 - x0;
-	int sizeY = y1 - y0;
+	int32_t sizeX = x1 - x0;
+	int32_t sizeY = y1 - y0;
 
 	DrawBox(x0 + sizeX / 2, y0 + sizeY / 2, sizeX, sizeY, 0.f, color);
 }
@@ -66,7 +66,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 {
 	switch (blendMode) {
 	case Blend::Alpha:
-		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
+		commands.insert(eastl::pair<int32_t, function<void(void)>>(graphCount, [&] {
 			//パイプライン変更
 			auto dx = GetWDX();
 
@@ -76,7 +76,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 		break;
 
 	case Blend::Sub:
-		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
+		commands.insert(eastl::pair<int32_t, function<void(void)>>(graphCount, [&] {
 			//パイプライン変更
 			auto dx = GetWDX();
 
@@ -86,7 +86,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 		break;
 
 	case Blend::Add:
-		commands.insert(eastl::pair<int, function<void(void)>>(graphCount, [&] {
+		commands.insert(eastl::pair<int32_t, function<void(void)>>(graphCount, [&] {
 			//パイプライン変更
 			auto dx = GetWDX();
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2dAdd"));
@@ -101,7 +101,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 void SpDS::SetRenderTarget(TextureKey key)
 {
 	commands.insert(
-		eastl::pair<int, function<void(void)>>(graphCount, [&, key] {
+		eastl::pair<int32_t, function<void(void)>>(graphCount, [&, key] {
 			//レンダーターゲット変更
 			if (key == "CurrentBuffer")
 			{
@@ -114,28 +114,28 @@ void SpDS::SetRenderTarget(TextureKey key)
 
 void SpDS::SetPreDrawFunc(function<void(void)> prop)
 {
-	commands.insert(eastl::pair<int, function<void(void)>>(graphCount, prop));
+	commands.insert(eastl::pair<int32_t, function<void(void)>>(graphCount, prop));
 }
 
-void SpDS::DrawBoxLine(int x, int y, int width, int height, Color color, float thickness, Anchor anchor)
+void SpDS::DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, Color color, float thickness, Anchor anchor)
 {
 	anchor;
-	int x1 = x - width / 2;
-	int x2 = x + width / 2;
-	int y1 = y - height / 2;
-	int y2 = y + height / 2;
+	int32_t x1 = x - width / 2;
+	int32_t x2 = x + width / 2;
+	int32_t y1 = y - height / 2;
+	int32_t y2 = y + height / 2;
 
-	DrawLine(x1, y1, x2, y1, color, (int)thickness);
-	DrawLine(x1, y1, x1, y2, color, (int)thickness);
-	DrawLine(x1, y2, x2, y2, color, (int)thickness);
-	DrawLine(x2, y1, x2, y2, color, (int)thickness);
+	DrawLine(x1, y1, x2, y1, color, (int32_t)thickness);
+	DrawLine(x1, y1, x1, y2, color, (int32_t)thickness);
+	DrawLine(x1, y2, x2, y2, color, (int32_t)thickness);
+	DrawLine(x2, y1, x2, y2, color, (int32_t)thickness);
 }
 
-void SpDS::DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness)
+void SpDS::DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, Color color, int32_t thickness)
 {
 	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);
 	float l = ray.GetLength();
-	DrawBox(startX + (int)(ray.x * 0.5f), startY + (int)(ray.y * 0.5f), thickness, (int)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
+	DrawBox(startX + (int32_t)(ray.x * 0.5f), startY + (int32_t)(ray.y * 0.5f), thickness, (int32_t)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
 }
 
 void SpDS::CreateBuffers()
@@ -179,7 +179,7 @@ void SpDS::CreateBuffers()
 	gvertBuff->Map(0, nullptr, (void**)&gvertMap);
 
 	// 全頂点に対して
-	for (int i = 0; i < _countof(vertices); i++)
+	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
 		gvertMap[i] = vertices[i];   // 座標をコピー
 	}
@@ -192,7 +192,7 @@ void SpDS::CreateBuffers()
 	gvbView.SizeInBytes = sizeVB;
 	gvbView.StrideInBytes = sizeof(GraphVertData);
 
-	for (int i = 0; i < graphBuffNum; i++)
+	for (int32_t i = 0; i < graphBuffNum; i++)
 	{
 		ggpu.emplace_back();
 	}
@@ -223,7 +223,7 @@ void SpDS::RenderGraph()
 	}
 	graphs.clear();
 
-	int dGraphIndex = 0;
+	int32_t dGraphIndex = 0;
 	for (auto& ggp : ggpu)
 	{
 		if (!ggp.used) continue;
@@ -270,6 +270,6 @@ eastl::vector<SpDS::Graph> SpDS::graphs;
 eastl::list<SpDS::GraphGPUData> SpDS::ggpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::gvbView;
 ComPtr<ID3D12Resource> SpDS::gvertBuff;
-int SpDS::graphCount = 0;
+int32_t SpDS::graphCount = 0;
 
-eastl::multimap<int, function<void(void)>> SpDS::commands;
+eastl::multimap<int32_t, function<void(void)>> SpDS::commands;

@@ -14,7 +14,7 @@ public:
     void Update();
 
     static TextureKey texture;
-    int maxTime = 120;
+    int32_t maxTime = 120;
 
     Vec3 vel;
 

@@ -20,11 +20,11 @@ void Light::UpdateLightData()
 	instance->lightCB.contents->dLightColor = directional.color;
 
 	//point lights
-	int nextTransferIndex = 0;
+	int32_t nextTransferIndex = 0;
 
 	if (instance->pointLights.size() > PointLight::MAX_LIGHTS) 
 	{
-		throw PointLight::QuantityOverflow(PointLight::MAX_LIGHTS, (int)instance->pointLights.size());
+		throw PointLight::QuantityOverflow(PointLight::MAX_LIGHTS, (int32_t)instance->pointLights.size());
 	};
 
 	for (auto itr = instance->pointLights.begin(); itr != instance->pointLights.end(); itr++)

@@ -12,28 +12,28 @@ public:
 		Sub
 	};
 
-	static void DrawRotaGraph(int x, int y, float dx, float dy, float rot,
+	static void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
 		TextureKey key, Anchor anchor = Anchor::Center,
 		Color brightness = Color(0xffffff));
 
-	static void DrawBox(int x, int y, int width, int height, float rot, Color color, Anchor anchor = Anchor::Center);
-	static void DrawBox(int x0, int y0, int x1, int y1, Color color);
+	static void DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, Color color, Anchor anchor = Anchor::Center);
+	static void DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, Color color);
 
 	static void SetBlendMode(Blend blendMode);
 	static void SetRenderTarget(TextureKey key);
 	static void SetPreDrawFunc(function<void(void)> prop);
 
-	static void DrawBoxLine(int x, int y, int width, int height, Color color, float thickness, Anchor anchor = Anchor::Center);
-	static void DrawCircleLine(int x, int y, int r, Color color, int edges = 100);
-	static void DrawLine(int startX, int startY, int endX, int endY, Color color, int thickness = 1);
+	static void DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, Color color, float thickness, Anchor anchor = Anchor::Center);
+	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
+	static void DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, Color color, int32_t thickness = 1);
 
 	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();
 	static void Render();
 
 private:
-	const static int graphBuffNum = 4096;
-	const static int lineBuffNum = 2048;
+	const static int32_t graphBuffNum = 4096;
+	const static int32_t lineBuffNum = 2048;
 
 	static void RenderGraph();
 
@@ -76,8 +76,8 @@ private:
 	static eastl::list<GraphGPUData> ggpu;
 	static D3D12_VERTEX_BUFFER_VIEW gvbView;
 	static ComPtr<ID3D12Resource> gvertBuff;
-	static int graphCount;
-	static eastl::multimap<int, function<void(void)>> commands;
+	static int32_t graphCount;
+	static eastl::multimap<int32_t, function<void(void)>> commands;
 };
 
 namespace SpDSLayouts {

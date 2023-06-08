@@ -40,19 +40,19 @@ void Key::Close()
 	instance->devkeyboard->Release();
 }
 
-bool Key::Down(int key)
+bool Key::Down(int32_t key)
 {
 	if (key >= 256 || key < 0) return false;
 	return (bool)GetInstance()->keys[key];
 }
 
-bool Key::Released(int key)
+bool Key::Released(int32_t key)
 {
 	if (key >= 256 || key < 0) return false;
 	return (bool)(!GetInstance()->keys[key] && GetInstance()->prevKeys[key]);
 }
 
-bool Key::Triggered(int key)
+bool Key::Triggered(int32_t key)
 {
 	if (key >= 256 || key < 0) return false;
 	return (bool)(GetInstance()->keys[key] && !GetInstance()->prevKeys[key]);
@@ -104,17 +104,17 @@ bool Input::Pad::Triggered(Button button)
 
 bool Input::Pad::Down(Trigger side)
 {
-	return GetInstance()->triggerState[(int)side];
+	return GetInstance()->triggerState[(int32_t)side];
 }
 
 bool Input::Pad::Released(Trigger side)
 {
-	return !(GetInstance()->triggerState[(int)side]) && GetInstance()->lastTriggerState[(int)side];
+	return !(GetInstance()->triggerState[(int32_t)side]) && GetInstance()->lastTriggerState[(int32_t)side];
 }
 
 bool Input::Pad::Triggered(Trigger side)
 {
-	return GetInstance()->triggerState[(int)side] && !(GetInstance()->lastTriggerState[(int)side]);
+	return GetInstance()->triggerState[(int32_t)side] && !(GetInstance()->lastTriggerState[(int32_t)side]);
 }
 
 Pad* Input::Pad::GetInstance()
@@ -191,17 +191,17 @@ void Input::Mouse::Close()
 
 bool Input::Mouse::Down(Click b)
 {
-	return GetInstance()->state.rgbButtons[(int)b] & (0x80);
+	return GetInstance()->state.rgbButtons[(int32_t)b] & (0x80);
 }
 
 bool Input::Mouse::Triggered(Click b)
 {
-	return (!(GetInstance()->prevState.rgbButtons[(int)b] & (0x80))) && (GetInstance()->state.rgbButtons[(int)b] & (0x80));
+	return (!(GetInstance()->prevState.rgbButtons[(int32_t)b] & (0x80))) && (GetInstance()->state.rgbButtons[(int32_t)b] & (0x80));
 }
 
 bool Input::Mouse::Released(Click b)
 {
-	return (!(GetInstance()->state.rgbButtons[(int)b] & (0x80))) && (GetInstance()->prevState.rgbButtons[(int)b] & (0x80));
+	return (!(GetInstance()->state.rgbButtons[(int32_t)b] & (0x80))) && (GetInstance()->prevState.rgbButtons[(int32_t)b] & (0x80));
 }
 
 Float2 Input::Mouse::GetVel()

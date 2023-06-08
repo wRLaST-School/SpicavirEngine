@@ -10,7 +10,7 @@ LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 	return DefWindowProc(hwnd, msg, wparam, lparam);
 }
 
-void* __cdecl operator new[](size_t size, const char* name, int flags, unsigned debugFlags, const char* file, int line)
+void* __cdecl operator new[](size_t size, const char* name, int32_t flags, unsigned debugFlags, const char* file, int32_t line)
 {
 	line;
 	file;
@@ -20,7 +20,7 @@ void* __cdecl operator new[](size_t size, const char* name, int flags, unsigned 
 	return new uint8_t[size];
 }
 
-void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName, int flags, unsigned debugFlags, const char* file, int line)
+void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName, int32_t flags, unsigned debugFlags, const char* file, int32_t line)
 {
 	line;
 	file;

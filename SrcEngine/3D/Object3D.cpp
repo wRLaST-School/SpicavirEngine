@@ -56,7 +56,7 @@ void Object3D::Draw()
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 	}, SpRenderer::Stage::Opaque);
 }
 
@@ -82,7 +82,7 @@ void Object3D::Draw(TextureKey key)
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 		}, SpRenderer::Stage::Opaque);
 }
 
@@ -100,7 +100,7 @@ void Object3D::DrawCommands(TextureKey key)
 
 	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 }
 
 void Object3D::DrawAdd()
@@ -131,7 +131,7 @@ void Object3D::DrawAdd(TextureKey key)
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 		}, SpRenderer::Stage::Add);
 }
 

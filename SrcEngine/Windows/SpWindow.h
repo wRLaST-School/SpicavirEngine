@@ -5,7 +5,7 @@
 class SpWindow
 {
 public:
-	void Create(LPCWSTR title, int windowWidth, int windowHeight);
+	void Create(LPCWSTR title, int32_t windowWidth, int32_t windowHeight);
 	void Close();
 
 	bool ProcessMessage();
@@ -13,8 +13,8 @@ public:
 	HWND hwnd;
 	WNDCLASSEX  w{};
 
-	int width = 1280;
-	int height = 720;
+	int32_t width = 1280;
+	int32_t height = 720;
 private:
 };
 

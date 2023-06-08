@@ -78,7 +78,7 @@ void Camera::UseCurrent()
 
 	Matrix pMat = current->projectionMode == ProjectionMode::Perspective ?
 		Matrix::Projection(current->fov, (float)current->renderWidth / (float)current->renderHeight, current->nearZ, current->farZ) :
-		Matrix::ProjectionOrtho((int)current->renderWidth, (int)current->renderHeight, current->nearZ, current->farZ, 20);
+		Matrix::ProjectionOrtho((int32_t)current->renderWidth, (int32_t)current->renderHeight, current->nearZ, current->farZ, 20);
 
 	current->cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
 	current->cameraViewProjMatrixCB.contents->cameraPos = current->position;
@@ -113,7 +113,7 @@ Float3 Camera::GetWorldPosFromScreen(Float2 screen, float depth)
 
 	Matrix pMat = projectionMode == ProjectionMode::Perspective ?
 		Matrix::Projection(fov, (float)renderWidth / (float)renderHeight, nearZ, farZ) :
-		Matrix::ProjectionOrtho((int)renderWidth, (int)renderHeight, nearZ, farZ, 20);
+		Matrix::ProjectionOrtho((int32_t)renderWidth, (int32_t)renderHeight, nearZ, farZ, 20);
 
 	Matrix vport(
 		(float)GetSpWindow()->width / 2, 0.f, 0.f, 0.f,
@@ -173,7 +173,7 @@ Ray Camera::GetScreenPosRay(Float2 screen)
 
 	Matrix pMat = projectionMode == ProjectionMode::Perspective ?
 		Matrix::Projection(fov, (float)renderWidth / (float)renderHeight, nearZ, farZ) :
-		Matrix::ProjectionOrtho((int)renderWidth, (int)renderHeight, nearZ, farZ, 20);
+		Matrix::ProjectionOrtho((int32_t)renderWidth, (int32_t)renderHeight, nearZ, farZ, 20);
 
 	Matrix vport(
 		(float)GetSpWindow()->width / 2, 0.f, 0.f, 0.f,

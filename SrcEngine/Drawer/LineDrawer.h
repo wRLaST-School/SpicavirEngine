@@ -27,7 +27,7 @@ public:
 private:
 	static vector<Line> lines;
 
-	static const int maxLines = 1024;
+	static const int32_t maxLines = 1024;
 
 	static D3D12_VERTEX_BUFFER_VIEW vbView;
 	static ComPtr<ID3D12Resource> vertBuff;

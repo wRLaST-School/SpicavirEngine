@@ -178,7 +178,7 @@ void SoundManager::ReleaseAllSounds()
 
 void SoundManager::ReleasePerSceneSounds()
 {
-    int lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+    int32_t lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
     for (auto itr = perSceneSounds[lastSceneResIndex].begin(); itr != perSceneSounds[lastSceneResIndex].end(); itr++)
     {
         bool usingInCurrentScene = false;
@@ -214,4 +214,4 @@ ComPtr<IXAudio2> SoundManager::xAudio2;
 IXAudio2MasteringVoice* SoundManager::masterVoice;
 exc_unordered_map<SoundKey, SoundData> SoundManager::sndMap;
 list<SoundKey> SoundManager::perSceneSounds[2];
-int SoundManager::currentSceneResIndex;
+int32_t SoundManager::currentSceneResIndex;

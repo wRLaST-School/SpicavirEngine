@@ -29,7 +29,7 @@ Color::Color(float r, float g, float b, float a)
 	f4 = { r, g, b, a };
 }
 
-Color::Color(int r, int g, int b, int a)
+Color::Color(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	f4 = { (float)r / 255.f,(float)g / 255.f, (float)b / 255.f, (float)a / 255.f };
 }
@@ -39,7 +39,7 @@ Color::Color(ColorInt rgba)
 	f4 = { (float)rgba.r / 255.f,(float)rgba.g / 255.f, (float)rgba.b / 255.f, (float)rgba.a / 255.f };
 }
 
-Color::Color(int hexcolor)
+Color::Color(int32_t hexcolor)
 {
 	ColorInt rgba = {0, 0, 0, 0};
 	rgba.r = hexcolor & 0xff0000;
@@ -56,7 +56,7 @@ Color::Color(int hexcolor)
 Color::operator ColorInt()
 {
 	Float4 t = { 255.f * f4.x, 255.f * f4.y, 255.f * f4.z, 255.f * f4.w };
-	return { (int)t.x, (int)t.y, (int)t.z, (int)t.w};
+	return { (int32_t)t.x, (int32_t)t.y, (int32_t)t.z, (int32_t)t.w};
 }
 
 Color::operator Float4()

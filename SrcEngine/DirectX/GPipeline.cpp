@@ -31,7 +31,7 @@ void GPipeline::InitDesc(PipelineDesc desc)
 		& psod.BlendState.RenderTarget[7],
 	};
 
-	for (int i = 0; i < 8; i++)
+	for (int32_t i = 0; i < 8; i++)
 	{
 		blendDesc[i]->RenderTargetWriteMask = desc.Blend[i].RenderTargetWriteMask;
 		blendDesc[i]->BlendEnable = desc.Blend[i].BlendEnable;

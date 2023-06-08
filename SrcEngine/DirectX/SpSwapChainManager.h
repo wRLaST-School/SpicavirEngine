@@ -20,7 +20,7 @@ public:
 
 	void ResizeAllBuffers();
 
-	static const int bbNum = 2;
+	static const int32_t bbNum = 2;
 
 private:
 };
