@@ -19,9 +19,9 @@ public:
 public:
 	Sprite() {};
 	//既存のテクスチャを使って生成
-	Sprite(TextureKey key);
+	Sprite(const TextureKey& key);
 	//テクスチャを読み込んでキーに保存、それを使ってSpriteを生成
-	Sprite(string path, TextureKey newKey);
+	Sprite(const string& path, const TextureKey& newKey);
 
 	static void PreSpriteDraw();
 	static void PostSpriteDraw();

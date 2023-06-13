@@ -165,9 +165,6 @@
     <ClCompile Include="SrcEngine\Others\Input.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Others\RenderTarget.cpp">
-      <Filter>Engine\ソースファイル\Others</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>

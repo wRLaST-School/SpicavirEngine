@@ -30,7 +30,7 @@ namespace Util
 	*/
 	int32_t RNG(int32_t min, int32_t max, bool preciseMode = false);
 
-	std::wstring StrToWStr(std::string str, int32_t page = CP_ACP);
+	std::wstring StrToWStr(const std::string& str, int32_t page = CP_ACP);
 };
 
 struct R8G8B8A8

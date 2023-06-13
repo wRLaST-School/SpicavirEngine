@@ -4,7 +4,7 @@
 class IParticle
 {
 public:
-	IParticle(Float3 pos):position(pos) 
+	IParticle(const Float3& pos):position(pos)
 	{	};
 
 	void Init() {

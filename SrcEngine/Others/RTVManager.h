@@ -5,17 +5,17 @@ class RTVManager
 {
 public:
 	static void SetRenderTargetToBackBuffer(UINT bbIndex);
-	static void SetRenderTargetToTexture(TextureKey key, bool clear = true);
-	static void SetRenderTargets(vector<TextureKey> keys);
+	static void SetRenderTargetToTexture(const TextureKey& key, bool clear = true);
+	static void SetRenderTargets(const vector<TextureKey>& keys);
 	static void SetRenderTargetToCurrentBB();
 
-	static void CreateRenderTargetTexture(int32_t width, int32_t height, TextureKey key);
-	static void CreateRenderTargetTexture(float width, float height, TextureKey key, bool useScreenRatio = false);
+	static void CreateRenderTargetTexture(int32_t width, int32_t height, const TextureKey& key);
+	static void CreateRenderTargetTexture(float width, float height, const TextureKey& key, bool useScreenRatio = false);
 	static void CreateHeaps();
 
 	static int32_t GetCurrentRenderTarget();
 
-	static void ClearCurrentRenderTarget(Float4 color);
+	static void ClearCurrentRenderTarget(const Float4& color);
 
 	static RTVManager& GetInstance();
 

@@ -11,10 +11,10 @@ class Color
 {
 public:
 	Color(); //çïÇ≈èâä˙âª
-	Color(Float4 rgba);
+	Color(const Float4& rgba);
 	Color(float r, float g, float b, float a = 1.0f);
 	Color(int32_t r, int32_t g, int32_t b, int32_t a = 255);
-	Color(ColorInt rgba);
+	Color(const ColorInt& rgba);
 	Color(int32_t hexcolor);
 
 	operator ColorInt();

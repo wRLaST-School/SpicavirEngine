@@ -157,7 +157,6 @@
     <ClCompile Include="SrcEngine\Others\Essentials.cpp" />
     <ClCompile Include="SrcEngine\Others\exc_unordered_map.cpp" />
     <ClCompile Include="SrcEngine\Others\Input.cpp" />
-    <ClCompile Include="SrcEngine\Others\RenderTarget.cpp" />
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp" />
     <ClCompile Include="SrcEngine\Others\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

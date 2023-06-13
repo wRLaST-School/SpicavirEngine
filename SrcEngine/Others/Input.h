@@ -74,11 +74,11 @@ namespace Input {
 
 		static void Close();
 
-		static bool Down(Click b);
+		static bool Down(const Click& b);
 
-		static bool Triggered(Click b);
+		static bool Triggered(const Click& b);
 
-		static bool Released(Click b);
+		static bool Released(const Click& b);
 
 		//マウスの移動量
 		static Float2 GetVel();
@@ -107,18 +107,18 @@ namespace Input {
 		static void Close();
 
 		//ボタンが押されているか
-		static bool Down(Button button);
+		static bool Down(const Button& button);
 		//ボタンが離された瞬間か
-		static bool Released(Button button);
+		static bool Released(const Button& button);
 		//ボタンが押された瞬間か
-		static bool Triggered(Button button);
+		static bool Triggered(const Button& button);
 
 		//ボタンが押されているか
-		static bool Down(Trigger side);
+		static bool Down(const Trigger& side);
 		//ボタンが離された瞬間か
-		static bool Released(Trigger side);
+		static bool Released(const Trigger& side);
 		//ボタンが押された瞬間か
-		static bool Triggered(Trigger side);
+		static bool Triggered(const Trigger& side);
 
 		static Pad* GetInstance();
 

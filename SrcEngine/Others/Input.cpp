@@ -87,32 +87,32 @@ void Input::Pad::Close()
 	//XInputEnable(false);
 }
 
-bool Input::Pad::Down(Button button)
+bool Input::Pad::Down(const Button& button)
 {
 	return GetInstance()->padState.Gamepad.wButtons & (UINT)button;
 }
 
-bool Input::Pad::Released(Button button)
+bool Input::Pad::Released(const Button& button)
 {
 	return !(GetInstance()->padState.Gamepad.wButtons & (UINT)button) && GetInstance()->lastPadState.Gamepad.wButtons & (UINT)button;
 }
 
-bool Input::Pad::Triggered(Button button)
+bool Input::Pad::Triggered(const Button& button)
 {
 	return !(GetInstance()->lastPadState.Gamepad.wButtons & (UINT)button) && GetInstance()->padState.Gamepad.wButtons & (UINT)button;
 }
 
-bool Input::Pad::Down(Trigger side)
+bool Input::Pad::Down(const Trigger& side)
 {
 	return GetInstance()->triggerState[(int32_t)side];
 }
 
-bool Input::Pad::Released(Trigger side)
+bool Input::Pad::Released(const Trigger& side)
 {
 	return !(GetInstance()->triggerState[(int32_t)side]) && GetInstance()->lastTriggerState[(int32_t)side];
 }
 
-bool Input::Pad::Triggered(Trigger side)
+bool Input::Pad::Triggered(const Trigger& side)
 {
 	return GetInstance()->triggerState[(int32_t)side] && !(GetInstance()->lastTriggerState[(int32_t)side]);
 }
@@ -189,17 +189,17 @@ void Input::Mouse::Close()
 	ins->devmouse->Release();
 }
 
-bool Input::Mouse::Down(Click b)
+bool Input::Mouse::Down(const Click& b)
 {
 	return GetInstance()->state.rgbButtons[(int32_t)b] & (0x80);
 }
 
-bool Input::Mouse::Triggered(Click b)
+bool Input::Mouse::Triggered(const Click& b)
 {
 	return (!(GetInstance()->prevState.rgbButtons[(int32_t)b] & (0x80))) && (GetInstance()->state.rgbButtons[(int32_t)b] & (0x80));
 }
 
-bool Input::Mouse::Released(Click b)
+bool Input::Mouse::Released(const Click& b)
 {
 	return (!(GetInstance()->state.rgbButtons[(int32_t)b] & (0x80))) && (GetInstance()->prevState.rgbButtons[(int32_t)b] & (0x80));
 }

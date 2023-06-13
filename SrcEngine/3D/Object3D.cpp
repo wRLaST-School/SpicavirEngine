@@ -60,7 +60,7 @@ void Object3D::Draw()
 	}, SpRenderer::Stage::Opaque);
 }
 
-void Object3D::Draw(TextureKey key)
+void Object3D::Draw(const TextureKey& key)
 {
 	transformCB.contents->mat = matWorld;
 
@@ -86,7 +86,7 @@ void Object3D::Draw(TextureKey key)
 		}, SpRenderer::Stage::Opaque);
 }
 
-void Object3D::DrawCommands(TextureKey key)
+void Object3D::DrawCommands(const TextureKey& key)
 {
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(key));
 
@@ -115,7 +115,7 @@ void Object3D::DrawAdd()
 	}
 }
 
-void Object3D::DrawAdd(TextureKey key)
+void Object3D::DrawAdd(const TextureKey& key)
 {
 	transformCB.contents->mat = matWorld;
 	SpRenderer::DrawCommand([&] {
@@ -147,7 +147,7 @@ void Object3D::DrawAlpha()
 	}
 }
 
-void Object3D::DrawAlpha(TextureKey key)
+void Object3D::DrawAlpha(const TextureKey& key)
 {
 	transformCB.contents->mat = matWorld;
 	this->alphaTexKey = key;

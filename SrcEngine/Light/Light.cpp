@@ -56,28 +56,28 @@ Light* Light::GetInstance()
 	return &obj;
 }
 
-PointLightKey Light::CreatePointLight(Float3 position, Float3 color, Float3 attenuation, PointLightKey key)
+PointLightKey Light::CreatePointLight(const Float3& position, const Float3& color, const Float3& attenuation, const PointLightKey& key)
 {
 	GetInstance()->pointLights.emplace(key, PointLight(position, color, attenuation)).first->second.name = key;
 	return key;
 }
 
-void Light::RemovePointLight(PointLightKey key)
+void Light::RemovePointLight(const PointLightKey& key)
 {
 	GetInstance()->pointLights.erase(key);
 }
 
-PointLight* Light::GetPointLightPtr(PointLightKey key)
+PointLight* Light::GetPointLightPtr(const PointLightKey& key)
 {
 	return &GetInstance()->pointLights.find(key)->second;
 }
 
-Float3 Light::GetPointLightPos(PointLightKey key)
+Float3 Light::GetPointLightPos(const PointLightKey& key)
 {
 	return GetPointLightPtr(key)->pos;
 }
 
-void Light::SetPointLightPos(PointLightKey key, Float3 pos)
+void Light::SetPointLightPos(const PointLightKey& key, const Float3& pos)
 {
 	GetPointLightPtr(key)->pos = pos;
 }

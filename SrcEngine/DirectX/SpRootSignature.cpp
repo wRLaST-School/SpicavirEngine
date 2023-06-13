@@ -35,12 +35,12 @@ void SpRootSignature::UseDefaultSettings()
 	samplerDesc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 }
 
-SpRootSignature* SpRootSignature::Get(string id)
+SpRootSignature* SpRootSignature::Get(const string& id)
 {
 	return &rsMap.find(id)->second;
 }
 
-SpRootSignature* SpRootSignature::Register(string id)
+SpRootSignature* SpRootSignature::Register(const string& id)
 {
 	rsMap.emplace(id, SpRootSignature()).second;
 	return &rsMap.find(id)->second;

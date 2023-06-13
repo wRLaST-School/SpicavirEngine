@@ -11,7 +11,7 @@
 Model::Model() {
 }
 
-Model::Model(string modelName)
+Model::Model(const string& modelName)
 {
 	string path = "Resources/Models/"+modelName+"/";
 	string objfile = modelName + ".obj";
@@ -183,7 +183,7 @@ Model::Model(string modelName)
 	ibView.SizeInBytes = sizeIB;
 }
 
-Model::Model(string filePath, bool useSmoothShading)
+Model::Model(const string& filePath, bool useSmoothShading)
 {
 	Assimp::Importer importer;
 
@@ -448,7 +448,7 @@ void Model::UpdateMaterial()
 	materialCBs.back().contents->alpha = material.front().alpha;
 }
 
-void ModelManager::Register(string modelName, ModelKey key)
+void ModelManager::Register(const string& modelName, const ModelKey& key)
 {
 	models.Access(
 		[&](auto& map) {
@@ -457,7 +457,7 @@ void ModelManager::Register(string modelName, ModelKey key)
 	);
 }
 
-void ModelManager::Register(string modelPath, ModelKey key, bool useAssimp)
+void ModelManager::Register(const string& modelPath, const ModelKey& key, bool useAssimp)
 {
 	models.Access(
 		[&](auto& map) {
@@ -468,7 +468,7 @@ void ModelManager::Register(string modelPath, ModelKey key, bool useAssimp)
 	);
 }
 
-Model* ModelManager::GetModel(ModelKey key)
+Model* ModelManager::GetModel(const ModelKey& key)
 {
 	Model* ret;
 	models.Access(

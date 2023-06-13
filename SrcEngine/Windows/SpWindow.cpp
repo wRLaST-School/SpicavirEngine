@@ -10,7 +10,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
 
-SpWindow* GetSpWindow(string ID)
+SpWindow* GetSpWindow(const string& ID)
 {
     auto res = wWindowList.find(ID);
     return res != wWindowList.end() ? &res->second : nullptr;
@@ -21,12 +21,12 @@ SpWindow* GetSpWindow()
     return GetSpWindow(defWndID);
 }
 
-void RegisterSpWindow(SpWindow wwnd, string ID)
+void RegisterSpWindow(SpWindow wwnd, const string& ID)
 {
     wWindowList[ID] = wwnd;
 }
 
-void SetDefaultWindowID(string ID)
+void SetDefaultWindowID(const string& ID)
 {
     defWndID = ID;
 }

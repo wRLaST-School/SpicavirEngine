@@ -9,10 +9,10 @@ class Animation2D
 public:
 	Animation2D(){};
 	//アニメーションを登録。初登録なら初期アニメーションに。
-	void Register(vector<TextureKey> texKeys, int32_t cooltime, bool loop, AnimKey key);
-	void SetDefaultKey(AnimKey key);
+	void Register(vector<TextureKey> texKeys, int32_t cooltime, bool loop, const AnimKey& key);
+	void SetDefaultKey(const AnimKey& key);
 	void Update();
-	void Set(AnimKey key); // animationEndを初期化
+	void Set(const AnimKey& key); // animationEndを初期化
 
 	TextureKey Get();
 	bool isAnimationEnd();

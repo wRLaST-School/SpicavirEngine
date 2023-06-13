@@ -49,12 +49,12 @@ void SpDS::DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot, Te
 	graphCount++;
 }
 
-void SpDS::DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, Color color, Anchor anchor)
+void SpDS::DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, const Color& color, const Anchor& anchor)
 {
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
 }
 
-void SpDS::DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, Color color)
+void SpDS::DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, const  Color& color)
 {
 	int32_t sizeX = x1 - x0;
 	int32_t sizeY = y1 - y0;
@@ -62,7 +62,7 @@ void SpDS::DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, Color color)
 	DrawBox(x0 + sizeX / 2, y0 + sizeY / 2, sizeX, sizeY, 0.f, color);
 }
 
-void SpDS::SetBlendMode(Blend blendMode)
+void SpDS::SetBlendMode(const Blend& blendMode)
 {
 	switch (blendMode) {
 	case Blend::Alpha:
@@ -98,7 +98,7 @@ void SpDS::SetBlendMode(Blend blendMode)
 
 }
 
-void SpDS::SetRenderTarget(TextureKey key)
+void SpDS::SetRenderTarget(const TextureKey& key)
 {
 	commands.insert(
 		eastl::pair<int32_t, function<void(void)>>(graphCount, [&, key] {
@@ -117,7 +117,7 @@ void SpDS::SetPreDrawFunc(function<void(void)> prop)
 	commands.insert(eastl::pair<int32_t, function<void(void)>>(graphCount, prop));
 }
 
-void SpDS::DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, Color color, float thickness, Anchor anchor)
+void SpDS::DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, const Color& color, float thickness, const  Anchor& anchor)
 {
 	anchor;
 	int32_t x1 = x - width / 2;
@@ -131,7 +131,7 @@ void SpDS::DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, Colo
 	DrawLine(x2, y1, x2, y2, color, (int32_t)thickness);
 }
 
-void SpDS::DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, Color color, int32_t thickness)
+void SpDS::DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, const Color& color, int32_t thickness)
 {
 	Vec2 ray((float)endX - (float)startX, (float)endY - (float)startY);
 	float l = ray.GetLength();

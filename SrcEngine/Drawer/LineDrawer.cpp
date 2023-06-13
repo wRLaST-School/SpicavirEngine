@@ -42,12 +42,12 @@ void LineDrawer::Init()
 	vbView.StrideInBytes = sizeof(Line);
 }
 
-void LineDrawer::DrawLine(Float3 start, Float3 end, Float4 color)
+void LineDrawer::DrawLine(const Float3& start, const Float3& end, const Float4& color)
 {
 	lines.emplace_back(start, end, color);
 }
 
-void LineDrawer::DrawLines(vector<Float3> positions, Float4 color)
+void LineDrawer::DrawLines(const vector<Float3>& positions, const Float4& color)
 {
 	for (auto itr = positions.begin(); itr + 1 != positions.end(); itr++)
 	{
@@ -55,7 +55,7 @@ void LineDrawer::DrawLines(vector<Float3> positions, Float4 color)
 	}
 }
 
-void LineDrawer::DrawCube(Float3 center, Float3 scale, Float4 color)
+void LineDrawer::DrawCube(const Float3& center, const Float3& scale, const Float4& color)
 {
 	vector<Float3> points = {
 		(Vec3)center + Vec3(-scale.x,  scale.y, -scale.z),
@@ -84,7 +84,7 @@ void LineDrawer::DrawCube(Float3 center, Float3 scale, Float4 color)
 	DrawLine(points[3], points[7], color);
 }
 
-void LineDrawer::DrawRotaCube(Float3 center, Float3 scale, Float3 rot, Float4 color)
+void LineDrawer::DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color)
 {
 	vector<Vec3> points = {
 	(Vec3)center + Vec3(-scale.x,  scale.y, -scale.z),

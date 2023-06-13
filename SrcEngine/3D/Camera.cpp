@@ -98,7 +98,7 @@ Matrix Camera::GetCurrentCameraBillboardMat()
 	return -camRot;
 }
 
-Float3 Camera::GetWorldPosFromScreen(Float2 screen, float depth)
+Float3 Camera::GetWorldPosFromScreen(const Float2& screen, float depth)
 {
 	if (useWindowSize)
 	{
@@ -158,7 +158,7 @@ Float3 Camera::GetWorldPosFromScreen(Float2 screen, float depth)
 	return nearPos + ray.SetLength(depth);
 }
 
-Ray Camera::GetScreenPosRay(Float2 screen)
+Ray Camera::GetScreenPosRay(const Float2& screen)
 {
 	if (useWindowSize)
 	{

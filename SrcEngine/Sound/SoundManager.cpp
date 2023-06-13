@@ -13,7 +13,7 @@ void SoundManager::Init()
     sndMap.clear();
 }
 
-SoundKey SoundManager::LoadWave(string path, SoundKey key)
+SoundKey SoundManager::LoadWave(const string& path, const SoundKey& key)
 {
     sndMap.Access(
         [&](auto& map) {
@@ -85,7 +85,7 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
     return key;
 }
 
-void SoundManager::Play(SoundKey key)
+void SoundManager::Play(const SoundKey& key)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
 
@@ -108,7 +108,7 @@ void SoundManager::Play(SoundKey key)
     pSourceVoice->Start();
     pSnd->sound = pSourceVoice;
 }
-SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
+SoundData* SoundManager::PlayBGM(const SoundKey& key, bool loopFlag)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
     SoundData* pSnd;
@@ -140,7 +140,7 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
     return pSnd;
 }
 
-SoundData* SoundManager::GetSoundData(SoundKey key)
+SoundData* SoundManager::GetSoundData(const SoundKey& key)
 {
     SoundData* pSnd;
     sndMap.Access(
@@ -151,7 +151,7 @@ SoundData* SoundManager::GetSoundData(SoundKey key)
     return pSnd;
 }
 
-void SoundManager::StopBGM(SoundKey key)
+void SoundManager::StopBGM(const SoundKey& key)
 {
     SoundData* pSnd;
     sndMap.Access(

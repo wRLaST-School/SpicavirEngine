@@ -7,7 +7,7 @@
 class Light
 {
 public:
-	struct LightCBData 
+	struct LightCBData
 	{
 		Vec3 dLightVec;//Œõ‚Ì•ûŒü‚Ì‹tƒxƒNƒgƒ‹
 		float padding1 = 0;
@@ -26,15 +26,15 @@ public:
 	static Light* GetInstance();
 
 
-	static PointLightKey CreatePointLight(Float3 position, Float3 color, Float3 attenuation, PointLightKey key);
+	static PointLightKey CreatePointLight(const Float3& position, const Float3& color, const Float3& attenuation, const PointLightKey& key);
 
-	static void RemovePointLight(PointLightKey key);
+	static void RemovePointLight(const PointLightKey& key);
 
-	static PointLight* GetPointLightPtr(PointLightKey key);
+	static PointLight* GetPointLightPtr(const PointLightKey& key);
 
-	static Float3 GetPointLightPos(PointLightKey key);
+	static Float3 GetPointLightPos(const PointLightKey& key);
 
-	static void SetPointLightPos(PointLightKey key, Float3 pos);
+	static void SetPointLightPos(const PointLightKey& key, const Float3& pos);
 
 	static void ClearAllPointLights();
 

@@ -12,7 +12,7 @@ public:
 	D3D12_STATIC_SAMPLER_DESC samplerDesc;
 
 public:
-	static SpRootSignature* Get(string id);
-	static SpRootSignature* Register(string id);
+	static SpRootSignature* Get(const string& id);
+	static SpRootSignature* Register(const string& id);
 	static map<string, SpRootSignature> rsMap;
 };

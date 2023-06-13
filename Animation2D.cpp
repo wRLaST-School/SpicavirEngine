@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "Animation2D.h"
 
-void Animation2D::Register(vector<TextureKey> texKeys, int32_t cooltime, bool loop, AnimKey key)
+void Animation2D::Register(vector<TextureKey> texKeys, int32_t cooltime, bool loop, const AnimKey& key)
 {
 	animMap.insert(pair<AnimKey, AnimData>(key, { texKeys, 0, (int32_t)texKeys.size(), 0, cooltime, loop }));
 
 	if (!current) current = &animMap.find(key)->second;
 }
 
-void Animation2D::SetDefaultKey(AnimKey key)
+void Animation2D::SetDefaultKey(const AnimKey& key)
 {
 	default = key;
 }
@@ -36,7 +36,7 @@ void Animation2D::Update()
 	}
 }
 
-void Animation2D::Set(AnimKey key)
+void Animation2D::Set(const AnimKey& key)
 {
 	current = &animMap.find(key)->second;
 	current->currentIndex = 0;

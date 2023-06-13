@@ -5,7 +5,7 @@ class PointLight
 {
 public:
 	PointLight() :pos({ 0,0,0 }), color({ 0,0,0 }), att({ 0,0,0 }) { isActive = false; }
-	PointLight(Float3 pos, Float3 color, Float3 att) :pos(pos), color(color), att(att), isActive(true) {}
+	PointLight(const Float3& pos, const Float3& color, const Float3& att) :pos(pos), color(color), att(att), isActive(true) {}
 	Float3 pos;
 	Float3 color;
 	Float3 att;

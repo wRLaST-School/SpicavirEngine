@@ -7,7 +7,7 @@
 #include <RootSignatureManager.h>
 #include <SpRenderer.h>
 
-Sprite::Sprite(TextureKey key)
+Sprite::Sprite(const TextureKey& key)
 {
 	this->tex = key;
 
@@ -70,7 +70,7 @@ Sprite::Sprite(TextureKey key)
 	constBuff.contents->color = {1.0, 1.0, 1.0, 1.0};
 }
 
-Sprite::Sprite(string path, TextureKey newKey)
+Sprite::Sprite(const string& path, const TextureKey& newKey)
 {
 	this->tex = SpTextureManager::LoadTexture(path, newKey);
 

@@ -24,10 +24,10 @@ private:
 /// </summary>
 /// <param name="ID">stringå^ÇÃID</param>
 /// <returns>ê¨å˜:SpWindowÇ÷ÇÃÉ|ÉCÉìÉ^,é∏îs:nullptr</returns>
-SpWindow* GetSpWindow(string ID);
+SpWindow* GetSpWindow(const string& ID);
 SpWindow* GetSpWindow();
 extern map<string, SpWindow> wWindowList;
-void RegisterSpWindow(SpWindow spwnd, string ID);
-void SetDefaultWindowID(string ID);
+void RegisterSpWindow(SpWindow spwnd, const string& ID);
+void SetDefaultWindowID(const string& ID);
 
 void CloseAllSpWindow();

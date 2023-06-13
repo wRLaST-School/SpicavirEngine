@@ -5,7 +5,7 @@
 #include <Sprite.h>
 #include <SpSwapChainManager.h>
 
-void IPostEffector::RegisterPipeline(string name)
+void IPostEffector::RegisterPipeline(const string& name)
 {
 	RegisterShader(name);
 	InitVS(name, name + "VS.hlsl");
@@ -28,7 +28,7 @@ void IPostEffector::RegisterPipeline(string name)
 	GPipeline::Create(pl2dDesc, name);
 }
 
-void IPostEffector::RegisterRS(string name)
+void IPostEffector::RegisterRS(const string& name)
 {
 #pragma region 2D Default RS
 	{
@@ -61,7 +61,7 @@ void IPostEffector::RegisterRS(string name)
 #pragma endregion
 }
 
-void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name, std::function<void(void)> commands)
+void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTex, const string& name, std::function<void(void)> commands)
 {
 	if (targetTex == "CurrentBuffer")
 	{

@@ -29,7 +29,7 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 	}
 }
 
-void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
+void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 {
 	CloseCurrentResBar();
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
@@ -60,11 +60,11 @@ void RTVManager::SetRenderTargetToTexture(TextureKey key, bool clear)
 	if (clear)ClearCurrentRenderTarget({ 0, 0, 0, 0 });
 }
 
-void RTVManager::SetRenderTargets(vector<TextureKey> keys)
+void RTVManager::SetRenderTargets(const vector<TextureKey>& keys)
 {
 	CloseCurrentResBar();
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
-	
+
 	for (auto& key : keys)
 	{
 		if (key == "CurrentBuffer")
@@ -127,14 +127,14 @@ void RTVManager::SetRenderTargetToCurrentBB()
 	SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
 }
 
-void RTVManager::CreateRenderTargetTexture(int32_t width, int32_t height, TextureKey key)
+void RTVManager::CreateRenderTargetTexture(int32_t width, int32_t height, const TextureKey& key)
 {
 	CreateRenderTargetTexture((float)width, (float)height, key, false);
 }
 
-void RTVManager::CreateRenderTargetTexture(float width, float height, TextureKey key, bool useScreenRatio)
+void RTVManager::CreateRenderTargetTexture(float width, float height, const TextureKey& key, bool useScreenRatio)
 {
-	key = SpTextureManager::CreateDummyTexture(width, height, key, true, useScreenRatio);
+	SpTextureManager::CreateDummyTexture(width, height, key, true, useScreenRatio);
 
 	if (SpTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
 
@@ -164,7 +164,7 @@ int32_t RTVManager::GetCurrentRenderTarget()
 	return GetInstance().currentRTIndex[0];
 }
 
-void RTVManager::ClearCurrentRenderTarget(Float4 color)
+void RTVManager::ClearCurrentRenderTarget(const Float4& color)
 {
 	float colour[] = { color.x, color.y, color.z, color.w };
 	for (int32_t i = 0; i < 8; i++)

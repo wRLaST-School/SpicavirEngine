@@ -56,12 +56,12 @@ public:
 	static SoundManager* GetInstance();
 	static void Init();
 
-	static SoundKey LoadWave(string path, SoundKey key);
-	static void Play(SoundKey key);
-	static SoundData* PlayBGM(SoundKey key, bool loopFlag);
+	static SoundKey LoadWave(const string& path, const SoundKey& key);
+	static void Play(const SoundKey& key);
+	static SoundData* PlayBGM(const SoundKey& key, bool loopFlag);
 
-	static SoundData* GetSoundData(SoundKey key);
-	static void StopBGM(SoundKey key);
+	static SoundData* GetSoundData(const SoundKey& key);
+	static void StopBGM(const SoundKey& key);
 
 	static void ReleaseAllSounds();
 	static void ReleasePerSceneSounds();

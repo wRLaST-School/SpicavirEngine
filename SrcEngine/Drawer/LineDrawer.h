@@ -4,7 +4,7 @@
 class Line 
 {
 public:
-	Line(Float3 start, Float3 end, Float4 color) : start(start), end(end), color(color) {}
+	Line(const Float3& start, const Float3& end, const Float4& color) : start(start), end(end), color(color) {}
 	Float3 start;
 	Float3 end;
 
@@ -16,10 +16,10 @@ class LineDrawer
 public:
 	static void Init();
 
-	static void DrawLine(Float3 start, Float3 end, Float4 color);
-	static void DrawLines(vector<Float3> positions, Float4 color);
-	static void DrawCube(Float3 center, Float3 scale, Float4 color);
-	static void DrawRotaCube(Float3 center, Float3 scale, Float3 rot, Float4 color);
+	static void DrawLine(const Float3& start, const Float3& end, const Float4& color);
+	static void DrawLines(const vector<Float3>& positions, const Float4& color);
+	static void DrawCube(const Float3& center, const Float3& scale, const Float4& color);
+	static void DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color);
 
 	static void DrawAllLines();
 

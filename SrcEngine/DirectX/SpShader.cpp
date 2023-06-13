@@ -3,17 +3,17 @@
 
 map<string, SpShader> shaderMap;
 
-void SpShader::InitVS(string vsPath)
+void SpShader::InitVS(const string& vsPath)
 {
 	string shaderFolder = "Resources/Shaders/";
-	vsPath = shaderFolder + vsPath;
+	string vsPath_ = shaderFolder + vsPath;
 	//シェーダーの読み込みとコンパイル
 	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
 	// 頂点シェーダの読み込みとコンパイル
 	HRESULT result;
 	result = D3DCompileFromFile(
-		wstring(vsPath.begin(), vsPath.end()).c_str(),  // シェーダファイル名
+		wstring(vsPath_.begin(), vsPath_.end()).c_str(),  // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "vs_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -36,10 +36,10 @@ void SpShader::InitVS(string vsPath)
 	}
 }
 
-void SpShader::InitPS(string psPath)
+void SpShader::InitPS(const string& psPath)
 {
 	string shaderFolder = "Resources/Shaders/";
-	psPath = shaderFolder + psPath;
+	string psPath_ = shaderFolder + psPath;
 	//シェーダーの読み込みとコンパイル
 	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
@@ -47,7 +47,7 @@ void SpShader::InitPS(string psPath)
 	HRESULT result;
 	// ピクセルシェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
-		wstring(psPath.begin(), psPath.end()).c_str(),   // シェーダファイル名
+		wstring(psPath_.begin(), psPath_.end()).c_str(),   // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "ps_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -70,17 +70,17 @@ void SpShader::InitPS(string psPath)
 	}
 }
 
-void SpShader::InitGS(string gsPath)
+void SpShader::InitGS(const string& gsPath)
 {
 	string shaderFolder = "Resources/Shaders/";
-	gsPath = shaderFolder + gsPath;
+	string gsPath_ = shaderFolder + gsPath;
 	//シェーダーの読み込みとコンパイル
 	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
 	// 頂点シェーダの読み込みとコンパイル
 	HRESULT result;
 	result = D3DCompileFromFile(
-		wstring(gsPath.begin(), gsPath.end()).c_str(),  // シェーダファイル名
+		wstring(gsPath_.begin(), gsPath_.end()).c_str(),  // シェーダファイル名
 		nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, // インクルード可能にする
 		"main", "gs_5_0", // エントリーポイント名、シェーダーモデル指定
@@ -103,27 +103,27 @@ void SpShader::InitGS(string gsPath)
 	}
 }
 
-void RegisterShader(string id)
+void RegisterShader(const string& id)
 {
 	shaderMap[id] = SpShader();
 }
 
-void InitGS(string id, string gsPath)
+void InitGS(const string& id, const string& gsPath)
 {
 	shaderMap[id].InitGS(gsPath);
 }
 
-void InitVS(string id, string vsPath)
+void InitVS(const string& id, const string& vsPath)
 {
 	shaderMap[id].InitVS(vsPath);
 }
 
-void InitPS(string id, string psPath)
+void InitPS(const string& id, const string& psPath)
 {
 	shaderMap[id].InitPS(psPath);
 }
 
-SpShader* GetShader(string id)
+SpShader* GetShader(const string& id)
 {
 	return &shaderMap[id];
 }

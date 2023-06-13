@@ -1,6 +1,6 @@
 #include "Util.h"
 
-std::wstring Util::StrToWStr(std::string str, int32_t page)
+std::wstring Util::StrToWStr(const std::string& str, int32_t page)
 {
     // SJIS -> wstring
     int32_t iBufferSize = MultiByteToWideChar(page, 0, str.c_str(), -1, (wchar_t*)NULL, 0);

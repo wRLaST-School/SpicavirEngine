@@ -40,7 +40,7 @@ void SpTextureManager::Init()
 	AddMasterTextureKey("notexture");
 }
 
-TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
+TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKey& key)
 {
 	perSceneTextures[currentSceneResIndex].push_back(key);
 	bool alreadyRegistered = false;
@@ -170,7 +170,7 @@ TextureKey SpTextureManager::LoadTexture(string filePath, TextureKey key)
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKey key)
+TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, const TextureKey& key)
 {
 	OutputDebugStringA((string("Loading Unique : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextTexIndex) + string(")\n")).c_str());
 	SpTextureManager& ins = GetInstance();
@@ -296,7 +296,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(string filePath, TextureKe
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::CreateDummyTexture(float width, float height, TextureKey key, bool initAsRenderTarget, bool useRatio)
+TextureKey SpTextureManager::CreateDummyTexture(float width, float height, const TextureKey& key, bool initAsRenderTarget, bool useRatio)
 {
 	perSceneTextures[currentSceneResIndex].push_back(key);
 	for (size_t i = 0; i < wMaxSRVCount; i++)
@@ -407,7 +407,7 @@ TextureKey SpTextureManager::CreateDummyTexture(float width, float height, Textu
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, TextureKey key, bool initAsRenderTarget)
+TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget)
 {//テクスチャバッファ
 	for (size_t i = 0; i < wMaxSRVCount; i++)
 	{
@@ -484,7 +484,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int3
 	throw std::out_of_range("out of texture resource");
 }
 
-void SpTextureManager::LoadDiv(string filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const vector<TextureKey>& keys)
+void SpTextureManager::LoadDiv(const string& filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const vector<TextureKey>& keys)
 {
 	auto itr = keys.begin();
 	int32_t end = 0;
@@ -509,7 +509,7 @@ void SpTextureManager::LoadDiv(string filePath, int32_t widthPer, int32_t height
 	}
 }
 
-TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, TextureKey key)
+TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, const TextureKey& key)
 {
 	perSceneTextures[currentSceneResIndex].push_back(key);
 	bool alreadyRegistered = false;
@@ -658,7 +658,7 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::CreatePlainSRV(TextureKey key)
+TextureKey SpTextureManager::CreatePlainSRV(const TextureKey& key)
 {
 	perSceneTextures[currentSceneResIndex].push_back(key);
 	for (size_t i = 0; i < wMaxSRVCount; i++)
@@ -738,7 +738,7 @@ void SpTextureManager::ResizeScreenTextures()
 	}
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
+D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(const TextureKey& key)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
@@ -751,7 +751,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE SpTextureManager::GetCPUDescHandle(TextureKey key)
 	return heapHandle;
 }
 
-D3D12_GPU_DESCRIPTOR_HANDLE SpTextureManager::GetGPUDescHandle(TextureKey key)
+D3D12_GPU_DESCRIPTOR_HANDLE SpTextureManager::GetGPUDescHandle(const TextureKey& key)
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetGPUDescriptorHandleForHeapStart();
@@ -764,7 +764,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE SpTextureManager::GetGPUDescHandle(TextureKey key)
 	return heapHandle;
 }
 
-TexMetadata SpTextureManager::GetTextureMetadata(TextureKey key)
+TexMetadata SpTextureManager::GetTextureMetadata(const TextureKey& key)
 {
 	TexMetadata meta;
 	GetInstance().texDataMap.Access(
@@ -775,7 +775,7 @@ TexMetadata SpTextureManager::GetTextureMetadata(TextureKey key)
 	return meta;
 }
 
-SpTextureManager::TexData SpTextureManager::GetTextureData(TextureKey key)
+SpTextureManager::TexData SpTextureManager::GetTextureData(const TextureKey& key)
 {
 	TexData data = {};
 	GetInstance().texDataMap.Access(
@@ -786,7 +786,7 @@ SpTextureManager::TexData SpTextureManager::GetTextureData(TextureKey key)
 	return data;
 }
 
-ID3D12Resource* SpTextureManager::GetTextureBuff(TextureKey key)
+ID3D12Resource* SpTextureManager::GetTextureBuff(const TextureKey& key)
 {
 	SRVHeapIndex index = 114514;
 	GetInstance().textureMap.Access(
@@ -797,7 +797,7 @@ ID3D12Resource* SpTextureManager::GetTextureBuff(TextureKey key)
 	return SpTextureManager::GetInstance().texBuffs[index].Get();
 }
 
-int32_t SpTextureManager::GetIndex(TextureKey key)
+int32_t SpTextureManager::GetIndex(const TextureKey& key)
 {
 	int32_t ret = 0;
 	GetInstance().textureMap.Access(
@@ -811,12 +811,12 @@ int32_t SpTextureManager::GetIndex(TextureKey key)
 	return ret;
 }
 
-void SpTextureManager::AddMasterTextureKey(TextureKey key)
+void SpTextureManager::AddMasterTextureKey(const TextureKey& key)
 {
 	masterTextures.push_back(key);
 }
 
-void SpTextureManager::Release(TextureKey key)
+void SpTextureManager::Release(const TextureKey& key)
 {
 	SpTextureManager& ins = GetInstance();
 
