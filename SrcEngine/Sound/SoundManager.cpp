@@ -182,7 +182,7 @@ void SoundManager::ReleasePerSceneSounds()
     for (auto itr = perSceneSounds[lastSceneResIndex].begin(); itr != perSceneSounds[lastSceneResIndex].end(); itr++)
     {
         bool usingInCurrentScene = false;
-        for (auto key : perSceneSounds[currentSceneResIndex])
+        for (auto& key : perSceneSounds[currentSceneResIndex])
         {
             if (key == *itr)
             {

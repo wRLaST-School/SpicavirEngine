@@ -61,7 +61,7 @@ void SrAddStage::PostDraw()
 
 void SrAddStage::Render()
 {
-	for (auto cmd : commands)
+	for (auto& cmd : commands)
 	{
 		cmd();
 	}

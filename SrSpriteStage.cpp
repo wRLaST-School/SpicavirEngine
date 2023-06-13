@@ -24,7 +24,7 @@ void SrSpriteStage::PostDraw()
 
 void SrSpriteStage::Render()
 {
-	for (auto cmd : commands)
+	for (auto& cmd : commands)
 	{
 		cmd();
 	}

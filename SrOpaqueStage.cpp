@@ -51,7 +51,7 @@ void SrOpaqueStage::PostDraw()
 
 void SrOpaqueStage::Render()
 {
-	for (auto cmd : commands)
+	for (auto& cmd : commands)
 	{
 		cmd();
 	}
