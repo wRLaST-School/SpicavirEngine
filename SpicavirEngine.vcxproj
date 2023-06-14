@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation2D.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -182,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="Anchor.h" />
     <ClInclude Include="Animation2D.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="GameScene.h" />

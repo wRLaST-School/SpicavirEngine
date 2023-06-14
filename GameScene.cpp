@@ -3,13 +3,13 @@
 
 void GameScene::LoadResources()
 {
-	ModelManager::Register("Resources/Models/Boss/boss.glb", "Boss", true);
-	SpTextureManager::LoadTexture("Resources/white.png", "white");
+	Boss::Load();
 }
 
 void GameScene::Init()
 {
-	boss.model = ModelManager::GetModel("Boss");
+	Boss::Set(&boss);
+	boss.Init();
 
 	cam.UseDefaultParams();
 
@@ -18,7 +18,7 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
-	boss.UpdateMatrix();
+	boss.Update();
 }
 
 void GameScene::DrawBack()
@@ -29,7 +29,7 @@ void GameScene::Draw3D()
 {
 	Camera::Set(cam);
 
-	boss.Draw("white");
+	boss.Draw();
 }
 
 void GameScene::DrawSprite()

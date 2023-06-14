@@ -354,6 +354,9 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>!Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -568,6 +571,9 @@
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>!Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>!Game\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
