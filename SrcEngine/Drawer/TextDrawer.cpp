@@ -153,7 +153,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	}
 
 	UINT64 imageDataCount = strdata.width * strdata.height;
-	R8G8B8A8* finalTexImageData = new R8G8B8A8[imageDataCount];
+	vector<R8G8B8A8> finalTexImageData =vector<R8G8B8A8>(imageDataCount);
 
 	for (UINT64 i = 0; i < imageDataCount; i++)
 	{
@@ -230,12 +230,10 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	SpTextureManager::GetTextureBuff(strdata.key)->WriteToSubresource(
 		0,
 		nullptr,
-		finalTexImageData,
+		&finalTexImageData.front(),
 		(UINT)sizeof(R8G8B8A8) * strdata.width,
 		(UINT)sizeof(R8G8B8A8) * (UINT)imageDataCount
 	);
-
-	delete[] finalTexImageData;
 
 	return strdata;
 }
