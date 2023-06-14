@@ -52,15 +52,15 @@ public:
 	ComPtr<ID3D12Resource>texBuffs[wMaxSRVCount] = {};
 
 private:
-	size_t nextTexIndex = 0;
-	exc_unordered_map<TextureKey, SRVHeapIndex> textureMap = {};
-	exc_unordered_map<TextureKey, TexData> texDataMap = {};
-	bool isOccupied[wMaxSRVCount] = {};
+	size_t nextTexIndex_ = 0;
+	exc_unordered_map<TextureKey, SRVHeapIndex> textureMap_ = {};
+	exc_unordered_map<TextureKey, TexData> texDataMap_ = {};
+	bool isOccupied_[wMaxSRVCount] = {};
 
-	static list<TextureKey> perSceneTextures[2];
-	static int32_t currentSceneResIndex;
+	static list<TextureKey> sPerSceneTextures[2];
+	static int32_t sCurrentSceneResIndex;
 
-	static list<TextureKey> masterTextures;
+	static list<TextureKey> sMasterTextures;
 private:
 	SpTextureManager() {};
 	SpTextureManager(const SpTextureManager&) = delete;

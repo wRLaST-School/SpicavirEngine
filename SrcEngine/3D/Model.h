@@ -102,7 +102,7 @@ public:
 	static void PreLoadNewScene();
 
 private:
-	static exc_unordered_map<ModelKey, Model> models;
-	static list<ModelKey> perSceneModels[2];
-	static int32_t currentSceneResIndex;
+	static exc_unordered_map<ModelKey, Model> sModels;
+	static list<ModelKey> sPerSceneModels[2];
+	static int32_t sCurrentSceneResIndex;
 };

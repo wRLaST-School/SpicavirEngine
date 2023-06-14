@@ -450,7 +450,7 @@ void Model::UpdateMaterial()
 
 void ModelManager::Register(const string& modelName, const ModelKey& key)
 {
-	models.Access(
+	sModels.Access(
 		[&](auto& map) {
 			map.emplace(key, modelName);
 		}
@@ -459,7 +459,7 @@ void ModelManager::Register(const string& modelName, const ModelKey& key)
 
 void ModelManager::Register(const string& modelPath, const ModelKey& key, bool useAssimp)
 {
-	models.Access(
+	sModels.Access(
 		[&](auto& map) {
 			map.emplace(std::piecewise_construct,
 				std::forward_as_tuple(key),
@@ -471,7 +471,7 @@ void ModelManager::Register(const string& modelPath, const ModelKey& key, bool u
 Model* ModelManager::GetModel(const ModelKey& key)
 {
 	Model* ret;
-	models.Access(
+	sModels.Access(
 		[&](auto& map) {
 			ret = &map.find(key)->second;
 		}
@@ -482,11 +482,11 @@ Model* ModelManager::GetModel(const ModelKey& key)
 
 void ModelManager::ReleasePerSceneModel()
 {
-	int32_t lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
-	for (auto itr = perSceneModels[lastSceneResIndex].begin(); itr != perSceneModels[lastSceneResIndex].end(); itr++)
+	int32_t lastSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
+	for (auto itr = sPerSceneModels[lastSceneResIndex].begin(); itr != sPerSceneModels[lastSceneResIndex].end(); itr++)
 	{
 		bool usingInCurrentScene = false;
-		for (auto key : perSceneModels[currentSceneResIndex])
+		for (auto key : sPerSceneModels[sCurrentSceneResIndex])
 		{
 			if (key == *itr)
 			{
@@ -496,7 +496,7 @@ void ModelManager::ReleasePerSceneModel()
 
 		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
 		{
-			models.Access(
+			sModels.Access(
 				[&](auto& map) {
 					map.erase(*itr);
 				}
@@ -504,20 +504,20 @@ void ModelManager::ReleasePerSceneModel()
 		}
 	}
 
-	perSceneModels[lastSceneResIndex].clear();
+	sPerSceneModels[lastSceneResIndex].clear();
 }
 
 void ModelManager::ReleaseAllModels()
 {
-	models.clear();
+	sModels.clear();
 }
 
 void ModelManager::PreLoadNewScene()
 {
-	currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+	sCurrentSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
 }
 
 
-exc_unordered_map<ModelKey, Model> ModelManager::models;
-list<ModelKey> ModelManager::perSceneModels[2];
-int32_t ModelManager::currentSceneResIndex = 0;
+exc_unordered_map<ModelKey, Model> ModelManager::sModels;
+list<ModelKey> ModelManager::sPerSceneModels[2];
+int32_t ModelManager::sCurrentSceneResIndex = 0;

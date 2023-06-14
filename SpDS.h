@@ -32,8 +32,8 @@ public:
 	static void Render();
 
 private:
-	const static int32_t graphBuffNum = 4096;
-	const static int32_t lineBuffNum = 2048;
+	const static int32_t GRAPH_BUFF_NUM = 4096;
+	const static int32_t LINE_BUFF_NUM = 2048;
 
 	static void RenderGraph();
 
@@ -66,18 +66,18 @@ private:
 		Float2 uv;
 	};
 
-	static eastl::vector<Line> lines;
+	static eastl::vector<Line> sLines;
 
 	/*static D3D12_VERTEX_BUFFER_VIEW vbView;
 	static ComPtr<ID3D12Resource> vertBuff;*/
 	//static Line* vertMap;
 
-	static eastl::vector<Graph> graphs;
-	static eastl::list<GraphGPUData> ggpu;
-	static D3D12_VERTEX_BUFFER_VIEW gvbView;
-	static ComPtr<ID3D12Resource> gvertBuff;
-	static int32_t graphCount;
-	static eastl::multimap<int32_t, function<void(void)>> commands;
+	static eastl::vector<Graph> sGraphs;
+	static eastl::list<GraphGPUData> sGgpu;
+	static D3D12_VERTEX_BUFFER_VIEW sGvbView;
+	static ComPtr<ID3D12Resource> sGvertBuff;
+	static int32_t sGraphCount;
+	static eastl::multimap<int32_t, function<void(void)>> sCommands;
 };
 
 namespace SpDSLayouts {

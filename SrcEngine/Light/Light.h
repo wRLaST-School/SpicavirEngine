@@ -39,12 +39,12 @@ public:
 	static void ClearAllPointLights();
 
 
-	static DirectionalLight directional;
+	static DirectionalLight sDirectional;
 
 private:
-	SpConstBuffer<LightCBData> lightCB;
+	SpConstBuffer<LightCBData> lightCB_;
 
-	map<PointLightKey, PointLight> pointLights;
+	map<PointLightKey, PointLight> pointLights_;
 
 	Light(){ };
 	~Light(){ };

@@ -24,7 +24,7 @@ class PostEffectCommon
 public:
 	static void Init();
 
-	static D3D12_VERTEX_BUFFER_VIEW vbView;
+	static D3D12_VERTEX_BUFFER_VIEW sVbView;
 
-	static ComPtr<ID3D12Resource> vertBuff;
+	static ComPtr<ID3D12Resource> sVertBuff;
 };

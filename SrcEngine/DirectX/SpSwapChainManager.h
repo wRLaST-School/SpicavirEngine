@@ -4,7 +4,7 @@ class SpSwapChainManager
 {
 public:
 	//TODO:‚±‚ê‚ğRTV‚Ì•û‚ÅRT2‚Â‚ÌVector‚É•Ï‚¦‚éART‚ğResource‚ÂİŒv‚É
-	vector<ComPtr<ID3D12Resource>> backBuffers = vector<ComPtr<ID3D12Resource>>(bbNum);
+	vector<ComPtr<ID3D12Resource>> backBuffers = vector<ComPtr<ID3D12Resource>>(BB_NUM);
 
 	ComPtr<IDXGISwapChain4> swapchain = nullptr;
 
@@ -20,7 +20,7 @@ public:
 
 	void ResizeAllBuffers();
 
-	static const int32_t bbNum = 2;
+	static const int32_t BB_NUM = 2;
 
 private:
 };

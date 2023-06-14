@@ -162,7 +162,7 @@ void Sprite::UpdateMatrix()
 
 void Sprite::Draw()
 {
-	constBuff.contents->mat = constBuff.contents->mat * proj;
+	constBuff.contents->mat = constBuff.contents->mat * sProj;
 	SpRenderer::DrawCommand([&] {
 		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
@@ -175,8 +175,8 @@ void Sprite::Draw()
 
 void Sprite::InitCommon()
 {
-	proj = Matrix::Projection(GetSpWindow()->width, GetSpWindow()->height);
+	sProj = Matrix::Projection(GetSpWindow()->width, GetSpWindow()->height);
 }
 
 
-Matrix Sprite::proj;
+Matrix Sprite::sProj;

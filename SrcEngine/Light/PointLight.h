@@ -39,7 +39,7 @@ public:
 	string name = "unnamed";
 
 private:
-	bool showFrame = false;
+	bool showFrame_ = false;
 };
 
 typedef string PointLightKey;

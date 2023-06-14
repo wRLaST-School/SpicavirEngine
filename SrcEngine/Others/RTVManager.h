@@ -28,9 +28,9 @@ public:
 	bool isAllResBarClosed = true;
 
 private:
-	int32_t currentRTIndex[8] = { -1, -1, -1, -1, -1, -1, -1, -1 };
+	int32_t currentRTIndex_[8] = { -1, -1, -1, -1, -1, -1, -1, -1 };
 
-	ComPtr<ID3D12DescriptorHeap> rtvHeaps = nullptr;
-	D3D12_DESCRIPTOR_HEAP_DESC heapDesc{};
+	ComPtr<ID3D12DescriptorHeap> rtvHeaps_ = nullptr;
+	D3D12_DESCRIPTOR_HEAP_DESC heapDesc_{};
 };
 

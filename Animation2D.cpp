@@ -5,32 +5,32 @@ void Animation2D::Register(vector<TextureKey> texKeys, int32_t cooltime, bool lo
 {
 	animMap.insert(pair<AnimKey, AnimData>(key, { texKeys, 0, (int32_t)texKeys.size(), 0, cooltime, loop }));
 
-	if (!current) current = &animMap.find(key)->second;
+	if (!current_) current_ = &animMap.find(key)->second;
 }
 
 void Animation2D::SetDefaultKey(const AnimKey& key)
 {
-	default = key;
+	default_ = key;
 }
 
 void Animation2D::Update()
 {
-	current->timer++;
-	if (current->timer >= current->cooltime)
+	current_->timer++;
+	if (current_->timer >= current_->cooltime)
 	{
-		current->timer = 0;
+		current_->timer = 0;
 
-		current->currentIndex++;
-		if (current->currentIndex >= current->maxIndex)
+		current_->currentIndex++;
+		if (current_->currentIndex >= current_->maxIndex)
 		{
-			if (current->loop)
+			if (current_->loop)
 			{
-				current->currentIndex = 0;
+				current_->currentIndex = 0;
 			}
 			else
 			{
-				animationEnd = true;
-				current->currentIndex = current->maxIndex - 1;
+				animationEnd_ = true;
+				current_->currentIndex = current_->maxIndex - 1;
 			}
 		}
 	}
@@ -38,18 +38,18 @@ void Animation2D::Update()
 
 void Animation2D::Set(const AnimKey& key)
 {
-	current = &animMap.find(key)->second;
-	current->currentIndex = 0;
-	current->timer = 0;
-	animationEnd = false;
+	current_ = &animMap.find(key)->second;
+	current_->currentIndex = 0;
+	current_->timer = 0;
+	animationEnd_ = false;
 }
 
 TextureKey Animation2D::Get()
 {
-	return current->textures.at(current->currentIndex);
+	return current_->textures.at(current_->currentIndex);
 }
 
 bool Animation2D::isAnimationEnd()
 {
-	return animationEnd;
+	return animationEnd_;
 }

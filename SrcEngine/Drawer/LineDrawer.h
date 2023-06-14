@@ -25,13 +25,13 @@ public:
 
 	static void ClearLineData();
 private:
-	static vector<Line> lines;
+	static vector<Line> lines_;
 
-	static const int32_t maxLines = 1024;
+	static const int32_t MAX_LINES = 1024;
 
-	static D3D12_VERTEX_BUFFER_VIEW vbView;
-	static ComPtr<ID3D12Resource> vertBuff;
-	static Line* vertMap;
+	static D3D12_VERTEX_BUFFER_VIEW vbView_;
+	static ComPtr<ID3D12Resource> vertBuff_;
+	static Line* vertMap_;
 };
 
 namespace LineDrawerCommon {

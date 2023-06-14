@@ -130,7 +130,7 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
 	
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 
@@ -138,7 +138,7 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(p3Tex));
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }

@@ -51,16 +51,16 @@ void SrOpaqueStage::PostDraw()
 
 void SrOpaqueStage::Render()
 {
-	for (auto& cmd : commands)
+	for (auto& cmd : commands_)
 	{
 		cmd();
 	}
-	commands.clear();
+	commands_.clear();
 
 	LineDrawer::DrawAllLines();
 }
 
 void SrOpaqueStage::DrawCommands(std::function<void(void)> cmd)
 {
-	commands.push_back(cmd);
+	commands_.push_back(cmd);
 }

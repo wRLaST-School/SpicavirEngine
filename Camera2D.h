@@ -13,5 +13,5 @@ public:
 	static Matrix GetViewProjMat();
 
 private:
-	static Camera2D* current;
+	static Camera2D* sCurrent;
 };

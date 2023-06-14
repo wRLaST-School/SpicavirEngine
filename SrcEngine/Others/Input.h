@@ -56,11 +56,11 @@ namespace Input {
 
 		static Key* GetInstance();
 	private:
-		IDirectInput8* dinput = nullptr;
-		IDirectInputDevice8* devkeyboard = nullptr;
+		IDirectInput8* dinput_ = nullptr;
+		IDirectInputDevice8* devkeyboard_ = nullptr;
 
-		BYTE keys[256] = {};
-		BYTE prevKeys[256] = {};
+		BYTE keys_[256] = {};
+		BYTE prevKeys_[256] = {};
 
 		friend IDirectInput8* GetDInput();
 	};
@@ -89,12 +89,12 @@ namespace Input {
 		static Mouse* GetInstance();
 
 	private:
-		IDirectInputDevice8* devmouse = nullptr;
+		IDirectInputDevice8* devmouse_ = nullptr;
 
-		Float2 cursor;
+		Float2 cursor_;
 
-		DIMOUSESTATE state;
-		DIMOUSESTATE prevState;
+		DIMOUSESTATE state_;
+		DIMOUSESTATE prevState_;
 	};
 
 	class Pad
@@ -140,12 +140,12 @@ namespace Input {
 
 		int32_t gamepadIndex = 0;
 	private:
-		XINPUT_STATE padState;
-		XINPUT_STATE lastPadState;
+		XINPUT_STATE padState_;
+		XINPUT_STATE lastPadState_;
 
-		bool triggerState[2] = { false, false };
-		bool lastTriggerState[2] = { false, false };
+		bool triggerState_[2] = { false, false };
+		bool lastTriggerState_[2] = { false, false };
 
-		float deadZone = 50;
+		float deadZone_ = 50;
 	};
 }

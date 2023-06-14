@@ -48,7 +48,7 @@ public:
 	Float3 scale = {1.0f, 1.0f, 1.0f};
 	Matrix world;
 
-	static Matrix proj;
+	static Matrix sProj;
 	static void InitCommon();
 };
 

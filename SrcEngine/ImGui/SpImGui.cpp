@@ -19,7 +19,7 @@ void SpImGui::Init()
 
 	InitDirectXForImGui();
 
-	ImGui_ImplDX12_Init(GetWDX()->dev.Get(), SpSwapChainManager::bbNum, DXGI_FORMAT_R8G8B8A8_UNORM,
+	ImGui_ImplDX12_Init(GetWDX()->dev.Get(), SpSwapChainManager::BB_NUM, DXGI_FORMAT_R8G8B8A8_UNORM,
 		SpTextureManager::GetInstance().srvHeap.Get(),
 		SpTextureManager::GetCPUDescHandle("imgui_srv"),
 		SpTextureManager::GetGPUDescHandle("imgui_srv"));
@@ -37,7 +37,7 @@ void SpImGui::InitDirectXForImGui()
 
 void SpImGui::Command(std::function<void(void)> command)
 {
-	commands.push_back(command);
+	sCommands.push_back(command);
 }
 
 void SpImGui::Draw()
@@ -46,7 +46,7 @@ void SpImGui::Draw()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	for (auto& c : commands) {
+	for (auto& c : sCommands) {
 		c();
 	}
 
@@ -54,7 +54,7 @@ void SpImGui::Draw()
 
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), GetWDX()->cmdList.Get());
 
-	commands.clear();
+	sCommands.clear();
 }
 
 void SpImGui::Shutdown()
@@ -65,4 +65,4 @@ void SpImGui::Shutdown()
 }
 
 
-std::list<std::function<void(void)>> SpImGui::commands;
+std::list<std::function<void(void)>> SpImGui::sCommands;

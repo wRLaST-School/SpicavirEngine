@@ -26,9 +26,9 @@ private:
 		bool loop = false;
 	};
 
-	AnimData* current = nullptr;
-	AnimKey default = "__Undefined";
-	bool animationEnd = false;
+	AnimData* current_ = nullptr;
+	AnimKey default_ = "__Undefined";
+	bool animationEnd_ = false;
 
 	
 	map<AnimKey, AnimData> animMap;

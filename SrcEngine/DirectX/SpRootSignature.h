@@ -14,5 +14,5 @@ public:
 public:
 	static SpRootSignature* Get(const string& id);
 	static SpRootSignature* Register(const string& id);
-	static map<string, SpRootSignature> rsMap;
+	static map<string, SpRootSignature> sRsMap;
 };

@@ -25,5 +25,5 @@ public:
 	int32_t maxTime = 120;
 	bool active = true;
 
-	static TextureKey texture;
+	static TextureKey sTexture;
 };

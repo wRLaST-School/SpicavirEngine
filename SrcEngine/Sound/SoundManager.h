@@ -68,12 +68,12 @@ public:
 	static void PreLoadNewScene();
 
 private:
-	static ComPtr<IXAudio2> xAudio2;
-	static IXAudio2MasteringVoice* masterVoice;
-	static exc_unordered_map<SoundKey, SoundData> sndMap;
+	static ComPtr<IXAudio2> sXAudio2;
+	static IXAudio2MasteringVoice* sMasterVoice;
+	static exc_unordered_map<SoundKey, SoundData> sSndMap;
 
 private:
-	static list<SoundKey> perSceneSounds[2];
-	static int32_t currentSceneResIndex;
+	static list<SoundKey> sPerSceneSounds[2];
+	static int32_t sCurrentSceneResIndex;
 
 };

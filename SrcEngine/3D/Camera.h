@@ -47,7 +47,7 @@ public:
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
     static void Set(Camera& camera);
-    static Camera* current;
+    static Camera* sCurrent;
     static void UseCurrent();
 
     static Matrix GetCurrentCameraBillboardMat();

@@ -8,17 +8,17 @@ void Camera2D::DrawRotaGraphCam(int32_t cx, int32_t cy, float dx, float dy, floa
 
 Camera2D* Camera2D::Get()
 {
-	return current;
+	return sCurrent;
 }
 
 void Camera2D::Set(Camera2D* camera)
 {
-	current = camera;
+	sCurrent = camera;
 }
 
 Matrix Camera2D::GetViewProjMat()
 {
-	Matrix vMat = Matrix::View(Matrix::Translation({ (float)current->x, (float)current->y, 0.f }));
+	Matrix vMat = Matrix::View(Matrix::Translation({ (float)sCurrent->x, (float)sCurrent->y, 0.f }));
 
 	SpWindow* win = GetSpWindow();
 	Matrix pMat = Matrix::ProjectionOrtho(win->width, win->height, -1.f, 1.f);
@@ -26,4 +26,4 @@ Matrix Camera2D::GetViewProjMat()
 	return vMat * pMat;
 }
 
-Camera2D* Camera2D::current = nullptr;
+Camera2D* Camera2D::sCurrent = nullptr;

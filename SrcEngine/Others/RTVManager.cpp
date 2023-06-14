@@ -17,15 +17,15 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 	GetInstance().isAllResBarClosed = false;
 
 	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetInstance().GetHeapCPUHandle(GetInstance().numRT - 2),
-		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc.Type));
+		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
-	GetInstance().currentRTIndex[0] = GetInstance().numRT - 2 + bbIndex;
+	GetInstance().currentRTIndex_[0] = GetInstance().numRT - 2 + bbIndex;
 
 	for (int32_t i = 1; i < 8; i++)
 	{
-		GetInstance().currentRTIndex[i] = -1;
+		GetInstance().currentRTIndex_[i] = -1;
 	}
 }
 
@@ -51,10 +51,10 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 	D3D12_CPU_DESCRIPTOR_HANDLE* pcpuhnd = &cpuhnd;
 	GetWDX()->cmdList->OMSetRenderTargets(1, pcpuhnd, false, &dsvH);
 
-	GetInstance().currentRTIndex[0] = index;
+	GetInstance().currentRTIndex_[0] = index;
 	for (int32_t i = 1; i < 8; i++)
 	{
-		GetInstance().currentRTIndex[i] = -1;
+		GetInstance().currentRTIndex_[i] = -1;
 	}
 
 	if (clear)ClearCurrentRenderTarget({ 0, 0, 0, 0 });
@@ -99,7 +99,7 @@ void RTVManager::SetRenderTargets(const vector<TextureKey>& keys)
 		if (key == "CurrentBuffer")
 		{
 			CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetInstance().GetHeapCPUHandle(GetInstance().numRT - 2),
-				GetSCM()->swapchain->GetCurrentBackBufferIndex(), GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc.Type));
+				GetSCM()->swapchain->GetCurrentBackBufferIndex(), GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
 			pcpuhnds.push_back(rtvH);
 		}
 		else
@@ -115,10 +115,10 @@ void RTVManager::SetRenderTargets(const vector<TextureKey>& keys)
 	{
 		if (i >= keys.size())
 		{
-			GetInstance().currentRTIndex[i] = -1;
+			GetInstance().currentRTIndex_[i] = -1;
 			continue;
 		}
-		GetInstance().currentRTIndex[i] = SpTextureManager::GetIndex(keys.at(i));
+		GetInstance().currentRTIndex_[i] = SpTextureManager::GetIndex(keys.at(i));
 	}
 }
 
@@ -154,14 +154,14 @@ void RTVManager::CreateRenderTargetTexture(float width, float height, const Text
 
 void RTVManager::CreateHeaps()
 {
-	GetInstance().heapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
-	GetInstance().heapDesc.NumDescriptors = GetInstance().numRT;
-	GetWDX()->dev->CreateDescriptorHeap(&GetInstance().heapDesc, IID_PPV_ARGS(GetInstance().rtvHeaps.GetAddressOf()));
+	GetInstance().heapDesc_.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+	GetInstance().heapDesc_.NumDescriptors = GetInstance().numRT;
+	GetWDX()->dev->CreateDescriptorHeap(&GetInstance().heapDesc_, IID_PPV_ARGS(GetInstance().rtvHeaps_.GetAddressOf()));
 }
 
 int32_t RTVManager::GetCurrentRenderTarget()
 {
-	return GetInstance().currentRTIndex[0];
+	return GetInstance().currentRTIndex_[0];
 }
 
 void RTVManager::ClearCurrentRenderTarget(const Float4& color)
@@ -169,7 +169,7 @@ void RTVManager::ClearCurrentRenderTarget(const Float4& color)
 	float colour[] = { color.x, color.y, color.z, color.w };
 	for (int32_t i = 0; i < 8; i++)
 	{
-		int32_t index = GetInstance().currentRTIndex[i];
+		int32_t index = GetInstance().currentRTIndex_[i];
 		if (index < 0) continue;
 
 		GetWDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(index), colour, 0, nullptr);
@@ -185,7 +185,7 @@ RTVManager& RTVManager::GetInstance()
 D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int32_t index)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
-	heapHandle = GetInstance().rtvHeaps->GetCPUDescriptorHandleForHeapStart();
+	heapHandle = GetInstance().rtvHeaps_->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * index;
 	return heapHandle;
 }
@@ -194,7 +194,7 @@ void RTVManager::CloseCurrentResBar()
 {
 	for (int32_t i = 0; i < 8; i++)
 	{
-		int32_t index = GetInstance().currentRTIndex[i];
+		int32_t index = GetInstance().currentRTIndex_[i];
 		if (index < 0) continue;
 
 		if (GetInstance().isAllResBarClosed)

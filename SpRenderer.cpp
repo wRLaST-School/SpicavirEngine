@@ -3,7 +3,7 @@
 
 void SpRenderer::Init()
 {
-	for (auto& stg : GetInstance()->stages)
+	for (auto& stg : GetInstance()->stages_)
 	{
 		stg->Init();
 	}
@@ -11,8 +11,8 @@ void SpRenderer::Init()
 
 void SpRenderer::Render()
 {
-	dynamic_cast<SrAlphaStage*>(GetInstance()->stages[(int32_t)Stage::Alpha].get())->SortObjects();
-	for (auto& stg : GetInstance()->stages)
+	dynamic_cast<SrAlphaStage*>(GetInstance()->stages_[(int32_t)Stage::Alpha].get())->SortObjects();
+	for (auto& stg : GetInstance()->stages_)
 	{
 		stg->PreDraw();
 		stg->Render();
@@ -28,10 +28,10 @@ SpRenderer* SpRenderer::GetInstance()
 
 void SpRenderer::DrawCommand(function<void(void)> cmd, const Stage& stg)
 {
-	GetInstance()->stages[(int32_t)stg]->DrawCommands(cmd);
+	GetInstance()->stages_[(int32_t)stg]->DrawCommands(cmd);
 }
 
 void SpRenderer::RegisterAlphaObj(Object3D* obj)
 {
-	dynamic_cast<SrAlphaStage*>(GetInstance()->stages[(int32_t)Stage::Alpha].get())->RegisterAlphaObject(obj);
+	dynamic_cast<SrAlphaStage*>(GetInstance()->stages_[(int32_t)Stage::Alpha].get())->RegisterAlphaObject(obj);
 }

@@ -117,14 +117,14 @@ void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTe
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
 	//GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }
 
-D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::vbView{};
+D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::sVbView{};
 
-ComPtr<ID3D12Resource> PostEffectCommon::vertBuff = nullptr;
+ComPtr<ID3D12Resource> PostEffectCommon::sVertBuff = nullptr;
 
 void PostEffectCommon::Init()
 {
@@ -156,13 +156,13 @@ void PostEffectCommon::Init()
 		&resdesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&vertBuff)
+		IID_PPV_ARGS(&sVertBuff)
 	);
 
-	vertBuff->SetName(L"POST EFFECT VERT BUFF");
+	sVertBuff->SetName(L"POST EFFECT VERT BUFF");
 	// GPU上のバッファに対応した仮想メモリを取得
 	Sprite::Vertex* vertMap = nullptr;
-	vertBuff->Map(0, nullptr, (void**)&vertMap);
+	sVertBuff->Map(0, nullptr, (void**)&vertMap);
 
 	// 全頂点に対して
 	for (int32_t i = 0; i < _countof(vertices); i++)
@@ -171,10 +171,10 @@ void PostEffectCommon::Init()
 	}
 
 	// マップを解除
-	vertBuff->Unmap(0, nullptr);
+	sVertBuff->Unmap(0, nullptr);
 
 	// 頂点バッファビューの作成
-	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
-	vbView.SizeInBytes = sizeVB;
-	vbView.StrideInBytes = sizeof(Sprite::Vertex);
+	sVbView.BufferLocation = sVertBuff->GetGPUVirtualAddress();
+	sVbView.SizeInBytes = sizeVB;
+	sVbView.StrideInBytes = sizeof(Sprite::Vertex);
 }
