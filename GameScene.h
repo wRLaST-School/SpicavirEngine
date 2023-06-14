@@ -1,5 +1,7 @@
 #pragma once
 #include "IScene.h"
+#include <Object3D.h>
+#include <Camera.h>
 class GameScene :
     public IScene
 {
@@ -11,5 +13,10 @@ public:
     void DrawBack() override;
     void Draw3D() override;
     void DrawSprite() override;
+
+private:
+    Object3D boss;
+
+    Camera cam;
 };
 

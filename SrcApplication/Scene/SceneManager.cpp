@@ -5,13 +5,14 @@
 #include <SingleCamTestScene.h>
 #include <IPostEffector.h>
 #include <Bloom.h>
+#include <GameScene.h>
 
 future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
 
 void SceneManager::Init()
 {
-	InstantTransition<SingleCamTestScene>();
+	InstantTransition<GameScene>();
 	//InstantTransition<GameScene>();
 }
 
