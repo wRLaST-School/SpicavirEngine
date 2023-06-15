@@ -4,7 +4,7 @@
 
 void LevelManager::Init()
 {
-	LevelLoader::Load("Levels/test.json");
+	LevelLoader::Load("Levels/scene.json");
 }
 
 void LevelManager::Update()
