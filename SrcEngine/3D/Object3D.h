@@ -14,18 +14,18 @@ public:
 
 	void Draw();
 	//別途読み込んだテクスチャを使う場合
-	void Draw(TextureKey key);
+	void Draw(const TextureKey& key);
 
-	void DrawCommands(TextureKey key);
+	void DrawCommands(const TextureKey& key);
 
 	//加算合成
 	void DrawAdd();
 	//加算合成
-	void DrawAdd(TextureKey key);
+	void DrawAdd(const TextureKey& key);
 
 	//透過表示用
 	void DrawAlpha();
-	void DrawAlpha(TextureKey key);
+	void DrawAlpha(const TextureKey& key);
 
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;

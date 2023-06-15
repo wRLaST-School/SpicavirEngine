@@ -91,10 +91,10 @@ namespace PipelineUtil
 class GPipeline
 {
 public:
-	static void Create(PipelineDesc desc, string id);
-	static D3D12_GRAPHICS_PIPELINE_STATE_DESC* GetDesc(string id);
-	static ID3D12PipelineState* GetState(string id);
-	static GPipeline* GetGPipeline(string id);
+	static void Create(const PipelineDesc& desc, const string& id);
+	static D3D12_GRAPHICS_PIPELINE_STATE_DESC* GetDesc(const string& id);
+	static ID3D12PipelineState* GetState(const string& id);
+	static GPipeline* GetGPipeline(const string& id);
 
 	GPipeline() {};
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC psod{};
@@ -104,7 +104,7 @@ private:
 	void Create();
 
 private:
-	void InitDesc(PipelineDesc desc);
+	void InitDesc(const PipelineDesc& desc);
 
 };
 

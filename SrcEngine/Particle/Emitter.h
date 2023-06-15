@@ -22,10 +22,10 @@ public:
 	} shape = Shape::Cube;
 
 	//同時に発生する数
-	int quantity = 1;
+	int32_t quantity = 1;
 
 	//発生間隔(フレーム)
-	int timeBetweenEmit = 1;
+	int32_t timeBetweenEmit = 1;
 
 	//trueならパーティクルを生成する
 	bool active = false;
@@ -35,30 +35,30 @@ public:
 
 public:
 	Emitter() {
-		this->texture = ParticleType::texture;
+		this->texture = ParticleType::sTexture;
 	}
 
 	void Activate() { active = true; };
 	void Deactivate() { active = false; };
 
 	void Update() {
-		timer++;
-		if (timer > timeBetweenEmit) {
-			timer = 0;
+		timer_++;
+		if (timer_ > timeBetweenEmit) {
+			timer_ = 0;
 
-			for (int i = 0; i < quantity; i++) { Emit(); }
+			for (int32_t i = 0; i < quantity; i++) { Emit(); }
 
 			if (emitOnce) { active = false; }
 		}
 
 		activeCount = 0;
-		for (auto itr = particles.begin(); itr != particles.end();)
+		for (auto itr = particles_.begin(); itr != particles_.end();)
 		{
 			itr->Update();
 
 			if (!itr->active)
 			{
-				itr = particles.erase(itr);
+				itr = particles_.erase(itr);
 			}
 			else
 			{
@@ -121,10 +121,10 @@ private:
 			break;
 		}
 
-		particles.emplace_back(particlePos);
+		particles_.emplace_back(particlePos);
 	}
 
-	vector<ParticleType> particles;
+	vector<ParticleType> particles_;
 
-	int timer = 0;
+	int32_t timer_ = 0;
 };

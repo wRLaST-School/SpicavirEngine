@@ -29,10 +29,10 @@ public:
 		ImGui
 	};
 
-	static void DrawCommand(function<void()> cmd, Stage stg);
+	static void DrawCommand(function<void()> cmd, const Stage& stg);
 	static void RegisterAlphaObj(Object3D* obj);
 private:
-	unique_ptr<IRenderStage> stages[7] = {
+	unique_ptr<IRenderStage> stages_[7] = {
 		make_unique<SrOpaqueStage>(),
 		make_unique<SrAddStage>(),
 		make_unique<SrParticleStage>(),

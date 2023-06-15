@@ -4,7 +4,7 @@
 class IParticle
 {
 public:
-	IParticle(Float3 pos):position(pos) 
+	IParticle(const Float3& pos):position(pos)
 	{	};
 
 	void Init() {
@@ -21,9 +21,9 @@ public:
 	Float3 position;
 	float scale = 1.0f;
 
-	int time = 0;
-	int maxTime = 120;
+	int32_t time = 0;
+	int32_t maxTime = 120;
 	bool active = true;
 
-	static TextureKey texture;
+	static TextureKey sTexture;
 };

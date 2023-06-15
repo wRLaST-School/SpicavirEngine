@@ -22,7 +22,7 @@ void SpSwapChainManager::Init()
 
 	RTVManager::CreateHeaps();
 
-	for (int i = 0; i < 2; i++)
+	for (int32_t i = 0; i < 2; i++)
 	{
 		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
 
@@ -59,7 +59,7 @@ void SpSwapChainManager::ResizeAllBuffers()
 	swapchain->ResizeBuffers(0, spw->width, spw->height, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
 
 	//リサイズ後にバックバッファーを再生成
-	for (int i = 0; i < 2; i++)
+	for (int32_t i = 0; i < 2; i++)
 	{
 		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
 

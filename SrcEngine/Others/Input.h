@@ -48,19 +48,19 @@ namespace Input {
 		static void Close();
 
 		//キーが押されているか
-		static bool Down(int key);
+		static bool Down(int32_t key);
 		//キーが離された瞬間か
-		static bool Released(int key);
+		static bool Released(int32_t key);
 		//キーが押された瞬間か
-		static bool Triggered(int key);
+		static bool Triggered(int32_t key);
 
 		static Key* GetInstance();
 	private:
-		IDirectInput8* dinput = nullptr;
-		IDirectInputDevice8* devkeyboard = nullptr;
+		IDirectInput8* dinput_ = nullptr;
+		IDirectInputDevice8* devkeyboard_ = nullptr;
 
-		BYTE keys[256] = {};
-		BYTE prevKeys[256] = {};
+		BYTE keys_[256] = {};
+		BYTE prevKeys_[256] = {};
 
 		friend IDirectInput8* GetDInput();
 	};
@@ -74,11 +74,11 @@ namespace Input {
 
 		static void Close();
 
-		static bool Down(Click b);
+		static bool Down(const Click& b);
 
-		static bool Triggered(Click b);
+		static bool Triggered(const Click& b);
 
-		static bool Released(Click b);
+		static bool Released(const Click& b);
 
 		//マウスの移動量
 		static Float2 GetVel();
@@ -89,12 +89,12 @@ namespace Input {
 		static Mouse* GetInstance();
 
 	private:
-		IDirectInputDevice8* devmouse = nullptr;
+		IDirectInputDevice8* devmouse_ = nullptr;
 
-		Float2 cursor;
+		Float2 cursor_;
 
-		DIMOUSESTATE state;
-		DIMOUSESTATE prevState;
+		DIMOUSESTATE state_;
+		DIMOUSESTATE prevState_;
 	};
 
 	class Pad
@@ -107,18 +107,18 @@ namespace Input {
 		static void Close();
 
 		//ボタンが押されているか
-		static bool Down(Button button);
+		static bool Down(const Button& button);
 		//ボタンが離された瞬間か
-		static bool Released(Button button);
+		static bool Released(const Button& button);
 		//ボタンが押された瞬間か
-		static bool Triggered(Button button);
+		static bool Triggered(const Button& button);
 
 		//ボタンが押されているか
-		static bool Down(Trigger side);
+		static bool Down(const Trigger& side);
 		//ボタンが離された瞬間か
-		static bool Released(Trigger side);
+		static bool Released(const Trigger& side);
 		//ボタンが押された瞬間か
-		static bool Triggered(Trigger side);
+		static bool Triggered(const Trigger& side);
 
 		static Pad* GetInstance();
 
@@ -138,14 +138,14 @@ namespace Input {
 		static void SetDeadZone(float range);
 		static float GetDeadZone();
 
-		int gamepadIndex = 0;
+		int32_t gamepadIndex = 0;
 	private:
-		XINPUT_STATE padState;
-		XINPUT_STATE lastPadState;
+		XINPUT_STATE padState_;
+		XINPUT_STATE lastPadState_;
 
-		bool triggerState[2] = { false, false };
-		bool lastTriggerState[2] = { false, false };
+		bool triggerState_[2] = { false, false };
+		bool lastTriggerState_[2] = { false, false };
 
-		float deadZone = 50;
+		float deadZone_ = 50;
 	};
 }

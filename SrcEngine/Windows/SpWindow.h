@@ -5,7 +5,7 @@
 class SpWindow
 {
 public:
-	void Create(LPCWSTR title, int windowWidth, int windowHeight);
+	void Create(LPCWSTR title, int32_t windowWidth, int32_t windowHeight);
 	void Close();
 
 	bool ProcessMessage();
@@ -13,8 +13,8 @@ public:
 	HWND hwnd;
 	WNDCLASSEX  w{};
 
-	int width = 1280;
-	int height = 720;
+	int32_t width = 1280;
+	int32_t height = 720;
 private:
 };
 
@@ -24,10 +24,10 @@ private:
 /// </summary>
 /// <param name="ID">stringå^ÇÃID</param>
 /// <returns>ê¨å˜:SpWindowÇ÷ÇÃÉ|ÉCÉìÉ^,é∏îs:nullptr</returns>
-SpWindow* GetSpWindow(string ID);
+SpWindow* GetSpWindow(const string& ID);
 SpWindow* GetSpWindow();
 extern map<string, SpWindow> wWindowList;
-void RegisterSpWindow(SpWindow spwnd, string ID);
-void SetDefaultWindowID(string ID);
+void RegisterSpWindow(SpWindow spwnd, const string& ID);
+void SetDefaultWindowID(const string& ID);
 
 void CloseAllSpWindow();

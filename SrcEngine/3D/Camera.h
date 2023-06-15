@@ -25,8 +25,8 @@ public:
     void SetRenderSize(float w, float h);
     void UseDefaultParams();
 
-    Float3 GetWorldPosFromScreen(Float2 screen, float depth);
-    Ray GetScreenPosRay(Float2 screen);
+    Float3 GetWorldPosFromScreen(const Float2& screen, float depth);
+    Ray GetScreenPosRay(const Float2& screen);
 
     Matrix GetBillboardMat();
 
@@ -47,7 +47,7 @@ public:
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
     static void Set(Camera& camera);
-    static Camera* current;
+    static Camera* sCurrent;
     static void UseCurrent();
 
     static Matrix GetCurrentCameraBillboardMat();

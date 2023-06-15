@@ -18,15 +18,15 @@ enum class Align
 struct FontOptions
 {
 	//フォントの解像度、シーンごとに統一することを推奨
-	int resolution = 64;
+	int32_t resolution = 64;
 
-	int weight = 1000;
-	int charSet = SHIFTJIS_CHARSET;
+	int32_t weight = 1000;
+	int32_t charSet = SHIFTJIS_CHARSET;
 
 	//使用するフォントの名前
 	string name = "ＭＳ Ｐ明朝";
 
-	int gradFlag = GGO_GRAY8_BITMAP;
+	int32_t gradFlag = GGO_GRAY8_BITMAP;
 };
 
 struct StringOptions
@@ -34,19 +34,19 @@ struct StringOptions
 	FontOptions fontOptions;
 
 	//フォントサイズ(pt)
-	int size = 64;
+	int32_t size = 64;
 
 	//行間(px)
-	int lineSpacing = 2;
+	int32_t lineSpacing = 2;
 	//字間(px)
-	int charSpacing = 2;
+	int32_t charSpacing = 2;
 };
 
 struct StringData
 {
 	TextureKey key;
-	int width = 0;
-	int height = 0;
+	int32_t width = 0;
+	int32_t height = 0;
 };
 
 class FontData
@@ -55,8 +55,8 @@ public:
 	GLYPHMETRICS gm = {};
 	TEXTMETRIC tm;
 	vector<BYTE> bmp;
-	int resolution;
-	int grad = 0;
+	int32_t resolution;
+	int32_t grad = 0;
 };
 
 class TextDrawer
@@ -64,8 +64,8 @@ class TextDrawer
 private:
 
 public:
-	static void DrawString(string str, int x, int y, Align alignment, StringOptions options);
-	static void DrawString(string str, int x, int y, Align alignment);
+	static void DrawString(string str, int32_t x, int32_t y, Align alignment, StringOptions options);
+	static void DrawString(string str, int32_t x, int32_t y, Align alignment);
 	static void SetDefaultStringOptions(StringOptions options);
 
 	static void ReleaseDrawStringData();
@@ -79,7 +79,7 @@ private:
 };
 
 typedef FontData* FontHandle;
-typedef unsigned int FontNameHandle;
+typedef uint32_t FontNameHandle;
 
 class FontManager
 {
@@ -101,5 +101,5 @@ private:
 
 	FontData* GetFontData(string fontName, wstring glyph);
 
-	int fontIndex = 0x8001;
+	int32_t fontIndex = 0x8001;
 };

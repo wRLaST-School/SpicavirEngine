@@ -2,7 +2,7 @@
 #include "SpRootSignature.h"
 map<string, GPipeline> psoMap;
 
-void GPipeline::InitDesc(PipelineDesc desc)
+void GPipeline::InitDesc(const PipelineDesc& desc)
 {
 	// グラフィックスパイプライン設定
 	psod.VS.pShaderBytecode = desc.Shader.pShader->vsBlob->GetBufferPointer();
@@ -31,7 +31,7 @@ void GPipeline::InitDesc(PipelineDesc desc)
 		& psod.BlendState.RenderTarget[7],
 	};
 
-	for (int i = 0; i < 8; i++)
+	for (int32_t i = 0; i < 8; i++)
 	{
 		blendDesc[i]->RenderTargetWriteMask = desc.Blend[i].RenderTargetWriteMask;
 		blendDesc[i]->BlendEnable = desc.Blend[i].BlendEnable;
@@ -99,7 +99,7 @@ void GPipeline::InitDesc(PipelineDesc desc)
 //	psod.pRootSignature = GetRootSignature()->rootsignature.Get();
 //}
 
-void GPipeline::Create(PipelineDesc desc, string id)
+void GPipeline::Create(const PipelineDesc& desc, const string& id)
 {
 	psoMap[id] = GPipeline();
 	GPipeline* ptr = &psoMap[id];
@@ -112,17 +112,17 @@ void GPipeline::Create()
 	GetWDX()->dev->CreateGraphicsPipelineState(&psod, IID_PPV_ARGS(&pso));
 }
 
-D3D12_GRAPHICS_PIPELINE_STATE_DESC* GPipeline::GetDesc(string id)
+D3D12_GRAPHICS_PIPELINE_STATE_DESC* GPipeline::GetDesc(const string& id)
 {
 	return &psoMap[id].psod;
 }
 
-ID3D12PipelineState* GPipeline::GetState(string id)
+ID3D12PipelineState* GPipeline::GetState(const string& id)
 {
 	return psoMap[id].pso.Get();
 }
 
-GPipeline* GPipeline::GetGPipeline(string id)
+GPipeline* GPipeline::GetGPipeline(const string& id)
 {
 	return &psoMap[id];
 }

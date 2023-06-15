@@ -3,7 +3,7 @@
 #include "GPipeline.h"
 #include "SpConstBuffer.h"
 
-map<string, SpRootSignature> SpRootSignature::rsMap;
+map<string, SpRootSignature> SpRootSignature::sRsMap;
 
 void SpRootSignature::Create()
 {
@@ -35,13 +35,13 @@ void SpRootSignature::UseDefaultSettings()
 	samplerDesc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 }
 
-SpRootSignature* SpRootSignature::Get(string id)
+SpRootSignature* SpRootSignature::Get(const string& id)
 {
-	return &rsMap.find(id)->second;
+	return &sRsMap.find(id)->second;
 }
 
-SpRootSignature* SpRootSignature::Register(string id)
+SpRootSignature* SpRootSignature::Register(const string& id)
 {
-	rsMap.emplace(id, SpRootSignature()).second;
-	return &rsMap.find(id)->second;
+	sRsMap.emplace(id, SpRootSignature()).second;
+	return &sRsMap.find(id)->second;
 }

@@ -5,7 +5,7 @@ class PointLight
 {
 public:
 	PointLight() :pos({ 0,0,0 }), color({ 0,0,0 }), att({ 0,0,0 }) { isActive = false; }
-	PointLight(Float3 pos, Float3 color, Float3 att) :pos(pos), color(color), att(att), isActive(true) {}
+	PointLight(const Float3& pos, const Float3& color, const Float3& att) :pos(pos), color(color), att(att), isActive(true) {}
 	Float3 pos;
 	Float3 color;
 	Float3 att;
@@ -22,24 +22,24 @@ public:
 		Float3 color;
 		float padding;
 		Float3 att;
-		unsigned int isActive = false;
+		uint32_t isActive = false;
 	};
 
 	//change MAX_PLIGHTS in hlsli aswell
-	static const unsigned int MAX_LIGHTS = 16;
+	static const uint32_t MAX_LIGHTS = 16;
 
 	//“_ŒõŒ¹”‚ªãŒÀ‚ğ’´‚¦‚½ê‡‚ÌƒGƒ‰[
 	class QuantityOverflow {
 	public:
-		QuantityOverflow(int limit, int actual):limit(limit),actual(actual) {};
-		int limit;
-		int actual;
+		QuantityOverflow(int32_t limit, int32_t actual):limit(limit),actual(actual) {};
+		int32_t limit;
+		int32_t actual;
 	};
 
 	string name = "unnamed";
 
 private:
-	bool showFrame = false;
+	bool showFrame_ = false;
 };
 
 typedef string PointLightKey;

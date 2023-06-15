@@ -21,6 +21,8 @@
 #include <EASTL/string.h>
 #include <EASTL/array.h>
 
+#include <stdint.h>
+
 #include <wrl.h>
 #include <stdexcept>
 

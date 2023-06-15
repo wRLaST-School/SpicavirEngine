@@ -1,13 +1,17 @@
 #include "Model.h"
 #include <fstream>
 #include <sstream>
+#pragma warning(push)
+#pragma warning(disable:26800)
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#pragma warning(pop)
+
 Model::Model() {
 }
 
-Model::Model(string modelName)
+Model::Model(const string& modelName)
 {
 	string path = "Resources/Models/"+modelName+"/";
 	string objfile = modelName + ".obj";
@@ -132,7 +136,7 @@ Model::Model(string modelName)
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
 	// 全頂点に対して
-	for (int i = 0; i < vertices.size(); i++)
+	for (uint32_t i = 0; i < vertices.size(); i++)
 	{
 		vertMap[i] = vertices[i];   // 座標をコピー
 	}
@@ -161,11 +165,11 @@ Model::Model(string modelName)
 	indexBuff->SetName(L"INDEX BUFF");
 
 	// GPU上のバッファに対応した仮想メモリを取得
-	unsigned int* indexMap = nullptr;
+	uint32_t* indexMap = nullptr;
 	indexBuff->Map(0, nullptr, (void**)&indexMap);
 
 	// 全indexに対して
-	for (int i = 0; i < indices.size(); i++)
+	for (int32_t i = 0; i < indices.size(); i++)
 	{
 		indexMap[i] = indices[i];   // 座標をコピー
 	}
@@ -179,7 +183,7 @@ Model::Model(string modelName)
 	ibView.SizeInBytes = sizeIB;
 }
 
-Model::Model(string filePath, bool useSmoothShading)
+Model::Model(const string& filePath, bool useSmoothShading)
 {
 	Assimp::Importer importer;
 
@@ -208,7 +212,7 @@ Model::Model(string filePath, bool useSmoothShading)
 
 	//ノードごとの処理
 	std::function<void(aiNode*)>fNode = [&](aiNode* cur) {
-		for (unsigned int i = 0; i < cur->mNumChildren; i++)
+		for (uint32_t  i = 0; i < cur->mNumChildren; i++)
 		{
 			fNode(cur->mChildren[i]);
 		}
@@ -223,14 +227,14 @@ Model::Model(string filePath, bool useSmoothShading)
 		aiMatrix4x4 wt = calcMat(cur);
 
 		//ノードごとのメッシュについて
-		for (unsigned int k = 0; k < cur->mNumMeshes; k++) {
+		for (uint32_t k = 0; k < cur->mNumMeshes; k++) {
 			//メッシュごとの処理
-			unsigned int i = cur->mMeshes[k];
+			uint32_t i = cur->mMeshes[k];
 			aiMesh* mesh = scene->mMeshes[i];
 
 			UINT lastMaxIndex = backIndex;
 
-			for (unsigned int j = 0; j < mesh->mNumVertices; j++) {
+			for (uint32_t j = 0; j < mesh->mNumVertices; j++) {
 				//頂点ごと
 				aiVector3D vertex = mesh->mVertices[j];
 				vertex *= wt;
@@ -253,10 +257,10 @@ Model::Model(string filePath, bool useSmoothShading)
 				vertices.emplace_back(Vertex{ posList.back(), normalList.back(), tcList.back() });
 			}
 
-			for (unsigned int j = 0; j < mesh->mNumFaces; j++) {
+			for (uint32_t j = 0; j < mesh->mNumFaces; j++) {
 				//ポリゴンごと)
 				aiFace face = mesh->mFaces[j];
-				for (unsigned int l = 0; l < face.mNumIndices; l++) {
+				for (uint32_t l = 0; l < face.mNumIndices; l++) {
 					//インデックスごと
 					UINT ind = face.mIndices[l];
 
@@ -269,7 +273,7 @@ Model::Model(string filePath, bool useSmoothShading)
 	//ノードごとの処理呼び出し
 	fNode(scene->mRootNode);	
 
-	for (unsigned int i = 0; i < scene->mNumMaterials; i++)
+	for (uint32_t i = 0; i < scene->mNumMaterials; i++)
 	{
 		//マテリアルごと
 		material.emplace_back();
@@ -294,8 +298,8 @@ Model::Model(string filePath, bool useSmoothShading)
 		//Textrue
 		aimtr->GetTexture(aiTextureType_DIFFUSE, 0, &tempstr);
 		//TODO:埋め込みテクスチャの場合の処理		
-		int pti = (int)filePath.find_last_of("\\");
-		int pti2 = (int)filePath.find_last_of("/");
+		int32_t pti = (int32_t)filePath.find_last_of("\\");
+		int32_t pti2 = (int32_t)filePath.find_last_of("/");
 		string filedir = filePath.substr(0, max(pti, pti2));
 
 		mtr->textureKey = SpTextureManager::LoadTexture(filedir + string("/") + string(tempstr.C_Str()), string("asmptex:") + filedir + string(tempstr.C_Str()));
@@ -332,7 +336,7 @@ Model::Model(string filePath, bool useSmoothShading)
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
 	// 全頂点に対して
-	for (int i = 0; i < vertices.size(); i++)
+	for (int32_t i = 0; i < vertices.size(); i++)
 	{
 		vertMap[i] = vertices[i];   // 座標をコピー
 	}
@@ -346,7 +350,7 @@ Model::Model(string filePath, bool useSmoothShading)
 	vbView.StrideInBytes = sizeof(Vertex);
 
 	//頂点インデックスバッファの生成
-	UINT sizeIB = static_cast<UINT>(sizeof(unsigned int) * indices.size());
+	UINT sizeIB = static_cast<UINT>(sizeof(uint32_t) * indices.size());
 
 	resdesc.Width = sizeIB;
 
@@ -362,11 +366,11 @@ Model::Model(string filePath, bool useSmoothShading)
 	indexBuff->SetName(L"INDEX_BUFF_ASMP");
 
 	// GPU上のバッファに対応した仮想メモリを取得
-	unsigned int* indexMap = nullptr;
+	uint32_t* indexMap = nullptr;
 	indexBuff->Map(0, nullptr, (void**)&indexMap);
 
 	// 全indexに対して
-	for (int i = 0; i < indices.size(); i++)
+	for (int32_t i = 0; i < indices.size(); i++)
 	{
 		indexMap[i] = indices[i];   // 座標をコピー
 	}
@@ -444,18 +448,18 @@ void Model::UpdateMaterial()
 	materialCBs.back().contents->alpha = material.front().alpha;
 }
 
-void ModelManager::Register(string modelName, ModelKey key)
+void ModelManager::Register(const string& modelName, const ModelKey& key)
 {
-	models.Access(
+	sModels.Access(
 		[&](auto& map) {
 			map.emplace(key, modelName);
 		}
 	);
 }
 
-void ModelManager::Register(string modelPath, ModelKey key, bool useAssimp)
+void ModelManager::Register(const string& modelPath, const ModelKey& key, bool useAssimp)
 {
-	models.Access(
+	sModels.Access(
 		[&](auto& map) {
 			map.emplace(std::piecewise_construct,
 				std::forward_as_tuple(key),
@@ -464,10 +468,10 @@ void ModelManager::Register(string modelPath, ModelKey key, bool useAssimp)
 	);
 }
 
-Model* ModelManager::GetModel(ModelKey key)
+Model* ModelManager::GetModel(const ModelKey& key)
 {
 	Model* ret;
-	models.Access(
+	sModels.Access(
 		[&](auto& map) {
 			ret = &map.find(key)->second;
 		}
@@ -478,11 +482,11 @@ Model* ModelManager::GetModel(ModelKey key)
 
 void ModelManager::ReleasePerSceneModel()
 {
-	int lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
-	for (auto itr = perSceneModels[lastSceneResIndex].begin(); itr != perSceneModels[lastSceneResIndex].end(); itr++)
+	int32_t lastSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
+	for (auto itr = sPerSceneModels[lastSceneResIndex].begin(); itr != sPerSceneModels[lastSceneResIndex].end(); itr++)
 	{
 		bool usingInCurrentScene = false;
-		for (auto key : perSceneModels[currentSceneResIndex])
+		for (auto key : sPerSceneModels[sCurrentSceneResIndex])
 		{
 			if (key == *itr)
 			{
@@ -492,7 +496,7 @@ void ModelManager::ReleasePerSceneModel()
 
 		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
 		{
-			models.Access(
+			sModels.Access(
 				[&](auto& map) {
 					map.erase(*itr);
 				}
@@ -500,20 +504,20 @@ void ModelManager::ReleasePerSceneModel()
 		}
 	}
 
-	perSceneModels[lastSceneResIndex].clear();
+	sPerSceneModels[lastSceneResIndex].clear();
 }
 
 void ModelManager::ReleaseAllModels()
 {
-	models.clear();
+	sModels.clear();
 }
 
 void ModelManager::PreLoadNewScene()
 {
-	currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+	sCurrentSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
 }
 
 
-exc_unordered_map<ModelKey, Model> ModelManager::models;
-list<ModelKey> ModelManager::perSceneModels[2];
-int ModelManager::currentSceneResIndex = 0;
+exc_unordered_map<ModelKey, Model> ModelManager::sModels;
+list<ModelKey> ModelManager::sPerSceneModels[2];
+int32_t ModelManager::sCurrentSceneResIndex = 0;

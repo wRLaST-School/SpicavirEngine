@@ -60,42 +60,42 @@ void SrAlphaStage::PostDraw()
 
 void SrAlphaStage::Render()
 {
-	for (auto itr = sortedObj.rbegin(); itr != sortedObj.rend(); ++itr)
+	for (auto itr = sortedObj_.rbegin(); itr != sortedObj_.rend(); ++itr)
 	{
 		(*itr)->DrawCommands((*itr)->alphaTexKey);
 	} 
-	objects.clear();
-	sortedObj.clear();
+	objects_.clear();
+	sortedObj_.clear();
 }
 
 void SrAlphaStage::RegisterAlphaObject(Object3D* obj)
 {
-	objects.push_back(obj);
+	objects_.push_back(obj);
 }
 
 void SrAlphaStage::SortObjects()
 {
-	Vec3 cam = Camera::current->position;
-	for (auto o : objects)
+	Vec3 cam = Camera::sCurrent->position;
+	for (auto o : objects_)
 	{
 		Vec3 v = cam - o->position;
 		o->distanceToCam = v.GetSquaredLength();
 	}
 
-	sortedObj.clear();
+	sortedObj_.clear();
 
-	for (auto o : objects)
+	for (auto o : objects_)
 	{
-		for (auto itr = sortedObj.begin(); true; itr++)
+		for (auto itr = sortedObj_.begin(); true; itr++)
 		{
-			if (itr == sortedObj.end())
+			if (itr == sortedObj_.end())
 			{
-				sortedObj.push_back(o);
+				sortedObj_.push_back(o);
 				break;
 			}
 			if ((*itr)->distanceToCam >= o->distanceToCam)
 			{
-				sortedObj.insert(itr, o);
+				sortedObj_.insert(itr, o);
 				break;
 			}
 		}

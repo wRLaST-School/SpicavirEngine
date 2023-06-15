@@ -4,7 +4,7 @@
 
 void PointLight::DrawFrame()
 {
-	if(showFrame)
+	if(showFrame_)
 		LineDrawer::DrawCube(pos, { .25f, .25f, .25f }, color);
 }
 
@@ -21,7 +21,7 @@ void PointLight::DrawLightEditor()
 				ImGui::SliderFloat3("Color", &color.x, 0.f, 3.f);
 				ImGui::SliderFloat3("Attenuation", &att.x, 0.f, .2f);
 				ImGui::Checkbox("Active", &isActive);
-				ImGui::Checkbox("ShowFrame", &showFrame);
+				ImGui::Checkbox("ShowFrame", &showFrame_);
 
 				ImGui::TreePop();
 			}

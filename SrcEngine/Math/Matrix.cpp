@@ -193,7 +193,7 @@ Matrix Matrix::Projection(float fov, float aspectRatio, float nearZ, float farZ)
 	return result;
 }
 
-Matrix Matrix::Projection(int windowWidth, int windowHeight)
+Matrix Matrix::Projection(int32_t windowWidth, int32_t windowHeight)
 {
 	return Matrix(
 		2.0f / windowWidth, 0, 0, 0,
@@ -203,7 +203,7 @@ Matrix Matrix::Projection(int windowWidth, int windowHeight)
 	);
 }
 
-Matrix Matrix::ProjectionOrtho(int width, int height, float nearZ, float farZ, float multiplier)
+Matrix Matrix::ProjectionOrtho(int32_t width, int32_t height, float nearZ, float farZ, float multiplier)
 {
 	return Matrix(
 		2.0f * multiplier / width, 0, 0, 0,
@@ -236,36 +236,36 @@ Matrix Matrix::operator-() const
 	float a;
 
 	//一時行列にコピー
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int32_t i = 0; i < 4; i++) {
+		for (int32_t j = 0; j < 4; j++) {
 			temp[i][j] = r[i][j];
 
 			if(i == j)temp[i][4 + j] = 1;
 		}
 	}
 
-	for (int k = 0; k < 4; k++) {
+	for (int32_t k = 0; k < 4; k++) {
 		a = 1 / temp[k][k];
 
-		for (int j = 0; j < 8; j++) {
+		for (int32_t j = 0; j < 8; j++) {
 			temp[k][j] *= a;
 		}
 
-		for (int i = 0; i < 4; i++) {
+		for (int32_t i = 0; i < 4; i++) {
 			if (i == k) {
 				continue;
 			}
 
 			a = -temp[i][k];
 
-			for (int j = 0; j < 8; j++) {
+			for (int32_t j = 0; j < 8; j++) {
 				temp[i][j] += temp[k][j] * a;
 			}
 		}
 	}
 
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
+	for (int32_t i = 0; i < 4; i++) {
+		for (int32_t j = 0; j < 4; j++) {
 			result[i][j] = temp[i][4 + j];
 		}
 	}

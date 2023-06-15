@@ -5,7 +5,7 @@
 #include <Sprite.h>
 #include <SpSwapChainManager.h>
 
-void IPostEffector::RegisterPipeline(string name)
+void IPostEffector::RegisterPipeline(const string& name)
 {
 	RegisterShader(name);
 	InitVS(name, name + "VS.hlsl");
@@ -28,7 +28,7 @@ void IPostEffector::RegisterPipeline(string name)
 	GPipeline::Create(pl2dDesc, name);
 }
 
-void IPostEffector::RegisterRS(string name)
+void IPostEffector::RegisterRS(const string& name)
 {
 #pragma region 2D Default RS
 	{
@@ -61,7 +61,7 @@ void IPostEffector::RegisterRS(string name)
 #pragma endregion
 }
 
-void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name, std::function<void(void)> commands)
+void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTex, const string& name, std::function<void(void)> commands)
 {
 	if (targetTex == "CurrentBuffer")
 	{
@@ -117,14 +117,14 @@ void IPostEffector::Effect(TextureKey baseTex, TextureKey targetTex, string name
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
 	//GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }
 
-D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::vbView{};
+D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::sVbView{};
 
-ComPtr<ID3D12Resource> PostEffectCommon::vertBuff = nullptr;
+ComPtr<ID3D12Resource> PostEffectCommon::sVertBuff = nullptr;
 
 void PostEffectCommon::Init()
 {
@@ -156,25 +156,25 @@ void PostEffectCommon::Init()
 		&resdesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&vertBuff)
+		IID_PPV_ARGS(&sVertBuff)
 	);
 
-	vertBuff->SetName(L"POST EFFECT VERT BUFF");
+	sVertBuff->SetName(L"POST EFFECT VERT BUFF");
 	// GPU上のバッファに対応した仮想メモリを取得
 	Sprite::Vertex* vertMap = nullptr;
-	vertBuff->Map(0, nullptr, (void**)&vertMap);
+	sVertBuff->Map(0, nullptr, (void**)&vertMap);
 
 	// 全頂点に対して
-	for (int i = 0; i < _countof(vertices); i++)
+	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
 		vertMap[i] = vertices[i];   // 座標をコピー
 	}
 
 	// マップを解除
-	vertBuff->Unmap(0, nullptr);
+	sVertBuff->Unmap(0, nullptr);
 
 	// 頂点バッファビューの作成
-	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
-	vbView.SizeInBytes = sizeVB;
-	vbView.StrideInBytes = sizeof(Sprite::Vertex);
+	sVbView.BufferLocation = sVertBuff->GetGPUVirtualAddress();
+	sVbView.SizeInBytes = sizeVB;
+	sVbView.StrideInBytes = sizeof(Sprite::Vertex);
 }

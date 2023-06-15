@@ -45,14 +45,14 @@ void SrParticleStage::PostDraw()
 
 void SrParticleStage::Render()
 {
-	for (auto cmd : commands)
+	for (auto cmd : commands_)
 	{
 		cmd();
 	}
-	commands.clear();
+	commands_.clear();
 }
 
 void SrParticleStage::DrawCommands(std::function<void(void)> cmd)
 {
-	commands.push_back(cmd);
+	commands_.push_back(cmd);
 }

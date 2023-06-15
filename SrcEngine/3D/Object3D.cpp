@@ -56,11 +56,11 @@ void Object3D::Draw()
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 	}, SpRenderer::Stage::Opaque);
 }
 
-void Object3D::Draw(TextureKey key)
+void Object3D::Draw(const TextureKey& key)
 {
 	transformCB.contents->mat = matWorld;
 
@@ -82,11 +82,11 @@ void Object3D::Draw(TextureKey key)
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 		}, SpRenderer::Stage::Opaque);
 }
 
-void Object3D::DrawCommands(TextureKey key)
+void Object3D::DrawCommands(const TextureKey& key)
 {
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(key));
 
@@ -100,7 +100,7 @@ void Object3D::DrawCommands(TextureKey key)
 
 	GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+	GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 }
 
 void Object3D::DrawAdd()
@@ -115,7 +115,7 @@ void Object3D::DrawAdd()
 	}
 }
 
-void Object3D::DrawAdd(TextureKey key)
+void Object3D::DrawAdd(const TextureKey& key)
 {
 	transformCB.contents->mat = matWorld;
 	SpRenderer::DrawCommand([&] {
@@ -131,7 +131,7 @@ void Object3D::DrawAdd(TextureKey key)
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
 
-		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(unsigned int), 1, 0, 0, 0);
+		GetWDX()->cmdList->DrawIndexedInstanced(model->ibView.SizeInBytes / sizeof(uint32_t), 1, 0, 0, 0);
 		}, SpRenderer::Stage::Add);
 }
 
@@ -147,7 +147,7 @@ void Object3D::DrawAlpha()
 	}
 }
 
-void Object3D::DrawAlpha(TextureKey key)
+void Object3D::DrawAlpha(const TextureKey& key)
 {
 	transformCB.contents->mat = matWorld;
 	this->alphaTexKey = key;

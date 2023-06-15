@@ -12,5 +12,5 @@ public:
     void DrawCommands(std::function<void(void)> cmd);
 
 private:
-    vector<std::function<void(void)>> commands;
+    vector<std::function<void(void)>> commands_;
 };

@@ -17,7 +17,7 @@ void BloomP1::Init()
 	RegisterPipeline(name);
 }
 
-void BloomP1::Effect(TextureKey baseTex, TextureKey targetTex)
+void BloomP1::Effect(const TextureKey& baseTex, const TextureKey& targetTex)
 {
 	IPostEffector::Effect(baseTex, targetTex, name);
 }
@@ -30,7 +30,7 @@ void BloomP2::Init()
 	cb.Create();
 }
 
-void BloomP2::Effect(TextureKey baseTex, TextureKey targetTex)
+void BloomP2::Effect(const TextureKey& baseTex, const TextureKey& targetTex)
 {
 	*cb.contents = GetGaussianWeight(strength);
 
@@ -43,7 +43,7 @@ void BloomP3::Init()
 	RegisterPipeline(name);
 }
 
-void BloomP3::Effect(TextureKey baseTex, TextureKey targetTex)
+void BloomP3::Effect(const TextureKey& baseTex, const TextureKey& targetTex)
 {
 	IPostEffector::Effect(baseTex, targetTex, name, [&](){GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, BloomP2::cb.buffer->GetGPUVirtualAddress()); });
 }
@@ -77,7 +77,7 @@ void BloomFin::Init()
 	GPipeline::Create(pl2dDesc, name+string("Add"));
 }
 
-void BloomFin::Effect(TextureKey baseTex, TextureKey p3Tex, TextureKey targetTex)
+void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const TextureKey& targetTex)
 {
 	if (targetTex == "CurrentBuffer")
 	{
@@ -130,7 +130,7 @@ void BloomFin::Effect(TextureKey baseTex, TextureKey p3Tex, TextureKey targetTex
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
 	
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 
@@ -138,7 +138,7 @@ void BloomFin::Effect(TextureKey baseTex, TextureKey p3Tex, TextureKey targetTex
 
 	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(p3Tex));
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::vbView);
+	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
 	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }

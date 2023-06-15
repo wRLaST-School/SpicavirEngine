@@ -15,6 +15,6 @@ public:
 	static void Shutdown();
 
 private:
-	static std::list<std::function<void(void)>> commands;
+	static std::list<std::function<void(void)>> sCommands;
 };
 

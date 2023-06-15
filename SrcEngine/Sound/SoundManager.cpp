@@ -8,14 +8,14 @@ SoundManager* SoundManager::GetInstance()
 
 void SoundManager::Init()
 {
-    XAudio2Create(&xAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
-    xAudio2->CreateMasteringVoice(&masterVoice);
-    sndMap.clear();
+    XAudio2Create(&sXAudio2, 0, XAUDIO2_DEFAULT_PROCESSOR);
+    sXAudio2->CreateMasteringVoice(&sMasterVoice);
+    sSndMap.clear();
 }
 
-SoundKey SoundManager::LoadWave(string path, SoundKey key)
+SoundKey SoundManager::LoadWave(const string& path, const SoundKey& key)
 {
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             if (map.count(key) <= 0) { return; }
         }
@@ -75,28 +75,28 @@ SoundKey SoundManager::LoadWave(string path, SoundKey key)
     soundData.pBuffer = reinterpret_cast<BYTE*>(pBuffer);
     soundData.bufferSize = data.size;
 
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             map.emplace(key, soundData);
         }
     );
-    perSceneSounds[currentSceneResIndex].push_back(key);
+    sPerSceneSounds[sCurrentSceneResIndex].push_back(key);
 
     return key;
 }
 
-void SoundManager::Play(SoundKey key)
+void SoundManager::Play(const SoundKey& key)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
 
     SoundData* pSnd;
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             pSnd = &map[key];
         }
     );
 
-    xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
+    sXAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
 
     XAUDIO2_BUFFER buf{};
 
@@ -108,11 +108,11 @@ void SoundManager::Play(SoundKey key)
     pSourceVoice->Start();
     pSnd->sound = pSourceVoice;
 }
-SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
+SoundData* SoundManager::PlayBGM(const SoundKey& key, bool loopFlag)
 {
     IXAudio2SourceVoice* pSourceVoice = nullptr;//‚±‚ê•Û‘¶‚µ‚Æ‚­‚ÆŽ~‚ß‚ç‚ê‚é
     SoundData* pSnd;
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             pSnd = &map[key];
         }
@@ -123,7 +123,7 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
         pSnd->sound->Stop();
     }
 
-    xAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
+    sXAudio2->CreateSourceVoice(&pSourceVoice, &pSnd->wfex);
 
     XAUDIO2_BUFFER buf{};
 
@@ -140,10 +140,10 @@ SoundData* SoundManager::PlayBGM(SoundKey key, bool loopFlag)
     return pSnd;
 }
 
-SoundData* SoundManager::GetSoundData(SoundKey key)
+SoundData* SoundManager::GetSoundData(const SoundKey& key)
 {
     SoundData* pSnd;
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             pSnd = &map[key];
         }
@@ -151,10 +151,10 @@ SoundData* SoundManager::GetSoundData(SoundKey key)
     return pSnd;
 }
 
-void SoundManager::StopBGM(SoundKey key)
+void SoundManager::StopBGM(const SoundKey& key)
 {
     SoundData* pSnd;
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             pSnd = &map[key];
         }
@@ -165,7 +165,7 @@ void SoundManager::StopBGM(SoundKey key)
 
 void SoundManager::ReleaseAllSounds()
 {
-    sndMap.Access(
+    sSndMap.Access(
         [&](auto& map) {
             for (auto itr = map.begin(); itr != map.end(); itr++)
             {
@@ -173,16 +173,16 @@ void SoundManager::ReleaseAllSounds()
             }
         }
     );
-    sndMap.clear();
+    sSndMap.clear();
 }
 
 void SoundManager::ReleasePerSceneSounds()
 {
-    int lastSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
-    for (auto itr = perSceneSounds[lastSceneResIndex].begin(); itr != perSceneSounds[lastSceneResIndex].end(); itr++)
+    int32_t lastSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
+    for (auto itr = sPerSceneSounds[lastSceneResIndex].begin(); itr != sPerSceneSounds[lastSceneResIndex].end(); itr++)
     {
         bool usingInCurrentScene = false;
-        for (auto key : perSceneSounds[currentSceneResIndex])
+        for (auto& key : sPerSceneSounds[sCurrentSceneResIndex])
         {
             if (key == *itr)
             {
@@ -194,7 +194,7 @@ void SoundManager::ReleasePerSceneSounds()
         {
             StopBGM(*itr);
             GetSoundData(*itr)->Release();
-            sndMap.Access(
+            sSndMap.Access(
                 [&](auto& map) {
                     map.erase(*itr);
                 }
@@ -202,16 +202,16 @@ void SoundManager::ReleasePerSceneSounds()
         }
     }
 
-    perSceneSounds[lastSceneResIndex].clear();
+    sPerSceneSounds[lastSceneResIndex].clear();
 }
 
 void SoundManager::PreLoadNewScene()
 {
-    currentSceneResIndex = currentSceneResIndex == 0 ? 1 : 0;
+    sCurrentSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
 }
 
-ComPtr<IXAudio2> SoundManager::xAudio2;
-IXAudio2MasteringVoice* SoundManager::masterVoice;
-exc_unordered_map<SoundKey, SoundData> SoundManager::sndMap;
-list<SoundKey> SoundManager::perSceneSounds[2];
-int SoundManager::currentSceneResIndex;
+ComPtr<IXAudio2> SoundManager::sXAudio2;
+IXAudio2MasteringVoice* SoundManager::sMasterVoice;
+exc_unordered_map<SoundKey, SoundData> SoundManager::sSndMap;
+list<SoundKey> SoundManager::sPerSceneSounds[2];
+int32_t SoundManager::sCurrentSceneResIndex;

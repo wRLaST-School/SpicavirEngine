@@ -66,8 +66,8 @@ class Model
 {
 public:
 	Model();
-	Model(string modelName);
-	Model(string fileName, bool useAssimp);
+	Model(const string& modelName);
+	Model(const string& fileName, bool useAssimp);
 
 	void LoadMaterial(const string& path, const string& filename);
 	void UpdateMaterial();
@@ -90,10 +90,10 @@ typedef std::string ModelKey;
 class ModelManager
 {
 public:
-	static void Register(string modelName, ModelKey key);
-	static void Register(string modelPath, ModelKey key, bool useAssimp);
+	static void Register(const string& modelName, const ModelKey& key);
+	static void Register(const string& modelPath, const ModelKey& key, bool useAssimp);
 
-	static Model* GetModel(ModelKey key);
+	static Model* GetModel(const ModelKey& key);
 
 	static void ReleasePerSceneModel();
 
@@ -102,7 +102,7 @@ public:
 	static void PreLoadNewScene();
 
 private:
-	static exc_unordered_map<ModelKey, Model> models;
-	static list<ModelKey> perSceneModels[2];
-	static int currentSceneResIndex;
+	static exc_unordered_map<ModelKey, Model> sModels;
+	static list<ModelKey> sPerSceneModels[2];
+	static int32_t sCurrentSceneResIndex;
 };

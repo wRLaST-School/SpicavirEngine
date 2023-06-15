@@ -9,7 +9,7 @@ struct PSOutput
     float4 target1 : SV_TARGET1;
 };
 
-PSOutput main(VSOutput input) : SV_TARGET
+PSOutput main(VSOutput input)
 {
 	float4 texcolor = float4(tex.Sample(smp, input.uv));
 

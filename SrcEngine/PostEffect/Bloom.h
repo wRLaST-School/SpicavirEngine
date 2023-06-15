@@ -21,7 +21,7 @@ class BloomP1 :
 public:
     static string name;
     static void Init();
-    static void Effect(TextureKey baseTex, TextureKey targetTex);
+    static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 };
 
 //輝度テクスチャをガウスぼかし(X)
@@ -31,20 +31,20 @@ class BloomP2 :
 public:
     static string name;
     static void Init();
-    static void Effect(TextureKey baseTex, TextureKey targetTex);
+    static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 
     static SpConstBuffer<GaussianWeight> cb;
     static float strength;
 };
 
 //輝度テクスチャをガウスぼかし(Y)
-class BloomP3:
+class BloomP3 :
     public IPostEffector
 {
 public:
     static string name;
     static void Init();
-    static void Effect(TextureKey baseTex, TextureKey targetTex);
+    static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 };
 
 //できれば上記二つの操作をまとめる
@@ -54,5 +54,5 @@ class BloomFin:
 public:
     static string name;
     static void Init();
-    static void Effect(TextureKey baseTex, TextureKey p3Tex, TextureKey targetTex);
+    static void Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const TextureKey& targetTex);
 };

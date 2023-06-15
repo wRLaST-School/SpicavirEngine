@@ -21,12 +21,12 @@ public:
 		Float4 color;
 	};
 protected:
-	const int vertexCount = 1024;
+	const int32_t vertexCount = 1024;
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	Vertex* vertMap = nullptr;
 
-	int activeCount = 0;
+	int32_t activeCount = 0;
 
 	TextureKey texture = "notexture";
 
