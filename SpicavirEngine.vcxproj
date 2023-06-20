@@ -117,10 +117,12 @@
     <ClCompile Include="Animation2D.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Camera2D.cpp" />
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SpDS.cpp" />
     <ClCompile Include="SpRenderer.cpp" />
@@ -189,10 +191,12 @@
     <ClInclude Include="Animation2D.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Camera2D.h" />
+    <ClInclude Include="CameraController.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="PlaneCollider.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SpDS.h" />
     <ClInclude Include="SpRenderer.h" />

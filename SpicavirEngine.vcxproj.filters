@@ -157,6 +157,9 @@
     <Filter Include="!Game\Boss">
       <UniqueIdentifier>{3f999d78-4b84-4120-9333-dd3002c888ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Game\Camera">
+      <UniqueIdentifier>{77e786f1-4511-4e1d-a1fa-5da7a4ee18b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -356,6 +359,12 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>!Game\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>!Game\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -574,6 +583,12 @@
     </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>!Game\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>!Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
