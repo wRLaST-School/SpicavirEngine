@@ -125,6 +125,15 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float ma
 
 	Vec3 cross = f.Cross(t);
 
+	if (cross.GetSquaredLength() == 0)
+	{
+		Vec3 axis(0.f, 1.f, 0.f);
+
+		float theta = 0.f;
+
+		return Quaternion(axis, theta);
+	}
+
 	Vec3 axis = cross.Norm();
 
 	float theta = acosf(dot);
