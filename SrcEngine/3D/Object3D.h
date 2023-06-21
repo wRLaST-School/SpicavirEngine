@@ -2,6 +2,7 @@
 #include "SpConstBuffer.h"
 #include "Model.h"
 #include "SpTextureManager.h"
+#include <Quaternion.h>
 struct ConstBufferDataTransform {
 	Matrix mat;//3Dïœä∑çsóÒ
 };
@@ -31,7 +32,7 @@ public:
 	SpConstBuffer<Float4> brightnessCB;
 
 	Float3 scale = { 1, 1, 1 };
-	Float3 rotation = { 0, 0, 0 };
+	Quaternion rotation = Quaternion::Identity();
 	Float3 position = { 0, 0, 0 };
 
 	Matrix matWorld = Matrix::Identity();

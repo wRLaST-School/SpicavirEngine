@@ -47,7 +47,7 @@ void TestScene::Init()
 	xCam.position.x = -10;
 	xCam.position.y = 0;
 	xCam.position.z = 0;
-	xCam.rotation = { 0.0f, PIf / 2, 0.0f };
+	xCam.rotation = Quaternion(Vec3(0, 1, 0), PIf / 2);
 	xCam.UpdateMatrix();
 
 	xCamSpr = Sprite("xCamSpr");
@@ -60,7 +60,7 @@ void TestScene::Init()
 	yCam.position.x = 0;
 	yCam.position.y = 10;
 	yCam.position.z = 0;
-	yCam.rotation = { PIf / 2, 0.0f, 0.0f };
+	yCam.rotation = Quaternion(Vec3(1, 0, 0), PIf / 2);
 	yCam.UpdateMatrix();
 
 	yCamSpr = Sprite("yCamSpr");
@@ -73,7 +73,7 @@ void TestScene::Init()
 	zCam.position.x = 0;
 	zCam.position.y = 0;
 	zCam.position.z = -10;
-	zCam.rotation = { 0.0f, 0.0f, 0.0f };
+	zCam.rotation = Quaternion(Vec3(0, 1, 0), 0);
 	zCam.UpdateMatrix();
 
 	zCamSpr = Sprite("zCamSpr");
@@ -96,7 +96,7 @@ void TestScene::Init()
 	finalScene.position.x = 0;
 	finalScene.position.y = 0;
 	finalScene.position.z = -10;
-	finalScene.rotation = { 0.0f, 0.0f, 0.0f };
+	finalScene.rotation = Quaternion(Vec3(0, 1, 0), 0);;
 	finalScene.UpdateMatrix();
 #pragma endregion
 
@@ -165,11 +165,10 @@ void TestScene::Update()
 		(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)) * 0.1f
 	);
 
-	camera.rotation = (Vec3)camera.rotation + Vec3(
-		(Input::Key::Down(DIK_1) - Input::Key::Down(DIK_2)) * 0.01f,
-		(Input::Key::Down(DIK_3) - Input::Key::Down(DIK_4)) * 0.01f,
-		(Input::Key::Down(DIK_5) - Input::Key::Down(DIK_6)) * 0.01f
-	);
+	camera.rotation *= Quaternion(Vec3(1, 0, 0), (Input::Key::Down(DIK_1) - Input::Key::Down(DIK_2)) * 0.01f);
+	camera.rotation *= Quaternion(Vec3(0, 1, 0), (Input::Key::Down(DIK_3) - Input::Key::Down(DIK_4)) * 0.01f);
+	camera.rotation *= Quaternion(Vec3(0, 0, 1), (Input::Key::Down(DIK_5) - Input::Key::Down(DIK_6)) * 0.01f);
+	
 	camera.UpdateMatrix();
 
 	emitter.Update();

@@ -366,6 +366,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>!Game\Player</Filter>
     </ClCompile>
+    <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -589,6 +592,9 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>!Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Quaternion.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

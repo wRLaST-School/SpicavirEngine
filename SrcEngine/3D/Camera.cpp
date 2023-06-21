@@ -21,7 +21,7 @@ void Camera::UseDefaultParams()
 	farZ = 1000.f;
 
 	position = { 0.f, 0.f, -10.f };
-	rotation = { 0.f, 0.f, 0.f };
+	rotation = Quaternion::Identity();
 
 	fov = PIf / 2;
 	nearZ = 0.1f;

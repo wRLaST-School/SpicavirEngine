@@ -23,7 +23,7 @@ void Player::Update()
 void Player::Move()
 {
 	Vec3 vel(0, 0, 0);
-	Matrix rMat = Matrix::RotRollPitchYaw(rotation);
+	Matrix rMat = rotation.GetRotMat();
 	Vec3 front = rMat.ExtractAxisZ();
 	Vec3 side = rMat.ExtractAxisX();
 

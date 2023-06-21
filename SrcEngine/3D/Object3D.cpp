@@ -12,7 +12,7 @@ void Object3D::UpdateMatrix()
 
 	mScale = Matrix::Scale(scale);
 
-	mRot = Matrix::RotRollPitchYaw(rotation);
+	mRot = rotation.GetRotMat();
 
 	mTrans = Matrix::Translation(position);
 
