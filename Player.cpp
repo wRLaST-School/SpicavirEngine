@@ -2,10 +2,12 @@
 #include "Player.h"
 #include <Input.h>
 #include <CameraController.h>
+#include <Boss.h>
 
 void Player::Init()
 {
 	model = ModelManager::GetModel("cube");
+	position = { 0, 1, -5 };
 }
 
 void Player::Update()
@@ -14,7 +16,15 @@ void Player::Update()
 
 	if (CameraController::Get()->GetMode() == CameraController::Mode::Target)
 	{
+		Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+		//front.y = 0;
+		front.Norm();
 
+		Vec3 to = ((Vec3)Boss::Get()->position - position);
+		to.y = 0;
+		to.Norm();
+
+		rotation = Quaternion::DirToDir(Vec3(0,0,1), to);
 	}
 
 	UpdateMatrix();
@@ -29,6 +39,7 @@ void Player::Move()
 
 	vel = front.SetLength((float)(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)));
 	vel += side.SetLength((float)(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)));
+	vel.y = 0;
 
 	if(vel.GetSquaredLength()) vel.SetLength(spd);
 
