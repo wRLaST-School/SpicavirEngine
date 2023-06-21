@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include <Player.h>
+#include <SpDS.h>
 
 void GameScene::LoadResources()
 {
@@ -19,7 +20,7 @@ void GameScene::Init()
 
 	floor.model = ModelManager::GetModel("floor");
 	floor.position = { 0.f, 0.f, 0.f };
-	floor.scale = { 15.f, 1.f, 15.f };
+	floor.scale = { 30.f, 1.f, 30.f };
 	floor.UpdateMatrix();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
@@ -51,4 +52,5 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
+	SpDS::DrawBox(100, 100, 150, 400, Color::Green);
 }

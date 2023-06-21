@@ -31,6 +31,6 @@ public:
 private:
 	static CameraController* sCurrent;
 
-	const float CAM_DIST = 5.f;
+	const float CAM_DIST = 7.5f;
 };
 
