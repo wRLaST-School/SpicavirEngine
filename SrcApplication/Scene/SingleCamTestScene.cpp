@@ -44,6 +44,7 @@ void SingleCamTestScene::LoadResources()
 void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
+	camera.position.z = -3.f;
 
 	pane.model = ModelManager::GetModel("FlatSphere");
 	pane2.model = ModelManager::GetModel("Cube");

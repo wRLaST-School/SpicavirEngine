@@ -13,5 +13,8 @@ public:
 
 private:
     vector<std::function<void(void)>> commands;
+
+    bool useBloom = true;
+    bool useGauss = false;
 };
 
