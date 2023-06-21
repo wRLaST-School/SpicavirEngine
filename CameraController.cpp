@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "CameraController.h"
+#include <Boss.h>
+#include <Player.h>
 
 void CameraController::Init()
 {
@@ -16,12 +18,22 @@ void CameraController::Update()
 	{
 	case CameraController::Mode::Target:
 	{
+		cam->target = Boss::Get()->position;
+		cam->targetMode = CameraTargetMode::LookAt;
 
+		Vec3 front = Player::Get()->rotation.GetRotMat().ExtractAxisZ();
+		front.y = 0;
+		front.Norm();
+
+		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
+		cam->position.y = 3;
 		break;
 	}
 
 	case CameraController::Mode::Free:
 	{
+		cam->target = Boss::Get()->position;
+		cam->targetMode = CameraTargetMode::LookAt;
 		break;
 	}
 	

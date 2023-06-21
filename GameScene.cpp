@@ -33,6 +33,7 @@ void GameScene::Update()
 {
 	boss.Update();
 	player.Update();
+	cam.Update();
 }
 
 void GameScene::DrawBack()

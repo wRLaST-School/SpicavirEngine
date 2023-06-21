@@ -27,6 +27,24 @@ void Player::Update()
 		rotation = Quaternion::DirToDir(Vec3(0,0,1), to);
 	}
 
+	if (position.y == 1.f && Input::Key::Triggered(DIK_SPACE))
+	{
+		vy = JUMP_POWER;
+	}
+	if (position.y > 1.f)
+	{
+		vy -= GRAV;
+	}
+
+	position.y += vy;
+
+	if (position.y < 1.f)
+	{
+		vy = 0;
+		position.y = 1.f;
+	}
+
+
 	UpdateMatrix();
 }
 
