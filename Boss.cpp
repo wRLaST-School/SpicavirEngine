@@ -12,6 +12,7 @@ void Boss::Load()
 void Boss::Init()
 {
 	model = ModelManager::GetModel("Boss");
+	position = { 0.f, 5.f, 0.f };
 }
 
 void Boss::Update()

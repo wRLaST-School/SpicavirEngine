@@ -3,6 +3,8 @@
 #include <Object3D.h>
 #include <Camera.h>
 #include <Boss.h>
+#include <Player.h>
+#include <CameraController.h>
 class GameScene :
     public IScene
 {
@@ -17,7 +19,10 @@ public:
 
 private:
     Boss boss;
+    Player player;
 
-    Camera cam;
+    CameraController cam;
+
+    Object3D floor;
 };
 

@@ -7,7 +7,7 @@ void CameraController::Init()
 
 	cam->UseDefaultParams();
 
-	cam->position = { 0, 0, 0 };
+	cam->position = { 0, 3, -10 };
 }
 
 void CameraController::Update()
@@ -35,6 +35,11 @@ void CameraController::Set()
 	Camera::Set(*cam.get());
 }
 
+CameraController::Mode CameraController::GetMode()
+{
+	return mode_;
+}
+
 void CameraController::ToggleMode()
 {
 	if (mode_ == Mode::Target)
@@ -51,3 +56,15 @@ void CameraController::SetMode(Mode m)
 {
 	mode_ = m;
 }
+
+CameraController* CameraController::Get()
+{
+	return sCurrent;
+}
+
+void CameraController::Set(CameraController* cctrl)
+{
+	sCurrent = cctrl;
+}
+
+CameraController* CameraController::sCurrent = nullptr;

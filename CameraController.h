@@ -3,16 +3,20 @@
 
 class CameraController
 {
-private:
+public:
 	enum class Mode {
 		Target,
 		Free
-	} mode_;
+	};
+
+private:
+	Mode mode_ = Mode::Target;
 
 public:
 	void Init();
 	void Update();
 	void Set();
+	Mode GetMode();
 
 	void ToggleMode();
 
@@ -20,6 +24,11 @@ public:
 
 	unique_ptr<Camera> cam;
 
+public:
+	static CameraController* Get();
+	static void Set(CameraController* cctrl);
 
+private:
+	static CameraController* sCurrent;
 };
 

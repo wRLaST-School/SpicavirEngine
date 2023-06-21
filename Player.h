@@ -8,7 +8,12 @@ public:
 
     void Update();
 
+    void Move();
+
     void Draw();
+
+private:
+    float spd = 0.08f;
 
 public:
     static void Load();
