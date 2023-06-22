@@ -16,7 +16,7 @@ struct Vertex
 	Float3 pos;
 	Float3 normal;
 	Float2 uv;
-	int32_t bIndices[ModelConsts::MAX_BONES_PER_VERTEX];
+	eastl::array <int32_t, ModelConsts::MAX_BONES_PER_VERTEX> bIndices;
 	Float4 bWeights;
 };
 

@@ -209,6 +209,8 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 	vector<Float3> posList;
 	vector<Vec3> normalList;
+	vector<Float4> bWeightList;
+	vector<eastl::array<int32_t, 4>> bIndexList;
 	vector<Float2> tcList;
 	vector<UINT> indices;
 	vector<Vertex> vertices;
@@ -258,8 +260,63 @@ Model::Model(const string& filePath, bool useSmoothShading)
 				{
 					tcList.push_back({ mesh->mTextureCoords[0][j].x,mesh->mTextureCoords[0][j].y });
 				}
+				//Bone
+				if (mesh->HasBones() || !mesh->mNumBones)
+				{
+					struct BoneData {
+						int32_t index;
+						float weight;
+					};
 
-				vertices.emplace_back(Vertex{ posList.back(), normalList.back(), tcList.back() });
+					vector<BoneData> bdlist;
+
+					for (size_t i = 0; i < mesh->mNumBones; i++)
+					{
+						BoneData bd;
+
+						bd.index = i;
+
+						for (size_t h; h < mesh->mBones[i]->mNumWeights; h++)
+						{
+							if (mesh->mBones[i]->mWeights[h].mVertexId == j)
+							{
+								bd.weight = mesh->mBones[i]->mWeights[h].mWeight;
+							}
+						}
+
+						bdlist.push_back(bd);
+					}
+
+					sort(bdlist.begin(), bdlist.end(), [](const auto & lhs, const auto& rhs) {
+						return lhs.weight > rhs.weight;
+					});
+
+					eastl::array<int32_t, 4> bInd;
+					eastl::array<float, 4> bWeight;
+
+					for (size_t i = 0; i < 4; i++)
+					{
+						if (i < bdlist.size())
+						{
+							bInd[i] = bdlist.at(i).index;
+							bWeight[i] = bdlist.at(i).weight;
+						}
+						else
+						{
+							bInd[i] = 0;
+							bWeight[i] = 0.f;
+						}
+					}
+					bIndexList.push_back({ bInd[0], bInd[1], bInd[2], bInd[3] });
+					bWeightList.push_back({ bWeight[0], bWeight[1], bWeight[2], bWeight[3] });
+				}
+				else
+				{
+					bIndexList.push_back({ 0, 0, 0, 0 });
+					bWeightList.push_back({ 0.f, 0.f, 0.f, 0.f });
+				}
+
+				vertices.emplace_back(Vertex{ posList.back(), normalList.back(), tcList.back(), bIndexList.back(), bWeightList.back() });
 			}
 
 			for (uint32_t j = 0; j < mesh->mNumFaces; j++) {
