@@ -13,7 +13,10 @@ void Player::Init()
 void Player::Update()
 {
 	Move();
-
+	if (Input::Key::Triggered(DIK_R))
+	{
+		CameraController::Get()->ToggleMode();
+	}
 	if (CameraController::Get()->GetMode() == CameraController::Mode::Target)
 	{
 		Vec3 front = rotation.GetRotMat().ExtractAxisZ();
@@ -25,6 +28,11 @@ void Player::Update()
 		to.Norm();
 
 		rotation = Quaternion::DirToDir(Vec3(0,0,1), to);
+	}
+	else
+	{
+		rotation *= Quaternion(Vec3(1, 0, 0), CameraController::GetCamSpd() * (Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)));
+		rotation *= Quaternion(Vec3(0, 1, 0), CameraController::GetCamSpd() * (Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)));
 	}
 
 	if (position.y == 1.f && Input::Key::Triggered(DIK_SPACE))

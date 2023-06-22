@@ -10,7 +10,7 @@ public:
 	};
 
 private:
-	Mode mode_ = Mode::Target;
+	Mode mode_ = Mode::Free;
 
 public:
 	void Init();
@@ -28,9 +28,13 @@ public:
 	static CameraController* Get();
 	static void Set(CameraController* cctrl);
 
+	static float GetCamSpd();
+
 private:
 	static CameraController* sCurrent;
 
 	const float CAM_DIST = 7.5f;
+
+	float camSpeed = PIf / 180;
 };
 

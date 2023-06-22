@@ -2,6 +2,7 @@
 #include "CameraController.h"
 #include <Boss.h>
 #include <Player.h>
+#include <Input.h>
 
 void CameraController::Init()
 {
@@ -32,8 +33,17 @@ void CameraController::Update()
 
 	case CameraController::Mode::Free:
 	{
-		cam->target = Boss::Get()->position;
-		cam->targetMode = CameraTargetMode::LookAt;
+		cam->targetMode = CameraTargetMode::LookTo;
+		cam->rotation = Player::Get()->rotation;
+
+		Vec3 front = Player::Get()->rotation.GetRotMat().ExtractAxisZ();
+		front.y = 0;
+		front.Norm();
+
+		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
+		cam->position.y = 3;
+
+		cam->UpdateMatrix();
 		break;
 	}
 	
@@ -56,6 +66,7 @@ void CameraController::ToggleMode()
 {
 	if (mode_ == Mode::Target)
 	{
+		cam->rotation = Player::Get()->rotation;
 		mode_ = Mode::Free;
 	}
 	else
@@ -77,6 +88,11 @@ CameraController* CameraController::Get()
 void CameraController::Set(CameraController* cctrl)
 {
 	sCurrent = cctrl;
+}
+
+float CameraController::GetCamSpd()
+{
+	return sCurrent->camSpeed;
 }
 
 CameraController* CameraController::sCurrent = nullptr;
