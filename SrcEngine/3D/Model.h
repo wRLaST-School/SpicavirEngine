@@ -6,11 +6,18 @@
 #include "SpConstBuffer.h"
 #include <exc_unordered_map.h>
 
+struct ModelConsts {
+	const static int MAX_BONES_PER_VERTEX = 4;
+	const static int MAX_BONES_PER_MODEL = 128;
+};
+
 struct Vertex
 {
 	Float3 pos;
 	Float3 normal;
 	Float2 uv;
+	int32_t bIndices[ModelConsts::MAX_BONES_PER_VERTEX];
+	Float4 bWeights;
 };
 
 struct Material
@@ -39,26 +46,42 @@ struct ConstBufferDataMaterial {
 	float alpha;
 };
 
+struct ConstBufferDataBoneMatrix {
+	Matrix bMatrix[ModelConsts::MAX_BONES_PER_MODEL];
+};
+
 namespace ModelCommon {
 	// 頂点レイアウト
 	static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
-			{
-				"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
-				D3D12_APPEND_ALIGNED_ELEMENT,
-				D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
-			},
+		{
+			"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
 
-			{
-				"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
-				D3D12_APPEND_ALIGNED_ELEMENT,
-				D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
-			},
+		{
+			"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
 
-			{
-				"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,
-				D3D12_APPEND_ALIGNED_ELEMENT,
-				D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
-			}
+		{
+			"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+
+		{
+			"BONEINDEX", 0, DXGI_FORMAT_R32G32B32A32_UINT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
+
+		{
+			"BONEWEIGHT", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0,
+			D3D12_APPEND_ALIGNED_ELEMENT,
+			D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0
+		},
 	};
 }
 
@@ -81,6 +104,7 @@ public:
 	vector<Material> material;
 
 	vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
+	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
 
 	Model operator= (Model& m) = delete;
 };

@@ -58,6 +58,13 @@ void RootSignatureManager::RegisterAllRS()
 		rs3d->params[5].Descriptor.RegisterSpace = 0;
 		rs3d->params[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
+		//定数バッファ5番ボーン行列
+		rs3d->params.emplace_back();
+		rs3d->params[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+		rs3d->params[6].Descriptor.ShaderRegister = 5;
+		rs3d->params[6].Descriptor.RegisterSpace = 0;
+		rs3d->params[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+
 		rs3d->Create();
 	}
 #pragma endregion

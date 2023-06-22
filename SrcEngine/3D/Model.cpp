@@ -88,6 +88,9 @@ Model::Model(const string& modelName)
 				vertex.pos = posList[indexPosition - 1];
 				vertex.normal = normalList[indexNormal - 1];
 				vertex.uv = tcList[indexTexcoord - 1];
+				vertex.bIndices[0] = 0;
+				vertex.bWeights = { 1.f, 0.f, 0.f, 0.f };
+
 				vertices.emplace_back(vertex);
 
 				indices.emplace_back((UINT)indices.size());
@@ -104,6 +107,8 @@ Model::Model(const string& modelName)
 
 	}
 	file.close();
+
+	bMatrixCB.contents->bMatrix[0] = Matrix::Identity();
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertices.size());
 
