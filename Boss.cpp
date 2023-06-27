@@ -17,13 +17,14 @@ void Boss::Init()
 
 void Boss::Update()
 {
-
+	UpdateMarkers();
 	UpdateMatrix();
 }
 
 void Boss::Draw()
 {
 	Object3D::Draw("white");
+	DrawMarkers();
 }
 
 Boss* Boss::Get()
@@ -34,4 +35,24 @@ Boss* Boss::Get()
 void Boss::Set(Boss* boss)
 {
 	sCurrent = boss;
+}
+
+void Boss::CastMarker(Float3 pos)
+{
+	for (auto& m : markers)
+	{
+		if (!m.active) {
+			m.Cast(pos);
+		}
+	}
+}
+
+void Boss::DrawMarkers()
+{
+	for (auto& m : markers) if (m.active) m.Draw();
+}
+
+void Boss::UpdateMarkers()
+{
+	for (auto& m : markers) if (m.active) m.Update();
 }

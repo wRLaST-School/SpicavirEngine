@@ -369,6 +369,9 @@
     <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Marker.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -595,6 +598,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\Math\Quaternion.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Marker.h">
+      <Filter>!Game\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

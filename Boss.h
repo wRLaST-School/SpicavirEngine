@@ -1,5 +1,6 @@
 #pragma once
 #include "Object3D.h"
+#include <Marker.h>
 class Boss :
     public Object3D
 {
@@ -16,6 +17,16 @@ public:
     static Boss* Get();
 
     static void Set(Boss* boss);
+
+public:
+    void CastMarker(Float3 pos);
+
+    void DrawMarkers();
+    void UpdateMarkers();
+
+private:
+    static const int MAX_MARKERS = 256;
+    eastl::array<Marker, MAX_MARKERS> markers;
 
 private:
     static Boss* sCurrent;

@@ -121,6 +121,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Marker.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="IRenderStage.h" />
+    <ClInclude Include="Marker.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
