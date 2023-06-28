@@ -52,8 +52,7 @@ void Player::Update()
 		vy = 0;
 		position.y = 1.f;
 	}
-
-
+	DamageUpdate();
 	UpdateMatrix();
 }
 
@@ -73,9 +72,29 @@ void Player::Move()
 	position += vel;
 }
 
+void Player::DamageUpdate()
+{
+	damageTimer--;
+	damageTimer = max(0, damageTimer);
+
+	if (damageTimer)
+	{
+		*brightnessCB.contents = { 1.f, 0.f, 0.f, .5f };
+	}
+	else
+	{
+		*brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
+	}
+}
+
+void Player::Damage()
+{
+	damageTimer = 60;
+}
+
 void Player::Draw()
 {
-	Object3D::Draw("white");
+	Object3D::DrawAlpha("white");
 }
 
 void Player::Load()

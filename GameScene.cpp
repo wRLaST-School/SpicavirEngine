@@ -19,7 +19,7 @@ void GameScene::Init()
 	player.Init();
 
 	floor.model = ModelManager::GetModel("floor");
-	floor.position = { 0.f, 0.f, 0.f };
+	floor.position = { 0.f, -0.0001f, 0.f };
 	floor.scale = { 30.f, 1.f, 30.f };
 	floor.UpdateMatrix();
 

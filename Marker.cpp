@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Marker.h"
+#include <Player.h>
 
 const TextureKey Marker::TEX_KEY = "Marker";
 
@@ -34,6 +35,17 @@ void Marker::Update()
     if (timer_ >= FIN_TIME)
     {
         //“–‚½‚è”»’è‚ð‘‚­
+        Player* pl = Player::Get();
+
+        Float2 diff = {
+            pl->position.x - pos.x,
+            pl->position.z - pos.z
+        };
+
+        if (abs(diff.x) <= (float)R / 2 + pl->r2d && abs(diff.y) <= (float)R / 2 + pl->r2d)
+        {
+            pl->Damage();
+        }
 
         active = false;
     }

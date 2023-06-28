@@ -9,8 +9,11 @@ public:
     void Update();
 
     void Move();
-
+    void DamageUpdate();
+    void Damage();
     void Draw();
+
+    float r2d = .5f;
 
 private:
     float spd = 0.08f;
@@ -18,6 +21,8 @@ private:
     const float GRAV = 0.025f;
     const float JUMP_POWER = 0.5f;
     float vy = 0.f;
+
+    int32_t damageTimer = 0;
 
 public:
     static void Load();
