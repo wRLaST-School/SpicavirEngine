@@ -15,7 +15,7 @@ struct PipelineDesc
 		struct BlendDesc {
 			D3D12_BLEND_OP BlendOpAlpha = D3D12_BLEND_OP_ADD;
 			D3D12_BLEND SrcBlendAlpha = D3D12_BLEND_ONE;
-			D3D12_BLEND DestBlendAlpha = D3D12_BLEND_ZERO;
+			D3D12_BLEND DestBlendAlpha = D3D12_BLEND_ONE;
 
 			D3D12_BLEND_OP BlendOp = D3D12_BLEND_OP_ADD;
 			D3D12_BLEND SrcBlend = D3D12_BLEND_SRC_ALPHA;

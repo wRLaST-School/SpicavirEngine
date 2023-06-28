@@ -5,7 +5,9 @@ class Marker
 public:
 	Marker();
 
-	void Cast(Float3 pos);
+	void Cast(const Float3& pos);
+
+	void InitModel();
 
 	void Update();
 	void Draw();
@@ -23,6 +25,6 @@ private:
 
 	const static TextureKey TEX_KEY;
 
-	const static int R = 3;
+	const static int R = 4;
 };
 

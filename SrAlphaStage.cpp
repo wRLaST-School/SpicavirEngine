@@ -15,6 +15,8 @@ void SrAlphaStage::Init()
 	defDesc.Shader.pShader = GetShader("lightless");
 	defDesc.Render.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;
 
+	defDesc.Blend->Desc = PipelineUtil::Blend::GetBlendMode(PipelineUtil::BlendMode::Alpha);
+
 	defDesc.Depth.DepthStencilState.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 
 	GPipeline::Create(defDesc, "Alpha3D");

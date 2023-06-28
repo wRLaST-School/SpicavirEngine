@@ -1,26 +1,35 @@
 #include "stdafx.h"
 #include "Marker.h"
 
+const TextureKey Marker::TEX_KEY = "Marker";
+
 Marker::Marker()
 {
 }
 
-void Marker::Cast(Float3 pos_)
+void Marker::Cast(const Float3& pos_)
 {
     pos = pos_;
     timer_ = 0;
     active = true;
 }
 
+void Marker::InitModel()
+{
+    outerObj.model = ModelManager::GetModel("Marker");
+    innerObj.model = ModelManager::GetModel("Marker");
+}
+
 void Marker::Update()
 {
     float scale = (float)R;
-    outerObj.scale = { scale, scale, 1 };
+    outerObj.scale = { scale, 1, scale };
     outerObj.position = pos;
 
     float inscale = scale * ((float)(FIN_TIME - timer_) / FIN_TIME);
-    innerObj.scale = { inscale, inscale, 1 };
+    innerObj.scale = { inscale, 1, inscale };
     innerObj.position = pos;
+    innerObj.position.y += 0.0001f;
 
     if (timer_ >= FIN_TIME)
     {

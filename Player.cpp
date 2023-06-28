@@ -8,6 +8,7 @@ void Player::Init()
 {
 	model = ModelManager::GetModel("cube");
 	position = { 0, 1, -5 };
+	scale = { 0.5, 1.0, 0.5 };
 }
 
 void Player::Update()
