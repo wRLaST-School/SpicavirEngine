@@ -372,6 +372,9 @@
     <ClCompile Include="Marker.cpp">
       <Filter>!Game\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="GlobalTimer.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -601,6 +604,9 @@
     </ClInclude>
     <ClInclude Include="Marker.h">
       <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalTimer.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

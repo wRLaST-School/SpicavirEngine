@@ -6,6 +6,7 @@
 #include <IPostEffector.h>
 #include <Bloom.h>
 #include <GameScene.h>
+#include <GlobalTimer.h>
 
 future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
@@ -18,6 +19,7 @@ void SceneManager::Init()
 
 void SceneManager::Update()
 {
+	GlobalTimer::Update();
 	ConfirmTransition();
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
