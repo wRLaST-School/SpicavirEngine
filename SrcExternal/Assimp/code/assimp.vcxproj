@@ -12,14 +12,6 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|x64">
-      <Configuration>MinSizeRel</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|x64">
-      <Configuration>RelWithDebInfo</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8FE8F28B-8B25-35D8-A6E1-060C10DF0CE7}</ProjectGuid>
@@ -36,16 +28,6 @@
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
@@ -67,14 +49,6 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp-vc143-mt</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(SolutionDir)SrcExternal\Assimp\lib\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">assimp.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">assimp-vc143-mt</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(SolutionDir)SrcExternal\Assimp\lib\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">assimp-vc143-mt</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -139,83 +113,6 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <Lib>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
-      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <Optimization>MinSpace</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <UseFullPaths>false</UseFullPaths>
-      <WarningLevel>Level4</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-      <ProgramDataBaseFileName>$(SolutionDir)SrcExternal\Assimp\code\MinSizeRel\assimp-vc143-mt.pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-    <Lib>
-      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
-      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWarningAsError>true</TreatWarningAsError>
-      <UseFullPaths>false</UseFullPaths>
-      <WarningLevel>Level4</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <ProgramDataBaseFileName>$(SolutionDir)SrcExternal\Assimp\code\RelWithDebInfo\assimp-vc143-mt.pdb</ProgramDataBaseFileName>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
