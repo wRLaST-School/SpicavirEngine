@@ -29,30 +29,27 @@ void Player::Update()
 		to.y = 0;
 		to.Norm();
 
-		rotation = Quaternion::DirToDir(Vec3(0,0,1), to);
+		rotation = Quaternion::DirToDir(Vec3(0, 0, 1), to);
 	}
 	else
 	{
 		//ƒtƒŠ[ƒJƒƒ‰Žž‚Ìˆ—
 	}
-
-	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
-	{
-		vy = JUMP_POWER;
-	}
-	if (position.y > 1.f)
-	{
-		vy -= GRAV;
-	}
-
-	position.y += vy;
-
-	if (position.y < 1.f)
-	{
-		vy = 0;
-		position.y = 1.f;
-	}
 	DamageUpdate();
+	
+	switch (state)
+	{
+	case Player::State::Idle:
+	case Player::State::Move:
+		IdleMoveUpdate();
+		break;
+	case Player::State::Dodge:
+		DodgeUpdate();
+		break;
+	default:
+		break;
+	}
+	
 	UpdateMatrix();
 }
 
@@ -103,6 +100,40 @@ void Player::Damage()
 void Player::Draw()
 {
 	Object3D::DrawAlpha("white");
+}
+
+void Player::DodgeUpdate()
+{
+	position += dodgeVec_;
+
+	dodgeTimer++;
+
+	if (dodgeTimer >= iFrame)
+	{
+		state = State::Idle;
+	}
+}
+
+void Player::IdleMoveUpdate()
+{
+
+
+	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
+	{
+		vy = JUMP_POWER;
+	}
+	if (position.y > 1.f)
+	{
+		vy -= GRAV;
+	}
+
+	position.y += vy;
+
+	if (position.y < 1.f)
+	{
+		vy = 0;
+		position.y = 1.f;
+	}
 }
 
 void Player::Load()

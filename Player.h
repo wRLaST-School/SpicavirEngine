@@ -13,6 +13,9 @@ public:
     void Damage();
     void Draw();
 
+    void DodgeUpdate();
+    void IdleMoveUpdate();
+
     float r2d = .5f;
 
 private:
@@ -34,6 +37,8 @@ private:
 
 private:
     Vec3 dodgeVec_ = Vec3();
+    int32_t dodgeTimer = 0;
+    const int32_t iFrame = 15;
 
 public:
     static void Load();
