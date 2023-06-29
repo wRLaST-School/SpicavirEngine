@@ -14,6 +14,7 @@ void Player::Init()
 void Player::Update()
 {
 	Move();
+
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
 	{
 		CameraController::Get()->ToggleMode();

@@ -26,6 +26,15 @@ private:
 
     int32_t damageTimer = 0;
 
+    enum class State {
+        Idle,
+        Move,
+        Dodge
+    } state = State::Idle;
+
+private:
+    Vec3 dodgeVec_ = Vec3();
+
 public:
     static void Load();
 
