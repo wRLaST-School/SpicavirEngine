@@ -36,5 +36,7 @@ private:
 	const float CAM_DIST = 7.5f;
 
 	float camSpeed = PIf / 180;
+
+	Float2 freeCamRot_ = {};
 };
 

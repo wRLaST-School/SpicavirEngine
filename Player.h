@@ -22,6 +22,8 @@ private:
     const float JUMP_POWER = 0.5f;
     float vy = 0.f;
 
+    Float3 rotTemp = { 0, 0, 0 };
+
     int32_t damageTimer = 0;
 
 public:

@@ -33,15 +33,25 @@ void CameraController::Update()
 
 	case CameraController::Mode::Free:
 	{
-		cam->targetMode = CameraTargetMode::LookTo;
-		cam->rotation = Player::Get()->rotation;
+		freeCamRot_.x += CameraController::GetCamSpd() * (Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN) - Input::Pad::GetRStick().y);
+		freeCamRot_.y += CameraController::GetCamSpd() * (Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT) + Input::Pad::GetRStick().x);
 
-		Vec3 front = Player::Get()->rotation.GetRotMat().ExtractAxisZ();
-		front.y = 0;
+		Matrix rotation = Matrix::RotX(freeCamRot_.x);
+		rotation *= Matrix::RotY(freeCamRot_.y);
+
+
+		cam->targetMode = CameraTargetMode::LookAt;
+		//cam->rotation = Player::Get()->rotation;
+
+		cam->target = Player::Get()->position;
+		cam->target.y += 2.0f;
+
+		Vec3 front = rotation.ExtractAxisZ();
+		//front.y = 0;
 		front.Norm();
 
 		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
-		cam->position.y = 3;
+		//cam->position.y = 3;
 
 		cam->UpdateMatrix();
 		break;

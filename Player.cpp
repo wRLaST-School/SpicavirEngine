@@ -14,7 +14,7 @@ void Player::Init()
 void Player::Update()
 {
 	Move();
-	if (Input::Key::Triggered(DIK_R))
+	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
 	{
 		CameraController::Get()->ToggleMode();
 	}
@@ -32,11 +32,10 @@ void Player::Update()
 	}
 	else
 	{
-		rotation *= Quaternion(Vec3(1, 0, 0), CameraController::GetCamSpd() * (Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)));
-		rotation *= Quaternion(Vec3(0, 1, 0), CameraController::GetCamSpd() * (Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)));
+		//ƒtƒŠ[ƒJƒƒ‰Žž‚Ìˆ—
 	}
 
-	if (position.y == 1.f && Input::Key::Triggered(DIK_SPACE))
+	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
 	{
 		vy = JUMP_POWER;
 	}
@@ -59,15 +58,23 @@ void Player::Update()
 void Player::Move()
 {
 	Vec3 vel(0, 0, 0);
-	Matrix rMat = rotation.GetRotMat();
-	Vec3 front = rMat.ExtractAxisZ();
-	Vec3 side = rMat.ExtractAxisX();
+	//Matrix rMat = rotation.GetRotMat();
+	CameraController* ctrl = CameraController::Get();
+	Vec3 front = (Vec3)ctrl->cam->target - ctrl->cam->position;
+	Vec3 side = front.Cross(Vec3(0.f, 1.f, 0.f));
 
 	vel = front.SetLength((float)(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)));
-	vel += side.SetLength((float)(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)));
+	vel += -side.SetLength((float)(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)));
+
+	front = (Vec3)ctrl->cam->target - ctrl->cam->position;
+	side = front.Cross(Vec3(0.f, 1.f, 0.f));
+
+	vel += -side.SetLength(Input::Pad::GetLStick().x);
+	vel += front.SetLength(Input::Pad::GetLStick().y);
+
 	vel.y = 0;
 
-	if(vel.GetSquaredLength()) vel.SetLength(spd);
+	if(vel.GetSquaredLength()) vel *= spd;
 
 	position += vel;
 }
