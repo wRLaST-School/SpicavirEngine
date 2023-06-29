@@ -2,16 +2,19 @@
 #include "GameScene.h"
 #include <Player.h>
 #include <SpDS.h>
+#include <LevelManager.h>
 
 void GameScene::LoadResources()
 {
 	Boss::Load();
 	Player::Load();
 	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
+	ModelManager::Register("cube", "Cube");
 }
 
 void GameScene::Init()
 {
+	LevelManager::Init();
 	Boss::Set(&boss);
 	Player::Set(&player);
 
@@ -32,6 +35,7 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
+	LevelManager::Update();
 	boss.Update();
 	player.Update();
 	cam.Update();
@@ -45,6 +49,7 @@ void GameScene::Draw3D()
 {
 	cam.Set();
 
+	LevelManager::Draw();
 	floor.Draw("white");
 	boss.Draw();
 	player.Draw();

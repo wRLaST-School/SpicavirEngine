@@ -33,6 +33,12 @@ public:
 
 	Float3 scale = { 1, 1, 1 };
 	Quaternion rotation = Quaternion::Identity();
+	Float3 rotationE = {};
+	enum class RotMode{
+		Euler,
+		Quaternion
+	} rotMode = RotMode::Quaternion;
+
 	Float3 position = { 0, 0, 0 };
 
 	Matrix matWorld = Matrix::Identity();

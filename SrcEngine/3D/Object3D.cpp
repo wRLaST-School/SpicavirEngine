@@ -12,7 +12,15 @@ void Object3D::UpdateMatrix()
 
 	mScale = Matrix::Scale(scale);
 
-	mRot = rotation.GetRotMat();
+	if (rotMode == RotMode::Quaternion)
+	{
+		mRot = rotation.GetRotMat();
+	}
+	else if (rotMode == RotMode::Euler)
+	{
+		mRot = Matrix::Identity();
+		mRot *= Matrix::RotRollPitchYaw(rotationE);
+	}
 
 	mTrans = Matrix::Translation(position);
 

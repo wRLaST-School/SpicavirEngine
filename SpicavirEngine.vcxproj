@@ -121,6 +121,8 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GlobalTimer.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marker.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
@@ -199,6 +201,8 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GlobalTimer.h" />
     <ClInclude Include="IRenderStage.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Marker.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />
@@ -262,6 +266,7 @@
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
+    <ClInclude Include="SrcExternal\json.hpp" />
     <ClInclude Include="SrImGuiStage.h" />
     <ClInclude Include="SrOpaqueStage.h" />
     <ClInclude Include="SrParticleStage.h" />
