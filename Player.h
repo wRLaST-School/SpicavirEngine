@@ -15,6 +15,7 @@ public:
 
     void DodgeUpdate();
     void IdleMoveUpdate();
+    void Dodge();
 
     float r2d = .5f;
 
@@ -37,8 +38,12 @@ private:
 
 private:
     Vec3 dodgeVec_ = Vec3();
-    int32_t dodgeTimer = 0;
+    int32_t dodgeTimer_ = 0;
     const int32_t iFrame = 15;
+
+    float dodgeSpd_ = 0.64f;
+
+    int32_t dodgeSucceededTimer_ = 0;
 
 public:
     static void Load();

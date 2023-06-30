@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "LevelLoader.h"
 #include <LevelManager.h>
+#pragma warning (push)
+#pragma warning (disable:26800)
 #include <SrcExternal/json.hpp>
+#pragma warning (pop)
 #include <fstream>
 #include <iostream>
 

@@ -13,8 +13,6 @@ void Player::Init()
 
 void Player::Update()
 {
-	Move();
-
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
 	{
 		CameraController::Get()->ToggleMode();
@@ -60,6 +58,8 @@ void Player::Move()
 	CameraController* ctrl = CameraController::Get();
 	Vec3 front = (Vec3)ctrl->cam->target - ctrl->cam->position;
 	Vec3 side = front.Cross(Vec3(0.f, 1.f, 0.f));
+	front.y = 0;
+	side.y = 0;
 
 	vel = front.SetLength((float)(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)));
 	vel += -side.SetLength((float)(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)));
@@ -82,9 +82,16 @@ void Player::DamageUpdate()
 	damageTimer--;
 	damageTimer = max(0, damageTimer);
 
-	if (damageTimer)
+	dodgeSucceededTimer_--;
+	dodgeSucceededTimer_ = max(0, dodgeSucceededTimer_);
+
+	if (dodgeSucceededTimer_)
 	{
-		*brightnessCB.contents = { 1.f, 0.f, 0.f, .5f };
+		*brightnessCB.contents = { 1.f, 1.f, 0.f, .25f };
+	}
+	else if (damageTimer)
+	{
+		*brightnessCB.contents = { 1.f, 0.f, 0.f, .25f };
 	}
 	else
 	{
@@ -94,7 +101,14 @@ void Player::DamageUpdate()
 
 void Player::Damage()
 {
-	damageTimer = 60;
+	if (state != State::Dodge)
+	{
+		damageTimer = 60;
+	}
+	else
+	{
+		dodgeSucceededTimer_ = 30;
+	}
 }
 
 void Player::Draw()
@@ -106,9 +120,9 @@ void Player::DodgeUpdate()
 {
 	position += dodgeVec_;
 
-	dodgeTimer++;
+	dodgeTimer_++;
 
-	if (dodgeTimer >= iFrame)
+	if (dodgeTimer_ >= iFrame)
 	{
 		state = State::Idle;
 	}
@@ -116,7 +130,7 @@ void Player::DodgeUpdate()
 
 void Player::IdleMoveUpdate()
 {
-
+	Move();
 
 	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
 	{
@@ -134,6 +148,38 @@ void Player::IdleMoveUpdate()
 		vy = 0;
 		position.y = 1.f;
 	}
+
+	if (Input::Pad::Triggered(Button::X))
+	{
+		Dodge();
+	}
+}
+
+void Player::Dodge()
+{
+	CameraController* ctrl = CameraController::Get();
+	Vec3 front = (Vec3)ctrl->cam->target - ctrl->cam->position;
+	Vec3 side = front.Cross(Vec3(0.f, 1.f, 0.f));
+	front.y = 0;
+	side.y = 0;
+
+	if (((Vec2)Input::Pad::GetLStick()).GetSquaredLength())
+	{
+		Vec2 input = Input::Pad::GetLStick();
+		Vec3 v;
+		v = front * input.y;
+		v += side * (-input.x);
+		v.SetLength(dodgeSpd_);
+		dodgeVec_ = v;
+	}
+	else
+	{
+		front.SetLength(dodgeSpd_);
+		dodgeVec_ = front;
+	}
+
+	state = State::Dodge;
+	dodgeTimer_ = 0;
 }
 
 void Player::Load()

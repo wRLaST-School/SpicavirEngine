@@ -138,7 +138,7 @@ namespace Input {
 		static void SetDeadZone(float range);
 		static float GetDeadZone();
 
-		int32_t gamepadIndex = 0;
+		int32_t gamepadIndex = 1;
 	private:
 		XINPUT_STATE padState_;
 		XINPUT_STATE lastPadState_;
