@@ -28,13 +28,7 @@ void SceneManager::Update()
 
 	if (Input::Key::Triggered(DIK_T) && Input::Key::Down(DIK_LSHIFT))
 	{
-		LoadScene<TestScene>();
-		Transition();
-	}
-
-	if (Input::Key::Triggered(DIK_N) && Input::Key::Down(DIK_LSHIFT))
-	{
-		LoadScene<SingleCamTestScene>();
+		LoadScene<GameScene>();
 		Transition();
 	}
 
