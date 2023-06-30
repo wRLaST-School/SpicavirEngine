@@ -22,7 +22,5 @@ private:
     Player player;
 
     CameraController cam;
-
-    Object3D floor;
 };
 

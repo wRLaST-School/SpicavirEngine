@@ -10,6 +10,7 @@ void GameScene::LoadResources()
 	Player::Load();
 	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
 	ModelManager::Register("cube", "Cube");
+	ModelManager::Register("triangle", "Triangle");
 }
 
 void GameScene::Init()
@@ -20,11 +21,6 @@ void GameScene::Init()
 
 	boss.Init();
 	player.Init();
-
-	floor.model = ModelManager::GetModel("floor");
-	floor.position = { 0.f, -0.0001f, 0.f };
-	floor.scale = { 30.f, 1.f, 30.f };
-	floor.UpdateMatrix();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
 
@@ -50,7 +46,6 @@ void GameScene::Draw3D()
 	cam.Set();
 
 	LevelManager::Draw();
-	floor.Draw("white");
 	boss.Draw();
 	player.Draw();
 }

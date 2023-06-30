@@ -20,7 +20,7 @@ void LevelManager::Draw()
 {
 	for (auto& o : objects)
 	{
-		o.Draw();
+		o.Draw("white");
 	}
 }
 
