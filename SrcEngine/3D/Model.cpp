@@ -242,6 +242,28 @@ Model::Model(const string& filePath, bool useSmoothShading)
 			UINT lastMaxIndex = backIndex;
 
 			for (uint32_t j = 0; j < mesh->mNumVertices; j++) {
+
+				//ボーンの定数バッファへの読み込み
+				if (mesh->HasBones())
+				{
+					for (int boneIndex = 0; boneIndex < min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
+					{
+						aiMatrix4x4 aimat = mesh->mBones[boneIndex]->mOffsetMatrix;
+						Matrix curBone = Matrix(
+							(float)aimat.a1, (float)aimat.a2, (float)aimat.a3, (float)aimat.a4,
+							(float)aimat.b1, (float)aimat.b2, (float)aimat.b3, (float)aimat.b4,
+							(float)aimat.c1, (float)aimat.c2, (float)aimat.c3, (float)aimat.c4,
+							(float)aimat.d1, (float)aimat.d2, (float)aimat.d3, (float)aimat.d4
+						);
+
+						bMatrixCB.contents->bMatrix[boneIndex] = curBone;
+					}
+				}
+				else
+				{
+					bMatrixCB.contents->bMatrix[0] = Matrix::Identity();
+				}
+
 				//頂点ごと
 				aiVector3D vertex = mesh->mVertices[j];
 				vertex *= wt;

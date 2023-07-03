@@ -7,8 +7,8 @@
 #include <exc_unordered_map.h>
 
 struct ModelConsts {
-	const static int MAX_BONES_PER_VERTEX = 4;
-	const static int MAX_BONES_PER_MODEL = 128;
+	const static int32_t MAX_BONES_PER_VERTEX = 4;
+	const static int32_t MAX_BONES_PER_MODEL = 128;
 };
 
 struct Vertex
