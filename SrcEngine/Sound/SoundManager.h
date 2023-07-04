@@ -1,7 +1,6 @@
 #pragma once
 #include "Essentials.h"
 #include <xaudio2.h>
-#pragma comment(lib, "xaudio2.lib")
 
 #include <fstream>
 #include <exc_unordered_map.h>
