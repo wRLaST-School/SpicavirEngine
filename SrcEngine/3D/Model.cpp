@@ -249,6 +249,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 					for (int boneIndex = 0; boneIndex < min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
 					{
 						aiMatrix4x4 aimat = mesh->mBones[boneIndex]->mOffsetMatrix;
+						aimat.Transpose();
 						Matrix curBone = Matrix(
 							(float)aimat.a1, (float)aimat.a2, (float)aimat.a3, (float)aimat.a4,
 							(float)aimat.b1, (float)aimat.b2, (float)aimat.b3, (float)aimat.b4,
@@ -256,7 +257,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 							(float)aimat.d1, (float)aimat.d2, (float)aimat.d3, (float)aimat.d4
 						);
 
-						bMatrixCB.contents->bMatrix[boneIndex] = curBone;
+						bMatrixCB.contents->bMatrix[boneIndex] = /*curBone*/Matrix::Identity();
 					}
 				}
 				else
@@ -266,7 +267,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 				//’¸“_‚²‚Æ
 				aiVector3D vertex = mesh->mVertices[j];
-				vertex *= wt;
+				//vertex *= wt;
 				posList.push_back({ vertex.x, vertex.y, vertex.z });
 				backIndex++;
 
@@ -303,10 +304,13 @@ Model::Model(const string& filePath, bool useSmoothShading)
 							if (mesh->mBones[m]->mWeights[h].mVertexId == j)
 							{
 								bd.weight = mesh->mBones[m]->mWeights[h].mWeight;
+
+								bdlist.push_back(bd);
+
+								break;
 							}
 						}
 
-						bdlist.push_back(bd);
 					}
 
 					sort(bdlist.begin(), bdlist.end(), [](const auto & lhs, const auto& rhs) {
