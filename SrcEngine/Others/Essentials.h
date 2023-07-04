@@ -1,8 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-#pragma comment(lib, "EASTL.lib")
-
 using namespace DirectX;
 using namespace std;
 using namespace Microsoft::WRL;
