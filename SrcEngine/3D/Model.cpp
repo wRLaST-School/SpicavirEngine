@@ -257,7 +257,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 							(float)aimat.d1, (float)aimat.d2, (float)aimat.d3, (float)aimat.d4
 						);
 
-						bMatrixCB.contents->bMatrix[boneIndex] = /*curBone*/Matrix::Identity();
+						bMatrixCB.contents->bMatrix[boneIndex] = curBone;
 					}
 				}
 				else
@@ -267,7 +267,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 				//’¸“_‚²‚Æ
 				aiVector3D vertex = mesh->mVertices[j];
-				//vertex *= wt;
+				vertex *= wt;
 				posList.push_back({ vertex.x, vertex.y, vertex.z });
 				backIndex++;
 
