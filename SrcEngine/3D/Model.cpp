@@ -292,17 +292,17 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 					vector<BoneData> bdlist;
 
-					for (size_t i = 0; i < mesh->mNumBones; i++)
+					for (size_t m = 0; m < mesh->mNumBones; m++)
 					{
 						BoneData bd;
 
-						bd.index = i;
+						bd.index = (int32_t)m;
 
-						for (size_t h; h < mesh->mBones[i]->mNumWeights; h++)
+						for (size_t h = 0; h < mesh->mBones[m]->mNumWeights; h++)
 						{
-							if (mesh->mBones[i]->mWeights[h].mVertexId == j)
+							if (mesh->mBones[m]->mWeights[h].mVertexId == j)
 							{
-								bd.weight = mesh->mBones[i]->mWeights[h].mWeight;
+								bd.weight = mesh->mBones[m]->mWeights[h].mWeight;
 							}
 						}
 
@@ -316,17 +316,17 @@ Model::Model(const string& filePath, bool useSmoothShading)
 					eastl::array<int32_t, 4> bInd;
 					eastl::array<float, 4> bWeight;
 
-					for (size_t i = 0; i < 4; i++)
+					for (size_t m = 0; m < 4; m++)
 					{
-						if (i < bdlist.size())
+						if (m < bdlist.size())
 						{
-							bInd[i] = bdlist.at(i).index;
-							bWeight[i] = bdlist.at(i).weight;
+							bInd[m] = bdlist.at(m).index;
+							bWeight[m] = bdlist.at(m).weight;
 						}
 						else
 						{
-							bInd[i] = 0;
-							bWeight[i] = 0.f;
+							bInd[m] = 0;
+							bWeight[m] = 0.f;
 						}
 					}
 					bIndexList.push_back({ bInd[0], bInd[1], bInd[2], bInd[3] });
