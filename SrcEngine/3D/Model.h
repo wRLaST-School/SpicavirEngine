@@ -85,6 +85,39 @@ namespace ModelCommon {
 	};
 }
 
+struct ATransData
+{
+	Float3 translation;
+	double time;
+};
+
+struct ARotData
+{
+	Quaternion rot;
+	double time;
+};
+
+struct AScaleData
+{
+	Float3 scale;
+	double time;
+};
+
+struct Channel
+{
+	string name;
+	vector<ATransData> translations;
+	vector<ARotData> rotations;
+	vector<AScaleData> scales;
+};
+
+struct Animation {
+	string name;
+	vector<Channel> channels;
+	double tickPerSecond;
+	double duration;
+};
+
 class Model
 {
 public:

@@ -248,7 +248,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 				{
 					for (int boneIndex = 0; boneIndex < min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
 					{
-						aiMatrix4x4 aimat = mesh->mBones[boneIndex]->mOffsetMatrix;
+						aiMatrix4x4 aimat = /*mesh->mBones[boneIndex]->mOffsetMatrix **/ wt;
 						aimat.Transpose();
 						Matrix curBone = Matrix(
 							(float)aimat.a1, (float)aimat.a2, (float)aimat.a3, (float)aimat.a4,
@@ -262,12 +262,18 @@ Model::Model(const string& filePath, bool useSmoothShading)
 				}
 				else
 				{
-					bMatrixCB.contents->bMatrix[0] = Matrix::Identity();
+					Matrix curBone = Matrix(
+						(float)wt.a1, (float)wt.a2, (float)wt.a3, (float)wt.a4,
+						(float)wt.b1, (float)wt.b2, (float)wt.b3, (float)wt.b4,
+						(float)wt.c1, (float)wt.c2, (float)wt.c3, (float)wt.c4,
+						(float)wt.d1, (float)wt.d2, (float)wt.d3, (float)wt.d4
+					);
+					bMatrixCB.contents->bMatrix[0] = Matrix::Identity() * curBone;
 				}
 
 				//頂点ごと
 				aiVector3D vertex = mesh->mVertices[j];
-				vertex *= wt;
+				//vertex *= wt;
 				posList.push_back({ vertex.x, vertex.y, vertex.z });
 				backIndex++;
 
@@ -342,11 +348,12 @@ Model::Model(const string& filePath, bool useSmoothShading)
 					bWeightList.push_back({ 0.f, 0.f, 0.f, 0.f });
 				}
 
+				//頂点データ配列に追加
 				vertices.emplace_back(Vertex{ posList.back(), normalList.back(), tcList.back(), bIndexList.back(), bWeightList.back() });
 			}
 
 			for (uint32_t j = 0; j < mesh->mNumFaces; j++) {
-				//ポリゴンごと)
+				//ポリゴンごと
 				aiFace face = mesh->mFaces[j];
 				for (uint32_t l = 0; l < face.mNumIndices; l++) {
 					//インデックスごと
