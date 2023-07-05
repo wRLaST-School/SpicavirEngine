@@ -5,6 +5,15 @@ Texture2D<float4> disTex : register(t1);
 
 SamplerState smp : register(s0);
 
+float4 calcRim(GSOutput i, float4 color)
+{
+    float3 eyeDir = normalize(cameraPos.xyz - i.worldpos.xyz);
+
+    half rim = 1.0 - abs(dot(eyeDir, i.normal));
+    float3 emission = lerp(color.rgb, rimColor.rgb, smoothstep(0.45, 0.5, pow(rim, rimStrength.r) * rimStrength.r));
+    color.rgb = emission;
+    return color;
+}
 
 float4 main(GSOutput input) : SV_TARGET
 {
@@ -66,6 +75,7 @@ float4 main(GSOutput input) : SV_TARGET
         }
 		
 	}
-
-	return shadecolor * texcolor * brightness;
+	
+    float4 ads = shadecolor * texcolor * brightness;
+    return calcRim(input, ads);
 }
