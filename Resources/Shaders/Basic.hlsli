@@ -50,8 +50,8 @@ cbuffer cbuff5 : register(b5)
 
 cbuffer cbuff6 : register(b6)
 {
-    float4 limColor;
-    float4 limStrength;
+    float4 rimColor;
+    float4 rimStrength;
     float4 dissolveStrength;
 }
 

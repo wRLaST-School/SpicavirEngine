@@ -7,8 +7,8 @@ struct ConstBufferDataTransform {
 };
 
 struct ConstBufferDataMisc {
-	Float4 limColor;
-	float limStrength;
+	Float4 rimColor;
+	float rimStrength;
 	Float3 padding;
 	float dissolveStrength;
 	Float3 padding2;
