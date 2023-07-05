@@ -6,6 +6,14 @@ struct ConstBufferDataTransform {
 	Matrix mat;//3D•ÏŠ·s—ñ
 };
 
+struct ConstBufferDataMisc {
+	Float4 limColor;
+	float limStrength;
+	Float3 padding;
+	float dissolveStrength;
+	Float3 padding;
+};
+
 class Object3D
 {
 public:
