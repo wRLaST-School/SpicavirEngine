@@ -48,6 +48,13 @@ cbuffer cbuff5 : register(b5)
     matrix bMatrix[MAX_BONES];
 }
 
+cbuffer cbuff6 : register(b6)
+{
+    float4 limColor;
+    float4 limStrength;
+    float4 dissolveStrength;
+}
+
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;

@@ -1,11 +1,17 @@
 #include "Basic.hlsli"
 
 Texture2D<float4> tex : register(t0);
+Texture2D<float4> disTex : register(t1);
+
 SamplerState smp : register(s0);
+
 
 float4 main(GSOutput input) : SV_TARGET
 {
 	float4 texcolor = float4(tex.Sample(smp, input.uv));
+    float4 dissolvecolor = float4(disTex.Sample(smp, input.uv));
+	
+    clip(dissolvecolor.r - 0.00001f - dissolveStrength.r);
 
 	float4 shadecolor;
 
