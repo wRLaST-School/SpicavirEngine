@@ -159,6 +159,7 @@
     <ClCompile Include="SrcEngine\Light\Light.cpp" />
     <ClCompile Include="SrcEngine\Light\PointLight.cpp" />
     <ClCompile Include="SrcEngine\Math\Matrix.cpp" />
+    <ClCompile Include="SrcEngine\Math\Quaternion.cpp" />
     <ClCompile Include="SrcEngine\Math\Vec2.cpp" />
     <ClCompile Include="SrcEngine\Math\Vec3.cpp" />
     <ClCompile Include="SrcEngine\Math\SpMath.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="SrcEngine\Math\Float3.h" />
     <ClInclude Include="SrcEngine\Math\Float4.h" />
     <ClInclude Include="SrcEngine\Math\Matrix.h" />
+    <ClInclude Include="SrcEngine\Math\Quaternion.h" />
     <ClInclude Include="SrcEngine\Math\Vec2.h" />
     <ClInclude Include="SrcEngine\Math\Vec3.h" />
     <ClInclude Include="SrcEngine\Math\SpMath.h" />

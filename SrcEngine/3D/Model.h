@@ -5,6 +5,7 @@
 #include "SpTextureManager.h"
 #include "SpConstBuffer.h"
 #include <exc_unordered_map.h>
+#include <Quaternion.h>
 
 struct ModelConsts {
 	const static int32_t MAX_BONES_PER_VERTEX = 4;
