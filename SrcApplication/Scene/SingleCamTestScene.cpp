@@ -115,6 +115,14 @@ void SingleCamTestScene::Update()
 			{
 				pane.model = ModelManager::GetModel("FlatSphere");
 			}
+
+			ImGui::ColorEdit4("Object Color", &pane.brightnessCB.contents->x);
+
+			ImGui::SliderFloat("Dissolve", &pane.miscCB.contents->dissolveStrength, -0.01f, 1.0f);
+
+			ImGui::SliderFloat("RimPower", &pane.miscCB.contents->rimStrength, 0.f, 1.f);
+
+			ImGui::ColorEdit4("RimColor", &pane.miscCB.contents->rimColor.x);
 		}
 	ImGui::End();
 	});

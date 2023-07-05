@@ -6,6 +6,14 @@ struct ConstBufferDataTransform {
 	Matrix mat;//3Dïœä∑çsóÒ
 };
 
+struct ConstBufferDataMisc {
+	Float4 rimColor;
+	float rimStrength;
+	Float3 padding;
+	float dissolveStrength;
+	Float3 padding2;
+};
+
 class Object3D
 {
 public:
@@ -29,6 +37,7 @@ public:
 
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;
+	SpConstBuffer<ConstBufferDataMisc> miscCB;
 
 	Float3 scale = { 1, 1, 1 };
 	Float3 rotation = { 0, 0, 0 };

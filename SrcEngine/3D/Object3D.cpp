@@ -54,6 +54,10 @@ void Object3D::Draw()
 
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, model->bMatrixCB.buffer->GetGPUVirtualAddress());
 
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(7, miscCB.buffer->GetGPUVirtualAddress());
+
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(8, SpTextureManager::GetGPUDescHandle("dissolveMap"));
+
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
@@ -83,6 +87,10 @@ void Object3D::Draw(const TextureKey& key)
 		
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, model->bMatrixCB.buffer->GetGPUVirtualAddress());
 
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(7, miscCB.buffer->GetGPUVirtualAddress());
+
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(8, SpTextureManager::GetGPUDescHandle("dissolveMap"));
+
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 
 		GetWDX()->cmdList->IASetIndexBuffer(&model->ibView);
@@ -102,6 +110,10 @@ void Object3D::DrawCommands(const TextureKey& key)
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(4, brightnessCB.buffer->GetGPUVirtualAddress());
 	
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, model->bMatrixCB.buffer->GetGPUVirtualAddress());
+
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(7, miscCB.buffer->GetGPUVirtualAddress());
+
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(8, SpTextureManager::GetGPUDescHandle("dissolveMap"));
 
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 
@@ -134,6 +146,11 @@ void Object3D::DrawAdd(const TextureKey& key)
 
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(4, brightnessCB.buffer->GetGPUVirtualAddress());
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, model->bMatrixCB.buffer->GetGPUVirtualAddress());
+
+
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(7, miscCB.buffer->GetGPUVirtualAddress());
+
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(8, SpTextureManager::GetGPUDescHandle("dissolveMap"));
 
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 
