@@ -38,6 +38,9 @@ void SpTextureManager::Init()
 
 	SpTextureManager::LoadTexture("Resources/notexture.png", "notexture");
 	AddMasterTextureKey("notexture");
+
+	SpTextureManager::LoadTexture("Resources/DissolveMap.png", "dissolveMap");
+	AddMasterTextureKey("dissolveMap");
 }
 
 TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKey& key)

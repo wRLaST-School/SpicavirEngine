@@ -18,9 +18,6 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	ModelManager::Register("ICO", "FlatSphere");
 
-	SpTextureManager::LoadTexture("Resources/DissolveMap.png", "dissolveMap");
-	SpTextureManager::AddMasterTextureKey("dissolveMap");
-
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
 	SpTextureManager::LoadSingleDiv("Resources/circleParticle.png", 100, 100, 100, 200, "particle1");
