@@ -640,6 +640,7 @@ void Model::SetAnim(std::string animKey)
 
 void Model::UpdateAnim()
 {
+	//Nodeを使って再帰的に処理を行うようにする
 	Animation& anim = animations.find(currentAnim)->second;
 	animTimer++;
 	if (animTimer >= anim.duration)
