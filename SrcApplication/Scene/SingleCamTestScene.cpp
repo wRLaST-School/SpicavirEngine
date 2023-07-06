@@ -87,6 +87,8 @@ void SingleCamTestScene::Update()
 
 	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
 
+	pane.model->UpdateAnim();
+
 	*pane2.brightnessCB.contents = Float4{ 0.f, 1.f, 1.f, .2f };
 	pane2.UpdateMatrix();
 

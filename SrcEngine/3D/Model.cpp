@@ -11,6 +11,16 @@
 Model::Model() {
 }
 
+Matrix AiMatToSpMat(aiMatrix4x4 m)
+{
+	return Matrix(
+		m.a1, m.a2, m.a3, m.a4,
+		m.b1, m.b2, m.b3, m.b4,
+		m.c1, m.c2, m.c3, m.c4,
+		m.d1, m.d2, m.d3, m.d4
+	);
+}
+
 Model::Model(const string& modelName)
 {
 	string path = "Resources/Models/"+modelName+"/";
@@ -217,21 +227,130 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 	UINT backIndex = 0;
 
-	//ノードごとの処理
-	std::function<void(aiNode*)>fNode = [&](aiNode* cur) {
-		for (uint32_t  i = 0; i < cur->mNumChildren; i++)
+	//アニメーション読み込み
+	if (scene->HasAnimations())
+	{
+		for (uint32_t a = 0; a < scene->mNumAnimations; a++)
 		{
-			fNode(cur->mChildren[i]);
+			Animation anim;
+
+			aiAnimation* aiAni = scene->mAnimations[a];
+
+			anim.duration = aiAni->mDuration;
+			anim.tickPerSecond = aiAni->mTicksPerSecond;
+			anim.name = aiAni->mName.C_Str();
+
+			for (uint32_t c = 0; c < aiAni->mNumChannels; c++)
+			{
+				Channel channel;
+				aiNodeAnim* aiChan = aiAni->mChannels[c];
+
+				channel.name = aiChan->mNodeName.C_Str();
+
+				//Position
+				for (uint32_t t = 0; t < aiChan->mNumPositionKeys; t++)
+				{
+					aiVector3D aiPos = aiChan->mPositionKeys[t].mValue;
+					Float3 pos = { aiPos.x, aiPos.y, aiPos.z };
+					channel.translations.push_back({ pos, aiChan->mPositionKeys[t].mTime });
+				}
+
+				//Rotation
+				for (uint32_t t = 0; t < aiChan->mNumRotationKeys; t++)
+				{
+					aiQuaternion aiRot = aiChan->mRotationKeys->mValue;
+					Quaternion rot = Quaternion(aiRot.w, Vec3(aiRot.x, aiRot.y, aiRot.z));
+					channel.rotations.push_back({ rot, aiChan->mRotationKeys->mTime });
+				}
+
+				//Scale
+				for (uint32_t s = 0; s < aiChan->mNumScalingKeys; s++)
+				{
+					aiVector3D aiScale = aiChan->mScalingKeys[s].mValue;
+					Float3 scale = { aiScale.x, aiScale.y, aiScale.z };
+					channel.scales.push_back({ scale, aiChan->mScalingKeys[s].mTime});
+				}
+
+				anim.channels.push_back(channel);
+			}
+			animations.insert(std::pair<std::string, Animation>(anim.name, anim));
 		}
+	}
+
+	//先にBoneのみ列挙して保存
+	std::function<void(aiNode*)>fNodeBone = [&](aiNode* cur)
+	{
+		for (uint32_t i = 0; i < cur->mNumChildren; i++)
+		{
+			fNodeBone(cur->mChildren[i]);
+		}
+		//ノードごとのメッシュについて
+		for (uint32_t k = 0; k < cur->mNumMeshes; k++) {
+
+			//メッシュごとの処理
+			uint32_t i = cur->mMeshes[k];
+			aiMesh* mesh = scene->mMeshes[i];
+
+			//ボーンの情報を保存
+			if (mesh->HasBones())
+			{
+				for (int boneIndex = 0; boneIndex < min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
+				{
+					Bone bone;
+					aiMatrix4x4 aioffsetmat = mesh->mBones[boneIndex]->mOffsetMatrix;
+					Matrix bOffsetMat = Matrix(
+						(float)aioffsetmat.a1, (float)aioffsetmat.a2, (float)aioffsetmat.a3, (float)aioffsetmat.a4,
+						(float)aioffsetmat.b1, (float)aioffsetmat.b2, (float)aioffsetmat.b3, (float)aioffsetmat.b4,
+						(float)aioffsetmat.c1, (float)aioffsetmat.c2, (float)aioffsetmat.c3, (float)aioffsetmat.c4,
+						(float)aioffsetmat.d1, (float)aioffsetmat.d2, (float)aioffsetmat.d3, (float)aioffsetmat.d4
+					);
+
+					bone.offsetMatrix = bOffsetMat;
+					bone.index = boneIndex;
+
+					bones.insert(pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
+				}
+			}
+		}
+	};
+
+	fNodeBone(scene->mRootNode);
+
+	//モデル読み込み
+	//ノードごとの処理
+	std::function<void(aiNode*, Node*)>fNode = [&](aiNode* cur, Node* parent) {
+		//ノードごとのボーン情報を取得
+		Node node;
+		node.parent = parent;
+
 		//このノード用の変換行列
 		std::function<aiMatrix4x4(aiNode*)>calcMat = [&](aiNode* calcn) {
-			if(calcn->mParent)
+			if (calcn->mParent)
 				return calcMat(calcn->mParent) * calcn->mTransformation;
-			
+
 			return calcn->mTransformation;
 		};
 
 		aiMatrix4x4 wt = calcMat(cur);
+
+		wt.Transpose();
+
+		node.worldTransform = AiMatToSpMat(wt);
+
+		if (!(bones.count(cur->mName.C_Str())))
+		{
+			Bone b = { 129, Matrix::Identity(), Matrix::Identity() };
+			bones.emplace(cur->mName.C_Str(), b);
+		}
+
+		node.bone = &bones.at(cur->mName.C_Str());
+
+		nodes.emplace(cur->mName.C_Str(), node);
+
+		for (uint32_t  i = 0; i < cur->mNumChildren; i++)
+		{
+			fNode(cur->mChildren[i], &nodes.at(cur->mName.C_Str()));
+		}
 
 		//ノードごとのメッシュについて
 		for (uint32_t k = 0; k < cur->mNumMeshes; k++) {
@@ -242,35 +361,6 @@ Model::Model(const string& filePath, bool useSmoothShading)
 			UINT lastMaxIndex = backIndex;
 
 			for (uint32_t j = 0; j < mesh->mNumVertices; j++) {
-
-				//ボーンの定数バッファへの読み込み
-				if (mesh->HasBones())
-				{
-					for (int boneIndex = 0; boneIndex < min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
-					{
-						aiMatrix4x4 aimat = /*mesh->mBones[boneIndex]->mOffsetMatrix **/ wt;
-						aimat.Transpose();
-						Matrix curBone = Matrix(
-							(float)aimat.a1, (float)aimat.a2, (float)aimat.a3, (float)aimat.a4,
-							(float)aimat.b1, (float)aimat.b2, (float)aimat.b3, (float)aimat.b4,
-							(float)aimat.c1, (float)aimat.c2, (float)aimat.c3, (float)aimat.c4,
-							(float)aimat.d1, (float)aimat.d2, (float)aimat.d3, (float)aimat.d4
-						);
-
-						bMatrixCB.contents->bMatrix[boneIndex] = curBone;
-					}
-				}
-				else
-				{
-					Matrix curBone = Matrix(
-						(float)wt.a1, (float)wt.a2, (float)wt.a3, (float)wt.a4,
-						(float)wt.b1, (float)wt.b2, (float)wt.b3, (float)wt.b4,
-						(float)wt.c1, (float)wt.c2, (float)wt.c3, (float)wt.c4,
-						(float)wt.d1, (float)wt.d2, (float)wt.d3, (float)wt.d4
-					);
-					bMatrixCB.contents->bMatrix[0] = Matrix::Identity() * curBone;
-				}
-
 				//頂点ごと
 				aiVector3D vertex = mesh->mVertices[j];
 				//vertex *= wt;
@@ -319,7 +409,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 					}
 
-					sort(bdlist.begin(), bdlist.end(), [](const auto & lhs, const auto& rhs) {
+					std::sort(bdlist.begin(), bdlist.end(), [](const auto & lhs, const auto& rhs) {
 						return lhs.weight > rhs.weight;
 					});
 
@@ -366,7 +456,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 	};
 
 	//ノードごとの処理呼び出し
-	fNode(scene->mRootNode);	
+	fNode(scene->mRootNode, nullptr);	
 
 	for (uint32_t i = 0; i < scene->mNumMaterials; i++)
 	{
@@ -541,6 +631,102 @@ void Model::UpdateMaterial()
 	materialCBs.back().contents->diffuse = material.front().diffuse;
 	materialCBs.back().contents->specular = material.front().specular;
 	materialCBs.back().contents->alpha = material.front().alpha;
+}
+
+void Model::SetAnim(std::string animKey)
+{
+	currentAnim = animKey;
+}
+
+void Model::UpdateAnim()
+{
+	Animation& anim = animations.find(currentAnim)->second;
+	animTimer++;
+	if (animTimer >= anim.duration)
+	{
+		animTimer = 0;
+	}
+
+	double aniTick = (float)animTimer / 60.f * anim.tickPerSecond;
+
+	for (auto& channel : anim.channels)
+	{
+		Matrix transform;
+
+		AScaleData fst{};
+		AScaleData scd{};
+
+		for (auto itr = channel.scales.begin(); itr != channel.scales.end(); itr++)
+		{
+			if (itr->time > aniTick)
+			{
+				scd = *itr;
+				itr--;
+				fst = *itr;
+				break;
+			}
+		}
+
+		transform = Matrix::Scale(Vec3::Lerp(fst.scale, scd.scale,(float)((aniTick - fst.time) / (scd.time - fst.time))));
+
+		ARotData fstr{};
+		ARotData scdr{};
+
+		for (auto itr = channel.rotations.begin(); itr != channel.rotations.end(); itr++)
+		{
+			if (itr->time > aniTick)
+			{
+				scdr = *itr;
+				itr--;
+				fstr = *itr;
+				break;
+			}
+		}
+
+		Quaternion finr = Quaternion::Slerp(fstr.rot, scdr.rot, (float)((aniTick - fstr.time) / (scdr.time - fstr.time)));
+
+		transform *= finr.GetRotMat();
+
+		ATransData fstt{};
+		ATransData scdt{};
+
+		for (auto itr = channel.translations.begin(); itr != channel.translations.end(); itr++)
+		{
+			if (itr->time > aniTick)
+			{
+				scdt = *itr;
+				itr--;
+				fstt = *itr;
+				break;
+			}
+		}
+
+		transform *= Matrix::Translation(Vec3::Lerp(fstt.translation, scdt.translation, (float)((aniTick - fstt.time) / (scdt.time - fstt.time))));
+
+		bones.at(channel.name).finalMatrix = bones.at(channel.name).offsetMatrix * transform/* * parentのworldTransform*/;
+	}
+
+	vector<Bone> finalBones;
+	for (auto& b : bones)
+	{
+		finalBones.push_back(b.second);
+	}
+
+	std::sort(finalBones.begin(), finalBones.end(), [](const auto& lhs, const auto& rhs) {
+		return lhs.index > rhs.index;
+	});
+
+	for (uint32_t i = 0; i < ModelConsts::MAX_BONES_PER_MODEL; i++)
+	{
+		if (i < finalBones.size())
+		{
+			bMatrixCB.contents->bMatrix[i] = finalBones.at(i).finalMatrix;
+		}
+		else
+		{
+			bMatrixCB.contents->bMatrix[i] = Matrix::Identity();
+		}
+	}
 }
 
 void ModelManager::Register(const string& modelName, const ModelKey& key)

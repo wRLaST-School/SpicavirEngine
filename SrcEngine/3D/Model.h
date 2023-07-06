@@ -119,6 +119,18 @@ struct Animation {
 	double duration;
 };
 
+struct Bone {
+	uint32_t index;
+	Matrix offsetMatrix;
+	Matrix finalMatrix;
+};
+
+struct Node {
+	Bone* bone;
+	Node* parent;
+	Matrix worldTransform;
+};
+
 class Model
 {
 public:
@@ -129,6 +141,9 @@ public:
 	void LoadMaterial(const string& path, const string& filename);
 	void UpdateMaterial();
 
+	void SetAnim(std::string animKey);
+	void UpdateAnim();
+
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	D3D12_INDEX_BUFFER_VIEW ibView{};
 
@@ -137,10 +152,18 @@ public:
 
 	vector<Material> material;
 
+	std::unordered_map<std::string, Bone> bones;
+	std::unordered_map<std::string, Animation> animations;
+	std::unordered_map<std::string, Node> nodes;
+
 	vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
 	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
 
 	Model operator= (Model& m) = delete;
+
+private:
+	uint32_t animTimer = 0;
+	std::string currentAnim = "Take 001";
 };
 
 typedef std::string ModelKey;
