@@ -129,6 +129,7 @@ struct Node {
 	Bone* bone;
 	Node* parent;
 	Matrix worldTransform;
+	string name;
 };
 
 class Model
@@ -163,7 +164,7 @@ public:
 
 private:
 	uint32_t animTimer = 0;
-	std::string currentAnim = "Take 001";
+	std::string currentAnim = "Idle";
 };
 
 typedef std::string ModelKey;

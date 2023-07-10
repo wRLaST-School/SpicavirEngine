@@ -14,8 +14,8 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
-	ModelManager::Register("Resources/Models/testgltf/player.gltf", "SmoothSphere", true);
-	ModelManager::Register("Resources/Models/boneTest.fbx", "FlatSphere", true);
+	ModelManager::Register("Resources/Models/boneTest.fbx", "SmoothSphere", true);
+	ModelManager::Register("Resources/Models/testgltf/player.gltf", "FlatSphere", true);
 	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	//ModelManager::Register("ICO", "FlatSphere");
 
@@ -76,11 +76,6 @@ void SingleCamTestScene::Update()
 
 	camera.position = move + camera.position;
 #pragma endregion
-
-	if (Input::Key::Triggered(DIK_B))
-	{
-		SoundManager::Play("Laser");
-	}
 
 	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };

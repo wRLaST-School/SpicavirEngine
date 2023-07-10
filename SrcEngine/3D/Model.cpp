@@ -650,9 +650,30 @@ void Model::UpdateAnim()
 
 	double aniTick = (float)animTimer / 60.f * anim.tickPerSecond;
 
-	for (auto& channel : anim.channels)
-	{
+	std::function<Matrix(Node*, Channel&, unordered_map<std::string, Node>&, unordered_map<std::string, Bone>)> fCalcParentTransform = [&aniTick, &fCalcParentTransform, &anim](Node* node, Channel& channel, unordered_map<std::string, Node>& nodes, unordered_map<std::string, Bone> bones) {
 		Matrix transform;
+		Matrix parentTrans;
+		Channel* parentChannel = nullptr;
+
+		if (node == nullptr || &channel == nullptr)
+		{
+			return Matrix::Identity();
+		}
+		else
+		{
+			if (node->parent != nullptr)
+			{
+				for (auto& a : anim.channels)
+				{
+					if (a.name == node->parent->name)
+					{
+						parentChannel = &a;
+					}
+				}
+			}
+
+			parentTrans = fCalcParentTransform(node->parent, *parentChannel, nodes, bones);
+		}
 
 		AScaleData fst{};
 		AScaleData scd{};
@@ -668,7 +689,7 @@ void Model::UpdateAnim()
 			}
 		}
 
-		transform = Matrix::Scale(Vec3::Lerp(fst.scale, scd.scale,(float)((aniTick - fst.time) / (scd.time - fst.time))));
+		transform = Matrix::Scale(Vec3::Lerp(fst.scale, scd.scale, (float)((aniTick - fst.time) / (scd.time - fst.time))));
 
 		ARotData fstr{};
 		ARotData scdr{};
@@ -704,7 +725,14 @@ void Model::UpdateAnim()
 
 		transform *= Matrix::Translation(Vec3::Lerp(fstt.translation, scdt.translation, (float)((aniTick - fstt.time) / (scdt.time - fstt.time))));
 
-		bones.at(channel.name).finalMatrix = bones.at(channel.name).offsetMatrix * transform/* * parent‚ÌworldTransform*/;
+		bones.at(channel.name).finalMatrix = bones.at(channel.name).offsetMatrix * transform * parentTrans;
+
+		return bones.at(channel.name).finalMatrix;
+	};
+
+	for (auto& channel : anim.channels)
+	{
+		fCalcParentTransform(&nodes.at(channel.name), channel, nodes, bones);
 	}
 
 	vector<Bone> finalBones;
