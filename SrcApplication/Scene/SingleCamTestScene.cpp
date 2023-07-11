@@ -14,7 +14,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
-	ModelManager::Register("Resources/Models/boneTest.fbx", "SmoothSphere", true);
+	ModelManager::Register("Resources/Models/testgltf/testFbx.gltf", "SmoothSphere", true);
 	ModelManager::Register("Resources/Models/testgltf/player.gltf", "FlatSphere", true);
 	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	//ModelManager::Register("ICO", "FlatSphere");

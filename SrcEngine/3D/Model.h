@@ -164,7 +164,7 @@ public:
 
 private:
 	uint32_t animTimer = 0;
-	std::string currentAnim = "Idle";
+	std::string currentAnim = "Walk";
 };
 
 typedef std::string ModelKey;
