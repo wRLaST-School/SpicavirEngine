@@ -298,13 +298,13 @@ Model::Model(const string& filePath, bool useSmoothShading)
 				{
 					Bone bone;
 					aiMatrix4x4 aioffsetmat = mesh->mBones[boneIndex]->mOffsetMatrix;
+					aioffsetmat.Transpose();
 					Matrix bOffsetMat = Matrix(
 						(float)aioffsetmat.a1, (float)aioffsetmat.a2, (float)aioffsetmat.a3, (float)aioffsetmat.a4,
 						(float)aioffsetmat.b1, (float)aioffsetmat.b2, (float)aioffsetmat.b3, (float)aioffsetmat.b4,
 						(float)aioffsetmat.c1, (float)aioffsetmat.c2, (float)aioffsetmat.c3, (float)aioffsetmat.c4,
 						(float)aioffsetmat.d1, (float)aioffsetmat.d2, (float)aioffsetmat.d3, (float)aioffsetmat.d4
 					);
-
 					bone.offsetMatrix = bOffsetMat;
 					bone.index = boneIndex;
 
@@ -332,6 +332,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 		};
 
 		aiMatrix4x4 wt = calcMat(cur);
+		//aiMatrix4x4 wt = cur->mTransformation;
 
 		wt.Transpose();
 
@@ -788,9 +789,9 @@ void Model::UpdateAnim()
 
 		transform *= Matrix::Translation(lerpedTrans);
 
-		bones.at(node->name).finalMatrix = bones.at(node->name).offsetMatrix * transform * parentTrans;
+		bones.at(channel.name).finalMatrix = bones.at(channel.name).offsetMatrix * transform * parentTrans /** node->worldTransform*/;
 
-		return bones.at(node->name).finalMatrix;
+		return transform * parentTrans;
 	};
 
 	for (auto& channel : anim->channels)
