@@ -95,7 +95,6 @@ Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, cons
 	Quaternion o = one;
 	if (clamped < 0)
 	{
-		o = Quaternion();
 		o.v = Vec3(-one.v.x, -one.v.y, -one.v.z);
 		o.w = -one.w;
 	}
