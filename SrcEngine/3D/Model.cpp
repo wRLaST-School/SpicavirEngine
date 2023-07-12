@@ -6,6 +6,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <SpImGui.h>
 #pragma warning(pop)
 
 Model::Model() {
@@ -258,7 +259,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 				//Rotation
 				for (uint32_t t = 0; t < aiChan->mNumRotationKeys; t++)
 				{
-					aiQuaternion aiRot = aiChan->mRotationKeys->mValue;
+					aiQuaternion aiRot = aiChan->mRotationKeys[t].mValue;
 					Quaternion rot = Quaternion(aiRot.w, Vec3(aiRot.x, aiRot.y, aiRot.z));
 					channel.rotations.push_back({ rot, aiChan->mRotationKeys[t].mTime });
 				}
@@ -331,8 +332,8 @@ Model::Model(const string& filePath, bool useSmoothShading)
 			return calcn->mTransformation;
 		};
 
-		aiMatrix4x4 wt = calcMat(cur);
-		//aiMatrix4x4 wt = cur->mTransformation;
+		//aiMatrix4x4 wt = calcMat(cur);
+		aiMatrix4x4 wt = cur->mTransformation;
 
 		wt.Transpose();
 
@@ -643,7 +644,7 @@ void Model::SetAnim(std::string animKey)
 
 void Model::UpdateAnim()
 {
-	//Nodeを使って再帰的に処理を行うようにする
+	//アニメーション時間に関する更新処理
 	Animation* anim = nullptr;
 	if (animations.count(currentAnim))
 	{
@@ -655,13 +656,23 @@ void Model::UpdateAnim()
 	}
 
 	animTimer++;
-	if ((double)animTimer / 60 * anim->tickPerSecond >= anim->duration)
+	if ((double)animTimer / 60.0 * anim->tickPerSecond >= anim->duration)
 	{
 		animTimer = 0;
 	}
 
-	double aniTick = (float)animTimer / 60.f * anim->tickPerSecond;
+	double aniTick = (float)animTimer / 60.0 * anim->tickPerSecond;
 
+	SpImGui::Command([=] {
+		if (ImGui::Begin("Animation"))
+		{
+			ImGui::Text("Time %f\nTickTime %f\nMax Tick %f", (double)animTimer, aniTick, anim->duration);
+		}
+
+		ImGui::End();
+	});
+
+	//Nodeを使って再帰的に処理を行う
 	std::function<Matrix(Node*, Channel&, unordered_map<std::string, Node>&, unordered_map<std::string, Bone>&)> 
 		fCalcParentTransform = 
 		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel& channel, unordered_map<std::string, Node>& nodes, unordered_map<std::string, Bone>& bones) 
@@ -670,7 +681,7 @@ void Model::UpdateAnim()
 		Matrix parentTrans;
 		Channel* parentChannel = nullptr;
 
-		if (node == nullptr || &channel == nullptr)
+		if (node == nullptr/* || &channel == nullptr*/)
 		{
 			return Matrix::Identity();
 		}
@@ -693,103 +704,110 @@ void Model::UpdateAnim()
 		AScaleData fst{};
 		AScaleData scd{};
 
-		if (channel.scales.size())
+		if (&channel != nullptr)
 		{
-			fst = channel.scales.front();
-			scd = channel.scales.front();
-		}
-
-		for (auto itr = channel.scales.begin(); itr != channel.scales.end(); itr++)
-		{
-			if (itr->time > aniTick)
+			if (channel.scales.size())
 			{
-				scd = *itr;
-				if (itr != channel.scales.begin())
-				{
-					itr--;
-				}
-
-				fst = *itr;
-				break;
+				fst = channel.scales.front();
+				scd = channel.scales.front();
 			}
-		}
 
-		Vec3 lerpedScale;
+			for (auto itr = channel.scales.begin(); itr != channel.scales.end(); itr++)
+			{
+				if (itr->time > aniTick)
+				{
+					scd = *itr;
+					if (itr != channel.scales.begin())
+					{
+						itr--;
+					}
 
-		if (scd.time - fst.time)
-		{
-			lerpedScale = Vec3::Lerp(fst.scale, scd.scale, (float)((aniTick - fst.time) / (scd.time - fst.time)));
+					fst = *itr;
+					break;
+				}
+			}
+
+			Vec3 lerpedScale;
+
+			if (scd.time - fst.time)
+			{
+				lerpedScale = Vec3::Lerp(fst.scale, scd.scale, (float)((aniTick - fst.time) / (scd.time - fst.time)));
+			}
+			else
+			{
+				lerpedScale = fst.scale;
+			}
+
+			transform = Matrix::Scale(lerpedScale);
+
+			ARotData fstr{};
+			ARotData scdr{};
+
+			for (auto itr = channel.rotations.begin(); itr != channel.rotations.end(); itr++)
+			{
+				if (itr->time > aniTick)
+				{
+					scdr = *itr;
+					if (itr != channel.rotations.begin())
+					{
+						itr--;
+					}
+					fstr = *itr;
+					break;
+				}
+			}
+
+			Quaternion slerpedRot;
+
+			if (scdr.time - fstr.time)
+			{
+				slerpedRot = Quaternion::Slerp(fstr.rot, scdr.rot, (float)((aniTick - fstr.time) / (scdr.time - fstr.time)));
+			}
+			else
+			{
+				fstr.rot;
+			}
+
+			Quaternion finr = slerpedRot;
+
+			transform *= finr.GetRotMat();
+
+			ATransData fstt{};
+			ATransData scdt{};
+
+			for (auto itr = channel.translations.begin(); itr != channel.translations.end(); itr++)
+			{
+				if (itr->time > aniTick)
+				{
+					scdt = *itr;
+					if (itr != channel.translations.begin())
+					{
+						itr--;
+					}
+					fstt = *itr;
+					break;
+				}
+			}
+
+			Vec3 lerpedTrans;
+
+			if (scdt.time - fstt.time)
+			{
+				lerpedTrans = Vec3::Lerp(fstt.translation, scdt.translation, (float)((aniTick - fstt.time) / (scdt.time - fstt.time)));
+			}
+			else
+			{
+				lerpedTrans = fstt.translation;
+			}
+
+			transform *= Matrix::Translation(lerpedTrans);
 		}
 		else
 		{
-			lerpedScale = fst.scale;
+			transform = node->worldTransform;
 		}
 
-		transform = Matrix::Scale(lerpedScale);
-
-		ARotData fstr{};
-		ARotData scdr{};
-
-		for (auto itr = channel.rotations.begin(); itr != channel.rotations.end(); itr++)
-		{
-			if (itr->time > aniTick)
-			{
-				scdr = *itr;
-				if (itr != channel.rotations.begin())
-				{
-					itr--;
-				}
-				fstr = *itr;
-				break;
-			}
-		}
-
-		Quaternion slerpedRot;
-
-		if (scdr.time - fstr.time)
-		{
-			slerpedRot = Quaternion::Slerp(fstr.rot, scdr.rot, (float)((aniTick - fstr.time) / (scdr.time - fstr.time)));
-		}
-		else
-		{
-			fstr.rot;
-		}
-
-		Quaternion finr = slerpedRot;
-
-		transform *= finr.GetRotMat();
-
-		ATransData fstt{};
-		ATransData scdt{};
-
-		for (auto itr = channel.translations.begin(); itr != channel.translations.end(); itr++)
-		{
-			if (itr->time > aniTick)
-			{
-				scdt = *itr;
-				if (itr != channel.translations.begin())
-				{
-					itr--;
-				}
-				fstt = *itr;
-				break;
-			}
-		}
-
-		Vec3 lerpedTrans;
-
-		if (scdt.time - fstt.time)
-		{
-			lerpedTrans = Vec3::Lerp(fstt.translation, scdt.translation, (float)((aniTick - fstt.time) / (scdt.time - fstt.time)));
-		}
-		else
-		{
-			lerpedTrans = fstt.translation;
-		}
-
-		transform *= Matrix::Translation(lerpedTrans);
-
-		bones.at(channel.name).finalMatrix = bones.at(channel.name).offsetMatrix * transform * parentTrans /** node->worldTransform*/;
+		bones.at(node->name).finalMatrix = bones.at(node->name).offsetMatrix * transform * parentTrans /** node->worldTransform*/;
 
 		return transform * parentTrans;
 	};
