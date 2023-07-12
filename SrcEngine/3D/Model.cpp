@@ -324,15 +324,16 @@ Model::Model(const string& filePath, bool useSmoothShading)
 		Node node;
 		node.parent = parent;
 
-		//このノード用の変換行列
-		std::function<aiMatrix4x4(aiNode*)>calcMat = [&](aiNode* calcn) {
-			if (calcn->mParent)
-				return calcMat(calcn->mParent) * calcn->mTransformation;
+		////このノード用の変換行列
+		//std::function<aiMatrix4x4(aiNode*)>calcMat = [&](aiNode* calcn) {
+		//	if (calcn->mParent)
+		//		return calcMat(calcn->mParent) * calcn->mTransformation;
 
-			return calcn->mTransformation;
-		};
+		//	return calcn->mTransformation;
+		//};
 
-		//aiMatrix4x4 wt = calcMat(cur);
+		////aiMatrix4x4 wt = calcMat(cur);
+
 		aiMatrix4x4 wt = cur->mTransformation;
 
 		wt.Transpose();

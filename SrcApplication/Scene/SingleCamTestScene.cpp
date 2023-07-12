@@ -14,7 +14,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
-	ModelManager::Register("Resources/Models/testgltf/testFbx.gltf", "SmoothSphere", true);
+	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "SmoothSphere", true);
 	ModelManager::Register("Resources/Models/testgltf/player.gltf", "FlatSphere", true);
 	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	//ModelManager::Register("ICO", "FlatSphere");
@@ -82,7 +82,8 @@ void SingleCamTestScene::Update()
 
 	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
 
-	pane.model->UpdateAnim();
+	if(animation)
+		pane.model->UpdateAnim();
 
 	*pane2.brightnessCB.contents = Float4{ 0.f, 1.f, 1.f, .2f };
 	pane2.UpdateMatrix();
@@ -123,6 +124,11 @@ void SingleCamTestScene::Update()
 			ImGui::ColorEdit4("RimColor", &pane.miscCB.contents->rimColor.x);
 
 			ImGui::InputText("Animation", buf, sizeof(buf));
+
+			if (ImGui::Button("Toggle Animation"))
+			{
+				animation = !animation;
+			}
 
 			pane.model->SetAnim(string(buf));
 		}

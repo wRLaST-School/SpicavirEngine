@@ -35,6 +35,7 @@ private:
 
     long long timer;
 
+    bool animation = true;
 
     char buf[255]{};
 
