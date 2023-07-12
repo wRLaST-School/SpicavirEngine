@@ -121,6 +121,10 @@ void SingleCamTestScene::Update()
 			ImGui::SliderFloat("RimPower", &pane.miscCB.contents->rimStrength, 0.f, 1.f);
 
 			ImGui::ColorEdit4("RimColor", &pane.miscCB.contents->rimColor.x);
+
+			ImGui::InputText("Animation", buf, sizeof(buf));
+
+			pane.model->SetAnim(string(buf));
 		}
 	ImGui::End();
 	});

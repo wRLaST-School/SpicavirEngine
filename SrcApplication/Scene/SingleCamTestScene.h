@@ -35,6 +35,9 @@ private:
 
     long long timer;
 
+
+    char buf[255]{};
+
     //Animation2D anim;
 };
 
