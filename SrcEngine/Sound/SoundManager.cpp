@@ -15,11 +15,18 @@ void SoundManager::Init()
 
 SoundKey SoundManager::LoadWave(const string& path, const SoundKey& key)
 {
+    bool isAlreadyRegistered = false;
     sSndMap.Access(
         [&](auto& map) {
-            if (map.count(key) <= 0) { return; }
+            if (map.count(key) > 0) { isAlreadyRegistered = true; }
         }
     );
+
+    if (isAlreadyRegistered)
+    {
+        return key;
+    }
+
     ifstream file;
 
     file.open(path, std::ios_base::binary);

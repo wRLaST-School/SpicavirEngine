@@ -22,6 +22,7 @@
 #include <SoundManager.h>
 #include <SpRenderer.h>
 #include <SpDS.h>
+#include <SpEffekseer.h>
 
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 {
@@ -96,6 +97,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 	//Init Sounds
 	SoundManager::Init();
 
+	//Init Effects
+	SpEffekseer::Init();
+
 	//Init Scene
 	SceneManager::Init();
 
@@ -111,6 +115,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 
 		/*更新処理*/
 		SceneManager::Update();
+		SpEffekseer::Update();
 		/*更新処理ここまで*/
 
 		SceneManager::DrawBack();

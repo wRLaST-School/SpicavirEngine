@@ -14,7 +14,41 @@
 #pragma warning(pop)
 #pragma warning(pop)
 
+#include <exc_unordered_map.h>
+
+typedef std::string EffectKey;
+
 class SpEffekseer
 {
+public:
+	static void Init();
+
+	static void Update();
+
+	static void Draw();
+
+	static EffectKey Load(std::wstring texFolder, std::wstring path, EffectKey key);
+
+	static Effekseer::Handle Play(EffectKey key, Float3 pos);
+
+	static void SetMatrices(Effekseer::Matrix44 view, Effekseer::Matrix44 proj);
+
+	static void ReleasePerSceneEffects();
+
+	static void PreLoadNewScene();
+
+private:
+	static Effekseer::RefPtr<EffekseerRenderer::Renderer> sEfkRenderer;
+
+	static Effekseer::RefPtr<Effekseer::Manager> sEfkManager;
+
+	static Effekseer::RefPtr<EffekseerRenderer::SingleFrameMemoryPool> sEfkMemoryPool;
+
+	static Effekseer::RefPtr<EffekseerRenderer::CommandList> sEfkCmdList;
+
+	static exc_unordered_map<EffectKey, Effekseer::EffectRef> effects;
+
+	static list <EffectKey > sPerSceneEffects[2];
+	static int32_t sCurrentSceneResIndex;
 };
 

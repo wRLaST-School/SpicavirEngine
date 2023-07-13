@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 #include <SpDirectX.h>
+#include <SpEffekseer.h>
 
 Camera::Camera()
 {
@@ -86,6 +87,26 @@ void Camera::UseCurrent()
 	sCurrent->cameraViewProjMatrixCB.contents->billboardMat = GetCurrentCameraBillboardMat();
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, sCurrent->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
+
+	//Effekseer‚Ìî•ñ‚ğXV
+	std::function<Effekseer::Matrix44(Matrix)> SpMatToEfkMat = [](Matrix in) {
+		Effekseer::Matrix44 out;
+
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				out.Values[i][j] = in[i][j];
+			}
+		}
+
+		return out;
+	};
+
+	Effekseer::Matrix44 efkViewMat = SpMatToEfkMat(vMat);
+	Effekseer::Matrix44 efkProjMat = SpMatToEfkMat(pMat);
+
+	SpEffekseer::SetMatrices(efkViewMat, efkProjMat);
 }
 
 Matrix Camera::GetCurrentCameraBillboardMat()
