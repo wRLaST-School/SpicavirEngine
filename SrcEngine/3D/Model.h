@@ -115,19 +115,19 @@ struct Channel
 struct Animation {
 	string name;
 	vector<Channel> channels;
-	double tickPerSecond;
-	double duration;
+	double tickPerSecond = 0;
+	double duration = 0;
 };
 
 struct Bone {
-	uint32_t index;
+	uint32_t index = 0;
 	Matrix offsetMatrix;
 	Matrix finalMatrix;
 };
 
 struct Node {
-	Bone* bone;
-	Node* parent;
+	Bone* bone = nullptr;
+	Node* parent = nullptr;
 	Matrix worldTransform;
 	string name;
 };

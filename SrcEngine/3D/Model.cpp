@@ -96,9 +96,9 @@ Model::Model(const string& modelName)
 				indexStream >> indexNormal;
 
 				Vertex vertex{};
-				vertex.pos = posList[indexPosition - 1];
-				vertex.normal = normalList[indexNormal - 1];
-				vertex.uv = tcList[indexTexcoord - 1];
+				vertex.pos = posList[(int32_t)indexPosition - 1];
+				vertex.normal = normalList[(int32_t)indexNormal - 1];
+				vertex.uv = tcList[(int32_t)indexTexcoord - 1];
 				vertex.bIndices[0] = 0;
 				vertex.bWeights = { 1.f, 0.f, 0.f, 0.f };
 
@@ -396,7 +396,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 
 					for (size_t m = 0; m < mesh->mNumBones; m++)
 					{
-						BoneData bd;
+						BoneData bd{};
 
 						bd.index = (int32_t)m;
 
@@ -418,8 +418,8 @@ Model::Model(const string& filePath, bool useSmoothShading)
 						return lhs.weight > rhs.weight;
 					});
 
-					eastl::array<int32_t, 4> bInd;
-					eastl::array<float, 4> bWeight;
+					eastl::array<int32_t, 4> bInd{};
+					eastl::array<float, 4> bWeight{};
 
 					for (size_t m = 0; m < 4; m++)
 					{
@@ -674,9 +674,9 @@ void Model::UpdateAnim()
 	});
 
 	//Nodeを使って再帰的に処理を行う
-	std::function<Matrix(Node*, Channel&, unordered_map<std::string, Node>&, unordered_map<std::string, Bone>&)> 
+	std::function<Matrix(Node*, Channel*, unordered_map<std::string, Node>&, unordered_map<std::string, Bone>&)> 
 		fCalcParentTransform = 
-		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel& channel, unordered_map<std::string, Node>& nodes, unordered_map<std::string, Bone>& bones) 
+		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel* channel, unordered_map<std::string, Node>& nodes, unordered_map<std::string, Bone>& bones) 
 	{
 		Matrix transform;
 		Matrix parentTrans;
@@ -699,26 +699,26 @@ void Model::UpdateAnim()
 				}
 			}
 
-			parentTrans = fCalcParentTransform(node->parent, *parentChannel, nodes, bones);
+			parentTrans = fCalcParentTransform(node->parent, parentChannel, nodes, bones);
 		}
 
 		AScaleData fst{};
 		AScaleData scd{};
 
-		if (&channel != nullptr)
+		if (channel != nullptr)
 		{
-			if (channel.scales.size())
+			if (channel->scales.size())
 			{
-				fst = channel.scales.front();
-				scd = channel.scales.front();
+				fst = channel->scales.front();
+				scd = channel->scales.front();
 			}
 
-			for (auto itr = channel.scales.begin(); itr != channel.scales.end(); itr++)
+			for (auto itr = channel->scales.begin(); itr != channel->scales.end(); itr++)
 			{
 				if (itr->time > aniTick)
 				{
 					scd = *itr;
-					if (itr != channel.scales.begin())
+					if (itr != channel->scales.begin())
 					{
 						itr--;
 					}
@@ -744,12 +744,12 @@ void Model::UpdateAnim()
 			ARotData fstr{};
 			ARotData scdr{};
 
-			for (auto itr = channel.rotations.begin(); itr != channel.rotations.end(); itr++)
+			for (auto itr = channel->rotations.begin(); itr != channel->rotations.end(); itr++)
 			{
 				if (itr->time > aniTick)
 				{
 					scdr = *itr;
-					if (itr != channel.rotations.begin())
+					if (itr != channel->rotations.begin())
 					{
 						itr--;
 					}
@@ -776,12 +776,12 @@ void Model::UpdateAnim()
 			ATransData fstt{};
 			ATransData scdt{};
 
-			for (auto itr = channel.translations.begin(); itr != channel.translations.end(); itr++)
+			for (auto itr = channel->translations.begin(); itr != channel->translations.end(); itr++)
 			{
 				if (itr->time > aniTick)
 				{
 					scdt = *itr;
-					if (itr != channel.translations.begin())
+					if (itr != channel->translations.begin())
 					{
 						itr--;
 					}
@@ -815,7 +815,7 @@ void Model::UpdateAnim()
 
 	for (auto& channel : anim->channels)
 	{
-		fCalcParentTransform(&nodes.at(channel.name), channel, nodes, bones);
+		fCalcParentTransform(&nodes.at(channel.name), &channel, nodes, bones);
 	}
 
 	vector<Bone> finalBones;
@@ -863,7 +863,7 @@ void ModelManager::Register(const string& modelPath, const ModelKey& key, bool u
 
 Model* ModelManager::GetModel(const ModelKey& key)
 {
-	Model* ret;
+	Model* ret = nullptr;
 	sModels.Access(
 		[&](auto& map) {
 			ret = &map.find(key)->second;
@@ -879,7 +879,7 @@ void ModelManager::ReleasePerSceneModel()
 	for (auto itr = sPerSceneModels[lastSceneResIndex].begin(); itr != sPerSceneModels[lastSceneResIndex].end(); itr++)
 	{
 		bool usingInCurrentScene = false;
-		for (auto key : sPerSceneModels[sCurrentSceneResIndex])
+		for (auto& key : sPerSceneModels[sCurrentSceneResIndex])
 		{
 			if (key == *itr)
 			{
