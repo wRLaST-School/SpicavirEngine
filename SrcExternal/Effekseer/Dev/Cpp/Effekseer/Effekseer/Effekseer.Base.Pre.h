@@ -652,7 +652,7 @@ public:
 	template <class U>
 	RefPtr(const RefPtr<U>& o)
 	{
-		T* ptr = o.Get();
+		auto ptr = o.Get();
 		SafeAddRef(ptr);
 		SafeRelease(ptr_);
 		ptr_ = ptr;
