@@ -379,6 +379,8 @@ CMakeLists.txt
 *.cmake
 *.stamp
 *.depend
+*.lib
+
 /SrcExternal/Effekseer/Dev/Cpp/3rdParty/LLGI/examples/GPUParticle/Shaders/GLSL_GL
 /SrcExternal/Effekseer/Dev/Cpp/3rdParty/LLGI/examples/GPUParticle/Shaders/GLSL_VULKAN
 /SrcExternal/Effekseer/Dev/Cpp/3rdParty/LLGI/examples/GPUParticle/Shaders/Metal

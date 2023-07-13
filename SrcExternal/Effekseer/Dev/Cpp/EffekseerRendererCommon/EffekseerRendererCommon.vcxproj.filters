@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.CommonUtils.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.DDSTextureLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.ModelRendererBase.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.PngTextureLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer_Impl.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RenderStateBase.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RibbonRendererBase.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RingRendererBase.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.SpriteRendererBase.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TGATextureLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TrackRendererBase.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\GraphicsDeviceCPU.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\ModelLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\TextureLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\VertexBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RenderStateBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.ModelRendererBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RibbonRendererBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.RingRendererBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.SpriteRendererBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.StandardRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TrackRendererBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.CommonUtils.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.ShaderBase.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.Renderer_Impl.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\GraphicsDeviceCPU.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\ModelLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\TextureLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\VertexBuffer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.DDSTextureLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.PngTextureLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRenderer.TGATextureLoader.h" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
