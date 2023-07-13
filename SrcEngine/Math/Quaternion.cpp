@@ -97,6 +97,7 @@ Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, cons
 	result.w = zerot.w + onet.w;
 	result.v = zerot.v + onet.v;
 
+	result.Normalize();
 	return result;
 }
 
