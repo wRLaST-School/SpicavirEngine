@@ -96,9 +96,9 @@ Model::Model(const string& modelName)
 				indexStream >> indexNormal;
 
 				Vertex vertex{};
-				vertex.pos = posList[(int32_t)indexPosition - 1];
-				vertex.normal = normalList[(int32_t)indexNormal - 1];
-				vertex.uv = tcList[(int32_t)indexTexcoord - 1];
+				vertex.pos = posList[indexPosition - 1];
+				vertex.normal = normalList[indexNormal - 1];
+				vertex.uv = tcList[indexTexcoord - 1];
 				vertex.bIndices[0] = 0;
 				vertex.bWeights = { 1.f, 0.f, 0.f, 0.f };
 
