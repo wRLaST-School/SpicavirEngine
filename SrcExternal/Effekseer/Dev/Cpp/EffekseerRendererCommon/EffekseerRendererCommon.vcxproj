@@ -157,12 +157,6 @@
     <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\VertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)SrcExternal\Effekseer\ZERO_CHECK.vcxproj">
-      <Project>{AD1E5A32-35B6-3D35-8B16-29B290F3C72B}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
     <ProjectReference Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer.vcxproj">
       <Project>{66FDBE36-B4EA-3409-A20E-9F086238450E}</Project>
       <Name>Effekseer</Name>

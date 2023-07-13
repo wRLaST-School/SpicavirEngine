@@ -652,7 +652,7 @@ public:
 	template <class U>
 	RefPtr(const RefPtr<U>& o)
 	{
-		auto ptr = o.Get();
+		T* ptr = reinterpret_cast<T*>(o.Get());
 		SafeAddRef(ptr);
 		SafeRelease(ptr_);
 		ptr_ = ptr;

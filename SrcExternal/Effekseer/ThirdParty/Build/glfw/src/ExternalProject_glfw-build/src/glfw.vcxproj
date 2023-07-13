@@ -143,14 +143,6 @@
     <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\egl_context.h" />
     <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\osmesa_context.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Build\glfw\src\ExternalProject_glfw-build\ZERO_CHECK.vcxproj">
-      <Project>{402B40C1-BECB-3924-8068-C60AC6D4CC60}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
