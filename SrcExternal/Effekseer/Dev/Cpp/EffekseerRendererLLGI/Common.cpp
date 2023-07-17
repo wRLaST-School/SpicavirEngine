@@ -2,6 +2,9 @@
 #include "EffekseerRendererLLGI.RendererImplemented.h"
 #include "GraphicsDevice.h"
 
+#include "Common.h"
+#include "EffekseerRendererLLGI.RendererImplemented.h"
+
 namespace EffekseerRenderer
 {
 
@@ -32,23 +35,25 @@ void FlushAndWait(::Effekseer::Backend::GraphicsDeviceRef graphicsDevice)
 Effekseer::RefPtr<EffekseerRenderer::CommandList> CreateCommandList(::Effekseer::Backend::GraphicsDeviceRef graphicsDevice,
 																	Effekseer::RefPtr<::EffekseerRenderer::SingleFrameMemoryPool> memoryPool)
 {
-	auto gd = static_cast<::EffekseerRendererLLGI::Backend::GraphicsDevice*>(graphicsDevice.Get());
+	auto gd = static_cast<EffekseerRendererLLGI::Backend::GraphicsDevice*>(graphicsDevice.Get());
 	auto g = static_cast<LLGI::Graphics*>(gd->GetGraphics());
-	auto mp = static_cast<::EffekseerRendererLLGI::SingleFrameMemoryPool*>(memoryPool.Get());
+	auto mp = static_cast<EffekseerRendererLLGI::SingleFrameMemoryPool*>(memoryPool.Get());
 	auto commandList = g->CreateCommandList(mp->GetInternal());
 	auto ret = Effekseer::MakeRefPtr<EffekseerRendererLLGI::CommandList>(g, commandList, mp->GetInternal());
 	ES_SAFE_RELEASE(commandList);
 	return ret;
-}
+};
+
 
 Effekseer::RefPtr<EffekseerRenderer::SingleFrameMemoryPool> CreateSingleFrameMemoryPool(::Effekseer::Backend::GraphicsDeviceRef graphicsDevice)
 {
-	auto gd = static_cast<::EffekseerRendererLLGI::Backend::GraphicsDevice*>(graphicsDevice.Get());
+	auto gd = static_cast<EffekseerRendererLLGI::Backend::GraphicsDevice*>(graphicsDevice.Get());
 	auto g = static_cast<LLGI::Graphics*>(gd->GetGraphics());
 	auto mp = g->CreateSingleFrameMemoryPool(1024 * 1024 * 8, 128);
 	auto ret = Effekseer::MakeRefPtr<EffekseerRendererLLGI::SingleFrameMemoryPool>(mp);
 	ES_SAFE_RELEASE(mp);
 	return ret;
-}
+};
+
 
 } // namespace EffekseerRenderer

@@ -78,7 +78,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -148,7 +148,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -183,7 +183,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>

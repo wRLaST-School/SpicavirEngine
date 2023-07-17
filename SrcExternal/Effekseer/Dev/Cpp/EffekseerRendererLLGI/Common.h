@@ -20,9 +20,9 @@ void ChangeRenderPassPipelineState(EffekseerRenderer::RendererRef renderer, Rend
 void FlushAndWait(::Effekseer::Backend::GraphicsDeviceRef graphicsDevice);
 
 Effekseer::RefPtr<EffekseerRenderer::CommandList> CreateCommandList(::Effekseer::Backend::GraphicsDeviceRef graphicsDevice,
-																	Effekseer::RefPtr<::EffekseerRenderer::SingleFrameMemoryPool> memoryPool);
+	Effekseer::RefPtr<::EffekseerRenderer::SingleFrameMemoryPool> memoryPool);
 
-Effekseer::RefPtr<EffekseerRenderer::SingleFrameMemoryPool> CreateSingleFrameMemoryPool(::Effekseer::Backend::GraphicsDeviceRef renderer);
+Effekseer::RefPtr<EffekseerRenderer::SingleFrameMemoryPool> CreateSingleFrameMemoryPool(::Effekseer::Backend::GraphicsDeviceRef graphicsDevice);
 
 } // namespace EffekseerRenderer
 

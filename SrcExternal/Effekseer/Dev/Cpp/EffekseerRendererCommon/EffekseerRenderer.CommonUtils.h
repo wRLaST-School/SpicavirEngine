@@ -700,8 +700,8 @@ struct ZFixedTransformBlock
 		m0 = mat.X;
 		m1 = mat.Y;
 		auto m2 = mat.Z;
-		center = Float4::SetZero();
-		Float4::Transpose(m0, m1, m2, center);
+		center = Effekseer::SIMD::Float4::SetZero();
+		Effekseer::SIMD::Float4::Transpose(m0, m1, m2, center);
 		center = center + m2 * z;
 	}
 
@@ -709,8 +709,8 @@ struct ZFixedTransformBlock
 	{
 		using namespace Effekseer::SIMD;
 
-		Float4 oPos = Float4::MulAddLane<0>(center, m0, data.s);
-		data.s = Float4::MulAddLane<1>(oPos, m1, data.s);
+		Effekseer::SIMD::Float4 oPos = Effekseer::SIMD::Float4::MulAddLane<0>(center, m0, data.s);
+		data.s = Effekseer::SIMD::Float4::MulAddLane<1>(oPos, m1, data.s);
 	}
 };
 
@@ -719,11 +719,11 @@ inline void TransformVertexes(Vertex& vertexes, int32_t count, const ::Effekseer
 {
 	using namespace Effekseer::SIMD;
 
-	Float4 m0 = mat.X;
-	Float4 m1 = mat.Y;
-	Float4 m2 = mat.Z;
-	Float4 m3 = Float4::SetZero();
-	Float4::Transpose(m0, m1, m2, m3);
+	Effekseer::SIMD::Float4 m0 = mat.X;
+	Effekseer::SIMD::Float4 m1 = mat.Y;
+	Effekseer::SIMD::Float4 m2 = mat.Z;
+	Effekseer::SIMD::Float4 m3 = Float4::SetZero();
+	Effekseer::SIMD::Float4::Transpose(m0, m1, m2, m3);
 
 	for (int i = 0; i < count; i++)
 	{
