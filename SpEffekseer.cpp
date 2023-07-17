@@ -25,7 +25,7 @@ void SpEffekseer::Init()
 		2,
 		format,
 		1,
-		DXGI_FORMAT_D16_UNORM,
+		DXGI_FORMAT_D32_FLOAT,
 		false,
 		10000
 	);
