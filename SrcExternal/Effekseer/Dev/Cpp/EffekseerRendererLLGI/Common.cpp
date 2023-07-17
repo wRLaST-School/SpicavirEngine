@@ -2,9 +2,6 @@
 #include "EffekseerRendererLLGI.RendererImplemented.h"
 #include "GraphicsDevice.h"
 
-#include "Common.h"
-#include "EffekseerRendererLLGI.RendererImplemented.h"
-
 namespace EffekseerRenderer
 {
 
