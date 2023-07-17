@@ -24,7 +24,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B81591EC-4A8B-38CF-8D42-703136287C1A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
     <ProjectName>EffekseerRendererLLGI</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EffekseerRendererLLGI.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">EffekseerRendererLLGI</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">EffekseerRendererLLGI.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">EffekseerRendererLLGI</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">EffekseerRendererLLGI.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">EffekseerRendererLLGI</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">EffekseerRendererLLGI.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">EffekseerRendererLLGI</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -88,7 +88,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Disabled</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <TreatSpecificWarningsAsErrors>4267;4456;4458;4715</TreatSpecificWarningsAsErrors>
       <UseFullPaths>false</UseFullPaths>
@@ -97,10 +97,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;__EFFEKSEER_BUILD_DX12__;__EFFEKSEER_NETWORK_ENABLED__;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -113,7 +113,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -132,10 +132,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;__EFFEKSEER_BUILD_DX12__;__EFFEKSEER_NETWORK_ENABLED__;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -148,7 +148,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -167,10 +167,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;__EFFEKSEER_BUILD_DX12__;__EFFEKSEER_NETWORK_ENABLED__;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -183,7 +183,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -201,10 +201,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;__EFFEKSEER_BUILD_DX12__;__EFFEKSEER_NETWORK_ENABLED__;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;C:\k021g1251\Assimp\Effekseer\Effekseer\ThirdParty\Install\glfw\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI;C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\..\3rdparty\LLGI\src;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -216,97 +216,34 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\CMakeLists.txt">
-      <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/Effekseer/Effekseer -BC:/k021g1251/Assimp/Effekseer/Effekseer --check-stamp-file C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/Effekseer/Effekseer -BC:/k021g1251/Assimp/Effekseer/Effekseer --check-stamp-file C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/Effekseer/Effekseer -BC:/k021g1251/Assimp/Effekseer/Effekseer --check-stamp-file C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/k021g1251/Assimp/Effekseer/Effekseer -BC:/k021g1251/Assimp/Effekseer/Effekseer --check-stamp-file C:/k021g1251/Assimp/Effekseer/Effekseer/Dev/Cpp/EffekseerRendererLLGI/CMakeFiles/generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
-    </CustomBuild>
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Common.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.Pre.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RendererImplemented.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\GraphicsDevice.h" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Common.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\GraphicsDevice.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Common.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Base.Pre.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RendererImplemented.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.h" />
-    <ClInclude Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\GraphicsDevice.h" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\Common.cpp" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.MaterialLoader.cpp" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.ModelRenderer.cpp" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Renderer.cpp" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.RenderState.cpp" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.Shader.cpp" />
-    <ClCompile Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererLLGI\GraphicsDevice.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="C:\k021g1251\Assimp\Effekseer\Effekseer\ZERO_CHECK.vcxproj">
-      <Project>{AD1E5A32-35B6-3D35-8B16-29B290F3C72B}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
-    <ProjectReference Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\Effekseer\Effekseer.vcxproj">
+    <ProjectReference Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer.vcxproj">
       <Project>{66FDBE36-B4EA-3409-A20E-9F086238450E}</Project>
       <Name>Effekseer</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRendererCommon.vcxproj">
+    <ProjectReference Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRendererCommon.vcxproj">
       <Project>{FFD7342C-39E2-3612-82E5-97E1A6F54388}</Project>
       <Name>EffekseerRendererCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\k021g1251\Assimp\Effekseer\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.vcxproj">
+    <ProjectReference Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.vcxproj">
       <Project>{2C6DC6B5-384C-314E-A810-AD53A0AA276F}</Project>
       <Name>LLGI</Name>
     </ProjectReference>
