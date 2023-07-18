@@ -18,7 +18,7 @@ void SrImGuiStage::PostDraw()
 {
 }
 
-void SrImGuiStage::DrawCommands(function<void(void)> cmd)
+void SrImGuiStage::DrawCommands(std::function<void(void)> cmd)
 {
 	OutputDebugStringA("Draw Command Queued on Unintended Stage\n");
 }

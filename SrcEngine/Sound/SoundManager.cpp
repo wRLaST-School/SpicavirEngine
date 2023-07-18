@@ -1,5 +1,7 @@
 #include "SoundManager.h"
 
+using namespace std;
+
 SoundManager* SoundManager::GetInstance()
 {
     static SoundManager obj;
@@ -13,7 +15,7 @@ void SoundManager::Init()
     sSndMap.clear();
 }
 
-SoundKey SoundManager::LoadWave(const string& path, const SoundKey& key)
+SoundKey SoundManager::LoadWave(const std::string& path, const SoundKey& key)
 {
     bool isAlreadyRegistered = false;
     sSndMap.Access(
@@ -27,7 +29,7 @@ SoundKey SoundManager::LoadWave(const string& path, const SoundKey& key)
         return key;
     }
 
-    ifstream file;
+    std::ifstream file;
 
     file.open(path, std::ios_base::binary);
 
@@ -217,7 +219,7 @@ void SoundManager::PreLoadNewScene()
     sCurrentSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
 }
 
-ComPtr<IXAudio2> SoundManager::sXAudio2;
+Microsoft::WRL::ComPtr<IXAudio2> SoundManager::sXAudio2;
 IXAudio2MasteringVoice* SoundManager::sMasterVoice;
 exc_unordered_map<SoundKey, SoundData> SoundManager::sSndMap;
 list<SoundKey> SoundManager::sPerSceneSounds[2];

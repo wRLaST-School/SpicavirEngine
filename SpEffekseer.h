@@ -54,7 +54,7 @@ private:
 
 	static exc_unordered_map<EffectKey, Effekseer::EffectRef> sEffects;
 
-	static list <EffectKey > sPerSceneEffects[2];
+	static std::list <EffectKey > sPerSceneEffects[2];
 	static int32_t sCurrentSceneResIndex;
 };
 

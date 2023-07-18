@@ -21,7 +21,7 @@ public:
 	//既存のテクスチャを使って生成
 	Sprite(const TextureKey& key);
 	//テクスチャを読み込んでキーに保存、それを使ってSpriteを生成
-	Sprite(const string& path, const TextureKey& newKey);
+	Sprite(const std::string& path, const TextureKey& newKey);
 
 	static void PreSpriteDraw();
 	static void PostSpriteDraw();
@@ -32,7 +32,7 @@ public:
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 
-	ComPtr<ID3D12Resource> vertBuff = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff = nullptr;
 
 	SpConstBuffer<SpriteCBuffData> constBuff;
 

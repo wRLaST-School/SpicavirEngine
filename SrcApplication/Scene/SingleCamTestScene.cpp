@@ -138,7 +138,7 @@ void SingleCamTestScene::Update()
 				animation = !animation;
 			}
 
-			pane.model->SetAnim(string(buf));
+			pane.model->SetAnim(std::string(buf));
 		}
 	ImGui::End();
 	});

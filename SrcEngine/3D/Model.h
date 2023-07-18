@@ -106,15 +106,15 @@ struct AScaleData
 
 struct Channel
 {
-	string name;
-	vector<ATransData> translations;
-	vector<ARotData> rotations;
-	vector<AScaleData> scales;
+	std::string name;
+	std::vector<ATransData> translations;
+	std::vector<ARotData> rotations;
+	std::vector<AScaleData> scales;
 };
 
 struct Animation {
-	string name;
-	vector<Channel> channels;
+	std::string name;
+	std::vector<Channel> channels;
 	double tickPerSecond = 0;
 	double duration = 0;
 };
@@ -129,17 +129,17 @@ struct Node {
 	Bone* bone = nullptr;
 	Node* parent = nullptr;
 	Matrix worldTransform;
-	string name;
+	std::string name;
 };
 
 class Model
 {
 public:
 	Model();
-	Model(const string& modelName);
-	Model(const string& fileName, bool useAssimp);
+	Model(const std::string& modelName);
+	Model(const std::string& fileName, bool useAssimp);
 
-	void LoadMaterial(const string& path, const string& filename);
+	void LoadMaterial(const std::string& path, const std::string& filename);
 	void UpdateMaterial();
 
 	void SetAnim(std::string animKey);
@@ -148,16 +148,16 @@ public:
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	D3D12_INDEX_BUFFER_VIEW ibView{};
 
-	ComPtr<ID3D12Resource> vertBuff = nullptr;
-	ComPtr<ID3D12Resource> indexBuff = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Resource> indexBuff = nullptr;
 
-	vector<Material> material;
+	std::vector<Material> material;
 
 	std::unordered_map<std::string, Bone> bones;
 	std::unordered_map<std::string, Animation> animations;
 	std::unordered_map<std::string, Node> nodes;
 
-	vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
+	std::vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
 	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
 
 	Model operator= (Model& m) = delete;
@@ -172,8 +172,8 @@ typedef std::string ModelKey;
 class ModelManager
 {
 public:
-	static void Register(const string& modelName, const ModelKey& key);
-	static void Register(const string& modelPath, const ModelKey& key, bool useAssimp);
+	static void Register(const std::string& modelName, const ModelKey& key);
+	static void Register(const std::string& modelPath, const ModelKey& key, bool useAssimp);
 
 	static Model* GetModel(const ModelKey& key);
 
@@ -185,6 +185,6 @@ public:
 
 private:
 	static exc_unordered_map<ModelKey, Model> sModels;
-	static list<ModelKey> sPerSceneModels[2];
+	static std::list<ModelKey> sPerSceneModels[2];
 	static int32_t sCurrentSceneResIndex;
 };

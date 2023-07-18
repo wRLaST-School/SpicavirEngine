@@ -5,7 +5,7 @@
 #include <fstream>
 #include <exc_unordered_map.h>
 
-typedef string SoundKey;
+typedef std::string SoundKey;
 
 struct ChunkHeader
 {
@@ -55,7 +55,7 @@ public:
 	static SoundManager* GetInstance();
 	static void Init();
 
-	static SoundKey LoadWave(const string& path, const SoundKey& key);
+	static SoundKey LoadWave(const std::string& path, const SoundKey& key);
 	static void Play(const SoundKey& key);
 	static SoundData* PlayBGM(const SoundKey& key, bool loopFlag);
 
@@ -67,12 +67,12 @@ public:
 	static void PreLoadNewScene();
 
 private:
-	static ComPtr<IXAudio2> sXAudio2;
+	static Microsoft::WRL::ComPtr<IXAudio2> sXAudio2;
 	static IXAudio2MasteringVoice* sMasterVoice;
 	static exc_unordered_map<SoundKey, SoundData> sSndMap;
 
 private:
-	static list<SoundKey> sPerSceneSounds[2];
+	static std::list<SoundKey> sPerSceneSounds[2];
 	static int32_t sCurrentSceneResIndex;
 
 };

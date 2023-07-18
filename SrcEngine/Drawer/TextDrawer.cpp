@@ -2,6 +2,8 @@
 #include "SpDirectX.h"
 #include "Util.h"
 
+using namespace std;
+
 FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 {
 	FontManager* ins = GetInstance();

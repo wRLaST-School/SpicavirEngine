@@ -6,6 +6,8 @@
 #include <GPipeline.h>
 #include <SpRootSignature.h>
 
+using namespace std;
+
 void SpDS::DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot, TextureKey key, Anchor anchor, Color brightness)
 {
 	Matrix m;
@@ -269,7 +271,7 @@ static ComPtr<ID3D12Resource> vertBuff;*/
 eastl::vector<SpDS::Graph> SpDS::sGraphs;
 eastl::list<SpDS::GraphGPUData> SpDS::sGgpu;
 D3D12_VERTEX_BUFFER_VIEW SpDS::sGvbView;
-ComPtr<ID3D12Resource> SpDS::sGvertBuff;
+Microsoft::WRL::ComPtr<ID3D12Resource> SpDS::sGvertBuff;
 int32_t SpDS::sGraphCount = 0;
 
 eastl::multimap<int32_t, function<void(void)>> SpDS::sCommands;

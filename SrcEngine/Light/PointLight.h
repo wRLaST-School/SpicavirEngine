@@ -36,11 +36,11 @@ public:
 		int32_t actual;
 	};
 
-	string name = "unnamed";
+	std::string name = "unnamed";
 
 private:
 	bool showFrame_ = false;
 };
 
-typedef string PointLightKey;
+typedef std::string PointLightKey;
 

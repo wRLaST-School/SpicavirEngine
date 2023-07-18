@@ -3,7 +3,7 @@
 #include "GPipeline.h"
 #include "SpConstBuffer.h"
 
-map<string, SpRootSignature> SpRootSignature::sRsMap;
+std::map<std::string, SpRootSignature> SpRootSignature::sRsMap;
 
 void SpRootSignature::Create()
 {
@@ -16,8 +16,8 @@ void SpRootSignature::Create()
 	rootSignatureDesc.pStaticSamplers = &samplerDesc;
 	rootSignatureDesc.NumStaticSamplers = 1;
 
-	ComPtr<ID3DBlob> rootSigBlob = nullptr;
-	ComPtr<ID3DBlob> errorBlob = nullptr;
+	Microsoft::WRL::ComPtr<ID3DBlob> rootSigBlob = nullptr;
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr;
 	D3D12SerializeRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	GetWDX()->dev->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(&rootsignature));
 }
@@ -35,12 +35,12 @@ void SpRootSignature::UseDefaultSettings()
 	samplerDesc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
 }
 
-SpRootSignature* SpRootSignature::Get(const string& id)
+SpRootSignature* SpRootSignature::Get(const std::string& id)
 {
 	return &sRsMap.find(id)->second;
 }
 
-SpRootSignature* SpRootSignature::Register(const string& id)
+SpRootSignature* SpRootSignature::Register(const std::string& id)
 {
 	sRsMap.emplace(id, SpRootSignature()).second;
 	return &sRsMap.find(id)->second;

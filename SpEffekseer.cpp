@@ -12,7 +12,7 @@ Effekseer::RefPtr<EffekseerRenderer::CommandList> SpEffekseer::sEfkCmdList;
 
 exc_unordered_map<EffectKey, Effekseer::EffectRef> SpEffekseer::sEffects;
 
-list <EffectKey > SpEffekseer::sPerSceneEffects[2];
+std::list <EffectKey > SpEffekseer::sPerSceneEffects[2];
 int32_t SpEffekseer::sCurrentSceneResIndex;
 
 DXGI_FORMAT format[] = {DXGI_FORMAT_R8G8B8A8_UNORM};

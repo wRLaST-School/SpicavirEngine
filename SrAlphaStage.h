@@ -17,7 +17,7 @@ public:
     void RegisterAlphaObject(Object3D* obj);
 
 private:
-    list<Object3D*> objects_;
-    list<Object3D*> sortedObj_;
+    std::list<Object3D*> objects_;
+    std::list<Object3D*> sortedObj_;
 };
 

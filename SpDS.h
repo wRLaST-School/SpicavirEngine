@@ -21,7 +21,7 @@ public:
 
 	static void SetBlendMode(const Blend& blendMode);
 	static void SetRenderTarget(const TextureKey& key);
-	static void SetPreDrawFunc(function<void(void)> prop);
+	static void SetPreDrawFunc(std::function<void(void)> prop);
 
 	static void DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, const Color& color, float thickness, const  Anchor& anchor = Anchor::Center);
 	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
@@ -75,9 +75,9 @@ private:
 	static eastl::vector<Graph> sGraphs;
 	static eastl::list<GraphGPUData> sGgpu;
 	static D3D12_VERTEX_BUFFER_VIEW sGvbView;
-	static ComPtr<ID3D12Resource> sGvertBuff;
+	static Microsoft::WRL::ComPtr<ID3D12Resource> sGvertBuff;
 	static int32_t sGraphCount;
-	static eastl::multimap<int32_t, function<void(void)>> sCommands;
+	static eastl::multimap<int32_t, std::function<void(void)>> sCommands;
 };
 
 namespace SpDSLayouts {

@@ -3,14 +3,14 @@
 #include <SpDepth.h>
 #include <Sprite.h>
 #include <imgui_impl_win32.h>
-static string defWndID = "Default";
-map<string, SpWindow> wWindowList;
+static std::string defWndID = "Default";
+std::map<std::string, SpWindow> wWindowList;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp);
 
-SpWindow* GetSpWindow(const string& ID)
+SpWindow* GetSpWindow(const std::string& ID)
 {
     auto res = wWindowList.find(ID);
     return res != wWindowList.end() ? &res->second : nullptr;
@@ -21,12 +21,12 @@ SpWindow* GetSpWindow()
     return GetSpWindow(defWndID);
 }
 
-void RegisterSpWindow(SpWindow wwnd, const string& ID)
+void RegisterSpWindow(SpWindow wwnd, const std::string& ID)
 {
     wWindowList[ID] = wwnd;
 }
 
-void SetDefaultWindowID(const string& ID)
+void SetDefaultWindowID(const std::string& ID)
 {
     defWndID = ID;
 }

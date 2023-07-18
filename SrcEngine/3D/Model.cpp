@@ -22,29 +22,29 @@ Matrix AiMatToSpMat(aiMatrix4x4 m)
 	);
 }
 
-Model::Model(const string& modelName)
+Model::Model(const std::string& modelName)
 {
-	string path = "Resources/Models/"+modelName+"/";
-	string objfile = modelName + ".obj";
+	std::string path = "Resources/Models/"+modelName+"/";
+	std::string objfile = modelName + ".obj";
 
-	vector<Vertex> vertices;
+	std::vector<Vertex> vertices;
 
-	vector<UINT> indices;
+	std::vector<UINT> indices;
 
-	ifstream file;
+	std::ifstream file;
 	file.open(path + objfile);
 	if (file.fail()) {
 		assert(0);
 	}
 
-	string line;
-	vector<Float3> posList;
-	vector<Vec3> normalList;
-	vector<Float2> tcList;
+	std::string line;
+	std::vector<Float3> posList;
+	std::vector<Vec3> normalList;
+	std::vector<Float2> tcList;
 	while (getline(file, line)) {
-		istringstream lineStream(line);
+		std::istringstream lineStream(line);
 
-		string key;
+		std::string key;
 		getline(lineStream, key, ' ');
 
 		if (key == "v")
@@ -80,18 +80,18 @@ Model::Model(const string& modelName)
 
 		if (key == "f")
 		{
-			string indexString;
+			std::string indexString;
 			while (getline(lineStream, indexString, ' ')) 
 			{
-				istringstream indexStream(indexString);
+				std::istringstream indexStream(indexString);
 				UINT indexPosition;
 				indexStream >> indexPosition;
 
-				indexStream.seekg(1, ios_base::cur);
+				indexStream.seekg(1, std::ios_base::cur);
 				UINT indexTexcoord;
 				indexStream >> indexTexcoord;
 
-				indexStream.seekg(1, ios_base::cur);
+				indexStream.seekg(1, std::ios_base::cur);
 				UINT indexNormal;
 				indexStream >> indexNormal;
 
@@ -110,7 +110,7 @@ Model::Model(const string& modelName)
 
 		if (key == "mtllib")
 		{
-			string filename;
+			std::string filename;
 			lineStream >> filename;
 
 			LoadMaterial(path, filename);
@@ -199,7 +199,7 @@ Model::Model(const string& modelName)
 	ibView.SizeInBytes = sizeIB;
 }
 
-Model::Model(const string& filePath, bool useSmoothShading)
+Model::Model(const std::string& filePath, bool useSmoothShading)
 {
 	Assimp::Importer importer;
 
@@ -218,13 +218,13 @@ Model::Model(const string& filePath, bool useSmoothShading)
 		return;
 	}
 
-	vector<Float3> posList;
-	vector<Vec3> normalList;
-	vector<Float4> bWeightList;
-	vector<eastl::array<int32_t, 4>> bIndexList;
-	vector<Float2> tcList;
-	vector<UINT> indices;
-	vector<Vertex> vertices;
+	std::vector<Float3> posList;
+	std::vector<Vec3> normalList;
+	std::vector<Float4> bWeightList;
+	std::vector<eastl::array<int32_t, 4>> bIndexList;
+	std::vector<Float2> tcList;
+	std::vector<UINT> indices;
+	std::vector<Vertex> vertices;
 
 	UINT backIndex = 0;
 
@@ -295,7 +295,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 			//ボーンの情報を保存
 			if (mesh->HasBones())
 			{
-				for (int boneIndex = 0; boneIndex < min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
+				for (int boneIndex = 0; boneIndex < std::min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
 				{
 					Bone bone;
 					aiMatrix4x4 aioffsetmat = mesh->mBones[boneIndex]->mOffsetMatrix;
@@ -309,7 +309,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 					bone.offsetMatrix = bOffsetMat;
 					bone.index = boneIndex;
 
-					bones.insert(pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
+					bones.insert(std::pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
 				}
 			}
 		}
@@ -392,7 +392,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 						float weight;
 					};
 
-					vector<BoneData> bdlist;
+					std::vector<BoneData> bdlist;
 
 					for (size_t m = 0; m < mesh->mNumBones; m++)
 					{
@@ -490,9 +490,9 @@ Model::Model(const string& filePath, bool useSmoothShading)
 		//TODO:埋め込みテクスチャの場合の処理		
 		int32_t pti = (int32_t)filePath.find_last_of("\\");
 		int32_t pti2 = (int32_t)filePath.find_last_of("/");
-		string filedir = filePath.substr(0, max(pti, pti2));
+		std::string filedir = filePath.substr(0, std::max(pti, pti2));
 
-		mtr->textureKey = SpTextureManager::LoadTexture(filedir + string("/") + string(tempstr.C_Str()), string("asmptex:") + filedir + string(tempstr.C_Str()));
+		mtr->textureKey = SpTextureManager::LoadTexture(filedir + std::string("/") + std::string(tempstr.C_Str()), std::string("asmptex:") + filedir + std::string(tempstr.C_Str()));
 	}
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertices.size());
@@ -576,7 +576,7 @@ Model::Model(const string& filePath, bool useSmoothShading)
 	UpdateMaterial();
 }
 
-void Model::LoadMaterial(const string& path, const string& filename)
+void Model::LoadMaterial(const std::string& path, const std::string& filename)
 {
 	std::ifstream file;
 
@@ -584,18 +584,18 @@ void Model::LoadMaterial(const string& path, const string& filename)
 
 	if (file.fail()) { assert(0); }
 
-	string line;
+	std::string line;
 
 	while (getline(file, line)) {
 		std::istringstream lineStream(line);
 
-		string key;
+		std::string key;
 		getline(lineStream, key, ' ');
 
 		if (key[0] == '\t') key.erase(key.begin());
 
 		if (key == "newmtl") {
-			string str;
+			std::string str;
 			lineStream >> str;
 			material.emplace_back();
 			material.back().name = str;
@@ -620,7 +620,7 @@ void Model::LoadMaterial(const string& path, const string& filename)
 		}
 
 		if (key == "map_Kd") {
-			string texName;
+			std::string texName;
 			lineStream >> texName;
 			material.back().textureKey = SpTextureManager::LoadTexture(path + texName, texName);
 		}
@@ -674,9 +674,9 @@ void Model::UpdateAnim()
 	});
 
 	//Nodeを使って再帰的に処理を行う
-	std::function<Matrix(Node*, Channel*, unordered_map<std::string, Node>&, unordered_map<std::string, Bone>&)> 
+	std::function<Matrix(Node*, Channel*, std::unordered_map<std::string, Node>&, std::unordered_map<std::string, Bone>&)> 
 		fCalcParentTransform = 
-		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel* channel, unordered_map<std::string, Node>& nodes, unordered_map<std::string, Bone>& bones) 
+		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel* channel, std::unordered_map<std::string, Node>& nodes, std::unordered_map<std::string, Bone>& bones) 
 	{
 		Matrix transform;
 		Matrix parentTrans;
@@ -818,7 +818,7 @@ void Model::UpdateAnim()
 		fCalcParentTransform(&nodes.at(channel.name), &channel, nodes, bones);
 	}
 
-	vector<Bone> finalBones;
+	std::vector<Bone> finalBones;
 	for (auto& b : bones)
 	{
 		finalBones.push_back(b.second);
@@ -841,7 +841,7 @@ void Model::UpdateAnim()
 	}
 }
 
-void ModelManager::Register(const string& modelName, const ModelKey& key)
+void ModelManager::Register(const std::string& modelName, const ModelKey& key)
 {
 	sModels.Access(
 		[&](auto& map) {
@@ -850,7 +850,7 @@ void ModelManager::Register(const string& modelName, const ModelKey& key)
 	);
 }
 
-void ModelManager::Register(const string& modelPath, const ModelKey& key, bool useAssimp)
+void ModelManager::Register(const std::string& modelPath, const ModelKey& key, bool useAssimp)
 {
 	sModels.Access(
 		[&](auto& map) {
@@ -912,5 +912,5 @@ void ModelManager::PreLoadNewScene()
 
 
 exc_unordered_map<ModelKey, Model> ModelManager::sModels;
-list<ModelKey> ModelManager::sPerSceneModels[2];
+std::list<ModelKey> ModelManager::sPerSceneModels[2];
 int32_t ModelManager::sCurrentSceneResIndex = 0;

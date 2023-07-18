@@ -6,7 +6,7 @@ class RTVManager
 public:
 	static void SetRenderTargetToBackBuffer(UINT bbIndex);
 	static void SetRenderTargetToTexture(const TextureKey& key, bool clear = true);
-	static void SetRenderTargets(const vector<TextureKey>& keys);
+	static void SetRenderTargets(const std::vector<TextureKey>& keys);
 	static void SetRenderTargetToCurrentBB();
 
 	static void CreateRenderTargetTexture(int32_t width, int32_t height, const TextureKey& key);
@@ -30,7 +30,7 @@ public:
 private:
 	int32_t currentRTIndex_[8] = { -1, -1, -1, -1, -1, -1, -1, -1 };
 
-	ComPtr<ID3D12DescriptorHeap> rtvHeaps_ = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> rtvHeaps_ = nullptr;
 	D3D12_DESCRIPTOR_HEAP_DESC heapDesc_{};
 };
 

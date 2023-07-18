@@ -6,7 +6,7 @@
 #include <IPostEffector.h>
 #include <Bloom.h>
 
-future<void> SceneManager::ftr;
+std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
 
 void SceneManager::Init()
@@ -92,7 +92,7 @@ template <class NextScene> void SceneManager::InstantTransition()
 	currentScene.release();
 	currentScene = nullptr;
 	Light::Init();
-	currentScene = make_unique<NextScene>();
+	currentScene = std::make_unique<NextScene>();
 	currentScene->LoadResources();
 	currentScene->Init();
 	FrameRate::InitMark();
@@ -107,7 +107,7 @@ void SceneManager::UpdateLoadState()
 	}
 }
 
-unique_ptr<IScene> SceneManager::currentScene = nullptr;
-unique_ptr<IScene> SceneManager::nextScene = nullptr;
+std::unique_ptr<IScene> SceneManager::currentScene = nullptr;
+std::unique_ptr<IScene> SceneManager::nextScene = nullptr;
 SceneManager::LoadState SceneManager::loadState = SceneManager::LoadState::NotInProgress;
 bool SceneManager::loadFinished = false;

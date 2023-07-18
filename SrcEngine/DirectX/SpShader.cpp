@@ -1,6 +1,8 @@
 #include "SpShader.h"
 #include "GPipeline.h"
 
+using namespace std;
+
 map<string, SpShader> shaderMap;
 
 void SpShader::InitVS(const string& vsPath)
@@ -8,7 +10,7 @@ void SpShader::InitVS(const string& vsPath)
 	string shaderFolder = "Resources/Shaders/";
 	string vsPath_ = shaderFolder + vsPath;
 	//シェーダーの読み込みとコンパイル
-	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
 	// 頂点シェーダの読み込みとコンパイル
 	HRESULT result;
@@ -41,7 +43,7 @@ void SpShader::InitPS(const string& psPath)
 	string shaderFolder = "Resources/Shaders/";
 	string psPath_ = shaderFolder + psPath;
 	//シェーダーの読み込みとコンパイル
-	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
 	// 頂点シェーダの読み込みとコンパイル
 	HRESULT result;
@@ -75,7 +77,7 @@ void SpShader::InitGS(const string& gsPath)
 	string shaderFolder = "Resources/Shaders/";
 	string gsPath_ = shaderFolder + gsPath;
 	//シェーダーの読み込みとコンパイル
-	ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
+	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
 
 	// 頂点シェーダの読み込みとコンパイル
 	HRESULT result;

@@ -124,7 +124,7 @@ private:
 		particles_.emplace_back(particlePos);
 	}
 
-	vector<ParticleType> particles_;
+	std::vector<ParticleType> particles_;
 
 	int32_t timer_ = 0;
 };

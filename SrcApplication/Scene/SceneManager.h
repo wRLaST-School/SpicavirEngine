@@ -22,7 +22,7 @@ public:
 			return;
 		}
 
-		nextScene = make_unique<NextScene>();
+		nextScene = std::make_unique<NextScene>();
 
 		ftr = std::async(std::launch::async, [&] {
 			SpTextureManager::PreLoadNewScene();
@@ -48,8 +48,8 @@ public:
 	//現在のシーン読み込みの状態を取得
 	static LoadState GetLoadState();
 
-	static unique_ptr<IScene> currentScene;
-	static unique_ptr<IScene> nextScene;
+	static std::unique_ptr<IScene> currentScene;
+	static std::unique_ptr<IScene> nextScene;
 
 private:
 	//ロードの状態、毎フレームの最初に更新される
@@ -69,5 +69,5 @@ private:
 	~SceneManager() {};
 	SceneManager(const SceneManager& a) = delete;
 	SceneManager& operator=(const SceneManager& a) = delete;
-	static future<void> ftr;
+	static std::future<void> ftr;
 };

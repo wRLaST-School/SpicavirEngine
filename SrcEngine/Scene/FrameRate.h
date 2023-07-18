@@ -8,6 +8,6 @@ public:
 	static void InitMark();
 
 private:
-	static chrono::system_clock::time_point  sFrameend, sFramestart;
+	static std::chrono::system_clock::time_point  sFrameend, sFramestart;
 };
 

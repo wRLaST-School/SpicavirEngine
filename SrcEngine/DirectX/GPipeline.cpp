@@ -1,6 +1,6 @@
 #include "GPipeline.h"
 #include "SpRootSignature.h"
-map<string, GPipeline> psoMap;
+std::map<std::string, GPipeline> psoMap;
 
 void GPipeline::InitDesc(const PipelineDesc& desc)
 {
@@ -99,7 +99,7 @@ void GPipeline::InitDesc(const PipelineDesc& desc)
 //	psod.pRootSignature = GetRootSignature()->rootsignature.Get();
 //}
 
-void GPipeline::Create(const PipelineDesc& desc, const string& id)
+void GPipeline::Create(const PipelineDesc& desc, const std::string& id)
 {
 	psoMap[id] = GPipeline();
 	GPipeline* ptr = &psoMap[id];
@@ -112,17 +112,17 @@ void GPipeline::Create()
 	GetWDX()->dev->CreateGraphicsPipelineState(&psod, IID_PPV_ARGS(&pso));
 }
 
-D3D12_GRAPHICS_PIPELINE_STATE_DESC* GPipeline::GetDesc(const string& id)
+D3D12_GRAPHICS_PIPELINE_STATE_DESC* GPipeline::GetDesc(const std::string& id)
 {
 	return &psoMap[id].psod;
 }
 
-ID3D12PipelineState* GPipeline::GetState(const string& id)
+ID3D12PipelineState* GPipeline::GetState(const std::string& id)
 {
 	return psoMap[id].pso.Get();
 }
 
-GPipeline* GPipeline::GetGPipeline(const string& id)
+GPipeline* GPipeline::GetGPipeline(const std::string& id)
 {
 	return &psoMap[id];
 }

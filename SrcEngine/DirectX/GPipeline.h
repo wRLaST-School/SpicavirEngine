@@ -91,14 +91,14 @@ namespace PipelineUtil
 class GPipeline
 {
 public:
-	static void Create(const PipelineDesc& desc, const string& id);
-	static D3D12_GRAPHICS_PIPELINE_STATE_DESC* GetDesc(const string& id);
-	static ID3D12PipelineState* GetState(const string& id);
-	static GPipeline* GetGPipeline(const string& id);
+	static void Create(const PipelineDesc& desc, const std::string& id);
+	static D3D12_GRAPHICS_PIPELINE_STATE_DESC* GetDesc(const std::string& id);
+	static ID3D12PipelineState* GetState(const std::string& id);
+	static GPipeline* GetGPipeline(const std::string& id);
 
 	GPipeline() {};
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC psod{};
-	ComPtr<ID3D12PipelineState> pso = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12PipelineState> pso = nullptr;
 
 private:
 	void Create();

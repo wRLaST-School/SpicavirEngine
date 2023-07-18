@@ -7,6 +7,8 @@
 #include "SpTextureManager.h"
 #include "RTVManager.h"
 
+using namespace std;
+
 static SpDirectX WDX;
 
 SpDirectX* GetWDX()
@@ -21,9 +23,9 @@ void InitWDX()
 
 void SpDirectX::Init() {
 	result = CreateDXGIFactory1(IID_PPV_ARGS(&dxgiFactory));
-	vector< ComPtr<IDXGIAdapter1>> adapters;
+	vector< Microsoft::WRL::ComPtr<IDXGIAdapter1>> adapters;
 
-	ComPtr<IDXGIAdapter1> tmpAdapter = nullptr;
+	Microsoft::WRL::ComPtr<IDXGIAdapter1> tmpAdapter = nullptr;
 
 	//ƒOƒ‰ƒ{ŒN‚Ì–ÊÚ‚µ‚Ü``‚·
 	for (int32_t i = 0; dxgiFactory->EnumAdapters1(i, &tmpAdapter) != DXGI_ERROR_NOT_FOUND; i++)

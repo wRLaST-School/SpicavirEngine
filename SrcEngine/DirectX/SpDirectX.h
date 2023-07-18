@@ -16,11 +16,11 @@ public:
 	void EndFrame();
 
 	HRESULT result;
-	ComPtr<ID3D12Device> dev = nullptr;
-	ComPtr<IDXGIFactory6> dxgiFactory = nullptr;
-	ComPtr<ID3D12CommandAllocator> cmdAllocator = nullptr;
-	ComPtr<ID3D12GraphicsCommandList> cmdList = nullptr;
-	ComPtr<ID3D12CommandQueue> cmdQueue = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Device> dev = nullptr;
+	Microsoft::WRL::ComPtr<IDXGIFactory6> dxgiFactory = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAllocator = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> cmdList = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12CommandQueue> cmdQueue = nullptr;
 
 	D3D12_RESOURCE_BARRIER barrierDesc{};
 

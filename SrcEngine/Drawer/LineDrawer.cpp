@@ -47,7 +47,7 @@ void LineDrawer::DrawLine(const Float3& start, const Float3& end, const Float4& 
 	lines_.emplace_back(start, end, color);
 }
 
-void LineDrawer::DrawLines(const vector<Float3>& positions, const Float4& color)
+void LineDrawer::DrawLines(const std::vector<Float3>& positions, const Float4& color)
 {
 	for (auto itr = positions.begin(); itr + 1 != positions.end(); itr++)
 	{
@@ -57,7 +57,7 @@ void LineDrawer::DrawLines(const vector<Float3>& positions, const Float4& color)
 
 void LineDrawer::DrawCube(const Float3& center, const Float3& scale, const Float4& color)
 {
-	vector<Float3> points = {
+	std::vector<Float3> points = {
 		(Vec3)center + Vec3(-scale.x,  scale.y, -scale.z),
 		(Vec3)center + Vec3( scale.x,  scale.y, -scale.z),
 		(Vec3)center + Vec3( scale.x, -scale.y, -scale.z),
@@ -86,7 +86,7 @@ void LineDrawer::DrawCube(const Float3& center, const Float3& scale, const Float
 
 void LineDrawer::DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color)
 {
-	vector<Vec3> points = {
+	std::vector<Vec3> points = {
 	(Vec3)center + Vec3(-scale.x,  scale.y, -scale.z),
 	(Vec3)center + Vec3(scale.x,  scale.y, -scale.z),
 	(Vec3)center + Vec3(scale.x, -scale.y, -scale.z),
@@ -150,6 +150,6 @@ void LineDrawer::ClearLineData()
 }
 
 D3D12_VERTEX_BUFFER_VIEW LineDrawer::vbView_{};
-ComPtr<ID3D12Resource> LineDrawer::vertBuff_ = nullptr;
+Microsoft::WRL::ComPtr<ID3D12Resource> LineDrawer::vertBuff_ = nullptr;
 Line* LineDrawer::vertMap_ = nullptr;
-vector<Line> LineDrawer::lines_;
+std::vector<Line> LineDrawer::lines_;
