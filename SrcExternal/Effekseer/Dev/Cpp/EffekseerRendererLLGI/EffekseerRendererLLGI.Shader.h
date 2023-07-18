@@ -29,7 +29,7 @@ public:
 
 	static Shader* Create(Effekseer::Backend::GraphicsDeviceRef graphicsDevice,
 						  Effekseer::Backend::ShaderRef shader,
-						  Effekseer::Backend::VertexLayoutRef vertexLayout,
+		EffekseerRendererLLGI::Backend::VertexLayoutRef vertexLayout,
 						  const char* name);
 
 public:

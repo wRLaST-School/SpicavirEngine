@@ -24,13 +24,13 @@ Shader::~Shader()
 
 Shader* Shader::Create(Effekseer::Backend::GraphicsDeviceRef graphicsDevice,
 					   Effekseer::Backend::ShaderRef shader,
-					   Effekseer::Backend::VertexLayoutRef vertexLayout,
+	EffekseerRendererLLGI::Backend::VertexLayoutRef vertexLayout,
 					   const char* name)
 {
 	assert(graphicsDevice != nullptr);
 	assert(shader != nullptr);
 
-	return new Shader(graphicsDevice.DownCast<Backend::GraphicsDevice>(), shader.DownCast<Backend::Shader>(), vertexLayout.DownCast<Backend::VertexLayout>());
+	return new Shader(graphicsDevice.DownCast<Backend::GraphicsDevice>(), shader.DownCast<Backend::Shader>(), vertexLayout);
 }
 
 void Shader::SetVertexConstantBufferSize(int32_t size)
