@@ -76,6 +76,7 @@ void SceneManager::ConfirmTransition()
 		SpTextureManager::ReleasePerSceneTexture();
 		ModelManager::ReleasePerSceneModel();
 		SoundManager::ReleasePerSceneSounds();
+		SpEffekseer::ReleasePerSceneEffects();
 
 		transitionQueued = false;
 	}

@@ -10,7 +10,7 @@ Effekseer::RefPtr<EffekseerRenderer::SingleFrameMemoryPool> SpEffekseer::sEfkMem
 
 Effekseer::RefPtr<EffekseerRenderer::CommandList> SpEffekseer::sEfkCmdList;
 
-exc_unordered_map<EffectKey, Effekseer::EffectRef> SpEffekseer::effects;
+exc_unordered_map<EffectKey, Effekseer::EffectRef> SpEffekseer::sEffects;
 
 list <EffectKey > SpEffekseer::sPerSceneEffects[2];
 int32_t SpEffekseer::sCurrentSceneResIndex;
@@ -66,7 +66,7 @@ void SpEffekseer::Draw()
 
 EffectKey SpEffekseer::Load(std::wstring texfolder, std::wstring path, EffectKey key)
 {
-	effects.Access([&](auto& map) {
+	sEffects.Access([&](auto& map) {
 		map.emplace(key, Effekseer::Effect::Create(
 			sEfkManager,
 			(const EFK_CHAR*)path.c_str(),
@@ -83,7 +83,7 @@ Effekseer::Handle SpEffekseer::Play(EffectKey key, Float3 pos)
 {
 	Effekseer::Handle ret;
 
-	effects.Access([&](auto& map) {
+	sEffects.Access([&](auto& map) {
 		ret = sEfkManager->Play(map.at(key), pos.x, pos.y, pos.z);
 	});
 
@@ -94,6 +94,35 @@ void SpEffekseer::SetMatrices(Effekseer::Matrix44 view, Effekseer::Matrix44 proj
 {
 	sEfkRenderer->SetCameraMatrix(view);
 	sEfkRenderer->SetProjectionMatrix(proj);
+}
+
+void SpEffekseer::ReleasePerSceneEffects()
+{
+	int32_t lastSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
+	for (auto itr = sPerSceneEffects[lastSceneResIndex].begin(); itr != sPerSceneEffects[lastSceneResIndex].end(); itr++)
+	{
+		bool usingInCurrentScene = false;
+		for (auto& key : sPerSceneEffects[sCurrentSceneResIndex])
+		{
+			if (key == *itr)
+			{
+				usingInCurrentScene = true;
+			}
+		}
+
+		if (!usingInCurrentScene) //今のシーンで使われていないならリリース
+		{
+			//TODO:再生を止める処理を書くなら書く
+
+			sEffects.Access(
+				[&](auto& map) {
+					map.erase(*itr);
+				}
+			);
+		}
+	}
+
+	sPerSceneEffects[lastSceneResIndex].clear();
 }
 
 void SpEffekseer::PreLoadNewScene()

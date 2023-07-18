@@ -4,6 +4,7 @@
 #include <future>
 #include <thread>
 #include <SoundManager.h>
+#include <SpEffekseer.h>
 class SceneManager final
 {
 public:
@@ -27,6 +28,7 @@ public:
 			SpTextureManager::PreLoadNewScene();
 			ModelManager::PreLoadNewScene();
 			SoundManager::PreLoadNewScene();
+			SpEffekseer::PreLoadNewScene();
 			nextScene->LoadResources();
 			loadFinished = true;
 			});
