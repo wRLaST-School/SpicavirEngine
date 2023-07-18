@@ -42,8 +42,8 @@ void SpEffekseer::Init()
 	sEfkManager->SetTextureLoader(sEfkRenderer->CreateTextureLoader());
 	sEfkManager->SetModelLoader(sEfkRenderer->CreateModelLoader());
 
-	sEfkMemoryPool = EffekseerRenderer::CreateSingleFrameMemoryPool(sEfkRenderer);
-	sEfkCmdList = EffekseerRenderer::CreateCommandList(sEfkRenderer, sEfkMemoryPool);
+	sEfkMemoryPool = EffekseerRenderer::CreateSingleFrameMemoryPool(sEfkRenderer->GetGraphicsDevice());
+	sEfkCmdList = EffekseerRenderer::CreateCommandList(sEfkRenderer->GetGraphicsDevice(), sEfkMemoryPool);
 	sEfkRenderer->SetCommandList(sEfkCmdList);
 }
 

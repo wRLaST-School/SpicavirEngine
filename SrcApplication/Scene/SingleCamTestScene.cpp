@@ -7,6 +7,7 @@
 #include <SpSwapChainManager.h>
 #include <Bloom.h>
 #include <SoundManager.h>
+#include <SpEffekseer.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -27,6 +28,8 @@ void SingleCamTestScene::LoadResources()
 
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "normalTest", true);
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "inverseTest", true);
+
+	SpEffekseer::Load(L"Resources/Effekseer/10", L"Resources/Effekseer/10/SimpleLaser.efk", "Laser");
 
 	/*vector<TextureKey> boss3Keys{
 		"boss1",
@@ -91,6 +94,11 @@ void SingleCamTestScene::Update()
 	camera.UpdateMatrix();
 	pane.UpdateMatrix();
 	sky.UpdateMatrix();
+
+	if (Input::Key::Triggered(DIK_L))
+	{
+		SpEffekseer::Play("Laser", {0.f, 0.f, 0.f});
+	}
 
 	////style editor
 	//SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
