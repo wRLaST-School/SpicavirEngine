@@ -5,6 +5,8 @@
 #include <Sprite.h>
 #include <SpSwapChainManager.h>
 
+using namespace std;
+
 void IPostEffector::RegisterPipeline(const string& name)
 {
 	RegisterShader(name);
@@ -93,7 +95,7 @@ void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTe
 	}
 	else
 	{
-		TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
+		DirectX::TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
 		viewport.Width = (FLOAT)md.width;
 		viewport.Height = (FLOAT)md.height;
 		scissorrect.left = 0;                                       // êÿÇËî≤Ç´ç¿ïWç∂
@@ -124,7 +126,7 @@ void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTe
 
 D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::sVbView{};
 
-ComPtr<ID3D12Resource> PostEffectCommon::sVertBuff = nullptr;
+Microsoft::WRL::ComPtr<ID3D12Resource> PostEffectCommon::sVertBuff = nullptr;
 
 void PostEffectCommon::Init()
 {

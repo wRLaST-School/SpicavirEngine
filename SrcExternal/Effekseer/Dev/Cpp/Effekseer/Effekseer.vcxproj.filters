@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Color.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.CurveLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.DefaultEffectLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.DefaultFile.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Effect.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNode.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeModel.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeRibbon.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeRing.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeRoot.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeSprite.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeTrack.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.FCurves.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Instance.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceChunk.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceContainer.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceGlobal.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceGroup.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InternalScript.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Manager.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Matrix43.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Matrix44.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Random.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.RectF.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Resource.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.ResourceManager.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Setting.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Vector2D.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Vector3D.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.WorkerThread.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Material\Effekseer.MaterialFile.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Material\Effekseer.CompiledMaterial.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Material\Effekseer.MaterialCompiler.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\IO\Effekseer.EfkEfcFactory.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Easing.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Effekseer.Parameters.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Rotation.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\Effekseer.CustomAllocator.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Mat43f.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Mat44f.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Utils.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Noise\CurlNoise.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\ForceField\ForceFields.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\ProceduralModelGenerator.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\Model.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\ModelLoader.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\SplineGenerator.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Client.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Server.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Session.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Socket.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer.Modules.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer.SIMD.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Base.Pre.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Effect.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Color.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.DefaultFile.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.File.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Manager.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Matrix43.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Matrix44.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Resource.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.RectF.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Setting.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Vector2D.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Vector3D.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Backend\GraphicsDevice.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Server.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Client.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\Effekseer.CustomAllocator.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\IO\Effekseer.EfkEfcFactory.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Base.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Float4_Gen.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Float4_NEON.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Float4_SSE.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Int4_Gen.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Int4_NEON.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Int4_SSE.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Bridge_Gen.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Bridge_NEON.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Bridge_SSE.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Vec2f.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Vec3f.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Vec4f.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Mat43f.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Mat44f.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Quaternionf.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\SIMD\Utils.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Effekseer.Parameters.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.SpriteRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.RibbonRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.RingRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.ModelRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.TrackRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.GPUTimer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.TextureLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\Model.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\ModelLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.MaterialLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Curve.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.CurveLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Sound\Effekseer.SoundPlayer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.SoundLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.WorkerThread.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.ResourceManager.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Base.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.DefaultEffectLoader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectImplemented.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNode.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeModel.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeRibbon.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeRing.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeRoot.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeSprite.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.EffectNodeTrack.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.FCurves.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Instance.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceChunk.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceContainer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceGlobal.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InstanceGroup.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InternalScript.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.InternalStruct.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.IntrusiveList.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.ManagerImplemented.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Math.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Effekseer.Random.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\ForceField\ForceFields.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Material\Effekseer.CompiledMaterial.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Material\Effekseer.MaterialCompiler.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Material\Effekseer.MaterialFile.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\ProceduralModelGenerator.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\ProceduralModelParameter.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Model\SplineGenerator.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.ClientImplemented.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.ServerImplemented.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Session.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\Effekseer.Socket.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\data\profiler_generated.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Network\data\reload_generated.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Noise\CurlNoise.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Noise\PerlinNoise.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\AllTypeColor.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\AlphaCutoff.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\BasicSettings.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\CustomData.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\DepthParameter.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\DynamicParameter.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Easing.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\KillRules.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\LOD.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Rotation.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Scaling.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Sound.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\SpawnMethod.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\Translation.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Parameter\UV.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Renderer\Effekseer.ParticleRenderer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\BinaryVersion.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\Compatiblity.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\Effekseer.BinaryReader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\InstancePool.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer\Utils\Profiler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Effekseer">
+      <UniqueIdentifier>{45B859EB-C226-323B-8D70-CD7E9B5EEE11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Backend">
+      <UniqueIdentifier>{CA4D1CB0-8EB6-3C0B-BD07-D950043D7597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\ForceField">
+      <UniqueIdentifier>{88B126FE-B888-345B-AF24-E4B513611C8F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\IO">
+      <UniqueIdentifier>{BDC96804-83BA-35E1-9A89-30CB8629D90D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Material">
+      <UniqueIdentifier>{FB28836F-4E90-394F-9F56-81DDBE5809B0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Model">
+      <UniqueIdentifier>{226B3C03-92D1-31C3-9DCB-C8F966959B06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Network">
+      <UniqueIdentifier>{1E3340A9-7FB6-3183-B9FB-5864729EE2C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Network\data">
+      <UniqueIdentifier>{DE36BAC7-1420-3F28-B56B-3F12BFF269C5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Noise">
+      <UniqueIdentifier>{9AD7C50A-C9C5-36BC-B342-1C1B275A7F1E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Parameter">
+      <UniqueIdentifier>{9039B08F-4BA6-317B-A5F2-9BA750BA7A56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Renderer">
+      <UniqueIdentifier>{B887F5A7-9845-3FA6-8FC6-F0E1359F5271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\SIMD">
+      <UniqueIdentifier>{127586CA-62A8-34F8-BADA-2A3E69D95D5E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Sound">
+      <UniqueIdentifier>{7422FE5E-B599-3F12-BE50-68F2BC5D36EA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effekseer\Utils">
+      <UniqueIdentifier>{A2DFA7EE-5592-3794-9014-387C620B5B1E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

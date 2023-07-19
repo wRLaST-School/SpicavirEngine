@@ -75,13 +75,29 @@ Quaternion Quaternion::GetInverse(const Quaternion& q)
 
 Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, const float& t)
 {
-	float theta = acosf(zero.Dot(one));
-	Quaternion zerot = zero * (sinf((1.f - t) * theta) / sinf(theta));
+	float clamped = Util::Clamp(zero.Dot(one), -1.f, 1.f);
+	float theta = acosf(clamped);
+	
+	if (!theta)
+	{
+		return zero;
+	}
+
+	Quaternion o = one;
+	if (clamped < 0)
+	{
+		o.v = Vec3(-one.v.x, -one.v.y, -one.v.z);
+		o.w = -one.w;
+	}
+
+	Quaternion zerot = o * (sinf((1.f - t) * theta) / sinf(theta));
 	Quaternion onet = (one * (sinf(t * theta) / sinf(theta)));
 	Quaternion result;
 	
 	result.w = zerot.w + onet.w;
 	result.v = zerot.v + onet.v;
+
+	result.Normalize();
 	return result;
 }
 

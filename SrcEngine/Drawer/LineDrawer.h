@@ -17,7 +17,7 @@ public:
 	static void Init();
 
 	static void DrawLine(const Float3& start, const Float3& end, const Float4& color);
-	static void DrawLines(const vector<Float3>& positions, const Float4& color);
+	static void DrawLines(const std::vector<Float3>& positions, const Float4& color);
 	static void DrawCube(const Float3& center, const Float3& scale, const Float4& color);
 	static void DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color);
 
@@ -25,12 +25,12 @@ public:
 
 	static void ClearLineData();
 private:
-	static vector<Line> lines_;
+	static std::vector<Line> lines_;
 
 	static const int32_t MAX_LINES = 1024;
 
 	static D3D12_VERTEX_BUFFER_VIEW vbView_;
-	static ComPtr<ID3D12Resource> vertBuff_;
+	static Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff_;
 	static Line* vertMap_;
 };
 

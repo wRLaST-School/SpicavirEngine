@@ -70,11 +70,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,6 +84,8 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -93,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -101,6 +104,7 @@
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
       <Optimization>MaxSpeed</Optimization>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,6 +115,8 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Release\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -129,6 +135,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="SpDS.cpp" />
+    <ClCompile Include="SpEffekseer.cpp" />
     <ClCompile Include="SpRenderer.cpp" />
     <ClCompile Include="SrAddStage.cpp" />
     <ClCompile Include="SrAlphaStage.cpp" />
@@ -208,6 +215,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="SpDS.h" />
+    <ClInclude Include="SpEffekseer.h" />
     <ClInclude Include="SpRenderer.h" />
     <ClInclude Include="SrAddStage.h" />
     <ClInclude Include="SrAlphaStage.h" />
@@ -415,6 +423,24 @@
     </ProjectReference>
     <ProjectReference Include="SrcExternal\EASTL\EASTL.vcxproj">
       <Project>{2ebf2370-9313-3e61-93e2-bf9215e3be2e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.vcxproj">
+      <Project>{2c6dc6b5-384c-314e-a810-ad53a0aa276f}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\EffekseerRendererCommon.vcxproj">
+      <Project>{ffd7342c-39e2-3612-82e5-97e1a6f54388}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\EffekseerRendererDX12.vcxproj">
+      <Project>{bffc0d34-cf08-3547-9712-c9bcb7f29b3b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.vcxproj">
+      <Project>{b81591ec-4a8b-38cf-8d42-703136287c1a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcExternal\Effekseer\Dev\Cpp\Effekseer\Effekseer.vcxproj">
+      <Project>{66fdbe36-b4ea-3409-a20e-9f086238450e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="SrcExternal\Effekseer\ThirdParty\Build\glfw\src\ExternalProject_glfw-build\src\glfw.vcxproj">
+      <Project>{ec7e4d95-f60b-3187-9ac7-af30e20e6adb}</Project>
     </ProjectReference>
     <ProjectReference Include="SrcImgui\imgui\imgui.vcxproj">
       <Project>{3650decb-313b-4c2d-88db-9e59a8234b8d}</Project>

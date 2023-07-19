@@ -16,7 +16,7 @@ public:
         map.clear();
     };
 
-    void Access(std::function<void(unordered_map<Key, T, Hash, Pred, Allocator>&)> implements)
+    void Access(std::function<void(std::unordered_map<Key, T, Hash, Pred, Allocator>&)> implements)
     {
         std::lock_guard<std::mutex> lock(mtx);
         implements(map);
@@ -28,6 +28,6 @@ public:
     };
 
 private:
-    unordered_map<Key, T, Hash, Pred, Allocator> map;
+    std::unordered_map<Key, T, Hash, Pred, Allocator> map;
     std::mutex mtx;
 };

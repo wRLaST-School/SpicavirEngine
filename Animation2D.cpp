@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Animation2D.h"
 
-void Animation2D::Register(vector<TextureKey> texKeys, int32_t cooltime, bool loop, const AnimKey& key)
+void Animation2D::Register(std::vector<TextureKey> texKeys, int32_t cooltime, bool loop, const AnimKey& key)
 {
-	animMap.insert(pair<AnimKey, AnimData>(key, { texKeys, 0, (int32_t)texKeys.size(), 0, cooltime, loop }));
+	animMap.insert(std::pair<AnimKey, AnimData>(key, { texKeys, 0, (int32_t)texKeys.size(), 0, cooltime, loop }));
 
 	if (!current_) current_ = &animMap.find(key)->second;
 }

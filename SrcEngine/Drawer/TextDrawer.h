@@ -24,7 +24,7 @@ struct FontOptions
 	int32_t charSet = SHIFTJIS_CHARSET;
 
 	//使用するフォントの名前
-	string name = "ＭＳ Ｐ明朝";
+	std::string name = "ＭＳ Ｐ明朝";
 
 	int32_t gradFlag = GGO_GRAY8_BITMAP;
 };
@@ -54,7 +54,7 @@ class FontData
 public:
 	GLYPHMETRICS gm = {};
 	TEXTMETRIC tm;
-	vector<BYTE> bmp;
+	std::vector<BYTE> bmp;
 	int32_t resolution;
 	int32_t grad = 0;
 };
@@ -64,8 +64,8 @@ class TextDrawer
 private:
 
 public:
-	static void DrawString(string str, int32_t x, int32_t y, Align alignment, StringOptions options);
-	static void DrawString(string str, int32_t x, int32_t y, Align alignment);
+	static void DrawString(std::string str, int32_t x, int32_t y, Align alignment, StringOptions options);
+	static void DrawString(std::string str, int32_t x, int32_t y, Align alignment);
 	static void SetDefaultStringOptions(StringOptions options);
 
 	static void ReleaseDrawStringData();
@@ -73,8 +73,8 @@ public:
 
 	static TextDrawer* GetInstance();
 private:
-	vector<TextureKey> releaseQueue;
-	vector<Sprite> stringSpriteQueue;
+	std::vector<TextureKey> releaseQueue;
+	std::vector<Sprite> stringSpriteQueue;
 	StringOptions defaultOption = StringOptions();
 };
 
@@ -84,22 +84,22 @@ typedef uint32_t FontNameHandle;
 class FontManager
 {
 public:
-	static FontHandle GetGlyphTexture(FontOptions options, wstring glyph);
+	static FontHandle GetGlyphTexture(FontOptions options, std::wstring glyph);
 
-	static StringData CreateStringTexture(string str, StringOptions options);
+	static StringData CreateStringTexture(std::string str, StringOptions options);
 
 	///<summary>フォントをファイルからWindowsに読み込ませる</summary>
 	///<param name = "path">読み込むファイルのexeからの相対パス / フルパス</param>
 	///<returns>読み込んだフォントを使用するための名前</returns>
-	static string LoadFontFromFile(string path);
+	static std::string LoadFontFromFile(std::string path);
 
 	static FontManager* GetInstance();
 
 private:
-	map<FontNameHandle, map<wstring, FontData>> fontMap;
-	map<string, FontNameHandle> fontNameMap;
+	std::map<FontNameHandle, std::map<std::wstring, FontData>> fontMap;
+	std::map<std::string, FontNameHandle> fontNameMap;
 
-	FontData* GetFontData(string fontName, wstring glyph);
+	FontData* GetFontData(std::string fontName, std::wstring glyph);
 
 	int32_t fontIndex = 0x8001;
 };

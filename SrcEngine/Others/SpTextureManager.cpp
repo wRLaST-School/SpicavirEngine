@@ -2,6 +2,9 @@
 #include "SpDirectX.h"
 #include <RTVManager.h>
 
+using namespace std;
+using namespace DirectX;
+
 #define SPTEX_NOTEXTURE_FOUND_ -1024
 
 void SpTextureManager::Create()
@@ -31,13 +34,16 @@ void SpTextureManager::Init()
 		map.clear();
 		});
 
-	for (ComPtr<ID3D12Resource>& texbuffs : ins.texBuffs)
+	for (Microsoft::WRL::ComPtr<ID3D12Resource>& texbuffs : ins.texBuffs)
 	{
 		texbuffs = nullptr;
 	}
 
 	SpTextureManager::LoadTexture("Resources/notexture.png", "notexture");
 	AddMasterTextureKey("notexture");
+
+	SpTextureManager::LoadTexture("Resources/DissolveMap.png", "dissolveMap");
+	AddMasterTextureKey("dissolveMap");
 }
 
 TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKey& key)
@@ -829,7 +835,7 @@ void SpTextureManager::Release(const TextureKey& key)
 	ins.isOccupied_[GetIndex(key)] = false;
 	ins.textureMap_.Access(
 		[&](auto& map) {
-			ins.texBuffs[map[key]] = ComPtr<ID3D12Resource>();
+			ins.texBuffs[map[key]] = Microsoft::WRL::ComPtr<ID3D12Resource>();
 			map.erase(key);
 		}
 	);

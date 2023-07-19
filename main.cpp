@@ -22,6 +22,7 @@
 #include <SoundManager.h>
 #include <SpRenderer.h>
 #include <SpDS.h>
+#include <SpEffekseer.h>
 
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 {
@@ -47,7 +48,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 
 	/*デバッグ有効化*/
 #ifdef  _DEBUG
-	ComPtr<ID3D12InfoQueue> infoQueue;
+	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue;
 	if (SUCCEEDED(GetWDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
 	{
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true); 
@@ -96,6 +97,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 	//Init Sounds
 	SoundManager::Init();
 
+	//Init Effects
+	SpEffekseer::Init();
+
 	//Init Scene
 	SceneManager::Init();
 
@@ -111,6 +115,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 
 		/*更新処理*/
 		SceneManager::Update();
+		SpEffekseer::Update();
 		/*更新処理ここまで*/
 
 		SceneManager::DrawBack();
@@ -125,7 +130,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 			Light::UpdateLightData();
 		}
 		catch (PointLight::QuantityOverflow& e) {
-			OutputDebugStringA((string("Too Many PointLights Registered. Limit: ") + to_string(e.limit) + string(", Used: ") + to_string(e.actual)).c_str());
+			OutputDebugStringA((std::string("Too Many PointLights Registered. Limit: ") + std::to_string(e.limit) + std::string(", Used: ") + std::to_string(e.actual)).c_str());
 			assert(false);
 		}
 

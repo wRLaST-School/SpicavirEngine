@@ -23,7 +23,7 @@ public:
 protected:
 	const int32_t vertexCount = 1024;
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
-	ComPtr<ID3D12Resource> vertBuff = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff = nullptr;
 	Vertex* vertMap = nullptr;
 
 	int32_t activeCount = 0;

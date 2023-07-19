@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Buffer.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.CommandList.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Compiler.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Graphics.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.PipelineState.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Platform.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Texture.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\PC\LLGI.CreatePC.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Win\LLGI.WindowWin.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.BaseDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.BufferDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.CommandListDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.CompilerDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.DescriptorHeapDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.GraphicsDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.PipelineStateDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.PlatformDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.RenderPassDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.RenderPassPipelineStateDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.ShaderDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.SingleFrameMemoryPoolDX12.cpp" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.TextureDX12.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Base.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Buffer.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.CommandList.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Compiler.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Graphics.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.PipelineState.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Platform.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Shader.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\LLGI.Texture.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Win\LLGI.WindowWin.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.BaseDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.BufferDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.CommandListDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.CompilerDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.DescriptorHeapDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.GraphicsDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.PipelineStateDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.PlatformDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.RenderPassDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.RenderPassPipelineStateDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.ShaderDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.SingleFrameMemoryPoolDX12.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\DX12\LLGI.TextureDX12.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{0FB95664-077C-3D42-A502-0CCA20296CC1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX12">
+      <UniqueIdentifier>{7A4C3740-41CB-3152-BA31-78A1ADD049FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PC">
+      <UniqueIdentifier>{C4AC9DD1-9FAA-3D7E-AA20-7526CAE63FA1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win">
+      <UniqueIdentifier>{D226B7B4-1219-392B-8836-20C6BBE1F1A4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -60,7 +60,7 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 	if (clear)ClearCurrentRenderTarget({ 0, 0, 0, 0 });
 }
 
-void RTVManager::SetRenderTargets(const vector<TextureKey>& keys)
+void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 {
 	CloseCurrentResBar();
 	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
@@ -93,7 +93,7 @@ void RTVManager::SetRenderTargets(const vector<TextureKey>& keys)
 	//TODO:ê—p‚ÌDSV‚ð—pˆÓ
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
-	vector<D3D12_CPU_DESCRIPTOR_HANDLE> pcpuhnds;
+	std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> pcpuhnds;
 	for (auto& key : keys)
 	{
 		if (key == "CurrentBuffer")

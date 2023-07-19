@@ -11,7 +11,7 @@ Sprite::Sprite(const TextureKey& key)
 {
 	this->tex = key;
 
-	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
+	DirectX::TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
 	this->width = (float)texmeta.width;
 	this->height = (float)texmeta.height;
 	float hlfw = (float)texmeta.width / 2;
@@ -70,11 +70,11 @@ Sprite::Sprite(const TextureKey& key)
 	constBuff.contents->color = {1.0, 1.0, 1.0, 1.0};
 }
 
-Sprite::Sprite(const string& path, const TextureKey& newKey)
+Sprite::Sprite(const std::string& path, const TextureKey& newKey)
 {
 	this->tex = SpTextureManager::LoadTexture(path, newKey);
 
-	TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
+	DirectX::TexMetadata texmeta = SpTextureManager::GetTextureMetadata(tex);
 	this->width = (float)texmeta.width;
 	this->height = (float)texmeta.height;
 	float hlfw = (float)texmeta.width / 2;

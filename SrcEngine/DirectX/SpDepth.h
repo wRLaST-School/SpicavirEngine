@@ -6,8 +6,8 @@ public:
 	void Init();
 	void Resize();
 
-	ComPtr<ID3D12Resource> depthBuffer;
-	ComPtr<ID3D12DescriptorHeap> dsvHeap = nullptr;
+	Microsoft::WRL::ComPtr<ID3D12Resource> depthBuffer;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsvHeap = nullptr;
 };
 
 void InitWDepth();

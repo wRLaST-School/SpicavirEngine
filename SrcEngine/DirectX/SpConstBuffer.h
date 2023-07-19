@@ -84,7 +84,7 @@ public:
 	}
 	
 public:
-	ComPtr<ID3D12Resource> buffer;
+	Microsoft::WRL::ComPtr<ID3D12Resource> buffer;
 	Contents* contents;
 };
 

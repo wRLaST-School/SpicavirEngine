@@ -19,7 +19,7 @@ class BloomP1 :
     public IPostEffector
 {
 public:
-    static string name;
+    static std::string name;
     static void Init();
     static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 };
@@ -29,7 +29,7 @@ class BloomP2 :
     public IPostEffector
 {
 public:
-    static string name;
+    static std::string name;
     static void Init();
     static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 
@@ -42,7 +42,7 @@ class BloomP3 :
     public IPostEffector
 {
 public:
-    static string name;
+    static std::string name;
     static void Init();
     static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 };
@@ -52,7 +52,7 @@ class BloomFin:
     public IPostEffector
 {
 public:
-    static string name;
+    static std::string name;
     static void Init();
     static void Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const TextureKey& targetTex);
 };

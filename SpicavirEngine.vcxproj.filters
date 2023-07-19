@@ -166,6 +166,12 @@
     <Filter Include="External">
       <UniqueIdentifier>{4f2e263e-1def-4680-a23a-738714752cd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Effekseer">
+      <UniqueIdentifier>{3b32a3d3-0ad0-49b2-955f-f539377f744a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Effekseer">
+      <UniqueIdentifier>{11d460ed-80c8-4586-941e-69259395d1ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -386,6 +392,12 @@
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
       <Filter>!Game\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="SpEffekseer.cpp">
+      <Filter>Engine\ソースファイル\Effekseer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -628,6 +640,12 @@
     </ClInclude>
     <ClInclude Include="SrcExternal\json.hpp">
       <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Math\Quaternion.h">
+      <Filter>Engine\ヘッダーファイル\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="SpEffekseer.h">
+      <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

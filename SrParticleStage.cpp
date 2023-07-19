@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SrParticleStage.h"
 #include <Camera.h>
+#include <SpEffekseer.h>
 
 void SrParticleStage::Init()
 {
@@ -41,11 +42,12 @@ void SrParticleStage::PreDraw()
 
 void SrParticleStage::PostDraw()
 {
+	SpEffekseer::Draw();
 }
 
 void SrParticleStage::Render()
 {
-	for (auto cmd : commands_)
+	for (auto& cmd : commands_)
 	{
 		cmd();
 	}

@@ -7,10 +7,18 @@ struct ConstBufferDataTransform {
 	Matrix mat;//3D•ÏŠ·s—ñ
 };
 
+struct ConstBufferDataMisc {
+	Float4 rimColor;
+	float rimStrength;
+	Float3 padding;
+	float dissolveStrength;
+	Float3 padding2;
+};
+
 class Object3D
 {
 public:
-	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; };
+	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; miscCB.contents->rimColor = { 1.f, 0.f, 0.f, 1.f }; };
 	void UpdateMatrix();
 
 	void Draw();
@@ -30,6 +38,7 @@ public:
 
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;
+	SpConstBuffer<ConstBufferDataMisc> miscCB;
 
 	Float3 scale = { 1, 1, 1 };
 	Quaternion rotation = Quaternion::Identity();

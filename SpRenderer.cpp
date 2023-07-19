@@ -26,7 +26,7 @@ SpRenderer* SpRenderer::GetInstance()
 	return &rndr;
 }
 
-void SpRenderer::DrawCommand(function<void(void)> cmd, const Stage& stg)
+void SpRenderer::DrawCommand(std::function<void(void)> cmd, const Stage& stg)
 {
 	GetInstance()->stages_[(int32_t)stg]->DrawCommands(cmd);
 }

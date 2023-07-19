@@ -5,6 +5,7 @@
 #include <SpSwapChainManager.h>
 #include <Sprite.h>
 
+using namespace std;
 
 string BloomP1::name = "BloomP1";
 string BloomP2::name = "BloomP2";
@@ -107,7 +108,7 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 	}
 	else
 	{
-		TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
+		DirectX::TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
 		viewport.Width = (FLOAT)md.width;
 		viewport.Height = (FLOAT)md.height;
 		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶

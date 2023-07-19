@@ -7,6 +7,7 @@
 #include <SpSwapChainManager.h>
 #include <Bloom.h>
 #include <SoundManager.h>
+#include <SpEffekseer.h>
 
 void SingleCamTestScene::LoadResources()
 {
@@ -14,9 +15,10 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
-	//ModelManager::Register("Resources/Models/Minion/Minion_FBX.fbx", "fbxtest", true);
-	ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
-	ModelManager::Register("ICO", "FlatSphere");
+	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "SmoothSphere", true);
+	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "FlatSphere", false);
+	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
+	//ModelManager::Register("ICO", "FlatSphere");
 
 	SpTextureManager::LoadTexture("Resources/white.png", "white");
 	SpTextureManager::LoadTexture("Resources/black.png", "black");
@@ -26,6 +28,8 @@ void SingleCamTestScene::LoadResources()
 
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "normalTest", true);
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "inverseTest", true);
+
+	SpEffekseer::Load(L"Resources/Effekseer/10", L"Resources/Effekseer/10/SimpleLaser.efk", "Laser");
 
 	/*vector<TextureKey> boss3Keys{
 		"boss1",
@@ -45,7 +49,7 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("FlatSphere");
+	pane.model = ModelManager::GetModel("SmoothSphere");
 	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
@@ -86,6 +90,9 @@ void SingleCamTestScene::Update()
 
 	//pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
 
+	if(animation)
+		pane.model->UpdateAnim();
+
 	*pane2.brightnessCB.contents = Float4{ 0.f, 1.f, 1.f, .2f };
 	pane2.UpdateMatrix();
 
@@ -93,13 +100,18 @@ void SingleCamTestScene::Update()
 	pane.UpdateMatrix();
 	sky.UpdateMatrix();
 
+	if (Input::Key::Triggered(DIK_L))
+	{
+		SpEffekseer::Play("Laser", {0.f, 0.f, 0.f});
+	}
+
 	////style editor
 	//SpImGui::Command([&]() { ImGui::ShowStyleEditor(); });
 
 	//Object
 	SpImGui::Command([&]() {
 		ImGui::SetNextWindowPos(ImVec2(100, 220));
-		ImGui::SetNextWindowSize(ImVec2(300, 200));
+		ImGui::SetNextWindowSize(ImVec2(300, 400));
 		if (ImGui::Begin("Object Editor"))
 		{
 			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
@@ -115,6 +127,23 @@ void SingleCamTestScene::Update()
 			{
 				pane.model = ModelManager::GetModel("FlatSphere");
 			}
+
+			ImGui::ColorEdit4("Object Color", &pane.brightnessCB.contents->x);
+
+			ImGui::SliderFloat("Dissolve", &pane.miscCB.contents->dissolveStrength, -0.01f, 1.0f);
+
+			ImGui::SliderFloat("RimPower", &pane.miscCB.contents->rimStrength, 0.f, 1.f);
+
+			ImGui::ColorEdit4("RimColor", &pane.miscCB.contents->rimColor.x);
+
+			ImGui::InputText("Animation", buf, sizeof(buf));
+
+			if (ImGui::Button("Toggle Animation"))
+			{
+				animation = !animation;
+			}
+
+			pane.model->SetAnim(std::string(buf));
 		}
 	ImGui::End();
 	});

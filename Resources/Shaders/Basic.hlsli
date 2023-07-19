@@ -41,6 +41,20 @@ cbuffer cbuff4 : register(b4)
 	PointLight pointLights[MAX_PLIGHTS];
 }
 
+static const int MAX_BONES = 128;
+
+cbuffer cbuff5 : register(b5)
+{
+    matrix bMatrix[MAX_BONES];
+}
+
+cbuffer cbuff6 : register(b6)
+{
+    float4 rimColor;
+    float4 rimStrength;
+    float4 dissolveStrength;
+}
+
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;

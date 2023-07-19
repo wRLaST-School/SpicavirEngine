@@ -14,4 +14,4 @@ void FrameRate::InitMark()
 	sFramestart = std::chrono::system_clock::now();
 }
 
-chrono::system_clock::time_point FrameRate::sFrameend, FrameRate::sFramestart;
+std::chrono::system_clock::time_point FrameRate::sFrameend, FrameRate::sFramestart;

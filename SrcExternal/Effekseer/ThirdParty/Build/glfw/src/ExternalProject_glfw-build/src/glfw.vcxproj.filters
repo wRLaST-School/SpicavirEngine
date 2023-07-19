@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\context.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\init.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\input.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\monitor.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\vulkan.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\window.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_init.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_joystick.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_monitor.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_time.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_thread.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_window.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\wgl_context.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\egl_context.c" />
+    <ClCompile Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\osmesa_context.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\internal.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\mappings.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Build\glfw\src\ExternalProject_glfw-build\src\glfw_config.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\include\GLFW\glfw3.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\include\GLFW\glfw3native.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_platform.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\win32_joystick.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\wgl_context.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\egl_context.h" />
+    <ClInclude Include="$(SolutionDir)SrcExternal\Effekseer\Downloads\glfw\src\osmesa_context.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{C219BC4B-0197-371B-BEB2-1885BD02DA58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6F0DAE42-B3F1-3BA8-8EC3-1793E4CBD0B8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -4,10 +4,6 @@
 #include <Windows.h>
 #include <Xinput.h>
 
-#pragma comment(lib, "dinput8.lib")
-#pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "xinput.lib")
-
 enum class Button {
 	Up = 0x0001,
 	Down = 0x0002,

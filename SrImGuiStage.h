@@ -9,7 +9,7 @@ public:
     void Render() override;
     void PostDraw() override;
 
-    void DrawCommands(function<void(void)> cmd) override;
+    void DrawCommands(std::function<void(void)> cmd) override;
 private:
 };
 

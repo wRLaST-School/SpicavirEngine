@@ -44,7 +44,7 @@ public:
 private:
 	SpConstBuffer<LightCBData> lightCB_;
 
-	map<PointLightKey, PointLight> pointLights_;
+	std::map<PointLightKey, PointLight> pointLights_;
 
 	Light(){ };
 	~Light(){ };

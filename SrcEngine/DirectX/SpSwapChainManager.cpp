@@ -16,7 +16,7 @@ void SpSwapChainManager::Init()
 	swapchainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
 	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
-	ComPtr<IDXGISwapChain1> swapchain1;
+	Microsoft::WRL::ComPtr<IDXGISwapChain1> swapchain1;
 	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetSpWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
 	swapchain1.As(&swapchain);
 
