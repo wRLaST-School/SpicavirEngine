@@ -312,6 +312,14 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 					bones.insert(std::pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
 				}
 			}
+			else
+			{
+				Bone bone;
+				bone.offsetMatrix = Matrix::Identity();
+				bone.index = 0;
+				bones.insert(std::pair<std::string, Bone>("", bone));
+				bMatrixCB.contents->bMatrix[0] = Matrix::Identity();
+			}
 		}
 	};
 
@@ -385,7 +393,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 					tcList.push_back({ mesh->mTextureCoords[0][j].x,mesh->mTextureCoords[0][j].y });
 				}
 				//Bone
-				if (mesh->HasBones() || !mesh->mNumBones)
+				if (mesh->HasBones() || mesh->mNumBones)
 				{
 					struct BoneData {
 						int32_t index;
@@ -440,7 +448,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 				else
 				{
 					bIndexList.push_back({ 0, 0, 0, 0 });
-					bWeightList.push_back({ 0.f, 0.f, 0.f, 0.f });
+					bWeightList.push_back({ 1.f, 0.f, 0.f, 0.f });
 				}
 
 				//頂点データ配列に追加
