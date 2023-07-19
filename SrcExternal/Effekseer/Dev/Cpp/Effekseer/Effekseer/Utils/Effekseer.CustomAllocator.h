@@ -147,7 +147,8 @@ struct CustomAllocator
 	}
 	void deallocate(T* p, std::size_t n)
 	{
-		GetFreeFunc()(p, sizeof(T) * static_cast<uint32_t>(n));
+		if(GetFreeFunc() != nullptr)
+			GetFreeFunc()(p, sizeof(T) * static_cast<uint32_t>(n));
 	}
 };
 
@@ -171,7 +172,8 @@ struct CustomAlignedAllocator
 	}
 	void deallocate(T* p, std::size_t n)
 	{
-		GetAlignedFreeFunc()(p, sizeof(T) * static_cast<uint32_t>(n));
+		if(GetAlignedFreeFunc() != nullptr)
+			GetAlignedFreeFunc()(p, sizeof(T) * static_cast<uint32_t>(n));
 	}
 
 	bool operator==(const CustomAlignedAllocator<T>&)
