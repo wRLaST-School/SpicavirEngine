@@ -16,7 +16,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
 	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "SmoothSphere", true);
-	ModelManager::Register("Resources/Models/testgltf/player.gltf", "FlatSphere", true);
+	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "FlatSphere", false);
 	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	//ModelManager::Register("ICO", "FlatSphere");
 
@@ -49,7 +49,7 @@ void SingleCamTestScene::Init()
 {
 	camera.UseDefaultParams();
 
-	pane.model = ModelManager::GetModel("FlatSphere");
+	pane.model = ModelManager::GetModel("SmoothSphere");
 	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
@@ -106,7 +106,7 @@ void SingleCamTestScene::Update()
 	//Object
 	SpImGui::Command([&]() {
 		ImGui::SetNextWindowPos(ImVec2(100, 220));
-		ImGui::SetNextWindowSize(ImVec2(300, 200));
+		ImGui::SetNextWindowSize(ImVec2(300, 400));
 		if (ImGui::Begin("Object Editor"))
 		{
 			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
