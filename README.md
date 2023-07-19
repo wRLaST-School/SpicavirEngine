@@ -10,6 +10,7 @@
 - XAudio2によるサウンド再生
 - DInputとXInputによるキーボード、マウス、ゲームパッド入力
 - EffekseerライブラリによるVFX読み込みと再生
+- 描画順を自動で決定することによる半透明オブジェクトのより正確な描画
 
 #### リファレンス(WIP)
 [リファレンス](https://scrapbox.io/SpicavirEngine/Spicavir_Engine_%E7%B0%A1%E6%98%93%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9)
