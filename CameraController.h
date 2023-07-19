@@ -22,7 +22,7 @@ public:
 
 	void SetMode(Mode m);
 
-	unique_ptr<Camera> cam;
+	std::unique_ptr<Camera> cam;
 
 public:
 	static CameraController* Get();

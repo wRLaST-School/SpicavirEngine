@@ -6,7 +6,7 @@
 
 void CameraController::Init()
 {
-	cam = make_unique<Camera>();
+	cam = std::make_unique<Camera>();
 
 	cam->UseDefaultParams();
 

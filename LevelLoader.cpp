@@ -9,11 +9,12 @@
 #include <iostream>
 
 using namespace nlohmann;
+using namespace std;
 
-void LevelLoader::Load(string path)
+void LevelLoader::Load(std::string path)
 {
 	//ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
-	ifstream file;
+	std::ifstream file;
 
 	file.open(path);
 

@@ -80,10 +80,10 @@ void Player::Move()
 void Player::DamageUpdate()
 {
 	damageTimer--;
-	damageTimer = max(0, damageTimer);
+	damageTimer = std::max(0, damageTimer);
 
 	dodgeSucceededTimer_--;
-	dodgeSucceededTimer_ = max(0, dodgeSucceededTimer_);
+	dodgeSucceededTimer_ = std::max(0, dodgeSucceededTimer_);
 
 	if (dodgeSucceededTimer_)
 	{

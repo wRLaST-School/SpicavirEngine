@@ -4,6 +4,6 @@
 class LevelLoader
 {
 public:
-	static void Load(string path);
+	static void Load(std::string path);
 };
 
