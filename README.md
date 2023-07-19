@@ -1,23 +1,19 @@
-# 課題のコードについて
-課題に関わるcommitには全て
-> <科目ID>-<章と節>-<コミット部分の内容>
-> i.e. CG3-01-01-Test
+# Spicavir Engine
+このゲームエンジンはDirectX12を用いてレンダリングを行うゲームエンジンです。
+「C++でのゲーム開発のしやすさ」「少人数チーム制作での作業分担のしやすさ」の2点を重視して設計しています。
+#### 基本機能
+- DirectX12による3D描画
+- DxLibライクな2D描画関数群
+- IPostEffectorを継承したクラスとシェーダーを作るだけの簡単なポストエフェクト
+- EmitterテンプレートクラスとIParticle基底クラスにより簡単に作れるGPUパーティクル
+- Assimpライブラリを用いたGLTFの読み込みとスキニングアニメーション再生
+- XAudio2によるサウンド再生
+- DInputとXInputによるキーボード、マウス、ゲームパッド入力
+- EffekseerライブラリによるVFX読み込みと再生
 
-の形式でタグをつけています。
-(例外：22/10/03以前に実装した部分)
-
-
-Code > Tags(画像参照)から評価対象のタグを選択し、
-
-![image](https://user-images.githubusercontent.com/103230447/193510905-db7a8bff-52b8-469a-b35c-10b7b6ca1d7b.png)
-
-最新のコミット(画像参照)をクリックすると該当箇所のコードを探しやすいと思います。
-
-![image](https://user-images.githubusercontent.com/103230447/193511117-c8ceb4a0-9711-4781-b496-c99a7c13bfd4.png)
-
-
-複数のコミットに分かれている場合は
->　<科目ID>-<章と節>
-
-の部分が一致しているタグが複数あります。
-
+#### 使用外部ライブラリ
+- [Assimp](https://github.com/assimp/assimp)
+- [DirectXTex](https://github.com/microsoft/DirectXTex)
+- [EASTL](https://github.com/electronicarts/EASTL)
+- [Effekseer](https://effekseer.github.io/jp/)
+- [Dear ImGui](https://github.com/ocornut/imgui)
