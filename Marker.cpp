@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Marker.h"
 #include <Player.h>
+#include <SpEffekseer.h>
 
 const TextureKey Marker::TEX_KEY = "Marker";
 
@@ -13,6 +14,7 @@ void Marker::Cast(const Float3& pos_)
     pos = pos_;
     timer_ = 0;
     active = true;
+    SpEffekseer::Play("Marker", pos);
 }
 
 void Marker::InitModel()
