@@ -12,7 +12,7 @@ void GameScene::LoadResources()
 	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
-	SpEffekseer::Load(L"Resources/Effekseer/Marker", L"Resources/Effekseer/Marker/Marker.efkpkg", "Marker");
+	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
 }
 
 void GameScene::Init()
