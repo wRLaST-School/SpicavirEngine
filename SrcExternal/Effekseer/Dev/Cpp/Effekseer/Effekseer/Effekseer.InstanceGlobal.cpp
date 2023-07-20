@@ -24,7 +24,8 @@ void* InstanceGlobal::operator new(size_t size)
 
 void InstanceGlobal::operator delete(void* p)
 {
-	GetAlignedFreeFunc()(p, sizeof(InstanceGlobal));
+	if(GetAlignedFreeFunc() != nullptr)
+		GetAlignedFreeFunc()(p, sizeof(InstanceGlobal));
 }
 
 InstanceGlobal::InstanceGlobal()

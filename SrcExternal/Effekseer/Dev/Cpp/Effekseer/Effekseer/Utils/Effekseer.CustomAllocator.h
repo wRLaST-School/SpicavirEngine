@@ -143,7 +143,10 @@ struct CustomAllocator
 
 	T* allocate(std::size_t n)
 	{
-		return reinterpret_cast<T*>(GetMallocFunc()(sizeof(T) * static_cast<uint32_t>(n)));
+		if(GetMallocFunc() != nullptr)
+			return reinterpret_cast<T*>(GetMallocFunc()(sizeof(T) * static_cast<uint32_t>(n)));
+		
+		return reinterpret_cast<T*>((void*)new char* [sizeof(T) * static_cast<uint32_t>(n)]);
 	}
 	void deallocate(T* p, std::size_t n)
 	{
@@ -168,7 +171,20 @@ struct CustomAlignedAllocator
 
 	T* allocate(std::size_t n)
 	{
-		return reinterpret_cast<T*>(GetAlignedMallocFunc()(sizeof(T) * static_cast<uint32_t>(n), 32));
+		if (GetAlignedMallocFunc() != nullptr)
+			return reinterpret_cast<T*>(GetAlignedMallocFunc()(sizeof(T) * static_cast<uint32_t>(n), 32));
+
+#if defined(__EMSCRIPTEN__) && __EMSCRIPTEN_minor__ < 38
+		return reinterpret_cast<T*>(malloc(sizeof(T) * static_cast<uint32_t>(n)));
+#elif defined(_WIN32)
+		return reinterpret_cast<T*>(_mm_malloc(sizeof(T) * static_cast<uint32_t>(n), 32));
+#elif defined(__MINGW32__)
+		return reinterpret_cast<T*>(_aligned_malloc(32, sizeof(T) * static_cast<uint32_t>(n)));
+#else
+		void* ptr = nullptr;
+		posix_memalign(&ptr, 32, sizeof(T) * static_cast<uint32_t>(n));
+		return reinterpret_cast<T*>(ptr);
+#endif
 	}
 	void deallocate(T* p, std::size_t n)
 	{
