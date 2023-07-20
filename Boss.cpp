@@ -3,6 +3,7 @@
 #include <Util.h>
 #include <Input.h>
 #include <GlobalTimer.h>
+#include <Player.h>
 
 Boss* Boss::sCurrent = nullptr;
 
@@ -29,10 +30,11 @@ void Boss::Update()
 	{
 		if (Util::Chance(50))
 		{
-			for (size_t i = 0; i < 30; i++)
-			{
-				CastMarker({ (float)Util::RNG(-20, 20), 0.001f, (float)(Util::RNG(-20, 20)) });
-			}
+			CastMarkerLine3();
+		}
+		else
+		{
+			CastMarkerAim1Rand5();
 		}
 	}
 	UpdateMarkers();
@@ -62,6 +64,38 @@ void Boss::CastMarker(Float3 pos)
 		if (!m.active) {
 			m.Cast(pos);
 			break;
+		}
+	}
+}
+
+void Boss::CastMarkerAim1Rand5()
+{
+	CastMarker({Player::Get()->position.x, 0, Player::Get()->position.z});
+
+	for (size_t i = 0; i < 5; i++)
+	{
+		CastMarker({ (float)Util::RNG(-30, 30), 0.001f, (float)(Util::RNG(-30, 30)) });
+	}
+}
+
+void Boss::CastMarkerLine3()
+{
+	if (Util::Chance(50))
+	{
+		for (float z = -10.f; z <= 10.f; z += 10.f)
+		{
+			for (float x = -28.f; x < 28.f; x += 4.f) {
+				CastMarker({ x, 0.f, z });
+			}
+		}
+	}
+	else
+	{
+		for (float x = -10.f; x <= 10.f; x += 10.f)
+		{
+			for (float z = -28.f; z < 28.f; z += 4.f) {
+				CastMarker({ x, 0.f, z });
+			}
 		}
 	}
 }

@@ -21,6 +21,9 @@ public:
 public:
     void CastMarker(Float3 pos);
 
+    void CastMarkerAim1Rand5();
+    void CastMarkerLine3();
+
     void DrawMarkers();
     void UpdateMarkers();
 

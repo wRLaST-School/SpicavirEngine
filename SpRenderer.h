@@ -22,8 +22,8 @@ public:
 	enum class Stage {
 		Opaque,
 		Add,
-		Particle,
 		Alpha,
+		Particle,
 		PostEffect,
 		Sprite,
 		ImGui
@@ -35,8 +35,8 @@ private:
 	std::unique_ptr<IRenderStage> stages_[7] = {
 		std::make_unique<SrOpaqueStage>(),
 		std::make_unique<SrAddStage>(),
-		std::make_unique<SrParticleStage>(),
 		std::make_unique<SrAlphaStage>(),
+		std::make_unique<SrParticleStage>(),
 		std::make_unique<SrPostEffectStage>(),
 		std::make_unique<SrSpriteStage>(),
 		std::make_unique<SrImGuiStage>()

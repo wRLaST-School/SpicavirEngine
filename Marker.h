@@ -16,8 +16,8 @@ public:
 	bool active = false;
 
 private:
-	Object3D outerObj;
-	Object3D innerObj;
+	//Object3D outerObj;
+	//Object3D innerObj;
 
 	int timer_ = 0;
 

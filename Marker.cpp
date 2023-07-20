@@ -19,20 +19,18 @@ void Marker::Cast(const Float3& pos_)
 
 void Marker::InitModel()
 {
-    outerObj.model = ModelManager::GetModel("Marker");
-    innerObj.model = ModelManager::GetModel("Marker");
 }
 
 void Marker::Update()
 {
-    float scale = (float)R;
-    outerObj.scale = { scale, 1, scale };
-    outerObj.position = pos;
+    //float scale = (float)R;
+    //outerObj.scale = { scale, 1, scale };
+    //outerObj.position = pos;
 
-    float inscale = scale * ((float)(FIN_TIME - timer_) / FIN_TIME);
-    innerObj.scale = { inscale, 1, inscale };
-    innerObj.position = pos;
-    innerObj.position.y += 0.0001f;
+    //float inscale = scale * ((float)(FIN_TIME - timer_) / FIN_TIME);
+    //innerObj.scale = { inscale, 1, inscale };
+    //innerObj.position = pos;
+    //innerObj.position.y += 0.0001f;
 
     if (timer_ >= FIN_TIME)
     {
@@ -52,14 +50,14 @@ void Marker::Update()
         active = false;
     }
 
-    outerObj.UpdateMatrix();
-    innerObj.UpdateMatrix();
+    //outerObj.UpdateMatrix();
+    //innerObj.UpdateMatrix();
 
     timer_++;
 }
 
 void Marker::Draw()
 {
-	outerObj.DrawAlpha(TEX_KEY);
-	innerObj.DrawAlpha(TEX_KEY);
+	//outerObj.DrawAlpha(TEX_KEY);
+	//innerObj.DrawAlpha(TEX_KEY);
 }
