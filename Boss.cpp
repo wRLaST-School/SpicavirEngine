@@ -4,6 +4,7 @@
 #include <Input.h>
 #include <GlobalTimer.h>
 #include <Player.h>
+#include <SpImGui.h>
 
 Boss* Boss::sCurrent = nullptr;
 
@@ -26,9 +27,27 @@ void Boss::Init()
 
 void Boss::Update()
 {
+	static float rotY;
+
+	SpImGui::Command([&] {
+		if (ImGui::Begin("Boss"))
+		{
+			ImGui::DragFloat("RotY", &rotY);
+			ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing);
+			ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing);
+		}
+		ImGui::End();
+	});
+
+	rotation = Quaternion(Vec3(0, 1, 0), rotY);
+
 	if (GlobalTimer::sTime % 120 == 0)
 	{
 		if (Util::Chance(50))
+		{
+			CastLineTriple();
+		}
+		else if (Util::Chance(50))
 		{
 			CastMarkerLine3();
 		}
@@ -83,7 +102,7 @@ void Boss::CastMarkerLine3()
 {
 	if (Util::Chance(50))
 	{
-		for (float z = -10.f; z <= 10.f; z += 10.f)
+		for (float z = -markerLine3Spacing; z <= markerLine3Spacing; z += markerLine3Spacing)
 		{
 			for (float x = -28.f; x < 28.f; x += 4.f) {
 				CastMarker({ x, 0.f, z });
@@ -92,7 +111,7 @@ void Boss::CastMarkerLine3()
 	}
 	else
 	{
-		for (float x = -10.f; x <= 10.f; x += 10.f)
+		for (float x = -markerLine3Spacing; x <= markerLine3Spacing; x += markerLine3Spacing)
 		{
 			for (float z = -28.f; z < 28.f; z += 4.f) {
 				CastMarker({ x, 0.f, z });
@@ -121,17 +140,22 @@ void Boss::CastLineTriple()
 	side.y = 0;
 	side.Norm();
 
+	Vec3 basePos = position;
+	basePos.y = 0;
+
 	if (Util::Chance(50))
 	{
-		for (float x = -10.f; x <= 10.f; x += 10.f)
+		for (float x = -lineAttackSpacing; x <= lineAttackSpacing; x += lineAttackSpacing)
 		{
-			CastLine((Vec3)position + front * 10.f + side * x, /*front‚ÌŠp“x*/);
+			
+			CastLine(basePos + front * 20.f + side * x, atan2f(front.x, front.z));
 		}
 	}
 	else
 	{
-		for (float z = -10.f; z <= 10.f; z += 10.f)
+		for (float z = -lineAttackSpacing; z <= lineAttackSpacing; z += lineAttackSpacing)
 		{
+			CastLine(basePos + front * (20.f + z), atan2f(front.x, front.z) + PIf / 2);
 		}
 	}
 }

@@ -113,7 +113,12 @@ void Player::Damage()
 
 void Player::Draw()
 {
-	Object3D::DrawAlpha("white");
+	if(brightnessCB.contents->w < 1.0f)
+		Object3D::DrawAlpha("white");
+	else
+	{
+		Object3D::Draw("white");
+	}
 }
 
 void Player::DodgeUpdate()

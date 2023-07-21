@@ -39,6 +39,9 @@ private:
 
     eastl::list<LineAttack> lineAttacks;
 
+    float markerLine3Spacing = 20.f;
+    float lineAttackSpacing = 15.f;
+
 private:
     static Boss* sCurrent;
 };
