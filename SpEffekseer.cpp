@@ -129,3 +129,8 @@ void SpEffekseer::PreLoadNewScene()
 {
 	sCurrentSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
 }
+
+Effekseer::Manager* SpEffekseer::Manager()
+{
+	return sEfkManager.Get();
+}

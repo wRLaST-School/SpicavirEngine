@@ -26,7 +26,7 @@ void Boss::Init()
 
 void Boss::Update()
 {
-	if (GlobalTimer::sTime % 60 == 0)
+	if (GlobalTimer::sTime % 120 == 0)
 	{
 		if (Util::Chance(50))
 		{
@@ -38,6 +38,7 @@ void Boss::Update()
 		}
 	}
 	UpdateMarkers();
+	UpdateLineAttacks();
 	UpdateMatrix();
 }
 
@@ -108,4 +109,51 @@ void Boss::DrawMarkers()
 void Boss::UpdateMarkers()
 {
 	for (auto& m : markers) if (m.active) m.Update();
+}
+
+void Boss::CastLineTriple()
+{
+	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	front.y = 0;
+	front.Norm();
+
+	Vec3 side = rotation.GetRotMat().ExtractAxisX();
+	side.y = 0;
+	side.Norm();
+
+	if (Util::Chance(50))
+	{
+		for (float x = -10.f; x <= 10.f; x += 10.f)
+		{
+			CastLine((Vec3)position + front * 10.f + side * x, /*front‚ÌŠp“x*/);
+		}
+	}
+	else
+	{
+		for (float z = -10.f; z <= 10.f; z += 10.f)
+		{
+		}
+	}
+}
+
+void Boss::CastLine(Float3 pos, float angle)
+{
+	lineAttacks.emplace_back(pos, angle);
+}
+
+void Boss::UpdateLineAttacks()
+{
+	for (auto itr = lineAttacks.begin(); itr != lineAttacks.end();)
+	{
+		itr->Update();
+
+		if (!itr->active)
+		{
+			itr = lineAttacks.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }

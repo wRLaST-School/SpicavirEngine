@@ -129,6 +129,7 @@
     <ClCompile Include="GlobalTimer.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="LineAttack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marker.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="IRenderStage.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="LineAttack.h" />
     <ClInclude Include="Marker.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />

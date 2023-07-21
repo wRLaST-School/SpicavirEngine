@@ -399,6 +399,9 @@
     <ClCompile Include="SpEffekseer.cpp">
       <Filter>Engine\ソースファイル\Effekseer</Filter>
     </ClCompile>
+    <ClCompile Include="LineAttack.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -646,6 +649,9 @@
     </ClInclude>
     <ClInclude Include="SpEffekseer.h">
       <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="LineAttack.h">
+      <Filter>!Game\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

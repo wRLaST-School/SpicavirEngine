@@ -43,6 +43,8 @@ public:
 
 	static void PreLoadNewScene();
 
+	static Effekseer::Manager* Manager();
+
 private:
 	static Effekseer::RefPtr<EffekseerRenderer::Renderer> sEfkRenderer;
 

@@ -13,6 +13,7 @@ void GameScene::LoadResources()
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
 	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
+	SpEffekseer::Load(L"Resources/Effekseer/Line", L"Resources/Effekseer/Line/Line.efk", "LineAttack");
 }
 
 void GameScene::Init()
