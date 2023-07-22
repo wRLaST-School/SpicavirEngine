@@ -144,6 +144,7 @@ public:
 
 	void SetAnim(std::string animKey);
 	void UpdateAnim();
+	void ResetAnimTimer();
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	D3D12_INDEX_BUFFER_VIEW ibView{};
@@ -161,6 +162,8 @@ public:
 	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
 
 	Model operator= (Model& m) = delete;
+
+	float aniSpeed = 1.f;
 
 private:
 	uint32_t animTimer = 0;

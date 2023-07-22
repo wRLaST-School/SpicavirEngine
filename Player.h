@@ -39,9 +39,9 @@ private:
 private:
     Vec3 dodgeVec_ = Vec3();
     int32_t dodgeTimer_ = 0;
-    const int32_t iFrame = 15;
+    const int32_t iFrame = 25;
 
-    float dodgeSpd_ = 0.64f;
+    float dodgeSpd_ = 0.48f;
 
     int32_t dodgeSucceededTimer_ = 0;
 

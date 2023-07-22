@@ -665,12 +665,12 @@ void Model::UpdateAnim()
 	}
 
 	animTimer++;
-	if ((double)animTimer / 60.0 * anim->tickPerSecond >= anim->duration)
+	if ((double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed >= anim->duration)
 	{
 		animTimer = 0;
 	}
 
-	double aniTick = (float)animTimer / 60.0 * anim->tickPerSecond;
+	double aniTick = (float)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
 
 	SpImGui::Command([=] {
 		if (ImGui::Begin("Animation"))
@@ -847,6 +847,11 @@ void Model::UpdateAnim()
 			bMatrixCB.contents->bMatrix[i] = Matrix::Identity();
 		}
 	}
+}
+
+void Model::ResetAnimTimer()
+{
+	animTimer = 0;
 }
 
 void ModelManager::Register(const std::string& modelName, const ModelKey& key)
