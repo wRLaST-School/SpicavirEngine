@@ -88,6 +88,7 @@ void Player::Move()
 	if (vel.GetSquaredLength())
 	{	
 		state = State::Move;
+		rotation = Quaternion::DirToDir(Vec3(0, 0, -1), vel);
 		vel *= spd;
 	}
 	else
@@ -145,6 +146,8 @@ void Player::Draw()
 void Player::DodgeUpdate()
 {
 	position += dodgeVec_;
+
+	rotation = Quaternion::DirToDir(Vec3(0, 0, -1), dodgeVec_.GetNorm());
 
 	dodgeTimer_++;
 
