@@ -269,7 +269,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 				{
 					aiVector3D aiScale = aiChan->mScalingKeys[s].mValue;
 					Float3 scale = { aiScale.x, aiScale.y, aiScale.z };
-					channel.scales.push_back({ scale, aiChan->mScalingKeys[s].mTime});
+					channel.scales.push_back({ scale, aiChan->mScalingKeys[s].mTime });
 				}
 
 				anim.channels.push_back(channel);
@@ -360,7 +360,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 		nodes.emplace(cur->mName.C_Str(), node);
 
-		for (uint32_t  i = 0; i < cur->mNumChildren; i++)
+		for (uint32_t i = 0; i < cur->mNumChildren; i++)
 		{
 			fNode(cur->mChildren[i], &nodes.at(cur->mName.C_Str()));
 		}
@@ -422,9 +422,9 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 					}
 
-					std::sort(bdlist.begin(), bdlist.end(), [](const auto & lhs, const auto& rhs) {
+					std::sort(bdlist.begin(), bdlist.end(), [](const auto& lhs, const auto& rhs) {
 						return lhs.weight > rhs.weight;
-					});
+						});
 
 					eastl::array<int32_t, 4> bInd{};
 					eastl::array<float, 4> bWeight{};
@@ -469,7 +469,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 	};
 
 	//ƒm[ƒh‚²‚Æ‚Ìˆ—ŒÄ‚Ño‚µ
-	fNode(scene->mRootNode, nullptr);	
+	fNode(scene->mRootNode, nullptr);
 
 	for (uint32_t i = 0; i < scene->mNumMaterials; i++)
 	{
@@ -485,7 +485,14 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 		mtr->name = tempstr.C_Str();
 
 		aimtr->Get(AI_MATKEY_COLOR_AMBIENT, temp);
-		mtr->ambient = { temp.r, temp.g, temp.b };
+		if (temp.r || temp.g || temp.b)
+		{
+			mtr->ambient = { temp.r, temp.g, temp.b };
+		}
+		else
+		{
+			mtr->ambient = { 0.7f, 0.7f, 0.7f };
+		}
 
 		aimtr->Get(AI_MATKEY_COLOR_SPECULAR, temp);
 		mtr->specular = { temp.r, temp.g, temp.b };

@@ -53,6 +53,12 @@ void LevelLoader::Load(std::string path)
 
 			if (obj.contains("file_name")) {
 				objdata.model = ModelManager::GetModel(obj["file_name"]);
+
+				//TODO: 削除してテクスチャを貼る
+				if (obj["file_name"] == "floor")
+				{
+					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 0.3f, 1.0 };
+				}
 			}
 
 			json& transform = obj["transform"];

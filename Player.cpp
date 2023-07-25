@@ -3,6 +3,21 @@
 #include <Input.h>
 #include <CameraController.h>
 #include <Boss.h>
+#include <SpEffekseer.h>
+
+void Player::Load()
+{
+	ModelManager::Register("Cube", "cube");
+
+	ModelManager::Register("Resources/Models/Player/Idle.gltf", "PlayerIdle", false);
+	ModelManager::Register("Resources/Models/Player/Roll.gltf", "PlayerRoll", false);
+	ModelManager::Register("Resources/Models/Player/Run.gltf", "PlayerRun", false);
+	ModelManager::Register("Resources/Models/Player/Slash1.gltf", "PlayerSlash1", false);
+	ModelManager::Register("Resources/Models/Player/Slash2.gltf", "PlayerSlash2", false);
+	ModelManager::Register("Resources/Models/Player/Slash3.gltf", "PlayerSlash3", false);
+
+	SpEffekseer::Load(L"Resources/Effekseer/Slash1", L"Resources/Effekseer/Slash1/Slash1.efk", "Slash1");
+}
 
 void Player::Init()
 {
@@ -43,6 +58,15 @@ void Player::Update()
 		break;
 	case Player::State::Dodge:
 		DodgeUpdate();
+		break;
+	case Player::State::Slash1:
+		SlashUpdate1();
+		break;
+	case Player::State::Slash2:
+		SlashUpdate2();
+		break;
+	case Player::State::Slash3:
+		SlashUpdate3();
 		break;
 	default:
 		break;
@@ -97,6 +121,26 @@ void Player::Move()
 	}
 
 	position += vel;
+}
+
+void Player::GravMove()
+{
+	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
+	{
+		vy = JUMP_POWER;
+	}
+	if (position.y > 1.f)
+	{
+		vy -= GRAV;
+	}
+
+	position.y += vy;
+
+	if (position.y < 1.f)
+	{
+		vy = 0;
+		position.y = 1.f;
+	}
 }
 
 void Player::DamageUpdate()
@@ -161,26 +205,16 @@ void Player::IdleMoveUpdate()
 {
 	Move();
 
-	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
-	{
-		vy = JUMP_POWER;
-	}
-	if (position.y > 1.f)
-	{
-		vy -= GRAV;
-	}
-
-	position.y += vy;
-
-	if (position.y < 1.f)
-	{
-		vy = 0;
-		position.y = 1.f;
-	}
+	GravMove();
 
 	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
 	{
 		Dodge();
+	}
+
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	{
+		Slash1();
 	}
 }
 
@@ -216,16 +250,51 @@ void Player::Dodge()
 	model->aniSpeed = 3.8f;
 }
 
-void Player::Load()
+void Player::SlashUpdate1()
 {
-	ModelManager::Register("Cube", "cube");
+	slashTimer++;
+	if (slashTimer > slashTime)
+	{
+		slashTimer = 0;
+		state = State::Idle;
+	}
+}
 
-	ModelManager::Register("Resources/Models/Player/Idle.gltf", "PlayerIdle", false);
-	ModelManager::Register("Resources/Models/Player/Roll.gltf", "PlayerRoll", false);
-	ModelManager::Register("Resources/Models/Player/Run.gltf", "PlayerRun", false);
-	ModelManager::Register("Resources/Models/Player/Slash1.gltf", "PlayerSlash1", false);
-	ModelManager::Register("Resources/Models/Player/Slash2.gltf", "PlayerSlash2", false);
-	ModelManager::Register("Resources/Models/Player/Slash3.gltf", "PlayerSlash3", false);
+void Player::SlashUpdate2()
+{
+}
+
+void Player::SlashUpdate3()
+{
+}
+
+void Player::Slash1()
+{
+	//³–Ê‚ÌŠp“x‚ðŒvŽZ
+	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	front.y = 0;
+	front.Norm();
+
+	/*Vec3 side = rotation.GetRotMat().ExtractAxisX();
+	side.y = 0;
+	side.Norm();*/
+	float angle = atan2f(front.x, front.z) + PIf;
+
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash1", position), { 0, 1, 0 }, angle);
+
+	model = ModelManager::GetModel("PlayerSlash2");
+	model->ResetAnimTimer();
+	model->aniSpeed = 1.5f;
+
+	state = State::Slash1;
+}
+
+void Player::Slash2()
+{
+}
+
+void Player::Slash3()
+{
 }
 
 Player* Player::Get()

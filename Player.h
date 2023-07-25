@@ -9,6 +9,7 @@ public:
     void Update();
 
     void Move();
+    void GravMove();
     void DamageUpdate();
     void Damage();
     void Draw();
@@ -16,6 +17,14 @@ public:
     void DodgeUpdate();
     void IdleMoveUpdate();
     void Dodge();
+
+    void SlashUpdate1();
+    void SlashUpdate2();
+    void SlashUpdate3();
+
+    void Slash1();
+    void Slash2();
+    void Slash3();
 
     float r2d = .5f;
 
@@ -33,7 +42,10 @@ private:
     enum class State {
         Idle,
         Move,
-        Dodge
+        Dodge,
+        Slash1,
+        Slash2,
+        Slash3
     } state = State::Idle;
 
 private:
@@ -44,6 +56,9 @@ private:
     float dodgeSpd_ = 0.48f;
 
     int32_t dodgeSucceededTimer_ = 0;
+
+    int32_t slashTimer = 0;
+    const int32_t slashTime = 40;
 
 public:
     static void Load();
