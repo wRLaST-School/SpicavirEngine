@@ -22,7 +22,7 @@ void CameraController::Update()
 		cam->target = Boss::Get()->position;
 		cam->targetMode = CameraTargetMode::LookAt;
 
-		Vec3 front = Player::Get()->rotation.GetRotMat().ExtractAxisZ();
+		Vec3 front = (Vec3)Boss::Get()->position - Player::Get()->position;
 		front.y = 0;
 		front.Norm();
 
