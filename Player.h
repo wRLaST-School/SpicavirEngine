@@ -29,7 +29,7 @@ public:
     float r2d = .5f;
 
 private:
-    float spd = 0.08f;
+    float spd = 0.125f;
 
     const float GRAV = 0.025f;
     const float JUMP_POWER = 0.5f;
@@ -59,6 +59,9 @@ private:
 
     int32_t slashTimer = 0;
     const int32_t slashTime = 40;
+    const int32_t slash3Time = 60;
+
+    bool slashRegistered = false;
 
 public:
     static void Load();

@@ -46,6 +46,11 @@ Quaternion& Quaternion::operator*=(const Quaternion& o)
 	return *this;
 }
 
+bool Quaternion::operator==(const Quaternion& o) const
+{
+	return v.x == o.v.x && v.y == o.v.y && v.z == o.v.z && w == w;
+}
+
 Quaternion Quaternion::Identity()
 {
 	return Quaternion();
@@ -77,6 +82,11 @@ Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, cons
 {
 	float clamped = Util::Clamp(zero.Dot(one), -1.f, 1.f);
 	float theta = acosf(clamped);
+
+	if (zero == one)
+	{
+		return zero;
+	}
 	
 	if (!theta)
 	{

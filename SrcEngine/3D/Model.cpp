@@ -677,7 +677,7 @@ void Model::UpdateAnim()
 		animTimer = 0;
 	}
 
-	double aniTick = (float)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
+	double aniTick = (double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
 
 	SpImGui::Command([=] {
 		if (ImGui::Begin("Animation"))
@@ -781,7 +781,7 @@ void Model::UpdateAnim()
 			}
 			else
 			{
-				fstr.rot;
+				slerpedRot = fstr.rot;
 			}
 
 			Quaternion finr = slerpedRot;

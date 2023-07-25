@@ -4,6 +4,10 @@
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_No_Iterator_Check|x64">
+      <Configuration>Debug_No_Iterator_Check</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -27,6 +31,11 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
@@ -42,9 +51,13 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">zlibstatic.dir\Debug\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">zlibstatic.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">zlibstaticd</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">zlibstaticd</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">.lib</TargetExt>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)SrcExternal\Assimp\contrib\zlib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">zlibstatic.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">zlibstatic</TargetName>
@@ -69,6 +82,43 @@
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;C:\k021g1251\Assimp\assimp-5.2.5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4131;4127;4244;4244</DisableSpecificWarnings>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;NO_FSEEKO;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;CMAKE_INTDIR="Debug";_ITERATOR_DEBUG_LEVEL=0</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>

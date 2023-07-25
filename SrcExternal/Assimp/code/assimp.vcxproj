@@ -4,6 +4,10 @@
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_No_Iterator_Check|x64">
+      <Configuration>Debug_No_Iterator_Check</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -27,6 +31,11 @@
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
@@ -42,9 +51,13 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)SrcExternal\Assimp\lib\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">$(SolutionDir)SrcExternal\Assimp\lib\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assimp.dir\Debug\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">assimp.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">assimp-vc143-mtd</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">assimp-vc143-mtd</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">.lib</TargetExt>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)SrcExternal\Assimp\lib\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">assimp-vc143-mt</TargetName>
@@ -70,6 +83,45 @@
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_DEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(SolutionDir)SrcExternal\Assimp\code\Debug\assimp-vc143-mtd.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcExternal\Assimp\code;$(SolutionDir)SrcExternal\Assimp\.;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\contrib\zlib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\pugixml\src;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\rapidjson\include;$(SolutionDir)SrcExternal\Assimp\code\..\contrib;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\unzip;$(SolutionDir)SrcExternal\Assimp\code\..\contrib\openddlparser\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..\include;$(SolutionDir)SrcExternal\Assimp\code\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;_DEBUG;OPENDDL_STATIC_LIBARY;ASSIMP_BUILD_NO_M3D_IMPORTER;ASSIMP_BUILD_NO_M3D_EXPORTER;WIN32_LEAN_AND_MEAN;UNICODE;_UNICODE;ASSIMP_BUILD_NO_C4D_IMPORTER;MINIZ_USE_UNALIGNED_LOADS_AND_STORES=0;ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC=1;RAPIDJSON_HAS_STDSTRING=1;RAPIDJSON_NOMEMBERITERATORCLASS;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;OPENDDLPARSER_BUILD;CMAKE_INTDIR="Debug";_ITERATOR_DEBUG_LEVEL=0</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(SolutionDir)SrcExternal\Assimp\code\Debug\assimp-vc143-mtd.pdb</ProgramDataBaseFileName>
     </ClCompile>

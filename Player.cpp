@@ -17,6 +17,8 @@ void Player::Load()
 	ModelManager::Register("Resources/Models/Player/Slash3.gltf", "PlayerSlash3", false);
 
 	SpEffekseer::Load(L"Resources/Effekseer/Slash1", L"Resources/Effekseer/Slash1/Slash1.efk", "Slash1");
+	SpEffekseer::Load(L"Resources/Effekseer/Slash2", L"Resources/Effekseer/Slash2/Slash2.efk", "Slash2");
+	SpEffekseer::Load(L"Resources/Effekseer/Slash3", L"Resources/Effekseer/Slash3/Slash3.efk", "Slash3");
 }
 
 void Player::Init()
@@ -125,21 +127,17 @@ void Player::Move()
 
 void Player::GravMove()
 {
-	if (position.y == 1.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
-	{
-		vy = JUMP_POWER;
-	}
-	if (position.y > 1.f)
+	if (position.y > 0.f)
 	{
 		vy -= GRAV;
 	}
 
 	position.y += vy;
 
-	if (position.y < 1.f)
+	if (position.y < 0.f)
 	{
 		vy = 0;
-		position.y = 1.f;
+		position.y = 0.f;
 	}
 }
 
@@ -204,7 +202,11 @@ void Player::DodgeUpdate()
 void Player::IdleMoveUpdate()
 {
 	Move();
-
+	
+	if (position.y == 0.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
+	{
+		vy = JUMP_POWER;
+	}
 	GravMove();
 
 	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
@@ -253,19 +255,89 @@ void Player::Dodge()
 void Player::SlashUpdate1()
 {
 	slashTimer++;
+
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	{
+		slashRegistered = true;
+	}
+
+	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	{
+		slashTimer = 0;
+		Dodge();
+	}
+
 	if (slashTimer > slashTime)
 	{
 		slashTimer = 0;
-		state = State::Idle;
+		if (slashRegistered)
+		{
+			Slash2();
+			slashRegistered = false;
+		}
+		else
+		{
+			state = State::Idle;
+		}
 	}
 }
 
 void Player::SlashUpdate2()
 {
+	slashTimer++;
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	{
+		slashRegistered = true;
+	}
+
+	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	{
+		slashTimer = 0;
+		Dodge();
+	}
+
+	if (slashTimer > slashTime)
+	{
+		slashTimer = 0;
+		if (slashRegistered)
+		{
+			Slash3();
+			slashRegistered = false;
+		}
+		else
+		{
+			state = State::Idle;
+		}
+	}
 }
 
 void Player::SlashUpdate3()
 {
+	slashTimer++;
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	{
+		slashRegistered = true;
+	}
+
+	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	{
+		slashTimer = 0;
+		Dodge();
+	}
+
+	if (slashTimer > slash3Time)
+	{
+		slashTimer = 0;
+		if (slashRegistered)
+		{
+			state = State::Idle;
+			slashRegistered = false;
+		}
+		else
+		{
+			state = State::Idle;
+		}
+	}
 }
 
 void Player::Slash1()
@@ -291,10 +363,44 @@ void Player::Slash1()
 
 void Player::Slash2()
 {
+	//³–Ê‚ÌŠp“x‚ðŒvŽZ
+	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	front.y = 0;
+	front.Norm();
+
+	/*Vec3 side = rotation.GetRotMat().ExtractAxisX();
+	side.y = 0;
+	side.Norm();*/
+	float angle = atan2f(front.x, front.z) + PIf;
+
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash2", position), { 0, 1, 0 }, angle);
+
+	model = ModelManager::GetModel("PlayerSlash1");
+	model->ResetAnimTimer();
+	model->aniSpeed = 1.5f;
+
+	state = State::Slash2;
 }
 
 void Player::Slash3()
 {
+	//³–Ê‚ÌŠp“x‚ðŒvŽZ
+	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	front.y = 0;
+	front.Norm();
+
+	/*Vec3 side = rotation.GetRotMat().ExtractAxisX();
+	side.y = 0;
+	side.Norm();*/
+	float angle = atan2f(front.x, front.z) + PIf;
+
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash3", position), { 0, 1, 0 }, angle);
+
+	model = ModelManager::GetModel("PlayerSlash3");
+	model->ResetAnimTimer();
+	model->aniSpeed = 1.5f;
+
+	state = State::Slash3;
 }
 
 Player* Player::Get()

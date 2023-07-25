@@ -14,6 +14,8 @@ public:
 	Quaternion operator* (const Quaternion& o) const;
 	Quaternion operator* (const float& o) const;
 	Quaternion& operator*= (const Quaternion& o);
+	bool operator == (const Quaternion& o) const;
+
 	float GetNorm() const;
 	Quaternion& Normalize();
 	Quaternion& Inverse();
