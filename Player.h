@@ -1,5 +1,7 @@
 #pragma once
 #include "Object3D.h"
+#include <Emitter.h>
+#include <CounterParticle.h>
 class Player :
     public Object3D
 {
@@ -62,6 +64,8 @@ private:
     const int32_t slash3Time = 60;
 
     bool slashRegistered = false;
+
+    Emitter<CounterParticle> counterEmitter;
 
 public:
     static void Load();

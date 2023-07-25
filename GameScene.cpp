@@ -12,6 +12,7 @@ void GameScene::LoadResources()
 	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
+	SpTextureManager::LoadTexture("Resources/circleParticle.png", "BasicParticle");
 	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
 	SpEffekseer::Load(L"Resources/Effekseer/Line", L"Resources/Effekseer/Line/Line.efk", "LineAttack");
 }

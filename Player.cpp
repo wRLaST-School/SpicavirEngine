@@ -26,10 +26,18 @@ void Player::Init()
 	model = ModelManager::GetModel("PlayerIdle");
 	position = { 0, 1, -5 };
 	scale = { 0.5, 1.0, 0.5 };
+
+	counterEmitter.active = false;
+	counterEmitter.emitOnce = true;
+
+	counterEmitter.quantity = 15;
+	counterEmitter.radius = Vec3(0.2f, 0.2f, 0.2f);
 }
 
 void Player::Update()
 {
+	counterEmitter.Update();
+
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
 	{
 		CameraController::Get()->ToggleMode();
@@ -172,6 +180,7 @@ void Player::Damage()
 	else
 	{
 		dodgeSucceededTimer_ = 30;
+		counterEmitter.Activate();
 	}
 }
 
@@ -183,6 +192,8 @@ void Player::Draw()
 	{
 		Object3D::Draw();
 	}
+
+	counterEmitter.Draw();
 }
 
 void Player::DodgeUpdate()

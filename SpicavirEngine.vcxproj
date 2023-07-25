@@ -172,6 +172,8 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="CounterParticle.cpp" />
+    <ClCompile Include="Easing.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GlobalTimer.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
@@ -254,6 +256,8 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CameraController.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="CounterParticle.h" />
+    <ClInclude Include="Easing.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GlobalTimer.h" />
     <ClInclude Include="IRenderStage.h" />

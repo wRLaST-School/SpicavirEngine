@@ -402,6 +402,12 @@
     <ClCompile Include="LineAttack.cpp">
       <Filter>!Game\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="CounterParticle.cpp">
+      <Filter>!Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -652,6 +658,12 @@
     </ClInclude>
     <ClInclude Include="LineAttack.h">
       <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CounterParticle.h">
+      <Filter>!Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>Application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
