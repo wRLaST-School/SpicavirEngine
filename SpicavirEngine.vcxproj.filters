@@ -172,6 +172,9 @@
     <Filter Include="Engine\ヘッダーファイル\Effekseer">
       <UniqueIdentifier>{11d460ed-80c8-4586-941e-69259395d1ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Game\Collider">
+      <UniqueIdentifier>{fa7a94c7-4560-4085-b5a1-607e48900284}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -407,6 +410,9 @@
     </ClCompile>
     <ClCompile Include="Easing.cpp">
       <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="OBBCollider.cpp">
+      <Filter>!Game\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -664,6 +670,9 @@
     </ClInclude>
     <ClInclude Include="Easing.h">
       <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="OBBCollider.h">
+      <Filter>!Game\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

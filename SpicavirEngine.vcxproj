@@ -181,6 +181,7 @@
     <ClCompile Include="LineAttack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Marker.cpp" />
+    <ClCompile Include="OBBCollider.cpp" />
     <ClCompile Include="PlaneCollider.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -265,6 +266,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LineAttack.h" />
     <ClInclude Include="Marker.h" />
+    <ClInclude Include="OBBCollider.h" />
     <ClInclude Include="PlaneCollider.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Ray.h" />

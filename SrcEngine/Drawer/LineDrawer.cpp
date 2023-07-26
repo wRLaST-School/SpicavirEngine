@@ -119,6 +119,41 @@ void LineDrawer::DrawRotaCube(const Float3& center, const Float3& scale, const F
 	DrawLine(points[3], points[7], color);
 }
 
+void LineDrawer::DrawRotaCube(const Float3& center, const Float3& scale, const Quaternion& rot, const Float4& color)
+{
+	std::vector<Vec3> points = {
+	(Vec3)center + Vec3(-scale.x,  scale.y, -scale.z),
+	(Vec3)center + Vec3(scale.x,  scale.y, -scale.z),
+	(Vec3)center + Vec3(scale.x, -scale.y, -scale.z),
+	(Vec3)center + Vec3(-scale.x, -scale.y, -scale.z),
+	(Vec3)center + Vec3(-scale.x,  scale.y,  scale.z),
+	(Vec3)center + Vec3(scale.x,  scale.y,  scale.z),
+	(Vec3)center + Vec3(scale.x, -scale.y,  scale.z),
+	(Vec3)center + Vec3(-scale.x, -scale.y,  scale.z),
+	};
+
+	Matrix rotMatrix = rot.GetRotMat();
+
+	for (auto& p : points) {
+		p *= rotMatrix;
+	}
+
+	DrawLine(points[0], points[1], color);
+	DrawLine(points[1], points[2], color);
+	DrawLine(points[2], points[3], color);
+	DrawLine(points[3], points[0], color);
+
+	DrawLine(points[4], points[5], color);
+	DrawLine(points[5], points[6], color);
+	DrawLine(points[6], points[7], color);
+	DrawLine(points[7], points[4], color);
+
+	DrawLine(points[0], points[4], color);
+	DrawLine(points[1], points[5], color);
+	DrawLine(points[2], points[6], color);
+	DrawLine(points[3], points[7], color);
+}
+
 void LineDrawer::DrawAllLines()
 {
 	size_t index = 0;

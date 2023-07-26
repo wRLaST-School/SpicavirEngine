@@ -20,6 +20,7 @@ public:
 	static void DrawLines(const std::vector<Float3>& positions, const Float4& color);
 	static void DrawCube(const Float3& center, const Float3& scale, const Float4& color);
 	static void DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color);
+	static void DrawRotaCube(const Float3& center, const Float3& scale, const Quaternion& rot, const Float4& color);
 
 	static void DrawAllLines();
 

@@ -19,7 +19,7 @@ public:
 	float GetNorm() const;
 	Quaternion& Normalize();
 	Quaternion& Inverse();
-	Matrix GetRotMat();
+	Matrix GetRotMat() const;
 
 	float Dot(const Quaternion& o) const;
 private:
@@ -32,6 +32,7 @@ public:
 	static Quaternion Slerp(const Quaternion& zero, const Quaternion& one, const float& t);
 	static Quaternion DirToDir(const Vec3& from, const Vec3& to);
 	static Quaternion DirToDir(const Vec3& from, const Vec3& to, const float maxRad);
+	static Quaternion EulerToQuaternion(const Float3& xyz);
 };
 
 Vec3 operator *(Vec3 v, Quaternion q);

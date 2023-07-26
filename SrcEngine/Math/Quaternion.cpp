@@ -169,6 +169,26 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float ma
 	return Quaternion(axis, theta);
 }
 
+Quaternion Quaternion::EulerToQuaternion(const Float3& xyz)
+{
+	float rollCos = cosf(xyz.z / 2.f);
+	float pitchCos = cosf(xyz.x / 2.f);
+	float yawCos = cosf(xyz.y / 2.f);
+
+	float rollSin = sinf(xyz.z / 2.f);
+	float pitchSin = sinf(xyz.x / 2.f);
+	float yawSin = sinf(xyz.y / 2.f);
+
+	return Quaternion(
+		rollCos * pitchCos * yawCos + rollSin * pitchSin * yawSin,
+		Vec3(
+			rollSin * pitchCos * yawCos - rollCos * pitchSin * yawSin,
+			rollCos * pitchSin * yawCos + rollSin * pitchCos * yawSin,
+			rollCos * pitchCos * yawSin - rollSin * pitchSin * yawCos
+		)
+	);
+}
+
 float Quaternion::GetNorm() const
 {
 	return sqrtf(w * w + v.x * v.x + v.y * v.y + v.z * v.z);
@@ -192,7 +212,7 @@ Quaternion& Quaternion::Inverse()
 	return *this;
 }
 
-Matrix Quaternion::GetRotMat()
+Matrix Quaternion::GetRotMat() const
 {
 	Vec3 axis = v;
 	Float4 X = { axis.x * axis.x, axis.x * axis.y, axis.x * axis.z, axis.x * w };
