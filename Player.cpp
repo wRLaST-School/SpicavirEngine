@@ -4,6 +4,7 @@
 #include <CameraController.h>
 #include <Boss.h>
 #include <SpEffekseer.h>
+#include <SpImGui.h>
 
 void Player::Load()
 {
@@ -36,6 +37,14 @@ void Player::Init()
 
 void Player::Update()
 {
+	SpImGui::Command([&] {
+		if (ImGui::Begin("Slash Col"))
+		{
+			ImGui::DragFloat3("Scale", &slashScale.x);
+		}
+	ImGui::End();
+		});
+
 	counterEmitter.Update();
 
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
@@ -272,6 +281,11 @@ void Player::SlashUpdate1()
 {
 	slashTimer++;
 
+	slashCol.DrawBB(Color::Blue);
+
+	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	front.Norm();
+
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
 	{
 		slashRegistered = true;
@@ -301,6 +315,9 @@ void Player::SlashUpdate1()
 void Player::SlashUpdate2()
 {
 	slashTimer++;
+
+	slashCol.DrawBB(Color::Blue);
+
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
 	{
 		slashRegistered = true;
@@ -330,6 +347,9 @@ void Player::SlashUpdate2()
 void Player::SlashUpdate3()
 {
 	slashTimer++;
+
+	slashCol.DrawBB(Color::Blue);
+
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
 	{
 		slashRegistered = true;
@@ -366,15 +386,19 @@ void Player::Slash1()
 	/*Vec3 side = rotation.GetRotMat().ExtractAxisX();
 	side.y = 0;
 	side.Norm();*/
-	float angle = atan2f(front.x, front.z) + PIf;
+	float angle = atan2f(front.x, front.z);
 
-	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash1", position), { 0, 1, 0 }, angle);
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash1", position), { 0, 1, 0 }, angle + PIf);
 
 	model = ModelManager::GetModel("PlayerSlash2");
 	model->ResetAnimTimer();
 	model->aniSpeed = 1.5f;
 
 	state = State::Slash1;
+
+	//“–‚½‚è”»’è‚Ìİ’è
+	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
 }
 
 void Player::Slash2()
@@ -396,6 +420,12 @@ void Player::Slash2()
 	model->aniSpeed = 1.5f;
 
 	state = State::Slash2;
+
+	//“–‚½‚è”»’è‚Ìİ’è
+	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
+
+	slashCol.scale = slashScale;
 }
 
 void Player::Slash3()
@@ -417,6 +447,10 @@ void Player::Slash3()
 	model->aniSpeed = 1.5f;
 
 	state = State::Slash3;
+
+	//“–‚½‚è”»’è‚Ìİ’è
+	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
 }
 
 OBBCollider Player::GetCollider()

@@ -66,6 +66,12 @@ private:
     const int32_t slashTime = 40;
     const int32_t slash3Time = 60;
 
+    const float slashDist = 3.f;
+    
+    Float3 slashScale = { 5.f, 1.f, 3.f };
+
+    OBBCollider slashCol;
+
     bool slashRegistered = false;
 
     Emitter<CounterParticle> counterEmitter;
