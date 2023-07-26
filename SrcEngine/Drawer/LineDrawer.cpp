@@ -122,20 +122,23 @@ void LineDrawer::DrawRotaCube(const Float3& center, const Float3& scale, const F
 void LineDrawer::DrawRotaCube(const Float3& center, const Float3& scale, const Quaternion& rot, const Float4& color)
 {
 	std::vector<Vec3> points = {
-	(Vec3)center + Vec3(-scale.x,  scale.y, -scale.z),
-	(Vec3)center + Vec3(scale.x,  scale.y, -scale.z),
-	(Vec3)center + Vec3(scale.x, -scale.y, -scale.z),
-	(Vec3)center + Vec3(-scale.x, -scale.y, -scale.z),
-	(Vec3)center + Vec3(-scale.x,  scale.y,  scale.z),
-	(Vec3)center + Vec3(scale.x,  scale.y,  scale.z),
-	(Vec3)center + Vec3(scale.x, -scale.y,  scale.z),
-	(Vec3)center + Vec3(-scale.x, -scale.y,  scale.z),
+	Vec3(-scale.x,  scale.y, -scale.z),
+	Vec3(scale.x,  scale.y, -scale.z),
+	Vec3(scale.x, -scale.y, -scale.z),
+	Vec3(-scale.x, -scale.y, -scale.z),
+	Vec3(-scale.x,  scale.y,  scale.z),
+	Vec3(scale.x,  scale.y,  scale.z),
+	Vec3(scale.x, -scale.y,  scale.z),
+	Vec3(-scale.x, -scale.y,  scale.z),
 	};
+
+
 
 	Matrix rotMatrix = rot.GetRotMat();
 
 	for (auto& p : points) {
 		p *= rotMatrix;
+		p += center;
 	}
 
 	DrawLine(points[0], points[1], color);

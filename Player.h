@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include <Emitter.h>
 #include <CounterParticle.h>
+#include <OBBCollider.h>
 class Player :
     public Object3D
 {
@@ -27,6 +28,8 @@ public:
     void Slash1();
     void Slash2();
     void Slash3();
+
+    OBBCollider GetCollider();
 
     float r2d = .5f;
 
@@ -66,6 +69,8 @@ private:
     bool slashRegistered = false;
 
     Emitter<CounterParticle> counterEmitter;
+
+    OBBCollider col;
 
 public:
     static void Load();

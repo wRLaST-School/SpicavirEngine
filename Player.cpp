@@ -96,6 +96,10 @@ void Player::Update()
 	scale = { 1.0f / 16.f ,1.0f / 16.f ,1.0f / 16.f };
 
 	UpdateMatrix();
+
+	col.pos = (Vec3)position + Vec3(0, 1.f, 0);
+	col.scale = {.5f, 1.f, .5f};
+	col.rot = rotation;
 }
 
 void Player::Move()
@@ -194,6 +198,7 @@ void Player::Draw()
 	}
 
 	counterEmitter.Draw();
+	col.DrawBB();
 }
 
 void Player::DodgeUpdate()
@@ -412,6 +417,11 @@ void Player::Slash3()
 	model->aniSpeed = 1.5f;
 
 	state = State::Slash3;
+}
+
+OBBCollider Player::GetCollider()
+{
+	return col;
 }
 
 Player* Player::Get()

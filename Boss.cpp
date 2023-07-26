@@ -65,6 +65,7 @@ void Boss::Draw()
 {
 	Object3D::Draw("white");
 	DrawMarkers();
+	DrawLineAttacks();
 }
 
 Boss* Boss::Get()
@@ -180,4 +181,9 @@ void Boss::UpdateLineAttacks()
 			itr++;
 		}
 	}
+}
+
+void Boss::DrawLineAttacks()
+{
+	for (auto& la : lineAttacks) la.Draw();
 }

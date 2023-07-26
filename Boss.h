@@ -32,6 +32,7 @@ public:
     void CastLine(Float3 pos, float angle);
 
     void UpdateLineAttacks();
+    void DrawLineAttacks();
 
 private:
     static const int MAX_MARKERS = 256;

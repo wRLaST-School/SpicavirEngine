@@ -1,4 +1,5 @@
 #pragma once
+#include <OBBCollider.h>
 class LineAttack
 {
 public:
@@ -21,5 +22,7 @@ private:
 	const static int R = 4;
 
 	float angle;
+
+	OBBCollider col;
 };
 
