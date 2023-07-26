@@ -2,6 +2,7 @@
 #include "Object3D.h"
 #include <Marker.h>
 #include <LineAttack.h>
+#include <OBBCollider.h>
 class Boss :
     public Object3D
 {
@@ -11,6 +12,8 @@ public:
     void Update();
 
     void Draw();
+    
+    void Damage();
 
 public:
     static void Load();
@@ -34,6 +37,8 @@ public:
     void UpdateLineAttacks();
     void DrawLineAttacks();
 
+    const OBBCollider& GetCollider();
+
 private:
     static const int MAX_MARKERS = 256;
     eastl::array<Marker, MAX_MARKERS> markers;
@@ -42,6 +47,12 @@ private:
 
     float markerLine3Spacing = 20.f;
     float lineAttackSpacing = 15.f;
+
+    OBBCollider col;
+
+    int32_t damageTimer = 0;
+    const int32_t damageTime = 15;
+    bool damaged = false;
 
 private:
     static Boss* sCurrent;

@@ -297,16 +297,25 @@ void Player::SlashUpdate1()
 		Dodge();
 	}
 
+	//当たり判定をチェック
+	Boss* boss = Boss::Get();
+	if (!slashHit && slashCol.Collide(boss->GetCollider()))
+	{
+		boss->Damage();
+		slashHit = true;
+	}
+
+	//タイマーが超過していたら
 	if (slashTimer > slashTime)
 	{
 		slashTimer = 0;
-		if (slashRegistered)
-		{
+		if (slashRegistered) //先行入力チェック
+		{//あるなら発動
 			Slash2();
 			slashRegistered = false;
 		}
 		else
-		{
+		{//ないならIdleに
 			state = State::Idle;
 		}
 	}
@@ -329,16 +338,25 @@ void Player::SlashUpdate2()
 		Dodge();
 	}
 
+	//当たり判定をチェック
+	Boss* boss = Boss::Get();
+	if (!slashHit && slashCol.Collide(boss->GetCollider()))
+	{
+		boss->Damage();
+		slashHit = true;
+	}
+
+	//タイマーが超過していたら
 	if (slashTimer > slashTime)
 	{
 		slashTimer = 0;
-		if (slashRegistered)
-		{
+		if (slashRegistered)//先行入力チェック
+		{//あるなら発動
 			Slash3();
 			slashRegistered = false;
 		}
 		else
-		{
+		{//ないならIdleに
 			state = State::Idle;
 		}
 	}
@@ -361,16 +379,25 @@ void Player::SlashUpdate3()
 		Dodge();
 	}
 
+	//当たり判定をチェック
+	Boss* boss = Boss::Get();
+	if (!slashHit && slashCol.Collide(boss->GetCollider()))
+	{
+		boss->Damage();
+		slashHit = true;
+	}
+
+	//タイマーが超過していたら
 	if (slashTimer > slash3Time)
 	{
 		slashTimer = 0;
-		if (slashRegistered)
-		{
+		if (slashRegistered)//先行入力チェック
+		{//あっても一旦Idleにしよう
 			state = State::Idle;
 			slashRegistered = false;
 		}
 		else
-		{
+		{//ないならIdleに
 			state = State::Idle;
 		}
 	}
@@ -399,6 +426,9 @@ void Player::Slash1()
 	//当たり判定の設定
 	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
 	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
+
+	//既に当たっているフラグをリセット
+	slashHit = false;
 }
 
 void Player::Slash2()
@@ -426,6 +456,9 @@ void Player::Slash2()
 	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	slashCol.scale = slashScale;
+
+	//既に当たっているフラグをリセット
+	slashHit = false;
 }
 
 void Player::Slash3()
@@ -451,9 +484,12 @@ void Player::Slash3()
 	//当たり判定の設定
 	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
 	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
+
+	//既に当たっているフラグをリセット
+	slashHit = false;
 }
 
-OBBCollider Player::GetCollider()
+const OBBCollider& Player::GetCollider()
 {
 	return col;
 }

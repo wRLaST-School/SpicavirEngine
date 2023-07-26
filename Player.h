@@ -29,7 +29,7 @@ public:
     void Slash2();
     void Slash3();
 
-    OBBCollider GetCollider();
+    const OBBCollider& GetCollider();
 
     float r2d = .5f;
 
@@ -73,6 +73,7 @@ private:
     OBBCollider slashCol;
 
     bool slashRegistered = false;
+    bool slashHit = false;
 
     Emitter<CounterParticle> counterEmitter;
 

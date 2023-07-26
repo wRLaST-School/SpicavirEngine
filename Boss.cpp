@@ -23,6 +23,10 @@ void Boss::Init()
 	position = { 0.f, 5.f, 0.f };
 
 	for (auto& m : markers) m.InitModel();
+
+	col.scale = { 2.5f, 2.5f, 2.5f };
+	col.pos = position;
+	col.rot = rotation;
 }
 
 void Boss::Update()
@@ -40,6 +44,28 @@ void Boss::Update()
 	});
 
 	rotation = Quaternion(Vec3(0, 1, 0), rotY);
+
+	//当たり判定を更新
+	col.pos = position;
+	col.rot = rotation;
+
+	col.DrawBB(Color::Red);
+
+	//ダメージ演出の更新
+	if (damaged)
+	{
+		damageTimer++;
+		if (damageTimer > damageTime)
+		{
+			damaged = false;
+		}
+
+		*brightnessCB.contents = Color::Red.f4;
+	}
+	else
+	{
+		*brightnessCB.contents = Color::White.f4;
+	}
 
 	if (GlobalTimer::sTime % 120 == 0)
 	{
@@ -66,6 +92,12 @@ void Boss::Draw()
 	Object3D::Draw("white");
 	DrawMarkers();
 	DrawLineAttacks();
+}
+
+void Boss::Damage()
+{
+	damageTimer = 0;
+	damaged = true;
 }
 
 Boss* Boss::Get()
@@ -186,4 +218,9 @@ void Boss::UpdateLineAttacks()
 void Boss::DrawLineAttacks()
 {
 	for (auto& la : lineAttacks) la.Draw();
+}
+
+const OBBCollider& Boss::GetCollider()
+{
+	return col;
 }
