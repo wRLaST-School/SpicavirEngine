@@ -53,15 +53,15 @@ void Player::Update()
 	}
 	if (CameraController::Get()->GetMode() == CameraController::Mode::Target)
 	{
-		Vec3 front = rotation.GetRotMat().ExtractAxisZ();
-		//front.y = 0;
-		front.Norm();
+		//Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+		////front.y = 0;
+		//front.Norm();
 
-		Vec3 to = ((Vec3)Boss::Get()->position - position);
-		to.y = 0;
-		to.Norm();
+		//Vec3 to = ((Vec3)Boss::Get()->position - position);
+		//to.y = 0;
+		//to.Norm();
 
-		rotation = Quaternion::DirToDir(Vec3(0, 0, 1), to);
+		//rotation = Quaternion::DirToDir(Vec3(0, 0, 1), to);
 	}
 	else
 	{
