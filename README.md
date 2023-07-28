@@ -23,7 +23,12 @@
 
 #### 使用外部ライブラリ
 - [Assimp](https://github.com/assimp/assimp)
+  - ボーン・アニメーション付きモデルの読み込みに使用
 - [DirectXTex](https://github.com/microsoft/DirectXTex)
-- [EASTL](https://github.com/electronicarts/EASTL)
+  - テクスチャの読み込みに使用
+- [EASTL](https://github.com/electronicarts/EASTL)  
+  - STLコンテナ系の軽量化に使用
 - [Effekseer](https://effekseer.github.io/jp/)
+  - Effekseerで制作したVFXの読み込みと再生に使用
 - [Dear ImGui](https://github.com/ocornut/imgui)
+  - インタラクティブなデバッグ用GUIに使用
