@@ -24,6 +24,8 @@ void Boss::Init()
 
 	for (auto& m : markers) m.InitModel();
 
+	rotation = Quaternion(Vec3(0, 1, 0), 0);
+
 	col.scale = { 2.5f, 2.5f, 2.5f };
 	col.pos = position;
 	col.rot = rotation;
@@ -33,17 +35,16 @@ void Boss::Update()
 {
 	static float rotY;
 
+	moveTimer++;
+
 	SpImGui::Command([&] {
 		if (ImGui::Begin("Boss"))
 		{
-			ImGui::DragFloat("RotY", &rotY);
 			ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing);
 			ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing);
 		}
 		ImGui::End();
 	});
-
-	rotation = Quaternion(Vec3(0, 1, 0), rotY);
 
 	//“–‚½‚è”»’è‚ðXV
 	col.pos = position;
@@ -67,23 +68,35 @@ void Boss::Update()
 		*brightnessCB.contents = Color::White.f4;
 	}
 
-	if (GlobalTimer::sTime % 120 == 0)
+	if (GlobalTimer::sTime % 120 == 0 && state != State::Rush)
 	{
-		if (Util::Chance(50))
-		{
-			CastLineTriple();
-		}
-		else if (Util::Chance(50))
-		{
-			CastMarkerLine3();
-		}
-		else
-		{
-			CastMarkerAim1Rand5();
-		}
+		//if (Util::Chance(50))
+		//{
+		//	CastLineTriple();
+		//}
+		//else if (Util::Chance(50))
+		//{
+		//	CastMarkerLine3();
+		//}
+		//else
+		//{
+		//	CastMarkerAim1Rand5();
+		//}
+
+		Rush();
 	}
 	UpdateMarkers();
 	UpdateLineAttacks();
+	RushUpdate();
+
+	if (dealDamageOnHit)
+	{
+		if (col.Collide(Player::Get()->GetCollider()))
+		{
+			Player::Get()->Damage();
+		}
+	}
+
 	UpdateMatrix();
 }
 
@@ -218,6 +231,66 @@ void Boss::UpdateLineAttacks()
 void Boss::DrawLineAttacks()
 {
 	for (auto& la : lineAttacks) la.Draw();
+}
+
+void Boss::Rush()
+{
+	state = State::Rush;
+	moveTime = prepTime + afterPrepWaitTime + rushTime + rushAfterTime;
+	moveTimer = 0;
+}
+
+void Boss::RushUpdate()
+{
+	if (moveTimer < prepTime)
+	{
+		Vec3 target = position;
+		target.y = 2.5f;
+		position = Vec3::Lerp(position, target, (float)moveTimer / (float)prepTime);
+
+		Vec3 rotTarget = Player::Get()->position;
+		rotTarget.y = position.y;
+
+		rotation = Quaternion::DirToDir(Vec3(0, 0, 1), rotTarget - position);
+	}
+	else if (moveTimer < prepTime + afterPrepWaitTime)
+	{
+		Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+		front.SetLength(rushDistance);
+
+		rushTarget = front + position;
+	}
+	else if (moveTimer < prepTime + afterPrepWaitTime + rushTime)
+	{
+		dealDamageOnHit = true;
+		rotation *= Quaternion(Vec3(0, 0, 1), PIf / 60.f);
+
+		position = Vec3::Lerp(position, rushTarget,
+			(float)(moveTimer - prepTime - afterPrepWaitTime) / (float)rushTime);
+	}
+	else
+	{
+		Vec3 target = position;
+		target.y = 5.f;
+		position = Vec3::Lerp(position, target, 
+			(float)(moveTimer - prepTime - afterPrepWaitTime - rushTime)/ (float)rushAfterTime);
+	}
+
+	if (moveTimer >= moveTime)
+	{
+		RushEnd();
+	}
+}
+
+void Boss::RushEnd()
+{
+	state = State::Idle;
+	dealDamageOnHit = false;
+}
+
+void Boss::SelectMove()
+{
+
 }
 
 const OBBCollider& Boss::GetCollider()
