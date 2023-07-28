@@ -7,13 +7,16 @@
 #include <Bloom.h>
 #include <GameScene.h>
 #include <GlobalTimer.h>
+#include <TitleScene.h>
+#include <Transition.h>
 
 std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
 
 void SceneManager::Init()
 {
-	InstantTransition<GameScene>();
+	Transition::Load();
+	InstantTransition<TitleScene>();
 	//InstantTransition<GameScene>();
 }
 
@@ -23,12 +26,20 @@ void SceneManager::Update()
 	ConfirmTransition();
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
+	Transition::Update();
 
-	Transition();
-
-	if (Input::Key::Triggered(DIK_T) && Input::Key::Down(DIK_LSHIFT))
+	if (Input::Key::Down(DIK_LSHIFT))
 	{
-		LoadScene<GameScene>();
+		if (Input::Key::Triggered(DIK_G))
+		{
+			LoadScene<GameScene>();
+		}
+
+		if (Input::Key::Triggered(DIK_T))
+		{
+			LoadScene<TitleScene>();
+		}
+
 		Transition();
 	}
 
@@ -43,6 +54,7 @@ void SceneManager::Draw3D()
 void SceneManager::DrawSprite()
 {
 	currentScene->DrawSprite();
+	Transition::Draw();
 }
 
 void SceneManager::DrawBack()

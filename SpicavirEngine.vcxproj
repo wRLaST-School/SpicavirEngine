@@ -249,6 +249,8 @@
     <ClCompile Include="SrParticleStage.cpp" />
     <ClCompile Include="SrPostEffectStage.cpp" />
     <ClCompile Include="SrSpriteStage.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Anchor.h" />
@@ -336,6 +338,8 @@
     <ClInclude Include="SrParticleStage.h" />
     <ClInclude Include="SrPostEffectStage.h" />
     <ClInclude Include="SrSpriteStage.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Transition.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">

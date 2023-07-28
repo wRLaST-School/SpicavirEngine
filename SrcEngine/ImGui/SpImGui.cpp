@@ -32,7 +32,7 @@ void SpImGui::Init()
 void SpImGui::InitDirectXForImGui()
 {
 	SpTextureManager::CreatePlainSRV("imgui_srv");
-	SpTextureManager::AddMasterTextureKey("imgui_srv_");
+	SpTextureManager::AddMasterTextureKey("imgui_srv");
 }
 
 void SpImGui::Command(std::function<void(void)> command)

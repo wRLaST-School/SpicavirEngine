@@ -414,6 +414,12 @@
     <ClCompile Include="OBBCollider.cpp">
       <Filter>!Game\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>!Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Transition.cpp">
+      <Filter>!Game\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -673,6 +679,12 @@
     </ClInclude>
     <ClInclude Include="OBBCollider.h">
       <Filter>!Game\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>!Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Transition.h">
+      <Filter>!Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
