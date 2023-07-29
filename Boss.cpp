@@ -52,6 +52,17 @@ void Boss::Update()
 
 	col.DrawBB(Color::Red);
 
+	//Stateに合わせたアップデート
+	void (Boss::*pFuncTable[])() = {
+		&Boss::IdleUpdate,
+		&Boss::MarkerUpdate,
+		&Boss::LineAttackUpdate,
+		&Boss::MarkerAndLineUpdate,
+		&Boss::RushUpdate
+	};
+
+	(this->*pFuncTable[(int32_t)state])();
+
 	//ダメージ演出の更新
 	if (damaged)
 	{
@@ -68,26 +79,8 @@ void Boss::Update()
 		*brightnessCB.contents = Color::White.f4;
 	}
 
-	if (GlobalTimer::sTime % 120 == 0 && state != State::Rush)
-	{
-		//if (Util::Chance(50))
-		//{
-		//	CastLineTriple();
-		//}
-		//else if (Util::Chance(50))
-		//{
-		//	CastMarkerLine3();
-		//}
-		//else
-		//{
-		//	CastMarkerAim1Rand5();
-		//}
-
-		Rush();
-	}
 	UpdateMarkers();
 	UpdateLineAttacks();
-	RushUpdate();
 
 	if (dealDamageOnHit)
 	{
@@ -178,6 +171,11 @@ void Boss::UpdateMarkers()
 
 void Boss::CastLineTriple()
 {
+	Vec3 target = Player::Get()->position;
+	target.y = position.y;
+
+	rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - position);
+
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
@@ -282,15 +280,105 @@ void Boss::RushUpdate()
 	}
 }
 
+void Boss::LineAttackUpdate()
+{
+	if (moveTimer >= moveTime)
+	{
+		state = State::Idle;
+		moveTimer = 0;
+	}
+}
+
+void Boss::MarkerUpdate()
+{
+	if (moveTimer >= moveTime)
+	{
+		state = State::Idle;
+		moveTimer = 0;
+	}
+}
+
+void Boss::MarkerAndLineUpdate()
+{
+	if (moveTimer >= moveTime)
+	{
+		state = State::Idle;
+		moveTimer = 0;
+	}
+}
+
 void Boss::RushEnd()
 {
 	state = State::Idle;
+	moveTimer = 0;
 	dealDamageOnHit = false;
+}
+
+void Boss::IdleUpdate()
+{
+	if (timesAttacked < 3)
+	{
+		if (moveTimer > 60)
+		{
+			SelectMove();
+			timesAttacked++;
+		}
+	}
+	else
+	{
+		if (moveTimer > 240)
+		{
+			SelectMove();
+			timesAttacked = 0;
+		}
+	}
 }
 
 void Boss::SelectMove()
 {
+	int32_t rng = Util::RNG(0, 6);
+	if (rng <= 1)
+	{
+		CastLineTriple();
+		state = State::Line;
+		moveTime = 60;
+		moveTimer = 0;
+	}
+	else if (rng <= 3)
+	{
+		if (Util::Chance(50))
+		{
+			CastMarkerLine3();
+		}
+		else
+		{
+			CastMarkerAim1Rand5();
+		}
 
+		state = State::Marker;
+		moveTime = 60;
+		moveTimer = 0;
+	}
+	else if (rng <= 5)
+	{
+		Rush();
+	}
+	else
+	{
+		if (Util::Chance(50))
+		{
+			CastMarkerLine3();
+		}
+		else
+		{
+			CastMarkerAim1Rand5();
+		}
+		CastLineTriple();
+
+		state = State::MarkerAndLine;
+		moveTime = 60;
+		moveTimer = 0;
+	}
 }
 
 const OBBCollider& Boss::GetCollider()

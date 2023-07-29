@@ -38,8 +38,14 @@ public:
     void DrawLineAttacks();
 
     void Rush();
-    void RushUpdate();
     void RushEnd();
+
+    //state updates
+    void RushUpdate();
+    void LineAttackUpdate();
+    void MarkerUpdate();
+    void MarkerAndLineUpdate();
+    void IdleUpdate();
 
     void SelectMove();
 
@@ -65,6 +71,9 @@ private:
     Float3 rushTarget = {};
 
     bool dealDamageOnHit = false;
+
+    //Idle
+    int32_t timesAttacked = 0;
 
     //Collision
     OBBCollider col;
