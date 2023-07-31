@@ -30,6 +30,11 @@ void CounterParticle::Update()
 	{
 		float t = (float)(time - 30) / 60;
 		position = Vec3::Lerp(position, Boss::Get()->position, t);
+
+		if (time - 30 == 15)
+		{
+			Boss::Get()->Damage(50);
+		}
 	}
 
 	color = { 1.f, 1.f, 1.f, 1.f };

@@ -9,9 +9,12 @@ public:
 
 	template <class NextScene>
 	static void Start() {
-		SceneManager::LoadScene<NextScene>();
-		started = true;
-		timer = 0;
+		if (!started)
+		{
+			SceneManager::LoadScene<NextScene>();
+			started = true;
+			timer = 0;
+		}
 	}
 
 private:

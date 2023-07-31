@@ -66,6 +66,9 @@ private:
     const int32_t slashTime = 40;
     const int32_t slash3Time = 60;
 
+    int32_t slashDamage = 150;
+    int32_t slash3Damage = 300;
+
     const float slashDist = 3.f;
     
     Float3 slashScale = { 5.f, 1.f, 3.f };

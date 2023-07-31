@@ -5,6 +5,7 @@
 #include <Boss.h>
 #include <SpEffekseer.h>
 #include <SpImGui.h>
+#include <SoundManager.h>
 
 void Player::Load()
 {
@@ -186,14 +187,21 @@ void Player::DamageUpdate()
 
 void Player::Damage()
 {
-	if (state != State::Dodge)
+	if (damageTimer == 0 && dodgeSucceededTimer_ == 0)
 	{
-		damageTimer = 60;
-	}
-	else
-	{
-		dodgeSucceededTimer_ = 30;
-		counterEmitter.Activate();
+		if (state != State::Dodge)
+		{
+			damageTimer = 60;
+			//SE再生
+			SoundManager::Play("takeDamage");
+		}
+		else
+		{
+			dodgeSucceededTimer_ = 30;
+			counterEmitter.Activate();
+			//SE再生
+			SoundManager::Play("counterSuccess");
+		}
 	}
 }
 
@@ -275,6 +283,8 @@ void Player::Dodge()
 	model = ModelManager::GetModel("PlayerRoll");
 	model->ResetAnimTimer();
 	model->aniSpeed = 3.8f;
+	//SE再生
+	SoundManager::Play("dodge");
 }
 
 void Player::SlashUpdate1()
@@ -301,7 +311,7 @@ void Player::SlashUpdate1()
 	Boss* boss = Boss::Get();
 	if (!slashHit && slashCol.Collide(boss->GetCollider()))
 	{
-		boss->Damage();
+		boss->Damage(slashDamage);
 		slashHit = true;
 	}
 
@@ -342,7 +352,7 @@ void Player::SlashUpdate2()
 	Boss* boss = Boss::Get();
 	if (!slashHit && slashCol.Collide(boss->GetCollider()))
 	{
-		boss->Damage();
+		boss->Damage(slashDamage);
 		slashHit = true;
 	}
 
@@ -383,7 +393,7 @@ void Player::SlashUpdate3()
 	Boss* boss = Boss::Get();
 	if (!slashHit && slashCol.Collide(boss->GetCollider()))
 	{
-		boss->Damage();
+		boss->Damage(slash3Damage);
 		slashHit = true;
 	}
 
@@ -429,6 +439,8 @@ void Player::Slash1()
 
 	//既に当たっているフラグをリセット
 	slashHit = false;
+	//SE再生
+	SoundManager::Play("Slash12");
 }
 
 void Player::Slash2()
@@ -459,6 +471,8 @@ void Player::Slash2()
 
 	//既に当たっているフラグをリセット
 	slashHit = false;
+	//SE再生
+	SoundManager::Play("Slash12");
 }
 
 void Player::Slash3()
@@ -487,6 +501,9 @@ void Player::Slash3()
 
 	//既に当たっているフラグをリセット
 	slashHit = false;
+
+	//SE再生
+	SoundManager::Play("Slash3");
 }
 
 const OBBCollider& Player::GetCollider()

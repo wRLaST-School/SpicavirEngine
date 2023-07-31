@@ -4,6 +4,8 @@
 #include <SpDS.h>
 #include <LevelManager.h>
 #include <SpEffekseer.h>
+#include <SoundManager.h>
+#include <MainTimer.h>
 
 void GameScene::LoadResources()
 {
@@ -12,9 +14,21 @@ void GameScene::LoadResources()
 	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
+	ModelManager::Register("skydome", "Sky");
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "BasicParticle");
 	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
 	SpEffekseer::Load(L"Resources/Effekseer/Line", L"Resources/Effekseer/Line/Line.efk", "LineAttack");
+
+	SoundManager::LoadWave("Resources/Sounds/counterSuccess.wav", "counterSuccess");
+	SoundManager::LoadWave("Resources/Sounds/dodge.wav", "dodge");
+	SoundManager::LoadWave("Resources/Sounds/LineAttack.wav", "LineAttack");
+	SoundManager::LoadWave("Resources/Sounds/marker.wav", "marker");
+	SoundManager::LoadWave("Resources/Sounds/Slash3.wav", "Slash3");
+	SoundManager::LoadWave("Resources/Sounds/Slash12.wav", "Slash12");
+	SoundManager::LoadWave("Resources/Sounds/takeDamage.wav", "takeDamage");
+	SoundManager::LoadWave("Resources/Sounds/RushImpact.wav", "RushImpact");
+
+	MainTimer::Load();
 }
 
 void GameScene::Init()
@@ -31,6 +45,8 @@ void GameScene::Init()
 	cam.Init();
 
 	CameraController::Set(&cam);
+
+	MainTimer::Init();
 }
 
 void GameScene::Update()
@@ -39,6 +55,8 @@ void GameScene::Update()
 	boss.Update();
 	player.Update();
 	cam.Update();
+
+	MainTimer::Update();
 }
 
 void GameScene::DrawBack()
@@ -52,9 +70,10 @@ void GameScene::Draw3D()
 	LevelManager::Draw();
 	boss.Draw();
 	player.Draw();
+
+	MainTimer::Draw();
 }
 
 void GameScene::DrawSprite()
 {
-	SpDS::DrawBox(100, 100, 150, 400, Color::Green);
 }

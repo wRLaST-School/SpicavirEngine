@@ -3,6 +3,7 @@
 #include <Marker.h>
 #include <LineAttack.h>
 #include <OBBCollider.h>
+#include <Score.h>
 class Boss :
     public Object3D
 {
@@ -13,7 +14,7 @@ public:
 
     void Draw();
     
-    void Damage();
+    void Damage(int32_t damage = 0);
 
 public:
     static void Load();

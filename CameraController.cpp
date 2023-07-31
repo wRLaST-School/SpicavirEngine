@@ -11,6 +11,8 @@ void CameraController::Init()
 	cam->UseDefaultParams();
 
 	cam->position = { 0, 3, -10 };
+
+	freeCamRot_ = {PIf / 4, 0.f};
 }
 
 void CameraController::Update()
@@ -33,8 +35,15 @@ void CameraController::Update()
 
 	case CameraController::Mode::Free:
 	{
+		Float2 lastFreeCamRot = freeCamRot_;
+
 		freeCamRot_.x += CameraController::GetCamSpd() * (Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN) - Input::Pad::GetRStick().y);
 		freeCamRot_.y += CameraController::GetCamSpd() * (Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT) + Input::Pad::GetRStick().x);
+
+		if (freeCamRot_.x >= PIf / 3.f)
+		{
+			freeCamRot_.x = PIf / 3.f;
+		}
 
 		Matrix rotation = Matrix::RotX(freeCamRot_.x);
 		rotation *= Matrix::RotY(freeCamRot_.y);
@@ -52,6 +61,12 @@ void CameraController::Update()
 
 		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
 		//cam->position.y = 3;
+
+		if (cam->position.y < 1.f)
+		{
+			cam->position.y = 1.0f;
+			freeCamRot_ = lastFreeCamRot;
+		}
 
 		cam->UpdateMatrix();
 		break;

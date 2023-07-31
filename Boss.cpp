@@ -5,6 +5,12 @@
 #include <GlobalTimer.h>
 #include <Player.h>
 #include <SpImGui.h>
+#include <SoundManager.h>
+#include <MainTimer.h>
+#include <SceneManager.h>
+#include <Transition.h>
+#include <ResulScene.h>
+#include <GameManager.h>
 
 Boss* Boss::sCurrent = nullptr;
 
@@ -15,6 +21,8 @@ void Boss::Load()
 
 	ModelManager::Register("Resources/Models/Marker/Marker.obj", "Marker", true);
 	SpTextureManager::LoadTexture("Resources/Marker.png", "Marker");
+
+	Score::Load();
 }
 
 void Boss::Init()
@@ -29,6 +37,8 @@ void Boss::Init()
 	col.scale = { 2.5f, 2.5f, 2.5f };
 	col.pos = position;
 	col.rot = rotation;
+
+	GameManager::score.Init();
 }
 
 void Boss::Update()
@@ -42,6 +52,7 @@ void Boss::Update()
 		{
 			ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing);
 			ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing);
+			ImGui::DragInt("Damage", &GameManager::score.totDamage);
 		}
 		ImGui::End();
 	});
@@ -91,6 +102,13 @@ void Boss::Update()
 	}
 
 	UpdateMatrix();
+
+	GameManager::score.Update();
+
+	if (MainTimer::timerSec <= 0 || GameManager::score.totDamage >= GameManager::score.gradeMax)
+	{
+		Transition::Start<ResultScene>();
+	}
 }
 
 void Boss::Draw()
@@ -98,12 +116,16 @@ void Boss::Draw()
 	Object3D::Draw("white");
 	DrawMarkers();
 	DrawLineAttacks();
+
+	GameManager::score.Draw();
 }
 
-void Boss::Damage()
+void Boss::Damage(int32_t damage)
 {
 	damageTimer = 0;
 	damaged = true;
+
+	GameManager::score.totDamage += damage;
 }
 
 Boss* Boss::Get()
@@ -135,6 +157,9 @@ void Boss::CastMarkerAim1Rand5()
 	{
 		CastMarker({ (float)Util::RNG(-30, 30), 0.001f, (float)(Util::RNG(-30, 30)) });
 	}
+
+	//SEçƒê∂
+	SoundManager::Play("marker");
 }
 
 void Boss::CastMarkerLine3()
@@ -157,6 +182,9 @@ void Boss::CastMarkerLine3()
 			}
 		}
 	}
+
+	//SEçƒê∂
+	SoundManager::Play("marker");
 }
 
 void Boss::DrawMarkers()
@@ -202,6 +230,9 @@ void Boss::CastLineTriple()
 			CastLine(basePos + front * (20.f + z), atan2f(front.x, front.z) + PIf / 2);
 		}
 	}
+
+	//SEçƒê∂
+	SoundManager::Play("LineAttack");
 }
 
 void Boss::CastLine(Float3 pos, float angle)
@@ -277,6 +308,12 @@ void Boss::RushUpdate()
 	if (moveTimer >= moveTime)
 	{
 		RushEnd();
+	}
+
+	if (moveTimer == prepTime + afterPrepWaitTime)
+	{
+		//SEçƒê∂
+		SoundManager::Play("RushImpact");
 	}
 }
 

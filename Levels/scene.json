@@ -242,6 +242,28 @@
                 ]
             },
             "file_name": "Triangle"
+        },
+        {
+            "type": "MESH",
+            "name": "Sphere001",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    90.00000762939453,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "Sky"
         }
     ]
 }

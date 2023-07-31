@@ -420,6 +420,18 @@
     <ClCompile Include="Transition.cpp">
       <Filter>!Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="MainTimer.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="ResulScene.cpp">
+      <Filter>!Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>!Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -685,6 +697,18 @@
     </ClInclude>
     <ClInclude Include="Transition.h">
       <Filter>!Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="MainTimer.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="ResulScene.h">
+      <Filter>!Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>!Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

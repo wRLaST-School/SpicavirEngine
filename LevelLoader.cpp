@@ -57,7 +57,11 @@ void LevelLoader::Load(std::string path)
 				//TODO: 削除してテクスチャを貼る
 				if (obj["file_name"] == "floor")
 				{
-					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 0.3f, 1.0 };
+					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 0.3f, 1.0f };
+				}
+				if (obj["file_name"] == "Sky")
+				{
+					*objdata.brightnessCB.contents = { 0.f, 0.f, 0.f, 1.0f };
 				}
 			}
 

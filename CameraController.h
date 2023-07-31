@@ -10,7 +10,7 @@ public:
 	};
 
 private:
-	Mode mode_ = Mode::Free;
+	Mode mode_ = Mode::Target;
 
 public:
 	void Init();
@@ -37,6 +37,6 @@ private:
 
 	float camSpeed = PIf / 180;
 
-	Float2 freeCamRot_ = {};
+	Float2 freeCamRot_ = {PIf / 4, 0.f};
 };
 
