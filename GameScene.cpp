@@ -6,6 +6,8 @@
 #include <SpEffekseer.h>
 #include <SoundManager.h>
 #include <MainTimer.h>
+#include <GameManager.h>
+#include <SpImGui.h>
 
 void GameScene::LoadResources()
 {
@@ -57,6 +59,17 @@ void GameScene::Update()
 	cam.Update();
 
 	MainTimer::Update();
+
+	if (GameManager::showDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Game Scene"))
+			{
+				ImGui::Checkbox("Show Hit Box", &GameManager::showHitBoxes);
+			}
+			ImGui::End();
+		});
+	}
 }
 
 void GameScene::DrawBack()

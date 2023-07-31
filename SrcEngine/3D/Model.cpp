@@ -679,15 +679,6 @@ void Model::UpdateAnim()
 
 	double aniTick = (double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
 
-	SpImGui::Command([=] {
-		if (ImGui::Begin("Animation"))
-		{
-			ImGui::Text("Time %f\nTickTime %f\nMax Tick %f", (double)animTimer, aniTick, anim->duration);
-		}
-
-		ImGui::End();
-	});
-
 	//Nodeを使って再帰的に処理を行う
 	std::function<Matrix(Node*, Channel*, std::unordered_map<std::string, Node>&, std::unordered_map<std::string, Bone>&)> 
 		fCalcParentTransform = 

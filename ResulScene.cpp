@@ -6,27 +6,25 @@
 #include <GameManager.h>
 #include <SpDS.h>
 
-using namespace GameManager;
-
 void ResultScene::LoadResources()
 {
-	if (score.gradeMax > score.totDamage)
+	if (GameManager::score.gradeMax > GameManager::score.totDamage)
 	{
 		SpTextureManager::LoadTexture("Resources/result.png", "resultText");
 
-		if (score.totDamage > score.gradeS)
+		if (GameManager::score.totDamage > GameManager::score.gradeS)
 		{
 			SpTextureManager::LoadTexture("Resources/rankS.png", "rank");
 		}
-		else if (score.totDamage > score.gradeA)
+		else if (GameManager::score.totDamage > GameManager::score.gradeA)
 		{
 			SpTextureManager::LoadTexture("Resources/rankA.png", "rank");
 		}
-		else if (score.totDamage > score.gradeB)
+		else if (GameManager::score.totDamage > GameManager::score.gradeB)
 		{
 			SpTextureManager::LoadTexture("Resources/rankB.png", "rank");
 		}
-		else if (score.totDamage > score.gradeC)
+		else if (GameManager::score.totDamage > GameManager::score.gradeC)
 		{
 			SpTextureManager::LoadTexture("Resources/rankC.png", "rank");
 		}

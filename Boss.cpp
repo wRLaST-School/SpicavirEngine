@@ -47,15 +47,18 @@ void Boss::Update()
 
 	moveTimer++;
 
-	SpImGui::Command([&] {
-		if (ImGui::Begin("Boss"))
-		{
-			ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing);
-			ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing);
-			ImGui::DragInt("Damage", &GameManager::score.totDamage);
-		}
+	if (GameManager::showDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Boss"))
+			{
+				ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing);
+				ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing);
+				ImGui::DragInt("Damage", &GameManager::score.totDamage);
+			}
 		ImGui::End();
-	});
+			});
+	}
 
 	//当たり判定を更新
 	col.pos = position;
@@ -100,6 +103,11 @@ void Boss::Update()
 			Player::Get()->Damage();
 		}
 	}
+
+	//フィールド内に座標をクランプ
+	float colR = ((Vec3)col.scale).GetLength();
+	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
+	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
 
 	UpdateMatrix();
 

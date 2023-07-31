@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "OBBCollider.h"
 #include <LineDrawer.h>
+#include <GameManager.h>
 
 //sepÇÕê≥ãKâªÇ≥ÇÍÇƒÇ¢ÇÈÇ±Ç∆
 float GetSeparateAxisLength(const Vec3& sep, const Vec3& e1, const Vec3& e2, const Vec3& e3 = Vec3(0, 0, 0))
@@ -162,5 +163,8 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
 void OBBCollider::DrawBB(Color color)
 {
-    LineDrawer::DrawRotaCube(pos, scale, rot, color.f4);
+    if (GameManager::showHitBoxes)
+    {
+        LineDrawer::DrawRotaCube(pos, scale, rot, color.f4);
+    }
 }

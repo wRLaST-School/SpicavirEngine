@@ -16,6 +16,11 @@ void MainTimer::Init()
 
 void MainTimer::Update()
 {
+	if (damageTimer > 0)
+	{
+		damageTimer--;
+	}
+
 	if (frameTimer >= 60)
 	{
 		timerSec--;
@@ -45,13 +50,21 @@ void MainTimer::Draw()
 			(int32_t)((GetSpWindow()->width - drawPosTR.x) - (float)numWidth * ((float)i + 0.5f)),
 			(int32_t)drawPosTR.y + 48,
 			1.f, 1.f, 0.f,
-			numbers.at(digis[i]));
+			numbers.at(digis[i]), Anchor::Center,
+			(damageTimer % 20 >= 10) ? Color::Red : Color::White);
 	}
+}
+
+void MainTimer::Damage()
+{
+	damageTimer = 60;
 }
 
 int32_t MainTimer::timerSec = 120;
 
 int32_t MainTimer::frameTimer = 60;
+
+int32_t MainTimer::damageTimer = 0;
 
 std::vector<TextureKey> MainTimer::numbers ={
 		"num_0",

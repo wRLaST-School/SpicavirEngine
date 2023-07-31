@@ -9,6 +9,7 @@
 #include <GlobalTimer.h>
 #include <TitleScene.h>
 #include <Transition.h>
+#include <GameManager.h>
 
 std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
@@ -38,6 +39,11 @@ void SceneManager::Update()
 		if (Input::Key::Triggered(DIK_T))
 		{
 			LoadScene<TitleScene>();
+		}
+
+		if (Input::Key::Triggered(DIK_D))
+		{
+			GameManager::showDebug = !GameManager::showDebug;
 		}
 
 		Transition();

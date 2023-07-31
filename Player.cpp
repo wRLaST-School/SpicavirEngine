@@ -6,6 +6,8 @@
 #include <SpEffekseer.h>
 #include <SpImGui.h>
 #include <SoundManager.h>
+#include <MainTimer.h>
+#include <GameManager.h>
 
 void Player::Load()
 {
@@ -38,13 +40,16 @@ void Player::Init()
 
 void Player::Update()
 {
-	SpImGui::Command([&] {
-		if (ImGui::Begin("Slash Col"))
-		{
-			ImGui::DragFloat3("Scale", &slashScale.x);
-		}
-	ImGui::End();
-		});
+	if (GameManager::showDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Slash Col"))
+			{
+				ImGui::DragFloat3("Scale", &slashScale.x);
+			}
+		ImGui::End();
+			});
+	}
 
 	counterEmitter.Update();
 
@@ -104,6 +109,10 @@ void Player::Update()
 	model->UpdateAnim();
 
 	scale = { 1.0f / 16.f ,1.0f / 16.f ,1.0f / 16.f };
+
+	float colR = ((Vec3)col.scale).GetLength();
+	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
+	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
 
 	UpdateMatrix();
 
@@ -194,6 +203,9 @@ void Player::Damage()
 			damageTimer = 60;
 			//SEçƒê∂
 			SoundManager::Play("takeDamage");
+
+			MainTimer::timerSec -= 5;
+			MainTimer::Damage();
 		}
 		else
 		{

@@ -1,6 +1,9 @@
 #pragma once
 #include <Score.h>
 
-namespace GameManager {
+class GameManager {
+public:
 	static Score score;
-}
+	static bool showDebug;
+	static bool showHitBoxes;
+};
