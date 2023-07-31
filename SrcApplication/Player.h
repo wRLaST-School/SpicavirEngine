@@ -34,15 +34,15 @@ public:
     float r2d = .5f;
 
 private:
-    float spd = 0.125f;
+    float spd_ = 0.125f;
 
     const float GRAV = 0.025f;
     const float JUMP_POWER = 0.5f;
-    float vy = 0.f;
+    float vy_ = 0.f;
 
-    Float3 rotTemp = { 0, 0, 0 };
+    Float3 rotTemp_ = { 0, 0, 0 };
 
-    int32_t damageTimer = 0;
+    int32_t damageTimer_ = 0;
 
     enum class State {
         Idle,
@@ -62,25 +62,25 @@ private:
 
     int32_t dodgeSucceededTimer_ = 0;
 
-    int32_t slashTimer = 0;
+    int32_t slashTimer_ = 0;
     const int32_t slashTime = 40;
     const int32_t slash3Time = 60;
 
-    int32_t slashDamage = 150;
-    int32_t slash3Damage = 300;
+    int32_t slashDamage_ = 150;
+    int32_t slash3Damage_ = 300;
 
     const float slashDist = 3.f;
     
-    Float3 slashScale = { 5.f, 1.f, 3.f };
+    Float3 slashScale_ = { 5.f, 1.f, 3.f };
 
-    OBBCollider slashCol;
+    OBBCollider slashCol_;
 
-    bool slashRegistered = false;
-    bool slashHit = false;
+    bool slashRegistered_ = false;
+    bool slashHit_ = false;
 
-    Emitter<CounterParticle> counterEmitter;
+    Emitter<CounterParticle> counterEmitter_;
 
-    OBBCollider col;
+    OBBCollider col_;
 
 public:
     static void Load();

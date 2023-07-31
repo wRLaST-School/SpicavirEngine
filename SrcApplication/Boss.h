@@ -55,39 +55,39 @@ public:
 private:
     //Marker
     static const int MAX_MARKERS = 256;
-    eastl::array<Marker, MAX_MARKERS> markers;
+    eastl::array<Marker, MAX_MARKERS> markers_;
 
     //LineAttack
-    eastl::list<LineAttack> lineAttacks;
+    eastl::list<LineAttack> lineAttacks_;
 
-    float markerLine3Spacing = 20.f;
-    float lineAttackSpacing = 15.f;
+    float markerLine3Spacing_ = 20.f;
+    float lineAttackSpacing_ = 15.f;
 
     //Rush
-    int32_t prepTime = 30;
-    int32_t afterPrepWaitTime = 30;
-    int32_t rushTime = 60;
-    int32_t rushAfterTime = 30;
-    float rushDistance = 20.f;
-    Float3 rushTarget = {};
+    int32_t prepTime_ = 30;
+    int32_t afterPrepWaitTime_ = 30;
+    int32_t rushTime_ = 60;
+    int32_t rushAfterTime_ = 30;
+    float rushDistance_ = 20.f;
+    Float3 rushTarget_ = {};
 
-    bool dealDamageOnHit = false;
+    bool dealDamageOnHit_ = false;
 
     //Idle
-    int32_t timesAttacked = 0;
+    int32_t timesAttacked_ = 0;
 
     //Collision
-    OBBCollider col;
+    OBBCollider col_;
 
     //Damage
-    int32_t damageTimer = 0;
+    int32_t damageTimer_ = 0;
     const int32_t damageTime = 15;
-    bool damaged = false;
+    bool damaged_ = false;
 
     //Move
-    int32_t moveTimer = 0;
-    int32_t moveTime = 0;
-    int32_t intervalTime = 0;
+    int32_t moveTimer_ = 0;
+    int32_t moveTime_ = 0;
+    int32_t intervalTime_ = 0;
 
 private:
     enum class State {
@@ -96,7 +96,7 @@ private:
         Line,
         MarkerAndLine,
         Rush
-    } state = State::Idle;
+    } state_ = State::Idle;
 
 private:
     static Boss* sCurrent;

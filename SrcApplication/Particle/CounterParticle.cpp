@@ -8,14 +8,14 @@
 TextureKey CounterParticle::sTexture = "BasicParticle";
 
 CounterParticle::CounterParticle(Float3 pos) : IParticle(pos) {
-    firstPos = pos;
-    secondPos.x = (float)Util::RNG(0, 32767) / 32767 * (Util::Chance(50) ? 1 : -1);
-    secondPos.y = (float)Util::RNG(0, 32767) / 32767 * (Util::Chance(50) ? 1 : -1);
-    secondPos.z = (float)Util::RNG(0, 32767) / 32767 * (Util::Chance(50) ? 1 : -1);
+    firstPos_ = pos;
+    secondPos_.x = (float)Util::RNG(0, 32767) / 32767 * (Util::Chance(50) ? 1 : -1);
+    secondPos_.y = (float)Util::RNG(0, 32767) / 32767 * (Util::Chance(50) ? 1 : -1);
+    secondPos_.z = (float)Util::RNG(0, 32767) / 32767 * (Util::Chance(50) ? 1 : -1);
 
-	secondPos.SetLength(spread);
+	secondPos_.SetLength(spread_);
 
-    secondPos += Player::Get()->position;
+    secondPos_ += Player::Get()->position;
 };
 
 void CounterParticle::Update()
@@ -24,7 +24,7 @@ void CounterParticle::Update()
 	if (time < 30)
 	{
 		float t = (float)time / 30;
-		position = Easing::Out(firstPos, secondPos, t, 5);
+		position = Easing::Out(firstPos_, secondPos_, t, 5);
 	}
 	else
 	{

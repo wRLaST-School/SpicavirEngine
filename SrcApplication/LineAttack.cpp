@@ -8,12 +8,12 @@ LineAttack::LineAttack(const Float3& pos_, float angle_)
     pos = pos_;
     timer_ = 0;
     active = true;
-    angle = angle_;
+    angle_ = angle_;
     SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("LineAttack", pos), { 0, 1, 0 }, angle_);
 
-    col.pos = pos_;
-    col.rot = Quaternion(Vec3(0, 1, 0), angle_);
-    col.scale = { 4.f, 2.f, 20.f };
+    col_.pos = pos_;
+    col_.rot = Quaternion(Vec3(0, 1, 0), angle_);
+    col_.scale = { 4.f, 2.f, 20.f };
 }
 
 void LineAttack::Update()
@@ -22,7 +22,7 @@ void LineAttack::Update()
     {
         Player* pl = Player::Get();
 
-        if (col.Collide(pl->GetCollider()))
+        if (col_.Collide(pl->GetCollider()))
         {
             pl->Damage();
         }
@@ -35,5 +35,5 @@ void LineAttack::Update()
 
 void LineAttack::Draw()
 {
-    col.DrawBB(Color::Red);
+    col_.DrawBB(Color::Red);
 }

@@ -43,7 +43,7 @@ void SceneManager::Update()
 
 		if (Input::Key::Triggered(DIK_D))
 		{
-			GameManager::showDebug = !GameManager::showDebug;
+			GameManager::sShowDebug = !GameManager::sShowDebug;
 		}
 
 		Transition();

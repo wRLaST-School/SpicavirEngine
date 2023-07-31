@@ -31,27 +31,27 @@ void Player::Init()
 	position = { 0, 1, -5 };
 	scale = { 0.5, 1.0, 0.5 };
 
-	counterEmitter.active = false;
-	counterEmitter.emitOnce = true;
+	counterEmitter_.active = false;
+	counterEmitter_.emitOnce = true;
 
-	counterEmitter.quantity = 15;
-	counterEmitter.radius = Vec3(0.2f, 0.2f, 0.2f);
+	counterEmitter_.quantity = 15;
+	counterEmitter_.radius = Vec3(0.2f, 0.2f, 0.2f);
 }
 
 void Player::Update()
 {
-	if (GameManager::showDebug)
+	if (GameManager::sShowDebug)
 	{
 		SpImGui::Command([&] {
 			if (ImGui::Begin("Slash Col"))
 			{
-				ImGui::DragFloat3("Scale", &slashScale.x);
+				ImGui::DragFloat3("Scale", &slashScale_.x);
 			}
 		ImGui::End();
 			});
 	}
 
-	counterEmitter.Update();
+	counterEmitter_.Update();
 
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
 	{
@@ -110,15 +110,15 @@ void Player::Update()
 
 	scale = { 1.0f / 16.f ,1.0f / 16.f ,1.0f / 16.f };
 
-	float colR = ((Vec3)col.scale).GetLength();
+	float colR = ((Vec3)col_.scale).GetLength();
 	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
 	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
 
 	UpdateMatrix();
 
-	col.pos = (Vec3)position + Vec3(0, 1.f, 0);
-	col.scale = {.5f, 1.f, .5f};
-	col.rot = rotation;
+	col_.pos = (Vec3)position + Vec3(0, 1.f, 0);
+	col_.scale = {.5f, 1.f, .5f};
+	col_.rot = rotation;
 }
 
 void Player::Move()
@@ -146,7 +146,7 @@ void Player::Move()
 	{	
 		state = State::Move;
 		rotation = Quaternion::DirToDir(Vec3(0, 0, -1), vel);
-		vel *= spd;
+		vel *= spd_;
 	}
 	else
 	{
@@ -160,22 +160,22 @@ void Player::GravMove()
 {
 	if (position.y > 0.f)
 	{
-		vy -= GRAV;
+		vy_ -= GRAV;
 	}
 
-	position.y += vy;
+	position.y += vy_;
 
 	if (position.y < 0.f)
 	{
-		vy = 0;
+		vy_ = 0;
 		position.y = 0.f;
 	}
 }
 
 void Player::DamageUpdate()
 {
-	damageTimer--;
-	damageTimer = std::max(0, damageTimer);
+	damageTimer_--;
+	damageTimer_ = std::max(0, damageTimer_);
 
 	dodgeSucceededTimer_--;
 	dodgeSucceededTimer_ = std::max(0, dodgeSucceededTimer_);
@@ -184,7 +184,7 @@ void Player::DamageUpdate()
 	{
 		*brightnessCB.contents = { 1.f, 1.f, 0.f, .25f };
 	}
-	else if (damageTimer)
+	else if (damageTimer_)
 	{
 		*brightnessCB.contents = { 1.f, 0.f, 0.f, .25f };
 	}
@@ -196,11 +196,11 @@ void Player::DamageUpdate()
 
 void Player::Damage()
 {
-	if (damageTimer == 0 && dodgeSucceededTimer_ == 0)
+	if (damageTimer_ == 0 && dodgeSucceededTimer_ == 0)
 	{
 		if (state != State::Dodge)
 		{
-			damageTimer = 60;
+			damageTimer_ = 60;
 			//SE再生
 			SoundManager::Play("takeDamage");
 
@@ -210,7 +210,7 @@ void Player::Damage()
 		else
 		{
 			dodgeSucceededTimer_ = 30;
-			counterEmitter.Activate();
+			counterEmitter_.Activate();
 			//SE再生
 			SoundManager::Play("counterSuccess");
 		}
@@ -226,8 +226,8 @@ void Player::Draw()
 		Object3D::Draw();
 	}
 
-	counterEmitter.Draw();
-	col.DrawBB();
+	counterEmitter_.Draw();
+	col_.DrawBB();
 }
 
 void Player::DodgeUpdate()
@@ -250,7 +250,7 @@ void Player::IdleMoveUpdate()
 	
 	if (position.y == 0.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
 	{
-		vy = JUMP_POWER;
+		vy_ = JUMP_POWER;
 	}
 	GravMove();
 
@@ -301,40 +301,40 @@ void Player::Dodge()
 
 void Player::SlashUpdate1()
 {
-	slashTimer++;
+	slashTimer_++;
 
-	slashCol.DrawBB(Color::Blue);
+	slashCol_.DrawBB(Color::Blue);
 
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.Norm();
 
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
 	{
-		slashRegistered = true;
+		slashRegistered_ = true;
 	}
 
 	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
 	{
-		slashTimer = 0;
+		slashTimer_ = 0;
 		Dodge();
 	}
 
 	//当たり判定をチェック
 	Boss* boss = Boss::Get();
-	if (!slashHit && slashCol.Collide(boss->GetCollider()))
+	if (!slashHit_ && slashCol_.Collide(boss->GetCollider()))
 	{
-		boss->Damage(slashDamage);
-		slashHit = true;
+		boss->Damage(slashDamage_);
+		slashHit_ = true;
 	}
 
 	//タイマーが超過していたら
-	if (slashTimer > slashTime)
+	if (slashTimer_ > slashTime)
 	{
-		slashTimer = 0;
-		if (slashRegistered) //先行入力チェック
+		slashTimer_ = 0;
+		if (slashRegistered_) //先行入力チェック
 		{//あるなら発動
 			Slash2();
-			slashRegistered = false;
+			slashRegistered_ = false;
 		}
 		else
 		{//ないならIdleに
@@ -345,37 +345,37 @@ void Player::SlashUpdate1()
 
 void Player::SlashUpdate2()
 {
-	slashTimer++;
+	slashTimer_++;
 
-	slashCol.DrawBB(Color::Blue);
+	slashCol_.DrawBB(Color::Blue);
 
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
 	{
-		slashRegistered = true;
+		slashRegistered_ = true;
 	}
 
 	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
 	{
-		slashTimer = 0;
+		slashTimer_ = 0;
 		Dodge();
 	}
 
 	//当たり判定をチェック
 	Boss* boss = Boss::Get();
-	if (!slashHit && slashCol.Collide(boss->GetCollider()))
+	if (!slashHit_ && slashCol_.Collide(boss->GetCollider()))
 	{
-		boss->Damage(slashDamage);
-		slashHit = true;
+		boss->Damage(slashDamage_);
+		slashHit_ = true;
 	}
 
 	//タイマーが超過していたら
-	if (slashTimer > slashTime)
+	if (slashTimer_ > slashTime)
 	{
-		slashTimer = 0;
-		if (slashRegistered)//先行入力チェック
+		slashTimer_ = 0;
+		if (slashRegistered_)//先行入力チェック
 		{//あるなら発動
 			Slash3();
-			slashRegistered = false;
+			slashRegistered_ = false;
 		}
 		else
 		{//ないならIdleに
@@ -386,37 +386,37 @@ void Player::SlashUpdate2()
 
 void Player::SlashUpdate3()
 {
-	slashTimer++;
+	slashTimer_++;
 
-	slashCol.DrawBB(Color::Blue);
+	slashCol_.DrawBB(Color::Blue);
 
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
 	{
-		slashRegistered = true;
+		slashRegistered_ = true;
 	}
 
 	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
 	{
-		slashTimer = 0;
+		slashTimer_ = 0;
 		Dodge();
 	}
 
 	//当たり判定をチェック
 	Boss* boss = Boss::Get();
-	if (!slashHit && slashCol.Collide(boss->GetCollider()))
+	if (!slashHit_ && slashCol_.Collide(boss->GetCollider()))
 	{
-		boss->Damage(slash3Damage);
-		slashHit = true;
+		boss->Damage(slash3Damage_);
+		slashHit_ = true;
 	}
 
 	//タイマーが超過していたら
-	if (slashTimer > slash3Time)
+	if (slashTimer_ > slash3Time)
 	{
-		slashTimer = 0;
-		if (slashRegistered)//先行入力チェック
+		slashTimer_ = 0;
+		if (slashRegistered_)//先行入力チェック
 		{//あっても一旦Idleにしよう
 			state = State::Idle;
-			slashRegistered = false;
+			slashRegistered_ = false;
 		}
 		else
 		{//ないならIdleに
@@ -446,11 +446,11 @@ void Player::Slash1()
 	state = State::Slash1;
 
 	//当たり判定の設定
-	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
-	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
+	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	//既に当たっているフラグをリセット
-	slashHit = false;
+	slashHit_ = false;
 	//SE再生
 	SoundManager::Play("Slash12");
 }
@@ -476,13 +476,13 @@ void Player::Slash2()
 	state = State::Slash2;
 
 	//当たり判定の設定
-	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
-	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
+	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
-	slashCol.scale = slashScale;
+	slashCol_.scale = slashScale_;
 
 	//既に当たっているフラグをリセット
-	slashHit = false;
+	slashHit_ = false;
 	//SE再生
 	SoundManager::Play("Slash12");
 }
@@ -508,11 +508,11 @@ void Player::Slash3()
 	state = State::Slash3;
 
 	//当たり判定の設定
-	slashCol.pos = front * -slashDist + position + Vec3(0, 1, 0);
-	slashCol.rot = Quaternion(Vec3(0, 1, 0), angle);
+	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	//既に当たっているフラグをリセット
-	slashHit = false;
+	slashHit_ = false;
 
 	//SE再生
 	SoundManager::Play("Slash3");
@@ -520,7 +520,7 @@ void Player::Slash3()
 
 const OBBCollider& Player::GetCollider()
 {
-	return col;
+	return col_;
 }
 
 Player* Player::Get()

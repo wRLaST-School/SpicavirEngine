@@ -14,8 +14,8 @@ public:
 	static int32_t timerSec;
 
 private:
-	static int32_t frameTimer;
-	static const int32_t frameTime = 60;
-	static std::vector<TextureKey> numbers;
-	static int32_t damageTimer;
+	static int32_t sFrameTimer;
+	static const int32_t FRAME_TIME = 60;
+	static std::vector<TextureKey> sNumbers;
+	static int32_t sDamageTimer;
 };

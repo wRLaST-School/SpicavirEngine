@@ -8,23 +8,23 @@
 
 void ResultScene::LoadResources()
 {
-	if (GameManager::score.gradeMax > GameManager::score.totDamage)
+	if (GameManager::sScore.gradeMax > GameManager::sScore.totDamage)
 	{
 		SpTextureManager::LoadTexture("Resources/result.png", "resultText");
 
-		if (GameManager::score.totDamage > GameManager::score.gradeS)
+		if (GameManager::sScore.totDamage > GameManager::sScore.gradeS)
 		{
 			SpTextureManager::LoadTexture("Resources/rankS.png", "rank");
 		}
-		else if (GameManager::score.totDamage > GameManager::score.gradeA)
+		else if (GameManager::sScore.totDamage > GameManager::sScore.gradeA)
 		{
 			SpTextureManager::LoadTexture("Resources/rankA.png", "rank");
 		}
-		else if (GameManager::score.totDamage > GameManager::score.gradeB)
+		else if (GameManager::sScore.totDamage > GameManager::sScore.gradeB)
 		{
 			SpTextureManager::LoadTexture("Resources/rankB.png", "rank");
 		}
-		else if (GameManager::score.totDamage > GameManager::score.gradeC)
+		else if (GameManager::sScore.totDamage > GameManager::sScore.gradeC)
 		{
 			SpTextureManager::LoadTexture("Resources/rankC.png", "rank");
 		}

@@ -30,41 +30,41 @@ void Boss::Init()
 	model = ModelManager::GetModel("Boss");
 	position = { 0.f, 5.f, 0.f };
 
-	for (auto& m : markers) m.InitModel();
+	for (auto& m : markers_) m.InitModel();
 
 	rotation = Quaternion(Vec3(0, 1, 0), 0);
 
-	col.scale = { 2.5f, 2.5f, 2.5f };
-	col.pos = position;
-	col.rot = rotation;
+	col_.scale = { 2.5f, 2.5f, 2.5f };
+	col_.pos = position;
+	col_.rot = rotation;
 
-	GameManager::score.Init();
+	GameManager::sScore.Init();
 }
 
 void Boss::Update()
 {
 	static float rotY;
 
-	moveTimer++;
+	moveTimer_++;
 
-	if (GameManager::showDebug)
+	if (GameManager::sShowDebug)
 	{
 		SpImGui::Command([&] {
 			if (ImGui::Begin("Boss"))
 			{
-				ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing);
-				ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing);
-				ImGui::DragInt("Damage", &GameManager::score.totDamage);
+				ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing_);
+				ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing_);
+				ImGui::DragInt("Damage", &GameManager::sScore.totDamage);
 			}
 		ImGui::End();
 			});
 	}
 
 	//当たり判定を更新
-	col.pos = position;
-	col.rot = rotation;
+	col_.pos = position;
+	col_.rot = rotation;
 
-	col.DrawBB(Color::Red);
+	col_.DrawBB(Color::Red);
 
 	//Stateに合わせたアップデート
 	void (Boss::*pFuncTable[])() = {
@@ -75,15 +75,15 @@ void Boss::Update()
 		&Boss::RushUpdate
 	};
 
-	(this->*pFuncTable[(int32_t)state])();
+	(this->*pFuncTable[(int32_t)state_])();
 
 	//ダメージ演出の更新
-	if (damaged)
+	if (damaged_)
 	{
-		damageTimer++;
-		if (damageTimer > damageTime)
+		damageTimer_++;
+		if (damageTimer_ > damageTime)
 		{
-			damaged = false;
+			damaged_ = false;
 		}
 
 		*brightnessCB.contents = Color::Red.f4;
@@ -96,24 +96,24 @@ void Boss::Update()
 	UpdateMarkers();
 	UpdateLineAttacks();
 
-	if (dealDamageOnHit)
+	if (dealDamageOnHit_)
 	{
-		if (col.Collide(Player::Get()->GetCollider()))
+		if (col_.Collide(Player::Get()->GetCollider()))
 		{
 			Player::Get()->Damage();
 		}
 	}
 
 	//フィールド内に座標をクランプ
-	float colR = ((Vec3)col.scale).GetLength();
+	float colR = ((Vec3)col_.scale).GetLength();
 	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
 	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
 
 	UpdateMatrix();
 
-	GameManager::score.Update();
+	GameManager::sScore.Update();
 
-	if (MainTimer::timerSec <= 0 || GameManager::score.totDamage >= GameManager::score.gradeMax)
+	if (MainTimer::timerSec <= 0 || GameManager::sScore.totDamage >= GameManager::sScore.gradeMax)
 	{
 		Transition::Start<ResultScene>();
 	}
@@ -125,15 +125,15 @@ void Boss::Draw()
 	DrawMarkers();
 	DrawLineAttacks();
 
-	GameManager::score.Draw();
+	GameManager::sScore.Draw();
 }
 
 void Boss::Damage(int32_t damage)
 {
-	damageTimer = 0;
-	damaged = true;
+	damageTimer_ = 0;
+	damaged_ = true;
 
-	GameManager::score.totDamage += damage;
+	GameManager::sScore.totDamage += damage;
 }
 
 Boss* Boss::Get()
@@ -148,7 +148,7 @@ void Boss::Set(Boss* boss)
 
 void Boss::CastMarker(Float3 pos)
 {
-	for (auto& m : markers)
+	for (auto& m : markers_)
 	{
 		if (!m.active) {
 			m.Cast(pos);
@@ -174,7 +174,7 @@ void Boss::CastMarkerLine3()
 {
 	if (Util::Chance(50))
 	{
-		for (float z = -markerLine3Spacing; z <= markerLine3Spacing; z += markerLine3Spacing)
+		for (float z = -markerLine3Spacing_; z <= markerLine3Spacing_; z += markerLine3Spacing_)
 		{
 			for (float x = -28.f; x < 28.f; x += 4.f) {
 				CastMarker({ x, 0.f, z });
@@ -183,7 +183,7 @@ void Boss::CastMarkerLine3()
 	}
 	else
 	{
-		for (float x = -markerLine3Spacing; x <= markerLine3Spacing; x += markerLine3Spacing)
+		for (float x = -markerLine3Spacing_; x <= markerLine3Spacing_; x += markerLine3Spacing_)
 		{
 			for (float z = -28.f; z < 28.f; z += 4.f) {
 				CastMarker({ x, 0.f, z });
@@ -197,12 +197,12 @@ void Boss::CastMarkerLine3()
 
 void Boss::DrawMarkers()
 {
-	for (auto& m : markers) if (m.active) m.Draw();
+	for (auto& m : markers_) if (m.active) m.Draw();
 }
 
 void Boss::UpdateMarkers()
 {
-	for (auto& m : markers) if (m.active) m.Update();
+	for (auto& m : markers_) if (m.active) m.Update();
 }
 
 void Boss::CastLineTriple()
@@ -225,7 +225,7 @@ void Boss::CastLineTriple()
 
 	if (Util::Chance(50))
 	{
-		for (float x = -lineAttackSpacing; x <= lineAttackSpacing; x += lineAttackSpacing)
+		for (float x = -lineAttackSpacing_; x <= lineAttackSpacing_; x += lineAttackSpacing_)
 		{
 			
 			CastLine(basePos + front * 20.f + side * x, atan2f(front.x, front.z));
@@ -233,7 +233,7 @@ void Boss::CastLineTriple()
 	}
 	else
 	{
-		for (float z = -lineAttackSpacing; z <= lineAttackSpacing; z += lineAttackSpacing)
+		for (float z = -lineAttackSpacing_; z <= lineAttackSpacing_; z += lineAttackSpacing_)
 		{
 			CastLine(basePos + front * (20.f + z), atan2f(front.x, front.z) + PIf / 2);
 		}
@@ -245,18 +245,18 @@ void Boss::CastLineTriple()
 
 void Boss::CastLine(Float3 pos, float angle)
 {
-	lineAttacks.emplace_back(pos, angle);
+	lineAttacks_.emplace_back(pos, angle);
 }
 
 void Boss::UpdateLineAttacks()
 {
-	for (auto itr = lineAttacks.begin(); itr != lineAttacks.end();)
+	for (auto itr = lineAttacks_.begin(); itr != lineAttacks_.end();)
 	{
 		itr->Update();
 
 		if (!itr->active)
 		{
-			itr = lineAttacks.erase(itr);
+			itr = lineAttacks_.erase(itr);
 		}
 		else
 		{
@@ -267,58 +267,58 @@ void Boss::UpdateLineAttacks()
 
 void Boss::DrawLineAttacks()
 {
-	for (auto& la : lineAttacks) la.Draw();
+	for (auto& la : lineAttacks_) la.Draw();
 }
 
 void Boss::Rush()
 {
-	state = State::Rush;
-	moveTime = prepTime + afterPrepWaitTime + rushTime + rushAfterTime;
-	moveTimer = 0;
+	state_ = State::Rush;
+	moveTime_ = prepTime_ + afterPrepWaitTime_ + rushTime_ + rushAfterTime_;
+	moveTimer_ = 0;
 }
 
 void Boss::RushUpdate()
 {
-	if (moveTimer < prepTime)
+	if (moveTimer_ < prepTime_)
 	{
 		Vec3 target = position;
 		target.y = 2.5f;
-		position = Vec3::Lerp(position, target, (float)moveTimer / (float)prepTime);
+		position = Vec3::Lerp(position, target, (float)moveTimer_ / (float)prepTime_);
 
 		Vec3 rotTarget = Player::Get()->position;
 		rotTarget.y = position.y;
 
 		rotation = Quaternion::DirToDir(Vec3(0, 0, 1), rotTarget - position);
 	}
-	else if (moveTimer < prepTime + afterPrepWaitTime)
+	else if (moveTimer_ < prepTime_ + afterPrepWaitTime_)
 	{
 		Vec3 front = rotation.GetRotMat().ExtractAxisZ();
-		front.SetLength(rushDistance);
+		front.SetLength(rushDistance_);
 
-		rushTarget = front + position;
+		rushTarget_ = front + position;
 	}
-	else if (moveTimer < prepTime + afterPrepWaitTime + rushTime)
+	else if (moveTimer_ < prepTime_ + afterPrepWaitTime_ + rushTime_)
 	{
-		dealDamageOnHit = true;
+		dealDamageOnHit_ = true;
 		rotation *= Quaternion(Vec3(0, 0, 1), PIf / 60.f);
 
-		position = Vec3::Lerp(position, rushTarget,
-			(float)(moveTimer - prepTime - afterPrepWaitTime) / (float)rushTime);
+		position = Vec3::Lerp(position, rushTarget_,
+			(float)(moveTimer_ - prepTime_ - afterPrepWaitTime_) / (float)rushTime_);
 	}
 	else
 	{
 		Vec3 target = position;
 		target.y = 5.f;
 		position = Vec3::Lerp(position, target, 
-			(float)(moveTimer - prepTime - afterPrepWaitTime - rushTime)/ (float)rushAfterTime);
+			(float)(moveTimer_ - prepTime_ - afterPrepWaitTime_ - rushTime_)/ (float)rushAfterTime_);
 	}
 
-	if (moveTimer >= moveTime)
+	if (moveTimer_ >= moveTime_)
 	{
 		RushEnd();
 	}
 
-	if (moveTimer == prepTime + afterPrepWaitTime)
+	if (moveTimer_ == prepTime_ + afterPrepWaitTime_)
 	{
 		//SE再生
 		SoundManager::Play("RushImpact");
@@ -327,54 +327,54 @@ void Boss::RushUpdate()
 
 void Boss::LineAttackUpdate()
 {
-	if (moveTimer >= moveTime)
+	if (moveTimer_ >= moveTime_)
 	{
-		state = State::Idle;
-		moveTimer = 0;
+		state_ = State::Idle;
+		moveTimer_ = 0;
 	}
 }
 
 void Boss::MarkerUpdate()
 {
-	if (moveTimer >= moveTime)
+	if (moveTimer_ >= moveTime_)
 	{
-		state = State::Idle;
-		moveTimer = 0;
+		state_ = State::Idle;
+		moveTimer_ = 0;
 	}
 }
 
 void Boss::MarkerAndLineUpdate()
 {
-	if (moveTimer >= moveTime)
+	if (moveTimer_ >= moveTime_)
 	{
-		state = State::Idle;
-		moveTimer = 0;
+		state_ = State::Idle;
+		moveTimer_ = 0;
 	}
 }
 
 void Boss::RushEnd()
 {
-	state = State::Idle;
-	moveTimer = 0;
-	dealDamageOnHit = false;
+	state_ = State::Idle;
+	moveTimer_ = 0;
+	dealDamageOnHit_ = false;
 }
 
 void Boss::IdleUpdate()
 {
-	if (timesAttacked < 3)
+	if (timesAttacked_ < 3)
 	{
-		if (moveTimer > 60)
+		if (moveTimer_ > 60)
 		{
 			SelectMove();
-			timesAttacked++;
+			timesAttacked_++;
 		}
 	}
 	else
 	{
-		if (moveTimer > 240)
+		if (moveTimer_ > 240)
 		{
 			SelectMove();
-			timesAttacked = 0;
+			timesAttacked_ = 0;
 		}
 	}
 }
@@ -385,9 +385,9 @@ void Boss::SelectMove()
 	if (rng <= 1)
 	{
 		CastLineTriple();
-		state = State::Line;
-		moveTime = 60;
-		moveTimer = 0;
+		state_ = State::Line;
+		moveTime_ = 60;
+		moveTimer_ = 0;
 	}
 	else if (rng <= 3)
 	{
@@ -400,9 +400,9 @@ void Boss::SelectMove()
 			CastMarkerAim1Rand5();
 		}
 
-		state = State::Marker;
-		moveTime = 60;
-		moveTimer = 0;
+		state_ = State::Marker;
+		moveTime_ = 60;
+		moveTimer_ = 0;
 	}
 	else if (rng <= 5)
 	{
@@ -420,13 +420,13 @@ void Boss::SelectMove()
 		}
 		CastLineTriple();
 
-		state = State::MarkerAndLine;
-		moveTime = 60;
-		moveTimer = 0;
+		state_ = State::MarkerAndLine;
+		moveTime_ = 60;
+		moveTimer_ = 0;
 	}
 }
 
 const OBBCollider& Boss::GetCollider()
 {
-	return col;
+	return col_;
 }

@@ -21,8 +21,8 @@ private:
 
 	const static int R = 4;
 
-	float angle;
+	float angle_;
 
-	OBBCollider col;
+	OBBCollider col_;
 };
 

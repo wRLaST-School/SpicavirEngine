@@ -3,7 +3,7 @@
 
 class GameManager {
 public:
-	static Score score;
-	static bool showDebug;
-	static bool showHitBoxes;
+	static Score sScore;
+	static bool sShowDebug;
+	static bool sShowHitBoxes;
 };

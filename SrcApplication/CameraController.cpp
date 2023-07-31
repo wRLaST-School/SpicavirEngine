@@ -117,7 +117,7 @@ void CameraController::Set(CameraController* cctrl)
 
 float CameraController::GetCamSpd()
 {
-	return sCurrent->camSpeed;
+	return sCurrent->camSpeed_;
 }
 
 CameraController* CameraController::sCurrent = nullptr;

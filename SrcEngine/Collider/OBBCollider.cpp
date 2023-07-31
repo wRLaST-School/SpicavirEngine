@@ -163,7 +163,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
 void OBBCollider::DrawBB(Color color)
 {
-    if (GameManager::showHitBoxes)
+    if (GameManager::sShowHitBoxes)
     {
         LineDrawer::DrawRotaCube(pos, scale, rot, color.f4);
     }

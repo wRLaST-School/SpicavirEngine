@@ -36,17 +36,17 @@ void GameScene::LoadResources()
 void GameScene::Init()
 {
 	LevelManager::Init();
-	Boss::Set(&boss);
-	Player::Set(&player);
+	Boss::Set(&boss_);
+	Player::Set(&player_);
 
-	boss.Init();
-	player.Init();
+	boss_.Init();
+	player_.Init();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
 
-	cam.Init();
+	cam_.Init();
 
-	CameraController::Set(&cam);
+	CameraController::Set(&cam_);
 
 	MainTimer::Init();
 }
@@ -54,18 +54,18 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	LevelManager::Update();
-	boss.Update();
-	player.Update();
-	cam.Update();
+	boss_.Update();
+	player_.Update();
+	cam_.Update();
 
 	MainTimer::Update();
 
-	if (GameManager::showDebug)
+	if (GameManager::sShowDebug)
 	{
 		SpImGui::Command([&] {
 			if (ImGui::Begin("Game Scene"))
 			{
-				ImGui::Checkbox("Show Hit Box", &GameManager::showHitBoxes);
+				ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
 			}
 			ImGui::End();
 		});
@@ -78,11 +78,11 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {
-	cam.Set();
+	cam_.Set();
 
 	LevelManager::Draw();
-	boss.Draw();
-	player.Draw();
+	boss_.Draw();
+	player_.Draw();
 
 	MainTimer::Draw();
 }

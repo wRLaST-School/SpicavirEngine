@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameManager.h"
 
-Score GameManager::score;
+Score GameManager::sScore;
 
-bool GameManager::showDebug = false;
-bool GameManager::showHitBoxes = false;
+bool GameManager::sShowDebug = false;
+bool GameManager::sShowHitBoxes = false;
