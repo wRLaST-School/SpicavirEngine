@@ -172,9 +172,6 @@
     <Filter Include="Engine\ヘッダーファイル\Effekseer">
       <UniqueIdentifier>{11d460ed-80c8-4586-941e-69259395d1ef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="!Game\Collider">
-      <UniqueIdentifier>{fa7a94c7-4560-4085-b5a1-607e48900284}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -327,110 +324,110 @@
     <ClCompile Include="SrcEngine\Drawer\TextDrawer.cpp">
       <Filter>Engine\ソースファイル\DrawHelper</Filter>
     </ClCompile>
-    <ClCompile Include="SpRenderer.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrOpaqueStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrAddStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrAlphaStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrImGuiStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrPostEffectStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrSpriteStage.cpp">
-      <Filter>Engine\ソースファイル\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrParticleStage.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Ray.cpp">
+    <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneCollider.cpp">
-      <Filter>Engine\ソースファイル\Collider</Filter>
+    <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
+      <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="Color.cpp">
+    <ClCompile Include="SrcEngine\2D\Camera2D.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SpDS.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
+    <ClCompile Include="SrcEngine\Others\Easing.cpp">
+      <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
-    <ClCompile Include="Animation2D.cpp">
-      <Filter>Engine\ソースファイル\2D</Filter>
+    <ClCompile Include="SrcEngine\Renderer\SrSpriteStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+    <ClCompile Include="SrcEngine\Renderer\SpRenderer.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene.cpp">
+    <ClCompile Include="SrcEngine\Renderer\SrAddStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrAlphaStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrImGuiStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrOpaqueStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrParticleStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Renderer\SrPostEffectStage.cpp">
+      <Filter>Engine\ソースファイル\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Particle\CounterParticle.cpp">
+      <Filter>!Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Player.cpp">
+      <Filter>!Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\GameScene.cpp">
       <Filter>!Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Boss.cpp">
-      <Filter>!Game\Boss</Filter>
+    <ClCompile Include="SrcApplication\Scene\ResulScene.cpp">
+      <Filter>!Game\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CameraController.cpp">
+    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp">
+      <Filter>!Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\Transition.cpp">
+      <Filter>!Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\GameManager.cpp">
+      <Filter>!Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\CameraController.cpp">
       <Filter>!Game\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>!Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
-      <Filter>Engine\ソースファイル\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Marker.cpp">
+    <ClCompile Include="SrcApplication\LineAttack.cpp">
       <Filter>!Game\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalTimer.cpp">
+    <ClCompile Include="SrcApplication\MainTimer.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Boss.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Marker.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Score.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\LevelLoader.cpp">
+      <Filter>!Game\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\LevelManager.cpp">
+      <Filter>!Game\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\GlobalTimer.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="LevelManager.cpp">
-      <Filter>!Game\Background</Filter>
+    <ClCompile Include="SrcEngine\Collider\OBBCollider.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>!Game\Background</Filter>
+    <ClCompile Include="SrcEngine\Collider\PlaneCollider.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
-      <Filter>Engine\ソースファイル\Math</Filter>
+    <ClCompile Include="SrcEngine\Collider\Ray.cpp">
+      <Filter>Engine\ソースファイル\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="SpEffekseer.cpp">
+    <ClCompile Include="SrcEngine\2D\Animation2D.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Others\Color.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\2D\SpDS.cpp">
+      <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\3D\SpEffekseer.cpp">
       <Filter>Engine\ソースファイル\Effekseer</Filter>
-    </ClCompile>
-    <ClCompile Include="LineAttack.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="CounterParticle.cpp">
-      <Filter>!Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Easing.cpp">
-      <Filter>Application</Filter>
-    </ClCompile>
-    <ClCompile Include="OBBCollider.cpp">
-      <Filter>!Game\Collider</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Transition.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Score.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="MainTimer.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="ResulScene.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>!Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -596,80 +593,8 @@
     <ClInclude Include="SrcEngine\Drawer\TextDrawer.h">
       <Filter>Engine\ヘッダーファイル\DrawHelper</Filter>
     </ClInclude>
-    <ClInclude Include="SpRenderer.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="IRenderStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrOpaqueStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrAddStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrAlphaStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrImGuiStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrSpriteStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrPostEffectStage.h">
-      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrParticleStage.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>Engine\ヘッダーファイル\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneCollider.h">
-      <Filter>Engine\ヘッダーファイル\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Anchor.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SpDS.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation2D.h">
-      <Filter>Engine\ヘッダーファイル\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera2D.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>!Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Boss.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>!Game\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>!Game\Player</Filter>
-    </ClInclude>
     <ClInclude Include="SrcEngine\Math\Quaternion.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Marker.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="GlobalTimer.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelManager.h">
-      <Filter>!Game\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelLoader.h">
-      <Filter>!Game\Background</Filter>
     </ClInclude>
     <ClInclude Include="SrcExternal\json.hpp">
       <Filter>External</Filter>
@@ -677,38 +602,110 @@
     <ClInclude Include="SrcEngine\Math\Quaternion.h">
       <Filter>Engine\ヘッダーファイル\Math</Filter>
     </ClInclude>
-    <ClInclude Include="SpEffekseer.h">
-      <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
+    <ClInclude Include="SrcEngine\Others\Color.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="LineAttack.h">
-      <Filter>!Game\Boss</Filter>
+    <ClInclude Include="SrcEngine\Others\Anchor.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="CounterParticle.h">
+    <ClInclude Include="SrcEngine\2D\Camera2D.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Others\Easing.h">
+      <Filter>Engine\ヘッダーファイル\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SpRenderer.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrAddStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrAlphaStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrImGuiStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrOpaqueStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrParticleStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrPostEffectStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\SrSpriteStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Renderer\IRenderStage.h">
+      <Filter>Engine\ヘッダーファイル\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Particle\CounterParticle.h">
       <Filter>!Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Easing.h">
-      <Filter>Application</Filter>
+    <ClInclude Include="SrcApplication\Player.h">
+      <Filter>!Game\Player</Filter>
     </ClInclude>
-    <ClInclude Include="OBBCollider.h">
-      <Filter>!Game\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
+    <ClInclude Include="SrcApplication\Scene\GameScene.h">
       <Filter>!Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Transition.h">
+    <ClInclude Include="SrcApplication\Scene\ResulScene.h">
       <Filter>!Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Score.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="MainTimer.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="ResulScene.h">
+    <ClInclude Include="SrcApplication\Scene\TitleScene.h">
       <Filter>!Game\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
+    <ClInclude Include="SrcApplication\Scene\Transition.h">
+      <Filter>!Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\GameManager.h">
       <Filter>!Game</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\CameraController.h">
+      <Filter>!Game\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\LineAttack.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\MainTimer.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Boss.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Marker.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Score.h">
+      <Filter>!Game\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\LevelLoader.h">
+      <Filter>!Game\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\LevelManager.h">
+      <Filter>!Game\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\GlobalTimer.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Collider\OBBCollider.h">
+      <Filter>Engine\ヘッダーファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Collider\PlaneCollider.h">
+      <Filter>Engine\ヘッダーファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Collider\Ray.h">
+      <Filter>Engine\ヘッダーファイル\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\2D\Animation2D.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\2D\SpDS.h">
+      <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\3D\SpEffekseer.h">
+      <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

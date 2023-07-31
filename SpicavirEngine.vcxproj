@@ -59,21 +59,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
@@ -167,44 +167,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation2D.cpp" />
-    <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="CounterParticle.cpp" />
-    <ClCompile Include="Easing.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="GlobalTimer.cpp" />
-    <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="LineAttack.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainTimer.cpp" />
-    <ClCompile Include="Marker.cpp" />
-    <ClCompile Include="OBBCollider.cpp" />
-    <ClCompile Include="PlaneCollider.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="ResulScene.cpp" />
-    <ClCompile Include="Score.cpp" />
-    <ClCompile Include="SpDS.cpp" />
-    <ClCompile Include="SpEffekseer.cpp" />
-    <ClCompile Include="SpRenderer.cpp" />
-    <ClCompile Include="SrAddStage.cpp" />
-    <ClCompile Include="SrAlphaStage.cpp" />
+    <ClCompile Include="SrcApplication\Boss.cpp" />
+    <ClCompile Include="SrcApplication\CameraController.cpp" />
+    <ClCompile Include="SrcApplication\GameManager.cpp" />
+    <ClCompile Include="SrcApplication\GlobalTimer.cpp" />
+    <ClCompile Include="SrcApplication\LevelLoader.cpp" />
+    <ClCompile Include="SrcApplication\LevelManager.cpp" />
+    <ClCompile Include="SrcApplication\LineAttack.cpp" />
+    <ClCompile Include="SrcApplication\MainTimer.cpp" />
+    <ClCompile Include="SrcApplication\Marker.cpp" />
+    <ClCompile Include="SrcApplication\Particle\CounterParticle.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp" />
+    <ClCompile Include="SrcApplication\Player.cpp" />
+    <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\ResulScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\Transition.cpp" />
+    <ClCompile Include="SrcApplication\Score.cpp" />
+    <ClCompile Include="SrcEngine\2D\Animation2D.cpp" />
+    <ClCompile Include="SrcEngine\2D\Camera2D.cpp" />
+    <ClCompile Include="SrcEngine\2D\SpDS.cpp" />
     <ClCompile Include="SrcEngine\2D\Sprite.cpp" />
     <ClCompile Include="SrcEngine\3D\Billboard.cpp" />
     <ClCompile Include="SrcEngine\3D\Camera.cpp" />
     <ClCompile Include="SrcEngine\3D\Model.cpp" />
     <ClCompile Include="SrcEngine\3D\Object3D.cpp" />
+    <ClCompile Include="SrcEngine\3D\SpEffekseer.cpp" />
     <ClCompile Include="SrcEngine\Collider\ICollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\OBBCollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\PlaneCollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\Ray.cpp" />
     <ClCompile Include="SrcEngine\Collider\RayCollider.cpp" />
     <ClCompile Include="SrcEngine\Collider\SphereCollider.cpp" />
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp" />
@@ -228,6 +225,8 @@
     <ClCompile Include="SrcEngine\Math\Vec2.cpp" />
     <ClCompile Include="SrcEngine\Math\Vec3.cpp" />
     <ClCompile Include="SrcEngine\Math\SpMath.cpp" />
+    <ClCompile Include="SrcEngine\Others\Color.cpp" />
+    <ClCompile Include="SrcEngine\Others\Easing.cpp" />
     <ClCompile Include="SrcEngine\Others\Essentials.cpp" />
     <ClCompile Include="SrcEngine\Others\exc_unordered_map.cpp" />
     <ClCompile Include="SrcEngine\Others\Input.cpp" />
@@ -244,58 +243,54 @@
     <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp" />
     <ClCompile Include="SrcEngine\PostEffect\Bloom.cpp" />
     <ClCompile Include="SrcEngine\PostEffect\IPostEffector.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SpRenderer.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrAddStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrAlphaStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrImGuiStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrOpaqueStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrParticleStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrPostEffectStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrSpriteStage.cpp" />
     <ClCompile Include="SrcEngine\Scene\FrameRate.cpp" />
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
-    <ClCompile Include="SrImGuiStage.cpp" />
-    <ClCompile Include="SrOpaqueStage.cpp" />
-    <ClCompile Include="SrParticleStage.cpp" />
-    <ClCompile Include="SrPostEffectStage.cpp" />
-    <ClCompile Include="SrSpriteStage.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Transition.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Anchor.h" />
-    <ClInclude Include="Animation2D.h" />
-    <ClInclude Include="Boss.h" />
-    <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="CameraController.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="CounterParticle.h" />
-    <ClInclude Include="Easing.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="GlobalTimer.h" />
-    <ClInclude Include="IRenderStage.h" />
-    <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="LineAttack.h" />
-    <ClInclude Include="MainTimer.h" />
-    <ClInclude Include="Marker.h" />
-    <ClInclude Include="OBBCollider.h" />
-    <ClInclude Include="PlaneCollider.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="ResulScene.h" />
-    <ClInclude Include="Score.h" />
-    <ClInclude Include="SpDS.h" />
-    <ClInclude Include="SpEffekseer.h" />
-    <ClInclude Include="SpRenderer.h" />
-    <ClInclude Include="SrAddStage.h" />
-    <ClInclude Include="SrAlphaStage.h" />
+    <ClInclude Include="SrcApplication\Boss.h" />
+    <ClInclude Include="SrcApplication\CameraController.h" />
+    <ClInclude Include="SrcApplication\GameManager.h" />
+    <ClInclude Include="SrcApplication\GlobalTimer.h" />
+    <ClInclude Include="SrcApplication\LevelLoader.h" />
+    <ClInclude Include="SrcApplication\LevelManager.h" />
+    <ClInclude Include="SrcApplication\LineAttack.h" />
+    <ClInclude Include="SrcApplication\MainTimer.h" />
+    <ClInclude Include="SrcApplication\Marker.h" />
+    <ClInclude Include="SrcApplication\Particle\CounterParticle.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample1.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample2.h" />
+    <ClInclude Include="SrcApplication\Player.h" />
+    <ClInclude Include="SrcApplication\Scene\GameScene.h" />
+    <ClInclude Include="SrcApplication\Scene\ResulScene.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
+    <ClInclude Include="SrcApplication\Scene\TitleScene.h" />
+    <ClInclude Include="SrcApplication\Scene\Transition.h" />
+    <ClInclude Include="SrcApplication\Score.h" />
+    <ClInclude Include="SrcEngine\2D\Animation2D.h" />
+    <ClInclude Include="SrcEngine\2D\Camera2D.h" />
+    <ClInclude Include="SrcEngine\2D\SpDS.h" />
     <ClInclude Include="SrcEngine\2D\Sprite.h" />
     <ClInclude Include="SrcEngine\3D\Billboard.h" />
     <ClInclude Include="SrcEngine\3D\Camera.h" />
     <ClInclude Include="SrcEngine\3D\Model.h" />
     <ClInclude Include="SrcEngine\3D\Object3D.h" />
+    <ClInclude Include="SrcEngine\3D\SpEffekseer.h" />
     <ClInclude Include="SrcEngine\Collider\ICollider.h" />
+    <ClInclude Include="SrcEngine\Collider\OBBCollider.h" />
+    <ClInclude Include="SrcEngine\Collider\PlaneCollider.h" />
+    <ClInclude Include="SrcEngine\Collider\Ray.h" />
     <ClInclude Include="SrcEngine\Collider\RayCollider.h" />
     <ClInclude Include="SrcEngine\Collider\SphereCollider.h" />
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h" />
@@ -322,6 +317,9 @@
     <ClInclude Include="SrcEngine\Math\Vec2.h" />
     <ClInclude Include="SrcEngine\Math\Vec3.h" />
     <ClInclude Include="SrcEngine\Math\SpMath.h" />
+    <ClInclude Include="SrcEngine\Others\Anchor.h" />
+    <ClInclude Include="SrcEngine\Others\Color.h" />
+    <ClInclude Include="SrcEngine\Others\Easing.h" />
     <ClInclude Include="SrcEngine\Others\Essentials.h" />
     <ClInclude Include="SrcEngine\Others\exc_unordered_map.h" />
     <ClInclude Include="SrcEngine\Others\Input.h" />
@@ -336,18 +334,20 @@
     <ClInclude Include="SrcEngine\Particle\ParticleManager.h" />
     <ClInclude Include="SrcEngine\PostEffect\Bloom.h" />
     <ClInclude Include="SrcEngine\PostEffect\IPostEffector.h" />
+    <ClInclude Include="SrcEngine\Renderer\IRenderStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SpRenderer.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrAddStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrAlphaStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrImGuiStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrOpaqueStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrParticleStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrPostEffectStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrSpriteStage.h" />
     <ClInclude Include="SrcEngine\Scene\FrameRate.h" />
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
     <ClInclude Include="SrcExternal\json.hpp" />
-    <ClInclude Include="SrImGuiStage.h" />
-    <ClInclude Include="SrOpaqueStage.h" />
-    <ClInclude Include="SrParticleStage.h" />
-    <ClInclude Include="SrPostEffectStage.h" />
-    <ClInclude Include="SrSpriteStage.h" />
-    <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Transition.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
