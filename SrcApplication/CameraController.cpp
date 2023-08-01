@@ -26,6 +26,17 @@ void CameraController::Update()
 
 		Vec3 front = (Vec3)Boss::Get()->position - Player::Get()->position;
 		front.y = 0;
+
+		//ƒ[ƒƒxƒNƒgƒ‹‚Å”ò‚Î‚È‚¢‚æ‚¤‚É
+		if (front.GetSquaredLength())
+		{
+			lastPlayerPos_ = Player::Get()->position;
+		}
+		else
+		{
+			front = (Vec3)Boss::Get()->position - lastPlayerPos_;
+		}
+
 		front.Norm();
 
 		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);

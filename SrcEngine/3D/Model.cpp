@@ -688,7 +688,7 @@ void Model::UpdateAnim()
 		Matrix parentTrans;
 		Channel* parentChannel = nullptr;
 
-		if (node == nullptr/* || &channel == nullptr*/)
+		if (node == nullptr)
 		{
 			return Matrix::Identity();
 		}

@@ -38,5 +38,7 @@ private:
 	float camSpeed_ = PIf / 180;
 
 	Float2 freeCamRot_ = {PIf / 4, 0.f};
+
+	Float3 lastPlayerPos_ = {};
 };
 

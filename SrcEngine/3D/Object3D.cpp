@@ -38,11 +38,6 @@ void Object3D::UpdateMatrix()
 void Object3D::Draw()
 {
 	transformCB.contents->mat = matWorld;
-	/*GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
-
-	Light::Use();
-	Camera::UseCurrent();*/
 
 	SpRenderer::DrawCommand([&] {
 		if (model->material.size())
