@@ -5,7 +5,7 @@ void FrameRate::FrameStartWithWait()
 	sFrameend = std::chrono::system_clock::now();
 
 	double waitTimer = 16.6 - (std::chrono::duration_cast<std::chrono::milliseconds>(sFrameend - sFramestart).count());
-	if (waitTimer > 0)Sleep((int32_t)waitTimer / 2);
+	if (waitTimer > 0)Sleep((int32_t)waitTimer);
 	sFramestart = std::chrono::system_clock::now();
 }
 
