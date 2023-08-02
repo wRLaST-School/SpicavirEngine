@@ -10,7 +10,7 @@ void LevelManager::Init()
 
 void LevelManager::Update()
 {
-	for (auto& o : objects_)
+	for (auto& o : objects)
 	{
 		o.UpdateMatrix();
 	}
@@ -18,7 +18,7 @@ void LevelManager::Update()
 
 void LevelManager::Draw()
 {
-	for (auto& o : objects_)
+	for (auto& o : objects)
 	{
 		o.Draw("white");
 	}
@@ -26,7 +26,7 @@ void LevelManager::Draw()
 
 void LevelManager::Clear()
 {
-	objects_.clear();
+	objects.clear();
 }
 
-eastl::list<Object3D> LevelManager::objects_;
+eastl::list<Object3D> LevelManager::objects;

@@ -9,9 +9,9 @@ Marker::Marker()
 {
 }
 
-void Marker::Cast(const Float3& pos_)
+void Marker::Cast(const Float3& pos)
 {
-    pos_ = pos_;
+    pos_ = pos;
     timer_ = 0;
     active_ = true;
     SpEffekseer::Play("Marker", pos_);
