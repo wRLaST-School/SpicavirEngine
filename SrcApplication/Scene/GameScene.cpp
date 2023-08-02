@@ -65,6 +65,7 @@ void GameScene::Update()
 		SpImGui::Command([&] {
 			if (ImGui::Begin("Game Scene"))
 			{
+				ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
 				ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
 			}
 			ImGui::End();
