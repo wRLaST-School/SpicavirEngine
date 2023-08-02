@@ -6,7 +6,7 @@
 
 void CameraController::Init()
 {
-	cam = std::make_unique<Camera>();
+	cam_ = std::make_unique<Camera>();
 
 	cam->UseDefaultParams();
 
@@ -90,7 +90,7 @@ void CameraController::Update()
 
 void CameraController::Set()
 {
-	Camera::Set(*cam.get());
+	Camera::Set(*cam_.get());
 }
 
 CameraController::Mode CameraController::GetMode()

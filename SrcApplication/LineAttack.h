@@ -8,12 +8,14 @@ public:
 	void Update();
 	void Draw();
 
+	bool IsActive();
+
 	Float3 pos{};
-	bool active = false;
 
 private:
 	//Object3D outerObj;
 	//Object3D innerObj;
+	bool active_ = false;
 
 	int timer_ = 0;
 

@@ -150,7 +150,7 @@ void Boss::CastMarker(Float3 pos)
 {
 	for (auto& m : markers_)
 	{
-		if (!m.active) {
+		if (!m.active_) {
 			m.Cast(pos);
 			break;
 		}
@@ -197,12 +197,12 @@ void Boss::CastMarkerLine3()
 
 void Boss::DrawMarkers()
 {
-	for (auto& m : markers_) if (m.active) m.Draw();
+	for (auto& m : markers_) if (m.active_) m.Draw();
 }
 
 void Boss::UpdateMarkers()
 {
-	for (auto& m : markers_) if (m.active) m.Update();
+	for (auto& m : markers_) if (m.active_) m.Update();
 }
 
 void Boss::CastLineTriple()
@@ -254,7 +254,7 @@ void Boss::UpdateLineAttacks()
 	{
 		itr->Update();
 
-		if (!itr->active)
+		if (!itr->active_)
 		{
 			itr = lineAttacks_.erase(itr);
 		}

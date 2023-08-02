@@ -7,7 +7,7 @@ LineAttack::LineAttack(const Float3& pos_, float angle_)
 {
     pos = pos_;
     timer_ = 0;
-    active = true;
+    active_ = true;
     angle_ = angle_;
     SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("LineAttack", pos), { 0, 1, 0 }, angle_);
 
@@ -27,7 +27,7 @@ void LineAttack::Update()
             pl->Damage();
         }
 
-        active = false;
+        active_ = false;
     }
 
     timer_++;
@@ -36,4 +36,9 @@ void LineAttack::Update()
 void LineAttack::Draw()
 {
     col_.DrawBB(Color::Red);
+}
+
+bool LineAttack::IsActive()
+{
+    return active_;
 }

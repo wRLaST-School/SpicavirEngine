@@ -48,8 +48,8 @@ void LevelLoader::Load(std::string path)
 		//í—Ş‚²‚Æ‚Ìˆ—
 		if (type.compare("MESH") == 0)
 		{
-			LevelManager::objects.emplace_back();
-			auto& objdata = LevelManager::objects.back();
+			LevelManager::objects_.emplace_back();
+			auto& objdata = LevelManager::objects_.back();
 
 			if (obj.contains("file_name")) {
 				objdata.model = ModelManager::GetModel(obj["file_name"]);

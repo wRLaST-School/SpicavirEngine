@@ -12,6 +12,8 @@ public:
 private:
 	Mode mode_ = Mode::Target;
 
+	std::unique_ptr<Camera> cam_;
+
 public:
 	void Init();
 	void Update();
@@ -21,8 +23,6 @@ public:
 	void ToggleMode();
 
 	void SetMode(Mode m);
-
-	std::unique_ptr<Camera> cam;
 
 public:
 	static CameraController* Get();

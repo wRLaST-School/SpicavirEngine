@@ -11,10 +11,10 @@ Marker::Marker()
 
 void Marker::Cast(const Float3& pos_)
 {
-    pos = pos_;
+    pos_ = pos_;
     timer_ = 0;
-    active = true;
-    SpEffekseer::Play("Marker", pos);
+    active_ = true;
+    SpEffekseer::Play("Marker", pos_);
 }
 
 void Marker::InitModel()
@@ -38,8 +38,8 @@ void Marker::Update()
         Player* pl = Player::Get();
 
         Float2 diff = {
-            pl->position.x - pos.x,
-            pl->position.z - pos.z
+            pl->position.x - pos_.x,
+            pl->position.z - pos_.z
         };
 
         if (abs(diff.x) <= (float)R / 2 + pl->r2d && abs(diff.y) <= (float)R / 2 + pl->r2d)
@@ -47,7 +47,7 @@ void Marker::Update()
             pl->Damage();
         }
 
-        active = false;
+        active_ = false;
     }
 
     //outerObj.UpdateMatrix();
@@ -60,4 +60,9 @@ void Marker::Draw()
 {
 	//outerObj.DrawAlpha(TEX_KEY);
 	//innerObj.DrawAlpha(TEX_KEY);
+}
+
+bool Marker::IsActive()
+{
+    return active_;
 }

@@ -12,14 +12,15 @@ public:
 	void Update();
 	void Draw();
 
-	Float3 pos;
-	bool active = false;
-
+	bool IsActive();
 private:
 	//Object3D outerObj;
 	//Object3D innerObj;
+	bool active_ = false;
 
 	int timer_ = 0;
+
+	Float3 pos_;
 
 	const static int FIN_TIME = 60;
 

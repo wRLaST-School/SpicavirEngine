@@ -12,5 +12,6 @@ public:
 
 	static void Clear();
 
-	static eastl::list<Object3D> objects;
+private:
+	static eastl::list<Object3D> objects_;
 };

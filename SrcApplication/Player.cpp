@@ -126,7 +126,7 @@ void Player::Move()
 	Vec3 vel(0, 0, 0);
 	//Matrix rMat = rotation.GetRotMat();
 	CameraController* ctrl = CameraController::Get();
-	Vec3 front = (Vec3)ctrl->cam->target - ctrl->cam->position;
+	Vec3 front = (Vec3)ctrl->GetCamera().target - ctrl->GetCamera().position;
 	Vec3 side = front.Cross(Vec3(0.f, 1.f, 0.f));
 	front.y = 0;
 	side.y = 0;
@@ -134,7 +134,7 @@ void Player::Move()
 	vel = front.SetLength((float)(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)));
 	vel += -side.SetLength((float)(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)));
 
-	front = (Vec3)ctrl->cam->target - ctrl->cam->position;
+	front = (Vec3)ctrl->GetCamera().target - ctrl->GetCamera().position;
 	side = front.Cross(Vec3(0.f, 1.f, 0.f));
 
 	vel += -side.SetLength(Input::Pad::GetLStick().x);
@@ -268,7 +268,7 @@ void Player::IdleMoveUpdate()
 void Player::Dodge()
 {
 	CameraController* ctrl = CameraController::Get();
-	Vec3 front = (Vec3)ctrl->cam->target - ctrl->cam->position;
+	Vec3 front = (Vec3)ctrl->GetCamera().target - ctrl->GetCamera().position;
 	Vec3 side = front.Cross(Vec3(0.f, 1.f, 0.f));
 	front.y = 0;
 	side.y = 0;
