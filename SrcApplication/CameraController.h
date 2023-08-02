@@ -24,6 +24,8 @@ public:
 
 	void SetMode(Mode m);
 
+	const Camera& GetCamera();
+
 public:
 	static CameraController* Get();
 	static void Set(CameraController* cctrl);

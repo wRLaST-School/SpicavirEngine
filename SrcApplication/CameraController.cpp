@@ -8,9 +8,9 @@ void CameraController::Init()
 {
 	cam_ = std::make_unique<Camera>();
 
-	cam->UseDefaultParams();
+	cam_->UseDefaultParams();
 
-	cam->position = { 0, 3, -10 };
+	cam_->position = { 0, 3, -10 };
 
 	freeCamRot_ = {PIf / 4, 0.f};
 }
@@ -21,8 +21,8 @@ void CameraController::Update()
 	{
 	case CameraController::Mode::Target:
 	{
-		cam->target = Boss::Get()->position;
-		cam->targetMode = CameraTargetMode::LookAt;
+		cam_->target = Boss::Get()->position;
+		cam_->targetMode = CameraTargetMode::LookAt;
 
 		Vec3 front = (Vec3)Boss::Get()->position - Player::Get()->position;
 		front.y = 0;
@@ -39,8 +39,8 @@ void CameraController::Update()
 
 		front.Norm();
 
-		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
-		cam->position.y = 3;
+		cam_->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
+		cam_->position.y = 3;
 		break;
 	}
 
@@ -60,26 +60,26 @@ void CameraController::Update()
 		rotation *= Matrix::RotY(freeCamRot_.y);
 
 
-		cam->targetMode = CameraTargetMode::LookAt;
+		cam_->targetMode = CameraTargetMode::LookAt;
 		//cam->rotation = Player::Get()->rotation;
 
-		cam->target = Player::Get()->position;
-		cam->target.y += 2.0f;
+		cam_->target = Player::Get()->position;
+		cam_->target.y += 2.0f;
 
 		Vec3 front = rotation.ExtractAxisZ();
 		//front.y = 0;
 		front.Norm();
 
-		cam->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
+		cam_->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
 		//cam->position.y = 3;
 
-		if (cam->position.y < 1.f)
+		if (cam_->position.y < 1.f)
 		{
-			cam->position.y = 1.0f;
+			cam_->position.y = 1.0f;
 			freeCamRot_ = lastFreeCamRot;
 		}
 
-		cam->UpdateMatrix();
+		cam_->UpdateMatrix();
 		break;
 	}
 	
@@ -102,7 +102,7 @@ void CameraController::ToggleMode()
 {
 	if (mode_ == Mode::Target)
 	{
-		cam->rotation = Player::Get()->rotation;
+		cam_->rotation = Player::Get()->rotation;
 		mode_ = Mode::Free;
 	}
 	else
@@ -114,6 +114,11 @@ void CameraController::ToggleMode()
 void CameraController::SetMode(Mode m)
 {
 	mode_ = m;
+}
+
+const Camera& CameraController::GetCamera()
+{
+	return *cam_.get();
 }
 
 CameraController* CameraController::Get()
