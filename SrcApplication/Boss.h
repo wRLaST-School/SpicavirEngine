@@ -52,6 +52,12 @@ public:
 
     const OBBCollider& GetCollider();
 
+    //Cereal—p
+    template <class Archive>
+    void serialize(Archive& ar) {
+        ar(markerLine3Spacing_, lineAttackSpacing_);
+    }
+
 private:
     //Marker
     static const int MAX_MARKERS = 256;

@@ -47,8 +47,8 @@ namespace Util
 	template<class T>
 	void DeserializeData(const std::string& path, T& obj)
 	{
-		std::ifstream ofs(path.c_str(), std::ios::binary);
-		cereal::BinaryInputArchive archive(ofs);
+		std::ifstream ifs(path.c_str(), std::ios::binary);
+		cereal::BinaryInputArchive archive(ifs);
 		archive(obj);
 	}
 };

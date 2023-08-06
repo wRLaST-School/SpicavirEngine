@@ -55,6 +55,16 @@ void Boss::Update()
 				ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing_);
 				ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing_);
 				ImGui::DragInt("Damage", &GameManager::sScore.totDamage);
+
+				if (ImGui::Button("Save"))
+				{
+					Util::SerializeData("Resources/Data/boss.bin", *this);
+				}
+
+				if (ImGui::Button("Load"))
+				{
+					Util::DeserializeData("Resources/Data/boss.bin", *this);
+				}
 			}
 		ImGui::End();
 			});
