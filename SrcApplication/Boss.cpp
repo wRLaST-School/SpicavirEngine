@@ -427,55 +427,53 @@ void Boss::IdleUpdate()
 
 void Boss::SelectMove()
 {
-	CastGravSphere();
+	int32_t rng = Util::RNG(0, 9);
+	if (rng <= 1)
+	{
+		CastLineTriple();
+		state_ = State::Line;
+		moveTime_ = 60;
+		moveTimer_ = 0;
+	}
+	else if (rng <= 3)
+	{
+		if (Util::Chance(50))
+		{
+			CastMarkerLine3();
+		}
+		else
+		{
+			CastMarkerAim1Rand5();
+		}
 
-	//int32_t rng = Util::RNG(0, 9);
-	//if (rng <= 1)
-	//{
-	//	CastLineTriple();
-	//	state_ = State::Line;
-	//	moveTime_ = 60;
-	//	moveTimer_ = 0;
-	//}
-	//else if (rng <= 3)
-	//{
-	//	if (Util::Chance(50))
-	//	{
-	//		CastMarkerLine3();
-	//	}
-	//	else
-	//	{
-	//		CastMarkerAim1Rand5();
-	//	}
+		state_ = State::Marker;
+		moveTime_ = 60;
+		moveTimer_ = 0;
+	}
+	else if (rng <= 5)
+	{
+		Rush();
+	}
+	else if (rng <= 8)
+	{
+		CastGravSphere();
+	}
+	else
+	{
+		if (Util::Chance(50))
+		{
+			CastMarkerLine3();
+		}
+		else
+		{
+			CastMarkerAim1Rand5();
+		}
+		CastLineTriple();
 
-	//	state_ = State::Marker;
-	//	moveTime_ = 60;
-	//	moveTimer_ = 0;
-	//}
-	//else if (rng <= 5)
-	//{
-	//	Rush();
-	//}
-	//else if (rng <= 8)
-	//{
-	//	CastGravSphere();
-	//}
-	//else
-	//{
-	//	if (Util::Chance(50))
-	//	{
-	//		CastMarkerLine3();
-	//	}
-	//	else
-	//	{
-	//		CastMarkerAim1Rand5();
-	//	}
-	//	CastLineTriple();
-
-	//	state_ = State::MarkerAndLine;
-	//	moveTime_ = 60;
-	//	moveTimer_ = 0;
-	//}
+		state_ = State::MarkerAndLine;
+		moveTime_ = 60;
+		moveTimer_ = 0;
+	}
 }
 
 const OBBCollider& Boss::GetCollider()
