@@ -14,7 +14,7 @@ private:
 	float r_ = 2.f;
 	float gravR_ = 8.f;
 
-	float maxHomeRad_ = PIf / 180.f;
+	float maxHomeRad_ = PIf / 90.f;
 	Vec3 vel_;
 	float speed_;
 

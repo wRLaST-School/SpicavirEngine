@@ -134,6 +134,7 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to)
 
 	Vec3 axis = cross.Norm();
 
+	dot = Util::Clamp(dot, -1.f, 1.f);
 	float theta = acosf(dot);
 
 	return Quaternion(axis, theta);
@@ -151,7 +152,7 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float ma
 
 	Vec3 cross = f.Cross(t);
 
-	if (cross.GetSquaredLength() == 0)
+	if (cross.GetSquaredLength() == 0 || (f-t).GetSquaredLength() == 0)
 	{
 		Vec3 axis(0.f, 1.f, 0.f);
 
@@ -162,9 +163,11 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float ma
 
 	Vec3 axis = cross.Norm();
 
+	dot = Util::Clamp(dot, -1.f, 1.f);
+
 	float theta = acosf(dot);
 
-	Util::Clamp(theta, 0.f, maxRad);
+	theta = Util::Clamp(theta, 0.f, maxRad);
 
 	return Quaternion(axis, theta);
 }
@@ -245,5 +248,6 @@ float Quaternion::Dot(const Quaternion& o) const
 
 Vec3 operator*(Vec3 v, Quaternion q)
 {
+	if (q.w == 0) return v;
 	return (q * Quaternion(v) * Quaternion::Conjugate(q)).v;
 }
