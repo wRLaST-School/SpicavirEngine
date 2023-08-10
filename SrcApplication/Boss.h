@@ -4,6 +4,7 @@
 #include <LineAttack.h>
 #include <OBBCollider.h>
 #include <Score.h>
+#include <GravSphere.h>
 class Boss :
     public Object3D
 {
@@ -41,11 +42,15 @@ public:
     void Rush();
     void RushEnd();
 
+    void CastGravSphere();
+    void GravSphereEnd();
+
     //state updates
     void RushUpdate();
     void LineAttackUpdate();
     void MarkerUpdate();
     void MarkerAndLineUpdate();
+    void GravSphereUpdate();
     void IdleUpdate();
 
     void SelectMove();
@@ -79,6 +84,11 @@ private:
 
     bool dealDamageOnHit_ = false;
 
+    //Sphere
+    std::unique_ptr<GravSphere> gravSphere_ = nullptr;
+    int32_t gravSphereTime_ = 240;
+    float gravSphereSpd_ = 0.2f;
+
     //Idle
     int32_t timesAttacked_ = 0;
 
@@ -101,7 +111,8 @@ private:
         Marker,
         Line,
         MarkerAndLine,
-        Rush
+        Rush,
+        GravSphere
     } state_ = State::Idle;
 
 private:

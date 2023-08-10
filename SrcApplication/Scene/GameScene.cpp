@@ -17,9 +17,12 @@ void GameScene::LoadResources()
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
 	ModelManager::Register("skydome", "Sky");
+	ModelManager::Register("Sphere", "Sphere");
+
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "BasicParticle");
 	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
 	SpEffekseer::Load(L"Resources/Effekseer/Line", L"Resources/Effekseer/Line/Line.efk", "LineAttack");
+	SpEffekseer::Load(L"Resources/Effekseer/Sphere", L"Resources/Effekseer/Sphere/sphere.efk", "SphereParticle");
 
 	SoundManager::LoadWave("Resources/Sounds/counterSuccess.wav", "counterSuccess");
 	SoundManager::LoadWave("Resources/Sounds/dodge.wav", "dodge");

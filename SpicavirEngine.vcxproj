@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GravSphere.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Boss.cpp" />
     <ClCompile Include="SrcApplication\CameraController.cpp" />
@@ -257,6 +258,7 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GravSphere.h" />
     <ClInclude Include="SrcApplication\Boss.h" />
     <ClInclude Include="SrcApplication\CameraController.h" />
     <ClInclude Include="SrcApplication\GameManager.h" />

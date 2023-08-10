@@ -77,12 +77,13 @@ void Boss::Update()
 	col_.DrawBB(Color::Red);
 
 	//Stateに合わせたアップデート
-	void (Boss::*pFuncTable[])() = {
+	void (Boss:: * pFuncTable[])() = {
 		&Boss::IdleUpdate,
 		&Boss::MarkerUpdate,
 		&Boss::LineAttackUpdate,
 		&Boss::MarkerAndLineUpdate,
-		&Boss::RushUpdate
+		&Boss::RushUpdate,
+		&Boss::GravSphereUpdate
 	};
 
 	(this->*pFuncTable[(int32_t)state_])();
@@ -134,6 +135,11 @@ void Boss::Draw()
 	Object3D::Draw("white");
 	DrawMarkers();
 	DrawLineAttacks();
+
+	if (gravSphere_ != nullptr)
+	{
+		gravSphere_->Draw();
+	}
 
 	GameManager::sScore.Draw();
 }
@@ -362,11 +368,41 @@ void Boss::MarkerAndLineUpdate()
 	}
 }
 
+void Boss::GravSphereUpdate()
+{
+	gravSphere_->Update();
+
+	if (moveTimer_ >= moveTime_)
+	{
+		state_ = State::Idle;
+		moveTimer_ = 0;
+		GravSphereEnd();
+	}
+}
+
 void Boss::RushEnd()
 {
 	state_ = State::Idle;
 	moveTimer_ = 0;
 	dealDamageOnHit_ = false;
+}
+
+void Boss::CastGravSphere()
+{
+	state_ = State::GravSphere;
+	moveTime_ = gravSphereTime_;
+	moveTimer_ = 0;
+
+	gravSphere_ = std::make_unique<GravSphere>(position,
+		((Vec3)Player::Get()->position - position).GetNorm(),
+		0.2f
+	);
+}
+
+void Boss::GravSphereEnd()
+{
+	gravSphere_.release();
+	gravSphere_ = nullptr;
 }
 
 void Boss::IdleUpdate()
@@ -391,49 +427,55 @@ void Boss::IdleUpdate()
 
 void Boss::SelectMove()
 {
-	int32_t rng = Util::RNG(0, 6);
-	if (rng <= 1)
-	{
-		CastLineTriple();
-		state_ = State::Line;
-		moveTime_ = 60;
-		moveTimer_ = 0;
-	}
-	else if (rng <= 3)
-	{
-		if (Util::Chance(50))
-		{
-			CastMarkerLine3();
-		}
-		else
-		{
-			CastMarkerAim1Rand5();
-		}
+	CastGravSphere();
 
-		state_ = State::Marker;
-		moveTime_ = 60;
-		moveTimer_ = 0;
-	}
-	else if (rng <= 5)
-	{
-		Rush();
-	}
-	else
-	{
-		if (Util::Chance(50))
-		{
-			CastMarkerLine3();
-		}
-		else
-		{
-			CastMarkerAim1Rand5();
-		}
-		CastLineTriple();
+	//int32_t rng = Util::RNG(0, 9);
+	//if (rng <= 1)
+	//{
+	//	CastLineTriple();
+	//	state_ = State::Line;
+	//	moveTime_ = 60;
+	//	moveTimer_ = 0;
+	//}
+	//else if (rng <= 3)
+	//{
+	//	if (Util::Chance(50))
+	//	{
+	//		CastMarkerLine3();
+	//	}
+	//	else
+	//	{
+	//		CastMarkerAim1Rand5();
+	//	}
 
-		state_ = State::MarkerAndLine;
-		moveTime_ = 60;
-		moveTimer_ = 0;
-	}
+	//	state_ = State::Marker;
+	//	moveTime_ = 60;
+	//	moveTimer_ = 0;
+	//}
+	//else if (rng <= 5)
+	//{
+	//	Rush();
+	//}
+	//else if (rng <= 8)
+	//{
+	//	CastGravSphere();
+	//}
+	//else
+	//{
+	//	if (Util::Chance(50))
+	//	{
+	//		CastMarkerLine3();
+	//	}
+	//	else
+	//	{
+	//		CastMarkerAim1Rand5();
+	//	}
+	//	CastLineTriple();
+
+	//	state_ = State::MarkerAndLine;
+	//	moveTime_ = 60;
+	//	moveTimer_ = 0;
+	//}
 }
 
 const OBBCollider& Boss::GetCollider()

@@ -429,6 +429,9 @@
     <ClCompile Include="SrcEngine\3D\SpEffekseer.cpp">
       <Filter>Engine\ソースファイル\Effekseer</Filter>
     </ClCompile>
+    <ClCompile Include="GravSphere.cpp">
+      <Filter>!Game\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -706,6 +709,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\3D\SpEffekseer.h">
       <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
+    </ClInclude>
+    <ClInclude Include="GravSphere.h">
+      <Filter>!Game\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
