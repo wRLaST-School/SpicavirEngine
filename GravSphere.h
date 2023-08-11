@@ -4,7 +4,8 @@
 class GravSphere
 {
 public:
-	GravSphere(Float3 pos, Vec3 vel, float speed);
+	GravSphere(Float3 pos, Vec3 vel, float speed,
+		float gravR, float gravitySpeed, float maxHomeRad);
 	void Update();
 	void CheckCollisions();
 	void Draw();
@@ -13,13 +14,13 @@ private:
 	Float3 pos_;
 
 	float r_ = 2.f;
-	float gravR_ = 16.f;
+	float gravR_;
 
-	float maxHomeRad_ = PIf / 90.f;
+	float maxHomeRad_;
 	Vec3 vel_;
 	float speed_;
 
-	float gravSpeed_ = 0.1f;
+	float gravSpeed_;
 
 	Object3D sphere_;
 

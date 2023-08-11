@@ -57,10 +57,15 @@ public:
 
     const OBBCollider& GetCollider();
 
+    //デバッグ系
+    void ShowImGui();
+
     //Cereal用
     template <class Archive>
     void serialize(Archive& ar) {
-        ar(markerLine3Spacing_, lineAttackSpacing_);
+        ar(markerLine3Spacing_, lineAttackSpacing_, prepTime_, afterPrepWaitTime_,
+            rushTime_, rushAfterTime_, rushDistance_,
+            gravSphereSpd_, gravR_, gravitySpeed_, maxHomeRad_);
     }
 
 private:
@@ -68,10 +73,11 @@ private:
     static const int MAX_MARKERS = 256;
     eastl::array<Marker, MAX_MARKERS> markers_;
 
+    float markerLine3Spacing_ = 20.f;
+
     //LineAttack
     eastl::list<LineAttack> lineAttacks_;
 
-    float markerLine3Spacing_ = 20.f;
     float lineAttackSpacing_ = 15.f;
 
     //Rush
@@ -88,6 +94,10 @@ private:
     std::unique_ptr<GravSphere> gravSphere_ = nullptr;
     int32_t gravSphereTime_ = 240;
     float gravSphereSpd_ = 0.2f;
+
+    float gravR_ = 16.f;
+    float gravitySpeed_ = 0.1f;
+    float maxHomeRad_ = PIf / 90.f;
 
     //Idle
     int32_t timesAttacked_ = 0;

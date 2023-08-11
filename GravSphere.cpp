@@ -2,11 +2,16 @@
 #include "GravSphere.h"
 #include <Player.h>
 
-GravSphere::GravSphere(Float3 pos, Vec3 vel, float speed)
+GravSphere::GravSphere(Float3 pos, Vec3 vel, float speed,
+	float gravR, float gravitySpeed, float maxHomeRad)
 {
 	pos_ = pos;
 	vel_ = vel;
 	speed_ = speed;
+	gravR_ = gravR;
+	gravSpeed_ = gravitySpeed;
+	maxHomeRad_ = maxHomeRad;
+
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
 	sphere_.model = ModelManager::GetModel("Sphere");
