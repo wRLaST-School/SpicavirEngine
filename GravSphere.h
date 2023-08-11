@@ -6,17 +6,20 @@ class GravSphere
 public:
 	GravSphere(Float3 pos, Vec3 vel, float speed);
 	void Update();
+	void CheckCollisions();
 	void Draw();
 
 private:
 	Float3 pos_;
 
 	float r_ = 2.f;
-	float gravR_ = 8.f;
+	float gravR_ = 16.f;
 
 	float maxHomeRad_ = PIf / 90.f;
 	Vec3 vel_;
 	float speed_;
+
+	float gravSpeed_ = 0.1f;
 
 	Object3D sphere_;
 

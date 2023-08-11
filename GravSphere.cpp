@@ -41,6 +41,34 @@ void GravSphere::Update()
 	sphere_.position = pos_;
 
 	sphere_.UpdateMatrix();
+
+	CheckCollisions();
+}
+
+void GravSphere::CheckCollisions()
+{
+	Player* pl = Player::Get();
+
+	float playerDistSquared = ((Vec3)pl->GetCollider().pos - pos_).GetSquaredLength();
+
+	//d—Í‚Ì”»’è
+	if (playerDistSquared <= gravR_ * gravR_)
+	{
+		Vec3 vel = (Vec3)pos_ - pl->GetCollider().pos;
+
+		vel.y = 0;
+
+		vel.SetLength(gravSpeed_);
+
+		pl->MoveTo((Vec3)pl->position + vel);
+	}
+
+
+	//”í’e‚Ì”»’è
+	if (playerDistSquared <= r_ * r_)
+	{
+		pl->Damage();
+	}
 }
 
 void GravSphere::Draw()

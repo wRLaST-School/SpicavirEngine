@@ -13,6 +13,8 @@ public:
 
     void Move();
     void GravMove();
+    void ClampPos();
+    void MoveTo(Float3 newPos);
     void DamageUpdate();
     void Damage();
     void Draw();

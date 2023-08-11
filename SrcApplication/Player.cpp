@@ -110,9 +110,7 @@ void Player::Update()
 
 	scale = { 1.0f / 16.f ,1.0f / 16.f ,1.0f / 16.f };
 
-	float colR = ((Vec3)col_.scale).GetLength();
-	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
-	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
+	ClampPos();
 
 	UpdateMatrix();
 
@@ -170,6 +168,22 @@ void Player::GravMove()
 		vy_ = 0;
 		position.y = 0.f;
 	}
+}
+
+void Player::ClampPos()
+{
+	float colR = ((Vec3)col_.scale).GetLength();
+	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
+	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
+}
+
+void Player::MoveTo(Float3 newPos)
+{
+	position = newPos;
+
+	ClampPos();
+
+	col_.pos = (Vec3)position + Vec3(0, 1.f, 0);
 }
 
 void Player::DamageUpdate()
