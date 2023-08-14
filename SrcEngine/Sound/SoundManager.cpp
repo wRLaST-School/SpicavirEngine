@@ -26,6 +26,7 @@ SoundKey SoundManager::LoadWave(const std::string& path, const SoundKey& key)
 
     if (isAlreadyRegistered)
     {
+        sPerSceneSounds[sCurrentSceneResIndex].push_back(key);
         return key;
     }
 
