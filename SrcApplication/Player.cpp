@@ -75,7 +75,7 @@ void Player::Update()
 	}
 	DamageUpdate();
 	
-	switch (state)
+	switch (state_)
 	{
 	case Player::State::Idle:
 	case Player::State::Move:
@@ -97,11 +97,11 @@ void Player::Update()
 		break;
 	}
 
-	if (state == State::Idle)
+	if (state_ == State::Idle)
 	{
 		model = ModelManager::GetModel("PlayerIdle");
 	}
-	else if (state == State::Move)
+	else if (state_ == State::Move)
 	{
 		model = ModelManager::GetModel("PlayerRun");
 	}
@@ -142,13 +142,13 @@ void Player::Move()
 
 	if (vel.GetSquaredLength())
 	{	
-		state = State::Move;
+		state_ = State::Move;
 		rotation = Quaternion::DirToDir(Vec3(0, 0, -1), vel);
 		vel *= spd_;
 	}
 	else
 	{
-		state = State::Idle;
+		state_ = State::Idle;
 	}
 
 	position += vel;
@@ -212,7 +212,7 @@ void Player::Damage()
 {
 	if (damageTimer_ == 0 && dodgeSucceededTimer_ == 0)
 	{
-		if (state != State::Dodge)
+		if (state_ != State::Dodge)
 		{
 			damageTimer_ = 60;
 			//SE再生
@@ -254,7 +254,7 @@ void Player::DodgeUpdate()
 
 	if (dodgeTimer_ >= iFrame)
 	{
-		state = State::Idle;
+		state_ = State::Idle;
 	}
 }
 
@@ -282,6 +282,7 @@ void Player::IdleMoveUpdate()
 void Player::Dodge()
 {
 	CameraController* ctrl = CameraController::Get();
+	dodgeStartCameraPos_ = ctrl->GetCamera().position;
 	Vec3 front = (Vec3)ctrl->GetCamera().target - ctrl->GetCamera().position;
 	Vec3 side = front.Cross(Vec3(0.f, 1.f, 0.f));
 	front.y = 0;
@@ -303,7 +304,9 @@ void Player::Dodge()
 		dodgeVec_ = front;
 	}
 
-	state = State::Dodge;
+	dodgeEndPlayerPos_ = (Vec3)position + (dodgeVec_ * (float)iFrame);
+
+	state_ = State::Dodge;
 	dodgeTimer_ = 0;
 
 	model = ModelManager::GetModel("PlayerRoll");
@@ -352,7 +355,7 @@ void Player::SlashUpdate1()
 		}
 		else
 		{//ないならIdleに
-			state = State::Idle;
+			state_ = State::Idle;
 		}
 	}
 }
@@ -393,7 +396,7 @@ void Player::SlashUpdate2()
 		}
 		else
 		{//ないならIdleに
-			state = State::Idle;
+			state_ = State::Idle;
 		}
 	}
 }
@@ -429,12 +432,12 @@ void Player::SlashUpdate3()
 		slashTimer_ = 0;
 		if (slashRegistered_)//先行入力チェック
 		{//あっても一旦Idleにしよう
-			state = State::Idle;
+			state_ = State::Idle;
 			slashRegistered_ = false;
 		}
 		else
 		{//ないならIdleに
-			state = State::Idle;
+			state_ = State::Idle;
 		}
 	}
 }
@@ -457,7 +460,7 @@ void Player::Slash1()
 	model->ResetAnimTimer();
 	model->aniSpeed = 1.5f;
 
-	state = State::Slash1;
+	state_ = State::Slash1;
 
 	//当たり判定の設定
 	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
@@ -487,7 +490,7 @@ void Player::Slash2()
 	model->ResetAnimTimer();
 	model->aniSpeed = 1.5f;
 
-	state = State::Slash2;
+	state_ = State::Slash2;
 
 	//当たり判定の設定
 	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
@@ -519,7 +522,7 @@ void Player::Slash3()
 	model->ResetAnimTimer();
 	model->aniSpeed = 1.5f;
 
-	state = State::Slash3;
+	state_ = State::Slash3;
 
 	//当たり判定の設定
 	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
@@ -535,6 +538,16 @@ void Player::Slash3()
 const OBBCollider& Player::GetCollider()
 {
 	return col_;
+}
+
+Player::State Player::GetState()
+{
+	return state_;
+}
+
+Player::DodgeData Player::GetDodgeData()
+{
+	return { dodgeTimer_, iFrame, dodgeStartCameraPos_, dodgeEndPlayerPos_ };
 }
 
 Player* Player::Get()

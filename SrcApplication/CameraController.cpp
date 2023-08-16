@@ -3,6 +3,7 @@
 #include <Boss.h>
 #include <Player.h>
 #include <Input.h>
+#include <Easing.h>
 
 void CameraController::Init()
 {
@@ -17,30 +18,65 @@ void CameraController::Init()
 
 void CameraController::Update()
 {
+	Player* pl = Player::Get();
+	
 	switch (mode_)
 	{
 	case CameraController::Mode::Target:
 	{
-		cam_->target = Boss::Get()->position;
-		cam_->targetMode = CameraTargetMode::LookAt;
-
-		Vec3 front = (Vec3)Boss::Get()->position - Player::Get()->position;
-		front.y = 0;
-
-		//ゼロベクトルで飛ばないように
-		if (front.GetSquaredLength())
+		if (pl->GetState() != Player::State::Dodge)
 		{
-			lastPlayerPos_ = Player::Get()->position;
+			cam_->target = Boss::Get()->position;
+			cam_->targetMode = CameraTargetMode::LookAt;
+
+			Vec3 front = (Vec3)Boss::Get()->position - pl->position;
+			front.y = 0;
+
+			//ゼロベクトルで飛ばないように
+			if (front.GetSquaredLength())
+			{
+				lastPlayerPos_ = pl->position;
+			}
+			else
+			{
+				front = (Vec3)Boss::Get()->position - lastPlayerPos_;
+			}
+
+			front.Norm();
+
+			cam_->position = (Vec3)pl->position - front.SetLength(CAM_DIST);
+			cam_->position.y = 3;
 		}
 		else
 		{
-			front = (Vec3)Boss::Get()->position - lastPlayerPos_;
+			cam_->target = Boss::Get()->position;
+			cam_->targetMode = CameraTargetMode::LookAt;
+
+			Vec3 front = (Vec3)Boss::Get()->position - pl->position;
+			front.y = 0;
+
+			//ゼロベクトルで飛ばないように
+			if (front.GetSquaredLength())
+			{
+				lastPlayerPos_ = pl->position;
+			}
+			else
+			{
+				front = (Vec3)Boss::Get()->position - lastPlayerPos_;
+			}
+
+			front.Norm();
+
+			Player::DodgeData dodgeData = pl->GetDodgeData();
+
+			Float3 cameraEndPos = (Vec3)dodgeData.dodgeEndPlayerPos - front.SetLength(CAM_DIST);
+
+			float t = (float)dodgeData.dodgeTimer / (float)dodgeData.iFrame;
+
+			cam_->position = Easing::In(dodgeData.startCameraPos, cameraEndPos, t, 2.f);
+			cam_->position.y = 3;
 		}
 
-		front.Norm();
-
-		cam_->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
-		cam_->position.y = 3;
 		break;
 	}
 
@@ -63,14 +99,14 @@ void CameraController::Update()
 		cam_->targetMode = CameraTargetMode::LookAt;
 		//cam->rotation = Player::Get()->rotation;
 
-		cam_->target = Player::Get()->position;
+		cam_->target = pl->position;
 		cam_->target.y += 2.0f;
 
 		Vec3 front = rotation.ExtractAxisZ();
 		//front.y = 0;
 		front.Norm();
 
-		cam_->position = (Vec3)Player::Get()->position - front.SetLength(CAM_DIST);
+		cam_->position = (Vec3)pl->position - front.SetLength(CAM_DIST);
 		//cam->position.y = 3;
 
 		if (cam_->position.y < 1.f)

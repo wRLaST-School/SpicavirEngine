@@ -29,7 +29,7 @@ public:
 public:
 	static CameraController* Get();
 	static void Set(CameraController* cctrl);
-
+	
 	static float GetCamSpd();
 
 private:

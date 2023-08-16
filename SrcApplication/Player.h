@@ -35,6 +35,23 @@ public:
 
     float r2d = .5f;
 
+    enum class State {
+        Idle,
+        Move,
+        Dodge,
+        Slash1,
+        Slash2,
+        Slash3
+    } GetState();
+
+    struct DodgeData {
+        int32_t dodgeTimer;
+        int32_t iFrame;
+        Float3 startCameraPos;
+        Float3 dodgeEndPlayerPos;
+    }
+    GetDodgeData();
+
 private:
     float spd_ = 0.125f;
 
@@ -46,23 +63,19 @@ private:
 
     int32_t damageTimer_ = 0;
 
-    enum class State {
-        Idle,
-        Move,
-        Dodge,
-        Slash1,
-        Slash2,
-        Slash3
-    } state = State::Idle;
+    State state_ = State::Idle;
 
 private:
     Vec3 dodgeVec_ = Vec3();
     int32_t dodgeTimer_ = 0;
-    const int32_t iFrame = 25;
+    int32_t iFrame = 25;
 
     float dodgeSpd_ = 0.48f;
 
     int32_t dodgeSucceededTimer_ = 0;
+
+    Float3 dodgeStartCameraPos_;
+    Float3 dodgeEndPlayerPos_;
 
     int32_t slashTimer_ = 0;
     const int32_t slashTime = 40;
