@@ -2,8 +2,8 @@
 #include "GravSphere.h"
 #include <Player.h>
 
-GravSphere::GravSphere(Float3 pos, Vec3 vel, float speed,
-	float gravR, float gravitySpeed, float maxHomeRad)
+GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
+	float gravR, float gravitySpeed, float maxHomeRad, int32_t stayTime)
 {
 	pos_ = pos;
 	vel_ = vel;
@@ -11,6 +11,7 @@ GravSphere::GravSphere(Float3 pos, Vec3 vel, float speed,
 	gravR_ = gravR;
 	gravSpeed_ = gravitySpeed;
 	maxHomeRad_ = maxHomeRad;
+	stayTime_ = stayTime;
 
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
@@ -19,35 +20,49 @@ GravSphere::GravSphere(Float3 pos, Vec3 vel, float speed,
 
 void GravSphere::Update()
 {
-	Vec3 target = (Vec3)Player::Get()->position - pos_;
-	if (target.GetSquaredLength())
+	timer_++;
+	if (timer_ < stayTime_)
 	{
-		target.Norm();
+		float t = (float)timer_ / stayTime_;
+		float r = r_ * t;
 
-		if (vel_.GetSquaredLength() == 0)
+		sphere_.scale = { r, r, r };
+		sphere_.position = pos_;
+
+		*sphere_.brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
+	}
+	else
+	{
+		Vec3 target = (Vec3)Player::Get()->position - pos_;
+		if (target.GetSquaredLength())
 		{
-			pos_ = target * speed_ + pos_;
+			target.Norm();
+
+			if (vel_.GetSquaredLength() == 0)
+			{
+				pos_ = target * speed_ + pos_;
+			}
+			else
+			{
+				Vec3 normVel = vel_.GetNorm();
+				normVel = normVel * Quaternion::DirToDir(normVel, target, maxHomeRad_);
+				vel_ = normVel * speed_;
+				pos_ = vel_ + pos_;
+			}
 		}
-		else
-		{
-			Vec3 normVel = vel_.GetNorm();
-			normVel = normVel * Quaternion::DirToDir(normVel, target, maxHomeRad_);
-			vel_ = normVel * speed_;
-			pos_ = vel_ + pos_;
-		}
+
+		*sphere_.brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
+
+		sphere_.scale = { r_, r_, r_ };
+
+		pos_.y = Util::ClampMin(pos_.y, r_ / 2.f);
+
+		sphere_.position = pos_;
+
+		CheckCollisions();
 	}
 
-	*sphere_.brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
-
-	sphere_.scale = { r_, r_, r_ };
-
-	pos_.y = Util::ClampMin(pos_.y, r_ / 2.f);
-
-	sphere_.position = pos_;
-
 	sphere_.UpdateMatrix();
-
-	CheckCollisions();
 }
 
 void GravSphere::CheckCollisions()

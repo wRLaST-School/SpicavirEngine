@@ -4,8 +4,8 @@
 class GravSphere
 {
 public:
-	GravSphere(Float3 pos, Vec3 vel, float speed,
-		float gravR, float gravitySpeed, float maxHomeRad);
+	GravSphere(const Float3& pos,const Vec3& vel, float speed,
+		float gravR, float gravitySpeed, float maxHomeRad, int32_t stayTime);
 	void Update();
 	void CheckCollisions();
 	void Draw();
@@ -21,6 +21,9 @@ private:
 	float speed_;
 
 	float gravSpeed_;
+
+	int32_t stayTime_;
+	int32_t timer_ = 0;
 
 	Object3D sphere_;
 

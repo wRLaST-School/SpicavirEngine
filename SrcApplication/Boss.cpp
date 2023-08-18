@@ -375,12 +375,24 @@ void Boss::CastGravSphere()
 	moveTime_ = gravSphereTime_;
 	moveTimer_ = 0;
 
-	gravSphere_ = std::make_unique<GravSphere>(position,
+	//プレイヤーの方向を向く
+	Vec3 target = Player::Get()->position;
+	target.y = position.y;
+
+	rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - position);
+
+	//プレイヤー側に1mの位置に生成
+	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	front.SetLength(3.f);
+
+	//重力弾を生成
+	gravSphere_ = std::make_unique<GravSphere>((Vec3)position + front,
 		((Vec3)Player::Get()->position - position).GetNorm(),
 		0.2f,
 		gravR_,
 		gravitySpeed_,
-		maxHomeRad_
+		maxHomeRad_,
+		gravSphereStayTime_
 	);
 }
 
@@ -412,7 +424,7 @@ void Boss::IdleUpdate()
 
 void Boss::SelectMove()
 {
-	int32_t rng = Util::RNG(0, 9);
+	/*int32_t rng = Util::RNG(0, 9);
 	if (rng <= 1)
 	{
 		CastLineTriple();
@@ -458,7 +470,8 @@ void Boss::SelectMove()
 		state_ = State::MarkerAndLine;
 		moveTime_ = 60;
 		moveTimer_ = 0;
-	}
+	}*/
+	CastGravSphere();
 }
 
 const OBBCollider& Boss::GetCollider()
@@ -540,6 +553,8 @@ void Boss::ShowImGui()
 				ImGui::InputFloat("Gravity Power", &gravitySpeed_);
 
 				ImGui::InputFloat("Max Homing Radian per Frame", &maxHomeRad_);
+
+				ImGui::InputInt("Sphere Generate Time", &gravSphereStayTime_);
 
 				ImGui::TreePop();
 			}

@@ -65,7 +65,7 @@ public:
     void serialize(Archive& ar) {
         ar(markerLine3Spacing_, lineAttackSpacing_, prepTime_, afterPrepWaitTime_,
             rushTime_, rushAfterTime_, rushDistance_,
-            gravSphereSpd_, gravR_, gravitySpeed_, maxHomeRad_);
+            gravSphereSpd_, gravR_, gravitySpeed_, maxHomeRad_, gravSphereStayTime_);
     }
 
 private:
@@ -98,6 +98,8 @@ private:
     float gravR_ = 16.f;
     float gravitySpeed_ = 0.1f;
     float maxHomeRad_ = PIf / 90.f;
+
+    int32_t gravSphereStayTime_ = 60;
 
     //Idle
     int32_t timesAttacked_ = 0;
