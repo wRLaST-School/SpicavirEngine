@@ -20,6 +20,8 @@ void GameScene::LoadResources()
 	ModelManager::Register("Sphere", "Sphere");
 
 	SpTextureManager::LoadTexture("Resources/circleParticle.png", "BasicParticle");
+	SpTextureManager::LoadTexture("Resources/black.png", "black");
+	SpTextureManager::LoadTexture("Resources/hexagonPattern.jpg", "hexagon");
 	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
 	SpEffekseer::Load(L"Resources/Effekseer/Line", L"Resources/Effekseer/Line/Line.efk", "LineAttack");
 	SpEffekseer::Load(L"Resources/Effekseer/Sphere", L"Resources/Effekseer/Sphere/sphere.efk", "SphereParticle");

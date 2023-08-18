@@ -57,12 +57,13 @@ void LevelLoader::Load(std::string path)
 				//TODO: 削除してテクスチャを貼る
 				if (obj["file_name"] == "floor")
 				{
-					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 0.3f, 1.0f };
+					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 1.0f, 1.0f };
 				}
-				if (obj["file_name"] == "Sky")
-				{
-					*objdata.brightnessCB.contents = { 0.f, 0.f, 0.f, 1.0f };
-				}
+			}
+
+			if (obj.contains("texture_file"))
+			{
+				objdata.model->material.front().textureKey = obj["texture_file"];
 			}
 
 			json& transform = obj["transform"];
