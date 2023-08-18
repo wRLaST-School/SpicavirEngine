@@ -424,7 +424,7 @@ void Boss::IdleUpdate()
 
 void Boss::SelectMove()
 {
-	/*int32_t rng = Util::RNG(0, 9);
+	int32_t rng = Util::RNG(0, 9);
 	if (rng <= 1)
 	{
 		CastLineTriple();
@@ -470,8 +470,7 @@ void Boss::SelectMove()
 		state_ = State::MarkerAndLine;
 		moveTime_ = 60;
 		moveTimer_ = 0;
-	}*/
-	CastGravSphere();
+	}
 }
 
 const OBBCollider& Boss::GetCollider()
