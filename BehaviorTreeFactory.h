@@ -1,5 +1,6 @@
 #pragma once
 #include <EASTL/unordered_map.h>
+#include <unordered_map>
 #include <BTNodeBase.h>
 namespace BT {
 	class BehaviorTreeFactory
@@ -12,8 +13,8 @@ namespace BT {
 		const std::function<bool(void)> GetConditionFunc(const std::string& key);
 
 	private:
-		eastl::unordered_map<std::string, std::function<bool(void)>> conditionTable_;
-		eastl::unordered_map<std::string, std::function<BT::Status(void)>> actionTable_;
+		std::unordered_map<std::string, std::function<bool(void)>> conditionTable_;
+		std::unordered_map<std::string, std::function<BT::Status(void)>> actionTable_;
 	};
 }
 
