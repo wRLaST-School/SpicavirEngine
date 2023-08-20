@@ -1,37 +1,42 @@
 #pragma once
 namespace BT {
+    class BehaviorTree;
+
     enum class Status {
-        Inactive,
         Success,
         Failure,
-        Running
+        Running,
+        Completed
     };
 
     class INode {
-    private:
-        std::vector<INode*> children_;
-        BT::Status status_ = Status::Inactive;
-
     protected:
+        std::vector<std::unique_ptr<INode>> children_;
+
+        uint32_t activeIndex = 0;
+
+        BehaviorTree* parentBT_ = nullptr;
+    public:
         virtual void OnStart() = 0;
-        virtual BT::Status OnUpdate() = 0;
+        virtual BT::Status Update() = 0;
         virtual void OnEnd() = 0;
         virtual void OnAbort();
 
-        virtual void SetParam(std::string param) = delete;
+        virtual void SetParam(std::string param) = 0;
 
+    public:
         template<class NodeType>
-        void AddNode(std::string param)
+        void AddNode(const std::string& param)
         {
-            children_.emplace_back();
+            children_.push_back(std::move(std::make_unique<NodeType>()));
             Last().SetParam(param);
+            Last()->parentBT_ = parentBT_;
         };
 
         INode* Last();
 
-    public:
         INode() {};
-        virtual ~INode() = delete;
+        virtual ~INode() {};
     };
 }
 

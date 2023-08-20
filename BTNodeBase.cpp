@@ -8,5 +8,5 @@ void BT::INode::OnAbort()
 
 BT::INode* BT::INode::Last()
 {
-	return children_.back();
+	return children_.back().get();
 }

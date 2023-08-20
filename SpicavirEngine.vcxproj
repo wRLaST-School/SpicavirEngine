@@ -168,7 +168,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BehaviorTree.cpp" />
+    <ClCompile Include="BehaviorTreeFactory.cpp" />
     <ClCompile Include="BTNodeBase.cpp" />
+    <ClCompile Include="BTRootNode.cpp" />
+    <ClCompile Include="BTSequencerNode.cpp" />
     <ClCompile Include="GravSphere.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Boss.cpp" />
@@ -261,7 +264,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BehaviorTree.h" />
+    <ClInclude Include="BehaviorTreeFactory.h" />
     <ClInclude Include="BTNodeBase.h" />
+    <ClInclude Include="BTRootNode.h" />
+    <ClInclude Include="BTSequencerNode.h" />
     <ClInclude Include="GravSphere.h" />
     <ClInclude Include="SrcApplication\Boss.h" />
     <ClInclude Include="SrcApplication\CameraController.h" />
