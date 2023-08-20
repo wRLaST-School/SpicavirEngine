@@ -24,6 +24,11 @@ void BT::RootNode::OnAbort()
 	INode::OnAbort();
 }
 
+void BT::RootNode::SetRootBT(BehaviorTree* bt)
+{
+	parentBT_ = bt;
+}
+
 void BT::RootNode::SetParam(std::string param)
 {
 }

@@ -450,6 +450,9 @@
     <ClCompile Include="BTSequencerNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
+    <ClCompile Include="BTActionNode.cpp">
+      <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -744,6 +747,9 @@
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
     <ClInclude Include="BTSequencerNode.h">
+      <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="BTActionNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
   </ItemGroup>

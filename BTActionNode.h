@@ -1,8 +1,7 @@
 #pragma once
 #include "BTNodeBase.h"
-
 namespace BT {
-    class RootNode :
+    class ActionNode :
         public INode
     {
     public:
@@ -11,9 +10,12 @@ namespace BT {
         void OnEnd() override;
         void OnAbort() override;
 
-        void SetRootBT(BehaviorTree* bt);
-
         void SetParam(std::string param) override;
+
+        void InitNode();
+
+    private:
+        std::string funcKey_;
     };
 }
 

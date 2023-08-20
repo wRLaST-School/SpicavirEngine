@@ -169,6 +169,7 @@
   <ItemGroup>
     <ClCompile Include="BehaviorTree.cpp" />
     <ClCompile Include="BehaviorTreeFactory.cpp" />
+    <ClCompile Include="BTActionNode.cpp" />
     <ClCompile Include="BTNodeBase.cpp" />
     <ClCompile Include="BTRootNode.cpp" />
     <ClCompile Include="BTSequencerNode.cpp" />
@@ -265,6 +266,7 @@
   <ItemGroup>
     <ClInclude Include="BehaviorTree.h" />
     <ClInclude Include="BehaviorTreeFactory.h" />
+    <ClInclude Include="BTActionNode.h" />
     <ClInclude Include="BTNodeBase.h" />
     <ClInclude Include="BTRootNode.h" />
     <ClInclude Include="BTSequencerNode.h" />

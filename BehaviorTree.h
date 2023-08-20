@@ -9,6 +9,7 @@ namespace BT {
 		BehaviorTree();
 
 		void SetFactory(const BehaviorTreeFactory& factory);
+		BehaviorTreeFactory* GetFactory();
 
 		void Tick();
 
