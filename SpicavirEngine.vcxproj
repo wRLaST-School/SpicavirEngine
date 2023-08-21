@@ -173,6 +173,7 @@
     <ClCompile Include="BTLoopNode.cpp" />
     <ClCompile Include="BTNodeBase.cpp" />
     <ClCompile Include="BTRootNode.cpp" />
+    <ClCompile Include="BTSelectorNode.cpp" />
     <ClCompile Include="BTSequencerNode.cpp" />
     <ClCompile Include="GravSphere.cpp" />
     <ClCompile Include="main.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="BTLoopNode.h" />
     <ClInclude Include="BTNodeBase.h" />
     <ClInclude Include="BTRootNode.h" />
+    <ClInclude Include="BTSelectorNode.h" />
     <ClInclude Include="BTSequencerNode.h" />
     <ClInclude Include="GravSphere.h" />
     <ClInclude Include="SrcApplication\Boss.h" />
