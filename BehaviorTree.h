@@ -1,6 +1,11 @@
 #pragma once
 #include <BehaviorTreeFactory.h>
 #include <BTNodeBase.h>
+#include <BTActionNode.h>
+#include <BTLoopNode.h>
+#include <BTRootNode.h>
+#include <BTSelectorNode.h>
+#include <BTSequencerNode.h>
 
 namespace BT {
 	class BehaviorTree

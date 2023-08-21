@@ -8,9 +8,14 @@ void BT::SelectorNode::OnStart()
 
 BT::Status BT::SelectorNode::Update()
 {
+	if (children_.size() < 0)
+	{
+		return Status::Success;
+	}
+	
 	if (selectedIndex < 0)
 	{
-		selectedIndex = Util::RNG(0, children_.size() - 1, true);
+		selectedIndex = Util::RNG(0, (int32_t)children_.size() - 1, true);
 	}
 
 	Status childStatus = children_.at(selectedIndex)->Update();
@@ -27,7 +32,6 @@ BT::Status BT::SelectorNode::Update()
 		return Status::Failure;
 	}
 
-	InitNode();
 	return Status::Running;
 }
 

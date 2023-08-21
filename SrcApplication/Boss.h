@@ -5,6 +5,7 @@
 #include <OBBCollider.h>
 #include <Score.h>
 #include <GravSphere.h>
+#include <BehaviorTree.h>
 class Boss :
     public Object3D
 {
@@ -25,33 +26,35 @@ public:
     static void Set(Boss* boss);
 
 public:
+    void InitBehaviorTree();
+
     void CastMarker(Float3 pos);
 
-    void CastMarkerAim1Rand5();
-    void CastMarkerLine3();
+    BT::Status CastMarkerAim1Rand5();
+    BT::Status CastMarkerLine3();
 
     void DrawMarkers();
     void UpdateMarkers();
 
-    void CastLineTriple();
+    BT::Status CastLineTriple();
     void CastLine(Float3 pos, float angle);
 
     void UpdateLineAttacks();
     void DrawLineAttacks();
 
-    void Rush();
+    BT::Status Rush();
     void RushEnd();
 
-    void CastGravSphere();
+    BT::Status CastGravSphere();
     void GravSphereEnd();
 
     //state updates
-    void RushUpdate();
-    void LineAttackUpdate();
-    void MarkerUpdate();
-    void MarkerAndLineUpdate();
-    void GravSphereUpdate();
-    void IdleUpdate();
+    BT::Status RushUpdate();
+    BT::Status LineAttackUpdate();
+    BT::Status MarkerUpdate();
+    BT::Status MarkerAndLineUpdate();
+    BT::Status GravSphereUpdate();
+    BT::Status Wait60Frame();
 
     void SelectMove();
 
@@ -69,6 +72,9 @@ public:
     }
 
 private:
+    //BehaviorTree
+    BT::BehaviorTree tree_;
+
     //Marker
     static const int MAX_MARKERS = 256;
     eastl::array<Marker, MAX_MARKERS> markers_;

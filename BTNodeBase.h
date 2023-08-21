@@ -29,7 +29,7 @@ namespace BT {
         void AddNode(const std::string& param)
         {
             children_.push_back(std::move(std::make_unique<NodeType>()));
-            Last().SetParam(param);
+            Last()->SetParam(param);
             Last()->parentBT_ = parentBT_;
         };
 

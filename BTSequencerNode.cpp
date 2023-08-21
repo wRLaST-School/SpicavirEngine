@@ -24,7 +24,6 @@ BT::Status BT::SequencerNode::Update()
 			return Status::Success;
 		}
 
-		InitNode();
 		return Status::Running;
 	}
 
@@ -34,7 +33,6 @@ BT::Status BT::SequencerNode::Update()
 		return Status::Failure;
 	}
 
-	InitNode();
 	return Status::Running;
 }
 

@@ -28,6 +28,9 @@ void Boss::Load()
 void Boss::Init()
 {
 	model = ModelManager::GetModel("Boss");
+
+	InitBehaviorTree();
+
 	position = { 0.f, 5.f, 0.f };
 
 	for (auto& m : markers_) m.InitModel();
@@ -58,17 +61,8 @@ void Boss::Update()
 
 	col_.DrawBB(Color::Red);
 
-	//Stateに合わせたアップデート
-	void (Boss:: * pFuncTable[])() = {
-		&Boss::IdleUpdate,
-		&Boss::MarkerUpdate,
-		&Boss::LineAttackUpdate,
-		&Boss::MarkerAndLineUpdate,
-		&Boss::RushUpdate,
-		&Boss::GravSphereUpdate
-	};
-
-	(this->*pFuncTable[(int32_t)state_])();
+	//BehaviorTreeのTickを行う
+	tree_.Tick();
 
 	//ダメージ演出の更新
 	if (damaged_)
@@ -144,6 +138,69 @@ void Boss::Set(Boss* boss)
 	sCurrent = boss;
 }
 
+void Boss::InitBehaviorTree()
+{
+	//ファクトリーに関数を登録
+	BT::BehaviorTreeFactory factory;
+
+	factory.RegisterAction("CastMarker1", std::bind(&Boss::CastMarkerAim1Rand5, this));
+	factory.RegisterAction("CastMarker2", std::bind(&Boss::CastMarkerLine3, this));
+	factory.RegisterAction("CastLineAttack", std::bind(&Boss::CastLineTriple, this));
+	factory.RegisterAction("CastRush", std::bind(&Boss::Rush, this));
+	factory.RegisterAction("CastGravSphere", std::bind(&Boss::CastGravSphere, this));
+
+	factory.RegisterAction("UpdateRush", std::bind(&Boss::RushUpdate, this));
+	factory.RegisterAction("UpdateLine", std::bind(&Boss::LineAttackUpdate, this));
+	factory.RegisterAction("UpdateMarker", std::bind(&Boss::MarkerUpdate, this));
+	factory.RegisterAction("UpdateMarkerAndLine", std::bind(&Boss::MarkerAndLineUpdate, this));
+	factory.RegisterAction("UpdateGravSphere", std::bind(&Boss::GravSphereUpdate, this));
+	factory.RegisterAction("Wait60Frame", std::bind(&Boss::Wait60Frame, this));
+
+	tree_.SetFactory(factory);
+
+	//ツリーの手動構築
+	tree_.root->AddNode<BT::LoopNode>("0");
+
+	tree_.root->Last()->AddNode<BT::SequencerNode>("");
+
+	tree_.root->Last()->Last()->AddNode<BT::LoopNode>("3");
+
+	tree_.root->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	
+	tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
+	
+	//Rush
+	tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastRush");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
+
+	//GravSphere
+	tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastGravSphere");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateGravSphere");
+
+	//LineAttack
+	tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastLineAttack");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateLine");
+
+	//Marker
+	tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker1");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker2");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
+
+	//終わったら60フレーム待機
+	tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
+
+	//3回行動したらさらに180フレーム待機
+	tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
+	tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
+	tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
+}
+
 void Boss::CastMarker(Float3 pos)
 {
 	for (auto& m : markers_)
@@ -155,7 +212,7 @@ void Boss::CastMarker(Float3 pos)
 	}
 }
 
-void Boss::CastMarkerAim1Rand5()
+BT::Status Boss::CastMarkerAim1Rand5()
 {
 	CastMarker({Player::Get()->position.x, 0, Player::Get()->position.z});
 
@@ -166,9 +223,15 @@ void Boss::CastMarkerAim1Rand5()
 
 	//SE再生
 	SoundManager::Play("marker");
+
+	state_ = State::Marker;
+	moveTime_ = 60;
+	moveTimer_ = 0;
+
+	return BT::Status::Success;
 }
 
-void Boss::CastMarkerLine3()
+BT::Status Boss::CastMarkerLine3()
 {
 	if (Util::Chance(50))
 	{
@@ -191,6 +254,12 @@ void Boss::CastMarkerLine3()
 
 	//SE再生
 	SoundManager::Play("marker");
+
+	state_ = State::Marker;
+	moveTime_ = 60;
+	moveTimer_ = 0;
+
+	return BT::Status::Success;
 }
 
 void Boss::DrawMarkers()
@@ -203,7 +272,7 @@ void Boss::UpdateMarkers()
 	for (auto& m : markers_) if (m.IsActive()) m.Update();
 }
 
-void Boss::CastLineTriple()
+BT::Status Boss::CastLineTriple()
 {
 	Vec3 target = Player::Get()->position;
 	target.y = position.y;
@@ -239,6 +308,12 @@ void Boss::CastLineTriple()
 
 	//SE再生
 	SoundManager::Play("LineAttack");
+
+	state_ = State::Line;
+	moveTime_ = 60;
+	moveTimer_ = 0;
+
+	return BT::Status::Success;
 }
 
 void Boss::CastLine(Float3 pos, float angle)
@@ -268,14 +343,16 @@ void Boss::DrawLineAttacks()
 	for (auto& la : lineAttacks_) la.Draw();
 }
 
-void Boss::Rush()
+BT::Status Boss::Rush()
 {
 	state_ = State::Rush;
 	moveTime_ = prepTime_ + afterPrepWaitTime_ + rushTime_ + rushAfterTime_;
 	moveTimer_ = 0;
+
+	return BT::Status::Success;
 }
 
-void Boss::RushUpdate()
+BT::Status Boss::RushUpdate()
 {
 	if (moveTimer_ < prepTime_)
 	{
@@ -314,6 +391,7 @@ void Boss::RushUpdate()
 	if (moveTimer_ >= moveTime_)
 	{
 		RushEnd();
+		return BT::Status::Completed;
 	}
 
 	if (moveTimer_ == prepTime_ + afterPrepWaitTime_)
@@ -321,36 +399,50 @@ void Boss::RushUpdate()
 		//SE再生
 		SoundManager::Play("RushImpact");
 	}
+
+	return BT::Status::Running;
 }
 
-void Boss::LineAttackUpdate()
+BT::Status Boss::LineAttackUpdate()
 {
 	if (moveTimer_ >= moveTime_)
 	{
 		state_ = State::Idle;
 		moveTimer_ = 0;
+
+		return BT::Status::Completed;
 	}
+
+	return BT::Status::Running;
 }
 
-void Boss::MarkerUpdate()
+BT::Status Boss::MarkerUpdate()
 {
 	if (moveTimer_ >= moveTime_)
 	{
 		state_ = State::Idle;
 		moveTimer_ = 0;
+
+		return BT::Status::Completed;
 	}
+
+	return BT::Status::Running;
 }
 
-void Boss::MarkerAndLineUpdate()
+BT::Status Boss::MarkerAndLineUpdate()
 {
 	if (moveTimer_ >= moveTime_)
 	{
 		state_ = State::Idle;
 		moveTimer_ = 0;
+
+		return BT::Status::Completed;
 	}
+
+	return BT::Status::Running;
 }
 
-void Boss::GravSphereUpdate()
+BT::Status Boss::GravSphereUpdate()
 {
 	gravSphere_->Update();
 
@@ -359,7 +451,24 @@ void Boss::GravSphereUpdate()
 		state_ = State::Idle;
 		moveTimer_ = 0;
 		GravSphereEnd();
+
+		return BT::Status::Completed;
 	}
+
+	return BT::Status::Running;
+}
+
+BT::Status Boss::Wait60Frame()
+{
+	if (moveTimer_ >= 60)
+	{
+		state_ = State::Idle;
+		moveTimer_ = 0;
+
+		return BT::Status::Completed;
+	}
+
+	return BT::Status::Running;
 }
 
 void Boss::RushEnd()
@@ -369,7 +478,7 @@ void Boss::RushEnd()
 	dealDamageOnHit_ = false;
 }
 
-void Boss::CastGravSphere()
+BT::Status Boss::CastGravSphere()
 {
 	state_ = State::GravSphere;
 	moveTime_ = gravSphereTime_;
@@ -394,6 +503,8 @@ void Boss::CastGravSphere()
 		maxHomeRad_,
 		gravSphereStayTime_
 	);
+
+	return BT::Status::Success;
 }
 
 void Boss::GravSphereEnd()
@@ -402,35 +513,12 @@ void Boss::GravSphereEnd()
 	gravSphere_ = nullptr;
 }
 
-void Boss::IdleUpdate()
-{
-	if (timesAttacked_ < 3)
-	{
-		if (moveTimer_ > 60)
-		{
-			SelectMove();
-			timesAttacked_++;
-		}
-	}
-	else
-	{
-		if (moveTimer_ > 240)
-		{
-			SelectMove();
-			timesAttacked_ = 0;
-		}
-	}
-}
-
 void Boss::SelectMove()
 {
 	int32_t rng = Util::RNG(0, 9);
 	if (rng <= 1)
 	{
 		CastLineTriple();
-		state_ = State::Line;
-		moveTime_ = 60;
-		moveTimer_ = 0;
 	}
 	else if (rng <= 3)
 	{
@@ -442,10 +530,6 @@ void Boss::SelectMove()
 		{
 			CastMarkerAim1Rand5();
 		}
-
-		state_ = State::Marker;
-		moveTime_ = 60;
-		moveTimer_ = 0;
 	}
 	else if (rng <= 5)
 	{
