@@ -10,6 +10,7 @@ BT::Status BT::SelectorNode::Update()
 {
 	if (children_.size() < 0)
 	{
+		InitNode();
 		return Status::Success;
 	}
 	

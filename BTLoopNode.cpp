@@ -7,7 +7,7 @@ void BT::LoopNode::OnStart()
 
 BT::Status BT::LoopNode::Update()
 {
-    if (loopCount_ <= param_ || param_ == 0)
+    if (loopCount_ < param_ || param_ == 0)
     {
         BT::Status status = children_.front()->Update();
 
@@ -16,6 +16,7 @@ BT::Status BT::LoopNode::Update()
             loopCount_++;
             if (loopCount_ >= param_ && param_ != 0)
             {
+                InitNode();
                 return Status::Completed;
             }
         }

@@ -173,7 +173,6 @@ void Boss::InitBehaviorTree()
 	tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
 	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastRush");
 	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
-	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
 
 	//GravSphere
 	tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
@@ -190,7 +189,7 @@ void Boss::InitBehaviorTree()
 	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
 	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker1");
 	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker2");
-	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
+	tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateMarker");
 
 	//終わったら60フレーム待機
 	tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
