@@ -14,6 +14,7 @@ namespace BT {
         void SetRootBT(BehaviorTree* bt);
 
         void SetParam(std::string param) override;
+        std::string GetNodeType() override;
     };
 }
 

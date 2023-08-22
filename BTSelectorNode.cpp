@@ -46,9 +46,15 @@ void BT::SelectorNode::OnAbort()
 
 void BT::SelectorNode::SetParam(std::string param)
 {
+	INode::SetParam(param);
 }
 
 void BT::SelectorNode::InitNode()
 {
 	selectedIndex = -1;
+}
+
+std::string BT::SelectorNode::GetNodeType()
+{
+	return "Selector";
 }

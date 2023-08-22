@@ -14,6 +14,8 @@ namespace BT {
 
         void InitNode();
 
+        std::string GetNodeType() override;
+
     private:
         std::string funcKey_;
     };

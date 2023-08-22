@@ -13,7 +13,7 @@ namespace BT {
         void SetParam(std::string param) override;
 
         void InitNode();
-
+        std::string GetNodeType() override;
     private:
         int32_t loopCount_ = 0;
         int32_t param_ = 0;

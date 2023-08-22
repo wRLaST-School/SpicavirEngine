@@ -20,6 +20,9 @@ namespace BT {
 
 		std::unique_ptr<INode> root;
 
+		void LoadJson(std::string path);
+		void SaveJson(std::string path);
+
 	private:
 		BehaviorTreeFactory funcFactory_;
 	};

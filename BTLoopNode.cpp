@@ -35,10 +35,16 @@ void BT::LoopNode::OnAbort()
 
 void BT::LoopNode::SetParam(std::string param)
 {
+    INode::SetParam(param);
     param_ = std::stoi(param);
 }
 
 void BT::LoopNode::InitNode()
 {
     loopCount_ = 0;
+}
+
+std::string BT::LoopNode::GetNodeType()
+{
+    return "Loop";
 }

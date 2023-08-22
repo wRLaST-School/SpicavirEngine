@@ -31,4 +31,10 @@ void BT::RootNode::SetRootBT(BehaviorTree* bt)
 
 void BT::RootNode::SetParam(std::string param)
 {
+	INode::SetParam(param);
+}
+
+std::string BT::RootNode::GetNodeType()
+{
+	return "Root";
 }

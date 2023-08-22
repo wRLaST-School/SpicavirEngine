@@ -11,8 +11,11 @@
 #pragma warning(disable:4201)
 #pragma warning(push)
 #pragma warning(disable:4267)
+#pragma warning(push)
+#pragma warning(disable:26813)
 #include <Effekseer.h>
 #include <EffekseerRendererDX12.h>
+#pragma warning(pop)
 #pragma warning(pop)
 #pragma warning(pop)
 #pragma warning(pop)

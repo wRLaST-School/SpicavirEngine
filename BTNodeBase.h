@@ -16,14 +16,19 @@ namespace BT {
         uint32_t activeIndex = 0;
 
         BehaviorTree* parentBT_ = nullptr;
+        std::string param_;
     public:
         virtual void OnStart() = 0;
         virtual BT::Status Update() = 0;
         virtual void OnEnd() = 0;
         virtual void OnAbort();
 
-        virtual void SetParam(std::string param) = 0;
+        virtual void SetParam(std::string param);
 
+        std::string GetParam();
+        const std::vector<std::unique_ptr<INode>>& GetChildren();
+
+        virtual std::string GetNodeType() = 0;
     public:
         template<class NodeType>
         void AddNode(const std::string& param)

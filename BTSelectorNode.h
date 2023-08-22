@@ -13,6 +13,7 @@ namespace BT {
         void SetParam(std::string param) override;
 
         void InitNode();
+        std::string GetNodeType() override;
 
         int32_t selectedIndex = -1;
     };

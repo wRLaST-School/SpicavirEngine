@@ -198,6 +198,8 @@ void Boss::InitBehaviorTree()
 	tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 	tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 	tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
+
+	tree_.SaveJson("Resources/data/BossBehavior.json");
 }
 
 void Boss::CastMarker(Float3 pos)

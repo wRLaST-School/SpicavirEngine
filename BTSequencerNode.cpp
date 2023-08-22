@@ -46,9 +46,15 @@ void BT::SequencerNode::OnAbort()
 
 void BT::SequencerNode::SetParam(std::string param)
 {
+	INode::SetParam(param);
 }
 
 void BT::SequencerNode::InitNode()
 {
 	activeIndex = 0;
+}
+
+std::string BT::SequencerNode::GetNodeType()
+{
+	return "Sequencer";
 }
