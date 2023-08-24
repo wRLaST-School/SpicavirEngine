@@ -61,31 +61,37 @@ void BT::BehaviorTree::SaveJson(std::string path)
 	// }
 
 	stringstream jsonStr;
+
 	jsonStr << "{" << endl;
 
 	//ノードを処理する再起関数
-	function<void(INode* currentNode, std::string indent)> processNode = [&](INode* current, std::string indent) {
-		jsonStr << indent << "{\"Node\":{\n";
+	function<void(INode* currentNode, std::string indent, std::string nodeNum)> processNode = [&](INode* current, std::string indent, std::string nodeNum = "") {
+		jsonStr << indent << "\"Node" << nodeNum << "\":{\n";
 		string firstIndent = indent;
-		indent += "\t";
-		jsonStr << indent << "\"NodeType\":" << current->GetNodeType() << ",\n";
-		jsonStr << indent << "\"NodeParam\":" << current->GetParam() << ",\n";
+		indent += "  ";
+		jsonStr << indent << "\"NodeType\":\"" << current->GetNodeType() << "\",\n";
+		jsonStr << indent << "\"NodeParam\":\"" << current->GetParam() << "\",\n";
 
+		int nodeNumInt = 0;
 		if (current->GetChildren().size())
 		{
-			jsonStr << indent << "\"Children\":[\n";
+			jsonStr << indent << "\"Children\":[\n" << indent << "{\n";
+
 			for (auto& c : current->GetChildren())
 			{
-				processNode(c.get(), indent + "\t");
+				processNode(c.get(), indent + "  ", to_string(nodeNumInt));
+				nodeNumInt++;
 			}
-			jsonStr << indent << "]\n";
+			jsonStr << indent << "}],\n";
 		}
+
+		jsonStr << indent << "\"NumChildren\":\"" << nodeNumInt << "\",\n";
 
 		jsonStr << firstIndent << "},\n";
 	};
 
 	//ルートノードから呼び出し
-	processNode(root.get(), "\t");
+	processNode(root.get(), "", "0");
 
 	jsonStr << "}" << endl;
 
