@@ -48,6 +48,14 @@ void BT::BehaviorTree::LoadJson(std::string path)
 
 	json deserialized;
 	file >> deserialized;
+
+	//ツリーのリセット
+
+	//ツリーの構築
+
+	//読み込みの再起関数
+
+	//読み込み再起関数呼び出し
 }
 
 void BT::BehaviorTree::SaveJson(std::string path)
