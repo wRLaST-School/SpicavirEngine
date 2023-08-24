@@ -17,8 +17,6 @@ BT::BehaviorTree::BehaviorTree()
 {
 	root = std::make_unique<RootNode>();
 	dynamic_cast<RootNode*>(root.get())->SetRootBT(this);
-
-	SaveJson("Resources/data/BTTest.json");
 }
 
 void BT::BehaviorTree::SetFactory(const BehaviorTreeFactory& factory)
@@ -38,6 +36,18 @@ void BT::BehaviorTree::Tick()
 
 void BT::BehaviorTree::LoadJson(std::string path)
 {
+	//ファイル読み込み
+	std::ifstream file;
+
+	file.open(path);
+
+	if (file.fail())
+	{
+		assert(0);
+	}
+
+	json deserialized;
+	file >> deserialized;
 }
 
 void BT::BehaviorTree::SaveJson(std::string path)
@@ -82,16 +92,43 @@ void BT::BehaviorTree::SaveJson(std::string path)
 				processNode(c.get(), indent + "  ", to_string(nodeNumInt));
 				nodeNumInt++;
 			}
+			//最後のカンマを削除
+			string tempStr = jsonStr.str();
+
+			tempStr.pop_back();
+			tempStr.pop_back();
+
+			tempStr += string("\n");
+
+			jsonStr.str("");
+			jsonStr.clear(stringstream::goodbit);
+
+			jsonStr << tempStr;
+
 			jsonStr << indent << "}],\n";
 		}
 
-		jsonStr << indent << "\"NumChildren\":\"" << nodeNumInt << "\",\n";
+		jsonStr << indent << "\"NumChildren\":\"" << nodeNumInt << "\"\n";
 
 		jsonStr << firstIndent << "},\n";
 	};
 
 	//ルートノードから呼び出し
 	processNode(root.get(), "", "0");
+
+	//最後のカンマを削除
+	string tempStr = jsonStr.str();
+
+	tempStr.pop_back();
+	tempStr.pop_back();
+
+	tempStr += string("\n");
+
+	jsonStr.str("");
+	jsonStr.clear(stringstream::goodbit);
+
+	jsonStr << tempStr;
+	jsonStr << "\n";
 
 	jsonStr << "}" << endl;
 
