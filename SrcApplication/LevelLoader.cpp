@@ -100,4 +100,6 @@ void LevelLoader::Load(std::string path)
 	for (auto& obj : deserialized["objects"]) {
 		ReadRec(obj, nullptr);
 	}
+
+	file.close();
 }
