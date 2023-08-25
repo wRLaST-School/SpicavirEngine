@@ -163,21 +163,11 @@ void Boss::InitBehaviorTree()
 
 	//tree_.root->Last()->AddNode<BT::SequencerNode>("");
 
-	//tree_.root->Last()->Last()->AddNode<BT::LoopNode>("3");
+	//tree_.root->Last()->Last()->AddNode<BT::LoopNode>("2");
 
 	//tree_.root->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
 	//
 	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-	//
-	////Rush
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastRush");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
-
-	////GravSphere
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastGravSphere");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateGravSphere");
 
 	////LineAttack
 	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
@@ -193,6 +183,23 @@ void Boss::InitBehaviorTree()
 
 	////終わったら60フレーム待機
 	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
+
+	//tree_.root->Last()->Last()->AddNode<BT::SequencerNode>("");
+
+	//tree_.root->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
+
+	////Rush
+	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastRush");
+	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
+
+	////GravSphere
+	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
+	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastGravSphere");
+	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateGravSphere");
+
+	////終わったら60フレーム待機
+	//tree_.root->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 
 	////3回行動したらさらに180フレーム待機
 	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
