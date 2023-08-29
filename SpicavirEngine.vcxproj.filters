@@ -175,6 +175,9 @@
     <Filter Include="Engine\ソースファイル\BehaviorTree">
       <UniqueIdentifier>{b116ebeb-3841-4339-8679-7d3cee7f9047}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\BTEditor">
+      <UniqueIdentifier>{130ff499-d04f-4e4b-8065-64d97cfae0aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -458,6 +461,27 @@
     </ClCompile>
     <ClCompile Include="BTSelectorNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="BTEditor.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="IBTENode.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BTESequencer.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BTESelector.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BTERoot.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BTELoop.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BTEAction.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -763,6 +787,27 @@
     </ClInclude>
     <ClInclude Include="BTSelectorNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="BTEditor.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTESequencer.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTESelector.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTERoot.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTELoop.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTEAction.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="IBTENode.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
