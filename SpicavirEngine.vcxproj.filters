@@ -438,49 +438,52 @@
     <ClCompile Include="GravSphere.cpp">
       <Filter>!Game\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="BehaviorTree.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTNodeBase.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTNodeBase.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BehaviorTreeFactory.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTRootNode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTRootNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTSequencerNode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTSequencerNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTActionNode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTActionNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTLoopNode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTLoopNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTSelectorNode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTSelectorNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="BTEditor.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEditor.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="IBTENode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\IBTENode.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="BTESequencer.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTESequencer.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="BTESelector.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTESelector.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="BTERoot.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTERoot.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="BTELoop.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTELoop.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="BTEAction.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEAction.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEditorScene.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -764,49 +767,52 @@
     <ClInclude Include="GravSphere.h">
       <Filter>!Game\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BehaviorTree.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTNodeBase.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTNodeBase.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BehaviorTreeFactory.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTRootNode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTRootNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTSequencerNode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTSequencerNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTActionNode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTActionNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTLoopNode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTLoopNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTSelectorNode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTSelectorNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="BTEditor.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEditor.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="BTESequencer.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTESequencer.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="BTESelector.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTESelector.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="BTERoot.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTERoot.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="BTELoop.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTELoop.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="BTEAction.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEAction.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="IBTENode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\IBTENode.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEditorScene.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
   </ItemGroup>

@@ -59,21 +59,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
@@ -167,22 +167,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BehaviorTree.cpp" />
-    <ClCompile Include="BehaviorTreeFactory.cpp" />
-    <ClCompile Include="BTActionNode.cpp" />
-    <ClCompile Include="BTEAction.cpp" />
-    <ClCompile Include="BTEditor.cpp" />
-    <ClCompile Include="BTELoop.cpp" />
-    <ClCompile Include="BTERoot.cpp" />
-    <ClCompile Include="BTESelector.cpp" />
-    <ClCompile Include="BTESequencer.cpp" />
-    <ClCompile Include="BTLoopNode.cpp" />
-    <ClCompile Include="BTNodeBase.cpp" />
-    <ClCompile Include="BTRootNode.cpp" />
-    <ClCompile Include="BTSelectorNode.cpp" />
-    <ClCompile Include="BTSequencerNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTActionNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEAction.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEditor.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEditorScene.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTELoop.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTERoot.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTESelector.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTESequencer.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTLoopNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTNodeBase.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTRootNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTSelectorNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTSequencerNode.cpp" />
     <ClCompile Include="GravSphere.cpp" />
-    <ClCompile Include="IBTENode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\IBTENode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Boss.cpp" />
     <ClCompile Include="SrcApplication\CameraController.cpp" />
@@ -273,22 +274,23 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BehaviorTree.h" />
-    <ClInclude Include="BehaviorTreeFactory.h" />
-    <ClInclude Include="BTActionNode.h" />
-    <ClInclude Include="BTEAction.h" />
-    <ClInclude Include="BTEditor.h" />
-    <ClInclude Include="BTELoop.h" />
-    <ClInclude Include="BTERoot.h" />
-    <ClInclude Include="BTESelector.h" />
-    <ClInclude Include="BTESequencer.h" />
-    <ClInclude Include="BTLoopNode.h" />
-    <ClInclude Include="BTNodeBase.h" />
-    <ClInclude Include="BTRootNode.h" />
-    <ClInclude Include="BTSelectorNode.h" />
-    <ClInclude Include="BTSequencerNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTActionNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEAction.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEditor.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEditorScene.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTELoop.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTERoot.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTESelector.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTESequencer.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTLoopNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTNodeBase.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTRootNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTSelectorNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTSequencerNode.h" />
     <ClInclude Include="GravSphere.h" />
-    <ClInclude Include="IBTENode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\IBTENode.h" />
     <ClInclude Include="SrcApplication\Boss.h" />
     <ClInclude Include="SrcApplication\CameraController.h" />
     <ClInclude Include="SrcApplication\GameManager.h" />
