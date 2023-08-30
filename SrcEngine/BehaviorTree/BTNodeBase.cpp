@@ -25,3 +25,18 @@ BT::INode* BT::INode::Last()
 {
 	return children_.back().get();
 }
+
+void BT::INode::ChangeParent(INode* newParent)
+{
+	for (auto itr = parent_->children_.begin(); itr != parent_->children_.end(); itr++)
+	{
+		if (itr->get() == this)
+		{
+			itr = parent_->children_.erase(itr);
+			break;
+		}
+	}
+
+	newParent->children_.emplace_back(this);
+	this->parent_ = newParent;
+}
