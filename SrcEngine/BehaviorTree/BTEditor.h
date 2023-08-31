@@ -1,5 +1,5 @@
 #pragma once
-#include <IBTENode.h>
+#include <BTENode.h>
 #include <BehaviorTree.h>
 #include <Camera2D.h>
 #include <EASTL/list.h>
@@ -14,7 +14,7 @@ private:
 	BT::BehaviorTree tree_;
 	Camera2D cam_;
 
-	eastl::list<IBTENode*> editorObjects;
+	eastl::list<BTENode*> editorObjects;
 
 //singleton
 public:

@@ -167,23 +167,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BTENode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTActionNode.cpp" />
-    <ClCompile Include="SrcEngine\BehaviorTree\BTEAction.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTEditor.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTEditorScene.cpp" />
-    <ClCompile Include="SrcEngine\BehaviorTree\BTELoop.cpp" />
-    <ClCompile Include="SrcEngine\BehaviorTree\BTERoot.cpp" />
-    <ClCompile Include="SrcEngine\BehaviorTree\BTESelector.cpp" />
-    <ClCompile Include="SrcEngine\BehaviorTree\BTESequencer.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTLoopNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTNodeBase.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTRootNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTSelectorNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTSequencerNode.cpp" />
     <ClCompile Include="GravSphere.cpp" />
-    <ClCompile Include="SrcEngine\BehaviorTree\IBTENode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Boss.cpp" />
     <ClCompile Include="SrcApplication\CameraController.cpp" />
@@ -274,23 +269,18 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BTENode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTActionNode.h" />
-    <ClInclude Include="SrcEngine\BehaviorTree\BTEAction.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTEditor.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTEditorScene.h" />
-    <ClInclude Include="SrcEngine\BehaviorTree\BTELoop.h" />
-    <ClInclude Include="SrcEngine\BehaviorTree\BTERoot.h" />
-    <ClInclude Include="SrcEngine\BehaviorTree\BTESelector.h" />
-    <ClInclude Include="SrcEngine\BehaviorTree\BTESequencer.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTLoopNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTNodeBase.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTRootNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTSelectorNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTSequencerNode.h" />
     <ClInclude Include="GravSphere.h" />
-    <ClInclude Include="SrcEngine\BehaviorTree\IBTENode.h" />
     <ClInclude Include="SrcApplication\Boss.h" />
     <ClInclude Include="SrcApplication\CameraController.h" />
     <ClInclude Include="SrcApplication\GameManager.h" />

@@ -1,4 +1,6 @@
 #pragma once
+class BTENode;
+
 namespace BT {
     class BehaviorTree;
 
@@ -11,6 +13,8 @@ namespace BT {
 
     class INode {
     protected:
+        friend BTENode;
+
         std::vector<std::unique_ptr<INode>> children_;
 
         uint32_t activeIndex = 0;
@@ -27,9 +31,13 @@ namespace BT {
         virtual void SetParam(std::string param);
 
         std::string GetParam();
+        INode* GetParent();
         const std::vector<std::unique_ptr<INode>>& GetChildren();
 
         virtual std::string GetNodeType() = 0;
+
+        //BTEditor—p
+        BTENode* editorNodePtr = nullptr;
     public:
         template<class NodeType>
         void AddNode(const std::string& param)

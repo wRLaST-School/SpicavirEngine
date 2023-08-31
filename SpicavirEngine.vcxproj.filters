@@ -465,25 +465,10 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTEditor.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\BehaviorTree\IBTENode.cpp">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\BehaviorTree\BTESequencer.cpp">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\BehaviorTree\BTESelector.cpp">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\BehaviorTree\BTERoot.cpp">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\BehaviorTree\BTELoop.cpp">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\BehaviorTree\BTEAction.cpp">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\BehaviorTree\BTEditorScene.cpp">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="BTENode.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -794,25 +779,10 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTEditor.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\BehaviorTree\BTESequencer.h">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\BehaviorTree\BTESelector.h">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\BehaviorTree\BTERoot.h">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\BehaviorTree\BTELoop.h">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\BehaviorTree\BTEAction.h">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\BehaviorTree\IBTENode.h">
-      <Filter>Engine\ソースファイル\BTEditor</Filter>
-    </ClInclude>
     <ClInclude Include="SrcEngine\BehaviorTree\BTEditorScene.h">
+      <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTENode.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
   </ItemGroup>

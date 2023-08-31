@@ -16,6 +16,11 @@ std::string BT::INode::GetParam()
 	return param_;
 }
 
+BT::INode* BT::INode::GetParent()
+{
+	return parent_;
+}
+
 const std::vector<std::unique_ptr<BT::INode>>& BT::INode::GetChildren()
 {
 	return children_;
