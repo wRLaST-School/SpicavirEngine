@@ -81,8 +81,6 @@ void BTENode::Draw()
 				"Root"
 			};
 
-			static const char* currentItem = nullptr;
-
 			if (master_->GetSelected())
 			{
 				if (ImGui::Button("Select"))
