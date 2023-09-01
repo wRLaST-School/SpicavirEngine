@@ -9,6 +9,7 @@
 #include <GlobalTimer.h>
 #include <TitleScene.h>
 #include <Transition.h>
+#include <BTEditorScene.h>
 #include <GameManager.h>
 
 std::future<void> SceneManager::ftr;
@@ -44,6 +45,11 @@ void SceneManager::Update()
 		if (Input::Key::Triggered(DIK_D))
 		{
 			GameManager::sShowDebug = !GameManager::sShowDebug;
+		}
+
+		if (Input::Key::Triggered(DIK_E))
+		{
+			LoadScene<BTEditorScene>();
 		}
 
 		Transition();

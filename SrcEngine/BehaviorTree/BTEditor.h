@@ -14,7 +14,9 @@ private:
 	BT::BehaviorTree tree_;
 	Camera2D cam_;
 
-	eastl::list<BTENode*> editorObjects;
+	eastl::list<BTENode> editorObjects;
+
+	uint64_t id = 0;
 
 //singleton
 public:
@@ -26,7 +28,7 @@ public:
 	static BTEditor* GetInstance();
 
 private:
-	BTEditor() = default;
+	BTEditor();
 	~BTEditor() = default;
 };
 

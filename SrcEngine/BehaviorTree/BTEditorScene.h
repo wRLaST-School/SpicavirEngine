@@ -1,6 +1,7 @@
 #pragma once
 #include "IScene.h"
 #include <Camera.h>
+#include <Camera2D.h>
 class BTEditorScene :
     public IScene
 {
@@ -15,5 +16,6 @@ public:
 
 private:
     Camera cam;
+    Camera2D cam2d;
 };
 

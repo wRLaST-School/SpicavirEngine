@@ -16,6 +16,11 @@ void Camera2D::Set(Camera2D* camera)
 	sCurrent = camera;
 }
 
+Float2 Camera2D::GetDiff()
+{
+	return { (float)x - lastX, (float)y - lastY};
+}
+
 Matrix Camera2D::GetViewProjMat()
 {
 	Matrix vMat = Matrix::View(Matrix::Translation({ (float)sCurrent->x, (float)sCurrent->y, 0.f }));
@@ -24,6 +29,15 @@ Matrix Camera2D::GetViewProjMat()
 	Matrix pMat = Matrix::ProjectionOrtho(win->width, win->height, -1.f, 1.f);
 
 	return vMat * pMat;
+}
+
+void Camera2D::OnFrameStart()
+{
+	if (sCurrent != nullptr)
+	{
+		sCurrent->lastX = sCurrent->x;
+		sCurrent->lastY = sCurrent->y;
+	}
 }
 
 Camera2D* Camera2D::sCurrent = nullptr;

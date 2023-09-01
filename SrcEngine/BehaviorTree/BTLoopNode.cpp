@@ -36,7 +36,17 @@ void BT::LoopNode::OnAbort()
 void BT::LoopNode::SetParam(std::string param)
 {
     INode::SetParam(param);
-    param_ = std::stoi(param);
+    try {
+        param_ = std::stoi(param);
+    }
+    catch (std::invalid_argument e)
+    {
+        param_ = 0;
+    }
+    catch (std::out_of_range e)
+    {
+        param_ = 0;
+    }
 }
 
 void BT::LoopNode::InitNode()

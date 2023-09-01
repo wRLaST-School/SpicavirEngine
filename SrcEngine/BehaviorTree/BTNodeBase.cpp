@@ -33,6 +33,10 @@ BT::INode* BT::INode::Last()
 
 void BT::INode::ChangeParent(INode* newParent)
 {
+	if (parent_ == nullptr)
+	{
+		return;
+	}
 	for (auto itr = parent_->children_.begin(); itr != parent_->children_.end(); itr++)
 	{
 		if (itr->get() == this)
