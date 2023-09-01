@@ -19,7 +19,16 @@ BT::Status BT::SelectorNode::Update()
 		selectedIndex = Util::RNG(0, (int32_t)children_.size() - 1, true);
 	}
 
-	Status childStatus = children_.at(selectedIndex)->Update();
+	Status childStatus = Status::Error;
+	uint32_t ind = 0;
+	for (auto itr = children_.begin(); itr != children_.end(); itr++)
+	{
+		if (ind == activeIndex)
+		{
+			childStatus = (*itr)->Update();
+		}
+		ind++;
+	}
 
 	if (childStatus == Status::Completed || childStatus == Status::Success)
 	{

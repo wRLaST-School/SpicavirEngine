@@ -13,7 +13,16 @@ BT::Status BT::SequencerNode::Update()
 		return Status::Success;
 	}
 
-	Status childStatus = children_.at(activeIndex)->Update();
+	Status childStatus = Status::Error;;
+	uint32_t ind = 0;
+	for (auto itr = children_.begin(); itr != children_.end(); itr++)
+	{
+		if (ind == activeIndex)
+		{
+			childStatus = (*itr)->Update();
+		}
+		ind++;
+	}
 
 	if (childStatus == Status::Completed || childStatus == Status::Success)
 	{

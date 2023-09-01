@@ -19,6 +19,7 @@ namespace BT {
 		void Tick();
 
 		std::unique_ptr<INode> root;
+		std::list<std::unique_ptr<INode>> floatingNodes;
 
 		void LoadJson(std::string path);
 		void SaveJson(std::string path);

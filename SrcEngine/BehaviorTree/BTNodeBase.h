@@ -8,14 +8,15 @@ namespace BT {
         Success,
         Failure,
         Running,
-        Completed
+        Completed,
+        Error
     };
 
     class INode {
     protected:
         friend BTENode;
 
-        std::vector<std::unique_ptr<INode>> children_;
+        std::list<std::unique_ptr<INode>> children_;
 
         uint32_t activeIndex = 0;
 
@@ -32,7 +33,7 @@ namespace BT {
 
         std::string GetParam();
         INode* GetParent();
-        const std::vector<std::unique_ptr<INode>>& GetChildren();
+        const std::list<std::unique_ptr<INode>>& GetChildren();
 
         virtual std::string GetNodeType() = 0;
 
@@ -42,15 +43,17 @@ namespace BT {
         template<class NodeType>
         void AddNode(const std::string& param)
         {
-            children_.push_back(std::move(std::make_unique<NodeType>()));
+            children_.emplace_back(std::make_unique<NodeType>());
             Last()->SetParam(param);
             Last()->parentBT_ = parentBT_;
             Last()->parent_ = this;
         };
 
         INode* Last();
+        std::unique_ptr<INode>* LastPtr();
 
-        void ChangeParent(INode* newParent);
+        //新しいNodeのuptrへのポインタを返す
+        std::unique_ptr<INode>* ChangeParent(INode* newParent);
 
         INode() {};
         virtual ~INode() {};

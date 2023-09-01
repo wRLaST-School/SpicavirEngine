@@ -3,18 +3,29 @@
 #include <BehaviorTree.h>
 #include <SpImGui.h>
 #include <Camera2D.h>
+#include <BTEditor.h>
 
-BTENode::BTENode(std::unique_ptr<BT::INode>* node, std::string uniqueName)
+BTENode::BTENode(std::unique_ptr<BT::INode>* node, std::string uniqueName, BTEditor* master)
 {
 	node_ = node;
 	(*node_)->editorNodePtr = this;
 
 	uniqueName_ = uniqueName;
+
+	master_ = master;
 }
 
 void BTENode::ChangeNodeType(std::string type)
 {
 	std::unique_ptr<BT::INode>* lastNode = std::move(node_);
+
+	BT::INode* last = lastNode->get();
+
+	std::string param = last->GetParam();
+	BT::INode* parent = last->parent_;
+	auto children = std::move(last->children_);
+	auto parentBT = last->parentBT_;
+
 	//NodeType‚É‚æ‚Á‚Ä•ªŠò
 	if (type == "Action")
 	{
@@ -34,26 +45,33 @@ void BTENode::ChangeNodeType(std::string type)
 	}
 	else
 	{
-		*node_ = std::make_unique<BT::SequencerNode>();
+		*node_ = std::make_unique<BT::RootNode>();
 	}
 
-	(*node_)->SetParam((*lastNode)->GetParam());
+	(*node_)->SetParam(param);
 	(*node_)->editorNodePtr = this;
-	(*node_)->ChangeParent((*lastNode)->GetParent());
-	(*node_)->children_ = std::move((*lastNode)->children_);
-	(*node_)->parentBT_ = (*lastNode)->parentBT_;
+	(*node_)->parentBT_ = parentBT;
+	(*node_)->children_ = std::move(children);
+	(*node_)->parent_ = parent;
+
+	for (auto& c : (*node_)->children_)
+	{
+		c->parent_ = node_->get();
+	}
 }
 
 void BTENode::Draw()
 {
 	SpImGui::Command([&] {
-		if(ImGui::Begin(uniqueName_.c_str()))
+		std::string wName = std::string("Node") + uniqueName_;
+		if(ImGui::Begin(wName.c_str()))
 		{
 			ImVec2 currentPos = ImGui::GetWindowPos();
 			currentPos.x -= Camera2D::Get()->GetDiff().x;
 			currentPos.y -= Camera2D::Get()->GetDiff().y;
 
 			ImGui::SetWindowPos(currentPos);
+			pos_ = { currentPos.x, currentPos.y };
 
 			static std::vector<std::string> itemList{
 				"Action",
@@ -65,7 +83,17 @@ void BTENode::Draw()
 
 			static const char* currentItem = nullptr;
 
-			if (ImGui::BeginCombo("NodeType", currentItem))
+			if (master_->GetSelected())
+			{
+				if (ImGui::Button("Select"))
+				{
+					node_ = node_->get()->ChangeParent(master_->GetSelected()->node_->get());
+					master_->ClearSelected();
+				}
+			}
+
+			std::string comboName = std::string("NodeType") + uniqueName_;
+			if (ImGui::BeginCombo(comboName.c_str(), currentItem))
 			{
 				for (int i = 0; i < itemList.size(); ++i)
 				{
@@ -90,8 +118,19 @@ void BTENode::Draw()
 			ImGui::InputText("Parameter", param, 256);
 			
 			node_->get()->SetParam(param);
+
+			if (ImGui::Button("Select Child"))
+			{
+				master_->SetSelected(this);
+			}
 		}
 
 		ImGui::End();
 	});
+
+	if (node_->get()->parent_)
+	{
+		auto parent = node_->get()->parent_->editorNodePtr;
+		SpDS::DrawLine((int32_t)parent->pos_.x, (int32_t)parent->pos_.y, (int32_t)pos_.x, (int32_t)pos_.y, Color::White);
+	}
 }

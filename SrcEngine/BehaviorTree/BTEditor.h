@@ -10,13 +10,19 @@ public:
 	static void Update();
 	static void Draw();
 
+	BTENode* GetSelected();
+	void ClearSelected();
+	void SetSelected(BTENode* node);
+
 private:
 	BT::BehaviorTree tree_;
 	Camera2D cam_;
 
-	eastl::list<BTENode> editorObjects;
+	std::list<BTENode> editorObjects;
 
 	uint64_t id = 0;
+
+	BTENode* selected_ = nullptr;
 
 //singleton
 public:
