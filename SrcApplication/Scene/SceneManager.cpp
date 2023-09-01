@@ -30,7 +30,7 @@ void SceneManager::Update()
 	UpdateLoadState();
 	Transition::Update();
 
-	if (Input::Key::Down(DIK_LSHIFT))
+	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
 		if (Input::Key::Triggered(DIK_G))
 		{
