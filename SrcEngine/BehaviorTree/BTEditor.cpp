@@ -11,8 +11,29 @@ void BTEditor::Draw()
 
 
     SpImGui::Command([&] {
-        if (ImGui::Begin("Master"))
+        if (ImGui::Begin("Master", nullptr, ImGuiWindowFlags_MenuBar))
         {
+            if (ImGui::BeginMenuBar()) {
+                if (ImGui::BeginMenu("File"))
+                {
+                    if (ImGui::MenuItem("Save")) {
+                        GetInstance()->tree_.SaveJson(GetInstance()->filePath);
+                    }
+                    if (ImGui::MenuItem("Load")) {
+                        //TODO:ƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ýˆ—‚ð‘‚­
+                    }
+
+                    ImGui::EndMenu();
+                }
+                ImGui::EndMenuBar();
+            }
+
+            char path[256];
+            strcpy_s(path, GetInstance()->filePath.c_str());
+            ImGui::InputText("FilePath", path, 256);
+
+            GetInstance()->filePath = path;
+
             if (ImGui::Button("New Node"))
             {
                 BTEditor* ins = GetInstance();

@@ -24,6 +24,8 @@ private:
 
 	BTENode* selected_ = nullptr;
 
+	std::string filePath = "";
+
 //singleton
 public:
 	BTEditor(const BTEditor&) = delete;

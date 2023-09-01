@@ -15,6 +15,7 @@ public:
 private:
 	std::unique_ptr<BT::INode>* node_;
 	Float2 pos_;
+	Float2 size_;
 
 	const char* currentItem = nullptr;
 

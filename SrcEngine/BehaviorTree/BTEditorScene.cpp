@@ -23,8 +23,6 @@ void BTEditorScene::Update()
 		cam2d.x -= (int32_t)v.x;
 		cam2d.y -= (int32_t)v.y;
 	}
-
-
 }
 
 void BTEditorScene::DrawBack()

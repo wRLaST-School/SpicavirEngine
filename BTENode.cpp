@@ -73,6 +73,9 @@ void BTENode::Draw()
 			ImGui::SetWindowPos(currentPos);
 			pos_ = { currentPos.x, currentPos.y };
 
+			ImVec2 currentSize = ImGui::GetWindowSize();
+			size_ = { currentSize.x, currentSize.y };
+
 			static std::vector<std::string> itemList{
 				"Action",
 				"Sequencer",
@@ -129,6 +132,6 @@ void BTENode::Draw()
 	if (node_->get()->parent_)
 	{
 		auto parent = node_->get()->parent_->editorNodePtr;
-		SpDS::DrawLine((int32_t)parent->pos_.x, (int32_t)parent->pos_.y, (int32_t)pos_.x, (int32_t)pos_.y, Color::White);
+		SpDS::DrawLine((int32_t)parent->pos_.x + (int32_t)(parent->size_.x / 2), (int32_t)parent->pos_.y + (int32_t)parent->size_.y, (int32_t)pos_.x + (int32_t)(size_.x / 2), (int32_t)pos_.y, Color::White);
 	}
 }

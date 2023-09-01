@@ -30,6 +30,7 @@ void SceneManager::Update()
 	UpdateLoadState();
 	Transition::Update();
 
+	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
 		if (Input::Key::Triggered(DIK_G))
