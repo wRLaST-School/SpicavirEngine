@@ -60,30 +60,35 @@ void SingleCamTestScene::Init()
 void SingleCamTestScene::Update()
 {
 #pragma region Camera
-	//rot
-	camera.rotation.x += (Input::Key::Down(DIK_DOWN) - Input::Key::Down(DIK_UP) - (Input::Pad::GetRStick().y / 1000)) * PIf / 120;
-	camera.rotation.y += (Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT) + (Input::Pad::GetRStick().x / 1000)) * PIf / 120;
-
-	//move
-	Matrix cm = Matrix::RotRollPitchYaw(camera.rotation);
-	Vec3 front = cm.ExtractAxisZ();
-	Vec3 right = cm.ExtractAxisX();
-	Vec3 up = cm.ExtractAxisY();
-
-	float spd = 0.2f;
-
-	Vec3 move =
-		front.SetLength((Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S) + (Input::Pad::GetLStick()).y / 1000) * spd) +
-		right.SetLength((Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A) + (Input::Pad::GetLStick()).x / 1000) * spd) +
-		up.SetLength((Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT) + Input::Pad::Down(Button::L) - Input::Pad::Down(Trigger::Left)) * spd);
-
-	camera.position = move + camera.position;
-#pragma endregion
+//	//rot
+//	camera.rotation.x += (Input::Key::Down(DIK_DOWN) - Input::Key::Down(DIK_UP) - (Input::Pad::GetRStick().y / 1000)) * PIf / 120;
+//	camera.rotation.y += (Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT) + (Input::Pad::GetRStick().x / 1000)) * PIf / 120;
+//
+//	//move
+//	Matrix cm = Matrix::RotRollPitchYaw(camera.rotation);
+//	Vec3 front = cm.ExtractAxisZ();
+//	Vec3 right = cm.ExtractAxisX();
+//	Vec3 up = cm.ExtractAxisY();
+//
+//	float spd = 0.2f;
+//
+//	Vec3 move =
+//		front.SetLength((Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S) + (Input::Pad::GetLStick()).y / 1000) * spd) +
+//		right.SetLength((Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A) + (Input::Pad::GetLStick()).x / 1000) * spd) +
+//		up.SetLength((Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT) + Input::Pad::Down(Button::L) - Input::Pad::Down(Trigger::Left)) * spd);
+//
+//	camera.position = move + camera.position;
+//#pragma endregion
+//
+//	if (Input::Key::Triggered(DIK_B))
+//	{
+//		SoundManager::Play("Laser");
+//	}
 
 	//pane.scale = { .01f, .01f, .01f};
 	sky.scale = { 5,5,5 };
 
-	pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
+	//pane.rotation = (Vec3(0, 0.03f * (Input::Pad::Down(Button::Left) - Input::Pad::Down(Button::Right)), 0)) + pane.rotation;
 
 	if(animation)
 		pane.model->UpdateAnim();
@@ -111,7 +116,7 @@ void SingleCamTestScene::Update()
 		{
 			ImGui::SliderFloat3("Position", &pane.position.x, -30.f, 30.f);
 			ImGui::SliderFloat3("Scale", &pane.scale.x, -1.f, 1.f);
-			ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 2.f * PIf);
+			//ImGui::SliderFloat3("Rotation", &pane.rotation.x, 0.f, 2.f * PIf);
 
 			if (ImGui::Button("UseSmooth"))
 			{

@@ -5,6 +5,7 @@
 #include "Float3.h"
 #include "Float4.h"
 #include "Matrix.h"
+#include <Quaternion.h>
 #include "Ray.h"
 
 #ifndef PI

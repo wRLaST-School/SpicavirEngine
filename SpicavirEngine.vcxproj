@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_No_Iterator_Check|x64">
+      <Configuration>Debug_No_Iterator_Check</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -25,6 +29,12 @@
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -40,25 +50,38 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
+    <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>false</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'" Label="Vcpkg">
     <VcpkgUseStatic>false</VcpkgUseStatic>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -70,7 +93,31 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(SolutionDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>/ignore:4099 %(AdditionalOptions)</AdditionalOptions>
+      <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(SolutionDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -96,7 +143,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(SolutionDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -120,29 +167,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation2D.cpp" />
-    <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTActionNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEditor.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTEditorScene.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTLoopNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTNodeBase.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTRootNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTSelectorNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTSequencerNode.cpp" />
+    <ClCompile Include="SrcApplication\GravSphere.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PlaneCollider.cpp" />
-    <ClCompile Include="Ray.cpp" />
-    <ClCompile Include="SpDS.cpp" />
-    <ClCompile Include="SpEffekseer.cpp" />
-    <ClCompile Include="SpRenderer.cpp" />
-    <ClCompile Include="SrAddStage.cpp" />
-    <ClCompile Include="SrAlphaStage.cpp" />
+    <ClCompile Include="SrcApplication\Boss.cpp" />
+    <ClCompile Include="SrcApplication\CameraController.cpp" />
+    <ClCompile Include="SrcApplication\GameManager.cpp" />
+    <ClCompile Include="SrcApplication\GlobalTimer.cpp" />
+    <ClCompile Include="SrcApplication\LevelLoader.cpp" />
+    <ClCompile Include="SrcApplication\LevelManager.cpp" />
+    <ClCompile Include="SrcApplication\LineAttack.cpp" />
+    <ClCompile Include="SrcApplication\MainTimer.cpp" />
+    <ClCompile Include="SrcApplication\Marker.cpp" />
+    <ClCompile Include="SrcApplication\Particle\CounterParticle.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp" />
+    <ClCompile Include="SrcApplication\Player.cpp" />
+    <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\ResulScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp" />
+    <ClCompile Include="SrcApplication\Scene\Transition.cpp" />
+    <ClCompile Include="SrcApplication\Score.cpp" />
+    <ClCompile Include="SrcEngine\2D\Animation2D.cpp" />
+    <ClCompile Include="SrcEngine\2D\Camera2D.cpp" />
+    <ClCompile Include="SrcEngine\2D\SpDS.cpp" />
     <ClCompile Include="SrcEngine\2D\Sprite.cpp" />
     <ClCompile Include="SrcEngine\3D\Billboard.cpp" />
     <ClCompile Include="SrcEngine\3D\Camera.cpp" />
     <ClCompile Include="SrcEngine\3D\Model.cpp" />
     <ClCompile Include="SrcEngine\3D\Object3D.cpp" />
+    <ClCompile Include="SrcEngine\3D\SpEffekseer.cpp" />
     <ClCompile Include="SrcEngine\Collider\ICollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\OBBCollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\PlaneCollider.cpp" />
+    <ClCompile Include="SrcEngine\Collider\Ray.cpp" />
     <ClCompile Include="SrcEngine\Collider\RayCollider.cpp" />
     <ClCompile Include="SrcEngine\Collider\SphereCollider.cpp" />
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp" />
@@ -166,12 +237,15 @@
     <ClCompile Include="SrcEngine\Math\Vec2.cpp" />
     <ClCompile Include="SrcEngine\Math\Vec3.cpp" />
     <ClCompile Include="SrcEngine\Math\SpMath.cpp" />
+    <ClCompile Include="SrcEngine\Others\Color.cpp" />
+    <ClCompile Include="SrcEngine\Others\Easing.cpp" />
     <ClCompile Include="SrcEngine\Others\Essentials.cpp" />
     <ClCompile Include="SrcEngine\Others\exc_unordered_map.cpp" />
     <ClCompile Include="SrcEngine\Others\Input.cpp" />
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp" />
     <ClCompile Include="SrcEngine\Others\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SrcEngine\Others\Util.cpp" />
@@ -181,41 +255,66 @@
     <ClCompile Include="SrcEngine\Particle\ParticleManager.cpp" />
     <ClCompile Include="SrcEngine\PostEffect\Bloom.cpp" />
     <ClCompile Include="SrcEngine\PostEffect\IPostEffector.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SpRenderer.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrAddStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrAlphaStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrImGuiStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrOpaqueStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrParticleStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrPostEffectStage.cpp" />
+    <ClCompile Include="SrcEngine\Renderer\SrSpriteStage.cpp" />
     <ClCompile Include="SrcEngine\Scene\FrameRate.cpp" />
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
-    <ClCompile Include="SrImGuiStage.cpp" />
-    <ClCompile Include="SrOpaqueStage.cpp" />
-    <ClCompile Include="SrParticleStage.cpp" />
-    <ClCompile Include="SrPostEffectStage.cpp" />
-    <ClCompile Include="SrSpriteStage.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Anchor.h" />
-    <ClInclude Include="Animation2D.h" />
-    <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="IRenderStage.h" />
-    <ClInclude Include="PlaneCollider.h" />
-    <ClInclude Include="Ray.h" />
-    <ClInclude Include="SpDS.h" />
-    <ClInclude Include="SpEffekseer.h" />
-    <ClInclude Include="SpRenderer.h" />
-    <ClInclude Include="SrAddStage.h" />
-    <ClInclude Include="SrAlphaStage.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTActionNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEditor.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTEditorScene.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTLoopNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTNodeBase.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTRootNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTSelectorNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTSequencerNode.h" />
+    <ClInclude Include="SrcApplication\GravSphere.h" />
+    <ClInclude Include="SrcApplication\Boss.h" />
+    <ClInclude Include="SrcApplication\CameraController.h" />
+    <ClInclude Include="SrcApplication\GameManager.h" />
+    <ClInclude Include="SrcApplication\GlobalTimer.h" />
+    <ClInclude Include="SrcApplication\LevelLoader.h" />
+    <ClInclude Include="SrcApplication\LevelManager.h" />
+    <ClInclude Include="SrcApplication\LineAttack.h" />
+    <ClInclude Include="SrcApplication\MainTimer.h" />
+    <ClInclude Include="SrcApplication\Marker.h" />
+    <ClInclude Include="SrcApplication\Particle\CounterParticle.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample1.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample2.h" />
+    <ClInclude Include="SrcApplication\Player.h" />
+    <ClInclude Include="SrcApplication\Scene\GameScene.h" />
+    <ClInclude Include="SrcApplication\Scene\ResulScene.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
+    <ClInclude Include="SrcApplication\Scene\TitleScene.h" />
+    <ClInclude Include="SrcApplication\Scene\Transition.h" />
+    <ClInclude Include="SrcApplication\Score.h" />
+    <ClInclude Include="SrcEngine\2D\Animation2D.h" />
+    <ClInclude Include="SrcEngine\2D\Camera2D.h" />
+    <ClInclude Include="SrcEngine\2D\SpDS.h" />
     <ClInclude Include="SrcEngine\2D\Sprite.h" />
     <ClInclude Include="SrcEngine\3D\Billboard.h" />
     <ClInclude Include="SrcEngine\3D\Camera.h" />
     <ClInclude Include="SrcEngine\3D\Model.h" />
     <ClInclude Include="SrcEngine\3D\Object3D.h" />
+    <ClInclude Include="SrcEngine\3D\SpEffekseer.h" />
     <ClInclude Include="SrcEngine\Collider\ICollider.h" />
+    <ClInclude Include="SrcEngine\Collider\OBBCollider.h" />
+    <ClInclude Include="SrcEngine\Collider\PlaneCollider.h" />
+    <ClInclude Include="SrcEngine\Collider\Ray.h" />
     <ClInclude Include="SrcEngine\Collider\RayCollider.h" />
     <ClInclude Include="SrcEngine\Collider\SphereCollider.h" />
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h" />
@@ -242,6 +341,9 @@
     <ClInclude Include="SrcEngine\Math\Vec2.h" />
     <ClInclude Include="SrcEngine\Math\Vec3.h" />
     <ClInclude Include="SrcEngine\Math\SpMath.h" />
+    <ClInclude Include="SrcEngine\Others\Anchor.h" />
+    <ClInclude Include="SrcEngine\Others\Color.h" />
+    <ClInclude Include="SrcEngine\Others\Easing.h" />
     <ClInclude Include="SrcEngine\Others\Essentials.h" />
     <ClInclude Include="SrcEngine\Others\exc_unordered_map.h" />
     <ClInclude Include="SrcEngine\Others\Input.h" />
@@ -256,146 +358,195 @@
     <ClInclude Include="SrcEngine\Particle\ParticleManager.h" />
     <ClInclude Include="SrcEngine\PostEffect\Bloom.h" />
     <ClInclude Include="SrcEngine\PostEffect\IPostEffector.h" />
+    <ClInclude Include="SrcEngine\Renderer\IRenderStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SpRenderer.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrAddStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrAlphaStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrImGuiStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrOpaqueStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrParticleStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrPostEffectStage.h" />
+    <ClInclude Include="SrcEngine\Renderer\SrSpriteStage.h" />
     <ClInclude Include="SrcEngine\Scene\FrameRate.h" />
     <ClInclude Include="SrcEngine\Scene\IScene.h" />
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
-    <ClInclude Include="SrImGuiStage.h" />
-    <ClInclude Include="SrOpaqueStage.h" />
-    <ClInclude Include="SrParticleStage.h" />
-    <ClInclude Include="SrPostEffectStage.h" />
-    <ClInclude Include="SrSpriteStage.h" />
+    <ClInclude Include="SrcExternal\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Geometry</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BasicInvPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BasicInvVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BasicVS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BloomP1PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BloomP1VS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BloomP2PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BloomP2VS.hlsl" />
     <FxCompile Include="Resources\Shaders\BloomP3PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\BloomP3VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\FinalizePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\FinalizeVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\LineGS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\LinePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\LineVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\NoLightPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\NoLightVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\ParticleGS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Geometry</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Geometry</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\ParticlePS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\ParticleVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\SpritePS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\SpriteVS.hlsl">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
     </FxCompile>
   </ItemGroup>

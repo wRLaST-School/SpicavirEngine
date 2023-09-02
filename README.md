@@ -32,3 +32,5 @@
   - Effekseerで制作したVFXの読み込みと再生に使用
 - [Dear ImGui](https://github.com/ocornut/imgui)
   - インタラクティブなデバッグ用GUIに使用
+- [Cereal](https://github.com/USCiLab/cereal)
+  - データのシリアライズ・デシリアライズに使用

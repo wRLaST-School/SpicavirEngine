@@ -23,6 +23,20 @@ cbuffer cbuff3 : register(b3)
 	float4 brightness;
 }
 
+static const int MAX_BONES = 128;
+
+cbuffer cbuff4 : register(b4)
+{
+    matrix bMatrix[MAX_BONES];
+}
+
+cbuffer cbuff5 : register(b5)
+{
+    float4 rimColor;
+    float4 rimStrength;
+    float4 dissolveStrength;
+}
+
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;

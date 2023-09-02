@@ -5,33 +5,54 @@
 #include <SingleCamTestScene.h>
 #include <IPostEffector.h>
 #include <Bloom.h>
+#include <GameScene.h>
+#include <GlobalTimer.h>
+#include <TitleScene.h>
+#include <Transition.h>
+#include <BTEditorScene.h>
+#include <GameManager.h>
 
 std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
 
 void SceneManager::Init()
 {
-	InstantTransition<SingleCamTestScene>();
+	Transition::Load();
+	InstantTransition<TitleScene>();
 	//InstantTransition<GameScene>();
 }
 
 void SceneManager::Update()
 {
+	GlobalTimer::Update();
 	ConfirmTransition();
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
+	Transition::Update();
 
-	Transition();
-
-	if (Input::Key::Triggered(DIK_T) && Input::Key::Down(DIK_LSHIFT))
+	//デバッグ用シーン変更
+	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
-		LoadScene<TestScene>();
-		Transition();
-	}
+		if (Input::Key::Triggered(DIK_G))
+		{
+			LoadScene<GameScene>();
+		}
 
-	if (Input::Key::Triggered(DIK_N) && Input::Key::Down(DIK_LSHIFT))
-	{
-		LoadScene<SingleCamTestScene>();
+		if (Input::Key::Triggered(DIK_T))
+		{
+			LoadScene<TitleScene>();
+		}
+
+		if (Input::Key::Triggered(DIK_D))
+		{
+			GameManager::sShowDebug = !GameManager::sShowDebug;
+		}
+
+		if (Input::Key::Triggered(DIK_E))
+		{
+			LoadScene<BTEditorScene>();
+		}
+
 		Transition();
 	}
 
@@ -46,6 +67,7 @@ void SceneManager::Draw3D()
 void SceneManager::DrawSprite()
 {
 	currentScene->DrawSprite();
+	Transition::Draw();
 }
 
 void SceneManager::DrawBack()

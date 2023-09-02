@@ -269,7 +269,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 				{
 					aiVector3D aiScale = aiChan->mScalingKeys[s].mValue;
 					Float3 scale = { aiScale.x, aiScale.y, aiScale.z };
-					channel.scales.push_back({ scale, aiChan->mScalingKeys[s].mTime});
+					channel.scales.push_back({ scale, aiChan->mScalingKeys[s].mTime });
 				}
 
 				anim.channels.push_back(channel);
@@ -312,6 +312,14 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 					bones.insert(std::pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
 				}
 			}
+			else
+			{
+				Bone bone;
+				bone.offsetMatrix = Matrix::Identity();
+				bone.index = 0;
+				bones.insert(std::pair<std::string, Bone>("", bone));
+				bMatrixCB.contents->bMatrix[0] = Matrix::Identity();
+			}
 		}
 	};
 
@@ -352,7 +360,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 		nodes.emplace(cur->mName.C_Str(), node);
 
-		for (uint32_t  i = 0; i < cur->mNumChildren; i++)
+		for (uint32_t i = 0; i < cur->mNumChildren; i++)
 		{
 			fNode(cur->mChildren[i], &nodes.at(cur->mName.C_Str()));
 		}
@@ -385,7 +393,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 					tcList.push_back({ mesh->mTextureCoords[0][j].x,mesh->mTextureCoords[0][j].y });
 				}
 				//Bone
-				if (mesh->HasBones() || !mesh->mNumBones)
+				if (mesh->HasBones() || mesh->mNumBones)
 				{
 					struct BoneData {
 						int32_t index;
@@ -414,9 +422,9 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 					}
 
-					std::sort(bdlist.begin(), bdlist.end(), [](const auto & lhs, const auto& rhs) {
+					std::sort(bdlist.begin(), bdlist.end(), [](const auto& lhs, const auto& rhs) {
 						return lhs.weight > rhs.weight;
-					});
+						});
 
 					eastl::array<int32_t, 4> bInd{};
 					eastl::array<float, 4> bWeight{};
@@ -440,7 +448,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 				else
 				{
 					bIndexList.push_back({ 0, 0, 0, 0 });
-					bWeightList.push_back({ 0.f, 0.f, 0.f, 0.f });
+					bWeightList.push_back({ 1.f, 0.f, 0.f, 0.f });
 				}
 
 				//頂点データ配列に追加
@@ -461,7 +469,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 	};
 
 	//ノードごとの処理呼び出し
-	fNode(scene->mRootNode, nullptr);	
+	fNode(scene->mRootNode, nullptr);
 
 	for (uint32_t i = 0; i < scene->mNumMaterials; i++)
 	{
@@ -477,7 +485,14 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 		mtr->name = tempstr.C_Str();
 
 		aimtr->Get(AI_MATKEY_COLOR_AMBIENT, temp);
-		mtr->ambient = { temp.r, temp.g, temp.b };
+		if (temp.r || temp.g || temp.b)
+		{
+			mtr->ambient = { temp.r, temp.g, temp.b };
+		}
+		else
+		{
+			mtr->ambient = { 0.7f, 0.7f, 0.7f };
+		}
 
 		aimtr->Get(AI_MATKEY_COLOR_SPECULAR, temp);
 		mtr->specular = { temp.r, temp.g, temp.b };
@@ -657,21 +672,12 @@ void Model::UpdateAnim()
 	}
 
 	animTimer++;
-	if ((double)animTimer / 60.0 * anim->tickPerSecond >= anim->duration)
+	if ((double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed >= anim->duration)
 	{
 		animTimer = 0;
 	}
 
-	double aniTick = (float)animTimer / 60.0 * anim->tickPerSecond;
-
-	SpImGui::Command([=] {
-		if (ImGui::Begin("Animation"))
-		{
-			ImGui::Text("Time %f\nTickTime %f\nMax Tick %f", (double)animTimer, aniTick, anim->duration);
-		}
-
-		ImGui::End();
-	});
+	double aniTick = (double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
 
 	//Nodeを使って再帰的に処理を行う
 	std::function<Matrix(Node*, Channel*, std::unordered_map<std::string, Node>&, std::unordered_map<std::string, Bone>&)> 
@@ -682,7 +688,7 @@ void Model::UpdateAnim()
 		Matrix parentTrans;
 		Channel* parentChannel = nullptr;
 
-		if (node == nullptr/* || &channel == nullptr*/)
+		if (node == nullptr)
 		{
 			return Matrix::Identity();
 		}
@@ -766,7 +772,7 @@ void Model::UpdateAnim()
 			}
 			else
 			{
-				fstr.rot;
+				slerpedRot = fstr.rot;
 			}
 
 			Quaternion finr = slerpedRot;
@@ -839,6 +845,11 @@ void Model::UpdateAnim()
 			bMatrixCB.contents->bMatrix[i] = Matrix::Identity();
 		}
 	}
+}
+
+void Model::ResetAnimTimer()
+{
+	animTimer = 0;
 }
 
 void ModelManager::Register(const std::string& modelName, const ModelKey& key)

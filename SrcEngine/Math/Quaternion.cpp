@@ -46,6 +46,11 @@ Quaternion& Quaternion::operator*=(const Quaternion& o)
 	return *this;
 }
 
+bool Quaternion::operator==(const Quaternion& o) const
+{
+	return v.x == o.v.x && v.y == o.v.y && v.z == o.v.z && w == w;
+}
+
 Quaternion Quaternion::Identity()
 {
 	return Quaternion();
@@ -77,6 +82,11 @@ Quaternion Quaternion::Slerp(const Quaternion& zero, const Quaternion& one, cons
 {
 	float clamped = Util::Clamp(zero.Dot(one), -1.f, 1.f);
 	float theta = acosf(clamped);
+
+	if (zero == one)
+	{
+		return zero;
+	}
 	
 	if (!theta)
 	{
@@ -124,6 +134,7 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to)
 
 	Vec3 axis = cross.Norm();
 
+	dot = Util::Clamp(dot, -1.f, 1.f);
 	float theta = acosf(dot);
 
 	return Quaternion(axis, theta);
@@ -141,7 +152,7 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float ma
 
 	Vec3 cross = f.Cross(t);
 
-	if (cross.GetSquaredLength() == 0)
+	if (cross.GetSquaredLength() == 0 || (f-t).GetSquaredLength() == 0)
 	{
 		Vec3 axis(0.f, 1.f, 0.f);
 
@@ -152,11 +163,33 @@ Quaternion Quaternion::DirToDir(const Vec3& from, const Vec3& to, const float ma
 
 	Vec3 axis = cross.Norm();
 
+	dot = Util::Clamp(dot, -1.f, 1.f);
+
 	float theta = acosf(dot);
 
-	Util::Clamp(theta, 0.f, maxRad);
+	theta = Util::Clamp(theta, 0.f, maxRad);
 
 	return Quaternion(axis, theta);
+}
+
+Quaternion Quaternion::EulerToQuaternion(const Float3& xyz)
+{
+	float rollCos = cosf(xyz.z / 2.f);
+	float pitchCos = cosf(xyz.x / 2.f);
+	float yawCos = cosf(xyz.y / 2.f);
+
+	float rollSin = sinf(xyz.z / 2.f);
+	float pitchSin = sinf(xyz.x / 2.f);
+	float yawSin = sinf(xyz.y / 2.f);
+
+	return Quaternion(
+		rollCos * pitchCos * yawCos + rollSin * pitchSin * yawSin,
+		Vec3(
+			rollSin * pitchCos * yawCos - rollCos * pitchSin * yawSin,
+			rollCos * pitchSin * yawCos + rollSin * pitchCos * yawSin,
+			rollCos * pitchCos * yawSin - rollSin * pitchSin * yawCos
+		)
+	);
 }
 
 float Quaternion::GetNorm() const
@@ -182,7 +215,7 @@ Quaternion& Quaternion::Inverse()
 	return *this;
 }
 
-Matrix Quaternion::GetRotMat()
+Matrix Quaternion::GetRotMat() const
 {
 	Vec3 axis = v;
 	Float4 X = { axis.x * axis.x, axis.x * axis.y, axis.x * axis.z, axis.x * w };
@@ -215,5 +248,6 @@ float Quaternion::Dot(const Quaternion& o) const
 
 Vec3 operator*(Vec3 v, Quaternion q)
 {
+	if (q.w == 0) return v;
 	return (q * Quaternion(v) * Quaternion::Conjugate(q)).v;
 }

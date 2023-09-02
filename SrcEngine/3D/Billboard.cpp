@@ -6,13 +6,13 @@ void Billboard::UpdateMatrix()
 
 	mScale = Matrix::Scale(scale);
 
-	mRot = Matrix::RotRollPitchYaw(rotation);
+	mRot = rotation.GetRotMat();
 
 	mTrans = Matrix::Translation(position);
 
 	matWorld = Matrix::Identity();
 	matWorld *= mScale;
-	matWorld *= Matrix::RotRollPitchYaw(camera->rotation);//ビルボード回転
+	matWorld *= camera->rotation.GetRotMat();//ビルボード回転
 	matWorld *= mRot;
 	matWorld *= mTrans;
 
@@ -29,7 +29,7 @@ void BillboardY::UpdateMatrix()
 
 	mScale = Matrix::Scale(scale);
 
-	mRot = Matrix::RotRollPitchYaw(rotation);
+	mRot = rotation.GetRotMat();
 
 	mTrans = Matrix::Translation(position);
 

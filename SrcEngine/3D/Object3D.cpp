@@ -12,7 +12,15 @@ void Object3D::UpdateMatrix()
 
 	mScale = Matrix::Scale(scale);
 
-	mRot = Matrix::RotRollPitchYaw(rotation);
+	if (rotMode == RotMode::Quaternion)
+	{
+		mRot = rotation.GetRotMat();
+	}
+	else if (rotMode == RotMode::Euler)
+	{
+		mRot = Matrix::Identity();
+		mRot *= Matrix::RotRollPitchYaw(rotationE);
+	}
 
 	mTrans = Matrix::Translation(position);
 
@@ -30,11 +38,6 @@ void Object3D::UpdateMatrix()
 void Object3D::Draw()
 {
 	transformCB.contents->mat = matWorld;
-	/*GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
-
-	Light::Use();
-	Camera::UseCurrent();*/
 
 	SpRenderer::DrawCommand([&] {
 		if (model->material.size())
@@ -109,11 +112,11 @@ void Object3D::DrawCommands(const TextureKey& key)
 
 	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(4, brightnessCB.buffer->GetGPUVirtualAddress());
 	
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, model->bMatrixCB.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(5, model->bMatrixCB.buffer->GetGPUVirtualAddress());
 
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(7, miscCB.buffer->GetGPUVirtualAddress());
+	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, miscCB.buffer->GetGPUVirtualAddress());
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(8, SpTextureManager::GetGPUDescHandle("dissolveMap"));
+	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(7, SpTextureManager::GetGPUDescHandle("dissolveMap"));
 
 	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 
@@ -145,12 +148,12 @@ void Object3D::DrawAdd(const TextureKey& key)
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(2, transformCB.buffer->GetGPUVirtualAddress());
 
 		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(4, brightnessCB.buffer->GetGPUVirtualAddress());
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, model->bMatrixCB.buffer->GetGPUVirtualAddress());
+		
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(5, model->bMatrixCB.buffer->GetGPUVirtualAddress());
 
+		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(6, miscCB.buffer->GetGPUVirtualAddress());
 
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(7, miscCB.buffer->GetGPUVirtualAddress());
-
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(8, SpTextureManager::GetGPUDescHandle("dissolveMap"));
+		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(7, SpTextureManager::GetGPUDescHandle("dissolveMap"));
 
 		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &model->vbView);
 

@@ -22,7 +22,7 @@ void Camera::UseDefaultParams()
 	farZ = 1000.f;
 
 	position = { 0.f, 0.f, -10.f };
-	rotation = { 0.f, 0.f, 0.f };
+	rotation = Quaternion::Identity();
 
 	fov = PIf / 2;
 	nearZ = 0.1f;
@@ -143,8 +143,6 @@ Float3 Camera::GetWorldPosFromScreen(const Float2& screen, float depth)
 		(float)GetSpWindow()->width / 2, (float)GetSpWindow()->height / 2, 0, 1
 	);
 
-	/*depth /= farZ - nearZ;*/
-
 	Matrix wMat = Matrix::Identity();
 	wMat[3][0] = screen.x;
 	wMat[3][1] = screen.y;
@@ -202,8 +200,6 @@ Ray Camera::GetScreenPosRay(const Float2& screen)
 		0.f, 0.f, 1.f, 0.f,
 		(float)GetSpWindow()->width / 2, (float)GetSpWindow()->height / 2, 0, 1
 	);
-
-	/*depth /= farZ - nearZ;*/
 
 	Matrix wMat = Matrix::Identity();
 	wMat[3][0] = screen.x;
