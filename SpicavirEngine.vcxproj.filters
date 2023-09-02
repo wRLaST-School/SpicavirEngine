@@ -435,7 +435,7 @@
     <ClCompile Include="SrcEngine\3D\SpEffekseer.cpp">
       <Filter>Engine\ソースファイル\Effekseer</Filter>
     </ClCompile>
-    <ClCompile Include="GravSphere.cpp">
+    <ClCompile Include="SrcApplication\GravSphere.cpp">
       <Filter>!Game\Boss</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp">
@@ -468,7 +468,7 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTEditorScene.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
-    <ClCompile Include="BTENode.cpp">
+    <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -749,7 +749,7 @@
     <ClInclude Include="SrcEngine\3D\SpEffekseer.h">
       <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
     </ClInclude>
-    <ClInclude Include="GravSphere.h">
+    <ClInclude Include="SrcApplication\GravSphere.h">
       <Filter>!Game\Boss</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h">
@@ -782,7 +782,7 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTEditorScene.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
-    <ClInclude Include="BTENode.h">
+    <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
   </ItemGroup>

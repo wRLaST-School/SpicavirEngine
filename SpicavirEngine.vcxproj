@@ -167,7 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BTENode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTActionNode.cpp" />
@@ -178,7 +178,7 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTRootNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTSelectorNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTSequencerNode.cpp" />
-    <ClCompile Include="GravSphere.cpp" />
+    <ClCompile Include="SrcApplication\GravSphere.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SrcApplication\Boss.cpp" />
     <ClCompile Include="SrcApplication\CameraController.cpp" />
@@ -269,7 +269,7 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BTENode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTActionNode.h" />
@@ -280,7 +280,7 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTRootNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTSelectorNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTSequencerNode.h" />
-    <ClInclude Include="GravSphere.h" />
+    <ClInclude Include="SrcApplication\GravSphere.h" />
     <ClInclude Include="SrcApplication\Boss.h" />
     <ClInclude Include="SrcApplication\CameraController.h" />
     <ClInclude Include="SrcApplication\GameManager.h" />
