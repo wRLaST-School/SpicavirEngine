@@ -984,6 +984,9 @@ enum ImGuiWindowFlags_
     ImGuiWindowFlags_Popup                  = 1 << 26,  // Don't use! For internal use by BeginPopup()
     ImGuiWindowFlags_Modal                  = 1 << 27,  // Don't use! For internal use by BeginPopupModal()
     ImGuiWindowFlags_ChildMenu              = 1 << 28,  // Don't use! For internal use by BeginMenu()
+
+    // [SpImGui Custom Flags]
+    ImGuiWindowFlags_DisableWindowClamp     = 1 << 29,  // SpImGui Custom Flag. Disables Window Position Clamp. Do not use it unless you have custom control on window position
 };
 
 // Flags for ImGui::InputText()
