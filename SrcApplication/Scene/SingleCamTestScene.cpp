@@ -15,7 +15,7 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
-	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "SmoothSphere", true);
+	ModelManager::Register("Resources/Models/ICO/ICO.obj", "SmoothSphere", true);
 	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "FlatSphere", false);
 	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	//ModelManager::Register("ICO", "FlatSphere");
@@ -172,7 +172,7 @@ void SingleCamTestScene::Draw3D()
 {
 	Camera::Set(camera);
 
-	//pane2.DrawAlpha("white");
+	pane2.DrawAlpha("white");
 	pane.Draw("white");
 	sky.Draw();
 
