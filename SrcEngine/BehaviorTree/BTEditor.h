@@ -14,6 +14,8 @@ public:
 	void ClearSelected();
 	void SetSelected(BTENode* node);
 
+	static void LoadFile(std::string filePath);
+
 private:
 	BT::BehaviorTree tree_;
 	Camera2D cam_;

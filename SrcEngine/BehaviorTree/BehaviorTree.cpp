@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <BTENode.h>
 
 #pragma warning (push)
 #pragma warning (disable:26800)
@@ -142,6 +143,12 @@ void BT::BehaviorTree::SaveJson(std::string path)
 		indent += "  ";
 		jsonStr << indent << "\"NodeType\":\"" << current->GetNodeType() << "\",\n";
 		jsonStr << indent << "\"NodeParam\":\"" << current->GetParam() << "\",\n";
+
+		if (current->editorNodePtr)
+		{
+			jsonStr << indent << "\"NodePosX\":\"" << current->editorNodePtr->GetPos().x << "\",\n";
+			jsonStr << indent << "\"NodePosY\":\"" << current->editorNodePtr->GetPos().y << "\",\n";
+		}
 
 		int32_t nodeNumInt = 0;
 		if (current->GetChildren().size())

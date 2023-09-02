@@ -5,6 +5,14 @@
 #include <Camera2D.h>
 #include <BTEditor.h>
 
+static std::vector<std::string> itemList{
+				"Action",
+				"Sequencer",
+				"Selector",
+				"Loop",
+				"Root"
+};
+
 BTENode::BTENode(std::unique_ptr<BT::INode>* node, std::string uniqueName, BTEditor* master)
 {
 	node_ = node;
@@ -64,7 +72,12 @@ void BTENode::Draw()
 {
 	SpImGui::Command([&] {
 		std::string wName = std::string("Node") + uniqueName_;
-		if(ImGui::Begin(wName.c_str()))
+
+		ImGui::SetNextWindowSize(ImVec2(300, 120), ImGuiCond_Appearing);
+
+		ImGui::SetNextWindowPos(ImVec2(firstPos_.x, firstPos_.y), ImGuiCond_Appearing);
+
+		if(ImGui::Begin(wName.c_str(), nullptr, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_DisableWindowClamp))
 		{
 			ImVec2 currentPos = ImGui::GetWindowPos();
 			currentPos.x -= Camera2D::Get()->GetDiff().x;
@@ -75,14 +88,6 @@ void BTENode::Draw()
 
 			ImVec2 currentSize = ImGui::GetWindowSize();
 			size_ = { currentSize.x, currentSize.y };
-
-			static std::vector<std::string> itemList{
-				"Action",
-				"Sequencer",
-				"Selector",
-				"Loop",
-				"Root"
-			};
 
 			if (master_->GetSelected())
 			{
@@ -134,4 +139,23 @@ void BTENode::Draw()
 		auto parent = node_->get()->parent_->editorNodePtr;
 		SpDS::DrawLine((int32_t)parent->pos_.x + (int32_t)(parent->size_.x / 2), (int32_t)parent->pos_.y + (int32_t)parent->size_.y, (int32_t)pos_.x + (int32_t)(size_.x / 2), (int32_t)pos_.y, Color::White);
 	}
+}
+
+const Float2& BTENode::GetPos()
+{
+	return pos_;
+}
+
+void BTENode::SetComboBoxItem(std::string nodeType)
+{
+	const char* cur = nullptr;
+	for (auto& i : itemList)
+	{
+		if (i == nodeType)
+		{
+			cur = i.c_str();
+		}
+	}
+
+	currentItem = cur;
 }

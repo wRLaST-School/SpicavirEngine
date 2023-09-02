@@ -20,10 +20,10 @@ BT::Status BT::SelectorNode::Update()
 	}
 
 	Status childStatus = Status::Error;
-	uint32_t ind = 0;
+	int32_t ind = 0;
 	for (auto itr = children_.begin(); itr != children_.end(); itr++)
 	{
-		if (ind == activeIndex)
+		if (ind == selectedIndex)
 		{
 			childStatus = (*itr)->Update();
 		}

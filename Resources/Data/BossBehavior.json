@@ -2,46 +2,64 @@
 "Node0":{
   "NodeType":"Root",
   "NodeParam":"",
+  "NodePosX":"1018",
+  "NodePosY":"-268",
   "Children":[
   {
     "Node0":{
       "NodeType":"Loop",
       "NodeParam":"0",
+      "NodePosX":"999",
+      "NodePosY":"-123",
       "Children":[
       {
         "Node0":{
           "NodeType":"Sequencer",
           "NodeParam":"",
+          "NodePosX":"1004",
+          "NodePosY":"19",
           "Children":[
           {
             "Node0":{
               "NodeType":"Loop",
               "NodeParam":"2",
+              "NodePosX":"553",
+              "NodePosY":"194",
               "Children":[
               {
                 "Node0":{
                   "NodeType":"Sequencer",
                   "NodeParam":"",
+                  "NodePosX":"545",
+                  "NodePosY":"358",
                   "Children":[
                   {
                     "Node0":{
                       "NodeType":"Selector",
                       "NodeParam":"",
+                      "NodePosX":"206",
+                      "NodePosY":"507",
                       "Children":[
                       {
                         "Node0":{
                           "NodeType":"Sequencer",
                           "NodeParam":"",
+                          "NodePosX":"8",
+                          "NodePosY":"681",
                           "Children":[
                           {
                             "Node0":{
                               "NodeType":"Action",
                               "NodeParam":"CastLineAttack",
+                              "NodePosX":"-130",
+                              "NodePosY":"828",
                               "NumChildren":"0"
                             },
                             "Node1":{
                               "NodeType":"Action",
                               "NodeParam":"UpdateLine",
+                              "NodePosX":"47",
+                              "NodePosY":"922",
                               "NumChildren":"0"
                             }
                           }],
@@ -50,21 +68,29 @@
                         "Node1":{
                           "NodeType":"Sequencer",
                           "NodeParam":"",
+                          "NodePosX":"376",
+                          "NodePosY":"680",
                           "Children":[
                           {
                             "Node0":{
                               "NodeType":"Selector",
                               "NodeParam":"",
+                              "NodePosX":"378",
+                              "NodePosY":"812",
                               "Children":[
                               {
                                 "Node0":{
                                   "NodeType":"Action",
                                   "NodeParam":"CastMarker1",
+                                  "NodePosX":"377",
+                                  "NodePosY":"966",
                                   "NumChildren":"0"
                                 },
                                 "Node1":{
                                   "NodeType":"Action",
                                   "NodeParam":"CastMarker2",
+                                  "NodePosX":"505",
+                                  "NodePosY":"1053",
                                   "NumChildren":"0"
                                 }
                               }],
@@ -73,6 +99,8 @@
                             "Node1":{
                               "NodeType":"Action",
                               "NodeParam":"UpdateMarker",
+                              "NodePosX":"707",
+                              "NodePosY":"910",
                               "NumChildren":"0"
                             }
                           }],
@@ -84,6 +112,8 @@
                     "Node1":{
                       "NodeType":"Action",
                       "NodeParam":"Wait60Frame",
+                      "NodePosX":"595",
+                      "NodePosY":"511",
                       "NumChildren":"0"
                     }
                   }],
@@ -95,26 +125,36 @@
             "Node1":{
               "NodeType":"Sequencer",
               "NodeParam":"",
+              "NodePosX":"989",
+              "NodePosY":"189",
               "Children":[
               {
                 "Node0":{
                   "NodeType":"Selector",
                   "NodeParam":"",
+                  "NodePosX":"935",
+                  "NodePosY":"355",
                   "Children":[
                   {
                     "Node0":{
                       "NodeType":"Sequencer",
                       "NodeParam":"",
+                      "NodePosX":"1241",
+                      "NodePosY":"514",
                       "Children":[
                       {
                         "Node0":{
                           "NodeType":"Action",
                           "NodeParam":"CastRush",
+                          "NodePosX":"1229",
+                          "NodePosY":"666",
                           "NumChildren":"0"
                         },
                         "Node1":{
                           "NodeType":"Action",
                           "NodeParam":"UpdateRush",
+                          "NodePosX":"1388",
+                          "NodePosY":"749",
                           "NumChildren":"0"
                         }
                       }],
@@ -123,16 +163,22 @@
                     "Node1":{
                       "NodeType":"Sequencer",
                       "NodeParam":"",
+                      "NodePosX":"901",
+                      "NodePosY":"496",
                       "Children":[
                       {
                         "Node0":{
                           "NodeType":"Action",
                           "NodeParam":"CastGravSphere",
+                          "NodePosX":"829",
+                          "NodePosY":"651",
                           "NumChildren":"0"
                         },
                         "Node1":{
                           "NodeType":"Action",
                           "NodeParam":"UpdateGravSphere",
+                          "NodePosX":"988",
+                          "NodePosY":"734",
                           "NumChildren":"0"
                         }
                       }],
@@ -144,6 +190,8 @@
                 "Node1":{
                   "NodeType":"Action",
                   "NodeParam":"Wait60Frame",
+                  "NodePosX":"1277",
+                  "NodePosY":"368",
                   "NumChildren":"0"
                 }
               }],
@@ -152,16 +200,22 @@
             "Node2":{
               "NodeType":"Action",
               "NodeParam":"Wait60Frame",
+              "NodePosX":"1695",
+              "NodePosY":"499",
               "NumChildren":"0"
             },
             "Node3":{
               "NodeType":"Action",
               "NodeParam":"Wait60Frame",
+              "NodePosX":"1746",
+              "NodePosY":"656",
               "NumChildren":"0"
             },
             "Node4":{
               "NodeType":"Action",
               "NodeParam":"Wait60Frame",
+              "NodePosX":"1765",
+              "NodePosY":"814",
               "NumChildren":"0"
             }
           }],
