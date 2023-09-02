@@ -53,7 +53,7 @@ void Player::Update()
 
 	counterEmitter_.Update();
 
-	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::R))
+	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::RStickButton))
 	{
 		CameraController::Get()->ToggleMode();
 	}
@@ -268,12 +268,16 @@ void Player::IdleMoveUpdate()
 	}
 	GravMove();
 
-	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	if (Input::Pad::Triggered(Button::L) ||
+		Input::Pad::Triggered(Button::R) ||
+		Input::Pad::Triggered(Trigger::Left) ||
+		Input::Pad::Triggered(Trigger::Right) ||
+		Input::Key::Triggered(DIK_LCONTROL))
 	{
 		Dodge();
 	}
 
-	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::X))
 	{
 		Slash1();
 	}
@@ -325,12 +329,16 @@ void Player::SlashUpdate1()
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.Norm();
 
-	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::X))
 	{
 		slashRegistered_ = true;
 	}
 
-	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	if (Input::Pad::Triggered(Button::L) ||
+		Input::Pad::Triggered(Button::R) ||
+		Input::Pad::Triggered(Trigger::Left) ||
+		Input::Pad::Triggered(Trigger::Right) ||
+		Input::Key::Triggered(DIK_LCONTROL))
 	{
 		slashTimer_ = 0;
 		Dodge();
@@ -366,12 +374,16 @@ void Player::SlashUpdate2()
 
 	slashCol_.DrawBB(Color::Blue);
 
-	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::X))
 	{
 		slashRegistered_ = true;
 	}
 
-	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	if (Input::Pad::Triggered(Button::L) ||
+		Input::Pad::Triggered(Button::R) ||
+		Input::Pad::Triggered(Trigger::Left) ||
+		Input::Pad::Triggered(Trigger::Right) || 
+		Input::Key::Triggered(DIK_LCONTROL))
 	{
 		slashTimer_ = 0;
 		Dodge();
@@ -407,12 +419,16 @@ void Player::SlashUpdate3()
 
 	slashCol_.DrawBB(Color::Blue);
 
-	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::L))
+	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::X))
 	{
 		slashRegistered_ = true;
 	}
 
-	if (Input::Pad::Triggered(Button::X) || Input::Key::Triggered(DIK_LCONTROL))
+	if (Input::Pad::Triggered(Button::L) ||
+		Input::Pad::Triggered(Button::R) ||
+		Input::Pad::Triggered(Trigger::Left) ||
+		Input::Pad::Triggered(Trigger::Right) || 
+		Input::Key::Triggered(DIK_LCONTROL))
 	{
 		slashTimer_ = 0;
 		Dodge();
