@@ -2,7 +2,6 @@
 #include "IScene.h"
 #include <Object3D.h>
 #include <Camera.h>
-#include <CameraController.h>
 class GameScene :
     public IScene
 {
@@ -16,7 +15,6 @@ public:
     void DrawSprite() override;
 
 private:
-
-    CameraController cam_;
+    Camera cam;
 };
 

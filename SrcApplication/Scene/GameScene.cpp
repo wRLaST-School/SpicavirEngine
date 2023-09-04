@@ -37,14 +37,11 @@ void GameScene::Init()
 	LevelManager::Init();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
-
-	cam_.Init();
 }
 
 void GameScene::Update()
 {
 	LevelManager::Update();
-	cam_.Update();
 
 	if (GameManager::sShowDebug)
 	{
@@ -65,8 +62,7 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {
-	cam_.Set();
-
+	Camera::Set(cam);
 	LevelManager::Draw();
 }
 
