@@ -18,7 +18,7 @@ bool SceneManager::transitionQueued = false;
 void SceneManager::Init()
 {
 	Transition::Load();
-	InstantTransition<SingleCamTestScene>();
+	InstantTransition<GameScene>();
 	//InstantTransition<GameScene>();
 }
 
