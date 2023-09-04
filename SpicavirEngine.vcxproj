@@ -107,7 +107,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -131,7 +131,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -162,7 +162,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Release\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
