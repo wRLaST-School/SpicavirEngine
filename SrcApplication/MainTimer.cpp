@@ -2,6 +2,7 @@
 #include "MainTimer.h"
 #include <SpDS.h>
 #include <Util.h>
+#include <GameManager.h>
 
 void MainTimer::Load()
 {
@@ -16,18 +17,21 @@ void MainTimer::Init()
 
 void MainTimer::Update()
 {
-	if (sDamageTimer > 0)
+	if (!GameManager::sDebugImmunity)
 	{
-		sDamageTimer--;
-	}
+		if (sDamageTimer > 0)
+		{
+			sDamageTimer--;
+		}
 
-	if (sFrameTimer >= 60)
-	{
-		timerSec--;
-		sFrameTimer = 0;
+		if (sFrameTimer >= 60)
+		{
+			timerSec--;
+			sFrameTimer = 0;
+		}
+		else
+			sFrameTimer++;
 	}
-	else
-		sFrameTimer++;
 }
 
 void MainTimer::Draw()

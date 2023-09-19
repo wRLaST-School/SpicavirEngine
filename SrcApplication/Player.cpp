@@ -214,12 +214,15 @@ void Player::Damage()
 	{
 		if (state_ != State::Dodge)
 		{
-			damageTimer_ = 60;
-			//SEÄ¶
-			SoundManager::Play("takeDamage");
+			if (!GameManager::sDebugImmunity)
+			{
+				damageTimer_ = 60;
+				//SEÄ¶
+				SoundManager::Play("takeDamage");
 
-			MainTimer::timerSec -= 5;
-			MainTimer::Damage();
+				MainTimer::timerSec -= 5;
+				MainTimer::Damage();
+			}
 		}
 		else
 		{
