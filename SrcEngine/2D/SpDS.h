@@ -16,17 +16,22 @@ public:
 		TextureKey key, Anchor anchor = Anchor::Center,
 		Color brightness = Color(0xffffff));
 
-	static void DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, const Color& color, const Anchor& anchor = Anchor::Center);
+	static void DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, 
+		const Color& color, const Anchor& anchor = Anchor::Center);
+
 	static void DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, const Color& color);
 
 	static void SetBlendMode(const Blend& blendMode);
 	static void SetRenderTarget(const TextureKey& key);
 	static void SetPreDrawFunc(std::function<void(void)> prop);
 
-	static void DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, const Color& color, float thickness, const  Anchor& anchor = Anchor::Center);
-	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
-	static void DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, const Color& color, int32_t thickness = 1);
+	static void DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, 
+		const Color& color, float thickness, const  Anchor& anchor = Anchor::Center);
 
+	static void DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY,
+		const Color& color, int32_t thickness = 1);
+
+	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
 	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();
 	static void Render();
