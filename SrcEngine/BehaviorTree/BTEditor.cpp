@@ -179,6 +179,10 @@ void BTEditor::LoadFile(std::string filePath)
 			{
 				parent->AddNode<SequencerNode>(object["NodeParam"].get<string>());
 			}
+			else if (nodeType == "Condition")
+			{
+				parent->AddNode<ConditionNode>(object["NodeParam"].get<string>());
+			}
 			else
 			{
 				parent->AddNode<SequencerNode>("");
