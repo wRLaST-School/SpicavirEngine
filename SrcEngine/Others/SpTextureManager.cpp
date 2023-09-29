@@ -548,8 +548,8 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 	trimed.GetImage(0,0,0)->pixels[0] = srcImg.GetImage(0,0,0)->pixels[0];
 
 	//size_t srcWidth = srcImg.GetMetadata().width;
-	for (int32_t y = 0; y < width; y++) {
-		for (int32_t x = 0; x < height; x++) {
+	for (int32_t y = 0; y < height; y++) {
+		for (int32_t x = 0; x < width; x++) {
 			trimed.GetImage(0, 0, 0)->pixels[x * 4 + y * trimed.GetImage(0,0,0)->rowPitch] =
 				srcImg.GetImage(0, 0, 0)->pixels[(x + originX) * 4 + (y + originY) * srcImg.GetImage(0,0,0)->rowPitch];
 
