@@ -1,5 +1,6 @@
 #pragma once
 class BTENode;
+class BTEditor;
 
 namespace BT {
     class BehaviorTree;
@@ -15,6 +16,7 @@ namespace BT {
     class INode {
     protected:
         friend BTENode;
+        friend BTEditor;
 
         std::list<std::unique_ptr<INode>> children_;
 

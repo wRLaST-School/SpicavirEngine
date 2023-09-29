@@ -6,6 +6,7 @@
 #include <BTRootNode.h>
 #include <BTSelectorNode.h>
 #include <BTSequencerNode.h>
+#include <BTConditionNode.h>
 
 namespace BT {
 	class BehaviorTree

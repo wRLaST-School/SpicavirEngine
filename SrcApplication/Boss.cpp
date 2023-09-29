@@ -156,6 +156,8 @@ void Boss::InitBehaviorTree()
 	factory.RegisterAction("UpdateGravSphere", std::bind(&Boss::GravSphereUpdate, this));
 	factory.RegisterAction("Wait60Frame", std::bind(&Boss::Wait60Frame, this));
 
+	factory.RegisterCondition("PlayerInsideRushRange", std::bind(&Boss::IsPlayerInsideRushRange, this));
+
 	tree_.SetFactory(factory);
 
 	////ƒcƒŠ[‚ÌŽè“®\’z
@@ -479,6 +481,16 @@ BT::Status Boss::Wait60Frame()
 	}
 
 	return BT::Status::Running;
+}
+
+bool Boss::IsPlayerInsideRushRange()
+{
+	Vec3 bPos = position;
+	Vec3 pPos = Player::Get()->position;
+	bPos.y = 0;
+	pPos.y = 0;
+
+	return (pPos - bPos).GetSquaredLength() < rushDistance_ * rushDistance_;
 }
 
 void Boss::RushEnd()

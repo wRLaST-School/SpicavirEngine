@@ -471,6 +471,9 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClCompile>
+    <ClCompile Include="BTConditionNode.cpp">
+      <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -784,6 +787,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="BTConditionNode.h">
+      <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -78,6 +78,49 @@ void BTEditor::SetSelected(BTENode* node)
     selected_ = node;
 }
 
+void BTEditor::DeleteNode(BTENode* node)
+{
+	if (node->node_->get()->GetChildren().size())
+	{
+		ImGui::OpenPopup("Error Deleting Node");
+		ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+		ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+
+
+		if (ImGui::BeginPopupModal("Error Deleting Node", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+			ImGui::SetItemDefaultFocus();
+			ImGui::Text("Do Not Delete a Node with Children!\n\n");
+
+			ImGui::Separator();
+
+			if (ImGui::Button("OK")) {
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
+		}
+		return;
+	}
+
+	std::list<std::unique_ptr<INode>>* childrenOfParent = &node->node_->get()->GetParent()->children_;
+
+	for (auto itr = childrenOfParent->begin(); itr != childrenOfParent->end(); itr++)
+	{
+		if (&(*itr) == node->node_)
+		{
+			childrenOfParent->erase(itr);
+		}
+	}
+
+	for (auto itr = editorObjects.begin(); itr != editorObjects.end(); itr++)
+	{
+		if (&(*itr) == node)
+		{
+			editorObjects.erase(itr);
+			break;
+		}
+	}
+}
+
 void BTEditor::LoadFile(std::string filePath)
 {
 	//インスタンス保存

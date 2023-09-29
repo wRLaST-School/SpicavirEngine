@@ -14,6 +14,8 @@ public:
 	void ClearSelected();
 	void SetSelected(BTENode* node);
 
+	void DeleteNode(BTENode* node);
+
 	static void LoadFile(std::string filePath);
 
 private:

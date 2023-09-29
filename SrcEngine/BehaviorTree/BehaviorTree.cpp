@@ -81,6 +81,10 @@ void BT::BehaviorTree::LoadJson(std::string path)
 		{
 			parent->AddNode<SequencerNode>(object["NodeParam"].get<string>());
 		}
+		else if (nodeType == "Condition")
+		{
+			parent->AddNode<ConditionNode>(object["NodeParam"].get<string>());
+		}
 		else
 		{
 			parent->AddNode<SequencerNode>("");

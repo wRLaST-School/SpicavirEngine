@@ -56,6 +56,8 @@ public:
     BT::Status GravSphereUpdate();
     BT::Status Wait60Frame();
 
+    bool IsPlayerInsideRushRange();
+
     void SelectMove();
 
     const OBBCollider& GetCollider();
