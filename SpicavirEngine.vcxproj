@@ -167,7 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BTConditionNode.cpp" />
+    <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.cpp" />
@@ -270,7 +270,7 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BTConditionNode.h" />
+    <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTreeFactory.h" />
