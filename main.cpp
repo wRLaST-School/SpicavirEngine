@@ -36,6 +36,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_  HINSTANCE, _In_ LPSTR, _In_ int)
 	}
 #endif //  _DEBUG
 
+	srand((uint32_t)time(NULL));
+
 	//ウィンドウを生成
 	{
 		SpWindow wwnd;
