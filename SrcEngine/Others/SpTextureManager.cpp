@@ -499,7 +499,7 @@ void SpTextureManager::LoadDiv(const string& filePath, int32_t widthPer, int32_t
 	int32_t end = 0;
 	for (int32_t y = 0; y < qy; y++)
 	{
-		for (int32_t x = 0; x < qy; x++)
+		for (int32_t x = 0; x < qx; x++)
 		{
 			if (end)
 			{
