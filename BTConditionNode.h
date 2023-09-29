@@ -18,4 +18,3 @@ namespace BT {
         int32_t selectedIndex = -1;
     };
 }
-
