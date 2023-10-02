@@ -61,6 +61,8 @@ private:
 	static int32_t sCurrentSceneResIndex;
 
 	static std::list<TextureKey> sMasterTextures;
+
+	static std::wstring GetExtension(const std::wstring& path);
 private:
 	SpTextureManager() {};
 	SpTextureManager(const SpTextureManager&) = delete;

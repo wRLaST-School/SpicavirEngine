@@ -71,7 +71,14 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+	if (GetExtension(wstrpath) == L".dds")
+	{
+		LoadFromDDSFile(wpath, DDS_FLAGS_NONE, &metadata, srcImg);
+	}
+	else
+	{
+		LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+	}
 
 	ScratchImage mipChain{};
 
@@ -190,7 +197,14 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+	if (GetExtension(wstrpath) == L".dds")
+	{
+		LoadFromDDSFile(wpath, DDS_FLAGS_NONE, &metadata, srcImg);
+	}
+	else
+	{
+		LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+	}
 
 	ScratchImage mipChain{};
 
@@ -540,7 +554,14 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+	if (GetExtension(wstrpath) == L".dds")
+	{
+		LoadFromDDSFile(wpath, DDS_FLAGS_NONE, &metadata, srcImg);
+	}
+	else
+	{
+		LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
+	}
 
 	ScratchImage trimed{};
 
@@ -893,6 +914,26 @@ SpTextureManager& SpTextureManager::GetInstance()
 {
 	static SpTextureManager obj;
 	return obj;
+}
+
+std::wstring SpTextureManager::GetExtension(const std::wstring& path)
+{
+	size_t pos1;
+
+	pos1 = path.rfind('.');
+
+	std::wstring fileExtension;
+
+	if (pos1 != std::wstring::npos)
+	{
+		fileExtension = path.substr(pos1 + 1, path.size() - pos1 - 1);
+	}
+	else
+	{
+		fileExtension = L"";
+	}
+
+	return fileExtension;
 }
 
 list<TextureKey> SpTextureManager::sPerSceneTextures[2] = {};
