@@ -78,20 +78,20 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 	else
 	{
 		LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
-	}
 
-	ScratchImage mipChain{};
+		ScratchImage mipChain{};
 
-	HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+		HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
 
-	if (SUCCEEDED(result)) {
-		srcImg = move(mipChain);
-		metadata = srcImg.GetMetadata();
+		if (SUCCEEDED(result)) {
+			srcImg = move(mipChain);
+			metadata = srcImg.GetMetadata();
+		}
 	}
 
 	//metadata.format = MakeSRGB(metadata.format);
 	ScratchImage scratchImg;
-	result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
+	HRESULT result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
 		srcImg.GetMetadata(),
 		DXGI_FORMAT_R16G16B16A16_FLOAT, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
 		scratchImg);
@@ -204,20 +204,20 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 	else
 	{
 		LoadFromWICFile(wpath, WIC_FLAGS_NONE, &metadata, srcImg);
-	}
 
-	ScratchImage mipChain{};
+		ScratchImage mipChain{};
 
-	HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
+		HRESULT result = GenerateMipMaps(srcImg.GetImages(), srcImg.GetImageCount(), srcImg.GetMetadata(), TEX_FILTER_DEFAULT, 0, mipChain);
 
-	if (SUCCEEDED(result)) {
-		srcImg = move(mipChain);
-		metadata = srcImg.GetMetadata();
+		if (SUCCEEDED(result)) {
+			srcImg = move(mipChain);
+			metadata = srcImg.GetMetadata();
+		}
 	}
 
 	//metadata.format = MakeSRGB(metadata.format);
 	ScratchImage scratchImg;
-	result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
+	HRESULT result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
 		srcImg.GetMetadata(),
 		DXGI_FORMAT_R8G8B8A8_UNORM, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
 		scratchImg);
