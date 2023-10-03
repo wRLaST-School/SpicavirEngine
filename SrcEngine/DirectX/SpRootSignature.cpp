@@ -7,7 +7,6 @@ std::map<std::string, SpRootSignature> SpRootSignature::sRsMap;
 
 void SpRootSignature::Create()
 {
-
 	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
 	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 	rootSignatureDesc.pParameters = params.begin()._Ptr;
