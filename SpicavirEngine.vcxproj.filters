@@ -178,6 +178,9 @@
     <Filter Include="Engine\ソースファイル\BTEditor">
       <UniqueIdentifier>{130ff499-d04f-4e4b-8065-64d97cfae0aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Framework">
+      <UniqueIdentifier>{8422c35f-6067-476d-9848-27c64ba8b2ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -475,7 +478,7 @@
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
     <ClCompile Include="SpFramework.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
+      <Filter>Engine\ソースファイル\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -795,7 +798,7 @@
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
     <ClInclude Include="SpFramework.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+      <Filter>Engine\ソースファイル\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
