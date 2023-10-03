@@ -25,7 +25,7 @@ void SrAlphaStage::Init()
 
 void SrAlphaStage::PreDraw()
 {
-	SpDirectX* dx = GetWDX();
+	SpDirectX* dx = GetSpDX();
 	dx->cmdList->SetPipelineState(GPipeline::GetState("Alpha3D"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("NoLight3D")->rootsignature.Get());
 

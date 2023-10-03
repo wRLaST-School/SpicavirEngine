@@ -38,7 +38,7 @@ Sprite::Sprite(const TextureKey& key)
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -101,7 +101,7 @@ Sprite::Sprite(const std::string& path, const TextureKey& newKey)
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -134,7 +134,7 @@ Sprite::Sprite(const std::string& path, const TextureKey& newKey)
 
 void Sprite::PreSpriteDraw()
 {
-	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
+	ID3D12GraphicsCommandList* cl = GetSpDX()->cmdList.Get();
 	cl->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
 	cl->SetPipelineState(GPipeline::GetState("2d"));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
@@ -164,12 +164,12 @@ void Sprite::Draw()
 {
 	constBuff.contents->mat = constBuff.contents->mat * sProj;
 	SpRenderer::DrawCommand([&] {
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
+		GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(tex));
+		GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
 
-		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
+		GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+		GetSpDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 		}, SpRenderer::Stage::Sprite);
 }
 

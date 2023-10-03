@@ -9,7 +9,7 @@ void SrParticleStage::Init()
 
 void SrParticleStage::PreDraw()
 {
-	SpDirectX* dx = GetWDX();
+	SpDirectX* dx = GetSpDX();
 	dx->cmdList->SetPipelineState(GPipeline::GetState("particle"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
 
@@ -33,7 +33,7 @@ void SrParticleStage::PreDraw()
 
 	dx->cmdList->RSSetScissorRects(1, &scissorrect);
 
-	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+	GetSpDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
 
 	dx->cmdList->RSSetScissorRects(1, &scissorrect);
 

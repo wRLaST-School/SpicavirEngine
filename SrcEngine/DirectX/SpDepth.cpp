@@ -20,7 +20,7 @@ void SpDepth::Init()
 	CD3DX12_CLEAR_VALUE clval(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
 	CD3DX12_CLEAR_VALUE* pclval = &clval;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		phtp,
 		D3D12_HEAP_FLAG_NONE,
 		&dResDesc,
@@ -34,13 +34,13 @@ void SpDepth::Init()
 	D3D12_DESCRIPTOR_HEAP_DESC dsvHeapDesc{};
 	dsvHeapDesc.NumDescriptors = 1;
 	dsvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
-	GetWDX()->dev->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&dsvHeap));
+	GetSpDX()->dev->CreateDescriptorHeap(&dsvHeapDesc, IID_PPV_ARGS(&dsvHeap));
 
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	GetWDX()->dev->CreateDepthStencilView(depthBuffer.Get(), &dsvDesc, dsvHeap->GetCPUDescriptorHandleForHeapStart());
+	GetSpDX()->dev->CreateDepthStencilView(depthBuffer.Get(), &dsvDesc, dsvHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
 void SpDepth::Resize()
@@ -49,7 +49,7 @@ void SpDepth::Resize()
 	Init();
 }
 
-void InitWDepth()
+void InitSpDepth()
 {
 	wdp.Init();
 }

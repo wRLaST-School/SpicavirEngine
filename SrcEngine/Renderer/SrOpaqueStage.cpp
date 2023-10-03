@@ -10,7 +10,7 @@ void SrOpaqueStage::Init()
 
 void SrOpaqueStage::PreDraw()
 {
-	SpDirectX* dx = GetWDX();
+	SpDirectX* dx = GetSpDX();
 	dx->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 

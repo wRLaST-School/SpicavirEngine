@@ -24,7 +24,7 @@ void SrAddStage::Init()
 
 void SrAddStage::PreDraw()
 {
-	SpDirectX* dx = GetWDX();
+	SpDirectX* dx = GetSpDX();
 	dx->cmdList->SetPipelineState(GPipeline::GetState("Add3D"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("NoLight3D")->rootsignature.Get());
 

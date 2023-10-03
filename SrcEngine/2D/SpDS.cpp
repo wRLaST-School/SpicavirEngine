@@ -70,7 +70,7 @@ void SpDS::SetBlendMode(const Blend& blendMode)
 	case Blend::Alpha:
 		sCommands.insert(eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&] {
 			//パイプライン変更
-			auto dx = GetWDX();
+			auto dx = GetSpDX();
 
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2d"));
 			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
@@ -80,7 +80,7 @@ void SpDS::SetBlendMode(const Blend& blendMode)
 	case Blend::Sub:
 		sCommands.insert(eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&] {
 			//パイプライン変更
-			auto dx = GetWDX();
+			auto dx = GetSpDX();
 
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2dSub"));
 			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
@@ -90,7 +90,7 @@ void SpDS::SetBlendMode(const Blend& blendMode)
 	case Blend::Add:
 		sCommands.insert(eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&] {
 			//パイプライン変更
-			auto dx = GetWDX();
+			auto dx = GetSpDX();
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2dAdd"));
 			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
 			}));
@@ -165,7 +165,7 @@ void SpDS::CreateBuffers()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -240,12 +240,12 @@ void SpDS::RenderGraph()
 		}
 
 		//描画
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());
+		GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
+		GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());
 
-		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &sGvbView);
+		GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &sGvbView);
 
-		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+		GetSpDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 
 		dGraphIndex++;
 	}

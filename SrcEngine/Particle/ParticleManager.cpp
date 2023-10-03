@@ -26,7 +26,7 @@ ParticleManager::ParticleManager()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -53,12 +53,12 @@ void ParticleManager::Draw()
 	}
 
 	SpRenderer::DrawCommand([&] {
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
+		GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
 
 		Camera::UseCurrent();
 
-		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
+		GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-		GetWDX()->cmdList->DrawInstanced(activeCount, 1, 0, 0);
+		GetSpDX()->cmdList->DrawInstanced(activeCount, 1, 0, 0);
 	}, SpRenderer::Stage::Particle);
 }

@@ -25,5 +25,5 @@ public:
 private:
 };
 
-void InitWSCM();
+void InitSpSCM();
 SpSwapChainManager* GetSCM();

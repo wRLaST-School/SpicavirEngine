@@ -21,7 +21,7 @@ public:
 		cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 		//GPUリソースの生成
-		GetWDX()->dev->CreateCommittedResource(
+		GetSpDX()->dev->CreateCommittedResource(
 			&cbheapprop,
 			D3D12_HEAP_FLAG_NONE,
 			&cbresdesc,
@@ -61,7 +61,7 @@ public:
 		cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 		//GPUリソースの生成
-		GetWDX()->dev->CreateCommittedResource(
+		GetSpDX()->dev->CreateCommittedResource(
 			&cbheapprop,
 			D3D12_HEAP_FLAG_NONE,
 			&cbresdesc,

@@ -62,7 +62,7 @@ void Camera::UseCurrent()
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 
-	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+	GetSpDX()->cmdList->RSSetViewports(1, &viewport);
 
 	D3D12_RECT scissorrect{};
 
@@ -71,7 +71,7 @@ void Camera::UseCurrent()
 	scissorrect.top = 0;                                        // 切り抜き座標上
 	scissorrect.bottom = scissorrect.top + (LONG)sCurrent->renderHeight;       // 切り抜き座標下
 
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
 	Matrix vMat = sCurrent->targetMode == CameraTargetMode::LookAt ?
 		Matrix::ViewLookAt(sCurrent->position, sCurrent->target, sCurrent->matWorld.ExtractAxisY()) :
@@ -86,7 +86,7 @@ void Camera::UseCurrent()
 
 	sCurrent->cameraViewProjMatrixCB.contents->billboardMat = GetCurrentCameraBillboardMat();
 
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(3, sCurrent->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
+	GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(3, sCurrent->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
 
 	//Effekseerの情報を更新
 	std::function<Effekseer::Matrix44(Matrix)> SpMatToEfkMat = [](Matrix in) {

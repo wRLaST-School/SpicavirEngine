@@ -20,8 +20,8 @@ DXGI_FORMAT format[] = {DXGI_FORMAT_R8G8B8A8_UNORM};
 void SpEffekseer::Init()
 {
 	sEfkRenderer = EffekseerRendererDX12::Create(
-		GetWDX()->dev.Get(),
-		GetWDX()->cmdQueue.Get(),
+		GetSpDX()->dev.Get(),
+		GetSpDX()->cmdQueue.Get(),
 		2,
 		format,
 		1,
@@ -55,7 +55,7 @@ void SpEffekseer::Update()
 
 void SpEffekseer::Draw()
 {
-	EffekseerRendererDX12::BeginCommandList(sEfkCmdList, GetWDX()->cmdList.Get());
+	EffekseerRendererDX12::BeginCommandList(sEfkCmdList, GetSpDX()->cmdList.Get());
 
 	sEfkRenderer->BeginRendering();
 	sEfkManager->Draw();

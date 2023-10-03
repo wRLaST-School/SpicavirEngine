@@ -27,6 +27,6 @@ public:
 private:
 };
 
-SpDirectX* GetWDX();
-void InitWDX();
+SpDirectX* GetSpDX();
+void InitSpDX();
 

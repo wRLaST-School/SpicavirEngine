@@ -10,6 +10,6 @@ public:
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> dsvHeap = nullptr;
 };
 
-void InitWDepth();
+void InitSpDepth();
 SpDepth* GetWDepth();
 

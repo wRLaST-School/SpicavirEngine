@@ -6,8 +6,8 @@
 void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 {
 	CloseCurrentResBar();
-	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
-	SpDirectX* dx = GetWDX();
+	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	SpDirectX* dx = GetSpDX();
 	//リソースバリアーを書き込み可能状態に
 	dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
 	dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
@@ -17,9 +17,9 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 	GetInstance().isAllResBarClosed = false;
 
 	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetInstance().GetHeapCPUHandle(GetInstance().numRT - 2),
-		bbIndex, GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
+		bbIndex, GetSpDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
-	GetWDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
+	GetSpDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
 	GetInstance().currentRTIndex_[0] = GetInstance().numRT - 2 + bbIndex;
 
@@ -32,10 +32,10 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 {
 	CloseCurrentResBar();
-	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	int32_t index = (int32_t)SpTextureManager::GetIndex(key);
 
-	SpDirectX* dx = GetWDX();
+	SpDirectX* dx = GetSpDX();
 	//リソースバリアーを書き込み可能状態に
 	dx->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 	dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
@@ -49,7 +49,7 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 
 	auto cpuhnd = (GetInstance().GetHeapCPUHandle(index));
 	D3D12_CPU_DESCRIPTOR_HANDLE* pcpuhnd = &cpuhnd;
-	GetWDX()->cmdList->OMSetRenderTargets(1, pcpuhnd, false, &dsvH);
+	GetSpDX()->cmdList->OMSetRenderTargets(1, pcpuhnd, false, &dsvH);
 
 	GetInstance().currentRTIndex_[0] = index;
 	for (int32_t i = 1; i < 8; i++)
@@ -63,13 +63,13 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 {
 	CloseCurrentResBar();
-	GetWDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 
 	for (auto& key : keys)
 	{
 		if (key == "CurrentBuffer")
 		{
-			SpDirectX* dx = GetWDX();
+			SpDirectX* dx = GetSpDX();
 			//リソースバリアーを書き込み可能状態に
 			dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[GetSCM()->swapchain->GetCurrentBackBufferIndex()].Get();
 			dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
@@ -79,7 +79,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 
 		else
 		{
-			SpDirectX* dx = GetWDX();
+			SpDirectX* dx = GetSpDX();
 			//リソースバリアーを書き込み可能状態に
 			dx->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 			dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
@@ -99,7 +99,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 		if (key == "CurrentBuffer")
 		{
 			CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetInstance().GetHeapCPUHandle(GetInstance().numRT - 2),
-				GetSCM()->swapchain->GetCurrentBackBufferIndex(), GetWDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
+				GetSCM()->swapchain->GetCurrentBackBufferIndex(), GetSpDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
 			pcpuhnds.push_back(rtvH);
 		}
 		else
@@ -109,7 +109,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 		}
 	}
 
-	GetWDX()->cmdList->OMSetRenderTargets((UINT)keys.size(), &pcpuhnds.front(), false, &dsvH);
+	GetSpDX()->cmdList->OMSetRenderTargets((UINT)keys.size(), &pcpuhnds.front(), false, &dsvH);
 
 	for (int32_t i = 0; i < 8; i++)
 	{
@@ -138,7 +138,7 @@ void RTVManager::CreateRenderTargetTexture(float width, float height, const Text
 
 	if (SpTextureManager::GetIndex(key) > GetInstance().numRT - 3) { throw "Its Gonna Eat Back Buffer memory"; return; }
 
-	GetWDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(key), nullptr,
+	GetSpDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(key), nullptr,
 		GetHeapCPUHandle((int32_t)SpTextureManager::GetIndex(key)));
 
 	//デフォルトのリソースバリアをセット
@@ -156,7 +156,7 @@ void RTVManager::CreateHeaps()
 {
 	GetInstance().heapDesc_.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
 	GetInstance().heapDesc_.NumDescriptors = GetInstance().numRT;
-	GetWDX()->dev->CreateDescriptorHeap(&GetInstance().heapDesc_, IID_PPV_ARGS(GetInstance().rtvHeaps_.GetAddressOf()));
+	GetSpDX()->dev->CreateDescriptorHeap(&GetInstance().heapDesc_, IID_PPV_ARGS(GetInstance().rtvHeaps_.GetAddressOf()));
 }
 
 int32_t RTVManager::GetCurrentRenderTarget()
@@ -172,7 +172,7 @@ void RTVManager::ClearCurrentRenderTarget(const Float4& color)
 		int32_t index = GetInstance().currentRTIndex_[i];
 		if (index < 0) continue;
 
-		GetWDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(index), colour, 0, nullptr);
+		GetSpDX()->cmdList->ClearRenderTargetView(GetHeapCPUHandle(index), colour, 0, nullptr);
 	}
 }
 
@@ -186,7 +186,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE RTVManager::GetHeapCPUHandle(int32_t index)
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = GetInstance().rtvHeaps_->GetCPUDescriptorHandleForHeapStart();
-	heapHandle.ptr += GetWDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * index;
+	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * index;
 	return heapHandle;
 }
 
@@ -205,20 +205,20 @@ void RTVManager::CloseCurrentResBar()
 		if (index >= GetInstance().numRT - 2)
 		{
 			//リソースバリアーを戻す
-			GetWDX()->barrierDesc.Transition.pResource = GetSCM()->backBuffers[index - GetInstance().numRT + 2].Get();
-			GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-			GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
+			GetSpDX()->barrierDesc.Transition.pResource = GetSCM()->backBuffers[index - GetInstance().numRT + 2].Get();
+			GetSpDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+			GetSpDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
-			GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
+			GetSpDX()->cmdList->ResourceBarrier(1, &GetSpDX()->barrierDesc);
 			continue;
 		}
 
 		//リソースバリアーを戻す
-		GetWDX()->barrierDesc.Transition.pResource = SpTextureManager::GetInstance().texBuffs[index].Get();
-		GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-		GetWDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+		GetSpDX()->barrierDesc.Transition.pResource = SpTextureManager::GetInstance().texBuffs[index].Get();
+		GetSpDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+		GetSpDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 
-		GetWDX()->cmdList->ResourceBarrier(1, &GetWDX()->barrierDesc);
+		GetSpDX()->cmdList->ResourceBarrier(1, &GetSpDX()->barrierDesc);
 	}
 
 }

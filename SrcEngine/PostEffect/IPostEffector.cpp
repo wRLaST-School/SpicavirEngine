@@ -74,7 +74,7 @@ void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTe
 		RTVManager::SetRenderTargetToTexture(targetTex);
 	}
 
-	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
+	ID3D12GraphicsCommandList* cl = GetSpDX()->cmdList.Get();
 	cl->SetGraphicsRootSignature(SpRootSignature::Get(name)->rootsignature.Get());
 	cl->SetPipelineState(GPipeline::GetState(name));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
@@ -109,19 +109,19 @@ void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTe
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 
-	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+	GetSpDX()->cmdList->RSSetViewports(1, &viewport);
 
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
 	ID3D12DescriptorHeap* ppHeaps[] = { SpTextureManager::GetInstance().srvHeap.Get() };
 	cl->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
+	GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
 	//GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, this->constBuff.buffer->GetGPUVirtualAddress());
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
+	GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
-	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+	GetSpDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }
 
 D3D12_VERTEX_BUFFER_VIEW PostEffectCommon::sVbView{};
@@ -152,7 +152,7 @@ void PostEffectCommon::Init()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,

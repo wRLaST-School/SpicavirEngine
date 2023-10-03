@@ -136,7 +136,7 @@ Model::Model(const std::string& modelName)
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -170,7 +170,7 @@ Model::Model(const std::string& modelName)
 
 	resdesc.Width = sizeIB;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -525,7 +525,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -559,7 +559,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 	resdesc.Width = sizeIB;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,

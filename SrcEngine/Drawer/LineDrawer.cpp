@@ -22,7 +22,7 @@ void LineDrawer::Init()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -170,16 +170,16 @@ void LineDrawer::DrawAllLines()
 		if (index >= MAX_LINES) break;
 	}
 
-	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("line"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
+	GetSpDX()->cmdList->SetPipelineState(GPipeline::GetState("line"));
+	GetSpDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
 
 	Camera::UseCurrent();
 
-	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+	GetSpDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView_);
+	GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &vbView_);
 
-	GetWDX()->cmdList->DrawInstanced(static_cast<UINT>(lines_.size()), 1, 0, 0);
+	GetSpDX()->cmdList->DrawInstanced(static_cast<UINT>(lines_.size()), 1, 0, 0);
 }
 
 void LineDrawer::ClearLineData()

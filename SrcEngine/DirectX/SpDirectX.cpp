@@ -11,12 +11,12 @@ using namespace std;
 
 static SpDirectX WDX;
 
-SpDirectX* GetWDX()
+SpDirectX* GetSpDX()
 {
 	return &WDX;
 }
 
-void InitWDX()
+void InitSpDX()
 {
 	WDX.Init();
 }
@@ -100,19 +100,19 @@ void SpDirectX::PreDrawCommands()
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
 	RTVManager::ClearCurrentRenderTarget(clearColor);
-	GetWDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	GetSpDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
 	/*•`‰æˆ—*/
-	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
+	GetSpDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
+	GetSpDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 
 	//ID3D12DescriptorHeap* ppHeaps[] = { basicDescHeap.Get()};
 	//GetWDX()->cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 	//GetWDX()->cmdList->SetGraphicsRootDescriptorTable(0, basicDescHeap->GetGPUDescriptorHandleForHeapStart());
 
 	ID3D12DescriptorHeap* ppSrvHeap[] = { SpTextureManager::GetInstance().srvHeap.Get()};
-	GetWDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
+	GetSpDX()->cmdList->SetDescriptorHeaps(1, ppSrvHeap);
 
 	D3D12_VIEWPORT viewport{};
 
@@ -123,7 +123,7 @@ void SpDirectX::PreDrawCommands()
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 
-	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+	GetSpDX()->cmdList->RSSetViewports(1, &viewport);
 
 	D3D12_RECT scissorrect{};
 
@@ -132,11 +132,11 @@ void SpDirectX::PreDrawCommands()
 	scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
 	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // Ø‚è”²‚«À•W‰º
 
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
-	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	GetSpDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 }
 
 void SpDirectX::PostDrawCommands()
