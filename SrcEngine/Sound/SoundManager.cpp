@@ -170,6 +170,7 @@ void SoundManager::StopBGM(const SoundKey& key)
         }
     );
     if (pSnd->sound == nullptr) return;
+
     pSnd->sound->Stop();
 }
 

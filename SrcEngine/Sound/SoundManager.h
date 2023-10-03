@@ -37,16 +37,17 @@ public:
 	IXAudio2SourceVoice* sound;
 
 	void Release() {
+		if (sound != nullptr)
+		{
+			sound->Stop();
+			sound->DestroyVoice();
+		}
+
 		delete[] pBuffer;
 
 		this->pBuffer = 0;
 		this->bufferSize = 0;
 		this->wfex = {};
-
-		if (sound != nullptr)
-		{
-			sound->Stop();
-		}
 	}
 };
 
