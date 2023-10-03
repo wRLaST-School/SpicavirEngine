@@ -1,10 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-//using namespace DirectX;
-//using namespace std;
-//using namespace Microsoft::WRL;
-
 LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 //à»â∫EASTLÇÃïKóvä÷êî

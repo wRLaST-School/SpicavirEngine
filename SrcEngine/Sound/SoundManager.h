@@ -1,6 +1,9 @@
 #pragma once
 #include "Essentials.h"
+
+#pragma warning(push, 0)
 #include <xaudio2.h>
+#pragma warning(pop)
 
 #include <fstream>
 #include <exc_unordered_map.h>
