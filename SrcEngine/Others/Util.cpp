@@ -1,4 +1,8 @@
 #include "Util.h"
+#include <random>
+
+std::random_device rnd;
+std::mt19937 mt(rnd());
 
 std::wstring Util::StrToWStr(const std::string& str, int32_t page)
 {
@@ -29,13 +33,10 @@ bool Util::Chance(int32_t percentage)
 int32_t Util::RNG(int32_t min, int32_t max, bool preciseMode)
 {
     if (!preciseMode) {
-        return (rand() % (max + 1 - min) + min);
+        return (mt() % (max + 1 - min) + min);
     }
 
-    int32_t ret = 0;
-    do {
-        ret = rand();
-    } while (ret >= RAND_MAX - RAND_MAX % (max + 1 - min));
-    ret = ret % (max + 1 - min) + min;
-    return ret;
+    std::uniform_int_distribution<> rbrnd(min, max);
+
+    return rbrnd(mt);
 }

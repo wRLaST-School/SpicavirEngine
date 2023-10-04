@@ -34,8 +34,6 @@ void SpFramework::Init()
 	}
 #endif //  _DEBUG
 
-	srand((uint32_t)time(NULL));
-
 	//ウィンドウを生成
 	{
 		SpWindow wwnd;
