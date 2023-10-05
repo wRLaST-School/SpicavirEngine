@@ -5,8 +5,8 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <SpImGui.h>
 #pragma warning(pop)
+#include <SpImGui.h>
 
 Model::Model() {
 }

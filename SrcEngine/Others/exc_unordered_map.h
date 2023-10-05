@@ -1,7 +1,6 @@
 #pragma once
 #include <Essentials.h>
 #include <mutex>
-#include <EASTL/unordered_map.h>
 
 template <class Key,
     class T,

@@ -3,10 +3,8 @@
 class Ray
 {
 public:
-	Ray() { };
-	Ray(Vec3 ray, Vec3 origin) : ray(ray), origin(origin) {
-
-	};
+	Ray();
+	Ray(Vec3 ray, Vec3 origin);
 
 	Vec3 ray;
 	Vec3 origin;

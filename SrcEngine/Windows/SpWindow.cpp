@@ -2,7 +2,11 @@
 #include <SpSwapChainManager.h>
 #include <SpDepth.h>
 #include <Sprite.h>
+
+#pragma warning(push, 0)
 #include <imgui_impl_win32.h>
+#pragma warning(pop)
+
 static std::string defWndID = "Default";
 std::map<std::string, SpWindow> wWindowList;
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Essentials.h"
 #include "SpShader.h"
-//TODO:İŒv‚ªƒKƒo‚·‚¬‚é‚Ì‚Åpso,rootsignature‚ÌİŒv‚ğŒ©’¼‚·
+
 struct PipelineDesc
 {
 	struct Shader {

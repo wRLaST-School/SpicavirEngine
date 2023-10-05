@@ -1,8 +1,12 @@
 #include "stdafx.h"
 #include "SpImGui.h"
+
+#pragma warning(push, 1)
 #include <ImGuiStyle.h>
 #include <imgui_impl_win32.h>
 #include <imgui_impl_dx12.h>
+#pragma warning(pop)
+
 #include <SpWindow.h>
 
 #include <SpSwapChainManager.h>

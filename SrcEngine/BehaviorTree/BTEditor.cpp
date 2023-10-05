@@ -8,9 +8,12 @@
 
 #pragma warning (push)
 #pragma warning (disable:26800)
+#pragma warning (push, 1)
 #include <SrcExternal/json.hpp>
-using namespace BT;
 #pragma warning (pop)
+#pragma warning (pop)
+
+using namespace BT;
 
 using namespace nlohmann;
 using namespace std;

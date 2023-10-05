@@ -181,6 +181,9 @@
     <Filter Include="Engine\ソースファイル\Framework">
       <UniqueIdentifier>{8422c35f-6067-476d-9848-27c64ba8b2ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Framework">
+      <UniqueIdentifier>{fce172b6-6c08-4dab-b90d-cf3189df133f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -803,14 +806,14 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="SpFramework.h">
-      <Filter>Engine\ソースファイル\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="ComputeShader.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="StructuredBuffer.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SpFramework.h">
+      <Filter>Engine\ヘッダーファイル\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 #pragma once
 #include "Essentials.h"
 
-
 class SpWindow
 {
 public:

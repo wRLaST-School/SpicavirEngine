@@ -27,13 +27,13 @@ private:
 	void CreateCommandList();
 
 
-	ComPtr<ID3D12RootSignature> rs;
-	ComPtr<ID3D12PipelineState> pl;
-	ComPtr<ID3D12DescriptorHeap> heap;
-	ComPtr<ID3D12Blob> shader;
-	ComPtr<ID3D12Fence> fence;
-	ComPtr<ID3D12CommandAllocator> cmdAlloc;
-	ComPtr<ID3D12CommandList> cmdList;
+	Microsoft::WRL::ComPtr<ID3D12RootSignature> rs;
+	Microsoft::WRL::ComPtr<ID3D12PipelineState> pl;
+	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> heap;
+	Microsoft::WRL::ComPtr<ID3DBlob> shader;
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> cmdAlloc;
+	Microsoft::WRL::ComPtr<ID3D12CommandList> cmdList;
 
 };
 
