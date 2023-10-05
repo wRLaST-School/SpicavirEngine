@@ -746,7 +746,7 @@ TextureKey SpTextureManager::CreatePlainSRV(const TextureKey& key)
 
 void SpTextureManager::ResizeScreenTextures()
 {
-	unordered_map<TextureKey, TexData> resizing;
+	eastl::unordered_map<TextureKey, TexData> resizing;
 	GetInstance().texDataMap_.Access(
 		[&](auto& map) {
 			for (auto& c : map)

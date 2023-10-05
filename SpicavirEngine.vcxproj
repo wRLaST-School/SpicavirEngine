@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ComputeShader.cpp" />
     <ClCompile Include="SpFramework.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp" />
@@ -269,8 +270,10 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
+    <ClCompile Include="StructuredBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ComputeShader.h" />
     <ClInclude Include="SpFramework.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h" />
@@ -376,6 +379,7 @@
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
     <ClInclude Include="SrcExternal\json.hpp" />
+    <ClInclude Include="StructuredBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">

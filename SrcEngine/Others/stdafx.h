@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning(push, 0)
+#pragma warning(push, 1)
 #include <Windows.h>
 #include <d3d12.h>
 #include <d3dx12.h>

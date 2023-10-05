@@ -1,8 +1,7 @@
 #include "Model.h"
 #include <fstream>
 #include <sstream>
-#pragma warning(push)
-#pragma warning(disable:26800)
+#pragma warning(push, 0)
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -274,7 +273,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 				anim.channels.push_back(channel);
 			}
-			animations.insert(std::pair<std::string, Animation>(anim.name, anim));
+			animations.insert(eastl::pair<std::string, Animation>(anim.name, anim));
 		}
 	}
 
@@ -309,7 +308,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 					bone.offsetMatrix = bOffsetMat;
 					bone.index = boneIndex;
 
-					bones.insert(std::pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
+					bones.insert(eastl::pair<std::string, Bone>(std::string(mesh->mBones[boneIndex]->mName.C_Str()), bone));
 				}
 			}
 			else
@@ -317,7 +316,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 				Bone bone;
 				bone.offsetMatrix = Matrix::Identity();
 				bone.index = 0;
-				bones.insert(std::pair<std::string, Bone>("", bone));
+				bones.insert(eastl::pair<std::string, Bone>("", bone));
 				bMatrixCB.contents->bMatrix[0] = Matrix::Identity();
 			}
 		}
@@ -680,9 +679,9 @@ void Model::UpdateAnim()
 	double aniTick = (double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
 
 	//Nodeを使って再帰的に処理を行う
-	std::function<Matrix(Node*, Channel*, std::unordered_map<std::string, Node>&, std::unordered_map<std::string, Bone>&)> 
+	std::function<Matrix(Node*, Channel*, eastl::unordered_map<std::string, Node>&, eastl::unordered_map<std::string, Bone>&)> 
 		fCalcParentTransform = 
-		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel* channel, std::unordered_map<std::string, Node>& nodes, std::unordered_map<std::string, Bone>& bones) 
+		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel* channel, eastl::unordered_map<std::string, Node>& nodes, eastl::unordered_map<std::string, Bone>& bones) 
 	{
 		Matrix transform;
 		Matrix parentTrans;
@@ -865,9 +864,9 @@ void ModelManager::Register(const std::string& modelPath, const ModelKey& key, b
 {
 	sModels.Access(
 		[&](auto& map) {
-			map.emplace(std::piecewise_construct,
-				std::forward_as_tuple(key),
-				std::forward_as_tuple(modelPath, useAssimp));
+			map.emplace(eastl::piecewise_construct,
+				eastl::forward_as_tuple(key),
+				eastl::forward_as_tuple(modelPath, useAssimp));
 		}
 	);
 }
@@ -923,5 +922,5 @@ void ModelManager::PreLoadNewScene()
 
 
 exc_unordered_map<ModelKey, Model> ModelManager::sModels;
-std::list<ModelKey> ModelManager::sPerSceneModels[2];
+eastl::list<ModelKey> ModelManager::sPerSceneModels[2];
 int32_t ModelManager::sCurrentSceneResIndex = 0;
