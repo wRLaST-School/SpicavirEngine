@@ -480,14 +480,14 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="SpFramework.cpp">
+    <ClCompile Include="SrcEngine\Compute\ComputeShader.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Compute\StructuredBuffer.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Others\SpFramework.cpp">
       <Filter>Engine\ソースファイル\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputeShader.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="StructuredBuffer.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -806,13 +806,13 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="ComputeShader.h">
+    <ClInclude Include="SrcEngine\Compute\ComputeShader.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="StructuredBuffer.h">
+    <ClInclude Include="SrcEngine\Compute\StructuredBuffer.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SpFramework.h">
+    <ClInclude Include="SrcEngine\Others\SpFramework.h">
       <Filter>Engine\ヘッダーファイル\Framework</Filter>
     </ClInclude>
   </ItemGroup>
