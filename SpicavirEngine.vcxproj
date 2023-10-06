@@ -59,21 +59,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
@@ -172,8 +172,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ComputeShader.cpp" />
-    <ClCompile Include="SpFramework.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp" />
@@ -224,6 +222,8 @@
     <ClCompile Include="SrcEngine\Collider\Ray.cpp" />
     <ClCompile Include="SrcEngine\Collider\RayCollider.cpp" />
     <ClCompile Include="SrcEngine\Collider\SphereCollider.cpp" />
+    <ClCompile Include="SrcEngine\Compute\ComputeShader.cpp" />
+    <ClCompile Include="SrcEngine\Compute\StructuredBuffer.cpp" />
     <ClCompile Include="SrcEngine\DirectX\GPipeline.cpp" />
     <ClCompile Include="SrcEngine\DirectX\GPipelineManager.cpp" />
     <ClCompile Include="SrcEngine\DirectX\RootSignatureManager.cpp" />
@@ -251,6 +251,7 @@
     <ClCompile Include="SrcEngine\Others\exc_unordered_map.cpp" />
     <ClCompile Include="SrcEngine\Others\Input.cpp" />
     <ClCompile Include="SrcEngine\Others\RTVManager.cpp" />
+    <ClCompile Include="SrcEngine\Others\SpFramework.cpp" />
     <ClCompile Include="SrcEngine\Others\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">Create</PrecompiledHeader>
@@ -275,11 +276,8 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
-    <ClCompile Include="StructuredBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ComputeShader.h" />
-    <ClInclude Include="SpFramework.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h" />
@@ -329,6 +327,8 @@
     <ClInclude Include="SrcEngine\Collider\Ray.h" />
     <ClInclude Include="SrcEngine\Collider\RayCollider.h" />
     <ClInclude Include="SrcEngine\Collider\SphereCollider.h" />
+    <ClInclude Include="SrcEngine\Compute\ComputeShader.h" />
+    <ClInclude Include="SrcEngine\Compute\StructuredBuffer.h" />
     <ClInclude Include="SrcEngine\DirectX\GPipeline.h" />
     <ClInclude Include="SrcEngine\DirectX\GPipelineManager.h" />
     <ClInclude Include="SrcEngine\DirectX\RootSignatureManager.h" />
@@ -361,6 +361,7 @@
     <ClInclude Include="SrcEngine\Others\Input.h" />
     <ClInclude Include="SrcEngine\Others\RenderTarget.h" />
     <ClInclude Include="SrcEngine\Others\RTVManager.h" />
+    <ClInclude Include="SrcEngine\Others\SpFramework.h" />
     <ClInclude Include="SrcEngine\Others\stdafx.h" />
     <ClInclude Include="SrcEngine\Others\Util.h" />
     <ClInclude Include="SrcEngine\Others\SpTextureManager.h" />
@@ -384,7 +385,6 @@
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
     <ClInclude Include="SrcExternal\json.hpp" />
-    <ClInclude Include="StructuredBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicGS.hlsl">
