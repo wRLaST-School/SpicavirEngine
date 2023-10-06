@@ -1,14 +1,18 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include <Player.h>
 #include <SpDS.h>
 #include <LevelManager.h>
 #include <SpEffekseer.h>
 #include <SoundManager.h>
+#include <MainTimer.h>
 #include <GameManager.h>
 #include <SpImGui.h>
 
 void GameScene::LoadResources()
 {
+	Boss::Load();
+	Player::Load();
 	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
@@ -30,18 +34,36 @@ void GameScene::LoadResources()
 	SoundManager::LoadWave("Resources/Sounds/Slash12.wav", "Slash12");
 	SoundManager::LoadWave("Resources/Sounds/takeDamage.wav", "takeDamage");
 	SoundManager::LoadWave("Resources/Sounds/RushImpact.wav", "RushImpact");
+
+	MainTimer::Load();
 }
 
 void GameScene::Init()
 {
 	LevelManager::Init();
+	Boss::Set(&boss_);
+	Player::Set(&player_);
+
+	boss_.Init();
+	player_.Init();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
+
+	cam_.Init();
+
+	CameraController::Set(&cam_);
+
+	MainTimer::Init();
 }
 
 void GameScene::Update()
 {
 	LevelManager::Update();
+	boss_.Update();
+	player_.Update();
+	cam_.Update();
+
+	MainTimer::Update();
 
 	if (GameManager::sShowDebug)
 	{
@@ -63,8 +85,13 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {
-	Camera::Set(cam);
+	cam_.Set();
+
 	LevelManager::Draw();
+	boss_.Draw();
+	player_.Draw();
+
+	MainTimer::Draw();
 }
 
 void GameScene::DrawSprite()

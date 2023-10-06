@@ -665,10 +665,6 @@ void Model::UpdateAnim()
 	{
 		anim = &animations.find(currentAnim)->second;
 	}
-	else if (animations.empty())
-	{
-		return;
-	}
 	else
 	{
 		anim = &animations.begin()->second;

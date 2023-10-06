@@ -19,6 +19,7 @@ void SceneManager::Init()
 {
 	Transition::Load();
 	InstantTransition<TitleScene>();
+	//InstantTransition<GameScene>();
 }
 
 void SceneManager::Update()
