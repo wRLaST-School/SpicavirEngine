@@ -74,8 +74,8 @@ private:
 
     int32_t dodgeSucceededTimer_ = 0;
 
-    Float3 dodgeStartCameraPos_;
-    Float3 dodgeEndPlayerPos_;
+    Float3 dodgeStartCameraPos_ = {};
+    Float3 dodgeEndPlayerPos_ = {};
 
     int32_t slashTimer_ = 0;
     const int32_t slashTime = 40;

@@ -40,8 +40,8 @@ public:
 
 	Float4 brightness = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-	float width;
-	float height;
+	float width = 0.f;
+	float height = 0.f;
 
 	float rot = 0.0f;
 	Float3 position = {};
