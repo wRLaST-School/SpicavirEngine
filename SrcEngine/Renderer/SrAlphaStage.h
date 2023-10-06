@@ -12,7 +12,7 @@ public:
     void Render();
     void DrawCommands(std::function<void(void)> cmd);
 
-    //Render�̍ŏ��ɌĂ�
+    //Renderの最初に呼ぶ
     void SortObjects();
     void RegisterAlphaObject(Object3D* obj);
 

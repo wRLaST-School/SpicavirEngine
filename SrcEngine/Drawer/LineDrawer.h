@@ -36,7 +36,7 @@ private:
 };
 
 namespace LineDrawerCommon {
-	// í∏ì_ÉåÉCÉAÉEÉg
+	// È†ÇÁÇπ„É¨„Ç§„Ç¢„Ç¶„Éà
 	static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 			{
 				"FROM", 0, 

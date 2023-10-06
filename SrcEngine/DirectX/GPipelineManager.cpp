@@ -9,7 +9,7 @@
 
 void GPipelineManager::CreateAll()
 {
-#pragma region ƒfƒtƒHƒ‹ƒg3D
+#pragma region ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ3D
 	RegisterShader("def");
 	InitVS("def", "BasicVS.hlsl");
 	InitGS("def", "BasicGS.hlsl");
@@ -27,13 +27,13 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(defDesc, "def");
 #pragma endregion
 
-#pragma region ƒ‰ƒCƒg‚È‚µ•`‰æ—pƒVƒF[ƒ_[‚ÌƒRƒ“ƒpƒCƒ‹
+#pragma region ãƒ©ã‚¤ãƒˆãªã—æç”»ç”¨ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
 	RegisterShader("lightless");
 	InitVS("lightless", "NoLightVS.hlsl");
 	InitPS("lightless", "NoLightPS.hlsl");
 #pragma endregion
 
-#pragma region ƒp[ƒeƒBƒNƒ‹3D
+#pragma region ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«3D
 	RegisterShader("particle");
 	InitVS("particle", "ParticleVS.hlsl");
 	InitGS("particle", "ParticleGS.hlsl");
@@ -58,7 +58,7 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(particleDesc, "particle");
 #pragma endregion
 
-#pragma region ƒ‰ƒCƒ“•\¦
+#pragma region ãƒ©ã‚¤ãƒ³è¡¨ç¤º
 	RegisterShader("line");
 	InitVS("line", "LineVS.hlsl");
 	InitGS("line", "LineGS.hlsl");
@@ -81,7 +81,7 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(lineDesc, "line");
 #pragma endregion
 
-#pragma region ƒfƒtƒHƒ‹ƒg2D
+#pragma region ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ2D
 	RegisterShader("2d");
 	InitVS("2d", "SpriteVS.hlsl");
 	InitPS("2d", "SpritePS.hlsl");
@@ -103,7 +103,7 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(pl2dDesc, "2d");
 #pragma endregion
 
-#pragma region ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg2‚Â
+#pragma region ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆ2ã¤
 	RegisterShader("defd");
 	InitVS("defd", "BasicInvVS.hlsl");
 	InitPS("defd", "BasicInvPS.hlsl");
@@ -126,7 +126,7 @@ void GPipelineManager::CreateAll()
 	GPipeline::Create(doubleDesc, "double");
 #pragma endregion
 
-#pragma region ’Ç‰Á—pi’Ç‰Á‚·‚é‚Æ‚«‚É‰º‚ÉƒRƒsƒyj
+#pragma region è¿½åŠ ç”¨ï¼ˆè¿½åŠ ã™ã‚‹ã¨ãã«ä¸‹ã«ã‚³ãƒ”ãƒšï¼‰
 
 #pragma endregion
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "Essentials.h"
 #include "SpShader.h"
-//TODO:İŒv‚ªƒKƒo‚·‚¬‚é‚Ì‚Åpso,rootsignature‚ÌİŒv‚ğŒ©’¼‚·
+
 struct PipelineDesc
 {
 	struct Shader {
@@ -48,7 +48,7 @@ struct PipelineDesc
 			0
 		};
 
-		//‰Šú‰»•K{
+		//åˆæœŸåŒ–å¿…é ˆ
 		D3D12_INPUT_LAYOUT_DESC InputLayout;
 	} Render;
 
@@ -67,7 +67,7 @@ struct PipelineDesc
 	} Depth;
 
 	struct RootSignature {
-		//‰Šú‰»•K{
+		//åˆæœŸåŒ–å¿…é ˆ
 		ID3D12RootSignature* ptr; 
 	} RootSignature;
 };

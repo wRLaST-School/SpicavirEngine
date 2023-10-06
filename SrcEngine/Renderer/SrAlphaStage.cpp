@@ -5,7 +5,7 @@
 
 void SrAlphaStage::Init()
 {
-#pragma region ƒfƒtƒHƒ‹ƒg3D
+#pragma region ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ3D
 	PipelineDesc defDesc;
 	defDesc.Render.InputLayout.pInputElementDescs = ModelCommon::inputLayout;
 	defDesc.Render.InputLayout.NumElements = _countof(ModelCommon::inputLayout);
@@ -25,7 +25,7 @@ void SrAlphaStage::Init()
 
 void SrAlphaStage::PreDraw()
 {
-	SpDirectX* dx = GetWDX();
+	SpDirectX* dx = GetSpDX();
 	dx->cmdList->SetPipelineState(GPipeline::GetState("Alpha3D"));
 	dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("NoLight3D")->rootsignature.Get());
 
@@ -42,10 +42,10 @@ void SrAlphaStage::PreDraw()
 
 	D3D12_RECT scissorrect{};
 
-	scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // Ø‚è”²‚«À•W‰E
-	scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // Ø‚è”²‚«À•W‰º
+	scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+	scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 
 	dx->cmdList->RSSetScissorRects(1, &scissorrect);
 

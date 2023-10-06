@@ -9,7 +9,7 @@ void SpSwapChainManager::Init()
 {
 	swapchainDesc.Width = GetSpWindow()->width;
 	swapchainDesc.Height = GetSpWindow()->height;
-	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //Fî•ñ‚Ì‘®(SpSwapChainManager::ResizeAllBuffers()‚É‚à“¯‚¶‚à‚Ì‚ğ‘‚­)
+	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //è‰²æƒ…å ±ã®æ›¸å¼(SpSwapChainManager::ResizeAllBuffers()ã«ã‚‚åŒã˜ã‚‚ã®ã‚’æ›¸ã)
 	swapchainDesc.SampleDesc.Count = 1;
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
 	swapchainDesc.BufferCount = 2;
@@ -17,7 +17,7 @@ void SpSwapChainManager::Init()
 	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
 	Microsoft::WRL::ComPtr<IDXGISwapChain1> swapchain1;
-	GetWDX()->dxgiFactory->CreateSwapChainForHwnd(GetWDX()->cmdQueue.Get(), GetSpWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
+	GetSpDX()->dxgiFactory->CreateSwapChainForHwnd(GetSpDX()->cmdQueue.Get(), GetSpWindow()->hwnd, &swapchainDesc, nullptr, nullptr, &swapchain1);
 	swapchain1.As(&swapchain);
 
 	RTVManager::CreateHeaps();
@@ -26,16 +26,16 @@ void SpSwapChainManager::Init()
 	{
 		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
 
-		GetWDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, RTVManager::GetHeapCPUHandle(RTVManager::GetInstance().numRT - 2 + i));
+		GetSpDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, RTVManager::GetHeapCPUHandle(RTVManager::GetInstance().numRT - 2 + i));
 	}
 
-	GetWDX()->dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
+	GetSpDX()->dev->CreateFence(fenceVal, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence));
 }
 
 void SpSwapChainManager::WaitForRender()
 {
-	//•`‰æƒRƒ}ƒ“ƒh‚ªI‚í‚Á‚½‚çŸ‚ÌƒtƒŒ[ƒ€‚Ì€”õ
-	GetWDX()->cmdQueue->Signal(fence.Get(), ++fenceVal);
+	//æç”»ã‚³ãƒãƒ³ãƒ‰ãŒçµ‚ã‚ã£ãŸã‚‰æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®æº–å‚™
+	GetSpDX()->cmdQueue->Signal(fence.Get(), ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal)
 	{
 		HANDLE event = CreateEvent(nullptr, false, false, nullptr);
@@ -44,8 +44,8 @@ void SpSwapChainManager::WaitForRender()
 		CloseHandle(event);
 	}
 
-	GetWDX()->cmdAllocator->Reset();
-	GetWDX()->cmdList->Reset(GetWDX()->cmdAllocator.Get(), nullptr);
+	GetSpDX()->cmdAllocator->Reset();
+	GetSpDX()->cmdList->Reset(GetSpDX()->cmdAllocator.Get(), nullptr);
 }
 
 void SpSwapChainManager::ResizeAllBuffers()
@@ -58,16 +58,16 @@ void SpSwapChainManager::ResizeAllBuffers()
 
 	swapchain->ResizeBuffers(0, spw->width, spw->height, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
 
-	//ƒŠƒTƒCƒYŒã‚ÉƒoƒbƒNƒoƒbƒtƒ@[‚ğÄ¶¬
+	//ãƒªã‚µã‚¤ã‚ºå¾Œã«ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’å†ç”Ÿæˆ
 	for (int32_t i = 0; i < 2; i++)
 	{
 		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));
 
-		GetWDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, RTVManager::GetHeapCPUHandle(RTVManager::GetInstance().numRT - 2 + i));
+		GetSpDX()->dev->CreateRenderTargetView(backBuffers[i].Get(), nullptr, RTVManager::GetHeapCPUHandle(RTVManager::GetInstance().numRT - 2 + i));
 	}
 }
 
-void InitWSCM()
+void InitSpSCM()
 {
 	scm.Init();
 }

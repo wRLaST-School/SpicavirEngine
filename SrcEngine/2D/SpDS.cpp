@@ -14,7 +14,7 @@ void SpDS::DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot, Te
 	auto meta = SpTextureManager::GetTextureMetadata(key);
 	Float2 halfsize = { (float)meta.width / 2, (float)meta.height / 2 };
 
-	//ƒAƒ“ƒJ[ƒ|ƒCƒ“ƒg‚É‰‚¶‚ÄˆÚ“®
+	//ã‚¢ãƒ³ã‚«ãƒ¼ãƒã‚¤ãƒ³ãƒˆã«å¿œã˜ã¦ç§»å‹•
 	float ancmX = 0;
 	if (anchor == Anchor::TopLeft || anchor == Anchor::CenterLeft || anchor == Anchor::BottomLeft)
 	{
@@ -69,8 +69,8 @@ void SpDS::SetBlendMode(const Blend& blendMode)
 	switch (blendMode) {
 	case Blend::Alpha:
 		sCommands.insert(eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&] {
-			//ƒpƒCƒvƒ‰ƒCƒ“•ÏX
-			auto dx = GetWDX();
+			//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³å¤‰æ›´
+			auto dx = GetSpDX();
 
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2d"));
 			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
@@ -79,8 +79,8 @@ void SpDS::SetBlendMode(const Blend& blendMode)
 
 	case Blend::Sub:
 		sCommands.insert(eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&] {
-			//ƒpƒCƒvƒ‰ƒCƒ“•ÏX
-			auto dx = GetWDX();
+			//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³å¤‰æ›´
+			auto dx = GetSpDX();
 
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2dSub"));
 			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
@@ -89,8 +89,8 @@ void SpDS::SetBlendMode(const Blend& blendMode)
 
 	case Blend::Add:
 		sCommands.insert(eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&] {
-			//ƒpƒCƒvƒ‰ƒCƒ“•ÏX
-			auto dx = GetWDX();
+			//ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³å¤‰æ›´
+			auto dx = GetSpDX();
 			dx->cmdList->SetPipelineState(GPipeline::GetState("2dAdd"));
 			dx->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("2D")->rootsignature.Get());
 			}));
@@ -104,7 +104,7 @@ void SpDS::SetRenderTarget(const TextureKey& key)
 {
 	sCommands.insert(
 		eastl::pair<int32_t, function<void(void)>>(sGraphCount, [&, key] {
-			//ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒg•ÏX
+			//ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆå¤‰æ›´
 			if (key == "CurrentBuffer")
 			{
 				RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
@@ -142,7 +142,7 @@ void SpDS::DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, 
 
 void SpDS::CreateBuffers()
 {
-	//graph—p
+	//graphç”¨
 	GraphVertData vertices[] = {
 		{{-0.5, 0.5, 0}, {0.0f, 1.0f}},
 		{{-0.5, -0.5, 0}, {0.0f, 0.0f}},
@@ -152,7 +152,7 @@ void SpDS::CreateBuffers()
 
 	UINT sizeVB = static_cast<UINT>(sizeof(GraphVertData) * _countof(vertices));
 
-	////’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -165,7 +165,7 @@ void SpDS::CreateBuffers()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -176,20 +176,20 @@ void SpDS::CreateBuffers()
 
 	sGvertBuff->SetName(L"DRAW GRAPH VERT BUFF");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	GraphVertData* gvertMap = nullptr;
 	sGvertBuff->Map(0, nullptr, (void**)&gvertMap);
 
-	// ‘S’¸“_‚É‘Î‚µ‚Ä
+	// å…¨é ‚ç‚¹ã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
-		gvertMap[i] = vertices[i];   // À•W‚ğƒRƒs[
+		gvertMap[i] = vertices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	sGvertBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	sGvbView.BufferLocation = sGvertBuff->GetGPUVirtualAddress();
 	sGvbView.SizeInBytes = sizeVB;
 	sGvbView.StrideInBytes = sizeof(GraphVertData);
@@ -230,7 +230,7 @@ void SpDS::RenderGraph()
 	{
 		if (!ggp.used) continue;
 
-		//ƒOƒ‰ƒtƒCƒ“ƒfƒbƒNƒX‚É‘Î‰‚µ‚½ƒRƒ}ƒ“ƒh‚ª‚ ‚Á‚½‚çÀs
+		//ã‚°ãƒ©ãƒ•ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã«å¯¾å¿œã—ãŸã‚³ãƒãƒ³ãƒ‰ãŒã‚ã£ãŸã‚‰å®Ÿè¡Œ
 		for (auto& c : sCommands)
 		{
 			if (c.first == dGraphIndex)
@@ -239,18 +239,18 @@ void SpDS::RenderGraph()
 			}
 		}
 
-		//•`‰æ
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
-		GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());
+		//æç”»
+		GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
+		GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());
 
-		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &sGvbView);
+		GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &sGvbView);
 
-		GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+		GetSpDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 
 		dGraphIndex++;
 	}
 
-	//ƒOƒ‰ƒtƒCƒ“ƒfƒbƒNƒX‚É‘Î‰‚µ‚½ƒRƒ}ƒ“ƒh‚ª‚ ‚Á‚½‚çÀs
+	//ã‚°ãƒ©ãƒ•ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã«å¯¾å¿œã—ãŸã‚³ãƒãƒ³ãƒ‰ãŒã‚ã£ãŸã‚‰å®Ÿè¡Œ
 	for (auto& c : sCommands)
 	{
 		if (c.first == dGraphIndex)

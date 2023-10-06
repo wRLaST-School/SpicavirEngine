@@ -1,12 +1,12 @@
 #include "SpMath.h"
 
-//ラジアンから角度
+//繝ｩ繧ｸ繧｢繝ｳ縺九ｉ隗貞ｺｦ
 float ConvertRadianToAngle(float radian) {
 	float angle = 180 / PIf * radian;
 	return angle;
 }
 
-//角度からラジアン
+//隗貞ｺｦ縺九ｉ繝ｩ繧ｸ繧｢繝ｳ
 float ConvertAngleToRadian(float angle) {
 	float radian = PIf / 180 * angle;
 	return radian;

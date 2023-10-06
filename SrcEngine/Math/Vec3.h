@@ -14,7 +14,7 @@ public:
 	Vec3();
 	Vec3(float x, float y, float z);
 
-	//Sqrt‚ªŒÄ‚Î‚ê‚é
+	//SqrtãŒå‘¼ã°ã‚Œã‚‹
 	Vec3& SetLength(float l);
 
 	Vec3 operator+(const Vec3& v2) const;
@@ -39,14 +39,14 @@ public:
 	bool operator < (const Vec3& v2) const;
 	bool operator <= (const Vec3& v2) const;
 
-	//Sqrt‚ªŒÄ‚Î‚ê‚é
+	//SqrtãŒå‘¼ã°ã‚Œã‚‹
 	Vec3& Norm();
-	//Sqrt‚ªŒÄ‚Î‚ê‚È‚¢B’·‚³‚ª‚í‚©‚Á‚Ä‚¢‚éê‡‚ÉB
+	//SqrtãŒå‘¼ã°ã‚Œãªã„ã€‚é•·ã•ãŒã‚ã‹ã£ã¦ã„ã‚‹å ´åˆã«ã€‚
 	Vec3& Norm(float length);
 
-	//Sqrt‚ªŒÄ‚Î‚ê‚é
+	//SqrtãŒå‘¼ã°ã‚Œã‚‹
 	Vec3 GetNorm() const;
-	//Sqrt‚ªŒÄ‚Î‚ê‚È‚¢B’·‚³‚ª‚í‚©‚Á‚Ä‚¢‚éê‡‚ÉB
+	//SqrtãŒå‘¼ã°ã‚Œãªã„ã€‚é•·ã•ãŒã‚ã‹ã£ã¦ã„ã‚‹å ´åˆã«ã€‚
 	Vec3 GetNorm(float length) const;
 
 

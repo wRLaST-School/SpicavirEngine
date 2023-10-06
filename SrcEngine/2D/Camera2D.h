@@ -17,6 +17,6 @@ public:
 private:
 	static Camera2D* sCurrent;
 
-	int32_t lastX;
-	int32_t lastY;
+	int32_t lastX = 0;
+	int32_t lastY = 0;
 };

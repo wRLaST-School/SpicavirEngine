@@ -13,7 +13,7 @@ ParticleManager::ParticleManager()
 {
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertexCount);
 
-	////’¸“_ƒoƒbƒtƒ@‚ÌÝ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -26,7 +26,7 @@ ParticleManager::ParticleManager()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -36,10 +36,10 @@ ParticleManager::ParticleManager()
 	);
 	vertBuff->SetName(L"PARTICLE VERT BUFF");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰ž‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ðŽæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Vertex);
@@ -53,12 +53,12 @@ void ParticleManager::Draw()
 	}
 
 	SpRenderer::DrawCommand([&] {
-		GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
+		GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(texture));
 
 		Camera::UseCurrent();
 
-		GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
+		GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &vbView);
 
-		GetWDX()->cmdList->DrawInstanced(activeCount, 1, 0, 0);
+		GetSpDX()->cmdList->DrawInstanced(activeCount, 1, 0, 0);
 	}, SpRenderer::Stage::Particle);
 }

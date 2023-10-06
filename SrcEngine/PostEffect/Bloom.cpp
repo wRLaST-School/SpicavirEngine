@@ -35,7 +35,7 @@ void BloomP2::Effect(const TextureKey& baseTex, const TextureKey& targetTex)
 {
 	*cb.contents = GetGaussianWeight(strength);
 
-	IPostEffector::Effect(baseTex, targetTex, name, [&](){GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, cb.buffer->GetGPUVirtualAddress()); });
+	IPostEffector::Effect(baseTex, targetTex, name, [&](){GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(0, cb.buffer->GetGPUVirtualAddress()); });
 }
 
 void BloomP3::Init()
@@ -46,7 +46,7 @@ void BloomP3::Init()
 
 void BloomP3::Effect(const TextureKey& baseTex, const TextureKey& targetTex)
 {
-	IPostEffector::Effect(baseTex, targetTex, name, [&](){GetWDX()->cmdList->SetGraphicsRootConstantBufferView(0, BloomP2::cb.buffer->GetGPUVirtualAddress()); });
+	IPostEffector::Effect(baseTex, targetTex, name, [&](){GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(0, BloomP2::cb.buffer->GetGPUVirtualAddress()); });
 }
 
 void BloomFin::Init()
@@ -89,7 +89,7 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 		RTVManager::SetRenderTargetToTexture(targetTex);
 	}
 
-	ID3D12GraphicsCommandList* cl = GetWDX()->cmdList.Get();
+	ID3D12GraphicsCommandList* cl = GetSpDX()->cmdList.Get();
 	cl->SetGraphicsRootSignature(SpRootSignature::Get(name)->rootsignature.Get());
 	cl->SetPipelineState(GPipeline::GetState(name));
 	cl->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
@@ -101,20 +101,20 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 	{
 		viewport.Width = (FLOAT)GetSpWindow()->width;
 		viewport.Height = (FLOAT)GetSpWindow()->height;
-		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // Ø‚è”²‚«À•W‰E
-		scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // Ø‚è”²‚«À•W‰º
+		scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+		scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 	}
 	else
 	{
 		DirectX::TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
 		viewport.Width = (FLOAT)md.width;
 		viewport.Height = (FLOAT)md.height;
-		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-		scissorrect.right = scissorrect.left + (LONG)md.width;        // Ø‚è”²‚«À•W‰E
-		scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // Ø‚è”²‚«À•W‰º
+		scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+		scissorrect.right = scissorrect.left + (LONG)md.width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+		scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 	}
 
 	viewport.TopLeftX = 0;
@@ -122,26 +122,26 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
 
-	GetWDX()->cmdList->RSSetViewports(1, &viewport);
+	GetSpDX()->cmdList->RSSetViewports(1, &viewport);
 
-	GetWDX()->cmdList->RSSetScissorRects(1, &scissorrect);
+	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
 	ID3D12DescriptorHeap* ppHeaps[] = { SpTextureManager::GetInstance().srvHeap.Get() };
 	cl->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
+	GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(baseTex));
 	
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
+	GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
-	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+	GetSpDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 
 	cl->SetPipelineState(GPipeline::GetState(name + string("Add")));
 
-	GetWDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(p3Tex));
+	GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(p3Tex));
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
+	GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &PostEffectCommon::sVbView);
 
-	GetWDX()->cmdList->DrawInstanced(4, 1, 0, 0);
+	GetSpDX()->cmdList->DrawInstanced(4, 1, 0, 0);
 }
 
 GaussianWeight GetGaussianWeight(float strength)

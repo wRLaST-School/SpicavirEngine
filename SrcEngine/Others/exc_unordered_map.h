@@ -1,13 +1,12 @@
 #pragma once
 #include <Essentials.h>
-#include <unordered_map>
 #include <mutex>
 
 template <class Key,
     class T,
-    class Hash = std::hash<Key>,
-    class Pred = std::equal_to<Key>,
-    class Allocator = std::allocator<std::pair<const Key, T> > >
+    class Hash = eastl::hash<Key>,
+    class Pred = eastl::equal_to<Key>,
+    class Allocator = EASTLAllocatorType >
 class exc_unordered_map
 {
 public:
@@ -16,7 +15,7 @@ public:
         map.clear();
     };
 
-    void Access(std::function<void(std::unordered_map<Key, T, Hash, Pred, Allocator>&)> implements)
+    void Access(std::function<void(eastl::unordered_map<Key, T, Hash, Pred, Allocator>&)> implements)
     {
         std::lock_guard<std::mutex> lock(mtx);
         implements(map);
@@ -28,6 +27,6 @@ public:
     };
 
 private:
-    std::unordered_map<Key, T, Hash, Pred, Allocator> map;
+    eastl::unordered_map<Key, T, Hash, Pred, Allocator> map;
     std::mutex mtx;
 };

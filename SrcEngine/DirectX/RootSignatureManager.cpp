@@ -23,63 +23,63 @@ void RootSignatureManager::RegisterAllRS()
 		descRange2.RegisterSpace = 0;
 		descRange2.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-		//’è”ƒoƒbƒtƒ@0”Ôƒ}ƒeƒŠƒAƒ‹
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡0ç•ªãƒžãƒ†ãƒªã‚¢ãƒ«
 		rs3d->params.emplace_back();
 		rs3d->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[0].Descriptor.ShaderRegister = 0;
 		rs3d->params[0].Descriptor.RegisterSpace = 0;
 		rs3d->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^0”Ô
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿0ç•ª
 		rs3d->params.emplace_back();
 		rs3d->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rs3d->params[1].DescriptorTable.pDescriptorRanges = &descRange;
 		rs3d->params[1].DescriptorTable.NumDescriptorRanges = 1;
 		rs3d->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 		
-		//’è”ƒoƒbƒtƒ@1”Ôƒ[ƒ‹ƒhs—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡1ç•ªãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 		rs3d->params.emplace_back();
 		rs3d->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[2].Descriptor.ShaderRegister = 1;
 		rs3d->params[2].Descriptor.RegisterSpace = 0;
 		rs3d->params[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@2”Ôƒrƒ…[EŽË‰e•ÏŠ·s—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡2ç•ªãƒ“ãƒ¥ãƒ¼ãƒ»å°„å½±å¤‰æ›è¡Œåˆ—
 		rs3d->params.emplace_back();
 		rs3d->params[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[3].Descriptor.ShaderRegister = 2;
 		rs3d->params[3].Descriptor.RegisterSpace = 0;
 		rs3d->params[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@3”Ô‹P“x
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡3ç•ªè¼åº¦
 		rs3d->params.emplace_back();
 		rs3d->params[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[4].Descriptor.ShaderRegister = 3;
 		rs3d->params[4].Descriptor.RegisterSpace = 0;
 		rs3d->params[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@4”ÔŒõŒ¹
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡4ç•ªå…‰æº
 		rs3d->params.emplace_back();
 		rs3d->params[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[5].Descriptor.ShaderRegister = 4;
 		rs3d->params[5].Descriptor.RegisterSpace = 0;
 		rs3d->params[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@5”Ôƒ{[ƒ“s—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡5ç•ªãƒœãƒ¼ãƒ³è¡Œåˆ—
 		rs3d->params.emplace_back();
 		rs3d->params[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[6].Descriptor.ShaderRegister = 5;
 		rs3d->params[6].Descriptor.RegisterSpace = 0;
 		rs3d->params[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@6”Ô‚»‚Ì‘¼ƒpƒ‰ƒ[ƒ^
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡6ç•ªãã®ä»–ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 		rs3d->params.emplace_back();
 		rs3d->params[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[7].Descriptor.ShaderRegister = 6;
 		rs3d->params[7].Descriptor.RegisterSpace = 0;
 		rs3d->params[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^1”ÔƒfƒBƒ]ƒ‹ƒuƒeƒNƒXƒ`ƒƒ
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿1ç•ªãƒ‡ã‚£ã‚¾ãƒ«ãƒ–ãƒ†ã‚¯ã‚¹ãƒãƒ£
 		rs3d->params.emplace_back();
 		rs3d->params[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rs3d->params[8].DescriptorTable.pDescriptorRanges = &descRange2;
@@ -109,56 +109,56 @@ void RootSignatureManager::RegisterAllRS()
 		descRange2.RegisterSpace = 0;
 		descRange2.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-		//’è”ƒoƒbƒtƒ@0”Ôƒ}ƒeƒŠƒAƒ‹
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡0ç•ªãƒžãƒ†ãƒªã‚¢ãƒ«
 		rs3d->params.emplace_back();
 		rs3d->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[0].Descriptor.ShaderRegister = 0;
 		rs3d->params[0].Descriptor.RegisterSpace = 0;
 		rs3d->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^0”Ô
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿0ç•ª
 		rs3d->params.emplace_back();
 		rs3d->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rs3d->params[1].DescriptorTable.pDescriptorRanges = &descRange;
 		rs3d->params[1].DescriptorTable.NumDescriptorRanges = 1;
 		rs3d->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@1”Ôƒ[ƒ‹ƒhs—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡1ç•ªãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 		rs3d->params.emplace_back();
 		rs3d->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[2].Descriptor.ShaderRegister = 1;
 		rs3d->params[2].Descriptor.RegisterSpace = 0;
 		rs3d->params[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@2”Ôƒrƒ…[EŽË‰e•ÏŠ·s—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡2ç•ªãƒ“ãƒ¥ãƒ¼ãƒ»å°„å½±å¤‰æ›è¡Œåˆ—
 		rs3d->params.emplace_back();
 		rs3d->params[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[3].Descriptor.ShaderRegister = 2;
 		rs3d->params[3].Descriptor.RegisterSpace = 0;
 		rs3d->params[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@3”Ô‹P“x
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡3ç•ªè¼åº¦
 		rs3d->params.emplace_back();
 		rs3d->params[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[4].Descriptor.ShaderRegister = 3;
 		rs3d->params[4].Descriptor.RegisterSpace = 0;
 		rs3d->params[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@4”Ôƒ{[ƒ“s—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡4ç•ªãƒœãƒ¼ãƒ³è¡Œåˆ—
 		rs3d->params.emplace_back();
 		rs3d->params[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[5].Descriptor.ShaderRegister = 4;
 		rs3d->params[5].Descriptor.RegisterSpace = 0;
 		rs3d->params[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@5”Ô‚»‚Ì‘¼ƒpƒ‰ƒ[ƒ^
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡5ç•ªãã®ä»–ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
 		rs3d->params.emplace_back();
 		rs3d->params[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs3d->params[6].Descriptor.ShaderRegister = 5;
 		rs3d->params[6].Descriptor.RegisterSpace = 0;
 		rs3d->params[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^1”ÔƒfƒBƒ]ƒ‹ƒuƒeƒNƒXƒ`ƒƒ
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿1ç•ªãƒ‡ã‚£ã‚¾ãƒ«ãƒ–ãƒ†ã‚¯ã‚¹ãƒãƒ£
 		rs3d->params.emplace_back();
 		rs3d->params[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rs3d->params[7].DescriptorTable.pDescriptorRanges = &descRange2;
@@ -181,28 +181,28 @@ void RootSignatureManager::RegisterAllRS()
 		descRange.BaseShaderRegister = 0;
 		descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-		//’è”ƒoƒbƒtƒ@0”Ôƒ}ƒeƒŠƒAƒ‹
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡0ç•ªãƒžãƒ†ãƒªã‚¢ãƒ«
 		rsparticle->params.emplace_back();
 		rsparticle->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rsparticle->params[0].Descriptor.ShaderRegister = 0;
 		rsparticle->params[0].Descriptor.RegisterSpace = 0;
 		rsparticle->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^0”Ô
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿0ç•ª
 		rsparticle->params.emplace_back();
 		rsparticle->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rsparticle->params[1].DescriptorTable.pDescriptorRanges = &descRange;
 		rsparticle->params[1].DescriptorTable.NumDescriptorRanges = 1;
 		rsparticle->params[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@1”Ô–¢Žg—p
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡1ç•ªæœªä½¿ç”¨
 		rsparticle->params.emplace_back();
 		rsparticle->params[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rsparticle->params[2].Descriptor.ShaderRegister = 1;
 		rsparticle->params[2].Descriptor.RegisterSpace = 0;
 		rsparticle->params[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//’è”ƒoƒbƒtƒ@2”Ôƒrƒ…[EŽË‰e•ÏŠ·s—ñ
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡2ç•ªãƒ“ãƒ¥ãƒ¼ãƒ»å°„å½±å¤‰æ›è¡Œåˆ—
 		rsparticle->params.emplace_back();
 		rsparticle->params[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rsparticle->params[3].Descriptor.ShaderRegister = 2;
@@ -225,14 +225,14 @@ void RootSignatureManager::RegisterAllRS()
 		descRange.BaseShaderRegister = 0;
 		descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-		//’è”ƒoƒbƒtƒ@0”ÔƒXƒvƒ‰ƒCƒg—p
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡0ç•ªã‚¹ãƒ—ãƒ©ã‚¤ãƒˆç”¨
 		rs2d->params.emplace_back();
 		rs2d->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs2d->params[0].Descriptor.ShaderRegister = 0;
 		rs2d->params[0].Descriptor.RegisterSpace = 0;
 		rs2d->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^0”Ô
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿0ç•ª
 		rs2d->params.emplace_back();
 		rs2d->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rs2d->params[1].DescriptorTable.pDescriptorRanges = &descRange;

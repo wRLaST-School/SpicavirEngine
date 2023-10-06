@@ -18,9 +18,9 @@ public:
 
 public:
 	Sprite() {};
-	//Šù‘¶‚ÌƒeƒNƒXƒ`ƒƒ‚ğg‚Á‚Ä¶¬
+	//æ—¢å­˜ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½¿ã£ã¦ç”Ÿæˆ
 	Sprite(const TextureKey& key);
-	//ƒeƒNƒXƒ`ƒƒ‚ğ“Ç‚İ‚ñ‚ÅƒL[‚É•Û‘¶A‚»‚ê‚ğg‚Á‚ÄSprite‚ğ¶¬
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’èª­ã¿è¾¼ã‚“ã§ã‚­ãƒ¼ã«ä¿å­˜ã€ãã‚Œã‚’ä½¿ã£ã¦Spriteã‚’ç”Ÿæˆ
 	Sprite(const std::string& path, const TextureKey& newKey);
 
 	static void PreSpriteDraw();
@@ -40,8 +40,8 @@ public:
 
 	Float4 brightness = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-	float width;
-	float height;
+	float width = 0.f;
+	float height = 0.f;
 
 	float rot = 0.0f;
 	Float3 position = {};
@@ -53,7 +53,7 @@ public:
 };
 
 namespace SpriteCommon {
-	// ’¸“_ƒŒƒCƒAƒEƒg
+	// é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	static D3D12_INPUT_ELEMENT_DESC inputLayout2D[] = {
 			{
 				"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,

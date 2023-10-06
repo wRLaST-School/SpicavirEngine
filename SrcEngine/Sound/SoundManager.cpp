@@ -97,7 +97,7 @@ SoundKey SoundManager::LoadWave(const std::string& path, const SoundKey& key)
 
 void SoundManager::Play(const SoundKey& key)
 {
-    IXAudio2SourceVoice* pSourceVoice = nullptr;//����ۑ����Ƃ��Ǝ~�߂���
+    IXAudio2SourceVoice* pSourceVoice = nullptr;//これ保存しとくと止められる
 
     SoundData* pSnd;
     sSndMap.Access(
@@ -120,7 +120,7 @@ void SoundManager::Play(const SoundKey& key)
 }
 SoundData* SoundManager::PlayBGM(const SoundKey& key, bool loopFlag)
 {
-    IXAudio2SourceVoice* pSourceVoice = nullptr;//����ۑ����Ƃ��Ǝ~�߂���
+    IXAudio2SourceVoice* pSourceVoice = nullptr;//これ保存しとくと止められる
     SoundData* pSnd;
     sSndMap.Access(
         [&](auto& map) {
@@ -170,6 +170,7 @@ void SoundManager::StopBGM(const SoundKey& key)
         }
     );
     if (pSnd->sound == nullptr) return;
+
     pSnd->sound->Stop();
 }
 
@@ -200,7 +201,7 @@ void SoundManager::ReleasePerSceneSounds()
             }
         }
 
-        if (!usingInCurrentScene) //���̃V�[���Ŏg���Ă��Ȃ��Ȃ烊���[�X
+        if (!usingInCurrentScene) //今のシーンで使われていないならリリース
         {
             StopBGM(*itr);
             GetSoundData(*itr)->Release();

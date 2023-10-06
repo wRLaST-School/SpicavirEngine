@@ -50,7 +50,7 @@ void Transition::Draw()
 
 		if (SceneManager::GetLoadState() == SceneManager::LoadState::Loading)
 		{
-			//“Ç‚İ‚İ’†‚Ì•`‰æˆ—
+			//èª­ã¿è¾¼ã¿ä¸­ã®æç”»å‡¦ç†
 		}
 	}
 }

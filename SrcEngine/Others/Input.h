@@ -43,11 +43,11 @@ namespace Input {
 
 		static void Close();
 
-		//ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+		//ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
 		static bool Down(int32_t key);
-		//ƒL[‚ª—£‚³‚ê‚½uŠÔ‚©
+		//ã‚­ãƒ¼ãŒé›¢ã•ã‚ŒãŸç¬é–“ã‹
 		static bool Released(int32_t key);
-		//ƒL[‚ª‰Ÿ‚³‚ê‚½uŠÔ‚©
+		//ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸç¬é–“ã‹
 		static bool Triggered(int32_t key);
 
 		static Key* GetInstance();
@@ -76,10 +76,10 @@ namespace Input {
 
 		static bool Released(const Click& b);
 
-		//ƒ}ƒEƒX‚ÌˆÚ“®—Ê
+		//ãƒã‚¦ã‚¹ã®ç§»å‹•é‡
 		static Float2 GetVel();
 
-		//ƒ}ƒEƒX‚ÌÀ•W
+		//ãƒã‚¦ã‚¹ã®åº§æ¨™
 		static Float2 GetPos();
 
 		static Mouse* GetInstance();
@@ -102,18 +102,18 @@ namespace Input {
 
 		static void Close();
 
-		//ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+		//ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
 		static bool Down(const Button& button);
-		//ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½uŠÔ‚©
+		//ãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸç¬é–“ã‹
 		static bool Released(const Button& button);
-		//ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½uŠÔ‚©
+		//ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸç¬é–“ã‹
 		static bool Triggered(const Button& button);
 
-		//ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚©
+		//ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã‹
 		static bool Down(const Trigger& side);
-		//ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½uŠÔ‚©
+		//ãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸç¬é–“ã‹
 		static bool Released(const Trigger& side);
-		//ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½uŠÔ‚©
+		//ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸç¬é–“ã‹
 		static bool Triggered(const Trigger& side);
 
 		static Pad* GetInstance();
@@ -125,12 +125,12 @@ namespace Input {
 			operator Vec2() { return Vec2(x, y); }; // vec2
 		};
 
-		//¶ƒXƒeƒBƒbƒN‚ÌˆÚ“®—Ê‚ğ-1‚©‚ç1‚Å•Ô‚·
+		//å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ç§»å‹•é‡ã‚’-1ã‹ã‚‰1ã§è¿”ã™
 		static Stick GetLStick();
-		//‰EƒXƒeƒBƒbƒN‚ÌˆÚ“®—Ê‚ğ-1‚©‚ç1‚Å•Ô‚·
+		//å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ç§»å‹•é‡ã‚’-1ã‹ã‚‰1ã§è¿”ã™
 		static Stick GetRStick();
 
-		//ƒfƒbƒhƒ][ƒ“‚Ì”ÍˆÍ‚ğİ’è(0‚©‚ç1000)
+		//ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³ã®ç¯„å›²ã‚’è¨­å®š(0ã‹ã‚‰1000)
 		static void SetDeadZone(float range);
 		static float GetDeadZone();
 

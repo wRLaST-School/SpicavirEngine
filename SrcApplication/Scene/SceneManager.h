@@ -14,7 +14,7 @@ public:
 	static void DrawSprite();
 	static void DrawBack();
 
-	//”ñ“¯Šú‚ÅŸ‚ÌƒV[ƒ“‚Ì“Ç‚İ‚İ‚ğŠJn‚·‚é
+	//éåŒæœŸã§æ¬¡ã®ã‚·ãƒ¼ãƒ³ã®èª­ã¿è¾¼ã¿ã‚’é–‹å§‹ã™ã‚‹
 	template <class NextScene> static void LoadScene()
 	{
 		if (loadState != LoadState::NotInProgress)
@@ -35,7 +35,7 @@ public:
 		loadState = LoadState::Loading;
 	};
 
-	//“Ç‚İ‚İ‚ªI‚í‚Á‚Ä‚¢‚½‚çƒV[ƒ“‚ğØ‚è‘Ö‚¦AI‚í‚Á‚Ä‚¢‚È‚¢‚È‚ç‰½‚à‚µ‚È‚¢
+	//èª­ã¿è¾¼ã¿ãŒçµ‚ã‚ã£ã¦ã„ãŸã‚‰ã‚·ãƒ¼ãƒ³ã‚’åˆ‡ã‚Šæ›¿ãˆã€çµ‚ã‚ã£ã¦ã„ãªã„ãªã‚‰ä½•ã‚‚ã—ãªã„
 	static void Transition();
 
 	static void ConfirmTransition();
@@ -45,23 +45,23 @@ public:
 		Loading,
 		Loaded
 	};
-	//Œ»İ‚ÌƒV[ƒ““Ç‚İ‚İ‚Ìó‘Ô‚ğæ“¾
+	//ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³èª­ã¿è¾¼ã¿ã®çŠ¶æ…‹ã‚’å–å¾—
 	static LoadState GetLoadState();
 
 	static std::unique_ptr<IScene> currentScene;
 	static std::unique_ptr<IScene> nextScene;
 
 private:
-	//ƒ[ƒh‚Ìó‘ÔA–ˆƒtƒŒ[ƒ€‚ÌÅ‰‚ÉXV‚³‚ê‚é
+	//ãƒ­ãƒ¼ãƒ‰ã®çŠ¶æ…‹ã€æ¯ãƒ•ãƒ¬ãƒ¼ãƒ ã®æœ€åˆã«æ›´æ–°ã•ã‚Œã‚‹
 	static LoadState loadState;
-	//‚±‚Á‚¿‚ÍƒŠƒAƒ‹ƒ^ƒCƒ€XVAŸƒtƒŒ[ƒ€‚ÌÅ‰‚ÉƒŠƒZƒbƒg
+	//ã“ã£ã¡ã¯ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ æ›´æ–°ã€æ¬¡ãƒ•ãƒ¬ãƒ¼ãƒ ã®æœ€åˆã«ãƒªã‚»ãƒƒãƒˆ
 	static bool loadFinished;
 	static void UpdateLoadState();
 	static bool transitionQueued;
 
-	//ˆÈ‰ºŠî–{g—p‹Ö~
+	//ä»¥ä¸‹åŸºæœ¬ä½¿ç”¨ç¦æ­¢
 public:
-	//”ñ“¯Šú‚Å‚ÌƒV[ƒ““Ç‚İ‚İ‚ğs‚í‚¸‚É’¼ÚƒV[ƒ“Ø‚è‘Ö‚¦‚ğ‚·‚é(ƒoƒO‹N‚«‚ª‚¿‚È‚Ì‚Å’ˆÓ)
+	//éåŒæœŸã§ã®ã‚·ãƒ¼ãƒ³èª­ã¿è¾¼ã¿ã‚’è¡Œã‚ãšã«ç›´æ¥ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã‚’ã™ã‚‹(ãƒã‚°èµ·ããŒã¡ãªã®ã§æ³¨æ„)
 	template <class NextScene> static void InstantTransition();
 
 private:

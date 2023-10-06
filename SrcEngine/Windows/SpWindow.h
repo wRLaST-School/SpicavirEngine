@@ -1,7 +1,6 @@
 #pragma once
 #include "Essentials.h"
 
-
 class SpWindow
 {
 public:
@@ -19,11 +18,11 @@ private:
 };
 
 /// <summary>
-///	SpWindowƒŠƒXƒg‚©‚çw’èID‚ÌSpWindow‚ğ’T‚µ‚Ä•Ô‚·B
-/// ID‚ğw’è‚µ‚È‚¢ê‡‚ÍSetDefaultWindowID‚Åw’è‚µ‚½ID‚ğg‚¤B
+///	SpWindowãƒªã‚¹ãƒˆã‹ã‚‰æŒ‡å®šIDã®SpWindowã‚’æ¢ã—ã¦è¿”ã™ã€‚
+/// IDã‚’æŒ‡å®šã—ãªã„å ´åˆã¯SetDefaultWindowIDã§æŒ‡å®šã—ãŸIDã‚’ä½¿ã†ã€‚
 /// </summary>
-/// <param name="ID">stringŒ^‚ÌID</param>
-/// <returns>¬Œ÷:SpWindow‚Ö‚Ìƒ|ƒCƒ“ƒ^,¸”s:nullptr</returns>
+/// <param name="ID">stringå‹ã®ID</param>
+/// <returns>æˆåŠŸ:SpWindowã¸ã®ãƒã‚¤ãƒ³ã‚¿,å¤±æ•—:nullptr</returns>
 SpWindow* GetSpWindow(const std::string& ID);
 SpWindow* GetSpWindow();
 extern std::map<std::string, SpWindow> wWindowList;

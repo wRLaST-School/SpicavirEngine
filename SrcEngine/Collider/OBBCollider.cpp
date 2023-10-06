@@ -3,10 +3,10 @@
 #include <LineDrawer.h>
 #include <GameManager.h>
 
-//sep‚Í³‹K‰»‚³‚ê‚Ä‚¢‚é‚±‚Æ
+//sepã¯æ­£è¦åŒ–ã•ã‚Œã¦ã„ã‚‹ã“ã¨
 float GetSeparateAxisLength(const Vec3& sep, const Vec3& e1, const Vec3& e2, const Vec3& e3 = Vec3(0, 0, 0))
 {
-    //3‚Â‚Ì“àÏ‚Ìâ‘Î’l‚Ì‡Œv‚ª“Š‰eü•ª‚Ì’·‚³
+    //3ã¤ã®å†…ç©ã®çµ¶å¯¾å€¤ã®åˆè¨ˆãŒæŠ•å½±ç·šåˆ†ã®é•·ã•
     float r1 = fabsf(sep.Dot(e1));
     float r2 = fabsf(sep.Dot(e2));
     float r3 = e3.GetSquaredLength() ? fabsf(sep.Dot(e3)) : 0;
@@ -38,14 +38,14 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     Vec3 interval = (Vec3)pos - other.pos;
 
-    //•ª—£²Ae1
+    //åˆ†é›¢è»¸Ae1
     float rA = scale.x;
     float rB = GetSeparateAxisLength(axVecNorm, bxVec, byVec, bzVec);
     float l = fabsf(interval.Dot(axVecNorm));
 
     if (l > rA + rB) return false;
 
-    //•ª—£²Ae2
+    //åˆ†é›¢è»¸Ae2
 
     rA = scale.y;
     rB = GetSeparateAxisLength(ayVecNorm, bxVec, byVec, bzVec);
@@ -53,7 +53,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²Ae3
+    //åˆ†é›¢è»¸Ae3
 
     rA = scale.z;
     rB = GetSeparateAxisLength(azVecNorm, bxVec, byVec, bzVec);
@@ -61,7 +61,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²Be1
+    //åˆ†é›¢è»¸Be1
 
     rA = GetSeparateAxisLength(bxVecNorm, axVec, ayVec, azVec);
     rB = other.scale.x;
@@ -69,7 +69,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²Be2
+    //åˆ†é›¢è»¸Be2
 
     rA = GetSeparateAxisLength(byVecNorm, axVec, ayVec, azVec);
     rB = other.scale.y;
@@ -77,7 +77,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²Be3
+    //åˆ†é›¢è»¸Be3
 
     rA = GetSeparateAxisLength(bzVecNorm, axVec, ayVec, azVec);
     rB = other.scale.z;
@@ -85,7 +85,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²ax bx
+    //åˆ†é›¢è»¸ax bx
     Vec3 cross = axVecNorm.Cross(bxVecNorm);
     rA = GetSeparateAxisLength(cross, ayVec, azVec);
     rB = GetSeparateAxisLength(cross, byVec, bzVec);
@@ -93,7 +93,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
     
     if (l > rA + rB) return false;
 
-    //•ª—£²ax by
+    //åˆ†é›¢è»¸ax by
     cross = axVecNorm.Cross(byVecNorm);
     rA = GetSeparateAxisLength(cross, ayVec, azVec);
     rB = GetSeparateAxisLength(cross, bxVec, bzVec);
@@ -101,7 +101,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²ax bz
+    //åˆ†é›¢è»¸ax bz
     cross = axVecNorm.Cross(bzVecNorm);
     rA = GetSeparateAxisLength(cross, ayVec, azVec);
     rB = GetSeparateAxisLength(cross, bxVec, byVec);
@@ -109,7 +109,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²ay bx
+    //åˆ†é›¢è»¸ay bx
     cross = ayVecNorm.Cross(bxVecNorm);
     rA = GetSeparateAxisLength(cross, axVec, azVec);
     rB = GetSeparateAxisLength(cross, byVec, bzVec);
@@ -117,7 +117,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²ay by
+    //åˆ†é›¢è»¸ay by
     cross = ayVecNorm.Cross(byVecNorm);
     rA = GetSeparateAxisLength(cross, axVec, azVec);
     rB = GetSeparateAxisLength(cross, bxVec, bzVec);
@@ -125,7 +125,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²ay bz
+    //åˆ†é›¢è»¸ay bz
     cross = ayVecNorm.Cross(bzVecNorm);
     rA = GetSeparateAxisLength(cross, axVec, azVec);
     rB = GetSeparateAxisLength(cross, bxVec, byVec);
@@ -133,7 +133,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²az bx
+    //åˆ†é›¢è»¸az bx
     cross = azVecNorm.Cross(bxVecNorm);
     rA = GetSeparateAxisLength(cross, axVec, ayVec);
     rB = GetSeparateAxisLength(cross, byVec, bzVec);
@@ -141,7 +141,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²az by
+    //åˆ†é›¢è»¸az by
     cross = azVecNorm.Cross(byVecNorm);
     rA = GetSeparateAxisLength(cross, axVec, ayVec);
     rB = GetSeparateAxisLength(cross, bxVec, bzVec);
@@ -149,7 +149,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£²az bz
+    //åˆ†é›¢è»¸az bz
     cross = azVecNorm.Cross(bzVecNorm);
     rA = GetSeparateAxisLength(cross, axVec, ayVec);
     rB = GetSeparateAxisLength(cross, bxVec, byVec);
@@ -157,7 +157,7 @@ bool OBBCollider::Collide(const OBBCollider& other)
 
     if (l > rA + rB) return false;
 
-    //•ª—£‚Å‚«‚È‚¢‚½‚ß“–‚½‚Á‚Ä‚¢‚é
+    //åˆ†é›¢ã§ããªã„ãŸã‚å½“ãŸã£ã¦ã„ã‚‹
     return true;
 }
 

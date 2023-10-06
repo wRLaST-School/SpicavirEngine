@@ -52,7 +52,7 @@ struct ConstBufferDataBoneMatrix {
 };
 
 namespace ModelCommon {
-	// í∏ì_ÉåÉCÉAÉEÉg
+	// È†ÇÁÇπ„É¨„Ç§„Ç¢„Ç¶„Éà
 	static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 		{
 			"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,
@@ -152,11 +152,11 @@ public:
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertBuff = nullptr;
 	Microsoft::WRL::ComPtr<ID3D12Resource> indexBuff = nullptr;
 
-	std::vector<Material> material;
+	eastl::vector<Material> material;
 
-	std::unordered_map<std::string, Bone> bones;
-	std::unordered_map<std::string, Animation> animations;
-	std::unordered_map<std::string, Node> nodes;
+	eastl::unordered_map<std::string, Bone> bones;
+	eastl::unordered_map<std::string, Animation> animations;
+	eastl::unordered_map<std::string, Node> nodes;
 
 	std::vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
 	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
@@ -188,6 +188,6 @@ public:
 
 private:
 	static exc_unordered_map<ModelKey, Model> sModels;
-	static std::list<ModelKey> sPerSceneModels[2];
+	static eastl::list<ModelKey> sPerSceneModels[2];
 	static int32_t sCurrentSceneResIndex;
 };

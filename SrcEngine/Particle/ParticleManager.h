@@ -11,7 +11,7 @@ public:
 	void Draw();
 
 	~ParticleManager() {
-		// ƒ}ƒbƒv‚ð‰ðœ
+		// ãƒžãƒƒãƒ—ã‚’è§£é™¤
 		vertBuff->Unmap(0, nullptr);
 	};
 

@@ -1,23 +1,27 @@
 #include "Util.h"
+#include <random>
+
+std::random_device rnd;
+std::mt19937 mt(rnd());
 
 std::wstring Util::StrToWStr(const std::string& str, int32_t page)
 {
     // SJIS -> wstring
     int32_t iBufferSize = MultiByteToWideChar(page, 0, str.c_str(), -1, (wchar_t*)NULL, 0);
 
-    // ƒoƒbƒtƒ@‚ÌŽæ“¾
+    // ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
     wchar_t* cpUCS2 = new wchar_t[iBufferSize];
 
     // SJIS -> wstring
     MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, cpUCS2, iBufferSize);
 
-    // string‚Ì¶¬
+    // stringã®ç”Ÿæˆ
     std::wstring ret(cpUCS2, cpUCS2 + iBufferSize - 1);
 
-    // ƒoƒbƒtƒ@‚Ì”jŠü
+    // ãƒãƒƒãƒ•ã‚¡ã®ç ´æ£„
     delete[] cpUCS2;
 
-    // •ÏŠ·Œ‹‰Ê‚ð•Ô‚·
+    // å¤‰æ›çµæžœã‚’è¿”ã™
     return ret;
 }
 
@@ -29,13 +33,10 @@ bool Util::Chance(int32_t percentage)
 int32_t Util::RNG(int32_t min, int32_t max, bool preciseMode)
 {
     if (!preciseMode) {
-        return (rand() % (max + 1 - min) + min);
+        return (mt() % (max + 1 - min) + min);
     }
 
-    int32_t ret = 0;
-    do {
-        ret = rand();
-    } while (ret >= RAND_MAX - RAND_MAX % (max + 1 - min));
-    ret = ret % (max + 1 - min) + min;
-    return ret;
+    std::uniform_int_distribution<> rbrnd(min, max);
+
+    return rbrnd(mt);
 }

@@ -6,4 +6,5 @@ public:
 	static Score sScore;
 	static bool sShowDebug;
 	static bool sShowHitBoxes;
+	static bool sDebugImmunity;
 };

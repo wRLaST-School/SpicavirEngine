@@ -2,7 +2,7 @@
 #include <Emitter.h>
 
 namespace ParticleCommon {
-	// í∏ì_ÉåÉCÉAÉEÉg
+	// È†ÇÁÇπ„É¨„Ç§„Ç¢„Ç¶„Éà
 	static D3D12_INPUT_ELEMENT_DESC inputLayout[] = {
 			{
 				"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,

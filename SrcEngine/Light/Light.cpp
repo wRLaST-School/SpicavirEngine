@@ -8,7 +8,7 @@ void Light::Init()
 
 void Light::Use()
 {
-	GetWDX()->cmdList->SetGraphicsRootConstantBufferView(RootParamIndex::LightBasic, GetInstance()->lightCB_.buffer->GetGPUVirtualAddress());
+	GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(RootParamIndex::LightBasic, GetInstance()->lightCB_.buffer->GetGPUVirtualAddress());
 }
 
 void Light::UpdateLightData()

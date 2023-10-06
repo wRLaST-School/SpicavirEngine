@@ -6,8 +6,6 @@
 
 void SrPostEffectStage::Init()
 {
-	//int w = GetSpWindow()->width;
-	//int h = GetSpWindow()->height;
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "BloomBefore", true);
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "BloomAfter", true);
 	RTVManager::CreateRenderTargetTexture(.5f, 1.f, "Bloom2ndAfter", true);

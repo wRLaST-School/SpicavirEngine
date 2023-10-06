@@ -178,6 +178,12 @@
     <Filter Include="Engine\ソースファイル\BTEditor">
       <UniqueIdentifier>{130ff499-d04f-4e4b-8065-64d97cfae0aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\Framework">
+      <UniqueIdentifier>{8422c35f-6067-476d-9848-27c64ba8b2ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Framework">
+      <UniqueIdentifier>{fce172b6-6c08-4dab-b90d-cf3189df133f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -470,6 +476,18 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\BehaviorTree\BTENode.cpp">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp">
+      <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClCompile>
+    <ClCompile Include="SpFramework.cpp">
+      <Filter>Engine\ソースファイル\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShader.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="StructuredBuffer.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -785,6 +803,18 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTENode.h">
       <Filter>Engine\ソースファイル\BTEditor</Filter>
     </ClInclude>
+    <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h">
+      <Filter>Engine\ソースファイル\BehaviorTree</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeShader.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="StructuredBuffer.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SpFramework.h">
+      <Filter>Engine\ヘッダーファイル\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\BasicPS.hlsl">
@@ -887,6 +917,9 @@
     </None>
     <None Include="Resources\Shaders\BasicInv.hlsli">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include=".editorconfig">
+      <Filter>未分類</Filter>
     </None>
   </ItemGroup>
 </Project>

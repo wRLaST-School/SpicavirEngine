@@ -10,6 +10,7 @@ static std::vector<std::string> itemList{
 				"Sequencer",
 				"Selector",
 				"Loop",
+				"Condition",
 				"Root"
 };
 
@@ -34,7 +35,7 @@ void BTENode::ChangeNodeType(std::string type)
 	auto children = std::move(last->children_);
 	auto parentBT = last->parentBT_;
 
-	//NodeType‚É‚æ‚Á‚Ä•ªŠò
+	//NodeTypeã«ã‚ˆã£ã¦åˆ†å²
 	if (type == "Action")
 	{
 		*node_ = std::make_unique<BT::ActionNode>();
@@ -50,6 +51,10 @@ void BTENode::ChangeNodeType(std::string type)
 	else if (type == "Sequencer")
 	{
 		*node_ = std::make_unique<BT::SequencerNode>();
+	}
+	else if (type == "Condition")
+	{
+		*node_ = std::make_unique<BT::ConditionNode>();
 	}
 	else
 	{
@@ -128,6 +133,14 @@ void BTENode::Draw()
 			if (ImGui::Button("Select Child"))
 			{
 				master_->SetSelected(this);
+			}
+
+			ImGui::SameLine();
+
+			if (ImGui::Button("Delete Node"))
+			{
+				//Nodeã‚’æ¶ˆã™
+				master_->DeleteNode(this);
 			}
 		}
 

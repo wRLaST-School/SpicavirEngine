@@ -4,7 +4,7 @@
 #include "SpTextureManager.h"
 #include <Quaternion.h>
 struct ConstBufferDataTransform {
-	Matrix mat;//3D•ÏŠ·s—ñ
+	Matrix mat;//3Då¤‰æ›è¡Œåˆ—
 };
 
 struct ConstBufferDataMisc {
@@ -22,17 +22,17 @@ public:
 	void UpdateMatrix();
 
 	void Draw();
-	//•Ê“r“Ç‚İ‚ñ‚¾ƒeƒNƒXƒ`ƒƒ‚ğg‚¤ê‡
+	//åˆ¥é€”èª­ã¿è¾¼ã‚“ã ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ä½¿ã†å ´åˆ
 	void Draw(const TextureKey& key);
 
 	void DrawCommands(const TextureKey& key);
 
-	//‰ÁZ‡¬
+	//åŠ ç®—åˆæˆ
 	void DrawAdd();
-	//‰ÁZ‡¬
+	//åŠ ç®—åˆæˆ
 	void DrawAdd(const TextureKey& key);
 
-	//“§‰ß•\¦—p
+	//é€éè¡¨ç¤ºç”¨
 	void DrawAlpha();
 	void DrawAlpha(const TextureKey& key);
 

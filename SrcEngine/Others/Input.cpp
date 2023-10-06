@@ -3,9 +3,7 @@
 #include "SpWindow.h"
 #include "Util.h"
 
-#ifdef _DEBUG
 #include <SpImGui.h>
-#endif
 
 using namespace Input;
 
@@ -23,6 +21,8 @@ void Key::Init()
 
 void Key::Update()
 {
+	if (ImGui::IsAnyItemActive()) return;
+
 	Key* instance = GetInstance();
 	for (size_t i = 0; i < 256; i++)
 	{
@@ -168,6 +168,8 @@ void Input::Mouse::Init()
 
 void Input::Mouse::Update()
 {
+	if (ImGui::IsAnyItemHovered()) return;
+
 	Mouse* ins = GetInstance();
 	ins->prevState_ = ins->state_;
 

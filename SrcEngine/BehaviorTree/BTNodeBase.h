@@ -1,5 +1,6 @@
 #pragma once
 class BTENode;
+class BTEditor;
 
 namespace BT {
     class BehaviorTree;
@@ -15,6 +16,7 @@ namespace BT {
     class INode {
     protected:
         friend BTENode;
+        friend BTEditor;
 
         std::list<std::unique_ptr<INode>> children_;
 
@@ -37,7 +39,7 @@ namespace BT {
 
         virtual std::string GetNodeType() = 0;
 
-        //BTEditor用
+        //BTEditor逕ｨ
         BTENode* editorNodePtr = nullptr;
     public:
         template<class NodeType>
@@ -52,7 +54,7 @@ namespace BT {
         INode* Last();
         std::unique_ptr<INode>* LastPtr();
 
-        //新しいNodeのuptrへのポインタを返す
+        //譁ｰ縺励＞Node縺ｮuptr縺ｸ縺ｮ繝昴う繝ｳ繧ｿ繧定ｿ斐☆
         std::unique_ptr<INode>* ChangeParent(INode* newParent);
 
         INode() {};

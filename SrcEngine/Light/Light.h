@@ -9,7 +9,7 @@ class Light
 public:
 	struct LightCBData
 	{
-		Vec3 dLightVec;//Œõ‚Ì•ûŒü‚Ì‹tƒxƒNƒgƒ‹
+		Vec3 dLightVec;//å…‰ã®æ–¹å‘ã®é€†ãƒ™ã‚¯ãƒˆãƒ«
 		float padding1 = 0;
 		Float3 dLightColor;
 		float padding2 = 0;

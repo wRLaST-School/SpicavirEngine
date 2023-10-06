@@ -8,11 +8,11 @@ class Animation2D
 {
 public:
 	Animation2D(){};
-	//ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ“o˜^B‰“o˜^‚È‚ç‰ŠúƒAƒjƒ[ƒVƒ‡ƒ“‚ÉB
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç™»éŒ²ã€‚åˆç™»éŒ²ãªã‚‰åˆæœŸã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã«ã€‚
 	void Register(std::vector<TextureKey> texKeys, int32_t cooltime, bool loop, const AnimKey& key);
 	void SetDefaultKey(const AnimKey& key);
 	void Update();
-	void Set(const AnimKey& key); // animationEnd‚ğ‰Šú‰»
+	void Set(const AnimKey& key); // animationEndã‚’åˆæœŸåŒ–
 
 	TextureKey Get();
 	bool isAnimationEnd();

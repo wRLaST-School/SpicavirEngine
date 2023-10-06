@@ -56,14 +56,16 @@ public:
     BT::Status GravSphereUpdate();
     BT::Status Wait60Frame();
 
+    bool IsPlayerInsideRushRange();
+
     void SelectMove();
 
     const OBBCollider& GetCollider();
 
-    //デバッグ系
+    //繝�繝舌ャ繧ｰ邉ｻ
     void ShowImGui();
 
-    //Cereal用
+    //Cereal逕ｨ
     template <class Archive>
     void serialize(Archive& ar) {
         ar(markerLine3Spacing_, lineAttackSpacing_, prepTime_, afterPrepWaitTime_,

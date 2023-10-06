@@ -28,7 +28,7 @@ public:
 	//change MAX_PLIGHTS in hlsli aswell
 	static const uint32_t MAX_LIGHTS = 16;
 
-	//“_ŒõŒ¹”‚ªãŒÀ‚ğ’´‚¦‚½ê‡‚ÌƒGƒ‰[
+	//ç‚¹å…‰æºæ•°ãŒä¸Šé™ã‚’è¶…ãˆãŸå ´åˆã®ã‚¨ãƒ©ãƒ¼
 	class QuantityOverflow {
 	public:
 		QuantityOverflow(int32_t limit, int32_t actual):limit(limit),actual(actual) {};

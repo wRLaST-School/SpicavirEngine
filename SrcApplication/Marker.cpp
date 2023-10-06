@@ -34,7 +34,7 @@ void Marker::Update()
 
     if (timer_ >= FIN_TIME)
     {
-        //“–‚½‚θ”»’θ‚π‘‚­
+        //ε½“γγ‚ε¤ε®γ‚’ζ›Έγ
         Player* pl = Player::Get();
 
         Float2 diff = {

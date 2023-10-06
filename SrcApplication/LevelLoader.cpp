@@ -13,7 +13,7 @@ using namespace std;
 
 void LevelLoader::Load(std::string path)
 {
-	//ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+	//ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
 	std::ifstream file;
 
 	file.open(path);
@@ -27,7 +27,7 @@ void LevelLoader::Load(std::string path)
 
 	file >> deserialized;
 
-	//³‹Kƒf[ƒ^‚©ƒ`ƒFƒbƒN
+	//æ­£è¦ãƒ‡ãƒ¼ã‚¿ã‹ãƒã‚§ãƒƒã‚¯
 	assert(deserialized.is_object());
 	assert(deserialized.contains("name"));
 	assert(deserialized["name"].is_string());
@@ -36,16 +36,16 @@ void LevelLoader::Load(std::string path)
 
 	assert(name.compare("scene") == 0);
 
-	//‘–¸ˆ—
+	//èµ°æŸ»å‡¦ç†
 	LevelManager::Clear();
 
-	//Ä‹AŠÖ”‚É‚·‚é
+	//å†å¸°é–¢æ•°ã«ã™ã‚‹
 	function<void(json& object, Object3D* parent)> ReadRec = [&ReadRec](json& obj, Object3D* parent) {
 		assert(obj.contains("type"));
 
 		string type = obj["type"].get<string>();
 
-		//í—Ş‚²‚Æ‚Ìˆ—
+		//ç¨®é¡ã”ã¨ã®å‡¦ç†
 		if (type.compare("MESH") == 0)
 		{
 			LevelManager::objects.emplace_back();
@@ -54,7 +54,7 @@ void LevelLoader::Load(std::string path)
 			if (obj.contains("file_name")) {
 				objdata.model = ModelManager::GetModel(obj["file_name"]);
 
-				//TODO: íœ‚µ‚ÄƒeƒNƒXƒ`ƒƒ‚ğ“\‚é
+				//TODO: å‰Šé™¤ã—ã¦ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’è²¼ã‚‹
 				if (obj["file_name"] == "floor")
 				{
 					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 1.0f, 1.0f };
@@ -86,7 +86,7 @@ void LevelLoader::Load(std::string path)
 				objdata.parent = parent;
 			}
 
-			//Ä‹Aˆ—
+			//å†å¸°å‡¦ç†
 			if (obj.contains("children"))
 			{
 				for (auto& child : obj["children"])

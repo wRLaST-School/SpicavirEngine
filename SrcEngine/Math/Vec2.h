@@ -16,7 +16,7 @@ public:
 
 	void SetY(float y);
 
-	//Sqrt‚ªŒÄ‚Î‚ê‚é
+	//SqrtãŒå‘¼ã°ã‚Œã‚‹
 	void SetLength(float l);
 
 	Vec2 operator+(const Vec2& v2) const;
@@ -44,10 +44,10 @@ public:
 
 	float Cross(const Vec2& v2) const;
 
-	//Sqrt‚ªŒÄ‚Î‚ê‚é
+	//SqrtãŒå‘¼ã°ã‚Œã‚‹
 	Vec2& Norm();
 
-	//Sqrt‚ªŒÄ‚Î‚ê‚é
+	//SqrtãŒå‘¼ã°ã‚Œã‚‹
 	Vec2 GetNorm() const;
 
 	float GetLength() const;

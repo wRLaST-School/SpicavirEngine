@@ -20,8 +20,8 @@ DXGI_FORMAT format[] = {DXGI_FORMAT_R8G8B8A8_UNORM};
 void SpEffekseer::Init()
 {
 	sEfkRenderer = EffekseerRendererDX12::Create(
-		GetWDX()->dev.Get(),
-		GetWDX()->cmdQueue.Get(),
+		GetSpDX()->dev.Get(),
+		GetSpDX()->cmdQueue.Get(),
 		2,
 		format,
 		1,
@@ -55,7 +55,7 @@ void SpEffekseer::Update()
 
 void SpEffekseer::Draw()
 {
-	EffekseerRendererDX12::BeginCommandList(sEfkCmdList, GetWDX()->cmdList.Get());
+	EffekseerRendererDX12::BeginCommandList(sEfkCmdList, GetSpDX()->cmdList.Get());
 
 	sEfkRenderer->BeginRendering();
 	sEfkManager->Draw();
@@ -110,9 +110,9 @@ void SpEffekseer::ReleasePerSceneEffects()
 			}
 		}
 
-		if (!usingInCurrentScene) //¡‚ÌƒV[ƒ“‚Åg‚í‚ê‚Ä‚¢‚È‚¢‚È‚çƒŠƒŠ[ƒX
+		if (!usingInCurrentScene) //ä»Šã®ã‚·ãƒ¼ãƒ³ã§ä½¿ã‚ã‚Œã¦ã„ãªã„ãªã‚‰ãƒªãƒªãƒ¼ã‚¹
 		{
-			//TODO:Ä¶‚ğ~‚ß‚éˆ—‚ğ‘‚­‚È‚ç‘‚­
+			//TODO:å†ç”Ÿã‚’æ­¢ã‚ã‚‹å‡¦ç†ã‚’æ›¸ããªã‚‰æ›¸ã
 
 			sEffects.Access(
 				[&](auto& map) {

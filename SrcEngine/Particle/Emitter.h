@@ -9,28 +9,28 @@ template <class ParticleType>
 class Emitter : public ParticleManager
 {
 public:
-	//ƒGƒ~ƒbƒ^‚ÌÀ•W
+	//ã‚¨ãƒŸãƒƒã‚¿ã®åº§æ¨™
 	Float3 position;
 
-	//oŒ»”ÍˆÍ‚Ì”¼ŒaAshape‚ªsphere‚È‚çx‚Ì‚İg—p
+	//å‡ºç¾ç¯„å›²ã®åŠå¾„ã€shapeãŒsphereãªã‚‰xã®ã¿ä½¿ç”¨
 	Float3 radius;
 
-	//oŒ»”ÍˆÍ‚ÌŒ`ó
+	//å‡ºç¾ç¯„å›²ã®å½¢çŠ¶
 	enum class Shape {
 		Cube,
 		Sphere
 	} shape = Shape::Cube;
 
-	//“¯‚É”­¶‚·‚é”
+	//åŒæ™‚ã«ç™ºç”Ÿã™ã‚‹æ•°
 	int32_t quantity = 1;
 
-	//”­¶ŠÔŠu(ƒtƒŒ[ƒ€)
+	//ç™ºç”Ÿé–“éš”(ãƒ•ãƒ¬ãƒ¼ãƒ )
 	int32_t timeBetweenEmit = 1;
 
-	//true‚È‚çƒp[ƒeƒBƒNƒ‹‚ğ¶¬‚·‚é
+	//trueãªã‚‰ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’ç”Ÿæˆã™ã‚‹
 	bool active = false;
 
-	//true‚È‚çƒp[ƒeƒBƒNƒ‹‚ğˆê“x¶¬‚·‚é‚Æ©“®“I‚Éactive‚ğfalse‚É
+	//trueãªã‚‰ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã‚’ä¸€åº¦ç”Ÿæˆã™ã‚‹ã¨è‡ªå‹•çš„ã«activeã‚’falseã«
 	bool emitOnce = false;
 
 public:

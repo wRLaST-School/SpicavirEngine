@@ -12,6 +12,7 @@
 #include <EASTL/type_traits.h>
 #include <EASTL/internal/functional_base.h>
 #include <EASTL/internal/mem_fn.h>
+#include <string>
 
 
 #if defined(EA_PRAGMA_ONCE_SUPPORTED)
@@ -1187,6 +1188,18 @@ namespace eastl
 		{
 			uint32_t c, result = 2166136261U;   // Intentionally uint32_t instead of size_t, so the behavior is the same regardless of size.
 			while((c = (uint32_t)*p++) != 0)    // cast to unsigned 32 bit.
+				result = (result * 16777619) ^ c;
+			return (size_t)result;
+		}
+	};
+
+	template <> struct hash<std::string>
+	{
+		size_t operator()(std::string p_raw) const
+		{
+			const char* p = p_raw.c_str();
+			uint32_t c, result = 2166136261U;   // Intentionally uint32_t instead of size_t, so the behavior is the same regardless of size.
+			while ((c = (uint8_t)*p++) != 0)     // cast to unsigned 8 bit.
 				result = (result * 16777619) ^ c;
 			return (size_t)result;
 		}

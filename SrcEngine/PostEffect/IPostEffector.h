@@ -16,7 +16,7 @@ public:
 
 	static void Effect(const TextureKey& baseTex, const TextureKey& targetTex, const std::string& name, std::function<void(void)> commands = [](void) {return; });
 
-	virtual void SetExclusiveCBV() = 0; // ê—p‚Ì’è”ƒoƒbƒtƒ@‚ğƒZƒbƒg‚·‚éƒRƒ}ƒ“ƒh—p(Œp³æ‚ÌEffectŠÖ”‚ÌÀ‘•“à‚ÅŒÄ‚Ño‚µ„§)A0”Ô‚Ì’è”ƒoƒbƒtƒ@
+	virtual void SetExclusiveCBV() = 0; // å°‚ç”¨ã®å®šæ•°ãƒãƒƒãƒ•ã‚¡ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã‚³ãƒãƒ³ãƒ‰ç”¨(ç¶™æ‰¿å…ˆã®Effecté–¢æ•°ã®å®Ÿè£…å†…ã§å‘¼ã³å‡ºã—æ¨å¥¨)ã€0ç•ªã®å®šæ•°ãƒãƒƒãƒ•ã‚¡
 };
 
 class PostEffectCommon

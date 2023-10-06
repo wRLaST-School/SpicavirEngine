@@ -12,7 +12,7 @@ void Billboard::UpdateMatrix()
 
 	matWorld = Matrix::Identity();
 	matWorld *= mScale;
-	matWorld *= camera->rotation.GetRotMat();//ビルボード回転
+	matWorld *= camera->rotation.GetRotMat();//繝薙Ν繝懊�ｼ繝牙屓霆｢
 	matWorld *= mRot;
 	matWorld *= mTrans;
 
@@ -40,7 +40,7 @@ void BillboardY::UpdateMatrix()
 
 	matWorld = Matrix::Identity();
 	matWorld *= mScale;
-	matWorld *= mYBill;//ビルボード回転
+	matWorld *= mYBill;//繝薙Ν繝懊�ｼ繝牙屓霆｢
 	matWorld *= mRot;
 	matWorld *= mTrans;
 

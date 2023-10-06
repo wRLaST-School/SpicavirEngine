@@ -37,7 +37,7 @@ void BT::BehaviorTree::Tick()
 
 void BT::BehaviorTree::LoadJson(std::string path)
 {
-	//ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+	//ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
 	std::ifstream file;
 
 	file.open(path);
@@ -50,7 +50,7 @@ void BT::BehaviorTree::LoadJson(std::string path)
 	json deserialized;
 	file >> deserialized;
 
-	//ƒcƒŠ[‚ÌƒŠƒZƒbƒg
+	//ãƒ„ãƒªãƒ¼ã®ãƒªã‚»ãƒƒãƒˆ
 	root = make_unique<BT::RootNode>();
 	dynamic_cast<RootNode*>(root.get())->SetRootBT(this);
 
@@ -59,12 +59,12 @@ void BT::BehaviorTree::LoadJson(std::string path)
 	assert(deserialized.contains("Node0"));
 	assert(deserialized["Node0"]["NodeType"] == "Root");
 
-	//ƒcƒŠ[‚Ì\’z
-	//“Ç‚İ‚İ‚ÌÄ‹NŠÖ”
+	//ãƒ„ãƒªãƒ¼ã®æ§‹ç¯‰
+	//èª­ã¿è¾¼ã¿ã®å†èµ·é–¢æ•°
 	function<void(const json& object, INode* parent)> processNode = [&](const json& object, INode* parent)
 	{
 		string nodeType = object["NodeType"].get<string>();
-		//NodeType‚É‚æ‚Á‚Ä•ªŠò
+		//NodeTypeã«ã‚ˆã£ã¦åˆ†å²
 		if (nodeType == "Action")
 		{
 			parent->AddNode<ActionNode>(object["NodeParam"].get<string>());
@@ -81,12 +81,16 @@ void BT::BehaviorTree::LoadJson(std::string path)
 		{
 			parent->AddNode<SequencerNode>(object["NodeParam"].get<string>());
 		}
+		else if (nodeType == "Condition")
+		{
+			parent->AddNode<ConditionNode>(object["NodeParam"].get<string>());
+		}
 		else
 		{
 			parent->AddNode<SequencerNode>("");
 		}
 
-		//qƒm[ƒh‚Ì“Ç‚İ‚İ
+		//å­ãƒãƒ¼ãƒ‰ã®èª­ã¿è¾¼ã¿
 		if (object.contains("Children"))
 		{
 			
@@ -100,7 +104,7 @@ void BT::BehaviorTree::LoadJson(std::string path)
 		}
 	};
 
-	//“Ç‚İ‚İÄ‹NŠÖ”ŒÄ‚Ño‚µ
+	//èª­ã¿è¾¼ã¿å†èµ·é–¢æ•°å‘¼ã³å‡ºã—
 	if (deserialized["Node0"].contains("Children"))
 	{
 		for (auto& node : deserialized["Node0"]["Children"])
@@ -114,9 +118,9 @@ void BT::BehaviorTree::LoadJson(std::string path)
 
 void BT::BehaviorTree::SaveJson(std::string path)
 {
-	//jsonŒ`®‚Ìstring‚ğì¬
+	//jsonå½¢å¼ã®stringã‚’ä½œæˆ
 	
-	//ì¬ƒCƒ[ƒW
+	//ä½œæˆã‚¤ãƒ¡ãƒ¼ã‚¸
 	// {
 	// "Node":{
 	//	"NodeType":"NODETYPE",
@@ -136,7 +140,7 @@ void BT::BehaviorTree::SaveJson(std::string path)
 
 	jsonStr << "{" << endl;
 
-	//ƒm[ƒh‚ğˆ—‚·‚éÄ‹NŠÖ”
+	//ãƒãƒ¼ãƒ‰ã‚’å‡¦ç†ã™ã‚‹å†èµ·é–¢æ•°
 	function<void(INode* currentNode, std::string indent, std::string nodeNum)> processNode = [&](INode* current, std::string indent, std::string nodeNum = "") {
 		jsonStr << indent << "\"Node" << nodeNum << "\":{\n";
 		string firstIndent = indent;
@@ -160,7 +164,7 @@ void BT::BehaviorTree::SaveJson(std::string path)
 				processNode(c.get(), indent + "  ", to_string(nodeNumInt));
 				nodeNumInt++;
 			}
-			//ÅŒã‚ÌƒJƒ“ƒ}‚ğíœ
+			//æœ€å¾Œã®ã‚«ãƒ³ãƒã‚’å‰Šé™¤
 			string tempStr = jsonStr.str();
 
 			tempStr.pop_back();
@@ -181,10 +185,10 @@ void BT::BehaviorTree::SaveJson(std::string path)
 		jsonStr << firstIndent << "},\n";
 	};
 
-	//ƒ‹[ƒgƒm[ƒh‚©‚çŒÄ‚Ño‚µ
+	//ãƒ«ãƒ¼ãƒˆãƒãƒ¼ãƒ‰ã‹ã‚‰å‘¼ã³å‡ºã—
 	processNode(root.get(), "", "0");
 
-	//ÅŒã‚ÌƒJƒ“ƒ}‚ğíœ
+	//æœ€å¾Œã®ã‚«ãƒ³ãƒã‚’å‰Šé™¤
 	string tempStr = jsonStr.str();
 
 	tempStr.pop_back();
@@ -201,7 +205,7 @@ void BT::BehaviorTree::SaveJson(std::string path)
 	jsonStr << "}" << endl;
 
 
-	//ƒtƒ@ƒCƒ‹‘‚«‚İ
+	//ãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿
 	std::ofstream file;
 
 	file.open(path);

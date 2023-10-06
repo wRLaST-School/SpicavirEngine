@@ -4,7 +4,7 @@
 
 typedef std::string TextureKey;
 typedef size_t SRVHeapIndex;
-//index‚ªunsigned char‚É‚È‚Á‚Ä‚é‚©‚ç‚±‚±‚ğ•ÏX‚·‚é‚È‚ç‚»‚Á‚¿‚à•ÏX
+//indexãŒunsigned charã«ãªã£ã¦ã‚‹ã‹ã‚‰ã“ã“ã‚’å¤‰æ›´ã™ã‚‹ãªã‚‰ãã£ã¡ã‚‚å¤‰æ›´
 const size_t wMaxSRVCount = 1024;
 
 class SpTextureManager
@@ -12,7 +12,7 @@ class SpTextureManager
 private:
 	struct TexData {
 		DirectX::TexMetadata meta;
-		Float2 ratio = { 0.f, 0.f }; //x‚ªƒ[ƒˆÈŠO‚È‚ç‰æ–Ê”ä—¦
+		Float2 ratio = { 0.f, 0.f }; //xãŒã‚¼ãƒ­ä»¥å¤–ãªã‚‰ç”»é¢æ¯”ç‡
 	};
 public:
 	static void Create();
@@ -36,11 +36,11 @@ public:
 	static ID3D12Resource* GetTextureBuff(const TextureKey& key);
 	static int32_t GetIndex(const TextureKey& key);
 
-	//ƒV[ƒ“‚ğ’´‚¦‚Äg—p‚·‚éƒŠƒ\[ƒX‚Æ‚µ‚Äİ’è
+	//ã‚·ãƒ¼ãƒ³ã‚’è¶…ãˆã¦ä½¿ç”¨ã™ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã¨ã—ã¦è¨­å®š
 	static void AddMasterTextureKey(const TextureKey& key);
 
 	static void Release(const TextureKey& key);
-	//‘O‚ÌƒV[ƒ“‚Åg‚í‚ê‚Ä‚¢‚Ä¡‚ÌƒV[ƒ“‚Åg‚í‚ê‚Ä‚¢‚È‚¢ƒeƒNƒXƒ`ƒƒ‚ğƒŠƒŠ[ƒX
+	//å‰ã®ã‚·ãƒ¼ãƒ³ã§ä½¿ã‚ã‚Œã¦ã„ã¦ä»Šã®ã‚·ãƒ¼ãƒ³ã§ä½¿ã‚ã‚Œã¦ã„ãªã„ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ãƒªãƒªãƒ¼ã‚¹
 	static void ReleasePerSceneTexture();
 	static void PreLoadNewScene();
 
@@ -61,6 +61,8 @@ private:
 	static int32_t sCurrentSceneResIndex;
 
 	static std::list<TextureKey> sMasterTextures;
+
+	static std::wstring GetExtension(const std::wstring& path);
 private:
 	SpTextureManager() {};
 	SpTextureManager(const SpTextureManager&) = delete;

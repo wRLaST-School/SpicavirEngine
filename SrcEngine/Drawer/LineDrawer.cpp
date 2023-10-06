@@ -9,7 +9,7 @@ void LineDrawer::Init()
 {
 	UINT sizeVB = static_cast<UINT>(sizeof(Line) * MAX_LINES);
 
-	////’¸“_ƒoƒbƒtƒ@‚ÌÝ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -22,7 +22,7 @@ void LineDrawer::Init()
 	resdesc.SampleDesc.Count = 1;
 	resdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	GetWDX()->dev->CreateCommittedResource(
+	GetSpDX()->dev->CreateCommittedResource(
 		&heapprop,
 		D3D12_HEAP_FLAG_NONE,
 		&resdesc,
@@ -33,10 +33,10 @@ void LineDrawer::Init()
 
 	vertBuff_->SetName(L"LINE VERT BUFF");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰ž‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ðŽæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	vertBuff_->Map(0, nullptr, (void**)&vertMap_);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView_.BufferLocation = vertBuff_->GetGPUVirtualAddress();
 	vbView_.SizeInBytes = sizeVB;
 	vbView_.StrideInBytes = sizeof(Line);
@@ -170,16 +170,16 @@ void LineDrawer::DrawAllLines()
 		if (index >= MAX_LINES) break;
 	}
 
-	GetWDX()->cmdList->SetPipelineState(GPipeline::GetState("line"));
-	GetWDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
+	GetSpDX()->cmdList->SetPipelineState(GPipeline::GetState("line"));
+	GetSpDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("Particle")->rootsignature.Get());
 
 	Camera::UseCurrent();
 
-	GetWDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
+	GetSpDX()->cmdList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
 
-	GetWDX()->cmdList->IASetVertexBuffers(0, 1, &vbView_);
+	GetSpDX()->cmdList->IASetVertexBuffers(0, 1, &vbView_);
 
-	GetWDX()->cmdList->DrawInstanced(static_cast<UINT>(lines_.size()), 1, 0, 0);
+	GetSpDX()->cmdList->DrawInstanced(static_cast<UINT>(lines_.size()), 1, 0, 0);
 }
 
 void LineDrawer::ClearLineData()

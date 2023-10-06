@@ -20,8 +20,8 @@
 #define EPSILON 0.000001f
 #endif
 
-//ラジアンから角度
+//繝ｩ繧ｸ繧｢繝ｳ縺九ｉ隗貞ｺｦ
 float ConvertRadianToAngle(float radian);
 
-//角度からラジアン
+//隗貞ｺｦ縺九ｉ繝ｩ繧ｸ繧｢繝ｳ
 float ConvertAngleToRadian(float angle);

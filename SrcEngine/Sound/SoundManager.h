@@ -1,6 +1,9 @@
 #pragma once
 #include "Essentials.h"
+
+#pragma warning(push, 0)
 #include <xaudio2.h>
+#pragma warning(pop)
 
 #include <fstream>
 #include <exc_unordered_map.h>
@@ -37,16 +40,17 @@ public:
 	IXAudio2SourceVoice* sound;
 
 	void Release() {
+		if (sound != nullptr)
+		{
+			sound->Stop();
+			sound->DestroyVoice();
+		}
+
 		delete[] pBuffer;
 
 		this->pBuffer = 0;
 		this->bufferSize = 0;
 		this->wfex = {};
-
-		if (sound != nullptr)
-		{
-			sound->Stop();
-		}
 	}
 };
 
