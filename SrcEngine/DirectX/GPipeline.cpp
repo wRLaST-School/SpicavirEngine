@@ -4,7 +4,7 @@ std::map<std::string, GPipeline> psoMap;
 
 void GPipeline::InitDesc(const PipelineDesc& desc)
 {
-	// ƒOƒ‰ƒtƒBƒbƒNƒXƒpƒCƒvƒ‰ƒCƒ“İ’è
+	// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³è¨­å®š
 	psod.VS.pShaderBytecode = desc.Shader.pShader->vsBlob->GetBufferPointer();
 	psod.VS.BytecodeLength = desc.Shader.pShader->vsBlob->GetBufferSize();
 	psod.PS.pShaderBytecode = desc.Shader.pShader->psBlob->GetBufferPointer();
@@ -65,7 +65,7 @@ void GPipeline::InitDesc(const PipelineDesc& desc)
 
 //void GPipeline::InitDesc2D()
 //{
-//	// ƒOƒ‰ƒtƒBƒbƒNƒXƒpƒCƒvƒ‰ƒCƒ“İ’è
+//	// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚¹ãƒ‘ã‚¤ãƒ—ãƒ©ã‚¤ãƒ³è¨­å®š
 //	psod.VS.pShaderBytecode = shader->vsBlob->GetBufferPointer();
 //	psod.VS.BytecodeLength = shader->vsBlob->GetBufferSize();
 //	psod.PS.pShaderBytecode = shader->psBlob->GetBufferPointer();
@@ -73,12 +73,12 @@ void GPipeline::InitDesc(const PipelineDesc& desc)
 //
 //	psod.PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 //
-//	psod.SampleMask = D3D12_DEFAULT_SAMPLE_MASK; // •W€İ’è
+//	psod.SampleMask = D3D12_DEFAULT_SAMPLE_MASK; // æ¨™æº–è¨­å®š
 //	psod.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-//	psod.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;  // ƒJƒŠƒ“ƒO‚µ‚È‚¢
+//	psod.RasterizerState.CullMode = D3D12_CULL_MODE_NONE;  // ã‚«ãƒªãƒ³ã‚°ã—ãªã„
 //
 //	D3D12_RENDER_TARGET_BLEND_DESC& blendDesc = psod.BlendState.RenderTarget[0];
-//	blendDesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;  // RBGA‘S‚Ä‚Ìƒ`ƒƒƒ“ƒlƒ‹‚ğ•`‰æ
+//	blendDesc.RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL;  // RBGAå…¨ã¦ã®ãƒãƒ£ãƒ³ãƒãƒ«ã‚’æç”»
 //	blendDesc.BlendEnable = true;
 //	blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 //	blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
@@ -88,9 +88,9 @@ void GPipeline::InitDesc(const PipelineDesc& desc)
 //	blendDesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
 //	blendDesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 //
-//	psod.NumRenderTargets = 1; // •`‰æ‘ÎÛ‚Í1‚Â
-//	psod.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // 0`255w’è‚ÌRGBA
-//	psod.SampleDesc.Count = 1; // 1ƒsƒNƒZƒ‹‚É‚Â‚«1‰ñƒTƒ“ƒvƒŠƒ“ƒO
+//	psod.NumRenderTargets = 1; // æç”»å¯¾è±¡ã¯1ã¤
+//	psod.RTVFormats[0] = DXGI_FORMAT_R8G8B8A8_UNORM; // 0ï½255æŒ‡å®šã®RGBA
+//	psod.SampleDesc.Count = 1; // 1ãƒ”ã‚¯ã‚»ãƒ«ã«ã¤ã1å›ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°
 //
 //	//Depth
 //	psod.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);

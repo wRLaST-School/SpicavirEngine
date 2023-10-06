@@ -26,7 +26,7 @@ void TestScene::LoadResources()
 
 void TestScene::Init()
 {
-#pragma region l•ªŠ„‰æ–Ê—pƒJƒƒ‰İ’è
+#pragma region å››åˆ†å‰²ç”»é¢ç”¨ã‚«ãƒ¡ãƒ©è¨­å®š
 	camera.SetRenderSize(640, 360);
 	camera.nearZ = 0.1f;
 	camera.farZ = 1000.0f;
@@ -237,6 +237,6 @@ void TestScene::DrawSprite()
 	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
 	udevGothicOpt.size = 32;
 
-	//TextDrawer::DrawString("0‚¤‚É‚á````0", 1180, 100, Align::TopRight, udevGothicOpt);
-	//TextDrawer::DrawString("ˆŸhoge‚¦ƒI123", 1180, 132, Align::TopRight);
+	//TextDrawer::DrawString("0ã†ã«ã‚ƒï½ï½ï½ï½0", 1180, 100, Align::TopRight, udevGothicOpt);
+	//TextDrawer::DrawString("äºœhogeãˆã‚ª123", 1180, 132, Align::TopRight);
 }

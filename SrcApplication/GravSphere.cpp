@@ -71,7 +71,7 @@ void GravSphere::CheckCollisions()
 
 	float playerDistSquared = ((Vec3)pl->GetCollider().pos - pos_).GetSquaredLength();
 
-	//d—Í‚Ì”»’è
+	//é‡åŠ›ã®åˆ¤å®š
 	if (playerDistSquared <= gravR_ * gravR_)
 	{
 		Vec3 vel = (Vec3)pos_ - pl->GetCollider().pos;
@@ -84,7 +84,7 @@ void GravSphere::CheckCollisions()
 	}
 
 
-	//”í’e‚Ì”»’è
+	//è¢«å¼¾ã®åˆ¤å®š
 	if (playerDistSquared <= r_ * r_)
 	{
 		pl->Damage();

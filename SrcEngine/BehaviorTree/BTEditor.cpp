@@ -126,10 +126,10 @@ void BTEditor::DeleteNode(BTENode* node)
 
 void BTEditor::LoadFile(std::string filePath)
 {
-	//ƒCƒ“ƒXƒ^ƒ“ƒX•Û‘¶
+	//ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ä¿å­˜
 	BTEditor* ins = GetInstance();
 
-	//ƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+	//ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
 	std::ifstream file;
 
 	file.open(filePath);
@@ -142,12 +142,12 @@ void BTEditor::LoadFile(std::string filePath)
 	json deserialized;
 	file >> deserialized;
 
-	//ƒcƒŠ[‚ÌƒŠƒZƒbƒg
+	//ãƒ„ãƒªãƒ¼ã®ãƒªã‚»ãƒƒãƒˆ
 	ins->tree_.root = make_unique<BT::RootNode>();
 	dynamic_cast<BT::RootNode*>(ins->tree_.root.get())->SetRootBT(&ins->tree_);
 	ins->editorObjects.clear();
 
-	//Editor Node‚ğ’Ç‰Á
+	//Editor Nodeã‚’è¿½åŠ 
 	std::string uniqueName = "##";
 	uniqueName += std::to_string(ins->id);
 	ins->id++;
@@ -160,12 +160,12 @@ void BTEditor::LoadFile(std::string filePath)
 	assert(deserialized.contains("Node0"));
 	assert(deserialized["Node0"]["NodeType"] == "Root");
 
-	//ƒcƒŠ[‚Ì\’z
-	//“Ç‚İ‚İ‚ÌÄ‹NŠÖ”
+	//ãƒ„ãƒªãƒ¼ã®æ§‹ç¯‰
+	//èª­ã¿è¾¼ã¿ã®å†èµ·é–¢æ•°
 	function<void(const json& object, INode* parent)> processNode = [&](const json& object, INode* parent)
 		{
 			string nodeType = object["NodeType"].get<string>();
-			//NodeType‚É‚æ‚Á‚Ä•ªŠò
+			//NodeTypeã«ã‚ˆã£ã¦åˆ†å²
 			if (nodeType == "Action")
 			{
 				parent->AddNode<ActionNode>(object["NodeParam"].get<string>());
@@ -191,7 +191,7 @@ void BTEditor::LoadFile(std::string filePath)
 				parent->AddNode<SequencerNode>("");
 			}
 
-			//Editor Node‚ğ’Ç‰Á
+			//Editor Nodeã‚’è¿½åŠ 
 			std::string uniqueName = "##";
 			uniqueName += std::to_string(ins->id);
 			ins->id++;
@@ -208,7 +208,7 @@ void BTEditor::LoadFile(std::string filePath)
 			}
 			parent->Last()->editorNodePtr->SetComboBoxItem(object["NodeType"].get<string>());
 
-			//qƒm[ƒh‚Ì“Ç‚İ‚İ
+			//å­ãƒãƒ¼ãƒ‰ã®èª­ã¿è¾¼ã¿
 			if (object.contains("Children"))
 			{
 
@@ -222,7 +222,7 @@ void BTEditor::LoadFile(std::string filePath)
 			}
 		};
 
-	//“Ç‚İ‚İÄ‹NŠÖ”ŒÄ‚Ño‚µ
+	//èª­ã¿è¾¼ã¿å†èµ·é–¢æ•°å‘¼ã³å‡ºã—
 	if (deserialized["Node0"].contains("Children"))
 	{
 		for (auto& node : deserialized["Node0"]["Children"])

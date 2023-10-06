@@ -14,7 +14,7 @@ struct GaussianWeight
     float h;
 } GetGaussianWeight(float strength);
 
-//�P�x�e�N�X�`������
+//輝度テクスチャ生成
 class BloomP1 :
     public IPostEffector
 {
@@ -24,7 +24,7 @@ public:
     static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 };
 
-//�P�x�e�N�X�`�����K�E�X�ڂ���(X)
+//輝度テクスチャをガウスぼかし(X)
 class BloomP2 :
     public IPostEffector
 {
@@ -37,7 +37,7 @@ public:
     static float strength;
 };
 
-//�P�x�e�N�X�`�����K�E�X�ڂ���(Y)
+//輝度テクスチャをガウスぼかし(Y)
 class BloomP3 :
     public IPostEffector
 {
@@ -47,7 +47,7 @@ public:
     static void Effect(const TextureKey& baseTex, const TextureKey& targetTex);
 };
 
-//�ł���Ώ�L��̑�����܂Ƃ߂�
+//できれば上記二つの操作をまとめる
 class BloomFin:
     public IPostEffector
 {

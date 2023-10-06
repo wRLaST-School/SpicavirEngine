@@ -55,9 +55,9 @@ void SpWindow::Create(LPCWSTR title, int32_t windowWidth, int32_t windowHeight) 
 
 	RegisterClassEx(&w);
 
-	//ウィンドウサイズのRECT
+	//繧ｦ繧｣繝ｳ繝峨え繧ｵ繧､繧ｺ縺ｮRECT
 	RECT wrc = { 0, 0, width, height };
-	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);//サイズ補正を自動で
+	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);//繧ｵ繧､繧ｺ陬懈ｭ｣繧定�ｪ蜍輔〒
 
 	hwnd = CreateWindow(w.lpszClassName,
 		title,
@@ -66,8 +66,8 @@ void SpWindow::Create(LPCWSTR title, int32_t windowWidth, int32_t windowHeight) 
 		CW_USEDEFAULT,
 		wrc.right - wrc.left,
 		wrc.bottom - wrc.top,
-		nullptr, //親ウィンドウハンドル
-		nullptr, //メニューハンドル
+		nullptr, //隕ｪ繧ｦ繧｣繝ｳ繝峨え繝上Φ繝峨Ν
+		nullptr, //繝｡繝九Η繝ｼ繝上Φ繝峨Ν
 		w.hInstance,
 		nullptr);
 
@@ -107,7 +107,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PostQuitMessage(0);
 		return 0;
 	case WM_CREATE:
-		//SetWindowLong(hwnd, GWL_STYLE, WS_POPUP | WS_BORDER); //ボーダーレスならコメントアウト解除
+		//SetWindowLong(hwnd, GWL_STYLE, WS_POPUP | WS_BORDER); //繝懊�ｼ繝繝ｼ繝ｬ繧ｹ縺ｪ繧峨さ繝｡繝ｳ繝医い繧ｦ繝郁ｧ｣髯､
 		return DefWindowProc(hwnd, msg, wParam, lParam);
 	case WM_SIZE:
 		{

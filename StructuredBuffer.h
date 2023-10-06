@@ -12,7 +12,7 @@ public:
 
 	~StructuredBuffer()
 	{
-		//ƒAƒ“ƒ}ƒbƒv
+		//ã‚¢ãƒ³ãƒãƒƒãƒ—
 		CD3DX12_RANGE readRange(0, 0);
 		if (buf_) {
 			buf_->Unmap(0, &readRange);
@@ -43,7 +43,7 @@ public:
 			IID_PPV_ARGS(&buf_)
 		);
 
-		//ƒ}ƒbƒv
+		//ãƒãƒƒãƒ—
 		CD3DX12_RANGE readRange(0, 0);
 		buf_->Map(0, &readRange, reinterpret_cast<void**>(&contents));
 

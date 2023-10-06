@@ -25,7 +25,7 @@ Sprite::Sprite(const TextureKey& key)
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Sprite::Vertex) * _countof(vertices));
 
-	////’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -49,20 +49,20 @@ Sprite::Sprite(const TextureKey& key)
 
 	vertBuff->SetName(L"SPRITE VERT BUFF");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	Sprite::Vertex* vertMap = nullptr;
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	// ‘S’¸“_‚É‘Î‚µ‚Ä
+	// å…¨é ‚ç‚¹ã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
-		vertMap[i] = vertices[i];   // À•W‚ğƒRƒs[
+		vertMap[i] = vertices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	vertBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Sprite::Vertex);
@@ -88,7 +88,7 @@ Sprite::Sprite(const std::string& path, const TextureKey& newKey)
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Sprite::Vertex) * _countof(vertices));
 
-	////’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -111,20 +111,20 @@ Sprite::Sprite(const std::string& path, const TextureKey& newKey)
 	);
 
 	vertBuff->SetName(L"SPRITE VERT BUFF");
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	Sprite::Vertex* vertMap = nullptr;
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	// ‘S’¸“_‚É‘Î‚µ‚Ä
+	// å…¨é ‚ç‚¹ã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
-		vertMap[i] = vertices[i];   // À•W‚ğƒRƒs[
+		vertMap[i] = vertices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	vertBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Sprite::Vertex);

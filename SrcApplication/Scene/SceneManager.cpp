@@ -30,7 +30,7 @@ void SceneManager::Update()
 	UpdateLoadState();
 	Transition::Update();
 
-	//デバッグ用シーン変更
+	//繝�繝舌ャ繧ｰ逕ｨ繧ｷ繝ｼ繝ｳ螟画峩
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
 		if (Input::Key::Triggered(DIK_G))

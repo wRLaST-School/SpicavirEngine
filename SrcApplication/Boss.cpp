@@ -55,16 +55,16 @@ void Boss::Update()
 		ShowImGui();
 	}
 
-	//“–‚½‚è”»’è‚ğXV
+	//å½“ãŸã‚Šåˆ¤å®šã‚’æ›´æ–°
 	col_.pos = position;
 	col_.rot = rotation;
 
 	col_.DrawBB(Color::Red);
 
-	//BehaviorTree‚ÌTick‚ğs‚¤
+	//BehaviorTreeã®Tickã‚’è¡Œã†
 	tree_.Tick();
 
-	//ƒ_ƒ[ƒW‰‰o‚ÌXV
+	//ãƒ€ãƒ¡ãƒ¼ã‚¸æ¼”å‡ºã®æ›´æ–°
 	if (damaged_)
 	{
 		damageTimer_++;
@@ -91,7 +91,7 @@ void Boss::Update()
 		}
 	}
 
-	//ƒtƒB[ƒ‹ƒh“à‚ÉÀ•W‚ğƒNƒ‰ƒ“ƒv
+	//ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰å†…ã«åº§æ¨™ã‚’ã‚¯ãƒ©ãƒ³ãƒ—
 	float colR = ((Vec3)col_.scale).GetLength();
 	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
 	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
@@ -140,7 +140,7 @@ void Boss::Set(Boss* boss)
 
 void Boss::InitBehaviorTree()
 {
-	//ƒtƒ@ƒNƒgƒŠ[‚ÉŠÖ”‚ğ“o˜^
+	//ãƒ•ã‚¡ã‚¯ãƒˆãƒªãƒ¼ã«é–¢æ•°ã‚’ç™»éŒ²
 	BT::BehaviorTreeFactory factory;
 
 	factory.RegisterAction("CastMarker1", std::bind(&Boss::CastMarkerAim1Rand5, this));
@@ -160,7 +160,7 @@ void Boss::InitBehaviorTree()
 
 	tree_.SetFactory(factory);
 
-	////ƒcƒŠ[‚Ìè“®\’z
+	////ãƒ„ãƒªãƒ¼ã®æ‰‹å‹•æ§‹ç¯‰
 	//tree_.root->AddNode<BT::LoopNode>("0");
 
 	//tree_.root->Last()->AddNode<BT::SequencerNode>("");
@@ -183,7 +183,7 @@ void Boss::InitBehaviorTree()
 	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker2");
 	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateMarker");
 
-	////I‚í‚Á‚½‚ç60ƒtƒŒ[ƒ€‘Ò‹@
+	////çµ‚ã‚ã£ãŸã‚‰60ãƒ•ãƒ¬ãƒ¼ãƒ å¾…æ©Ÿ
 	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 
 	//tree_.root->Last()->Last()->AddNode<BT::SequencerNode>("");
@@ -200,10 +200,10 @@ void Boss::InitBehaviorTree()
 	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastGravSphere");
 	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateGravSphere");
 
-	////I‚í‚Á‚½‚ç60ƒtƒŒ[ƒ€‘Ò‹@
+	////çµ‚ã‚ã£ãŸã‚‰60ãƒ•ãƒ¬ãƒ¼ãƒ å¾…æ©Ÿ
 	//tree_.root->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 
-	////3‰ñs“®‚µ‚½‚ç‚³‚ç‚É180ƒtƒŒ[ƒ€‘Ò‹@
+	////3å›è¡Œå‹•ã—ãŸã‚‰ã•ã‚‰ã«180ãƒ•ãƒ¬ãƒ¼ãƒ å¾…æ©Ÿ
 	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
 	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
@@ -233,7 +233,7 @@ BT::Status Boss::CastMarkerAim1Rand5()
 		CastMarker({ (float)Util::RNG(-30, 30), 0.001f, (float)(Util::RNG(-30, 30)) });
 	}
 
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("marker");
 
 	state_ = State::Marker;
@@ -264,7 +264,7 @@ BT::Status Boss::CastMarkerLine3()
 		}
 	}
 
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("marker");
 
 	state_ = State::Marker;
@@ -318,7 +318,7 @@ BT::Status Boss::CastLineTriple()
 		}
 	}
 
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("LineAttack");
 
 	state_ = State::Line;
@@ -408,7 +408,7 @@ BT::Status Boss::RushUpdate()
 
 	if (moveTimer_ == prepTime_ + afterPrepWaitTime_)
 	{
-		//SEÄ¶
+		//SEå†ç”Ÿ
 		SoundManager::Play("RushImpact");
 	}
 
@@ -506,17 +506,17 @@ BT::Status Boss::CastGravSphere()
 	moveTime_ = gravSphereTime_;
 	moveTimer_ = 0;
 
-	//ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ–¹å‘ã‚’å‘ã
 	Vec3 target = Player::Get()->position;
 	target.y = position.y;
 
 	rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - position);
 
-	//ƒvƒŒƒCƒ„[‘¤‚É1m‚ÌˆÊ’u‚É¶¬
+	//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å´ã«1mã®ä½ç½®ã«ç”Ÿæˆ
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.SetLength(3.f);
 
-	//d—Í’e‚ğ¶¬
+	//é‡åŠ›å¼¾ã‚’ç”Ÿæˆ
 	gravSphere_ = std::make_unique<GravSphere>((Vec3)position + front,
 		((Vec3)Player::Get()->position - position).GetNorm(),
 		0.2f,
@@ -589,7 +589,7 @@ void Boss::ShowImGui()
 	SpImGui::Command([&] {
 		if (ImGui::Begin("Boss", nullptr, ImGuiWindowFlags_MenuBar))
 		{
-			//ƒZ[ƒu‚Æƒ[ƒh
+			//ã‚»ãƒ¼ãƒ–ã¨ãƒ­ãƒ¼ãƒ‰
 			if (ImGui::BeginMenuBar()) {
 				if (ImGui::BeginMenu("File"))
 				{
@@ -605,7 +605,7 @@ void Boss::ShowImGui()
 				ImGui::EndMenuBar();
 			}
 
-			//ƒXƒe[ƒ^ƒXŠÖ˜A
+			//ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹é–¢é€£
 			if (ImGui::TreeNode("Basic Stats"))
 			{
 
@@ -614,7 +614,7 @@ void Boss::ShowImGui()
 
 			ImGui::Separator();
 
-			//ƒ}[ƒJ[UŒ‚
+			//ãƒãƒ¼ã‚«ãƒ¼æ”»æ’ƒ
 			if (ImGui::TreeNode("Marker Attack"))
 			{
 				ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing_);
@@ -624,7 +624,7 @@ void Boss::ShowImGui()
 
 			ImGui::Separator();
 
-			//’¼üUŒ‚
+			//ç›´ç·šæ”»æ’ƒ
 			if (ImGui::TreeNode("Line Attack"))
 			{
 				ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing_);
@@ -634,7 +634,7 @@ void Boss::ShowImGui()
 
 			ImGui::Separator();
 
-			//“ËiUŒ‚
+			//çªé€²æ”»æ’ƒ
 			if (ImGui::TreeNode("Rush"))
 			{
 				ImGui::InputInt("Prepare Time", &prepTime_);
@@ -648,7 +648,7 @@ void Boss::ShowImGui()
 
 			ImGui::Separator();
 
-			//d—Í’eUŒ‚
+			//é‡åŠ›å¼¾æ”»æ’ƒ
 			if (ImGui::TreeNode("Gravity Sphere"))
 			{
 				ImGui::InputFloat("Gravity Sphere Speed", &gravSphereSpd_);

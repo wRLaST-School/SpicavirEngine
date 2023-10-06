@@ -9,19 +9,19 @@ std::wstring Util::StrToWStr(const std::string& str, int32_t page)
     // SJIS -> wstring
     int32_t iBufferSize = MultiByteToWideChar(page, 0, str.c_str(), -1, (wchar_t*)NULL, 0);
 
-    // ƒoƒbƒtƒ@‚Ìæ“¾
+    // ãƒãƒƒãƒ•ã‚¡ã®å–å¾—
     wchar_t* cpUCS2 = new wchar_t[iBufferSize];
 
     // SJIS -> wstring
     MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, cpUCS2, iBufferSize);
 
-    // string‚Ì¶¬
+    // stringã®ç”Ÿæˆ
     std::wstring ret(cpUCS2, cpUCS2 + iBufferSize - 1);
 
-    // ƒoƒbƒtƒ@‚Ì”jŠü
+    // ãƒãƒƒãƒ•ã‚¡ã®ç ´æ£„
     delete[] cpUCS2;
 
-    // •ÏŠ·Œ‹‰Ê‚ğ•Ô‚·
+    // å¤‰æ›çµæœã‚’è¿”ã™
     return ret;
 }
 

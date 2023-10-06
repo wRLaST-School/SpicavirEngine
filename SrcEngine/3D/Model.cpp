@@ -122,7 +122,7 @@ Model::Model(const std::string& modelName)
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertices.size());
 
-	////’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -146,25 +146,25 @@ Model::Model(const std::string& modelName)
 
 	vertBuff->SetName(L"VERT BUFF");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	Vertex* vertMap = nullptr;
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	// ‘S’¸“_‚É‘Î‚µ‚Ä
+	// å…¨é ‚ç‚¹ã«å¯¾ã—ã¦
 	for (uint32_t i = 0; i < vertices.size(); i++)
 	{
-		vertMap[i] = vertices[i];   // À•W‚ğƒRƒs[
+		vertMap[i] = vertices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	vertBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Vertex);
 
-	//’¸“_ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì¶¬
+	//é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	UINT sizeIB = static_cast<UINT>(sizeof(UINT) * indices.size());
 
 	resdesc.Width = sizeIB;
@@ -179,20 +179,20 @@ Model::Model(const std::string& modelName)
 	);
 	indexBuff->SetName(L"INDEX BUFF");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	uint32_t* indexMap = nullptr;
 	indexBuff->Map(0, nullptr, (void**)&indexMap);
 
-	// ‘Sindex‚É‘Î‚µ‚Ä
+	// å…¨indexã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < indices.size(); i++)
 	{
-		indexMap[i] = indices[i];   // À•W‚ğƒRƒs[
+		indexMap[i] = indices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	indexBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R32_UINT;
 	ibView.SizeInBytes = sizeIB;
@@ -227,7 +227,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 	UINT backIndex = 0;
 
-	//ƒAƒjƒ[ƒVƒ‡ƒ““Ç‚İ‚İ
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³èª­ã¿è¾¼ã¿
 	if (scene->HasAnimations())
 	{
 		for (uint32_t a = 0; a < scene->mNumAnimations; a++)
@@ -277,21 +277,21 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 		}
 	}
 
-	//æ‚ÉBone‚Ì‚İ—ñ‹“‚µ‚Ä•Û‘¶
+	//å…ˆã«Boneã®ã¿åˆ—æŒ™ã—ã¦ä¿å­˜
 	std::function<void(aiNode*)>fNodeBone = [&](aiNode* cur)
 	{
 		for (uint32_t i = 0; i < cur->mNumChildren; i++)
 		{
 			fNodeBone(cur->mChildren[i]);
 		}
-		//ƒm[ƒh‚²‚Æ‚ÌƒƒbƒVƒ…‚É‚Â‚¢‚Ä
+		//ãƒãƒ¼ãƒ‰ã”ã¨ã®ãƒ¡ãƒƒã‚·ãƒ¥ã«ã¤ã„ã¦
 		for (uint32_t k = 0; k < cur->mNumMeshes; k++) {
 
-			//ƒƒbƒVƒ…‚²‚Æ‚Ìˆ—
+			//ãƒ¡ãƒƒã‚·ãƒ¥ã”ã¨ã®å‡¦ç†
 			uint32_t i = cur->mMeshes[k];
 			aiMesh* mesh = scene->mMeshes[i];
 
-			//ƒ{[ƒ“‚Ìî•ñ‚ğ•Û‘¶
+			//ãƒœãƒ¼ãƒ³ã®æƒ…å ±ã‚’ä¿å­˜
 			if (mesh->HasBones())
 			{
 				for (int boneIndex = 0; boneIndex < std::min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
@@ -324,14 +324,14 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 	fNodeBone(scene->mRootNode);
 
-	//ƒ‚ƒfƒ‹“Ç‚İ‚İ
-	//ƒm[ƒh‚²‚Æ‚Ìˆ—
+	//ãƒ¢ãƒ‡ãƒ«èª­ã¿è¾¼ã¿
+	//ãƒãƒ¼ãƒ‰ã”ã¨ã®å‡¦ç†
 	std::function<void(aiNode*, Node*)>fNode = [&](aiNode* cur, Node* parent) {
-		//ƒm[ƒh‚²‚Æ‚Ìƒ{[ƒ“î•ñ‚ğæ“¾
+		//ãƒãƒ¼ãƒ‰ã”ã¨ã®ãƒœãƒ¼ãƒ³æƒ…å ±ã‚’å–å¾—
 		Node node;
 		node.parent = parent;
 
-		////‚±‚Ìƒm[ƒh—p‚Ì•ÏŠ·s—ñ
+		////ã“ã®ãƒãƒ¼ãƒ‰ç”¨ã®å¤‰æ›è¡Œåˆ—
 		//std::function<aiMatrix4x4(aiNode*)>calcMat = [&](aiNode* calcn) {
 		//	if (calcn->mParent)
 		//		return calcMat(calcn->mParent) * calcn->mTransformation;
@@ -364,22 +364,22 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 			fNode(cur->mChildren[i], &nodes.at(cur->mName.C_Str()));
 		}
 
-		//ƒm[ƒh‚²‚Æ‚ÌƒƒbƒVƒ…‚É‚Â‚¢‚Ä
+		//ãƒãƒ¼ãƒ‰ã”ã¨ã®ãƒ¡ãƒƒã‚·ãƒ¥ã«ã¤ã„ã¦
 		for (uint32_t k = 0; k < cur->mNumMeshes; k++) {
-			//ƒƒbƒVƒ…‚²‚Æ‚Ìˆ—
+			//ãƒ¡ãƒƒã‚·ãƒ¥ã”ã¨ã®å‡¦ç†
 			uint32_t i = cur->mMeshes[k];
 			aiMesh* mesh = scene->mMeshes[i];
 
 			UINT lastMaxIndex = backIndex;
 
 			for (uint32_t j = 0; j < mesh->mNumVertices; j++) {
-				//’¸“_‚²‚Æ
+				//é ‚ç‚¹ã”ã¨
 				aiVector3D vertex = mesh->mVertices[j];
 				//vertex *= wt;
 				posList.push_back({ vertex.x, vertex.y, vertex.z });
 				backIndex++;
 
-				//–@ü
+				//æ³•ç·š
 				if (mesh->mNormals)
 				{
 					aiVector3D norm = mesh->mNormals[j];
@@ -450,15 +450,15 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 					bWeightList.push_back({ 1.f, 0.f, 0.f, 0.f });
 				}
 
-				//’¸“_ƒf[ƒ^”z—ñ‚É’Ç‰Á
+				//é ‚ç‚¹ãƒ‡ãƒ¼ã‚¿é…åˆ—ã«è¿½åŠ 
 				vertices.emplace_back(Vertex{ posList.back(), normalList.back(), tcList.back(), bIndexList.back(), bWeightList.back() });
 			}
 
 			for (uint32_t j = 0; j < mesh->mNumFaces; j++) {
-				//ƒ|ƒŠƒSƒ“‚²‚Æ
+				//ãƒãƒªã‚´ãƒ³ã”ã¨
 				aiFace face = mesh->mFaces[j];
 				for (uint32_t l = 0; l < face.mNumIndices; l++) {
-					//ƒCƒ“ƒfƒbƒNƒX‚²‚Æ
+					//ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã”ã¨
 					UINT ind = face.mIndices[l];
 
 					indices.emplace_back(ind + lastMaxIndex);
@@ -467,12 +467,12 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 		}
 	};
 
-	//ƒm[ƒh‚²‚Æ‚Ìˆ—ŒÄ‚Ño‚µ
+	//ãƒãƒ¼ãƒ‰ã”ã¨ã®å‡¦ç†å‘¼ã³å‡ºã—
 	fNode(scene->mRootNode, nullptr);
 
 	for (uint32_t i = 0; i < scene->mNumMaterials; i++)
 	{
-		//ƒ}ƒeƒŠƒAƒ‹‚²‚Æ
+		//ãƒãƒ†ãƒªã‚¢ãƒ«ã”ã¨
 		material.emplace_back();
 		Material* mtr = &material.back();
 		aiMaterial* aimtr = scene->mMaterials[i];
@@ -501,7 +501,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 		//Textrue
 		aimtr->GetTexture(aiTextureType_DIFFUSE, 0, &tempstr);
-		//TODO:–„‚ß‚İƒeƒNƒXƒ`ƒƒ‚Ìê‡‚Ìˆ—		
+		//TODO:åŸ‹ã‚è¾¼ã¿ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®å ´åˆã®å‡¦ç†		
 		int32_t pti = (int32_t)filePath.find_last_of("\\");
 		int32_t pti2 = (int32_t)filePath.find_last_of("/");
 		std::string filedir = filePath.substr(0, std::max(pti, pti2));
@@ -511,7 +511,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Vertex) * vertices.size());
 
-	////’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -535,25 +535,25 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 	vertBuff->SetName(L"VERTEX_BUFF_ASMP");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	Vertex* vertMap = nullptr;
 	vertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	// ‘S’¸“_‚É‘Î‚µ‚Ä
+	// å…¨é ‚ç‚¹ã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < vertices.size(); i++)
 	{
-		vertMap[i] = vertices[i];   // À•W‚ğƒRƒs[
+		vertMap[i] = vertices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	vertBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
 	vbView.SizeInBytes = sizeVB;
 	vbView.StrideInBytes = sizeof(Vertex);
 
-	//’¸“_ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@‚Ì¶¬
+	//é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ã®ç”Ÿæˆ
 	UINT sizeIB = static_cast<UINT>(sizeof(uint32_t) * indices.size());
 
 	resdesc.Width = sizeIB;
@@ -569,20 +569,20 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 
 	indexBuff->SetName(L"INDEX_BUFF_ASMP");
 
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	uint32_t* indexMap = nullptr;
 	indexBuff->Map(0, nullptr, (void**)&indexMap);
 
-	// ‘Sindex‚É‘Î‚µ‚Ä
+	// å…¨indexã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < indices.size(); i++)
 	{
-		indexMap[i] = indices[i];   // À•W‚ğƒRƒs[
+		indexMap[i] = indices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	indexBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒCƒ“ƒfƒbƒNƒXƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R32_UINT;
 	ibView.SizeInBytes = sizeIB;
@@ -659,7 +659,7 @@ void Model::SetAnim(std::string animKey)
 
 void Model::UpdateAnim()
 {
-	//ƒAƒjƒ[ƒVƒ‡ƒ“ŠÔ‚ÉŠÖ‚·‚éXVˆ—
+	//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ™‚é–“ã«é–¢ã™ã‚‹æ›´æ–°å‡¦ç†
 	Animation* anim = nullptr;
 	if (animations.count(currentAnim))
 	{
@@ -678,7 +678,7 @@ void Model::UpdateAnim()
 
 	double aniTick = (double)animTimer / 60.0 * anim->tickPerSecond * (double)aniSpeed;
 
-	//Node‚ğg‚Á‚ÄÄ‹A“I‚Éˆ—‚ğs‚¤
+	//Nodeã‚’ä½¿ã£ã¦å†å¸°çš„ã«å‡¦ç†ã‚’è¡Œã†
 	std::function<Matrix(Node*, Channel*, eastl::unordered_map<std::string, Node>&, eastl::unordered_map<std::string, Bone>&)> 
 		fCalcParentTransform = 
 		[&aniTick, &fCalcParentTransform, &anim](Node* node, Channel* channel, eastl::unordered_map<std::string, Node>& nodes, eastl::unordered_map<std::string, Bone>& bones) 
@@ -897,7 +897,7 @@ void ModelManager::ReleasePerSceneModel()
 			}
 		}
 
-		if (!usingInCurrentScene) //¡‚ÌƒV[ƒ“‚Åg‚í‚ê‚Ä‚¢‚È‚¢‚È‚çƒŠƒŠ[ƒX
+		if (!usingInCurrentScene) //ä»Šã®ã‚·ãƒ¼ãƒ³ã§ä½¿ã‚ã‚Œã¦ã„ãªã„ãªã‚‰ãƒªãƒªãƒ¼ã‚¹
 		{
 			sModels.Access(
 				[&](auto& map) {

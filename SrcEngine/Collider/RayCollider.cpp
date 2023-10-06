@@ -22,21 +22,21 @@ bool RayCollider::Collide(const SphereCollider& other) const
 
 bool RayCollider::Collide(const PlaneCollider& other, Vec3* intersection) const
 {
-    //–Ê–@ü‚ÆƒŒƒC•ûŒü‚Ì“àÏ‚ğŒ©‚Ä— –Ê‚©‚ç‚ÌƒŒƒC‚È‚çfalse‚ğ•Ô‚·
+    //é¢æ³•ç·šã¨ãƒ¬ã‚¤æ–¹å‘ã®å†…ç©ã‚’è¦‹ã¦è£é¢ã‹ã‚‰ã®ãƒ¬ã‚¤ãªã‚‰falseã‚’è¿”ã™
     float d1 = other.norm.Dot(r.ray);
     if (d1 > -EPSILON) { return false; }
 
-    //“–‚½‚è”»’è‚ğŒ©‚é
+    //å½“ãŸã‚Šåˆ¤å®šã‚’è¦‹ã‚‹
     float d2 = other.norm.Dot(r.origin);
 
     float dist = d2 - other.distance;
 
     float t = dist / -d1;
 
-    //•‰‚È‚ç“–‚½‚Á‚Ä‚¢‚È‚¢
+    //è² ãªã‚‰å½“ãŸã£ã¦ã„ãªã„
     if (t < 0) { return false; }
 
-    //“–‚½‚Á‚½‚È‚ç“–‚½‚Á‚Ä‚¢‚éˆÊ’u‚ğŠi”[‚µ‚Ä‚Ù‚µ‚¢‚È‚ç‚·‚é
+    //å½“ãŸã£ãŸãªã‚‰å½“ãŸã£ã¦ã„ã‚‹ä½ç½®ã‚’æ ¼ç´ã—ã¦ã»ã—ã„ãªã‚‰ã™ã‚‹
     if (intersection) { *intersection = r.origin + r.ray * t; }
 
     return true;

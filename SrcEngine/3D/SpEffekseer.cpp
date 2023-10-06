@@ -110,9 +110,9 @@ void SpEffekseer::ReleasePerSceneEffects()
 			}
 		}
 
-		if (!usingInCurrentScene) //¡‚ÌƒV[ƒ“‚Åg‚í‚ê‚Ä‚¢‚È‚¢‚È‚çƒŠƒŠ[ƒX
+		if (!usingInCurrentScene) //ä»Šã®ã‚·ãƒ¼ãƒ³ã§ä½¿ã‚ã‚Œã¦ã„ãªã„ãªã‚‰ãƒªãƒªãƒ¼ã‚¹
 		{
-			//TODO:Ä¶‚ğ~‚ß‚éˆ—‚ğ‘‚­‚È‚ç‘‚­
+			//TODO:å†ç”Ÿã‚’æ­¢ã‚ã‚‹å‡¦ç†ã‚’æ›¸ããªã‚‰æ›¸ã
 
 			sEffects.Access(
 				[&](auto& map) {

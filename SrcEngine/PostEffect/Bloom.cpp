@@ -101,20 +101,20 @@ void BloomFin::Effect(const TextureKey& baseTex, const TextureKey& p3Tex, const 
 	{
 		viewport.Width = (FLOAT)GetSpWindow()->width;
 		viewport.Height = (FLOAT)GetSpWindow()->height;
-		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // Ø‚è”²‚«À•W‰E
-		scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // Ø‚è”²‚«À•W‰º
+		scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+		scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 	}
 	else
 	{
 		DirectX::TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
 		viewport.Width = (FLOAT)md.width;
 		viewport.Height = (FLOAT)md.height;
-		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-		scissorrect.right = scissorrect.left + (LONG)md.width;        // Ø‚è”²‚«À•W‰E
-		scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // Ø‚è”²‚«À•W‰º
+		scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+		scissorrect.right = scissorrect.left + (LONG)md.width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+		scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 	}
 
 	viewport.TopLeftX = 0;

@@ -39,7 +39,7 @@ std::unique_ptr<BT::INode>* BT::INode::LastPtr()
 
 std::unique_ptr<BT::INode>* BT::INode::ChangeParent(INode* newParent)
 {
-	//—¼•û‚ ‚éê‡
+	//ä¸¡æ–¹ã‚ã‚‹å ´åˆ
 	if (parent_ != nullptr && newParent != nullptr)
 	{
 		for (auto itr = parent_->children_.begin(); itr != parent_->children_.end(); itr++)
@@ -54,7 +54,7 @@ std::unique_ptr<BT::INode>* BT::INode::ChangeParent(INode* newParent)
 			}
 		}
 	}
-	//parent‚ª–³‚­‚Änew parent‚ª‚ ‚éê‡
+	//parentãŒç„¡ãã¦new parentãŒã‚ã‚‹å ´åˆ
 	else if(parent_ == nullptr && newParent != nullptr)
 	{
 		if (parentBT_->root.get() == this)
@@ -74,7 +74,7 @@ std::unique_ptr<BT::INode>* BT::INode::ChangeParent(INode* newParent)
 			}
 		}
 	}
-	//parent‚ª‚ ‚Á‚Änew parent‚ª–³‚¢ê‡
+	//parentãŒã‚ã£ã¦new parentãŒç„¡ã„å ´åˆ
 	else if (parent_ != nullptr && newParent == nullptr)
 	{
 		for (auto itr = parent_->children_.begin(); itr != parent_->children_.end(); itr++)
@@ -90,7 +90,7 @@ std::unique_ptr<BT::INode>* BT::INode::ChangeParent(INode* newParent)
 		}
 	}
 
-	else //parent‚ànew parent‚à‚È‚¢ê‡
+	else //parentã‚‚new parentã‚‚ãªã„å ´åˆ
 	{
 		if (parentBT_->root.get() == this)
 		{

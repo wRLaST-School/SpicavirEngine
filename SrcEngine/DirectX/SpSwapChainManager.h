@@ -3,7 +3,7 @@
 class SpSwapChainManager
 {
 public:
-	//TODO:‚±‚ê‚ğRTV‚Ì•û‚ÅRT2‚Â‚ÌVector‚É•Ï‚¦‚éART‚ğResource‚ÂİŒv‚É
+	//TODO:ã“ã‚Œã‚’RTVã®æ–¹ã§RT2ã¤ã®Vectorã«å¤‰ãˆã‚‹ã€RTã‚’ResourceæŒã¤è¨­è¨ˆã«
 	std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> backBuffers = std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>>(BB_NUM);
 
 	Microsoft::WRL::ComPtr<IDXGISwapChain4> swapchain = nullptr;

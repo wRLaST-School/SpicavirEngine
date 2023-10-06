@@ -9,7 +9,7 @@ void SpSwapChainManager::Init()
 {
 	swapchainDesc.Width = GetSpWindow()->width;
 	swapchainDesc.Height = GetSpWindow()->height;
-	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //Fî•ñ‚Ì‘Ž®(SpSwapChainManager::ResizeAllBuffers()‚É‚à“¯‚¶‚à‚Ì‚ð‘‚­)
+	swapchainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM; //è‰²æƒ…å ±ã®æ›¸å¼(SpSwapChainManager::ResizeAllBuffers()ã«ã‚‚åŒã˜ã‚‚ã®ã‚’æ›¸ã)
 	swapchainDesc.SampleDesc.Count = 1;
 	swapchainDesc.BufferUsage = DXGI_USAGE_BACK_BUFFER;
 	swapchainDesc.BufferCount = 2;
@@ -34,7 +34,7 @@ void SpSwapChainManager::Init()
 
 void SpSwapChainManager::WaitForRender()
 {
-	//•`‰æƒRƒ}ƒ“ƒh‚ªI‚í‚Á‚½‚çŽŸ‚ÌƒtƒŒ[ƒ€‚Ì€”õ
+	//æç”»ã‚³ãƒžãƒ³ãƒ‰ãŒçµ‚ã‚ã£ãŸã‚‰æ¬¡ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã®æº–å‚™
 	GetSpDX()->cmdQueue->Signal(fence.Get(), ++fenceVal);
 	if (fence->GetCompletedValue() != fenceVal)
 	{
@@ -58,7 +58,7 @@ void SpSwapChainManager::ResizeAllBuffers()
 
 	swapchain->ResizeBuffers(0, spw->width, spw->height, DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
 
-	//ƒŠƒTƒCƒYŒã‚ÉƒoƒbƒNƒoƒbƒtƒ@[‚ðÄ¶¬
+	//ãƒªã‚µã‚¤ã‚ºå¾Œã«ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ãƒ¼ã‚’å†ç”Ÿæˆ
 	for (int32_t i = 0; i < 2; i++)
 	{
 		swapchain->GetBuffer(i, IID_PPV_ARGS(&backBuffers[i]));

@@ -3,7 +3,7 @@
 
 LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
-//ˆÈ‰ºEASTL‚Ì•K—vŠÖ”
+//ä»¥ä¸‹EASTLã®å¿…è¦é–¢æ•°
 void* __cdecl operator new[](size_t size, const char* name, int32_t flags, unsigned debugFlags, const char* file, int32_t line);
 
 void* operator new[](size_t size, size_t alignment, size_t alignmentOffset, const char* pName, int32_t flags, unsigned debugFlags, const char* file, int32_t line);

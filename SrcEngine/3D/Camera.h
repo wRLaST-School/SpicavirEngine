@@ -32,7 +32,7 @@ public:
 
     Float3 target = { 0.0f, 0.0f, 0.0f };
 
-    //レンダーサイズ
+    //繝ｬ繝ｳ繝繝ｼ繧ｵ繧､繧ｺ
     float renderWidth;
     float renderHeight;
 

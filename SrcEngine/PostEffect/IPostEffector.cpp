@@ -44,14 +44,14 @@ void IPostEffector::RegisterRS(const string& name)
 		descRange.BaseShaderRegister = 0;
 		descRange.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
-		//’è”ƒoƒbƒtƒ@0”ÔŠePostEffectê—pƒf[ƒ^
+		//å®šæ•°ãƒãƒƒãƒ•ã‚¡0ç•ªå„PostEffectå°‚ç”¨ãƒ‡ãƒ¼ã‚¿
 		rs->params.emplace_back();
 		rs->params[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
 		rs->params[0].Descriptor.ShaderRegister = 0;
 		rs->params[0].Descriptor.RegisterSpace = 0;
 		rs->params[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
 
-		//ƒeƒNƒXƒ`ƒƒƒŒƒWƒXƒ^0”Ô
+		//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒ¬ã‚¸ã‚¹ã‚¿0ç•ª
 		rs->params.emplace_back();
 		rs->params[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 		rs->params[1].DescriptorTable.pDescriptorRanges = &descRange;
@@ -88,20 +88,20 @@ void IPostEffector::Effect(const TextureKey& baseTex, const TextureKey& targetTe
 	{
 		viewport.Width = (FLOAT)GetSpWindow()->width;
 		viewport.Height = (FLOAT)GetSpWindow()->height;
-		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // Ø‚è”²‚«À•W‰E
-		scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // Ø‚è”²‚«À•W‰º
+		scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+		scissorrect.right = scissorrect.left + (LONG)viewport.Width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+		scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+		scissorrect.bottom = scissorrect.top + (LONG)viewport.Height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 	}
 	else
 	{
 		DirectX::TexMetadata md = SpTextureManager::GetTextureMetadata(targetTex);
 		viewport.Width = (FLOAT)md.width;
 		viewport.Height = (FLOAT)md.height;
-		scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-		scissorrect.right = scissorrect.left + (LONG)md.width;        // Ø‚è”²‚«À•W‰E
-		scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // Ø‚è”²‚«À•W‰º
+		scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+		scissorrect.right = scissorrect.left + (LONG)md.width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+		scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+		scissorrect.bottom = scissorrect.top + (LONG)md.height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 	}
 
 	viewport.TopLeftX = 0;
@@ -139,7 +139,7 @@ void PostEffectCommon::Init()
 
 	UINT sizeVB = static_cast<UINT>(sizeof(Sprite::Vertex) * _countof(vertices));
 
-	////’¸“_ƒoƒbƒtƒ@‚Ìİ’è
+	////é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
 	D3D12_HEAP_PROPERTIES heapprop{};
 	heapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
@@ -162,20 +162,20 @@ void PostEffectCommon::Init()
 	);
 
 	sVertBuff->SetName(L"POST EFFECT VERT BUFF");
-	// GPUã‚Ìƒoƒbƒtƒ@‚É‘Î‰‚µ‚½‰¼‘zƒƒ‚ƒŠ‚ğæ“¾
+	// GPUä¸Šã®ãƒãƒƒãƒ•ã‚¡ã«å¯¾å¿œã—ãŸä»®æƒ³ãƒ¡ãƒ¢ãƒªã‚’å–å¾—
 	Sprite::Vertex* vertMap = nullptr;
 	sVertBuff->Map(0, nullptr, (void**)&vertMap);
 
-	// ‘S’¸“_‚É‘Î‚µ‚Ä
+	// å…¨é ‚ç‚¹ã«å¯¾ã—ã¦
 	for (int32_t i = 0; i < _countof(vertices); i++)
 	{
-		vertMap[i] = vertices[i];   // À•W‚ğƒRƒs[
+		vertMap[i] = vertices[i];   // åº§æ¨™ã‚’ã‚³ãƒ”ãƒ¼
 	}
 
-	// ƒ}ƒbƒv‚ğ‰ğœ
+	// ãƒãƒƒãƒ—ã‚’è§£é™¤
 	sVertBuff->Unmap(0, nullptr);
 
-	// ’¸“_ƒoƒbƒtƒ@ƒrƒ…[‚Ìì¬
+	// é ‚ç‚¹ãƒãƒƒãƒ•ã‚¡ãƒ“ãƒ¥ãƒ¼ã®ä½œæˆ
 	sVbView.BufferLocation = sVertBuff->GetGPUVirtualAddress();
 	sVbView.SizeInBytes = sizeVB;
 	sVbView.StrideInBytes = sizeof(Sprite::Vertex);

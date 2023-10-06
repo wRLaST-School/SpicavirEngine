@@ -71,7 +71,7 @@ void Player::Update()
 	}
 	else
 	{
-		//ƒtƒŠ[ƒJƒƒ‰‚Ìˆ—
+		//ãƒ•ãƒªãƒ¼ã‚«ãƒ¡ãƒ©æ™‚ã®å‡¦ç†
 	}
 	DamageUpdate();
 	
@@ -217,7 +217,7 @@ void Player::Damage()
 			if (!GameManager::sDebugImmunity)
 			{
 				damageTimer_ = 60;
-				//SEÄ¶
+				//SEå†ç”Ÿ
 				SoundManager::Play("takeDamage");
 
 				MainTimer::timerSec -= 5;
@@ -228,7 +228,7 @@ void Player::Damage()
 		{
 			dodgeSucceededTimer_ = 30;
 			counterEmitter_.Activate();
-			//SEÄ¶
+			//SEå†ç”Ÿ
 			SoundManager::Play("counterSuccess");
 		}
 	}
@@ -319,7 +319,7 @@ void Player::Dodge()
 	model = ModelManager::GetModel("PlayerRoll");
 	model->ResetAnimTimer();
 	model->aniSpeed = 3.8f;
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("dodge");
 }
 
@@ -347,7 +347,7 @@ void Player::SlashUpdate1()
 		Dodge();
 	}
 
-	//“–‚½‚è”»’è‚ğƒ`ƒFƒbƒN
+	//å½“ãŸã‚Šåˆ¤å®šã‚’ãƒã‚§ãƒƒã‚¯
 	Boss* boss = Boss::Get();
 	if (!slashHit_ && slashCol_.Collide(boss->GetCollider()))
 	{
@@ -355,17 +355,17 @@ void Player::SlashUpdate1()
 		slashHit_ = true;
 	}
 
-	//ƒ^ƒCƒ}[‚ª’´‰ß‚µ‚Ä‚¢‚½‚ç
+	//ã‚¿ã‚¤ãƒãƒ¼ãŒè¶…éã—ã¦ã„ãŸã‚‰
 	if (slashTimer_ > slashTime)
 	{
 		slashTimer_ = 0;
-		if (slashRegistered_) //æs“ü—Íƒ`ƒFƒbƒN
-		{//‚ ‚é‚È‚ç”­“®
+		if (slashRegistered_) //å…ˆè¡Œå…¥åŠ›ãƒã‚§ãƒƒã‚¯
+		{//ã‚ã‚‹ãªã‚‰ç™ºå‹•
 			Slash2();
 			slashRegistered_ = false;
 		}
 		else
-		{//‚È‚¢‚È‚çIdle‚É
+		{//ãªã„ãªã‚‰Idleã«
 			state_ = State::Idle;
 		}
 	}
@@ -392,7 +392,7 @@ void Player::SlashUpdate2()
 		Dodge();
 	}
 
-	//“–‚½‚è”»’è‚ğƒ`ƒFƒbƒN
+	//å½“ãŸã‚Šåˆ¤å®šã‚’ãƒã‚§ãƒƒã‚¯
 	Boss* boss = Boss::Get();
 	if (!slashHit_ && slashCol_.Collide(boss->GetCollider()))
 	{
@@ -400,17 +400,17 @@ void Player::SlashUpdate2()
 		slashHit_ = true;
 	}
 
-	//ƒ^ƒCƒ}[‚ª’´‰ß‚µ‚Ä‚¢‚½‚ç
+	//ã‚¿ã‚¤ãƒãƒ¼ãŒè¶…éã—ã¦ã„ãŸã‚‰
 	if (slashTimer_ > slashTime)
 	{
 		slashTimer_ = 0;
-		if (slashRegistered_)//æs“ü—Íƒ`ƒFƒbƒN
-		{//‚ ‚é‚È‚ç”­“®
+		if (slashRegistered_)//å…ˆè¡Œå…¥åŠ›ãƒã‚§ãƒƒã‚¯
+		{//ã‚ã‚‹ãªã‚‰ç™ºå‹•
 			Slash3();
 			slashRegistered_ = false;
 		}
 		else
-		{//‚È‚¢‚È‚çIdle‚É
+		{//ãªã„ãªã‚‰Idleã«
 			state_ = State::Idle;
 		}
 	}
@@ -437,7 +437,7 @@ void Player::SlashUpdate3()
 		Dodge();
 	}
 
-	//“–‚½‚è”»’è‚ğƒ`ƒFƒbƒN
+	//å½“ãŸã‚Šåˆ¤å®šã‚’ãƒã‚§ãƒƒã‚¯
 	Boss* boss = Boss::Get();
 	if (!slashHit_ && slashCol_.Collide(boss->GetCollider()))
 	{
@@ -445,17 +445,17 @@ void Player::SlashUpdate3()
 		slashHit_ = true;
 	}
 
-	//ƒ^ƒCƒ}[‚ª’´‰ß‚µ‚Ä‚¢‚½‚ç
+	//ã‚¿ã‚¤ãƒãƒ¼ãŒè¶…éã—ã¦ã„ãŸã‚‰
 	if (slashTimer_ > slash3Time)
 	{
 		slashTimer_ = 0;
-		if (slashRegistered_)//æs“ü—Íƒ`ƒFƒbƒN
-		{//‚ ‚Á‚Ä‚àˆê’UIdle‚É‚µ‚æ‚¤
+		if (slashRegistered_)//å…ˆè¡Œå…¥åŠ›ãƒã‚§ãƒƒã‚¯
+		{//ã‚ã£ã¦ã‚‚ä¸€æ—¦Idleã«ã—ã‚ˆã†
 			state_ = State::Idle;
 			slashRegistered_ = false;
 		}
 		else
-		{//‚È‚¢‚È‚çIdle‚É
+		{//ãªã„ãªã‚‰Idleã«
 			state_ = State::Idle;
 		}
 	}
@@ -463,7 +463,7 @@ void Player::SlashUpdate3()
 
 void Player::Slash1()
 {
-	//³–Ê‚ÌŠp“x‚ğŒvZ
+	//æ­£é¢ã®è§’åº¦ã‚’è¨ˆç®—
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
@@ -481,19 +481,19 @@ void Player::Slash1()
 
 	state_ = State::Slash1;
 
-	//“–‚½‚è”»’è‚Ìİ’è
+	//å½“ãŸã‚Šåˆ¤å®šã®è¨­å®š
 	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
 	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
-	//Šù‚É“–‚½‚Á‚Ä‚¢‚éƒtƒ‰ƒO‚ğƒŠƒZƒbƒg
+	//æ—¢ã«å½“ãŸã£ã¦ã„ã‚‹ãƒ•ãƒ©ã‚°ã‚’ãƒªã‚»ãƒƒãƒˆ
 	slashHit_ = false;
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("Slash12");
 }
 
 void Player::Slash2()
 {
-	//³–Ê‚ÌŠp“x‚ğŒvZ
+	//æ­£é¢ã®è§’åº¦ã‚’è¨ˆç®—
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
@@ -511,21 +511,21 @@ void Player::Slash2()
 
 	state_ = State::Slash2;
 
-	//“–‚½‚è”»’è‚Ìİ’è
+	//å½“ãŸã‚Šåˆ¤å®šã®è¨­å®š
 	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
 	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	slashCol_.scale = slashScale_;
 
-	//Šù‚É“–‚½‚Á‚Ä‚¢‚éƒtƒ‰ƒO‚ğƒŠƒZƒbƒg
+	//æ—¢ã«å½“ãŸã£ã¦ã„ã‚‹ãƒ•ãƒ©ã‚°ã‚’ãƒªã‚»ãƒƒãƒˆ
 	slashHit_ = false;
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("Slash12");
 }
 
 void Player::Slash3()
 {
-	//³–Ê‚ÌŠp“x‚ğŒvZ
+	//æ­£é¢ã®è§’åº¦ã‚’è¨ˆç®—
 	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
@@ -543,14 +543,14 @@ void Player::Slash3()
 
 	state_ = State::Slash3;
 
-	//“–‚½‚è”»’è‚Ìİ’è
+	//å½“ãŸã‚Šåˆ¤å®šã®è¨­å®š
 	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
 	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
-	//Šù‚É“–‚½‚Á‚Ä‚¢‚éƒtƒ‰ƒO‚ğƒŠƒZƒbƒg
+	//æ—¢ã«å½“ãŸã£ã¦ã„ã‚‹ãƒ•ãƒ©ã‚°ã‚’ãƒªã‚»ãƒƒãƒˆ
 	slashHit_ = false;
 
-	//SEÄ¶
+	//SEå†ç”Ÿ
 	SoundManager::Play("Slash3");
 }
 

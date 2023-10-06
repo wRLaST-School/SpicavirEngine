@@ -66,10 +66,10 @@ void Camera::UseCurrent()
 
 	D3D12_RECT scissorrect{};
 
-	scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-	scissorrect.right = scissorrect.left + (LONG)sCurrent->renderWidth;        // Ø‚è”²‚«À•W‰E
-	scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-	scissorrect.bottom = scissorrect.top + (LONG)sCurrent->renderHeight;       // Ø‚è”²‚«À•W‰º
+	scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+	scissorrect.right = scissorrect.left + (LONG)sCurrent->renderWidth;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+	scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+	scissorrect.bottom = scissorrect.top + (LONG)sCurrent->renderHeight;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 
 	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
@@ -88,7 +88,7 @@ void Camera::UseCurrent()
 
 	GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(3, sCurrent->cameraViewProjMatrixCB.buffer->GetGPUVirtualAddress());
 
-	//Effekseer‚Ìî•ñ‚ğXV
+	//Effekseerã®æƒ…å ±ã‚’æ›´æ–°
 	std::function<Effekseer::Matrix44(Matrix)> SpMatToEfkMat = [](Matrix in) {
 		Effekseer::Matrix44 out;
 

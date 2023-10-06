@@ -24,7 +24,7 @@
 
 void SpFramework::Init()
 {
-	/*ƒfƒoƒbƒO—LŒø‰»*/
+	/*ãƒ‡ãƒãƒƒã‚°æœ‰åŠ¹åŒ–*/
 #ifdef  _DEBUG
 	ID3D12Debug1* debugController;
 	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
@@ -34,17 +34,17 @@ void SpFramework::Init()
 	}
 #endif //  _DEBUG
 
-	//ƒEƒBƒ“ƒhƒE‚ğ¶¬
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’ç”Ÿæˆ
 	{
 		SpWindow wwnd;
 		wwnd.Create(L"DirectX", 1920, 1080);
 		RegisterSpWindow(wwnd, "Default");
 	}
 
-	/*DirectX‰Šú‰»ˆ—*/
+	/*DirectXåˆæœŸåŒ–å‡¦ç†*/
 	InitSpDX();
 
-	/*ƒfƒoƒbƒO—LŒø‰»*/
+	/*ãƒ‡ãƒãƒƒã‚°æœ‰åŠ¹åŒ–*/
 #ifdef  _DEBUG
 	Microsoft::WRL::ComPtr<ID3D12InfoQueue> infoQueue;
 	if (SUCCEEDED(GetSpDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
@@ -61,7 +61,7 @@ void SpFramework::Init()
 	Input::Mouse::Init();
 
 	/*Init Draw*/
-	//ƒ_ƒuƒ‹ƒoƒbƒtƒ@ƒŠƒ“ƒO‚Æ‚©
+	//ãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ã¨ã‹
 	InitSpSCM();
 	InitSpDepth();
 
@@ -111,12 +111,12 @@ void SpFramework::Run()
 		Input::Pad::Update();
 		Input::Mouse::Update();
 
-		/*–ˆƒtƒŒ[ƒ€ˆ—*/
+		/*æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‡¦ç†*/
 
-		/*XVˆ—*/
+		/*æ›´æ–°å‡¦ç†*/
 		SceneManager::Update();
 		SpEffekseer::Update();
-		/*XVˆ—‚±‚±‚Ü‚Å*/
+		/*æ›´æ–°å‡¦ç†ã“ã“ã¾ã§*/
 
 		SceneManager::DrawBack();
 
@@ -138,15 +138,15 @@ void SpFramework::Run()
 
 		GetSpDX()->PostDrawCommands();
 
-		/*–ˆƒtƒŒ[ƒ€ˆ—‚±‚±‚Ü‚Å*/
+		/*æ¯ãƒ•ãƒ¬ãƒ¼ãƒ å‡¦ç†ã“ã“ã¾ã§*/
 		GetSpDX()->EndFrame();
 
-		/*DrawString—p‚Ìƒf[ƒ^‚ğ‰ğ•ú*/
+		/*DrawStringç”¨ã®ãƒ‡ãƒ¼ã‚¿ã‚’è§£æ”¾*/
 		TextDrawer::ReleaseDrawStringData();
 		LineDrawer::ClearLineData();
 	}
 
-	/*ƒ‹[ƒv‚±‚±‚Ü‚Å*/
+	/*ãƒ«ãƒ¼ãƒ—ã“ã“ã¾ã§*/
 	SoundManager::ReleaseAllSounds();
 	SpImGui::Shutdown();
 	CloseAllSpWindow();

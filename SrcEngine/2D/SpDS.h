@@ -32,7 +32,7 @@ public:
 		const Color& color, int32_t thickness = 1);
 
 	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
-	//Šeƒoƒbƒtƒ@‚Æ‘å—Ê‚Ìƒ_ƒ~[ƒXƒvƒ‰ƒCƒg‰Šú‰»
+	//å„ãƒãƒƒãƒ•ã‚¡ã¨å¤§é‡ã®ãƒ€ãƒŸãƒ¼ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆåˆæœŸåŒ–
 	static void CreateBuffers();
 	static void Render();
 
@@ -101,7 +101,7 @@ namespace SpDSLayouts {
 		},
 	};
 
-	// DrawLine2D—p’¸“_ƒŒƒCƒAƒEƒg
+	// DrawLine2Dç”¨é ‚ç‚¹ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	const static D3D12_INPUT_ELEMENT_DESC lineLayout[] = {
 			{
 				"FROM", 0,

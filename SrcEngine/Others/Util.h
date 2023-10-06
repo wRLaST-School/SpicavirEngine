@@ -24,18 +24,18 @@ namespace Util
 		return value > max ? max : value;
 	}
 
-	//percentage %‚ÌŠm—¦‚Åtrue‚ğ•Ô‚·
+	//percentage %ã®ç¢ºç‡ã§trueã‚’è¿”ã™
 	bool Chance(int32_t percentage);
 
 	/*
-	—”‚ğÅ’á’l‚ÆÅ‚’l‚ğİ’è‚µ‚Ä•Ô‚·B
-	RNG(1,3)‚È‚ç1, 2, 3‚Ì‚Ç‚ê‚©‚ª•Ô‚éBpreciseMode‚ğtrue‚É‚·‚é‚Æ‚æ‚è¸–§‚É—”‚ğæ‚éB
+	ä¹±æ•°ã‚’æœ€ä½å€¤ã¨æœ€é«˜å€¤ã‚’è¨­å®šã—ã¦è¿”ã™ã€‚
+	RNG(1,3)ãªã‚‰1, 2, 3ã®ã©ã‚Œã‹ãŒè¿”ã‚‹ã€‚preciseModeã‚’trueã«ã™ã‚‹ã¨ã‚ˆã‚Šç²¾å¯†ã«ä¹±æ•°ã‚’å–ã‚‹ã€‚
 	*/
 	int32_t RNG(int32_t min, int32_t max, bool preciseMode = false);
 
 	std::wstring StrToWStr(const std::string& str, int32_t page = CP_ACP);
 
-	//serializeŠÖ”‚ğ’è‹`‚µ‚½ƒIƒuƒWƒFƒNƒg‚Ìƒtƒ@ƒCƒ‹•Û‘¶/“Ç‚İ‚İ
+	//serializeé–¢æ•°ã‚’å®šç¾©ã—ãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ•ã‚¡ã‚¤ãƒ«ä¿å­˜/èª­ã¿è¾¼ã¿
 	template<class T>
 	void SerializeData(const std::string& path, const T& obj)
 	{

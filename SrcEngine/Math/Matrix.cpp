@@ -235,7 +235,7 @@ Matrix Matrix::operator-() const
 
 	float a;
 
-	//一時行列にコピー
+	//荳譎り｡悟�励↓繧ｳ繝斐�ｼ
 	for (int32_t i = 0; i < 4; i++) {
 		for (int32_t j = 0; j < 4; j++) {
 			temp[i][j] = r[i][j];

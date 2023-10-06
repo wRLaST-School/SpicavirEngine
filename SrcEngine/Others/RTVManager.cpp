@@ -8,7 +8,7 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 	CloseCurrentResBar();
 	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	SpDirectX* dx = GetSpDX();
-	//ƒŠƒ\[ƒXƒoƒŠƒA[‚ð‘‚«ž‚Ý‰Â”\ó‘Ô‚É
+	//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æ›¸ãè¾¼ã¿å¯èƒ½çŠ¶æ…‹ã«
 	dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
 	dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
 	dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -36,7 +36,7 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 	int32_t index = (int32_t)SpTextureManager::GetIndex(key);
 
 	SpDirectX* dx = GetSpDX();
-	//ƒŠƒ\[ƒXƒoƒŠƒA[‚ð‘‚«ž‚Ý‰Â”\ó‘Ô‚É
+	//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æ›¸ãè¾¼ã¿å¯èƒ½çŠ¶æ…‹ã«
 	dx->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 	dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -44,7 +44,7 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 
 	GetInstance().isAllResBarClosed = false;
 
-	//TODO:ê—p‚ÌDSV‚ð—pˆÓ
+	//TODO:å°‚ç”¨ã®DSVã‚’ç”¨æ„
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
 	auto cpuhnd = (GetInstance().GetHeapCPUHandle(index));
@@ -70,7 +70,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 		if (key == "CurrentBuffer")
 		{
 			SpDirectX* dx = GetSpDX();
-			//ƒŠƒ\[ƒXƒoƒŠƒA[‚ð‘‚«ž‚Ý‰Â”\ó‘Ô‚É
+			//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æ›¸ãè¾¼ã¿å¯èƒ½çŠ¶æ…‹ã«
 			dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[GetSCM()->swapchain->GetCurrentBackBufferIndex()].Get();
 			dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 			dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -80,7 +80,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 		else
 		{
 			SpDirectX* dx = GetSpDX();
-			//ƒŠƒ\[ƒXƒoƒŠƒA[‚ð‘‚«ž‚Ý‰Â”\ó‘Ô‚É
+			//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æ›¸ãè¾¼ã¿å¯èƒ½çŠ¶æ…‹ã«
 			dx->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 			dx->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 			dx->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -90,7 +90,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 		}
 	}
 
-	//TODO:ê—p‚ÌDSV‚ð—pˆÓ
+	//TODO:å°‚ç”¨ã®DSVã‚’ç”¨æ„
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
 	std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> pcpuhnds;
@@ -141,7 +141,7 @@ void RTVManager::CreateRenderTargetTexture(float width, float height, const Text
 	GetSpDX()->dev->CreateRenderTargetView(SpTextureManager::GetTextureBuff(key), nullptr,
 		GetHeapCPUHandle((int32_t)SpTextureManager::GetIndex(key)));
 
-	//ƒfƒtƒHƒ‹ƒg‚ÌƒŠƒ\[ƒXƒoƒŠƒA‚ðƒZƒbƒg
+	//ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ã‚’ã‚»ãƒƒãƒˆ
 	//ID3D12Resource* lastRes = GetWDX()->barrierDesc.Transition.pResource;
 	//GetWDX()->barrierDesc.Transition.pResource = SpTextureManager::GetTextureBuff(key);
 	//GetWDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
@@ -204,7 +204,7 @@ void RTVManager::CloseCurrentResBar()
 
 		if (index >= GetInstance().numRT - 2)
 		{
-			//ƒŠƒ\[ƒXƒoƒŠƒA[‚ð–ß‚·
+			//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æˆ»ã™
 			GetSpDX()->barrierDesc.Transition.pResource = GetSCM()->backBuffers[index - GetInstance().numRT + 2].Get();
 			GetSpDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 			GetSpDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
@@ -213,7 +213,7 @@ void RTVManager::CloseCurrentResBar()
 			continue;
 		}
 
-		//ƒŠƒ\[ƒXƒoƒŠƒA[‚ð–ß‚·
+		//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æˆ»ã™
 		GetSpDX()->barrierDesc.Transition.pResource = SpTextureManager::GetInstance().texBuffs[index].Get();
 		GetSpDX()->barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 		GetSpDX()->barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;

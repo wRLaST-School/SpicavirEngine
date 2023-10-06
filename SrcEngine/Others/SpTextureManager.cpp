@@ -10,7 +10,7 @@ using namespace DirectX;
 void SpTextureManager::Create()
 {
 	GetInstance().nextTexIndex_ = 0;
-	//İ’è\‘¢‘Ì
+	//è¨­å®šæ§‹é€ ä½“
 	D3D12_DESCRIPTOR_HEAP_DESC srvHeapDesc{};
 
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
@@ -100,7 +100,7 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 		metadata = scratchImg.GetMetadata();
 	}
 
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
@@ -147,7 +147,7 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 		assert(SUCCEEDED(hr));
 	}
 
-	//ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = ins.srvHeap->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex_;
@@ -226,7 +226,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 		metadata = scratchImg.GetMetadata();
 	}
 
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
@@ -267,7 +267,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 		);
 	}
 
-	//ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex_;
@@ -373,7 +373,7 @@ TextureKey SpTextureManager::CreateDummyTexture(float width, float height, const
 
 	GetInstance().texBuffs[GetInstance().nextTexIndex_]->SetName(L"TEXTURE_BUFFER");
 
-	//ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex_;
@@ -431,7 +431,7 @@ TextureKey SpTextureManager::CreateDummyTexture(float width, float height, const
 }
 
 TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget)
-{//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+{//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	for (size_t i = 0; i < wMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i] && i <= 253)
@@ -458,7 +458,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int3
 		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextTexIndex_]));
 
 	GetInstance().texBuffs[GetInstance().nextTexIndex_]->SetName(L"TEXTURE_BUFFER");
-	//ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex_;
@@ -606,7 +606,7 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 		metadata = scratchImg.GetMetadata();
 	}
 
-	//ƒeƒNƒXƒ`ƒƒƒoƒbƒtƒ@
+	//ãƒ†ã‚¯ã‚¹ãƒãƒ£ãƒãƒƒãƒ•ã‚¡
 	D3D12_HEAP_PROPERTIES texHeapProp{};
 	texHeapProp.Type = D3D12_HEAP_TYPE_CUSTOM;
 	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
@@ -649,7 +649,7 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 		assert(SUCCEEDED(hr));
 	}
 
-	//ƒVƒF[ƒ_[ƒŠƒ\[ƒXƒrƒ…[‚Ì¶¬
+	//ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ãƒªã‚½ãƒ¼ã‚¹ãƒ“ãƒ¥ãƒ¼ã®ç”Ÿæˆ
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = ins.srvHeap->GetCPUDescriptorHandleForHeapStart();
 	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex_;
@@ -878,7 +878,7 @@ void SpTextureManager::ReleasePerSceneTexture()
 	for (auto itr = sPerSceneTextures[lastSceneResIndex].begin(); itr != sPerSceneTextures[lastSceneResIndex].end(); itr++)
 	{
 		bool usingInCurrentScene = false;
-		//Ÿ‚ÌƒV[ƒ“‚Å‚àg‚í‚ê‚é‚©ƒ`ƒFƒbƒN
+		//æ¬¡ã®ã‚·ãƒ¼ãƒ³ã§ã‚‚ä½¿ã‚ã‚Œã‚‹ã‹ãƒã‚§ãƒƒã‚¯
 		for (auto key : sPerSceneTextures[sCurrentSceneResIndex])
 		{
 			if (key == *itr)
@@ -888,7 +888,7 @@ void SpTextureManager::ReleasePerSceneTexture()
 			}
 		}
 
-		//ƒ}ƒXƒ^[ƒeƒNƒXƒ`ƒƒ‚©ƒ`ƒFƒbƒN
+		//ãƒã‚¹ã‚¿ãƒ¼ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‹ãƒã‚§ãƒƒã‚¯
 		for (auto& tk : sMasterTextures)
 		{
 			if (*itr == tk)
@@ -897,7 +897,7 @@ void SpTextureManager::ReleasePerSceneTexture()
 			}
 		}
 
-		if (!usingInCurrentScene) //¡‚ÌƒV[ƒ“‚Åg‚í‚ê‚Ä‚¢‚È‚¢‚È‚çƒŠƒŠ[ƒX
+		if (!usingInCurrentScene) //ä»Šã®ã‚·ãƒ¼ãƒ³ã§ä½¿ã‚ã‚Œã¦ã„ãªã„ãªã‚‰ãƒªãƒªãƒ¼ã‚¹
 		{
 			Release(*itr);
 		}

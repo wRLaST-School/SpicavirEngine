@@ -8,7 +8,7 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 {
 	FontManager* ins = GetInstance();
 
-	//‚±‚ÌƒtƒHƒ“ƒg‚ğŒÄ‚Ô‚Ì‚ª‰‚ß‚Ä‚È‚çƒ}ƒbƒv‚ÉƒtƒHƒ“ƒg‚ğ’Ç‰Á
+	//ã“ã®ãƒ•ã‚©ãƒ³ãƒˆã‚’å‘¼ã¶ã®ãŒåˆã‚ã¦ãªã‚‰ãƒãƒƒãƒ—ã«ãƒ•ã‚©ãƒ³ãƒˆã‚’è¿½åŠ 
 	FontNameHandle handle;
 	map<wstring, FontData>* pFontDataMap = nullptr;
 	auto itr = ins->fontNameMap.find(options.name);
@@ -23,7 +23,7 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 		pFontDataMap = &ins->fontMap.find(handle)->second;
 	}
 
-	//‚±‚ÌƒtƒHƒ“ƒg‚Å‚±‚Ì•¶š‚ğ“Ç‚İ‚Ş‚Ì‚ª‰‚ß‚Ä‚©AŠù‘¶‚Ì•¨‚æ‚è‘å‚«‚¢ƒtƒHƒ“ƒgƒTƒCƒY‚È‚ç“Ç‚İ‚İA‚»‚¤‚Å‚È‚¢‚È‚çreturn
+	//ã“ã®ãƒ•ã‚©ãƒ³ãƒˆã§ã“ã®æ–‡å­—ã‚’èª­ã¿è¾¼ã‚€ã®ãŒåˆã‚ã¦ã‹ã€æ—¢å­˜ã®ç‰©ã‚ˆã‚Šå¤§ãã„ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚ºãªã‚‰èª­ã¿è¾¼ã¿ã€ãã†ã§ãªã„ãªã‚‰return
 	auto itr2 = pFontDataMap->find(glyph);
 	FontHandle pFont = nullptr;
 	if (itr2 != pFontDataMap->end())
@@ -77,7 +77,7 @@ FontHandle FontManager::GetGlyphTexture(FontOptions options, wstring glyph)
 	int32_t bmpX = (pFont->gm.gmBlackBoxX + 3) / 4 * 4;
 	BYTE* finalGlyph = new BYTE[pFont->gm.gmBlackBoxX * pFont->gm.gmBlackBoxY];
 
-	//•‚ğBlackBox‚É‡‚í‚¹‚é
+	//å¹…ã‚’BlackBoxã«åˆã‚ã›ã‚‹
 	for (uint32_t i = 0; i < pFont->gm.gmBlackBoxX; i++)
 	{
 		for (uint32_t j = 0; j < pFont->gm.gmBlackBoxY; j++)
@@ -136,7 +136,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 
 	strdata.width = -(*glyphList.begin())->gm.gmptGlyphOrigin.x;
 
-	//ÅŒã‚Ì—v‘f‚ÌƒCƒeƒŒ[ƒ^[
+	//æœ€å¾Œã®è¦ç´ ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãƒ¼
 	auto backitr = glyphList.end();
 	backitr--;
 
@@ -162,45 +162,45 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 		finalTexImageData[i] = { 0,0,0,0 };
 	}
 
-	//ƒ_ƒ~[ƒeƒNƒXƒ`ƒƒ
+	//ãƒ€ãƒŸãƒ¼ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	strdata.key = SpTextureManager::CreateDummyTextureWithUniqueKey(strdata.width, strdata.height, str, false);
 
 	int32_t drawOriginX = 0;
 	int32_t drawOriginY = 0;
 	int32_t cellX = 0;
 
-	//ÅŒã‚Ì•¶š‚ÌcellX‚ÉÅŒã‚Ì•¶š‚ÌgmCellIncX‚ğ‘«‚µ‚½ˆÊ’u‚É‚³‚ç‚ÉgmptGlyphOrigin‚ğ‘«‚µ‚½ˆÊ’u‚ª•`‰æn“_X
-	//tmAscent‚©‚çgmptGlyphOrigin.Y‚ğˆø‚¢‚½”’l‚ª•¶š‚Ì•`‰æn“_Y
+	//æœ€å¾Œã®æ–‡å­—ã®cellXã«æœ€å¾Œã®æ–‡å­—ã®gmCellIncXã‚’è¶³ã—ãŸä½ç½®ã«ã•ã‚‰ã«gmptGlyphOriginã‚’è¶³ã—ãŸä½ç½®ãŒæç”»å§‹ç‚¹X
+	//tmAscentã‹ã‚‰gmptGlyphOrigin.Yã‚’å¼•ã„ãŸæ•°å€¤ãŒæ–‡å­—ã®æç”»å§‹ç‚¹Y
 
 	for (auto itr = glyphList.begin(); itr != glyphList.end(); itr++)
 	{
 		FontData* glyph = *itr;
-		//Å‰‚Ìˆê•¶š‚Í•¶šƒf[ƒ^‚Ì¶’[‚ğŒ´“_‚Æ‚İ‚È‚µ‚Ä•`‰æ
+		//æœ€åˆã®ä¸€æ–‡å­—ã¯æ–‡å­—ãƒ‡ãƒ¼ã‚¿ã®å·¦ç«¯ã‚’åŸç‚¹ã¨ã¿ãªã—ã¦æç”»
 		if (itr == glyphList.begin())
 		{
-			//n“_‚ÌŒvZ
+			//å§‹ç‚¹ã®è¨ˆç®—
 			drawOriginX = 0;
 			drawOriginY = glyph->tm.tmAscent - glyph->gm.gmptGlyphOrigin.y;
 		}
-		//c‚è‚Ì•¶š‚ÍŒ´“_‚ğŠî€‚É•`‰æ
+		//æ®‹ã‚Šã®æ–‡å­—ã¯åŸç‚¹ã‚’åŸºæº–ã«æç”»
 		else
 		{
-			//n“_‚ÌŒvZ
+			//å§‹ç‚¹ã®è¨ˆç®—
 			drawOriginX = cellX + glyph->gm.gmptGlyphOrigin.x;
 			drawOriginY = glyph->tm.tmAscent - glyph->gm.gmptGlyphOrigin.y;
 		}
 
-		//ƒrƒbƒgƒ}ƒbƒv‚ğ–„‚ß‚é
+		//ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã‚’åŸ‹ã‚ã‚‹
 		for (uint32_t i = 0; i < glyph->gm.gmBlackBoxY; i++)
 		{
 			for (uint32_t j = 0; j < glyph->gm.gmBlackBoxX; j++)
 			{
-				//index‚ÌŒvZ
+				//indexã®è¨ˆç®—
 				int32_t x = drawOriginX + j;
 				int32_t y = drawOriginY + i;
 				UINT64 index = y * strdata.width + x;
 
-				//F‚ğŒvZ
+				//è‰²ã‚’è¨ˆç®—
 				float alpha = (float)glyph->bmp[i * glyph->gm.gmBlackBoxX + j] / (float)glyph->grad * 255;
 				//Float4 pixelColor = { alpha, alpha, alpha, alpha };
 
@@ -211,18 +211,18 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 					(BYTE)(alpha + finalTexImageData[index].a * (255 - alpha))
 				};
 
-				//‘‚«‚İ
+				//æ›¸ãè¾¼ã¿
 				finalTexImageData[index] = finalColor;
 			}
 		}
 
-		//Ÿ‚ÌcellX‚ğŒvZ
-		//Å‰‚Ìˆê•¶š
+		//æ¬¡ã®cellXã‚’è¨ˆç®—
+		//æœ€åˆã®ä¸€æ–‡å­—
 		if (itr == glyphList.begin())
 		{
 			cellX += -glyph->gm.gmptGlyphOrigin.x + glyph->gm.gmCellIncX;
 		}
-		//Å‰‚ÆÅŒãˆÈŠO
+		//æœ€åˆã¨æœ€å¾Œä»¥å¤–
 		else if (itr != backitr)
 		{
 			cellX += glyph->gm.gmCellIncX;

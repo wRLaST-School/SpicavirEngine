@@ -17,22 +17,22 @@ private:
 
 public:
 //Constructors
-	//’PˆÊs—ñ‚Å‰Šú‰»
+	//å˜ä½è¡Œåˆ—ã§åˆæœŸåŒ–
 	Matrix();
 
-	//Float4‚ğ4‚Â‚Å‰Šú‰»
+	//Float4ã‚’4ã¤ã§åˆæœŸåŒ–
 	Matrix(Float4 r0, Float4 r1, Float4 r2, Float4 r3);
 	
-	//Float4‚Ì”z—ñ‚Å‰Šú‰»
+	//Float4ã®é…åˆ—ã§åˆæœŸåŒ–
 	Matrix(const Float4* pf44Array);
 
-	//float‚ğ16ŒÂ‚Å‰Šú‰»
+	//floatã‚’16å€‹ã§åˆæœŸåŒ–
 	Matrix(float r0c0, float r0c1, float r0c2, float r0c3,
 		float r1c0, float r1c1, float r1c2, float r1c3,
 		float r2c0, float r2c1, float r2c2, float r2c3,
 		float r3c0, float r3c1, float r3c2, float r3c3);
 
-	//float‚Ì”z—ñ‚Å‰Šú‰»
+	//floatã®é…åˆ—ã§åˆæœŸåŒ–
 	Matrix(const float* pf16Array);
 
 //Operators
@@ -53,11 +53,11 @@ public:
 	Matrix& Transpose();
 	Matrix GetTranspose() const;
 
-	//s—ñ‚©‚çƒIƒuƒWƒFƒNƒg‚ÌX²•ûŒü‚ÌƒxƒNƒgƒ‹‚ğæ“¾
+	//è¡Œåˆ—ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Xè»¸æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
 	Vec3 ExtractAxisX(float scale = 1.0);
-	//s—ñ‚©‚çƒIƒuƒWƒFƒNƒg‚ÌY²•ûŒü‚ÌƒxƒNƒgƒ‹‚ğæ“¾
+	//è¡Œåˆ—ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Yè»¸æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
 	Vec3 ExtractAxisY(float scale = 1.0);
-	//s—ñ‚©‚çƒIƒuƒWƒFƒNƒg‚ÌZ²•ûŒü‚ÌƒxƒNƒgƒ‹‚ğæ“¾
+	//è¡Œåˆ—ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Zè»¸æ–¹å‘ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
 	Vec3 ExtractAxisZ(float scale = 1.0);
 
 //Static Functions
@@ -65,7 +65,7 @@ public:
 
 	static Matrix ViewLookTo(Float3 eyePos, Vec3 zVec, Vec3 up = Vec3(0.0f, 1.0f, 0.0f));
 	static Matrix ViewLookAt(Float3 eye, Float3 target, Vec3 up = Vec3(0.0f, 1.0f, 0.0f));
-	//‹ts—ñ‚ğæ“¾‚·‚é‚¾‚¯(ƒJƒƒ‰‚Ìs—ñ‚©‚çƒrƒ…[‚É•ÏŠ·)
+	//é€†è¡Œåˆ—ã‚’å–å¾—ã™ã‚‹ã ã‘(ã‚«ãƒ¡ãƒ©ã®è¡Œåˆ—ã‹ã‚‰ãƒ“ãƒ¥ãƒ¼ã«å¤‰æ›)
 	static Matrix View(Matrix camera);
 
 	static Matrix Projection(float fov, float aspectRatio, float nearZ, float farZ);
@@ -86,7 +86,7 @@ public:
 	static Matrix RotRollPitchYaw(float roll, float pitch, float yaw);
 	static Matrix RotRollPitchYaw(Float3 pitchYawRoll);
 
-	//”CˆÓ²‰ñ“](ƒNƒH[ƒ^ƒjƒIƒ“)
+	//ä»»æ„è»¸å›è»¢(ã‚¯ã‚©ãƒ¼ã‚¿ãƒ‹ã‚ªãƒ³)
 	static Matrix RotArbitrary(Vec3 axis, float rad);
 
 	static Matrix Scale(Float3 scale);

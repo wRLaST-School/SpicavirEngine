@@ -35,7 +35,7 @@ void BTENode::ChangeNodeType(std::string type)
 	auto children = std::move(last->children_);
 	auto parentBT = last->parentBT_;
 
-	//NodeType‚É‚æ‚Á‚Ä•ªŠò
+	//NodeTypeã«ã‚ˆã£ã¦åˆ†å²
 	if (type == "Action")
 	{
 		*node_ = std::make_unique<BT::ActionNode>();
@@ -139,7 +139,7 @@ void BTENode::Draw()
 
 			if (ImGui::Button("Delete Node"))
 			{
-				//Node‚ğÁ‚·
+				//Nodeã‚’æ¶ˆã™
 				master_->DeleteNode(this);
 			}
 		}

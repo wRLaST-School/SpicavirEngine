@@ -4,13 +4,13 @@
 template <class Contents> class SpConstBuffer
 {
 public:
-	//ConstBuffer‚ð¶¬‚µ‚Äƒ}ƒbƒsƒ“ƒO
+	//ConstBufferã‚’ç”Ÿæˆã—ã¦ãƒžãƒƒãƒ”ãƒ³ã‚°
 	SpConstBuffer() {
-		//ƒq[ƒvÝ’è
+		//ãƒ’ãƒ¼ãƒ—è¨­å®š
 		D3D12_HEAP_PROPERTIES cbheapprop{};
 		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
-		//ƒŠƒ\[ƒXÝ’è
+		//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 		D3D12_RESOURCE_DESC cbresdesc{};
 		cbresdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 		cbresdesc.Width = (sizeof(Contents) + 0xff) & ~0xff;
@@ -20,7 +20,7 @@ public:
 		cbresdesc.SampleDesc.Count = 1;
 		cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-		//GPUƒŠƒ\[ƒX‚Ì¶¬
+		//GPUãƒªã‚½ãƒ¼ã‚¹ã®ç”Ÿæˆ
 		GetSpDX()->dev->CreateCommittedResource(
 			&cbheapprop,
 			D3D12_HEAP_FLAG_NONE,
@@ -46,11 +46,11 @@ public:
 	}
 
 	void Create() {		
-		//ƒq[ƒvÝ’è
+		//ãƒ’ãƒ¼ãƒ—è¨­å®š
 		D3D12_HEAP_PROPERTIES cbheapprop{};
 		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
 
-		//ƒŠƒ\[ƒXÝ’è
+		//ãƒªã‚½ãƒ¼ã‚¹è¨­å®š
 		D3D12_RESOURCE_DESC cbresdesc{};
 		cbresdesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 		cbresdesc.Width = (sizeof(Contents) + 0xff) & ~0xff;
@@ -60,7 +60,7 @@ public:
 		cbresdesc.SampleDesc.Count = 1;
 		cbresdesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-		//GPUƒŠƒ\[ƒX‚Ì¶¬
+		//GPUãƒªã‚½ãƒ¼ã‚¹ã®ç”Ÿæˆ
 		GetSpDX()->dev->CreateCommittedResource(
 			&cbheapprop,
 			D3D12_HEAP_FLAG_NONE,

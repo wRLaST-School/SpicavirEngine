@@ -27,7 +27,7 @@ void SpDirectX::Init() {
 
 	Microsoft::WRL::ComPtr<IDXGIAdapter1> tmpAdapter = nullptr;
 
-	//ƒOƒ‰ƒ{ŒN‚Ì–ÊÚ‚µ‚Ü``‚·
+	//ã‚°ãƒ©ãƒœå›ã®é¢æ¥ã—ã¾ï½ï½ã™
 	for (int32_t i = 0; dxgiFactory->EnumAdapters1(i, &tmpAdapter) != DXGI_ERROR_NOT_FOUND; i++)
 	{
 		adapters.push_back(tmpAdapter);
@@ -38,22 +38,22 @@ void SpDirectX::Init() {
 		DXGI_ADAPTER_DESC1 adesc;
 		adp->GetDesc1(&adesc);
 
-		//ƒ\ƒtƒgƒEƒFƒA‚Í‚¨ŒÄ‚Ñ‚Å‚È‚¢‚Ì‚Å‚¨‹F‚èƒ[ƒ‹
+		//ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã¯ãŠå‘¼ã³ã§ãªã„ã®ã§ãŠç¥ˆã‚Šãƒ¡ãƒ¼ãƒ«
 		if (adesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
 			continue;
 		}
 
 		wstring strDesc = adesc.Description;
-		// Intel UHD‚Í‚³‚æ‚È‚ç
+		// Intel UHDã¯ã•ã‚ˆãªã‚‰
 		if (strDesc.find(L"Intel") == wstring::npos)
 		{
-			//ŒN—DG‚¾‚Ë‚¥`Ì—p‚£
+			//å›å„ªç§€ã ã­ã‡ï½æ¡ç”¨ã…
 			tmpAdapter = adp;
 			break;
 		}
 	}
 
-	//ƒfƒoƒCƒX¶¬(•¡”¶¬‚µ‚È‚¢‚æ‚¤‚ÉI)
+	//ãƒ‡ãƒã‚¤ã‚¹ç”Ÿæˆ(è¤‡æ•°ç”Ÿæˆã—ãªã„ã‚ˆã†ã«ï¼)
 	D3D_FEATURE_LEVEL levels[] =
 	{
 		D3D_FEATURE_LEVEL_12_1,
@@ -66,7 +66,7 @@ void SpDirectX::Init() {
 
 	for (int32_t i = 0; i < _countof(levels); i++)
 	{
-		//Ì—p‚µ‚½ƒAƒ_ƒvƒ^[‚ÅƒfƒoƒCƒX‚ğ¶¬
+		//æ¡ç”¨ã—ãŸã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã§ãƒ‡ãƒã‚¤ã‚¹ã‚’ç”Ÿæˆ
 		result = D3D12CreateDevice(tmpAdapter.Get(), levels[i], IID_PPV_ARGS(&dev));
 		if (result == S_OK)
 		{
@@ -75,7 +75,7 @@ void SpDirectX::Init() {
 		}
 	}
 
-	//ƒRƒ}ƒ“ƒhƒŠƒXƒg‚ÆƒRƒ}ƒ“ƒhƒLƒ…[
+	//ã‚³ãƒãƒ³ãƒ‰ãƒªã‚¹ãƒˆã¨ã‚³ãƒãƒ³ãƒ‰ã‚­ãƒ¥ãƒ¼
 	result = dev->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&cmdAllocator));
 
 	result = dev->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, cmdAllocator.Get(), nullptr, IID_PPV_ARGS(&cmdList));
@@ -92,10 +92,10 @@ bool SpDirectX::StartFrame()
 
 void SpDirectX::PreDrawCommands()
 {
-	//ƒoƒbƒNƒoƒbƒtƒ@”Ô†‚ğæ“¾(0‚©1)
+	//ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ç•ªå·ã‚’å–å¾—(0ã‹1)
 	UINT bbIndex = GetSCM()->swapchain->GetCurrentBackBufferIndex();
 
-	//‰æ–ÊƒNƒŠƒA
+	//ç”»é¢ã‚¯ãƒªã‚¢
 	Float4 clearColor = { 0.1f, 0.25f, 0.5f, 0.0f };
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
@@ -103,7 +103,7 @@ void SpDirectX::PreDrawCommands()
 	GetSpDX()->cmdList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 
 	RTVManager::SetRenderTargetToBackBuffer(bbIndex);
-	/*•`‰æˆ—*/
+	/*æç”»å‡¦ç†*/
 	GetSpDX()->cmdList->SetPipelineState(GPipeline::GetState("def"));
 	GetSpDX()->cmdList->SetGraphicsRootSignature(SpRootSignature::Get("3D")->rootsignature.Get());
 
@@ -127,10 +127,10 @@ void SpDirectX::PreDrawCommands()
 
 	D3D12_RECT scissorrect{};
 
-	scissorrect.left = 0;                                       // Ø‚è”²‚«À•W¶
-	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // Ø‚è”²‚«À•W‰E
-	scissorrect.top = 0;                                        // Ø‚è”²‚«À•Wã
-	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // Ø‚è”²‚«À•W‰º
+	scissorrect.left = 0;                                       // åˆ‡ã‚ŠæŠœãåº§æ¨™å·¦
+	scissorrect.right = scissorrect.left + GetSpWindow()->width;        // åˆ‡ã‚ŠæŠœãåº§æ¨™å³
+	scissorrect.top = 0;                                        // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸Š
+	scissorrect.bottom = scissorrect.top + GetSpWindow()->height;       // åˆ‡ã‚ŠæŠœãåº§æ¨™ä¸‹
 
 	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
@@ -141,7 +141,7 @@ void SpDirectX::PreDrawCommands()
 
 void SpDirectX::PostDrawCommands()
 {
-	//ƒŠƒ\[ƒXƒoƒŠƒA[‚ğ–ß‚·
+	//ãƒªã‚½ãƒ¼ã‚¹ãƒãƒªã‚¢ãƒ¼ã‚’æˆ»ã™
 	barrierDesc.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrierDesc.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
@@ -152,7 +152,7 @@ void SpDirectX::PostDrawCommands()
 
 void SpDirectX::EndFrame()
 {	
-	//–½—ß‚ğÀs‚µ‚Ä•`‰æ
+	//å‘½ä»¤ã‚’å®Ÿè¡Œã—ã¦æç”»
 	cmdList->Close();
 
 	ID3D12CommandList* cmdLists[] = { cmdList.Get() };

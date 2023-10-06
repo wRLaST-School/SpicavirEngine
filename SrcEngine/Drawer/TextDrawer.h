@@ -17,14 +17,14 @@ enum class Align
 
 struct FontOptions
 {
-	//ƒtƒHƒ“ƒg‚Ì‰ğ‘œ“xAƒV[ƒ“‚²‚Æ‚É“ˆê‚·‚é‚±‚Æ‚ğ„§
+	//ãƒ•ã‚©ãƒ³ãƒˆã®è§£åƒåº¦ã€ã‚·ãƒ¼ãƒ³ã”ã¨ã«çµ±ä¸€ã™ã‚‹ã“ã¨ã‚’æ¨å¥¨
 	int32_t resolution = 64;
 
 	int32_t weight = 1000;
 	int32_t charSet = SHIFTJIS_CHARSET;
 
-	//g—p‚·‚éƒtƒHƒ“ƒg‚Ì–¼‘O
-	std::string name = "‚l‚r ‚o–¾’©";
+	//ä½¿ç”¨ã™ã‚‹ãƒ•ã‚©ãƒ³ãƒˆã®åå‰
+	std::string name = "ï¼­ï¼³ ï¼°æ˜æœ";
 
 	int32_t gradFlag = GGO_GRAY8_BITMAP;
 };
@@ -33,12 +33,12 @@ struct StringOptions
 {
 	FontOptions fontOptions;
 
-	//ƒtƒHƒ“ƒgƒTƒCƒY(pt)
+	//ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º(pt)
 	int32_t size = 64;
 
-	//sŠÔ(px)
+	//è¡Œé–“(px)
 	int32_t lineSpacing = 2;
-	//šŠÔ(px)
+	//å­—é–“(px)
 	int32_t charSpacing = 2;
 };
 
@@ -88,9 +88,9 @@ public:
 
 	static StringData CreateStringTexture(std::string str, StringOptions options);
 
-	///<summary>ƒtƒHƒ“ƒg‚ğƒtƒ@ƒCƒ‹‚©‚çWindows‚É“Ç‚İ‚Ü‚¹‚é</summary>
-	///<param name = "path">“Ç‚İ‚Şƒtƒ@ƒCƒ‹‚Ìexe‚©‚ç‚Ì‘Š‘ÎƒpƒX / ƒtƒ‹ƒpƒX</param>
-	///<returns>“Ç‚İ‚ñ‚¾ƒtƒHƒ“ƒg‚ğg—p‚·‚é‚½‚ß‚Ì–¼‘O</returns>
+	///<summary>ãƒ•ã‚©ãƒ³ãƒˆã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰Windowsã«èª­ã¿è¾¼ã¾ã›ã‚‹</summary>
+	///<param name = "path">èª­ã¿è¾¼ã‚€ãƒ•ã‚¡ã‚¤ãƒ«ã®exeã‹ã‚‰ã®ç›¸å¯¾ãƒ‘ã‚¹ / ãƒ•ãƒ«ãƒ‘ã‚¹</param>
+	///<returns>èª­ã¿è¾¼ã‚“ã ãƒ•ã‚©ãƒ³ãƒˆã‚’ä½¿ç”¨ã™ã‚‹ãŸã‚ã®åå‰</returns>
 	static std::string LoadFontFromFile(std::string path);
 
 	static FontManager* GetInstance();

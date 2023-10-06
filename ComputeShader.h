@@ -26,6 +26,8 @@ private:
 
 	void CreateCommandList();
 
+	void Init();
+
 
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> rs;
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> pl;
@@ -40,18 +42,18 @@ private:
 template<class Object>
 inline void ComputeShader<Object>::CreateRS(std::wstring shaderFile)
 {
-	//ƒVƒF[ƒ_[ƒRƒ“ƒpƒCƒ‹
+	//ç¹§ï½·ç¹§ï½§ç¹ï½¼ç¹ï¿½ç¹ï½¼ç¹§ï½³ç¹ï½³ç¹ä»£ã†ç¹ï½«
 	auto hr = D3DCompileFromFile(shaderFile, nullptr,
 		D3D_COMPILE_STANDARD_FILE_INCLUDE, "CS", "cs_5_1", D3DCOMPILE_DEBUG |
 		D3DCOMPILE_SKIP_OPTIMIZATION, 0, &shader, nullptr);
-	//ƒVƒF[ƒ_[‚©‚çƒ‹[ƒgƒVƒOƒlƒ`ƒƒî•ñ‚ðŽæ“¾
+	//ç¹§ï½·ç¹§ï½§ç¹ï½¼ç¹ï¿½ç¹ï½¼ç¸ºä¹ï½‰ç¹ï½«ç¹ï½¼ç¹åŒ»ã™ç¹§ï½°ç¹é˜ªãƒ¡ç¹ï½£è« ï¿½ï¿½ï½±ç¹§è²žå™è •ï¿½
 	ID3DBlob* sig = nullptr;
 	hr = D3DGetBlobPart(shader->GetBufferPointer(), shader->GetBufferSize(),
 		D3D_BLOB_ROOT_SIGNATURE, 0, &sig);
 
 	assert(SUCCEEDED(hr));
 
-	//ƒ‹[ƒgƒVƒOƒlƒ`ƒƒ‚Ì¶¬
+	//ç¹ï½«ç¹ï½¼ç¹åŒ»ã™ç¹§ï½°ç¹é˜ªãƒ¡ç¹ï½£ç¸ºï½®é€•æ»“ï¿½ï¿½
 	hr = dev->CreateRootSignature(0, sig->GetBufferPointer(), sig->GetBufferSize(),
 		IID_PPV_ARGS(&rs));
 
@@ -83,4 +85,20 @@ inline void ComputeShader<Object>::CreateHeap()
 
 	auto hr = dev->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&heap));
 	assert(SUCCEEDED(hr));
+}
+
+template<class Object>
+inline void ComputeShader<Object>::Map()
+{
+	data = buf.contents;
+}
+
+template<class Object>
+inline void ComputeShader<Object>::CreateCommandList()
+{
+	auto hr = dev->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_COMPUTE,
+		IID_PPV_ARGS(&allo));
+	hr = dev->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_COMPUTE, allo, nullptr,
+		IID_PPV_ARGS(&list));
+	return hr;
 }

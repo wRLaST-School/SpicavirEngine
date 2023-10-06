@@ -32,7 +32,7 @@ void CameraController::Update()
 			Vec3 front = (Vec3)Boss::Get()->position - pl->position;
 			front.y = 0;
 
-			//�[���x�N�g���Ŕ�΂Ȃ��悤��
+			//ゼロベクトルで飛ばないように
 			if (front.GetSquaredLength())
 			{
 				lastPlayerPos_ = pl->position;
@@ -55,7 +55,7 @@ void CameraController::Update()
 			Vec3 front = (Vec3)Boss::Get()->position - pl->position;
 			front.y = 0;
 
-			//�[���x�N�g���Ŕ�΂Ȃ��悤��
+			//ゼロベクトルで飛ばないように
 			if (front.GetSquaredLength())
 			{
 				lastPlayerPos_ = pl->position;

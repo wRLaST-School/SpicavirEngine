@@ -10,7 +10,7 @@ struct ColorInt {
 class Color
 {
 public:
-	Color(); //•‚Å‰Šú‰»
+	Color(); //é»’ã§åˆæœŸåŒ–
 	Color(const Float4& rgba);
 	Color(float r, float g, float b, float a = 1.0f);
 	Color(int32_t r, int32_t g, int32_t b, int32_t a = 255);
@@ -24,7 +24,7 @@ public:
 
 	void ShowImGUIEditor(std::string windowTitle);
 
-	//ˆÈ‰º–¢À‘•
+	//ä»¥ä¸‹æœªå®Ÿè£…
 	operator int32_t();
 	Float3 GetHSV();
 

@@ -918,5 +918,8 @@
     <None Include="Resources\Shaders\BasicInv.hlsli">
       <Filter>Shaders</Filter>
     </None>
+    <None Include=".editorconfig">
+      <Filter>未分類</Filter>
+    </None>
   </ItemGroup>
 </Project>
