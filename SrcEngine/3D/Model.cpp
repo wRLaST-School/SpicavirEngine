@@ -23,7 +23,7 @@ Matrix AiMatToSpMat(aiMatrix4x4 m)
 
 Model::Model(const std::string& modelName)
 {
-	std::string path = "Resources/Models/"+modelName+"/";
+	std::string path = "Assets/Models/"+modelName+"/";
 	std::string objfile = modelName + ".obj";
 
 	std::vector<Vertex> vertices;

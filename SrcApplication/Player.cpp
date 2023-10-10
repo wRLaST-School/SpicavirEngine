@@ -13,16 +13,16 @@ void Player::Load()
 {
 	ModelManager::Register("Cube", "cube");
 
-	ModelManager::Register("Resources/Models/Player/Idle.gltf", "PlayerIdle", false);
-	ModelManager::Register("Resources/Models/Player/Roll.gltf", "PlayerRoll", false);
-	ModelManager::Register("Resources/Models/Player/Run.gltf", "PlayerRun", false);
-	ModelManager::Register("Resources/Models/Player/Slash1.gltf", "PlayerSlash1", false);
-	ModelManager::Register("Resources/Models/Player/Slash2.gltf", "PlayerSlash2", false);
-	ModelManager::Register("Resources/Models/Player/Slash3.gltf", "PlayerSlash3", false);
+	ModelManager::Register("Assets/Models/Player/Idle.gltf", "PlayerIdle", false);
+	ModelManager::Register("Assets/Models/Player/Roll.gltf", "PlayerRoll", false);
+	ModelManager::Register("Assets/Models/Player/Run.gltf", "PlayerRun", false);
+	ModelManager::Register("Assets/Models/Player/Slash1.gltf", "PlayerSlash1", false);
+	ModelManager::Register("Assets/Models/Player/Slash2.gltf", "PlayerSlash2", false);
+	ModelManager::Register("Assets/Models/Player/Slash3.gltf", "PlayerSlash3", false);
 
-	SpEffekseer::Load(L"Resources/Effekseer/Slash1", L"Resources/Effekseer/Slash1/Slash1.efk", "Slash1");
-	SpEffekseer::Load(L"Resources/Effekseer/Slash2", L"Resources/Effekseer/Slash2/Slash2.efk", "Slash2");
-	SpEffekseer::Load(L"Resources/Effekseer/Slash3", L"Resources/Effekseer/Slash3/Slash3.efk", "Slash3");
+	SpEffekseer::Load(L"Assets/Effekseer/Slash1", L"Assets/Effekseer/Slash1/Slash1.efk", "Slash1");
+	SpEffekseer::Load(L"Assets/Effekseer/Slash2", L"Assets/Effekseer/Slash2/Slash2.efk", "Slash2");
+	SpEffekseer::Load(L"Assets/Effekseer/Slash3", L"Assets/Effekseer/Slash3/Slash3.efk", "Slash3");
 }
 
 void Player::Init()

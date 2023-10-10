@@ -68,5 +68,19 @@ void SpImGui::Shutdown()
 	ImGui::DestroyContext();
 }
 
+bool SpImGui::DoubleClickButton(const char* label, const ImVec2& size_arg)
+{
+	ImGui::Button(label, size_arg);
+
+	return ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left);
+}
+
+bool SpImGui::DoubleClickImageButton(ImTextureID user_texture_id, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, int frame_padding, const ImVec4& bg_col, const ImVec4& tint_col)
+{
+	ImGui::ImageButton(user_texture_id, size, uv0, uv1, frame_padding,  bg_col, tint_col);
+
+	return ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left);
+}
+
 
 std::list<std::function<void(void)>> SpImGui::sCommands;

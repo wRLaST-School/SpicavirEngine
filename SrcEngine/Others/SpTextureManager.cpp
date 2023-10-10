@@ -39,13 +39,13 @@ void SpTextureManager::Init()
 		texbuffs = nullptr;
 	}
 
-	SpTextureManager::LoadTexture("Resources/notexture.png", "notexture");
+	SpTextureManager::LoadTexture("Assets/Images/notexture.png", "notexture");
 	AddMasterTextureKey("notexture");
 
-	SpTextureManager::LoadTexture("Resources/DissolveMap.png", "dissolveMap");
+	SpTextureManager::LoadTexture("Assets/Images/DissolveMap.png", "dissolveMap");
 	AddMasterTextureKey("dissolveMap");
 
-	SpTextureManager::LoadTexture("Resources/white.png", "white");
+	SpTextureManager::LoadTexture("Assets/Images/white.png", "white");
 	AddMasterTextureKey("white");
 }
 

@@ -16,11 +16,8 @@ Boss* Boss::sCurrent = nullptr;
 
 void Boss::Load()
 {
-	ModelManager::Register("Resources/Models/Boss/boss.glb", "Boss", true);
-	SpTextureManager::LoadTexture("Resources/white.png", "white");
-
-	ModelManager::Register("Resources/Models/Marker/Marker.obj", "Marker", true);
-	SpTextureManager::LoadTexture("Resources/Marker.png", "Marker");
+	ModelManager::Register("Assets/Models/Boss/boss.glb", "Boss", true);
+	SpTextureManager::LoadTexture("Assets/Images/white.png", "white");
 
 	Score::Load();
 }
@@ -210,7 +207,7 @@ void Boss::InitBehaviorTree()
 
 	//tree_.SaveJson("Resources/data/BossBehavior.json");
 
-	tree_.LoadJson("Resources/data/BossBehavior.json");
+	tree_.LoadJson("Assets/data/BossBehavior.json");
 }
 
 void Boss::CastMarker(Float3 pos)
@@ -594,10 +591,10 @@ void Boss::ShowImGui()
 				if (ImGui::BeginMenu("File"))
 				{
 					if (ImGui::MenuItem("Save")) {
-						Util::SerializeData("Resources/Data/boss.bin", *this);
+						Util::SerializeData("Assets/Data/boss.bin", *this);
 					}
 					if (ImGui::MenuItem("Load")) {
-						Util::DeserializeData("Resources/Data/boss.bin", *this);
+						Util::DeserializeData("Assets/Data/boss.bin", *this);
 					}
 
 					ImGui::EndMenu();

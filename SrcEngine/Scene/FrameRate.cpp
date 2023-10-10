@@ -17,7 +17,7 @@ void FrameRate::FrameStartWithWait()
 
 				if (ImGui::Button("Save"))
 				{
-					Util::SerializeData("Resources/Data/frameRate.bin", sWaitTimeData);
+					Util::SerializeData("Assets/Data/frameRate.bin", sWaitTimeData);
 				}
 			}
 			ImGui::End();
@@ -37,7 +37,7 @@ void FrameRate::InitMark()
 {
 	sFramestart = std::chrono::system_clock::now();
 
-	Util::DeserializeData("Resources/Data/frameRate.bin", sWaitTimeData);
+	Util::DeserializeData("Assets/Data/frameRate.bin", sWaitTimeData);
 }
 
 std::chrono::system_clock::time_point FrameRate::sFrameend, FrameRate::sFramestart;
