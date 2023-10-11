@@ -23,6 +23,7 @@
 #include <SpEffekseer.h>
 #include <AssetBrowser.h>
 #include <GameManager.h>
+#include <HierarchyPanel.h>
 
 void SpFramework::Init()
 {
@@ -132,6 +133,8 @@ void SpFramework::Run()
 		if (GameManager::sShowDebug)
 		{
 			AssetBrowser::SDraw();
+
+			HierarchyPanel::SDraw();
 		}
 
 		GetSpDX()->PreDrawCommands();

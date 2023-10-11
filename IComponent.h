@@ -1,4 +1,7 @@
 #pragma once
+
+class HierarchyPanel;
+
 class IComponent
 {
 public:
@@ -33,16 +36,24 @@ public:
 
 	~IComponent() {};
 
+	//components_の中身をHierarchy Panelからのみ直接操作したいため
+	friend HierarchyPanel;
+	
+protected:
+	std::string name = "";
+
 private:
 	eastl::hash_multimap<std::string, eastl::unique_ptr<IComponent>> components_;
 
 	IComponent* parent_ = nullptr;
+
 };
 
 template<class Type, class ...Args>
 inline void IComponent::AddComponent(std::string key, Args ...args)
 {
-	components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
+	auto itr = components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
+	itr->second->name = itr->first;
 }
 
 template<class Type>
