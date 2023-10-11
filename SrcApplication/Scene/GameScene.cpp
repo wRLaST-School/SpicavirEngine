@@ -40,12 +40,18 @@ void GameScene::LoadResources()
 
 void GameScene::Init()
 {
-	LevelManager::Init();
-	Boss::Set(&boss_);
-	Player::Set(&player_);
+	AddComponent<Player>("Player");
+	AddComponent<Boss>("Boss");
 
-	boss_.Init();
-	player_.Init();
+	player_ = GetComponent<Player>("Player");
+	boss_ = GetComponent<Boss>("Boss");
+
+	LevelManager::Init();
+	Boss::Set(boss_);
+	Player::Set(player_);
+
+	boss_->Init();
+	player_->Init();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
 
@@ -59,8 +65,8 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	LevelManager::Update();
-	boss_.Update();
-	player_.Update();
+	boss_->Update();
+	player_->Update();
 	cam_.Update();
 
 	MainTimer::Update();
@@ -88,8 +94,8 @@ void GameScene::Draw3D()
 	cam_.Set();
 
 	LevelManager::Draw();
-	boss_.Draw();
-	player_.Draw();
+	boss_->Draw();
+	player_->Draw();
 
 	MainTimer::Draw();
 }

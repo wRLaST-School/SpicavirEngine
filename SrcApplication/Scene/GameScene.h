@@ -18,8 +18,8 @@ public:
     void DrawSprite() override;
 
 private:
-    Boss boss_;
-    Player player_;
+    Boss* boss_;
+    Player* player_;
 
     CameraController cam_;
 };

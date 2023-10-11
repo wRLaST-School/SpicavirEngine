@@ -1,6 +1,7 @@
 #pragma once
 #include "Light.h"
-class IScene
+#include <IComponent.h>
+class IScene : public IComponent
 {
 public:
 	IScene() { 

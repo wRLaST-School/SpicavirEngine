@@ -7,7 +7,7 @@
 #include <GravSphere.h>
 #include <BehaviorTree.h>
 class Boss :
-    public Object3D
+    public Object3D, public IComponent
 {
 public:
     void Init();
@@ -75,7 +75,7 @@ public:
 
 private:
     //BehaviorTree
-    BT::BehaviorTree tree_;
+    BT::BehaviorTree* tree_;
 
     //Marker
     static const int MAX_MARKERS = 256;

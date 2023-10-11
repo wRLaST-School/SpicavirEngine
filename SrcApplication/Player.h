@@ -3,8 +3,9 @@
 #include <Emitter.h>
 #include <CounterParticle.h>
 #include <OBBCollider.h>
+
 class Player :
-    public Object3D
+    public Object3D, public IComponent
 {
 public:
     void Init();

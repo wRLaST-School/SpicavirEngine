@@ -59,7 +59,7 @@ void Boss::Update()
 	col_.DrawBB(Color::Red);
 
 	//BehaviorTreeのTickを行う
-	tree_.Tick();
+	tree_->Tick();
 
 	//ダメージ演出の更新
 	if (damaged_)
@@ -137,6 +137,10 @@ void Boss::Set(Boss* boss)
 
 void Boss::InitBehaviorTree()
 {
+	//BTのコンポーネントを追加
+	AddComponent<BT::BehaviorTree>("BehaviorTree");
+	tree_ = GetComponent<BT::BehaviorTree>("BehaviorTree");
+
 	//ファクトリーに関数を登録
 	BT::BehaviorTreeFactory factory;
 
@@ -155,9 +159,9 @@ void Boss::InitBehaviorTree()
 
 	factory.RegisterCondition("PlayerInsideRushRange", std::bind(&Boss::IsPlayerInsideRushRange, this));
 
-	tree_.SetFactory(factory);
+	tree_->SetFactory(factory);
 
-	tree_.LoadJson("Assets/data/BossBehavior.bt");
+	tree_->LoadJson("Assets/data/BossBehavior.bt");
 }
 
 void Boss::CastMarker(Float3 pos)
