@@ -157,57 +157,7 @@ void Boss::InitBehaviorTree()
 
 	tree_.SetFactory(factory);
 
-	////ツリーの手動構築
-	//tree_.root->AddNode<BT::LoopNode>("0");
-
-	//tree_.root->Last()->AddNode<BT::SequencerNode>("");
-
-	//tree_.root->Last()->Last()->AddNode<BT::LoopNode>("2");
-
-	//tree_.root->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-
-	////LineAttack
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastLineAttack");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateLine");
-
-	////Marker
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker1");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker2");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateMarker");
-
-	////終わったら60フレーム待機
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-
-	//tree_.root->Last()->Last()->AddNode<BT::SequencerNode>("");
-
-	//tree_.root->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-
-	////Rush
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastRush");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
-
-	////GravSphere
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastGravSphere");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateGravSphere");
-
-	////終わったら60フレーム待機
-	//tree_.root->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-
-	////3回行動したらさらに180フレーム待機
-	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-
-	//tree_.SaveJson("Resources/data/BossBehavior.json");
-
-	tree_.LoadJson("Assets/data/BossBehavior.json");
+	tree_.LoadJson("Assets/data/BossBehavior.bt");
 }
 
 void Boss::CastMarker(Float3 pos)
