@@ -34,7 +34,8 @@ public:
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
 	template <class Type> eastl::list<Type*> GetComponents(std::string key);
 
-	~IComponent() {};
+	virtual ~IComponent() {
+	};
 
 	//components_の中身をHierarchy Panelからのみ直接操作したいため
 	friend HierarchyPanel;
@@ -59,7 +60,7 @@ inline void IComponent::AddComponent(std::string key, Args ...args)
 template<class Type>
 inline Type* IComponent::GetComponent(std::string key)
 {
-	return static_cast<Type*>(components_.find(key)->second.get());
+	return dynamic_cast<Type*>(components_.find(key)->second.get());
 }
 
 template<class Type>
@@ -71,7 +72,7 @@ inline eastl::list<Type*> IComponent::GetComponents(std::string key)
 	auto itr = components_.find(key);
 	for (int32_t i = 0; i < count; i++)
 	{
-		hitComponents.emplace_back(static_cast<Type*>(itr->second.get()));
+		hitComponents.emplace_back(dynamic_cast<Type*>(itr->second.get()));
 	}
 
 	return hitComponents;
