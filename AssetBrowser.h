@@ -12,6 +12,8 @@ private:
 
 	void Draw();
 
+	void FileOpenAction(const std::filesystem::directory_entry& ditr);
+
 	std::filesystem::path currentDirectory_;
 
 	float thumbnailSize = 128.f;

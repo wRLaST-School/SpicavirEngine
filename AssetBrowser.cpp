@@ -8,6 +8,8 @@
 #include <windows.system.h>
 
 #include <SpTextureManager.h>
+#include <SceneManager.h>
+#include <BTEditorScene.h>
 
 constexpr char* sAssetsDirectory = "Assets";
 const static std::filesystem::path sAssetPath = "Assets";
@@ -70,12 +72,10 @@ void AssetBrowser::OnImGuiRender()
 		//ファイルなら
 		if (!ditr.is_directory())
 		{
-			const auto& path = ditr.path().string();
-
 			std::string fileName = ditr.path().filename().string();
 			if (SpImGui::DoubleClickImageButton((ImTextureID)SpTextureManager::GetGPUDescHandle("Engine_FileIcon").ptr, { thumbnailSize, thumbnailSize }))
 			{
-				ShellExecuteA(0, 0, path.c_str(), 0, 0, SW_SHOW);
+				FileOpenAction(ditr);
 			};
 			ImGui::Text(fileName.c_str());
 
@@ -94,6 +94,24 @@ void AssetBrowser::OnImGuiRender()
 void AssetBrowser::Draw()
 {
 	SpImGui::Command(std::bind(&AssetBrowser::OnImGuiRender, this));
+}
+
+void AssetBrowser::FileOpenAction(const std::filesystem::directory_entry& ditr)
+{
+	const auto& path = ditr.path().string();
+	const auto& ext = ditr.path().extension();
+
+	//拡張子ごとに特殊なプログラム呼び出しがあれば実行
+	if (ext == ".bt")
+	{
+		SceneManager::LoadScene<BTEditorScene>(path);
+		SceneManager::WaitForLoadAndTransition();
+	}
+	else
+	{
+		ShellExecuteA(0, 0, path.c_str(), 0, 0, SW_SHOW);
+	}
+
 }
 
 void AssetBrowser::SDraw()
