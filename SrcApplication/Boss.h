@@ -78,13 +78,10 @@ private:
     BT::BehaviorTree* tree_;
 
     //Marker
-    static const int MAX_MARKERS = 256;
-    eastl::array<Marker, MAX_MARKERS> markers_;
 
     float markerLine3Spacing_ = 20.f;
 
     //LineAttack
-    eastl::list<LineAttack> lineAttacks_;
 
     float lineAttackSpacing_ = 15.f;
 
@@ -99,7 +96,7 @@ private:
     bool dealDamageOnHit_ = false;
 
     //Sphere
-    std::unique_ptr<GravSphere> gravSphere_ = nullptr;
+    GravSphere* gravSphere_ = nullptr;
     int32_t gravSphereTime_ = 240;
     float gravSphereSpd_ = 0.2f;
 

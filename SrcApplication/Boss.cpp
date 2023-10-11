@@ -30,8 +30,6 @@ void Boss::Init()
 
 	position = { 0.f, 5.f, 0.f };
 
-	for (auto& m : markers_) m.InitModel();
-
 	rotation = Quaternion(Vec3(0, 1, 0), 0);
 
 	col_.scale = { 2.5f, 2.5f, 2.5f };
@@ -166,13 +164,7 @@ void Boss::InitBehaviorTree()
 
 void Boss::CastMarker(Float3 pos)
 {
-	for (auto& m : markers_)
-	{
-		if (!m.IsActive()) {
-			m.Cast(pos);
-			break;
-		}
-	}
+	AddComponent<Marker>("Marker", pos);
 }
 
 BT::Status Boss::CastMarkerAim1Rand5()
@@ -227,12 +219,23 @@ BT::Status Boss::CastMarkerLine3()
 
 void Boss::DrawMarkers()
 {
-	for (auto& m : markers_) if (m.IsActive()) m.Draw();
+	auto markers = GetComponents<Marker>("Marker");
+	for (auto& m : markers) if (m->IsActive()) m->Draw();
 }
 
 void Boss::UpdateMarkers()
 {
-	for (auto& m : markers_) if (m.IsActive()) m.Update();
+	auto markers = GetComponents<Marker>("Marker");
+	for (auto& m : markers) {
+		if (m->IsActive())
+		{
+			m->Update();
+		}
+		else
+		{
+			RemoveComponent(m);
+		}
+	}
 }
 
 BT::Status Boss::CastLineTriple()
@@ -281,29 +284,27 @@ BT::Status Boss::CastLineTriple()
 
 void Boss::CastLine(Float3 pos, float angle)
 {
-	lineAttacks_.emplace_back(pos, angle);
+	AddComponent<LineAttack>("LineAttack", pos, angle);
 }
 
 void Boss::UpdateLineAttacks()
 {
-	for (auto itr = lineAttacks_.begin(); itr != lineAttacks_.end();)
+	auto lineAttacks = GetComponents<LineAttack>("LineAttack");
+	for (auto itr = lineAttacks.begin(); itr != lineAttacks.end(); itr++)
 	{
-		itr->Update();
+		(*itr)->Update();
 
-		if (!itr->IsActive())
+		if (!(*itr)->IsActive())
 		{
-			itr = lineAttacks_.erase(itr);
-		}
-		else
-		{
-			itr++;
+			RemoveComponent(*itr);
 		}
 	}
 }
 
 void Boss::DrawLineAttacks()
 {
-	for (auto& la : lineAttacks_) la.Draw();
+	auto lineAttacks = GetComponents<LineAttack>("LineAttack");
+	for (auto& la : lineAttacks) la->Draw();
 }
 
 BT::Status Boss::Rush()
@@ -468,7 +469,8 @@ BT::Status Boss::CastGravSphere()
 	front.SetLength(3.f);
 
 	//重力弾を生成
-	gravSphere_ = std::make_unique<GravSphere>((Vec3)position + front,
+	AddComponent<GravSphere>( "GravSphere",
+		(Vec3)position + front,
 		((Vec3)Player::Get()->position - position).GetNorm(),
 		0.2f,
 		gravR_,
@@ -477,12 +479,14 @@ BT::Status Boss::CastGravSphere()
 		gravSphereStayTime_
 	);
 
+	gravSphere_ = GetComponent<GravSphere>("GravSphere");
+
 	return BT::Status::Success;
 }
 
 void Boss::GravSphereEnd()
 {
-	gravSphere_.release();
+	RemoveComponent(gravSphere_);
 	gravSphere_ = nullptr;
 }
 

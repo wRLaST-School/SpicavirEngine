@@ -44,7 +44,7 @@ protected:
 	std::string name = "";
 
 private:
-	eastl::hash_multimap<std::string, eastl::unique_ptr<IComponent>> components_;
+	eastl::multimap<std::string, eastl::unique_ptr<IComponent>> components_;
 
 	IComponent* parent_ = nullptr;
 
@@ -68,11 +68,12 @@ inline eastl::list<Type*> IComponent::GetComponents(std::string key)
 {
 	eastl::list<Type*> hitComponents;
 
-	int32_t count = components_.count(key);
+	size_t count = components_.count(key);
 	auto itr = components_.find(key);
-	for (int32_t i = 0; i < count; i++)
+	for (size_t i = 0; i < count; i++)
 	{
 		hitComponents.emplace_back(dynamic_cast<Type*>(itr->second.get()));
+		itr++;
 	}
 
 	return hitComponents;

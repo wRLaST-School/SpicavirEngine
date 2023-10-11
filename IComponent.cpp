@@ -37,6 +37,7 @@ eastl::list<IComponent*> IComponent::GetComponents(std::string key)
 	for (size_t i = 0; i < count; i++)
 	{
 		hitComponents.emplace_back(itr->second.get());
+		itr++;
 	}
 
 	return hitComponents;
