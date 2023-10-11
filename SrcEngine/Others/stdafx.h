@@ -29,6 +29,7 @@
 #include <EASTL/string.h>
 #include <EASTL/array.h>
 #include <EASTL/unordered_map.h>
+#include <EASTL/vector_multimap.h>
 
 #include <stdint.h>
 #include <wrl.h>
