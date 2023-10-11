@@ -17,7 +17,7 @@ void SpImGui::Init()
 {
 	ImGui::CreateContext();
 
-	SpImguiCustom::StyleColorsSpicavirSakura();
+	SpImguiCustom::StyleColorsDarkBlossom();
 
 	ImGui_ImplWin32_Init(GetSpWindow()->hwnd);
 
@@ -30,7 +30,7 @@ void SpImGui::Init()
 
 	ImGuiIO& io = ImGui::GetIO();
 
-	io.Fonts->AddFontFromFileTTF("SrcImgui\\imgui\\ImGuiLibs\\Resources\\UDEVGothicLG-Bold.ttf", 14);
+	io.Fonts->AddFontFromFileTTF("Resources/fonts/rounded-x-mgenplus-1m-bold.ttf", 18);
 }
 
 void SpImGui::InitDirectXForImGui()
