@@ -3,6 +3,15 @@
 #include <Input.h>
 #include <BTEditor.h>
 
+BTEditorScene::BTEditorScene()
+{
+}
+
+BTEditorScene::BTEditorScene(std::string filePath)
+{
+	BTEditor::LoadFile(filePath);
+}
+
 void BTEditorScene::LoadResources()
 {
 }

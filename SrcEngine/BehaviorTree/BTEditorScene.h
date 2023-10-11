@@ -6,6 +6,8 @@ class BTEditorScene :
     public IScene
 {
 public:
+    BTEditorScene();
+    BTEditorScene(std::string filePath);
     ~BTEditorScene() {};
     void LoadResources() override;
     void Init() override;
