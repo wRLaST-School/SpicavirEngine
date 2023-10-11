@@ -32,9 +32,9 @@ eastl::list<IComponent*> IComponent::GetComponents(std::string key)
 {
 	eastl::list<IComponent*> hitComponents;
 
-	int32_t count = components_.count(key);
+	auto count = components_.count(key);
 	auto itr = components_.find(key);
-	for (int32_t i = 0; i < count; i++)
+	for (size_t i = 0; i < count; i++)
 	{
 		hitComponents.emplace_back(itr->second.get());
 	}
