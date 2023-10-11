@@ -83,6 +83,17 @@ void SceneManager::Transition()
 	}
 }
 
+void SceneManager::WaitForLoadAndTransition()
+{
+	while (loadState == LoadState::Loading)
+	{
+		UpdateLoadState();
+		Sleep(16);
+	}
+
+	transitionQueued = true;
+}
+
 void SceneManager::ConfirmTransition()
 {
 	if (transitionQueued)
