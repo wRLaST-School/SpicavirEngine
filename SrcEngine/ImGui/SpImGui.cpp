@@ -12,12 +12,18 @@
 #include <SpSwapChainManager.h>
 #include <SpTextureManager.h>
 #include <SpDirectX.h>
+#include <GameManager.h>
 
 void SpImGui::Init()
 {
 	ImGui::CreateContext();
 
 	SpImguiCustom::StyleColorsDarkBlossom();
+
+	ImGuiIO& io = ImGui::GetIO();
+
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	ImGui_ImplWin32_Init(GetSpWindow()->hwnd);
 
@@ -27,10 +33,6 @@ void SpImGui::Init()
 		SpTextureManager::GetInstance().srvHeap.Get(),
 		SpTextureManager::GetCPUDescHandle("imgui_srv"),
 		SpTextureManager::GetGPUDescHandle("imgui_srv"));
-
-	ImGuiIO& io = ImGui::GetIO();
-
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
 	io.Fonts->AddFontFromFileTTF("Resources/fonts/rounded-x-mgenplus-1m-bold.ttf", 18);
 }
@@ -61,6 +63,48 @@ void SpImGui::Draw()
 	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), GetSpDX()->cmdList.Get());
 
 	sCommands.clear();
+}
+
+void SpImGui::EnableScreenDock()
+{
+	Command([&] {
+		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+		ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+		if (!GameManager::sShowDebug) dockspace_flags |= ImGuiDockNodeFlags_::ImGuiDockNodeFlags_KeepAliveOnly;
+
+		const ImGuiViewport* viewport = ImGui::GetMainViewport();
+		ImGui::SetNextWindowPos(viewport->WorkPos);
+		ImGui::SetNextWindowSize(viewport->WorkSize);
+		ImGui::SetNextWindowViewport(viewport->ID);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+		window_flags |= ImGuiWindowFlags_NoBackground;
+
+		static bool open = true;
+
+		ImGui::Begin("Editor", &open, window_flags);
+		ImGuiIO& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+		{
+			ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+			ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+		}
+		ImGui::End();
+
+		ImGui::PopStyleVar(3);
+	});
+}
+
+void SpImGui::EndFrame()
+{
+	if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+	{
+		ImGui::UpdatePlatformWindows();
+		ImGui::RenderPlatformWindowsDefault(nullptr, (void*)GetSpDX()->cmdList.Get());
+	}
 }
 
 void SpImGui::Shutdown()

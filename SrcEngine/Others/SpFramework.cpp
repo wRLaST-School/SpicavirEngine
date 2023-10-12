@@ -119,10 +119,14 @@ void SpFramework::Run()
 
 		/*毎フレーム処理*/
 
+		SpImGui::EnableScreenDock();
+
 		/*更新処理*/
 		SceneManager::Update();
 		SpEffekseer::Update();
 		/*更新処理ここまで*/
+
+
 
 		SceneManager::DrawBack();
 
@@ -148,6 +152,8 @@ void SpFramework::Run()
 		}
 
 		SpRenderer::Render();
+
+		SpImGui::EndFrame();
 
 		GetSpDX()->PostDrawCommands();
 
