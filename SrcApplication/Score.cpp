@@ -7,8 +7,8 @@
 
 void Score::Load()
 {
-	SpTextureManager::LoadTexture("Resources/ScoreBase.png", "scoreBase");
-	SpTextureManager::LoadTexture("Resources/ScoreTierOverlay.png", "scoreOverlay");
+	SpTextureManager::LoadTexture("Assets/Images/ScoreBase.png", "scoreBase");
+	SpTextureManager::LoadTexture("Assets/Images/ScoreTierOverlay.png", "scoreOverlay");
 }
 
 void Score::Init()

@@ -10,32 +10,32 @@ void ResultScene::LoadResources()
 {
 	if (GameManager::sScore.gradeMax > GameManager::sScore.totDamage)
 	{
-		SpTextureManager::LoadTexture("Resources/result.png", "resultText");
+		SpTextureManager::LoadTexture("Assets/Images/result.png", "resultText");
 
 		if (GameManager::sScore.totDamage > GameManager::sScore.gradeS)
 		{
-			SpTextureManager::LoadTexture("Resources/rankS.png", "rank");
+			SpTextureManager::LoadTexture("Assets/Images/rankS.png", "rank");
 		}
 		else if (GameManager::sScore.totDamage > GameManager::sScore.gradeA)
 		{
-			SpTextureManager::LoadTexture("Resources/rankA.png", "rank");
+			SpTextureManager::LoadTexture("Assets/Images/rankA.png", "rank");
 		}
 		else if (GameManager::sScore.totDamage > GameManager::sScore.gradeB)
 		{
-			SpTextureManager::LoadTexture("Resources/rankB.png", "rank");
+			SpTextureManager::LoadTexture("Assets/Images/rankB.png", "rank");
 		}
 		else if (GameManager::sScore.totDamage > GameManager::sScore.gradeC)
 		{
-			SpTextureManager::LoadTexture("Resources/rankC.png", "rank");
+			SpTextureManager::LoadTexture("Assets/Images/rankC.png", "rank");
 		}
 		else
 		{
-			SpTextureManager::LoadTexture("Resources/rankD.png", "rank");
+			SpTextureManager::LoadTexture("Assets/Images/rankD.png", "rank");
 		}
 	}
 	else
 	{
-		SpTextureManager::LoadTexture("Resources/clearResult.png", "resultText");
+		SpTextureManager::LoadTexture("Assets/Images/clearResult.png", "resultText");
 	}
 }
 

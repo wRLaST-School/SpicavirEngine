@@ -13,39 +13,45 @@ void GameScene::LoadResources()
 {
 	Boss::Load();
 	Player::Load();
-	ModelManager::Register("Resources/Models/Floor.glb", "floor", true);
+	ModelManager::Register("Assets/Models/Floor.glb", "floor", true);
 	ModelManager::Register("cube", "Cube");
 	ModelManager::Register("triangle", "Triangle");
 	ModelManager::Register("skydome", "Sky");
 	ModelManager::Register("Sphere", "Sphere");
 
-	SpTextureManager::LoadTexture("Resources/circleParticle.png", "BasicParticle");
-	SpTextureManager::LoadTexture("Resources/black.png", "black");
-	SpTextureManager::LoadTexture("Resources/hexagonPattern.jpg", "hexagon");
-	SpEffekseer::Load(L"Resources/Effekseer", L"Resources/Effekseer/Marker/Marker.efk", "Marker");
-	SpEffekseer::Load(L"Resources/Effekseer/Line", L"Resources/Effekseer/Line/Line.efk", "LineAttack");
-	SpEffekseer::Load(L"Resources/Effekseer/Sphere", L"Resources/Effekseer/Sphere/sphere.efk", "SphereParticle");
+	SpTextureManager::LoadTexture("Assets/Images/circleParticle.png", "BasicParticle");
+	SpTextureManager::LoadTexture("Assets/Images/black.png", "black");
+	SpTextureManager::LoadTexture("Assets/Images/hexagonPattern.jpg", "hexagon");
+	SpEffekseer::Load(L"Assets/Effekseer", L"Assets/Effekseer/Marker/Marker.efk", "Marker");
+	SpEffekseer::Load(L"Assets/Effekseer/Line", L"Assets/Effekseer/Line/Line.efk", "LineAttack");
+	SpEffekseer::Load(L"Assets/Effekseer/Sphere", L"Assets/Effekseer/Sphere/sphere.efk", "SphereParticle");
 
-	SoundManager::LoadWave("Resources/Sounds/counterSuccess.wav", "counterSuccess");
-	SoundManager::LoadWave("Resources/Sounds/dodge.wav", "dodge");
-	SoundManager::LoadWave("Resources/Sounds/LineAttack.wav", "LineAttack");
-	SoundManager::LoadWave("Resources/Sounds/marker.wav", "marker");
-	SoundManager::LoadWave("Resources/Sounds/Slash3.wav", "Slash3");
-	SoundManager::LoadWave("Resources/Sounds/Slash12.wav", "Slash12");
-	SoundManager::LoadWave("Resources/Sounds/takeDamage.wav", "takeDamage");
-	SoundManager::LoadWave("Resources/Sounds/RushImpact.wav", "RushImpact");
+	SoundManager::LoadWave("Assets/Sounds/counterSuccess.wav", "counterSuccess");
+	SoundManager::LoadWave("Assets/Sounds/dodge.wav", "dodge");
+	SoundManager::LoadWave("Assets/Sounds/LineAttack.wav", "LineAttack");
+	SoundManager::LoadWave("Assets/Sounds/marker.wav", "marker");
+	SoundManager::LoadWave("Assets/Sounds/Slash3.wav", "Slash3");
+	SoundManager::LoadWave("Assets/Sounds/Slash12.wav", "Slash12");
+	SoundManager::LoadWave("Assets/Sounds/takeDamage.wav", "takeDamage");
+	SoundManager::LoadWave("Assets/Sounds/RushImpact.wav", "RushImpact");
 
 	MainTimer::Load();
 }
 
 void GameScene::Init()
 {
-	LevelManager::Init();
-	Boss::Set(&boss_);
-	Player::Set(&player_);
+	AddComponent<Player>("Player");
+	AddComponent<Boss>("Boss");
 
-	boss_.Init();
-	player_.Init();
+	player_ = GetComponent<Player>("Player");
+	boss_ = GetComponent<Boss>("Boss");
+
+	LevelManager::Init();
+	Boss::Set(boss_);
+	Player::Set(player_);
+
+	boss_->Init();
+	player_->Init();
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
 
@@ -59,8 +65,8 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	LevelManager::Update();
-	boss_.Update();
-	player_.Update();
+	boss_->Update();
+	player_->Update();
 	cam_.Update();
 
 	MainTimer::Update();
@@ -88,8 +94,8 @@ void GameScene::Draw3D()
 	cam_.Set();
 
 	LevelManager::Draw();
-	boss_.Draw();
-	player_.Draw();
+	boss_->Draw();
+	player_->Draw();
 
 	MainTimer::Draw();
 }

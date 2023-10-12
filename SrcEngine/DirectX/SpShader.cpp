@@ -7,7 +7,7 @@ map<string, SpShader> shaderMap;
 
 void SpShader::InitVS(const string& vsPath)
 {
-	string shaderFolder = "Resources/Shaders/";
+	string shaderFolder = "Assets/Shaders/";
 	string vsPath_ = shaderFolder + vsPath;
 	//シェーダーの読み込みとコンパイル
 	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
@@ -40,7 +40,7 @@ void SpShader::InitVS(const string& vsPath)
 
 void SpShader::InitPS(const string& psPath)
 {
-	string shaderFolder = "Resources/Shaders/";
+	string shaderFolder = "Assets/Shaders/";
 	string psPath_ = shaderFolder + psPath;
 	//シェーダーの読み込みとコンパイル
 	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト
@@ -74,7 +74,7 @@ void SpShader::InitPS(const string& psPath)
 
 void SpShader::InitGS(const string& gsPath)
 {
-	string shaderFolder = "Resources/Shaders/";
+	string shaderFolder = "Assets/Shaders/";
 	string gsPath_ = shaderFolder + gsPath;
 	//シェーダーの読み込みとコンパイル
 	Microsoft::WRL::ComPtr<ID3DBlob> errorBlob = nullptr; // エラーオブジェクト

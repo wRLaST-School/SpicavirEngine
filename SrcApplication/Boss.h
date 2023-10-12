@@ -6,8 +6,7 @@
 #include <Score.h>
 #include <GravSphere.h>
 #include <BehaviorTree.h>
-class Boss :
-    public Object3D
+class Boss : public IComponent
 {
 public:
     void Init();
@@ -24,6 +23,9 @@ public:
     static Boss* Get();
 
     static void Set(Boss* boss);
+
+    //Object3D
+    Object3D* obj_;
 
 public:
     void InitBehaviorTree();
@@ -75,16 +77,13 @@ public:
 
 private:
     //BehaviorTree
-    BT::BehaviorTree tree_;
+    BT::BehaviorTree* tree_;
 
     //Marker
-    static const int MAX_MARKERS = 256;
-    eastl::array<Marker, MAX_MARKERS> markers_;
 
     float markerLine3Spacing_ = 20.f;
 
     //LineAttack
-    eastl::list<LineAttack> lineAttacks_;
 
     float lineAttackSpacing_ = 15.f;
 
@@ -99,7 +98,7 @@ private:
     bool dealDamageOnHit_ = false;
 
     //Sphere
-    std::unique_ptr<GravSphere> gravSphere_ = nullptr;
+    GravSphere* gravSphere_ = nullptr;
     int32_t gravSphereTime_ = 240;
     float gravSphereSpd_ = 0.2f;
 

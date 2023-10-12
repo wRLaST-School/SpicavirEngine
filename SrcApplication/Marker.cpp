@@ -5,8 +5,9 @@
 
 const TextureKey Marker::TEX_KEY = "Marker";
 
-Marker::Marker()
+Marker::Marker(const Float3& pos)
 {
+    Cast(pos);
 }
 
 void Marker::Cast(const Float3& pos)
@@ -15,10 +16,6 @@ void Marker::Cast(const Float3& pos)
     timer_ = 0;
     active_ = true;
     SpEffekseer::Play("Marker", pos_);
-}
-
-void Marker::InitModel()
-{
 }
 
 void Marker::Update()
@@ -38,8 +35,8 @@ void Marker::Update()
         Player* pl = Player::Get();
 
         Float2 diff = {
-            pl->position.x - pos_.x,
-            pl->position.z - pos_.z
+            pl->obj_->position.x - pos_.x,
+            pl->obj_->position.z - pos_.z
         };
 
         if (abs(diff.x) <= (float)R / 2 + pl->r2d && abs(diff.y) <= (float)R / 2 + pl->r2d)

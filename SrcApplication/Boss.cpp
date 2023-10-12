@@ -16,30 +16,29 @@ Boss* Boss::sCurrent = nullptr;
 
 void Boss::Load()
 {
-	ModelManager::Register("Resources/Models/Boss/boss.glb", "Boss", true);
-	SpTextureManager::LoadTexture("Resources/white.png", "white");
-
-	ModelManager::Register("Resources/Models/Marker/Marker.obj", "Marker", true);
-	SpTextureManager::LoadTexture("Resources/Marker.png", "Marker");
+	ModelManager::Register("Assets/Models/Boss/boss.glb", "Boss", true);
+	SpTextureManager::LoadTexture("Assets/Images/white.png", "white");
 
 	Score::Load();
 }
 
 void Boss::Init()
 {
-	model = ModelManager::GetModel("Boss");
+	AddComponent<Object3D>("Object3D");
+
+	obj_ = GetComponent<Object3D>("Object3D");
+
+	obj_->model = ModelManager::GetModel("Boss");
 
 	InitBehaviorTree();
 
-	position = { 0.f, 5.f, 0.f };
+	obj_->position = { 0.f, 5.f, 0.f };
 
-	for (auto& m : markers_) m.InitModel();
-
-	rotation = Quaternion(Vec3(0, 1, 0), 0);
+	obj_->rotation = Quaternion(Vec3(0, 1, 0), 0);
 
 	col_.scale = { 2.5f, 2.5f, 2.5f };
-	col_.pos = position;
-	col_.rot = rotation;
+	col_.pos = obj_->position;
+	col_.rot = obj_->rotation;
 
 	GameManager::sScore.Init();
 }
@@ -56,13 +55,13 @@ void Boss::Update()
 	}
 
 	//当たり判定を更新
-	col_.pos = position;
-	col_.rot = rotation;
+	col_.pos = obj_->position;
+	col_.rot = obj_->rotation;
 
 	col_.DrawBB(Color::Red);
 
 	//BehaviorTreeのTickを行う
-	tree_.Tick();
+	tree_->Tick();
 
 	//ダメージ演出の更新
 	if (damaged_)
@@ -73,11 +72,11 @@ void Boss::Update()
 			damaged_ = false;
 		}
 
-		*brightnessCB.contents = Color::Red.f4;
+		*obj_->brightnessCB.contents = Color::Red.f4;
 	}
 	else
 	{
-		*brightnessCB.contents = Color::White.f4;
+		*obj_->brightnessCB.contents = Color::White.f4;
 	}
 
 	UpdateMarkers();
@@ -93,10 +92,10 @@ void Boss::Update()
 
 	//フィールド内に座標をクランプ
 	float colR = ((Vec3)col_.scale).GetLength();
-	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
-	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
+	obj_->position.x = Util::Clamp(obj_->position.x, -30.f + colR, 30.f - colR);
+	obj_->position.z = Util::Clamp(obj_->position.z, -30.f + colR, 30.f - colR);
 
-	UpdateMatrix();
+	obj_->UpdateMatrix();
 
 	GameManager::sScore.Update();
 
@@ -108,7 +107,7 @@ void Boss::Update()
 
 void Boss::Draw()
 {
-	Object3D::Draw("white");
+	obj_->Draw("white");
 	DrawMarkers();
 	DrawLineAttacks();
 
@@ -140,6 +139,10 @@ void Boss::Set(Boss* boss)
 
 void Boss::InitBehaviorTree()
 {
+	//BTのコンポーネントを追加
+	AddComponent<BT::BehaviorTree>("BehaviorTree");
+	tree_ = GetComponent<BT::BehaviorTree>("BehaviorTree");
+
 	//ファクトリーに関数を登録
 	BT::BehaviorTreeFactory factory;
 
@@ -158,75 +161,19 @@ void Boss::InitBehaviorTree()
 
 	factory.RegisterCondition("PlayerInsideRushRange", std::bind(&Boss::IsPlayerInsideRushRange, this));
 
-	tree_.SetFactory(factory);
+	tree_->SetFactory(factory);
 
-	////ツリーの手動構築
-	//tree_.root->AddNode<BT::LoopNode>("0");
-
-	//tree_.root->Last()->AddNode<BT::SequencerNode>("");
-
-	//tree_.root->Last()->Last()->AddNode<BT::LoopNode>("2");
-
-	//tree_.root->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-
-	////LineAttack
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastLineAttack");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateLine");
-
-	////Marker
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker1");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastMarker2");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateMarker");
-
-	////終わったら60フレーム待機
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-
-	//tree_.root->Last()->Last()->AddNode<BT::SequencerNode>("");
-
-	//tree_.root->Last()->Last()->Last()->AddNode<BT::SelectorNode>("");
-
-	////Rush
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastRush");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateRush");
-
-	////GravSphere
-	//tree_.root->Last()->Last()->Last()->Last()->AddNode<BT::SequencerNode>("");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("CastGravSphere");
-	//tree_.root->Last()->Last()->Last()->Last()->Last()->AddNode<BT::ActionNode>("UpdateGravSphere");
-
-	////終わったら60フレーム待機
-	//tree_.root->Last()->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-
-	////3回行動したらさらに180フレーム待機
-	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-	//tree_.root->Last()->Last()->AddNode<BT::ActionNode>("Wait60Frame");
-
-	//tree_.SaveJson("Resources/data/BossBehavior.json");
-
-	tree_.LoadJson("Resources/data/BossBehavior.json");
+	tree_->LoadJson("Assets/data/BossBehavior.bt");
 }
 
 void Boss::CastMarker(Float3 pos)
 {
-	for (auto& m : markers_)
-	{
-		if (!m.IsActive()) {
-			m.Cast(pos);
-			break;
-		}
-	}
+	AddComponent<Marker>("Marker", pos);
 }
 
 BT::Status Boss::CastMarkerAim1Rand5()
 {
-	CastMarker({Player::Get()->position.x, 0, Player::Get()->position.z});
+	CastMarker({Player::Get()->obj_->position.x, 0, Player::Get()->obj_->position.z});
 
 	for (size_t i = 0; i < 5; i++)
 	{
@@ -276,30 +223,41 @@ BT::Status Boss::CastMarkerLine3()
 
 void Boss::DrawMarkers()
 {
-	for (auto& m : markers_) if (m.IsActive()) m.Draw();
+	auto markers = GetComponents<Marker>("Marker");
+	for (auto& m : markers) if (m->IsActive()) m->Draw();
 }
 
 void Boss::UpdateMarkers()
 {
-	for (auto& m : markers_) if (m.IsActive()) m.Update();
+	auto markers = GetComponents<Marker>("Marker");
+	for (auto& m : markers) {
+		if (m->IsActive())
+		{
+			m->Update();
+		}
+		else
+		{
+			RemoveComponent(m);
+		}
+	}
 }
 
 BT::Status Boss::CastLineTriple()
 {
-	Vec3 target = Player::Get()->position;
-	target.y = position.y;
+	Vec3 target = Player::Get()->obj_->position;
+	target.y = obj_->position.y;
 
-	rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - position);
+	obj_->rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - obj_->position);
 
-	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
 
-	Vec3 side = rotation.GetRotMat().ExtractAxisX();
+	Vec3 side = obj_->rotation.GetRotMat().ExtractAxisX();
 	side.y = 0;
 	side.Norm();
 
-	Vec3 basePos = position;
+	Vec3 basePos = obj_->position;
 	basePos.y = 0;
 
 	if (Util::Chance(50))
@@ -330,29 +288,27 @@ BT::Status Boss::CastLineTriple()
 
 void Boss::CastLine(Float3 pos, float angle)
 {
-	lineAttacks_.emplace_back(pos, angle);
+	AddComponent<LineAttack>("LineAttack", pos, angle);
 }
 
 void Boss::UpdateLineAttacks()
 {
-	for (auto itr = lineAttacks_.begin(); itr != lineAttacks_.end();)
+	auto lineAttacks = GetComponents<LineAttack>("LineAttack");
+	for (auto itr = lineAttacks.begin(); itr != lineAttacks.end(); itr++)
 	{
-		itr->Update();
+		(*itr)->Update();
 
-		if (!itr->IsActive())
+		if (!(*itr)->IsActive())
 		{
-			itr = lineAttacks_.erase(itr);
-		}
-		else
-		{
-			itr++;
+			RemoveComponent(*itr);
 		}
 	}
 }
 
 void Boss::DrawLineAttacks()
 {
-	for (auto& la : lineAttacks_) la.Draw();
+	auto lineAttacks = GetComponents<LineAttack>("LineAttack");
+	for (auto& la : lineAttacks) la->Draw();
 }
 
 BT::Status Boss::Rush()
@@ -368,35 +324,35 @@ BT::Status Boss::RushUpdate()
 {
 	if (moveTimer_ < prepTime_)
 	{
-		Vec3 target = position;
+		Vec3 target = obj_->position;
 		target.y = 2.5f;
-		position = Vec3::Lerp(position, target, (float)moveTimer_ / (float)prepTime_);
+		obj_->position = Vec3::Lerp(obj_->position, target, (float)moveTimer_ / (float)prepTime_);
 
-		Vec3 rotTarget = Player::Get()->position;
-		rotTarget.y = position.y;
+		Vec3 rotTarget = Player::Get()->obj_->position;
+		rotTarget.y = obj_->position.y;
 
-		rotation = Quaternion::DirToDir(Vec3(0, 0, 1), rotTarget - position);
+		obj_->rotation = Quaternion::DirToDir(Vec3(0, 0, 1), rotTarget - obj_->position);
 	}
 	else if (moveTimer_ < prepTime_ + afterPrepWaitTime_)
 	{
-		Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+		Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 		front.SetLength(rushDistance_);
 
-		rushTarget_ = front + position;
+		rushTarget_ = front + obj_->position;
 	}
 	else if (moveTimer_ < prepTime_ + afterPrepWaitTime_ + rushTime_)
 	{
 		dealDamageOnHit_ = true;
-		rotation *= Quaternion(Vec3(0, 0, 1), PIf / 60.f);
+		obj_->rotation *= Quaternion(Vec3(0, 0, 1), PIf / 60.f);
 
-		position = Vec3::Lerp(position, rushTarget_,
+		obj_->position = Vec3::Lerp(obj_->position, rushTarget_,
 			(float)(moveTimer_ - prepTime_ - afterPrepWaitTime_) / (float)rushTime_);
 	}
 	else
 	{
-		Vec3 target = position;
+		Vec3 target = obj_->position;
 		target.y = 5.f;
-		position = Vec3::Lerp(position, target, 
+		obj_->position = Vec3::Lerp(obj_->position, target,
 			(float)(moveTimer_ - prepTime_ - afterPrepWaitTime_ - rushTime_)/ (float)rushAfterTime_);
 	}
 
@@ -485,8 +441,8 @@ BT::Status Boss::Wait60Frame()
 
 bool Boss::IsPlayerInsideRushRange()
 {
-	Vec3 bPos = position;
-	Vec3 pPos = Player::Get()->position;
+	Vec3 bPos = obj_->position;
+	Vec3 pPos = Player::Get()->obj_->position;
 	bPos.y = 0;
 	pPos.y = 0;
 
@@ -507,18 +463,19 @@ BT::Status Boss::CastGravSphere()
 	moveTimer_ = 0;
 
 	//プレイヤーの方向を向く
-	Vec3 target = Player::Get()->position;
-	target.y = position.y;
+	Vec3 target = Player::Get()->obj_->position;
+	target.y = obj_->position.y;
 
-	rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - position);
+	obj_->rotation = Quaternion::DirToDir(Vec3(0, 0, 1), target - obj_->position);
 
 	//プレイヤー側に1mの位置に生成
-	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 	front.SetLength(3.f);
 
 	//重力弾を生成
-	gravSphere_ = std::make_unique<GravSphere>((Vec3)position + front,
-		((Vec3)Player::Get()->position - position).GetNorm(),
+	AddComponent<GravSphere>( "GravSphere",
+		(Vec3)obj_->position + front,
+		((Vec3)Player::Get()->obj_->position - obj_->position).GetNorm(),
 		0.2f,
 		gravR_,
 		gravitySpeed_,
@@ -526,12 +483,14 @@ BT::Status Boss::CastGravSphere()
 		gravSphereStayTime_
 	);
 
+	gravSphere_ = GetComponent<GravSphere>("GravSphere");
+
 	return BT::Status::Success;
 }
 
 void Boss::GravSphereEnd()
 {
-	gravSphere_.release();
+	RemoveComponent(gravSphere_);
 	gravSphere_ = nullptr;
 }
 
@@ -594,10 +553,10 @@ void Boss::ShowImGui()
 				if (ImGui::BeginMenu("File"))
 				{
 					if (ImGui::MenuItem("Save")) {
-						Util::SerializeData("Resources/Data/boss.bin", *this);
+						Util::SerializeData("Assets/Data/boss.bin", *this);
 					}
 					if (ImGui::MenuItem("Load")) {
-						Util::DeserializeData("Resources/Data/boss.bin", *this);
+						Util::DeserializeData("Assets/Data/boss.bin", *this);
 					}
 
 					ImGui::EndMenu();

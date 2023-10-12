@@ -21,6 +21,9 @@
 #include <SpRenderer.h>
 #include <SpDS.h>
 #include <SpEffekseer.h>
+#include <AssetBrowser.h>
+#include <GameManager.h>
+#include <HierarchyPanel.h>
 
 void SpFramework::Init()
 {
@@ -100,6 +103,9 @@ void SpFramework::Init()
 
 	//Init Scene
 	SceneManager::Init();
+
+	//Load Asset Browser Resources
+	AssetBrowser::LoadResources();
 }
 
 void SpFramework::Run()
@@ -123,6 +129,13 @@ void SpFramework::Run()
 		SceneManager::Draw3D();
 
 		SceneManager::DrawSprite();
+
+		if (GameManager::sShowDebug)
+		{
+			AssetBrowser::SDraw();
+
+			HierarchyPanel::SDraw();
+		}
 
 		GetSpDX()->PreDrawCommands();
 

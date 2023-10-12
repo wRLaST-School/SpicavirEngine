@@ -15,21 +15,17 @@ void SingleCamTestScene::LoadResources()
 	ModelManager::Register("20Surface", "20s");
 	ModelManager::Register("square", "Pane");
 	ModelManager::Register("skydome", "Sky");
-	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "SmoothSphere", true);
-	ModelManager::Register("Resources/Models/testgltf/Mike.gltf", "FlatSphere", false);
+	ModelManager::Register("Assets/Models/testgltf/Mike.gltf", "SmoothSphere", true);
+	ModelManager::Register("Assets/Models/testgltf/Mike.gltf", "FlatSphere", false);
 	//ModelManager::Register("Resources/Models/SmoothSphere/SmoothSphere.fbx", "SmoothSphere", true);
 	//ModelManager::Register("ICO", "FlatSphere");
 
-	SpTextureManager::LoadTexture("Resources/white.png", "white");
-	SpTextureManager::LoadTexture("Resources/black.png", "black");
-	SpTextureManager::LoadSingleDiv("Resources/circleParticle.png", 100, 100, 100, 200, "particle1");
-
-	SoundManager::LoadWave("Resources/Sounds/Laser.wav", "Laser");
+	SpTextureManager::LoadTexture("Assets/Images/white.png", "white");
+	SpTextureManager::LoadTexture("Assets/Images/black.png", "black");
+	SpTextureManager::LoadSingleDiv("Assets/Images/circleParticle.png", 100, 100, 100, 200, "particle1");
 
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "normalTest", true);
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "inverseTest", true);
-
-	SpEffekseer::Load(L"Resources/Effekseer/10", L"Resources/Effekseer/10/SimpleLaser.efk", "Laser");
 
 	/*vector<TextureKey> boss3Keys{
 		"boss1",

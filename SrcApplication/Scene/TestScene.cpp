@@ -13,7 +13,7 @@ void TestScene::LoadResources()
 	RTVManager::CreateRenderTargetTexture(640, 360, "yCamSpr");
 	RTVManager::CreateRenderTargetTexture(640, 360, "zCamSpr");
 
-	SpTextureManager::LoadTexture("Resources/white.png", "white");
+	SpTextureManager::LoadTexture("Assets/Images/white.png", "white");
 
 	ModelManager::Register("cube", "Cube");
 
