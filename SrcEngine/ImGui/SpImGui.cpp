@@ -30,6 +30,8 @@ void SpImGui::Init()
 
 	ImGuiIO& io = ImGui::GetIO();
 
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
 	io.Fonts->AddFontFromFileTTF("Resources/fonts/rounded-x-mgenplus-1m-bold.ttf", 18);
 }
 
