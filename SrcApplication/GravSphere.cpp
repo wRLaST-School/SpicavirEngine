@@ -13,9 +13,12 @@ GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
 	maxHomeRad_ = maxHomeRad;
 	stayTime_ = stayTime;
 
+	AddComponent<Object3D>("Object3D");
+	sphere_ = GetComponent<Object3D>("Object3D");
+
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
-	sphere_.model = ModelManager::GetModel("Sphere");
+	sphere_->model = ModelManager::GetModel("Sphere");
 }
 
 void GravSphere::Update()
@@ -26,14 +29,14 @@ void GravSphere::Update()
 		float t = (float)timer_ / stayTime_;
 		float r = r_ * t;
 
-		sphere_.scale = { r, r, r };
-		sphere_.position = pos_;
+		sphere_->scale = { r, r, r };
+		sphere_->position = pos_;
 
-		*sphere_.brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
+		*sphere_->brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
 	}
 	else
 	{
-		Vec3 target = (Vec3)Player::Get()->position - pos_;
+		Vec3 target = (Vec3)Player::Get()->obj_->position - pos_;
 		if (target.GetSquaredLength())
 		{
 			target.Norm();
@@ -51,18 +54,18 @@ void GravSphere::Update()
 			}
 		}
 
-		*sphere_.brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
+		*sphere_->brightnessCB.contents = { 0.3f, 0.2f, 0.3f, 0.4f };
 
-		sphere_.scale = { r_, r_, r_ };
+		sphere_->scale = { r_, r_, r_ };
 
 		pos_.y = Util::ClampMin(pos_.y, r_ / 2.f);
 
-		sphere_.position = pos_;
+		sphere_->position = pos_;
 
 		CheckCollisions();
 	}
 
-	sphere_.UpdateMatrix();
+	sphere_->UpdateMatrix();
 }
 
 void GravSphere::CheckCollisions()
@@ -80,7 +83,7 @@ void GravSphere::CheckCollisions()
 
 		vel.SetLength(gravSpeed_);
 
-		pl->MoveTo((Vec3)pl->position + vel);
+		pl->MoveTo((Vec3)pl->obj_->position + vel);
 	}
 
 
@@ -93,6 +96,6 @@ void GravSphere::CheckCollisions()
 
 void GravSphere::Draw()
 {
-	sphere_.DrawAlpha("white");
+	sphere_->DrawAlpha("white");
 	SpEffekseer::Manager()->SetLocation(hnd_, Effekseer::Vector3D(pos_.x, pos_.y, pos_.z));
 }

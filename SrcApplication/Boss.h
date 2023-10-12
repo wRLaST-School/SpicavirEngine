@@ -6,8 +6,7 @@
 #include <Score.h>
 #include <GravSphere.h>
 #include <BehaviorTree.h>
-class Boss :
-    public Object3D, public IComponent
+class Boss : public IComponent
 {
 public:
     void Init();
@@ -24,6 +23,9 @@ public:
     static Boss* Get();
 
     static void Set(Boss* boss);
+
+    //Object3D
+    Object3D* obj_;
 
 public:
     void InitBehaviorTree();

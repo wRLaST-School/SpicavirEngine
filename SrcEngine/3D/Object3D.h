@@ -15,7 +15,7 @@ struct ConstBufferDataMisc {
 	Float3 padding2;
 };
 
-class Object3D
+class Object3D : public IComponent
 {
 public:
 	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; miscCB.contents->rimColor = { 1.f, 0.f, 0.f, 1.f }; };

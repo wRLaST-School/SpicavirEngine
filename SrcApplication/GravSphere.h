@@ -25,7 +25,7 @@ private:
 	int32_t stayTime_;
 	int32_t timer_ = 0;
 
-	Object3D sphere_;
+	Object3D* sphere_;
 
 	Effekseer::Handle hnd_;
 };

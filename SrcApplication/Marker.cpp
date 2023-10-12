@@ -35,8 +35,8 @@ void Marker::Update()
         Player* pl = Player::Get();
 
         Float2 diff = {
-            pl->position.x - pos_.x,
-            pl->position.z - pos_.z
+            pl->obj_->position.x - pos_.x,
+            pl->obj_->position.z - pos_.z
         };
 
         if (abs(diff.x) <= (float)R / 2 + pl->r2d && abs(diff.y) <= (float)R / 2 + pl->r2d)
