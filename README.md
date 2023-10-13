@@ -11,9 +11,6 @@
 - DInputとXInputによるキーボード、マウス、ゲームパッド入力
 - EffekseerライブラリによるVFX読み込みと再生
 
-#### リファレンス(WIP)
-[リファレンス](https://scrapbox.io/SpicavirEngine/Spicavir_Engine_%E7%B0%A1%E6%98%93%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9)
-
 #### 使用外部ライブラリ
 - [Assimp](https://github.com/assimp/assimp)
   - ボーン・アニメーション付きモデルの読み込みに使用
