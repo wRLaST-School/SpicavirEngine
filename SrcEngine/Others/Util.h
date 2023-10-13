@@ -51,6 +51,10 @@ namespace Util
 		cereal::BinaryInputArchive archive(ifs);
 		archive(obj);
 	}
+
+	Float2 GetWinSize();
+	int32_t GetWinWidth();
+	int32_t GetWinHeight();
 };
 
 struct R8G8B8A8

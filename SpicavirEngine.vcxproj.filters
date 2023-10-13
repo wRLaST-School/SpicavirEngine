@@ -498,6 +498,9 @@
     <ClCompile Include="HierarchyPanel.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="DockPanel.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -831,6 +834,9 @@
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="HierarchyPanel.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="DockPanel.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

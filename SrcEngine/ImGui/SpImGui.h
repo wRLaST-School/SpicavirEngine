@@ -12,8 +12,6 @@ public:
 
 	static void Draw();
 
-	static void EnableScreenDock();
-
 	static void EndFrame();
 
 	static void Shutdown();

@@ -24,6 +24,7 @@
 #include <AssetBrowser.h>
 #include <GameManager.h>
 #include <HierarchyPanel.h>
+#include <DockPanel.h>
 
 void SpFramework::Init()
 {
@@ -119,14 +120,12 @@ void SpFramework::Run()
 
 		/*毎フレーム処理*/
 
-		SpImGui::EnableScreenDock();
+		DockPanel::EnableScreenDock();
 
 		/*更新処理*/
 		SceneManager::Update();
 		SpEffekseer::Update();
 		/*更新処理ここまで*/
-
-
 
 		SceneManager::DrawBack();
 

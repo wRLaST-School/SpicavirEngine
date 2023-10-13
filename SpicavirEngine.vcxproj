@@ -173,6 +173,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AssetBrowser.cpp" />
+    <ClCompile Include="DockPanel.cpp" />
     <ClCompile Include="HierarchyPanel.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp" />
@@ -282,6 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetBrowser.h" />
+    <ClInclude Include="DockPanel.h" />
     <ClInclude Include="HierarchyPanel.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h" />
