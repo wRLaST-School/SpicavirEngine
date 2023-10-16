@@ -44,7 +44,7 @@ void DockPanel::DrawViewPort()
 			static bool open = true;
 			ImGui::Begin("Game", &open, ImGuiWindowFlags_NoCollapse);
 
-			ImGui::Image((ImTextureID)SpTextureManager::GetGPUDescHandle("BloomBefore").ptr,
+			ImGui::Image((ImTextureID)SpTextureManager::GetGPUDescHandle("RenderTexture").ptr,
 				ImGui::GetWindowSize());
 
 			ImGui::End();
