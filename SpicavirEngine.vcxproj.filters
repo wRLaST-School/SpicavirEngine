@@ -184,6 +184,18 @@
     <Filter Include="Engine\ヘッダーファイル\Framework">
       <UniqueIdentifier>{fce172b6-6c08-4dab-b90d-cf3189df133f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ソースファイル\SceneEditor">
+      <UniqueIdentifier>{c32ab0c1-808d-4d97-b438-bda00b868fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\SceneEditor">
+      <UniqueIdentifier>{9451b33e-77c9-4eb0-aa8b-4079da3508bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\Compute">
+      <UniqueIdentifier>{8720c7fe-52c5-491b-aa5b-adcbae275ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ヘッダーファイル\Compute">
+      <UniqueIdentifier>{4a244f15-1dea-4a2f-9a8a-cc1c6d2b1d2c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -342,9 +354,6 @@
     <ClCompile Include="SrcEngine\Math\Quaternion.cpp">
       <Filter>Engine\ソースファイル\Math</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\2D\Camera2D.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\Others\Easing.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
@@ -417,9 +426,6 @@
     <ClCompile Include="SrcApplication\LevelManager.cpp">
       <Filter>!Game\Background</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\GlobalTimer.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\Collider\OBBCollider.cpp">
       <Filter>Engine\ソースファイル\Collider</Filter>
     </ClCompile>
@@ -431,9 +437,6 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\2D\Animation2D.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\Others\Color.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\2D\SpDS.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
@@ -480,25 +483,34 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTConditionNode.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClCompile>
-    <ClCompile Include="SrcEngine\Compute\ComputeShader.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcEngine\Compute\StructuredBuffer.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\Others\SpFramework.cpp">
       <Filter>Engine\ソースファイル\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="AssetBrowser.cpp">
+    <ClCompile Include="SrcEngine\SceneEditor\IComponent.cpp">
+      <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\SceneEditor\AssetBrowser.cpp">
+      <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\SceneEditor\DockPanel.cpp">
+      <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\SceneEditor\HierarchyPanel.cpp">
+      <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Compute\ComputeShader.cpp">
+      <Filter>Engine\ソースファイル\Compute</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Compute\StructuredBuffer.cpp">
+      <Filter>Engine\ソースファイル\Compute</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcEngine\Others\Color.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="IComponent.cpp">
+    <ClCompile Include="SrcEngine\2D\Camera2D.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="HierarchyPanel.cpp">
-      <Filter>未分類\ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DockPanel.cpp">
+    <ClCompile Include="SrcApplication\GlobalTimer.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -818,26 +830,26 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTConditionNode.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
     </ClInclude>
-    <ClInclude Include="SrcEngine\Compute\ComputeShader.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcEngine\Compute\StructuredBuffer.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SrcEngine\Others\SpFramework.h">
       <Filter>Engine\ヘッダーファイル\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="AssetBrowser.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\SceneEditor\AssetBrowser.h">
+      <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\SceneEditor\DockPanel.h">
+      <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
     </ClInclude>
-    <ClInclude Include="HierarchyPanel.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\SceneEditor\HierarchyPanel.h">
+      <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
     </ClInclude>
-    <ClInclude Include="DockPanel.h">
-      <Filter>未分類\ヘッダー ファイル</Filter>
+    <ClInclude Include="SrcEngine\SceneEditor\IComponent.h">
+      <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Compute\ComputeShader.h">
+      <Filter>Engine\ヘッダーファイル\Compute</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcEngine\Compute\StructuredBuffer.h">
+      <Filter>Engine\ヘッダーファイル\Compute</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
