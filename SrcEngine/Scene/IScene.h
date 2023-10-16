@@ -1,9 +1,11 @@
 #pragma once
 #include "Light.h"
-class IScene
+#include <IComponent.h>
+class IScene : public IComponent
 {
 public:
 	IScene() { 
+		name = "Scene";
 	};
 
 	virtual void LoadResources() = 0;

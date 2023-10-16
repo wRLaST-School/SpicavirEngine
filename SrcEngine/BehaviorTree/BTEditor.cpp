@@ -129,6 +129,9 @@ void BTEditor::LoadFile(std::string filePath)
 	//インスタンス保存
 	BTEditor* ins = GetInstance();
 
+	//ファイルパス変数を更新
+	ins->filePath = filePath;
+
 	//ファイル読み込み
 	std::ifstream file;
 

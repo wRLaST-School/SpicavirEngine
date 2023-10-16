@@ -29,6 +29,7 @@
 #include <EASTL/string.h>
 #include <EASTL/array.h>
 #include <EASTL/unordered_map.h>
+#include <EASTL/unique_ptr.h>
 
 #include <stdint.h>
 #include <wrl.h>
@@ -42,6 +43,8 @@
 #pragma warning(pop)
 
 #include <SpMath.h>
+#include <IComponent.h>
+
 
 #ifdef _DEBUG
 

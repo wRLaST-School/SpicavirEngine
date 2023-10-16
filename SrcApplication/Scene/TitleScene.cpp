@@ -7,7 +7,7 @@
 
 void TitleScene::LoadResources()
 {
-	SpTextureManager::LoadTexture("Resources/title.png", "titleText");
+	SpTextureManager::LoadTexture("Assets/Images/title.png", "titleText");
 }
 
 void TitleScene::Init()

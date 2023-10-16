@@ -3,8 +3,8 @@
 #include <Emitter.h>
 #include <CounterParticle.h>
 #include <OBBCollider.h>
-class Player :
-    public Object3D
+
+class Player : public IComponent
 {
 public:
     void Init();
@@ -103,6 +103,8 @@ public:
     static Player* Get();
 
     static void Set(Player* player);
+
+    Object3D* obj_;
 
 private:
     static Player* sCurrent;

@@ -10,7 +10,7 @@ void SrPostEffectStage::Init()
 	RTVManager::CreateRenderTargetTexture(1.f, 1.f, "BloomAfter", true);
 	RTVManager::CreateRenderTargetTexture(.5f, 1.f, "Bloom2ndAfter", true);
 	RTVManager::CreateRenderTargetTexture(.5f, .5f, "Bloom3rdAfter", true);
-	SpTextureManager::LoadTexture("Resources/black.png", "Black");
+	SpTextureManager::LoadTexture("Assets/Images/black.png", "Black");
 	SpTextureManager::AddMasterTextureKey("BloomBefore");
 	SpTextureManager::AddMasterTextureKey("BloomAfter");
 	SpTextureManager::AddMasterTextureKey("Bloom2ndAfter");

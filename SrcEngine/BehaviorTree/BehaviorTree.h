@@ -9,7 +9,7 @@
 #include <BTConditionNode.h>
 
 namespace BT {
-	class BehaviorTree
+	class BehaviorTree : public IComponent
 	{
 	public:
 		BehaviorTree();

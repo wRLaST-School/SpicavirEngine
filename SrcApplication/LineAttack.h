@@ -1,6 +1,6 @@
 #pragma once
 #include <OBBCollider.h>
-class LineAttack
+class LineAttack : public IComponent
 {
 public:
 	LineAttack(const Float3& pos, float angle);

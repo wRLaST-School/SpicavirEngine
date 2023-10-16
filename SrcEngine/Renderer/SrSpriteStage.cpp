@@ -2,6 +2,7 @@
 #include "SrSpriteStage.h"
 #include <Sprite.h>
 #include <SpDS.h>
+#include <DockPanel.h>
 
 void SrSpriteStage::DrawCommands(std::function<void(void)> cmd)
 {
@@ -20,6 +21,8 @@ void SrSpriteStage::PreDraw()
 void SrSpriteStage::PostDraw()
 {
 	Sprite::PostSpriteDraw();
+
+	DockPanel::DrawViewPort();
 }
 
 void SrSpriteStage::Render()

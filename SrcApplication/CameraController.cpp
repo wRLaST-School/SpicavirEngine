@@ -26,43 +26,43 @@ void CameraController::Update()
 	{
 		if (pl->GetState() != Player::State::Dodge)
 		{
-			cam_->target = Boss::Get()->position;
+			cam_->target = Boss::Get()->obj_->position;
 			cam_->targetMode = CameraTargetMode::LookAt;
 
-			Vec3 front = (Vec3)Boss::Get()->position - pl->position;
+			Vec3 front = (Vec3)Boss::Get()->obj_->position - pl->obj_->position;
 			front.y = 0;
 
 			//ゼロベクトルで飛ばないように
 			if (front.GetSquaredLength())
 			{
-				lastPlayerPos_ = pl->position;
+				lastPlayerPos_ = pl->obj_->position;
 			}
 			else
 			{
-				front = (Vec3)Boss::Get()->position - lastPlayerPos_;
+				front = (Vec3)Boss::Get()->obj_->position - lastPlayerPos_;
 			}
 
 			front.Norm();
 
-			cam_->position = (Vec3)pl->position - front.SetLength(CAM_DIST);
+			cam_->position = (Vec3)pl->obj_->position - front.SetLength(CAM_DIST);
 			cam_->position.y = 3;
 		}
 		else
 		{
-			cam_->target = Boss::Get()->position;
+			cam_->target = Boss::Get()->obj_->position;
 			cam_->targetMode = CameraTargetMode::LookAt;
 
-			Vec3 front = (Vec3)Boss::Get()->position - pl->position;
+			Vec3 front = (Vec3)Boss::Get()->obj_->position - pl->obj_->position;
 			front.y = 0;
 
 			//ゼロベクトルで飛ばないように
 			if (front.GetSquaredLength())
 			{
-				lastPlayerPos_ = pl->position;
+				lastPlayerPos_ = pl->obj_->position;
 			}
 			else
 			{
-				front = (Vec3)Boss::Get()->position - lastPlayerPos_;
+				front = (Vec3)Boss::Get()->obj_->position - lastPlayerPos_;
 			}
 
 			front.Norm();
@@ -99,14 +99,14 @@ void CameraController::Update()
 		cam_->targetMode = CameraTargetMode::LookAt;
 		//cam->rotation = Player::Get()->rotation;
 
-		cam_->target = pl->position;
+		cam_->target = pl->obj_->position;
 		cam_->target.y += 2.0f;
 
 		Vec3 front = rotation.ExtractAxisZ();
 		//front.y = 0;
 		front.Norm();
 
-		cam_->position = (Vec3)pl->position - front.SetLength(CAM_DIST);
+		cam_->position = (Vec3)pl->obj_->position - front.SetLength(CAM_DIST);
 		//cam->position.y = 3;
 
 		if (cam_->position.y < 1.f)
@@ -138,7 +138,7 @@ void CameraController::ToggleMode()
 {
 	if (mode_ == Mode::Target)
 	{
-		cam_->rotation = Player::Get()->rotation;
+		cam_->rotation = Player::Get()->obj_->rotation;
 		mode_ = Mode::Free;
 	}
 	else

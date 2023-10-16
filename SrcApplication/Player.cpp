@@ -13,23 +13,26 @@ void Player::Load()
 {
 	ModelManager::Register("Cube", "cube");
 
-	ModelManager::Register("Resources/Models/Player/Idle.gltf", "PlayerIdle", false);
-	ModelManager::Register("Resources/Models/Player/Roll.gltf", "PlayerRoll", false);
-	ModelManager::Register("Resources/Models/Player/Run.gltf", "PlayerRun", false);
-	ModelManager::Register("Resources/Models/Player/Slash1.gltf", "PlayerSlash1", false);
-	ModelManager::Register("Resources/Models/Player/Slash2.gltf", "PlayerSlash2", false);
-	ModelManager::Register("Resources/Models/Player/Slash3.gltf", "PlayerSlash3", false);
+	ModelManager::Register("Assets/Models/Player/Idle.gltf", "PlayerIdle", false);
+	ModelManager::Register("Assets/Models/Player/Roll.gltf", "PlayerRoll", false);
+	ModelManager::Register("Assets/Models/Player/Run.gltf", "PlayerRun", false);
+	ModelManager::Register("Assets/Models/Player/Slash1.gltf", "PlayerSlash1", false);
+	ModelManager::Register("Assets/Models/Player/Slash2.gltf", "PlayerSlash2", false);
+	ModelManager::Register("Assets/Models/Player/Slash3.gltf", "PlayerSlash3", false);
 
-	SpEffekseer::Load(L"Resources/Effekseer/Slash1", L"Resources/Effekseer/Slash1/Slash1.efk", "Slash1");
-	SpEffekseer::Load(L"Resources/Effekseer/Slash2", L"Resources/Effekseer/Slash2/Slash2.efk", "Slash2");
-	SpEffekseer::Load(L"Resources/Effekseer/Slash3", L"Resources/Effekseer/Slash3/Slash3.efk", "Slash3");
+	SpEffekseer::Load(L"Assets/Effekseer/Slash1", L"Assets/Effekseer/Slash1/Slash1.efk", "Slash1");
+	SpEffekseer::Load(L"Assets/Effekseer/Slash2", L"Assets/Effekseer/Slash2/Slash2.efk", "Slash2");
+	SpEffekseer::Load(L"Assets/Effekseer/Slash3", L"Assets/Effekseer/Slash3/Slash3.efk", "Slash3");
 }
 
 void Player::Init()
 {
-	model = ModelManager::GetModel("PlayerIdle");
-	position = { 0, 1, -5 };
-	scale = { 0.5, 1.0, 0.5 };
+	AddComponent<Object3D>("Object3D");
+	obj_ = GetComponent<Object3D>("Object3D");
+
+	obj_->model = ModelManager::GetModel("PlayerIdle");
+	obj_->position = { 0, 1, -5 };
+	obj_->scale = { 0.5, 1.0, 0.5 };
 
 	counterEmitter_.active = false;
 	counterEmitter_.emitOnce = true;
@@ -40,17 +43,6 @@ void Player::Init()
 
 void Player::Update()
 {
-	if (GameManager::sShowDebug)
-	{
-		SpImGui::Command([&] {
-			if (ImGui::Begin("Slash Col"))
-			{
-				ImGui::DragFloat3("Scale", &slashScale_.x);
-			}
-		ImGui::End();
-			});
-	}
-
 	counterEmitter_.Update();
 
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::RStickButton))
@@ -74,7 +66,7 @@ void Player::Update()
 		//フリーカメラ時の処理
 	}
 	DamageUpdate();
-	
+
 	switch (state_)
 	{
 	case Player::State::Idle:
@@ -99,24 +91,24 @@ void Player::Update()
 
 	if (state_ == State::Idle)
 	{
-		model = ModelManager::GetModel("PlayerIdle");
+		obj_->model = ModelManager::GetModel("PlayerIdle");
 	}
 	else if (state_ == State::Move)
 	{
-		model = ModelManager::GetModel("PlayerRun");
+		obj_->model = ModelManager::GetModel("PlayerRun");
 	}
-	
-	model->UpdateAnim();
 
-	scale = { 1.0f / 16.f ,1.0f / 16.f ,1.0f / 16.f };
+	obj_->model->UpdateAnim();
+
+	obj_->scale = { 1.0f / 16.f ,1.0f / 16.f ,1.0f / 16.f };
 
 	ClampPos();
 
-	UpdateMatrix();
+	obj_->UpdateMatrix();
 
-	col_.pos = (Vec3)position + Vec3(0, 1.f, 0);
-	col_.scale = {.5f, 1.f, .5f};
-	col_.rot = rotation;
+	col_.pos = (Vec3)obj_->position + Vec3(0, 1.f, 0);
+	col_.scale = { .5f, 1.f, .5f };
+	col_.rot = obj_->rotation;
 }
 
 void Player::Move()
@@ -143,7 +135,7 @@ void Player::Move()
 	if (vel.GetSquaredLength())
 	{	
 		state_ = State::Move;
-		rotation = Quaternion::DirToDir(Vec3(0, 0, -1), vel);
+		obj_->rotation = Quaternion::DirToDir(Vec3(0, 0, -1), vel);
 		vel *= spd_;
 	}
 	else
@@ -151,39 +143,39 @@ void Player::Move()
 		state_ = State::Idle;
 	}
 
-	position += vel;
+	obj_->position += vel;
 }
 
 void Player::GravMove()
 {
-	if (position.y > 0.f)
+	if (obj_->position.y > 0.f)
 	{
 		vy_ -= GRAV;
 	}
 
-	position.y += vy_;
+	obj_->position.y += vy_;
 
-	if (position.y < 0.f)
+	if (obj_->position.y < 0.f)
 	{
 		vy_ = 0;
-		position.y = 0.f;
+		obj_->position.y = 0.f;
 	}
 }
 
 void Player::ClampPos()
 {
 	float colR = ((Vec3)col_.scale).GetLength();
-	position.x = Util::Clamp(position.x, -30.f + colR, 30.f - colR);
-	position.z = Util::Clamp(position.z, -30.f + colR, 30.f - colR);
+	obj_->position.x = Util::Clamp(obj_->position.x, -30.f + colR, 30.f - colR);
+	obj_->position.z = Util::Clamp(obj_->position.z, -30.f + colR, 30.f - colR);
 }
 
 void Player::MoveTo(Float3 newPos)
 {
-	position = newPos;
+	obj_->position = newPos;
 
 	ClampPos();
 
-	col_.pos = (Vec3)position + Vec3(0, 1.f, 0);
+	col_.pos = (Vec3)obj_->position + Vec3(0, 1.f, 0);
 }
 
 void Player::DamageUpdate()
@@ -196,15 +188,15 @@ void Player::DamageUpdate()
 
 	if (dodgeSucceededTimer_)
 	{
-		*brightnessCB.contents = { 1.f, 1.f, 0.f, .25f };
+		*obj_->brightnessCB.contents = { 1.f, 1.f, 0.f, .25f };
 	}
 	else if (damageTimer_)
 	{
-		*brightnessCB.contents = { 1.f, 0.f, 0.f, .25f };
+		*obj_->brightnessCB.contents = { 1.f, 0.f, 0.f, .25f };
 	}
 	else
 	{
-		*brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
+		*obj_->brightnessCB.contents = { 1.f, 1.f, 1.f, 1.f };
 	}
 }
 
@@ -236,22 +228,33 @@ void Player::Damage()
 
 void Player::Draw()
 {
-	if(brightnessCB.contents->w < 1.0f)
-		Object3D::DrawAlpha("white");
+	if(obj_->brightnessCB.contents->w < 1.0f)
+		obj_->DrawAlpha("white");
 	else
 	{
-		Object3D::Draw();
+		obj_->Draw();
 	}
 
 	counterEmitter_.Draw();
 	col_.DrawBB();
+
+	if (GameManager::sShowDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Slash Col"))
+			{
+				ImGui::DragFloat3("Scale", &slashScale_.x);
+			}
+			ImGui::End();
+			});
+	}
 }
 
 void Player::DodgeUpdate()
 {
-	position += dodgeVec_;
+	obj_->position += dodgeVec_;
 
-	rotation = Quaternion::DirToDir(Vec3(0, 0, -1), dodgeVec_.GetNorm());
+	obj_->rotation = Quaternion::DirToDir(Vec3(0, 0, -1), dodgeVec_.GetNorm());
 
 	dodgeTimer_++;
 
@@ -265,7 +268,7 @@ void Player::IdleMoveUpdate()
 {
 	Move();
 	
-	if (position.y == 0.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
+	if (obj_->position.y == 0.f && (Input::Key::Triggered(DIK_SPACE) || Input::Pad::Triggered(Button::A)))
 	{
 		vy_ = JUMP_POWER;
 	}
@@ -311,14 +314,14 @@ void Player::Dodge()
 		dodgeVec_ = front;
 	}
 
-	dodgeEndPlayerPos_ = (Vec3)position + (dodgeVec_ * (float)iFrame);
+	dodgeEndPlayerPos_ = (Vec3)obj_->position + (dodgeVec_ * (float)iFrame);
 
 	state_ = State::Dodge;
 	dodgeTimer_ = 0;
 
-	model = ModelManager::GetModel("PlayerRoll");
-	model->ResetAnimTimer();
-	model->aniSpeed = 3.8f;
+	obj_->model = ModelManager::GetModel("PlayerRoll");
+	obj_->model->ResetAnimTimer();
+	obj_->model->aniSpeed = 3.8f;
 	//SE再生
 	SoundManager::Play("dodge");
 }
@@ -329,7 +332,7 @@ void Player::SlashUpdate1()
 
 	slashCol_.DrawBB(Color::Blue);
 
-	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 	front.Norm();
 
 	if (Input::Mouse::Triggered(Click::Left) || Input::Pad::Triggered(Button::X))
@@ -464,7 +467,7 @@ void Player::SlashUpdate3()
 void Player::Slash1()
 {
 	//正面の角度を計算
-	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
 
@@ -473,16 +476,16 @@ void Player::Slash1()
 	side.Norm();*/
 	float angle = atan2f(front.x, front.z);
 
-	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash1", position), { 0, 1, 0 }, angle + PIf);
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash1", obj_->position), { 0, 1, 0 }, angle + PIf);
 
-	model = ModelManager::GetModel("PlayerSlash2");
-	model->ResetAnimTimer();
-	model->aniSpeed = 1.5f;
+	obj_->model = ModelManager::GetModel("PlayerSlash2");
+	obj_->model->ResetAnimTimer();
+	obj_->model->aniSpeed = 1.5f;
 
 	state_ = State::Slash1;
 
 	//当たり判定の設定
-	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol_.pos = front * -slashDist + obj_->position + Vec3(0, 1, 0);
 	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	//既に当たっているフラグをリセット
@@ -494,7 +497,7 @@ void Player::Slash1()
 void Player::Slash2()
 {
 	//正面の角度を計算
-	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
 
@@ -503,16 +506,16 @@ void Player::Slash2()
 	side.Norm();*/
 	float angle = atan2f(front.x, front.z) + PIf;
 
-	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash2", position), { 0, 1, 0 }, angle);
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash2", obj_->position), { 0, 1, 0 }, angle);
 
-	model = ModelManager::GetModel("PlayerSlash1");
-	model->ResetAnimTimer();
-	model->aniSpeed = 1.5f;
+	obj_->model = ModelManager::GetModel("PlayerSlash1");
+	obj_->model->ResetAnimTimer();
+	obj_->model->aniSpeed = 1.5f;
 
 	state_ = State::Slash2;
 
 	//当たり判定の設定
-	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol_.pos = front * -slashDist + obj_->position + Vec3(0, 1, 0);
 	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	slashCol_.scale = slashScale_;
@@ -526,7 +529,7 @@ void Player::Slash2()
 void Player::Slash3()
 {
 	//正面の角度を計算
-	Vec3 front = rotation.GetRotMat().ExtractAxisZ();
+	Vec3 front = obj_->rotation.GetRotMat().ExtractAxisZ();
 	front.y = 0;
 	front.Norm();
 
@@ -535,16 +538,16 @@ void Player::Slash3()
 	side.Norm();*/
 	float angle = atan2f(front.x, front.z) + PIf;
 
-	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash3", position), { 0, 1, 0 }, angle);
+	SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("Slash3", obj_->position), { 0, 1, 0 }, angle);
 
-	model = ModelManager::GetModel("PlayerSlash3");
-	model->ResetAnimTimer();
-	model->aniSpeed = 1.5f;
+	obj_->model = ModelManager::GetModel("PlayerSlash3");
+	obj_->model->ResetAnimTimer();
+	obj_->model->aniSpeed = 1.5f;
 
 	state_ = State::Slash3;
 
 	//当たり判定の設定
-	slashCol_.pos = front * -slashDist + position + Vec3(0, 1, 0);
+	slashCol_.pos = front * -slashDist + obj_->position + Vec3(0, 1, 0);
 	slashCol_.rot = Quaternion(Vec3(0, 1, 0), angle);
 
 	//既に当たっているフラグをリセット

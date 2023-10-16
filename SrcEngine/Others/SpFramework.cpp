@@ -21,6 +21,10 @@
 #include <SpRenderer.h>
 #include <SpDS.h>
 #include <SpEffekseer.h>
+#include <AssetBrowser.h>
+#include <GameManager.h>
+#include <HierarchyPanel.h>
+#include <DockPanel.h>
 
 void SpFramework::Init()
 {
@@ -100,6 +104,9 @@ void SpFramework::Init()
 
 	//Init Scene
 	SceneManager::Init();
+
+	//Load Asset Browser Resources
+	AssetBrowser::LoadResources();
 }
 
 void SpFramework::Run()
@@ -113,6 +120,8 @@ void SpFramework::Run()
 
 		/*毎フレーム処理*/
 
+		DockPanel::EnableScreenDock();
+
 		/*更新処理*/
 		SceneManager::Update();
 		SpEffekseer::Update();
@@ -123,6 +132,13 @@ void SpFramework::Run()
 		SceneManager::Draw3D();
 
 		SceneManager::DrawSprite();
+
+		if (GameManager::sShowDebug)
+		{
+			AssetBrowser::SDraw();
+
+			HierarchyPanel::SDraw();
+		}
 
 		GetSpDX()->PreDrawCommands();
 
@@ -135,6 +151,8 @@ void SpFramework::Run()
 		}
 
 		SpRenderer::Render();
+
+		SpImGui::EndFrame();
 
 		GetSpDX()->PostDrawCommands();
 

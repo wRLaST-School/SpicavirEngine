@@ -1,5 +1,7 @@
 #include "Util.h"
 #include <random>
+#include <GameManager.h>
+#include <SpWindow.h>
 
 std::random_device rnd;
 std::mt19937 mt(rnd());
@@ -23,6 +25,26 @@ std::wstring Util::StrToWStr(const std::string& str, int32_t page)
 
     // 変換結果を返す
     return ret;
+}
+
+Float2 Util::GetWinSize()
+{
+    if (GameManager::sShowDebug)
+    {
+
+    }
+    return Float2(static_cast<float>(GetSpWindow()->width), 
+        static_cast<float>(GetSpWindow()->height));
+}
+
+int32_t Util::GetWinWidth()
+{
+    return static_cast<int32_t>(GetWinSize().x);
+}
+
+int32_t Util::GetWinHeight()
+{
+    return static_cast<int32_t>(GetWinSize().y);
 }
 
 bool Util::Chance(int32_t percentage)

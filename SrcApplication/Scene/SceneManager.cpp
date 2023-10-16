@@ -56,7 +56,8 @@ void SceneManager::Update()
 		Transition();
 	}
 
-	currentScene->Update();
+	if(!GameManager::sDebugTimeStop)
+		currentScene->Update();
 }
 
 void SceneManager::Draw3D()
@@ -81,6 +82,17 @@ void SceneManager::Transition()
 	{
 		transitionQueued = true;
 	}
+}
+
+void SceneManager::WaitForLoadAndTransition()
+{
+	while (loadState == LoadState::Loading)
+	{
+		UpdateLoadState();
+		Sleep(16);
+	}
+
+	transitionQueued = true;
 }
 
 void SceneManager::ConfirmTransition()

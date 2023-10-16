@@ -3,5 +3,6 @@
 
 namespace SpImguiCustom {
     void StyleColorsSpicavirSakura(ImGuiStyle* dst = NULL);
+    void StyleColorsDarkBlossom(ImGuiStyle* dst = NULL);
 }
 

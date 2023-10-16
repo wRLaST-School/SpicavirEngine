@@ -15,7 +15,7 @@ CounterParticle::CounterParticle(Float3 pos) : IParticle(pos) {
 
 	secondPos_.SetLength(spread_);
 
-    secondPos_ += Player::Get()->position;
+    secondPos_ += Player::Get()->obj_->position;
 };
 
 void CounterParticle::Update()
@@ -29,7 +29,7 @@ void CounterParticle::Update()
 	else
 	{
 		float t = (float)(time - 30) / 60;
-		position = Vec3::Lerp(position, Boss::Get()->position, t);
+		position = Vec3::Lerp(position, Boss::Get()->obj_->position, t);
 
 		if (time - 30 == 15)
 		{

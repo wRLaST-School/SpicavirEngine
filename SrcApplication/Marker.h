@@ -1,13 +1,11 @@
 #pragma once
 #include <Object3D.h>
-class Marker
+class Marker : public IComponent
 {
 public:
-	Marker();
+	Marker(const Float3& pos);
 
 	void Cast(const Float3& pos);
-
-	void InitModel();
 
 	void Update();
 	void Draw();
