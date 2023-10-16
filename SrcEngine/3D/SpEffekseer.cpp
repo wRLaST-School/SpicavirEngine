@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SpEffekseer.h"
 #include <SpDirectX.h>
+#include <GameManager.h>
 
 Effekseer::RefPtr<EffekseerRenderer::Renderer> SpEffekseer::sEfkRenderer = nullptr;
 
@@ -49,7 +50,8 @@ void SpEffekseer::Init()
 
 void SpEffekseer::Update()
 {
-	sEfkManager->Update();
+	if(!GameManager::sDebugTimeStop)
+		sEfkManager->Update();
 	sEfkMemoryPool->NewFrame();
 }
 

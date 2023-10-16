@@ -56,7 +56,8 @@ void SceneManager::Update()
 		Transition();
 	}
 
-	currentScene->Update();
+	if(!GameManager::sDebugTimeStop)
+		currentScene->Update();
 }
 
 void SceneManager::Draw3D()

@@ -49,11 +49,6 @@ void Boss::Update()
 
 	moveTimer_++;
 
-	if (GameManager::sShowDebug)
-	{
-		ShowImGui();
-	}
-
 	//当たり判定を更新
 	col_.pos = obj_->position;
 	col_.rot = obj_->rotation;
@@ -117,6 +112,10 @@ void Boss::Draw()
 	}
 
 	GameManager::sScore.Draw();
+	if (GameManager::sShowDebug)
+	{
+		ShowImGui();
+	}
 }
 
 void Boss::Damage(int32_t damage)

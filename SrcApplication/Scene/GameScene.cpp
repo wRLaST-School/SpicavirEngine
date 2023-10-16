@@ -70,19 +70,6 @@ void GameScene::Update()
 	cam_.Update();
 
 	MainTimer::Update();
-
-	if (GameManager::sShowDebug)
-	{
-		SpImGui::Command([&] {
-			if (ImGui::Begin("Game Scene"))
-			{
-				ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
-				ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
-				ImGui::Checkbox("Debug Immunity", &GameManager::sDebugImmunity);
-			}
-			ImGui::End();
-		});
-	}
 }
 
 void GameScene::DrawBack()
@@ -102,4 +89,17 @@ void GameScene::Draw3D()
 
 void GameScene::DrawSprite()
 {
+	if (GameManager::sShowDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Game Scene"))
+			{
+				ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
+				ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
+				ImGui::Checkbox("Debug Immunity", &GameManager::sDebugImmunity);
+				ImGui::Checkbox("Pause Game", &GameManager::sDebugTimeStop);
+			}
+			ImGui::End();
+			});
+	}
 }

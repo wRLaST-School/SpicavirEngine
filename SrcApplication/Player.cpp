@@ -43,17 +43,6 @@ void Player::Init()
 
 void Player::Update()
 {
-	if (GameManager::sShowDebug)
-	{
-		SpImGui::Command([&] {
-			if (ImGui::Begin("Slash Col"))
-			{
-				ImGui::DragFloat3("Scale", &slashScale_.x);
-			}
-			ImGui::End();
-			});
-	}
-
 	counterEmitter_.Update();
 
 	if (Input::Key::Triggered(DIK_R) || Input::Pad::Triggered(Button::RStickButton))
@@ -248,6 +237,17 @@ void Player::Draw()
 
 	counterEmitter_.Draw();
 	col_.DrawBB();
+
+	if (GameManager::sShowDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Slash Col"))
+			{
+				ImGui::DragFloat3("Scale", &slashScale_.x);
+			}
+			ImGui::End();
+			});
+	}
 }
 
 void Player::DodgeUpdate()
