@@ -111,6 +111,11 @@ void Player::Update()
 	col_.rot = obj_->rotation;
 }
 
+void Player::DrawParams()
+{
+	ImGui::DragFloat3("SlashColScale", &slashScale_.x);
+}
+
 void Player::Move()
 {
 	Vec3 vel(0, 0, 0);
@@ -237,17 +242,6 @@ void Player::Draw()
 
 	counterEmitter_.Draw();
 	col_.DrawBB();
-
-	if (GameManager::sShowDebug)
-	{
-		SpImGui::Command([&] {
-			if (ImGui::Begin("Slash Col"))
-			{
-				ImGui::DragFloat3("Scale", &slashScale_.x);
-			}
-			ImGui::End();
-			});
-	}
 }
 
 void Player::DodgeUpdate()
