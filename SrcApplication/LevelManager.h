@@ -1,17 +1,17 @@
 #pragma once
 #include <Essentials.h>
 #include <Object3D.h>
-class LevelManager
+class LevelManager : public IComponent
 {
 public:
-	static void Init();
+	LevelManager();
 
-	static void Update();
+	void Init();
 
-	static void Draw();
+	void Update();
 
-	static void Clear();
+	void Draw();
 
-	static eastl::list<Object3D> objects;
+	void Clear();
 private:
 };

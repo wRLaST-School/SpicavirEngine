@@ -2,31 +2,38 @@
 #include "LevelManager.h"
 #include <LevelLoader.h>
 
+LevelManager::LevelManager()
+{
+	Init();
+}
+
 void LevelManager::Init()
 {
 	Clear();
-	LevelLoader::Load("Levels/scene.json");
+	LevelLoader::Load("Levels/scene.json", this);
 }
 
 void LevelManager::Update()
 {
+	eastl::list<Object3D*> objects = GetComponents<Object3D>("Object3D");
+
 	for (auto& o : objects)
 	{
-		o.UpdateMatrix();
+		o->UpdateMatrix();
 	}
 }
 
 void LevelManager::Draw()
 {
+	eastl::list<Object3D*> objects = GetComponents<Object3D>("Object3D");
+
 	for (auto& o : objects)
 	{
-		o.Draw();
+		o->Draw();
 	}
 }
 
 void LevelManager::Clear()
 {
-	objects.clear();
+	ClearComponentWithKey("Object3D");
 }
-
-eastl::list<Object3D> LevelManager::objects;

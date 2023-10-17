@@ -8,7 +8,7 @@ public:
 	//指定したキーのコンポーネントを指定したクラスで作成
 	//指定したクラスのコンストラクタの引数を取る
 	template <class Type, class ...Args>
-	void AddComponent(std::string key, Args ...args);
+	Type* AddComponent(std::string key, Args ...args);
 
 	//指定したキーのコンポーネントを一つ削除
 	//該当要素が複数ある場合の動作は保証しない
@@ -57,10 +57,12 @@ private:
 };
 
 template<class Type, class ...Args>
-inline void IComponent::AddComponent(std::string key, Args ...args)
+inline Type* IComponent::AddComponent(std::string key, Args ...args)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
 	itr->second->name_ = itr->first;
+
+	return dynamic_cast<Type*>(itr->second.get());
 }
 
 template<class Type>
