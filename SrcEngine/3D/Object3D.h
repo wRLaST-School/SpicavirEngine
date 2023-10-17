@@ -57,6 +57,8 @@ public:
 
 	Object3D* parent = nullptr;
 
+	TextureKey texture = "";
+
 	Model* model = nullptr;
 
 	float distanceToCam = 0;

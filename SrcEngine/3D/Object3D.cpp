@@ -38,6 +38,9 @@ void Object3D::UpdateMatrix()
 
 void Object3D::Draw()
 {
+	if (texture != "")
+		Draw(texture);
+
 	transformCB.contents->mat = matWorld;
 
 	SpRenderer::DrawCommand([&] {
@@ -198,4 +201,14 @@ void Object3D::DrawParams()
 	ImGui::Checkbox("Use Quaternion Rotation", reinterpret_cast<bool*>(&rotMode));
 
 	ImGui::ColorEdit4("Brightness", reinterpret_cast<float*>(brightnessCB.contents));
+
+	ImGui::Separator();
+
+	const size_t bufSize = 256;
+	char buf[bufSize];
+	strncpy_s(buf, texture.c_str(), std::min(bufSize, texture.length()));
+	if (ImGui::InputText("Texture", buf, bufSize, ImGuiInputTextFlags_EnterReturnsTrue))
+	{
+		texture = buf;
+	};
 }
