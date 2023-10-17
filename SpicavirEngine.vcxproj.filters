@@ -516,6 +516,9 @@
     <ClCompile Include="NoEffect.cpp">
       <Filter>Engine\ソースファイル\PostEffect</Filter>
     </ClCompile>
+    <ClCompile Include="InspectorWindow.cpp">
+      <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -856,6 +859,9 @@
     </ClInclude>
     <ClInclude Include="NoEffect.h">
       <Filter>Engine\ヘッダーファイル\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="InspectorWindow.h">
+      <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -34,6 +34,12 @@ public:
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
 	template <class Type> eastl::list<Type*> GetComponents(std::string key);
 
+	//つけられている名前を取得
+	const std::string& GetName();
+
+	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
+	virtual void DrawParams();
+
 	virtual ~IComponent() {
 	};
 
@@ -41,7 +47,7 @@ public:
 	friend HierarchyPanel;
 	
 protected:
-	std::string name = "";
+	std::string name_ = "";
 
 private:
 	eastl::multimap<std::string, eastl::unique_ptr<IComponent>> components_;
@@ -54,7 +60,7 @@ template<class Type, class ...Args>
 inline void IComponent::AddComponent(std::string key, Args ...args)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
-	itr->second->name = itr->first;
+	itr->second->name_ = itr->first;
 }
 
 template<class Type>

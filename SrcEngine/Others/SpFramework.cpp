@@ -25,6 +25,7 @@
 #include <GameManager.h>
 #include <HierarchyPanel.h>
 #include <DockPanel.h>
+#include <InspectorWindow.h>
 
 void SpFramework::Init()
 {
@@ -138,6 +139,8 @@ void SpFramework::Run()
 			AssetBrowser::SDraw();
 
 			HierarchyPanel::SDraw();
+
+			InspectorWindow::SDraw();
 		}
 
 		GetSpDX()->PreDrawCommands();

@@ -5,7 +5,7 @@ class IScene : public IComponent
 {
 public:
 	IScene() { 
-		name = "Scene";
+		name_ = "Scene";
 	};
 
 	virtual void LoadResources() = 0;

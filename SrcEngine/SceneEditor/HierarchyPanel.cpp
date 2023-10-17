@@ -3,6 +3,7 @@
 #include <SpImGui.h>
 #include <IComponent.h>
 #include <SceneManager.h>
+#include <InspectorWindow.h>
 
 void HierarchyPanel::Draw()
 {
@@ -22,17 +23,27 @@ void HierarchyPanel::OnImGuiRender()
 
 void HierarchyPanel::ShowItemRecursive(IComponent* current)
 {
-    std::string taggedName = current->name + std::string("##") + std::to_string(itemIndex);
+    std::string taggedName = current->name_ + std::string("##") + std::to_string(itemIndex);
     itemIndex++;
 
-    ImGuiTreeNodeFlags nodeFlags = 0;
+    ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_None;
+
+    nodeFlags |= ImGuiTreeNodeFlags_OpenOnArrow;
+    nodeFlags |= ImGuiTreeNodeFlags_OpenOnDoubleClick;
     
     if (current->components_.size() == 0)
     {
         nodeFlags |= ImGuiTreeNodeFlags_Leaf;
     }
 
-    if (ImGui::TreeNodeEx(taggedName.c_str(), nodeFlags))
+    bool treeNodeTriggered = ImGui::TreeNodeEx(taggedName.c_str(), nodeFlags);
+    
+    if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
+    {
+        InspectorWindow::SelectObject(current);
+    }
+
+    if (treeNodeTriggered)
     {
         for (auto& child : current->components_)
         {
