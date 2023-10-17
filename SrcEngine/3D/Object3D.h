@@ -36,6 +36,9 @@ public:
 	void DrawAlpha();
 	void DrawAlpha(const TextureKey& key);
 
+	//Inspector Window用
+	void DrawParams();
+
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;
 	SpConstBuffer<ConstBufferDataMisc> miscCB;

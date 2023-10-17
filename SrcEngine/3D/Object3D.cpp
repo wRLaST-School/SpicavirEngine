@@ -5,6 +5,7 @@
 #include <Camera.h>
 #include <SpMath.h>
 #include <SpRenderer.h>
+#include <SpImGui.h>
 
 void Object3D::UpdateMatrix()
 {
@@ -180,4 +181,21 @@ void Object3D::DrawAlpha(const TextureKey& key)
 	transformCB.contents->mat = matWorld;
 	this->alphaTexKey = key;
 	SpRenderer::RegisterAlphaObj(this);
+}
+
+void Object3D::DrawParams()
+{
+	ImGui::DragFloat3("Position", &position.x, 0.1f);
+	ImGui::DragFloat3("Scale", &scale.x, 0.05f);
+	if (rotMode == RotMode::Euler)
+	{
+		ImGui::DragFloat3("Rotation", &rotationE.x, PIf / 360.f);
+	}
+	else
+	{
+		ImGui::InputFloat4("Rotation", &rotation.w);
+	}
+	ImGui::Checkbox("Use Quaternion Rotation", reinterpret_cast<bool*>(&rotMode));
+
+	ImGui::ColorEdit4("Brightness", reinterpret_cast<float*>(brightnessCB.contents));
 }
