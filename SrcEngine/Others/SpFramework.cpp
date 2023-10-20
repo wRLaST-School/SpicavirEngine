@@ -26,6 +26,7 @@
 #include <HierarchyPanel.h>
 #include <DockPanel.h>
 #include <InspectorWindow.h>
+#include <ResourceWindow.h>
 
 void SpFramework::Init()
 {
@@ -141,6 +142,8 @@ void SpFramework::Run()
 			HierarchyPanel::SDraw();
 
 			InspectorWindow::SDraw();
+
+			ResourceWindow::SDraw();
 		}
 
 		GetSpDX()->PreDrawCommands();
