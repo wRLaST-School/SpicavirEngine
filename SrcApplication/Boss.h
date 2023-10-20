@@ -17,6 +17,8 @@ public:
     
     void Damage(int32_t damage = 0);
 
+    void DrawParams();
+
 public:
     static void Load();
 

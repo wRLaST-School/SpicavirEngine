@@ -3,6 +3,7 @@
 #include <Sprite.h>
 #include <SpDS.h>
 #include <DockPanel.h>
+#include <NoEffect.h>
 
 void SrSpriteStage::DrawCommands(std::function<void(void)> cmd)
 {
@@ -22,6 +23,7 @@ void SrSpriteStage::PostDraw()
 {
 	Sprite::PostSpriteDraw();
 
+	NoEffect::Effect("RenderTexture", "CurrentBuffer");
 	DockPanel::DrawViewPort();
 }
 

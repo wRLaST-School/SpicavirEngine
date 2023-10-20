@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "LevelLoader.h"
-#include <LevelManager.h>
 #pragma warning (push)
 #pragma warning (disable:26800)
 #include <SrcExternal/json.hpp>
@@ -11,7 +10,7 @@
 using namespace nlohmann;
 using namespace std;
 
-void LevelLoader::Load(std::string path)
+void LevelLoader::Load(std::string path, LevelManager* lm)
 {
 	//ファイル読み込み
 	std::ifstream file;
@@ -37,10 +36,10 @@ void LevelLoader::Load(std::string path)
 	assert(name.compare("scene") == 0);
 
 	//走査処理
-	LevelManager::Clear();
+	lm->Clear();
 
 	//再帰関数にする
-	function<void(json& object, Object3D* parent)> ReadRec = [&ReadRec](json& obj, Object3D* parent) {
+	function<void(json& object, Object3D* parent)> ReadRec = [&ReadRec, &lm](json& obj, Object3D* parent) {
 		assert(obj.contains("type"));
 
 		string type = obj["type"].get<string>();
@@ -48,42 +47,41 @@ void LevelLoader::Load(std::string path)
 		//種類ごとの処理
 		if (type.compare("MESH") == 0)
 		{
-			LevelManager::objects.emplace_back();
-			auto& objdata = LevelManager::objects.back();
+			auto objdata = lm->AddComponent<Object3D>("Object3D");
 
 			if (obj.contains("file_name")) {
-				objdata.model = ModelManager::GetModel(obj["file_name"]);
+				objdata->model = ModelManager::GetModel(obj["file_name"]);
 
 				//TODO: 削除してテクスチャを貼る
 				if (obj["file_name"] == "floor")
 				{
-					*objdata.brightnessCB.contents = { 0.3f, 0.3f, 1.0f, 1.0f };
+					*objdata->brightnessCB.contents = { 0.22f, 0.22f, 0.22f, 1.0f };
 				}
 			}
 
 			if (obj.contains("texture_file"))
 			{
-				objdata.model->material.front().textureKey = obj["texture_file"];
+				objdata->model->material.front().textureKey = obj["texture_file"];
 			}
 
 			json& transform = obj["transform"];
 
-			objdata.position.x = (float)transform["translation"][1];
-			objdata.position.y = (float)transform["translation"][2];
-			objdata.position.z = -(float)transform["translation"][0];
+			objdata->position.x = (float)transform["translation"][1];
+			objdata->position.y = (float)transform["translation"][2];
+			objdata->position.z = -(float)transform["translation"][0];
 
-			objdata.rotationE.x = -(float)transform["rotation"][1];
-			objdata.rotationE.y = -(float)transform["rotation"][2];
-			objdata.rotationE.z = (float)transform["rotation"][0];
-			objdata.rotMode = Object3D::RotMode::Euler;
+			objdata->rotationE.x = -(float)transform["rotation"][1];
+			objdata->rotationE.y = -(float)transform["rotation"][2];
+			objdata->rotationE.z = (float)transform["rotation"][0];
+			objdata->rotMode = Object3D::RotMode::Euler;
 
-			objdata.scale.x = (float)transform["scaling"][1];
-			objdata.scale.y = (float)transform["scaling"][2];
-			objdata.scale.z = (float)transform["scaling"][0];
+			objdata->scale.x = (float)transform["scaling"][1];
+			objdata->scale.y = (float)transform["scaling"][2];
+			objdata->scale.z = (float)transform["scaling"][0];
 
 			if (parent)
 			{
-				objdata.parent = parent;
+				objdata->parent = parent;
 			}
 
 			//再帰処理
@@ -91,7 +89,7 @@ void LevelLoader::Load(std::string path)
 			{
 				for (auto& child : obj["children"])
 				{
-					ReadRec(child, &objdata);
+					ReadRec(child, objdata);
 				}
 			}
 		}

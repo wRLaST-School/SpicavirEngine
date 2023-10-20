@@ -126,6 +126,88 @@ void Boss::Damage(int32_t damage)
 	GameManager::sScore.totDamage += damage;
 }
 
+void Boss::DrawParams()
+{
+	//セーブとロード
+	if (ImGui::BeginMenuBar()) {
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Save")) {
+				Util::SerializeData("Assets/Data/boss.bin", *this);
+			}
+			if (ImGui::MenuItem("Load")) {
+				Util::DeserializeData("Assets/Data/boss.bin", *this);
+			}
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+
+	//ステータス関連
+	if (ImGui::TreeNode("Basic Stats"))
+	{
+
+		ImGui::TreePop();
+	}
+
+	ImGui::Separator();
+
+	//マーカー攻撃
+	if (ImGui::TreeNode("Marker Attack"))
+	{
+		ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing_);
+
+		ImGui::TreePop();
+	}
+
+	ImGui::Separator();
+
+	//直線攻撃
+	if (ImGui::TreeNode("Line Attack"))
+	{
+		ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing_);
+
+		ImGui::TreePop();
+	}
+
+	ImGui::Separator();
+
+	//突進攻撃
+	if (ImGui::TreeNode("Rush"))
+	{
+		ImGui::InputInt("Prepare Time", &prepTime_);
+		ImGui::InputInt("After Prepare Wait Time", &afterPrepWaitTime_);
+		ImGui::InputInt("Rush Time", &rushTime_);
+		ImGui::InputInt("After Rush Wait Time", &rushAfterTime_);
+		ImGui::InputFloat("Rush Distance", &rushDistance_);
+
+		ImGui::TreePop();
+	}
+
+	ImGui::Separator();
+
+	//重力弾攻撃
+	if (ImGui::TreeNode("Gravity Sphere"))
+	{
+		ImGui::InputFloat("Gravity Sphere Speed", &gravSphereSpd_);
+
+		ImGui::InputFloat("Gravity Affect Range", &gravR_);
+
+		ImGui::InputFloat("Gravity Power", &gravitySpeed_);
+
+		ImGui::InputFloat("Max Homing Radian per Frame", &maxHomeRad_);
+
+		ImGui::InputInt("Sphere Generate Time", &gravSphereStayTime_);
+
+		ImGui::TreePop();
+	}
+
+	ImGui::Separator();
+
+	ImGui::DragInt("Damage", &GameManager::sScore.totDamage);
+}
+
 Boss* Boss::Get()
 {
 	return sCurrent;
@@ -544,88 +626,4 @@ const OBBCollider& Boss::GetCollider()
 
 void Boss::ShowImGui()
 {
-	SpImGui::Command([&] {
-		if (ImGui::Begin("Boss", nullptr, ImGuiWindowFlags_MenuBar))
-		{
-			//セーブとロード
-			if (ImGui::BeginMenuBar()) {
-				if (ImGui::BeginMenu("File"))
-				{
-					if (ImGui::MenuItem("Save")) {
-						Util::SerializeData("Assets/Data/boss.bin", *this);
-					}
-					if (ImGui::MenuItem("Load")) {
-						Util::DeserializeData("Assets/Data/boss.bin", *this);
-					}
-
-					ImGui::EndMenu();
-				}
-				ImGui::EndMenuBar();
-			}
-
-			//ステータス関連
-			if (ImGui::TreeNode("Basic Stats"))
-			{
-
-				ImGui::TreePop();
-			}
-
-			ImGui::Separator();
-
-			//マーカー攻撃
-			if (ImGui::TreeNode("Marker Attack"))
-			{
-				ImGui::InputFloat("Marker Line 3 Spacing", &markerLine3Spacing_);
-
-				ImGui::TreePop();
-			}
-
-			ImGui::Separator();
-
-			//直線攻撃
-			if (ImGui::TreeNode("Line Attack"))
-			{
-				ImGui::InputFloat("Line Attack Spacing", &lineAttackSpacing_);
-
-				ImGui::TreePop();
-			}
-
-			ImGui::Separator();
-
-			//突進攻撃
-			if (ImGui::TreeNode("Rush"))
-			{
-				ImGui::InputInt("Prepare Time", &prepTime_);
-				ImGui::InputInt("After Prepare Wait Time", &afterPrepWaitTime_);
-				ImGui::InputInt("Rush Time", &rushTime_);
-				ImGui::InputInt("After Rush Wait Time", &rushAfterTime_);
-				ImGui::InputFloat("Rush Distance", &rushDistance_);
-
-				ImGui::TreePop();
-			}
-
-			ImGui::Separator();
-
-			//重力弾攻撃
-			if (ImGui::TreeNode("Gravity Sphere"))
-			{
-				ImGui::InputFloat("Gravity Sphere Speed", &gravSphereSpd_);
-
-				ImGui::InputFloat("Gravity Affect Range", &gravR_);
-
-				ImGui::InputFloat("Gravity Power", &gravitySpeed_);
-
-				ImGui::InputFloat("Max Homing Radian per Frame", &maxHomeRad_);
-
-				ImGui::InputInt("Sphere Generate Time", &gravSphereStayTime_);
-
-				ImGui::TreePop();
-			}
-
-			ImGui::Separator();
-			
-			ImGui::DragInt("Damage", &GameManager::sScore.totDamage);
-		}
-		ImGui::End();
-		});
 }

@@ -43,6 +43,15 @@ eastl::list<IComponent*> IComponent::GetComponents(std::string key)
 	return hitComponents;
 }
 
+const std::string& IComponent::GetName()
+{
+	return name_;
+}
+
+void IComponent::DrawParams()
+{
+}
+
 
 
 

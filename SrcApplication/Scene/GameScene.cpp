@@ -46,7 +46,7 @@ void GameScene::Init()
 	player_ = GetComponent<Player>("Player");
 	boss_ = GetComponent<Boss>("Boss");
 
-	LevelManager::Init();
+	AddComponent<LevelManager>("Level Manager");
 	Boss::Set(boss_);
 	Player::Set(player_);
 
@@ -64,7 +64,7 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
-	LevelManager::Update();
+	GetComponent<LevelManager>("Level Manager")->Update();
 	boss_->Update();
 	player_->Update();
 	cam_.Update();
@@ -80,7 +80,7 @@ void GameScene::Draw3D()
 {
 	cam_.Set();
 
-	LevelManager::Draw();
+	GetComponent<LevelManager>("Level Manager")->Draw();
 	boss_->Draw();
 	player_->Draw();
 

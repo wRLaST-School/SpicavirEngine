@@ -11,6 +11,8 @@ public:
 
     void Update();
 
+    void DrawParams() override;
+
     void Move();
     void GravMove();
     void ClampPos();

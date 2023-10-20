@@ -172,6 +172,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SrcEngine\SceneEditor\InspectorWindow.cpp" />
+    <ClCompile Include="SrcEngine\PostEffect\NoEffect.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\AssetBrowser.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\DockPanel.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\HierarchyPanel.cpp" />
@@ -282,6 +284,8 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SrcEngine\SceneEditor\InspectorWindow.h" />
+    <ClInclude Include="SrcEngine\PostEffect\NoEffect.h" />
     <ClInclude Include="SrcEngine\SceneEditor\AssetBrowser.h" />
     <ClInclude Include="SrcEngine\SceneEditor\DockPanel.h" />
     <ClInclude Include="SrcEngine\SceneEditor\HierarchyPanel.h" />

@@ -2,6 +2,7 @@
 #include "DockPanel.h"
 #include <GameManager.h>
 #include <SpTextureManager.h>
+#include <Util.h>
 
 void DockPanel::EnableScreenDock()
 {
@@ -44,8 +45,34 @@ void DockPanel::DrawViewPort()
 			static bool open = true;
 			ImGui::Begin("Game", &open, ImGuiWindowFlags_NoCollapse);
 
-			ImGui::Image((ImTextureID)SpTextureManager::GetGPUDescHandle("BloomBefore").ptr,
-				ImGui::GetWindowSize());
+			//タブ等を除いたウィンドウのサイズを取得(計算)
+			ImVec2 cntRegionMax = ImGui::GetWindowContentRegionMax();
+			ImVec2 cntRegionMin = ImGui::GetWindowContentRegionMin();
+			ImVec2 wndSize = {cntRegionMax.x - cntRegionMin.x, cntRegionMax.y - cntRegionMin.y};
+	
+			//元のアス比とImGuiウィンドウのアス比を比較
+			float outerWindowAspectRatio = static_cast<float>(Util::GetWinWidth()) / static_cast<float>(Util::GetWinHeight());
+			float innerWindowAspectRatio = wndSize.x / wndSize.y;
+			ImVec2 finalWndSize = wndSize;
+
+			//横幅が大きかったら縦基準で画像サイズを決定
+			if (outerWindowAspectRatio <= innerWindowAspectRatio)
+			{
+				finalWndSize.x *= outerWindowAspectRatio / innerWindowAspectRatio ;
+			}
+			//縦幅が大きかったら横基準で画像サイズを決定
+			else
+			{
+				finalWndSize.y *= innerWindowAspectRatio / outerWindowAspectRatio;
+			}
+
+			//画像を中央に持ってくる
+			ImVec2 topLeft = { (wndSize.x - finalWndSize.x) * 0.5f + cntRegionMin.x,
+								(wndSize.y - finalWndSize.y) * 0.5f + cntRegionMin.y };
+			ImGui::SetCursorPos(topLeft);
+
+			ImGui::Image((ImTextureID)SpTextureManager::GetGPUDescHandle("RenderTexture").ptr,
+				finalWndSize);
 
 			ImGui::End();
 		});
