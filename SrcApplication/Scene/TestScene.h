@@ -1,10 +1,21 @@
 #pragma once
 #include "IScene.h"
-#include "SpMath.h"
 #include "Camera.h"
-#include "Sprite.h"
-#include "Billboard.h"
-#include <Particle.h>
+#include <Color.h>
+
+class Circle : public IComponent
+{
+public:
+    Circle(Vec2 pos, float r);
+
+    bool Collide(const Circle& o);
+
+    void Draw();
+
+    Vec2 pos_;
+    float r_;
+    Color color_ = Color::White;
+};
 
 class TestScene :
     public IScene
@@ -19,27 +30,9 @@ public:
     void DrawSprite() override;
 
 private:
-    Camera camera;
-    Sprite cameraSpr;
-    Camera xCam;
-    Sprite xCamSpr;
-    Camera yCam;
-    Sprite yCamSpr;
-    Camera zCam;
-    Sprite zCamSpr;
+    Camera cam;
 
-    Camera finalScene;
-
-    Object3D ray;
-    BillboardY pane;
-    Billboard pane2;
-
-    TextureKey whiteTex;
-
-    Model sky;
-
-    Emitter<IParticle> emitter;
-
-    Object3D skysphere;
+    Circle* circleA;
+    Circle* circleB;
 };
 

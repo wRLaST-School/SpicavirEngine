@@ -18,7 +18,7 @@ bool SceneManager::transitionQueued = false;
 void SceneManager::Init()
 {
 	Transition::Load();
-	InstantTransition<TitleScene>();
+	InstantTransition<TestScene>();
 	//InstantTransition<GameScene>();
 }
 

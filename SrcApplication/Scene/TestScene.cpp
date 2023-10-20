@@ -1,242 +1,80 @@
 #include "TestScene.h"
-#include "RTVManager.h"
-#include "SpSwapChainManager.h"
 #include "Input.h"
-#include "RayCollider.h"
-#include "TextDrawer.h"
-#include <LineDrawer.h>
+#include <SpDS.h>
+
+Circle::Circle(Vec2 pos, float r)
+{
+	pos_ = pos;
+	r_ = r;
+}
+
+bool Circle::Collide(const Circle& o)
+{
+	float dist = (pos_ - o.pos_).GetSquaredLength();
+	float rsum = powf(r_ + o.r_, 2);
+	return dist <= rsum;
+}
+
+void Circle::Draw()
+{
+	SpDS::DrawCircle(
+		static_cast<int32_t>(pos_.x),
+		static_cast<int32_t>(pos_.y),
+		static_cast<int32_t>(r_),
+		color_
+	);
+}
 
 void TestScene::LoadResources()
 {
-	RTVManager::CreateRenderTargetTexture(640, 360, "camSpr");
-	RTVManager::CreateRenderTargetTexture(640, 360, "xCamSpr");
-	RTVManager::CreateRenderTargetTexture(640, 360, "yCamSpr");
-	RTVManager::CreateRenderTargetTexture(640, 360, "zCamSpr");
-
-	SpTextureManager::LoadTexture("Assets/Images/white.png", "white");
-
-	ModelManager::Register("cube", "Cube");
-
-	ModelManager::Register("skydome", "Sky");
-
-	ModelManager::Register("sphere", "Sphere");
-
-	ModelManager::Register("square", "Square");
+	
 }
 
 void TestScene::Init()
 {
-#pragma region 四分割画面用カメラ設定
-	camera.SetRenderSize(640, 360);
-	camera.nearZ = 0.1f;
-	camera.farZ = 1000.0f;
-	camera.fov = PIf / 2.f;
+	Camera::Set(cam);
 
-	camera.position.x = -3;
-	camera.position.y = 3;
-	camera.position.z = -3;
-	camera.UpdateMatrix();
-
-	cameraSpr = Sprite("camSpr");
-
-	xCam.SetRenderSize(640, 360);
-	xCam.nearZ = 0.1f;
-	xCam.farZ = 1000.0f;
-	xCam.fov = PIf / 2.f;
-
-	xCam.position.x = -10;
-	xCam.position.y = 0;
-	xCam.position.z = 0;
-	xCam.rotation = Quaternion(Vec3(0, 1, 0), PIf / 2);
-	xCam.UpdateMatrix();
-
-	xCamSpr = Sprite("xCamSpr");
-
-	yCam.SetRenderSize(640, 360);
-	yCam.nearZ = 0.1f;
-	yCam.farZ = 1000.0f;
-	yCam.fov = PIf / 2.f;
-
-	yCam.position.x = 0;
-	yCam.position.y = 10;
-	yCam.position.z = 0;
-	yCam.rotation = Quaternion(Vec3(1, 0, 0), PIf / 2);
-	yCam.UpdateMatrix();
-
-	yCamSpr = Sprite("yCamSpr");
-
-	zCam.SetRenderSize(640, 360);
-	zCam.nearZ = 0.1f;
-	zCam.farZ = 1000.0f;
-	zCam.fov = PIf / 2.f;
-
-	zCam.position.x = 0;
-	zCam.position.y = 0;
-	zCam.position.z = -10;
-	zCam.rotation = Quaternion(Vec3(0, 1, 0), 0);
-	zCam.UpdateMatrix();
-
-	zCamSpr = Sprite("zCamSpr");
-
-	camera.projectionMode = ProjectionMode::Perspective;
-	xCam.projectionMode = ProjectionMode::Orthographic;
-	yCam.projectionMode = ProjectionMode::Orthographic;
-	zCam.projectionMode = ProjectionMode::Orthographic;
-
-	cameraSpr.position = {960, 180, 0.0f};
-	xCamSpr.position = {960, 540, 0.0f};
-	yCamSpr.position = {320, 180, 0.0f};
-	zCamSpr.position = {320, 540, 0.0f};
-
-	finalScene.SetRenderSize(1280, 720);
-	finalScene.nearZ = 0.1f;
-	finalScene.farZ = 1000.0f;
-	finalScene.fov = PIf / 2.f;
-
-	finalScene.position.x = 0;
-	finalScene.position.y = 0;
-	finalScene.position.z = -10;
-	finalScene.rotation = Quaternion(Vec3(0, 1, 0), 0);;
-	finalScene.UpdateMatrix();
-#pragma endregion
-
-	pane.model = ModelManager::GetModel("Square");
-	pane2.model = ModelManager::GetModel("Square");
-
-	skysphere.model = ModelManager::GetModel("Sky");
-
-	whiteTex = "white";
-
-	emitter.position = { 0, 0, 0 };
-	emitter.radius = { 3.f, 3.f, 3.f };
-
-	emitter.quantity = 1;
-
-	pane.camera = &camera;
-	pane2.camera = &camera;
+	circleA = AddComponent<Circle>("Circle", Vec2(400.f, 400.f), 100.f);
+	circleB = AddComponent<Circle>("Circle", Vec2(100.f, 100.f), 50.f);
 }
 
 void TestScene::Update()
 {
-	cameraSpr.position = { 960, 180 };
-	xCamSpr.position = { 960, 540 };
-	yCamSpr.position = { 320, 180 };
-	zCamSpr.position = { 320, 540 };
+	const static float spd = 5.f;
 
-	cameraSpr.scale = { 1.0f, 1.0f };
-	xCamSpr.scale = { 1.0f, 1.0f };
-	yCamSpr.scale = { 1.0f, 1.0f };
-	zCamSpr.scale = { 1.0f, 1.0f };
+	Vec2 vel;
+	vel.x = static_cast<float>(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT));
+	vel.y = static_cast<float>(Input::Key::Down(DIK_DOWN) - Input::Key::Down(DIK_UP));
 
-	pane.position = (Vec3)pane.position + Vec3(
-		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
-		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
-		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
-	);
+	if (vel.GetSquaredLength())
+	{
+		vel.SetLength(spd);
+	}
 
-	pane.position = (Vec3)pane.position + Vec3(
-		(Input::Pad::GetLStick().x) * 0.0001f,
-		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
-		(Input::Pad::GetLStick().y) * 0.0001f
-	);
+	circleB->pos_ += vel;
 
-	pane.scale = {1.f / 30, 1.f / 30, 1.f / 30};
-
-	pane2.position = (Vec3)pane.position + Vec3(
-		(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT)) * 0.1f,
-		(Input::Key::Down(DIK_SPACE) - Input::Key::Down(DIK_LSHIFT)) * 0.1f,
-		(Input::Key::Down(DIK_UP) - Input::Key::Down(DIK_DOWN)) * 0.1f
-	);
-
-	pane2.position = (Vec3)pane.position + Vec3(
-		(Input::Pad::GetLStick().x) * 0.0001f,
-		(Input::Pad::Down(Button::A) - Input::Pad::Down(Trigger::Left)) * 0.1f,
-		(Input::Pad::GetLStick().y) * 0.0001f
-	);
-
-	pane2.position.x -= 6;
-
-	pane2.scale = { 1.f / 30, 1.f / 30, 1.f / 30 };
-	//camera.rotation = (Vec3)camera.rotation + Vec3(0.01, 0, 0);
-
-	camera.position = (Vec3)camera.position + Vec3(
-		(Input::Key::Down(DIK_D) - Input::Key::Down(DIK_A)) * 0.1f,
-		(Input::Key::Down(DIK_E) - Input::Key::Down(DIK_Q)) * 0.1f,
-		(Input::Key::Down(DIK_W) - Input::Key::Down(DIK_S)) * 0.1f
-	);
-
-	camera.rotation *= Quaternion(Vec3(1, 0, 0), (Input::Key::Down(DIK_1) - Input::Key::Down(DIK_2)) * 0.01f);
-	camera.rotation *= Quaternion(Vec3(0, 1, 0), (Input::Key::Down(DIK_3) - Input::Key::Down(DIK_4)) * 0.01f);
-	camera.rotation *= Quaternion(Vec3(0, 0, 1), (Input::Key::Down(DIK_5) - Input::Key::Down(DIK_6)) * 0.01f);
-	
-	camera.UpdateMatrix();
-
-	emitter.Update();
-	emitter.DrawEmitArea();
-
-	cameraSpr.UpdateMatrix();
-	xCamSpr.UpdateMatrix();
-	yCamSpr.UpdateMatrix();
-	zCamSpr.UpdateMatrix();
-	skysphere.UpdateMatrix();
-	pane.UpdateMatrix();
-	pane2.UpdateMatrix();
+	if (circleA->Collide(*circleB))
+	{
+		circleB->color_ = Color::Blue;
+	}
+	else
+	{
+		circleB->color_ = Color::Red;
+	}
 }
 
 void TestScene::DrawBack()
 {
+
 }
 
 void TestScene::Draw3D()
 {
-	RTVManager::SetRenderTargetToTexture("camSpr");
-	Camera::Set(camera);
-	skysphere.Draw();
-	pane.Draw();
-	pane2.Draw();
-	emitter.Draw();
-	LineDrawer::DrawAllLines();
-
-	RTVManager::SetRenderTargetToTexture("xCamSpr");
-	Camera::Set(xCam);
-	skysphere.Draw();
-	pane.Draw();
-	pane2.Draw();
-	emitter.Draw();
-	LineDrawer::DrawAllLines();
-
-	RTVManager::SetRenderTargetToTexture("yCamSpr");
-	Camera::Set(yCam);
-	skysphere.Draw();
-	pane.Draw();
-	pane2.Draw();
-	emitter.Draw();
-	LineDrawer::DrawAllLines();
-
-	RTVManager::SetRenderTargetToTexture("zCamSpr");
-	Camera::Set(zCam);
-	skysphere.Draw();
-	pane.Draw();
-	pane2.Draw();
-	emitter.Draw();
-	LineDrawer::DrawAllLines();
-
-	Camera::Set(finalScene);
-	Camera::UseCurrent();
-	RTVManager::SetRenderTargetToBackBuffer(GetSCM()->swapchain->GetCurrentBackBufferIndex());
+	
 }
 
 void TestScene::DrawSprite()
 {
-	cameraSpr.Draw();
-	xCamSpr.Draw();
-	yCamSpr.Draw();
-	zCamSpr.Draw();
-
-	StringOptions udevGothicOpt;
-	udevGothicOpt.fontOptions.name = "UDEV Gothic Regular";
-	udevGothicOpt.size = 32;
-
-	//TextDrawer::DrawString("0うにゃ～～～～0", 1180, 100, Align::TopRight, udevGothicOpt);
-	//TextDrawer::DrawString("亜hogeえオ123", 1180, 132, Align::TopRight);
+	circleA->Draw();
+	circleB->Draw();
 }

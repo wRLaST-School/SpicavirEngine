@@ -42,7 +42,7 @@ void SpFramework::Init()
 	//ウィンドウを生成
 	{
 		SpWindow wwnd;
-		wwnd.Create(L"DirectX", 1920, 1080);
+		wwnd.Create(L"DirectX", 1280, 720);
 		RegisterSpWindow(wwnd, "Default");
 	}
 
@@ -96,6 +96,7 @@ void SpFramework::Init()
 
 	//Init DS
 	SpDS::CreateBuffers();
+	SpDS::LoadRes();
 
 	//Init Sounds
 	SoundManager::Init();

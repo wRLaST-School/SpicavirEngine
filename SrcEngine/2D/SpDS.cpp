@@ -140,6 +140,13 @@ void SpDS::DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY, 
 	DrawBox(startX + (int32_t)(ray.x * 0.5f), startY + (int32_t)(ray.y * 0.5f), thickness, (int32_t)l, Vec2::VecToVec(Vec2(0.f, 1.f), ray.GetNorm()), color, Anchor::Center);
 }
 
+void SpDS::DrawCircle(int32_t x, int32_t y, int32_t r, Color color)
+{
+	float scale = static_cast<float>(r) / (circlePngSize / 2);
+	DrawRotaGraph(x, y, scale, scale, 0,
+		"circle_sys", Anchor::Center, color);
+}
+
 void SpDS::CreateBuffers()
 {
 	//graph用
@@ -198,6 +205,13 @@ void SpDS::CreateBuffers()
 	{
 		sGgpu.emplace_back();
 	}
+}
+
+void SpDS::LoadRes()
+{
+	SpTextureManager::LoadTexture("Resources/SpDS/circle.png", "circle_sys");
+	SpTextureManager::AddMasterTextureKey("circle_sys");
+	circlePngSize = SpTextureManager::GetTextureData("circle_sys").meta.width;
 }
 
 void SpDS::Render()

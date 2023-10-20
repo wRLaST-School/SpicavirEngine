@@ -31,14 +31,19 @@ public:
 	static void DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY,
 		const Color& color, int32_t thickness = 1);
 
+	static void DrawCircle(int32_t x, int32_t y, int32_t r, Color color);
+
 	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
 	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();
+	static void LoadRes();
 	static void Render();
 
 private:
 	const static int32_t GRAPH_BUFF_NUM = 4096;
 	const static int32_t LINE_BUFF_NUM = 2048;
+
+	inline static uint64_t circlePngSize = 1;
 
 	static void RenderGraph();
 
