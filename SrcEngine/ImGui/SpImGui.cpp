@@ -95,5 +95,16 @@ bool SpImGui::DoubleClickImageButton(ImTextureID user_texture_id, const ImVec2& 
 	return ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left);
 }
 
+bool SpImGui::DoubleClickImageButton2(ImTextureID user_texture_id, const ImVec2& size, std::function<void(void)> singleClickEvent, const ImVec2& uv0, const ImVec2& uv1, int frame_padding, const ImVec4& bg_col, const ImVec4& tint_col)
+{
+	if (ImGui::ImageButton("buttonTag", user_texture_id, size, uv0, uv1, bg_col, tint_col)) {
+		singleClickEvent();
+	};
+
+	frame_padding;
+
+	return ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left);
+}
+
 
 std::list<std::function<void(void)>> SpImGui::sCommands;

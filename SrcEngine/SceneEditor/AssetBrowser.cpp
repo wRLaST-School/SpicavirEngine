@@ -73,10 +73,26 @@ void AssetBrowser::OnImGuiRender()
 		if (!ditr.is_directory())
 		{
 			std::string fileName = ditr.path().filename().string();
-			if (SpImGui::DoubleClickImageButton((ImTextureID)SpTextureManager::GetGPUDescHandle("Engine_FileIcon").ptr, { thumbnailSize, thumbnailSize }))
+			std::string filePath = ditr.path().string();
+
+			ImGui::ImageButton("buttonTag", (ImTextureID)SpTextureManager::GetGPUDescHandle("Engine_FileIcon").ptr, { thumbnailSize, thumbnailSize });
+
+			if (ImGui::IsItemHovered() && !ImGui::IsMouseDown(ImGuiMouseButton_Left)) {
+				selectedItemPath = filePath;
+			};
+
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 			{
 				FileOpenAction(ditr);
 			};
+
+			if (ImGui::BeginDragDropSource())
+			{
+				const char* relPath = selectedItemPath.c_str();
+				ImGui::SetDragDropPayload("AST_BROWSER_ITEM", relPath, strlen(relPath) * sizeof(char));
+				ImGui::EndDragDropSource();
+			}
+
 			ImGui::Text(fileName.c_str());
 
 			ImGui::NextColumn();

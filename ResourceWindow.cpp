@@ -3,11 +3,39 @@
 #include <SpImGui.h>
 #include <SpTextureManager.h>
 #include <SpDirectX.h>
+#include <filesystem>
+#include <regex>
 
 void ResourceWindow::Draw()
 {
     SpImGui::Command([&] {
         ImGui::Begin("Resource Window");
+
+		//テクスチャのAssetBrowserからDDによる読み込み
+		if (ImGui::BeginDragDropTarget())
+		{
+			const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AST_BROWSER_ITEM");
+
+			if (payload) {
+				const char* filePathCharP = reinterpret_cast<const char*>(payload->Data);
+				std::string filePath = filePathCharP;
+
+				filePath = filePath.substr(0, static_cast<rsize_t>(payload->DataSize) / sizeof(char));
+
+				auto ditr = std::filesystem::directory_entry(filePath);
+
+				//画像ファイルの場合
+				std::regex re(".(png|PNG|jpg|JPG|dds|DDS)");
+				std::string ext = ditr.path().extension().string();
+				if (std::regex_match(ext, re))
+				{
+					SpTextureManager::LoadTexture(filePath, ditr.path().filename().string());
+				}
+
+			}
+
+			ImGui::EndDragDropTarget();
+		}
 
 		//レイアウト調整
 		float cellSize = thumbnailSize + padding;
@@ -35,6 +63,13 @@ void ResourceWindow::Draw()
 				{
 					//ダブルクリック時の処理
 				};
+
+				if (ImGui::BeginDragDropSource())
+				{
+					const char* texKey = c.first.c_str();
+					ImGui::SetDragDropPayload("RES_WINDOW_ITEM", texKey, strlen(texKey) * sizeof(char), ImGuiCond_Once);
+					ImGui::EndDragDropSource();
+				}
 
 				ImGui::Text(c.first.c_str());
 

@@ -18,6 +18,8 @@ private:
 
 	float thumbnailSize = 128.f;
 	float padding = 16.f;
+
+	std::string selectedItemPath = "ERROR";
 	
 public://singleton
 	AssetBrowser(const AssetBrowser&) = delete;
