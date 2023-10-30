@@ -4,6 +4,7 @@
 #include <IComponent.h>
 #include <SceneManager.h>
 #include <InspectorWindow.h>
+#include <Object3D.h>
 
 void HierarchyPanel::Draw()
 {
@@ -37,6 +38,24 @@ void HierarchyPanel::ShowItemRecursive(IComponent* current)
     }
 
     bool treeNodeTriggered = ImGui::TreeNodeEx(taggedName.c_str(), nodeFlags);
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("RES_WINDOW_ITEM");
+        
+        if (payload) {
+            const char* texKey = reinterpret_cast<const char*>(payload->Data);
+
+            Object3D* obj = dynamic_cast<Object3D*>(current);
+
+            if (obj)
+            {
+                obj->texture = texKey;
+            }
+        }
+
+        ImGui::EndDragDropTarget();
+    }
     
     if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
     {

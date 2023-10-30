@@ -7,6 +7,8 @@ typedef size_t SRVHeapIndex;
 //indexがunsigned charになってるからここを変更するならそっちも変更
 const size_t wMaxSRVCount = 1024;
 
+class ResourceWindow;
+
 class SpTextureManager
 {
 private:
@@ -15,6 +17,8 @@ private:
 		Float2 ratio = { 0.f, 0.f }; //xがゼロ以外なら画面比率
 	};
 public:
+	friend ResourceWindow;
+
 	static void Create();
 	static void Init();
 	static TextureKey LoadTexture(const std::string& filePath, const TextureKey& key);
