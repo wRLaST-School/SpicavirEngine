@@ -519,7 +519,7 @@
     <ClCompile Include="SrcEngine\SceneEditor\InspectorWindow.cpp">
       <Filter>Engine\ソースファイル\SceneEditor</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceWindow.cpp">
+    <ClCompile Include="SrcEngine\SceneEditor\ResourceWindow.cpp">
       <Filter>Engine\ソースファイル\SceneEditor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -866,7 +866,7 @@
     <ClInclude Include="SrcEngine\SceneEditor\InspectorWindow.h">
       <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceWindow.h">
+    <ClInclude Include="SrcEngine\SceneEditor\ResourceWindow.h">
       <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
     </ClInclude>
   </ItemGroup>
