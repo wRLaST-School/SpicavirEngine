@@ -1,6 +1,9 @@
 #pragma once
 #include <functional>
 #include <imgui.h>
+#include <SrcImgui/imgui/ImGuizmo/ImGuizmo.h>
+#include <SrcImgui/imgui/ImGuizmo/GraphEditor.h>
+
 class SpImGui
 {
 public:

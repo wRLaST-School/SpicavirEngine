@@ -64,6 +64,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir)ImGuiLibs/;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +119,8 @@
     <ClCompile Include="ImGuiLibs\imgui_impl_win32.cpp" />
     <ClCompile Include="ImGuiLibs\imgui_tables.cpp" />
     <ClCompile Include="ImGuiLibs\imgui_widgets.cpp" />
+    <ClCompile Include="ImGuizmo\GraphEditor.cpp" />
+    <ClCompile Include="ImGuizmo\ImGuizmo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGuiLibs\imconfig.h" />
@@ -128,6 +131,8 @@
     <ClInclude Include="ImGuiLibs\imstb_rectpack.h" />
     <ClInclude Include="ImGuiLibs\imstb_textedit.h" />
     <ClInclude Include="ImGuiLibs\imstb_truetype.h" />
+    <ClInclude Include="ImGuizmo\GraphEditor.h" />
+    <ClInclude Include="ImGuizmo\ImGuizmo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
