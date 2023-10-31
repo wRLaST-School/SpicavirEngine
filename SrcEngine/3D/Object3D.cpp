@@ -188,16 +188,31 @@ void Object3D::DrawAlpha(const TextureKey& key)
 
 void Object3D::DrawParams()
 {
-	ImGui::DragFloat3("Position", &position.x, 0.1f);
-	ImGui::DragFloat3("Scale", &scale.x, 0.05f);
+	if (ImGui::DragFloat3("Position", &position.x, 0.1f))
+	{
+		UpdateMatrix();
+	}
+
+	if (ImGui::DragFloat3("Scale", &scale.x, 0.05f))
+	{
+		UpdateMatrix();
+	}
+
 	if (rotMode == RotMode::Euler)
 	{
-		ImGui::DragFloat3("Rotation", &rotationE.x, PIf / 360.f);
+		if (ImGui::DragFloat3("Rotation", &rotationE.x, PIf / 360.f))
+		{
+			UpdateMatrix();
+		}
 	}
 	else
 	{
-		ImGui::InputFloat4("Rotation", &rotation.w);
+		if(ImGui::InputFloat4("Rotation", &rotation.w))
+		{
+			UpdateMatrix();
+		}
 	}
+
 	ImGui::Checkbox("Use Quaternion Rotation", reinterpret_cast<bool*>(&rotMode));
 
 	ImGui::ColorEdit4("Brightness", reinterpret_cast<float*>(brightnessCB.contents));
