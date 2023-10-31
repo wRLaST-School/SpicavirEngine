@@ -381,50 +381,8 @@
     <ClCompile Include="SrcEngine\Renderer\SrPostEffectStage.cpp">
       <Filter>Engine\ソースファイル\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="SrcApplication\Particle\CounterParticle.cpp">
-      <Filter>!Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Player.cpp">
-      <Filter>!Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\GameScene.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\ResulScene.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Scene\Transition.cpp">
-      <Filter>!Game\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="SrcApplication\GameManager.cpp">
       <Filter>!Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\CameraController.cpp">
-      <Filter>!Game\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\LineAttack.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\MainTimer.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Boss.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Marker.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\Score.cpp">
-      <Filter>!Game\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\LevelLoader.cpp">
-      <Filter>!Game\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\LevelManager.cpp">
-      <Filter>!Game\Background</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\Collider\OBBCollider.cpp">
       <Filter>Engine\ソースファイル\Collider</Filter>
@@ -443,9 +401,6 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\3D\SpEffekseer.cpp">
       <Filter>Engine\ソースファイル\Effekseer</Filter>
-    </ClCompile>
-    <ClCompile Include="SrcApplication\GravSphere.cpp">
-      <Filter>!Game\Boss</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\BehaviorTree\BehaviorTree.cpp">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
@@ -521,6 +476,9 @@
     </ClCompile>
     <ClCompile Include="SrcEngine\SceneEditor\ResourceWindow.cpp">
       <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SrcApplication\Scene\Transition.cpp">
+      <Filter>!Game\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -734,50 +692,8 @@
     <ClInclude Include="SrcEngine\Renderer\IRenderStage.h">
       <Filter>Engine\ヘッダーファイル\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="SrcApplication\Particle\CounterParticle.h">
-      <Filter>!Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Player.h">
-      <Filter>!Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\GameScene.h">
-      <Filter>!Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\ResulScene.h">
-      <Filter>!Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\TitleScene.h">
-      <Filter>!Game\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Scene\Transition.h">
-      <Filter>!Game\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="SrcApplication\GameManager.h">
       <Filter>!Game</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\CameraController.h">
-      <Filter>!Game\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\LineAttack.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\MainTimer.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Boss.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Marker.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\Score.h">
-      <Filter>!Game\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\LevelLoader.h">
-      <Filter>!Game\Background</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\LevelManager.h">
-      <Filter>!Game\Background</Filter>
     </ClInclude>
     <ClInclude Include="SrcApplication\GlobalTimer.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
@@ -799,9 +715,6 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\3D\SpEffekseer.h">
       <Filter>Engine\ヘッダーファイル\Effekseer</Filter>
-    </ClInclude>
-    <ClInclude Include="SrcApplication\GravSphere.h">
-      <Filter>!Game\Boss</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\BehaviorTree\BehaviorTree.h">
       <Filter>Engine\ソースファイル\BehaviorTree</Filter>
@@ -868,6 +781,9 @@
     </ClInclude>
     <ClInclude Include="SrcEngine\SceneEditor\ResourceWindow.h">
       <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SrcApplication\Scene\Transition.h">
+      <Filter>!Game\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

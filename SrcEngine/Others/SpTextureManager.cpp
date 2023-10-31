@@ -71,7 +71,7 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	if (GetExtension(wstrpath) == L".dds")
+	if (GetExtension(wstrpath) == L"dds")
 	{
 		LoadFromDDSFile(wpath, DDS_FLAGS_NONE, &metadata, srcImg);
 	}
@@ -89,16 +89,9 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 		}
 	}
 
-	//metadata.format = MakeSRGB(metadata.format);
 	ScratchImage scratchImg;
-	HRESULT result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
-		srcImg.GetMetadata(),
-		DXGI_FORMAT_R16G16B16A16_FLOAT, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
-		scratchImg);
 
-	if (SUCCEEDED(result)) {
-		metadata = scratchImg.GetMetadata();
-	}
+	scratchImg = std::move(srcImg); // SRGBにするならmakeSRGBとConvertをここで呼ぶ
 
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
@@ -197,7 +190,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 	wstring wstrpath = wstring(filePath.begin(), filePath.end());
 	const wchar_t* wpath = wstrpath.c_str();
 
-	if (GetExtension(wstrpath) == L".dds")
+	if (GetExtension(wstrpath) == L"dds")
 	{
 		LoadFromDDSFile(wpath, DDS_FLAGS_NONE, &metadata, srcImg);
 	}
@@ -215,16 +208,9 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 		}
 	}
 
-	//metadata.format = MakeSRGB(metadata.format);
 	ScratchImage scratchImg;
-	HRESULT result = Convert(srcImg.GetImages(), srcImg.GetImageCount(),
-		srcImg.GetMetadata(),
-		DXGI_FORMAT_R8G8B8A8_UNORM, TEX_FILTER_DEFAULT, TEX_THRESHOLD_DEFAULT,
-		scratchImg);
 
-	if (SUCCEEDED(result)) {
-		metadata = scratchImg.GetMetadata();
-	}
+	scratchImg = std::move(srcImg); // SRGBにするならmakeSRGBとConvertをここで呼ぶ
 
 	//テクスチャバッファ
 	D3D12_HEAP_PROPERTIES texHeapProp{};
