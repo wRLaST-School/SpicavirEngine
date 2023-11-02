@@ -283,5 +283,7 @@ void Object3D::DrawGizmo()
 		Vec3 deltaRot = static_cast<Vec3>(rot) - rotationE;
 
 		rotationE += deltaRot;
+
+		UpdateMatrix();
 	}
 }
