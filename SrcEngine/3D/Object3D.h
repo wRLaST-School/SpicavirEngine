@@ -20,6 +20,7 @@ class Object3D : public IComponent
 public:
 	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; miscCB.contents->rimColor = { 1.f, 0.f, 0.f, 1.f }; };
 	void UpdateMatrix();
+	void DecomposeMatrix();
 
 	void Draw();
 	//別途読み込んだテクスチャを使う場合
@@ -38,6 +39,7 @@ public:
 
 	//Inspector Window用
 	void DrawParams();
+	void DrawGizmo();
 
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;

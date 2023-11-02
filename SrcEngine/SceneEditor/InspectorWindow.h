@@ -6,6 +6,9 @@ public:
 
 	void DrawWindow();
 
+	template <class Type>
+	static Type* GetSelected();
+
 	static void SDraw();
 
 private:
@@ -24,3 +27,8 @@ private:
 	~InspectorWindow() = default;
 };
 
+template<class Type>
+inline Type* InspectorWindow::GetSelected()
+{
+	return dynamic_cast<Type*>(GetInstance()->selected_);
+}
