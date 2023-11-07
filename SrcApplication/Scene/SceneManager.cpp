@@ -122,8 +122,8 @@ void SceneManager::ConfirmTransition()
 
 void SceneManager::ReleaseScene()
 {
-	currentScene.release();
-	nextScene.release();
+	currentScene.reset();
+	nextScene.reset();
 }
 
 SceneManager::LoadState SceneManager::GetLoadState()
