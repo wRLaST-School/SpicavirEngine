@@ -818,8 +818,14 @@ int32_t SpTextureManager::GetIndex(const TextureKey& key)
 	GetInstance().textureMap_.Access(
 		[&](auto& map) {
 			auto itr = map.find(key);
-			if (itr == map.end()) ret = SPTEX_NOTEXTURE_FOUND_;
-			else ret = (int32_t)itr->second;
+			if (itr == map.end())
+			{
+				ret = SPTEX_NOTEXTURE_FOUND_;
+			}
+			else
+			{
+				ret = (int32_t)itr->second;
+			}
 		}
 	);
 
@@ -829,6 +835,16 @@ int32_t SpTextureManager::GetIndex(const TextureKey& key)
 void SpTextureManager::AddMasterTextureKey(const TextureKey& key)
 {
 	sMasterTextures.push_back(key);
+}
+
+bool SpTextureManager::IsMasterTexture(const TextureKey& key)
+{
+	for (auto& mst : sMasterTextures)
+	{
+		if (mst == key) return true;
+	}
+
+	return false;
 }
 
 void SpTextureManager::Release(const TextureKey& key)
