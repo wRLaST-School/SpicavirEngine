@@ -37,6 +37,10 @@ public:
 	//つけられている名前を取得
 	const std::string& GetName();
 
+	//コンポーネント共通で毎フレーム呼ばれる処理
+	virtual void Update();
+	virtual void Draw();
+
 	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
 	virtual void DrawParams();
 
@@ -49,9 +53,9 @@ public:
 protected:
 	std::string name_ = "";
 
-private:
 	eastl::multimap<std::string, eastl::unique_ptr<IComponent>> components_;
 
+private:
 	IComponent* parent_ = nullptr;
 
 };

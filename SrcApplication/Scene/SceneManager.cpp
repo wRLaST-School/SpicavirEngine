@@ -56,13 +56,17 @@ void SceneManager::Update()
 		Transition();
 	}
 
-	if(!GameManager::sDebugTimeStop)
+	if (!GameManager::sDebugTimeStop)
+	{
 		currentScene->Update();
+		currentScene->UpdateAllComponents();
+	}
 }
 
 void SceneManager::Draw3D()
 {
 	currentScene->Draw3D();
+	currentScene->DrawAllComponents();
 }
 
 void SceneManager::DrawSprite()

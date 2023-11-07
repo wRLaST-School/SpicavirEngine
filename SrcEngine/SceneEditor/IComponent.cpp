@@ -48,6 +48,14 @@ const std::string& IComponent::GetName()
 	return name_;
 }
 
+void IComponent::Update()
+{
+}
+
+void IComponent::Draw()
+{
+}
+
 void IComponent::DrawParams()
 {
 }
