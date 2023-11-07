@@ -147,9 +147,9 @@ void Matrix::DecomposeTransform(Float3* pos, Float3* rot, Float3* scale) const
 
 	copied[3] = { 0, 0, 0, 1 };
 
-	Vec3 axisX = copied.ExtractAxisX();
-	Vec3 axisY = copied.ExtractAxisY();
-	Vec3 axisZ = copied.ExtractAxisZ();
+	Vec3 axisX = Vec3(copied[0][0], copied[0][1], copied[0][2]);
+	Vec3 axisY = Vec3(copied[1][0], copied[1][1], copied[1][2]);
+	Vec3 axisZ = Vec3(copied[2][0], copied[2][1], copied[2][2]);
 
 	scale->x = axisX.GetLength();
 	scale->y = axisY.GetLength();

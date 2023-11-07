@@ -257,7 +257,7 @@ void Object3D::DrawGizmo()
 	ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, 
 		ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
 
-	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::ROTATE);
+	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
 	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
 
 	ImGuizmo::Enable(true);
@@ -271,6 +271,8 @@ void Object3D::DrawGizmo()
 
 	Matrix view = Camera::sCurrent->GetViewMat();
 	Matrix proj = Camera::sCurrent->GetProjMat();
+
+	UpdateMatrix();
 
 	ImGuizmo::Manipulate(reinterpret_cast<float*>(&view),
 		reinterpret_cast<float*>(&proj), mCurrentGizmoOperation, mCurrentGizmoMode, &matWorld[0][0], NULL, NULL);
