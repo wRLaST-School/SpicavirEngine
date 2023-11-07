@@ -77,6 +77,8 @@ void SpFramework::Init()
 
 	GPipelineManager::CreateAll();
 
+	Light::GetInstance();
+
 	/*Init Draw End*/
 	Sprite::InitCommon();
 
@@ -172,6 +174,7 @@ void SpFramework::Run()
 
 	/*ループここまで*/
 	SoundManager::ReleaseAllSounds();
+	SceneManager::ReleaseScene();
 	SpImGui::Shutdown();
 	CloseAllSpWindow();
 }

@@ -8,6 +8,7 @@
 #include <SoundManager.h>
 #include <MainTimer.h>
 #include <GameManager.h>
+#include <PointLight.h>
 
 void Player::Load()
 {
@@ -29,6 +30,8 @@ void Player::Init()
 {
 	AddComponent<Object3D>("Object3D");
 	obj_ = GetComponent<Object3D>("Object3D");
+
+	AddComponent<PointLight>("PlayerLight", Vec3(0.f, 0.f, 0.f), Vec3(.8f, .7f, .0f), Vec3(0.5f, 0.2f, 0.1f  ));
 
 	obj_->model = ModelManager::GetModel("PlayerIdle");
 	obj_->position = { 0, 1, -5 };

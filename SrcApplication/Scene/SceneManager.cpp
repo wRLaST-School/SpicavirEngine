@@ -120,6 +120,12 @@ void SceneManager::ConfirmTransition()
 	}
 }
 
+void SceneManager::ReleaseScene()
+{
+	currentScene.release();
+	nextScene.release();
+}
+
 SceneManager::LoadState SceneManager::GetLoadState()
 {
 	return loadState;
