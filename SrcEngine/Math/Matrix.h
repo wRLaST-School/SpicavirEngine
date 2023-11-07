@@ -60,6 +60,9 @@ public:
 	//行列からオブジェクトのZ軸方向のベクトルを取得
 	Vec3 ExtractAxisZ(float scale = 1.0);
 
+	//Transform行列からPos,Rot,Scaleを抽出
+	void DecomposeTransform(Float3* pos, Float3* rot, Float3* scale) const;
+
 //Static Functions
 	static Matrix Identity();
 

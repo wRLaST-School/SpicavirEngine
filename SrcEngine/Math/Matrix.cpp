@@ -137,6 +137,41 @@ Vec3 Matrix::ExtractAxisZ(float scale)
 	return Vec3(r[2][0], r[2][1], r[2][2] / scale).GetNorm();
 }
 
+void Matrix::DecomposeTransform(Float3* pos, Float3* rot, Float3* scale) const
+{
+	Matrix copied(*this);
+
+	pos->x = copied[3][0];
+	pos->y = copied[3][1];
+	pos->z = copied[3][2];
+
+	copied[3] = { 0, 0, 0, 1 };
+
+	Vec3 axisX = Vec3(copied[0][0], copied[0][1], copied[0][2]);
+	Vec3 axisY = Vec3(copied[1][0], copied[1][1], copied[1][2]);
+	Vec3 axisZ = Vec3(copied[2][0], copied[2][1], copied[2][2]);
+
+	scale->x = axisX.GetLength();
+	scale->y = axisY.GetLength();
+	scale->z = axisZ.GetLength();
+
+	axisX.Norm(scale->x);
+	axisZ.Norm(scale->y);
+	axisZ.Norm(scale->z);
+
+	rot->y = asinf(-axisX.z);
+	if (cosf(rot->y) != 0)
+	{
+		rot->x = atan2f(axisY.z, axisZ.z);
+		rot->z = atan2f(axisX.y, axisX.x);
+	}
+	else
+	{
+		rot->x = atan2f(-axisZ.x, axisY.y);
+		rot->z = 0;
+	}
+}
+
 Matrix Matrix::Identity()
 {
 	return Matrix();

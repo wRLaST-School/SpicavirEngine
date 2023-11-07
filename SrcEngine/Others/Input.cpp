@@ -21,7 +21,7 @@ void Key::Init()
 
 void Key::Update()
 {
-	if (ImGui::IsAnyItemActive()) return;
+	if (ImGui::IsAnyItemActive() || ImGuizmo::IsUsing()) return;
 
 	Key* instance = GetInstance();
 	for (size_t i = 0; i < 256; i++)
@@ -168,7 +168,7 @@ void Input::Mouse::Init()
 
 void Input::Mouse::Update()
 {
-	if (ImGui::IsAnyItemHovered()) return;
+	if (ImGui::IsAnyItemHovered() || ImGuizmo::IsUsing()) return;
 
 	Mouse* ins = GetInstance();
 	ins->prevState_ = ins->state_;

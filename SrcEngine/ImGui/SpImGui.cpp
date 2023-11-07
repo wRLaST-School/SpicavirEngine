@@ -53,6 +53,7 @@ void SpImGui::Draw()
 	ImGui_ImplDX12_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+	ImGuizmo::BeginFrame();
 
 	for (auto& c : sCommands) {
 		c();

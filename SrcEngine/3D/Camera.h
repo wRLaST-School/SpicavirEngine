@@ -28,6 +28,11 @@ public:
     Float3 GetWorldPosFromScreen(const Float2& screen, float depth);
     Ray GetScreenPosRay(const Float2& screen);
 
+    //UseCurrentより後に呼ばれる場合のみ動作保証
+    Matrix GetViewMat();
+    //UseCurrentより後に呼ばれる場合のみ動作保証
+    Matrix GetProjMat();
+
     Matrix GetBillboardMat();
 
     Float3 target = { 0.0f, 0.0f, 0.0f };
@@ -53,4 +58,8 @@ public:
     static Matrix GetCurrentCameraBillboardMat();
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
+
+private:
+    Matrix view;
+    Matrix proj;
 };

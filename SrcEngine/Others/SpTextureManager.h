@@ -43,6 +43,8 @@ public:
 	//シーンを超えて使用するリソースとして設定
 	static void AddMasterTextureKey(const TextureKey& key);
 
+	static bool IsMasterTexture(const TextureKey& key);
+
 	static void Release(const TextureKey& key);
 	//前のシーンで使われていて今のシーンで使われていないテクスチャをリリース
 	static void ReleasePerSceneTexture();

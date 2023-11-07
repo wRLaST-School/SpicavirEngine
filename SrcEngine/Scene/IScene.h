@@ -15,6 +15,9 @@ public:
 	virtual void Draw3D() = 0;
 	virtual void DrawSprite() = 0;
 
+	void UpdateAllComponents();
+	void DrawAllComponents();
+
 	virtual ~IScene() { 
 	};
 };

@@ -3,6 +3,8 @@
 #include <GameManager.h>
 #include <SpTextureManager.h>
 #include <Util.h>
+#include <InspectorWindow.h>
+#include <Object3D.h>
 
 void DockPanel::EnableScreenDock()
 {
@@ -45,6 +47,8 @@ void DockPanel::DrawViewPort()
 			static bool open = true;
 			ImGui::Begin("Game", &open, ImGuiWindowFlags_NoCollapse);
 
+			viewPortWindow = ImGui::GetCurrentWindow();
+
 			//タブ等を除いたウィンドウのサイズを取得(計算)
 			ImVec2 cntRegionMax = ImGui::GetWindowContentRegionMax();
 			ImVec2 cntRegionMin = ImGui::GetWindowContentRegionMin();
@@ -74,7 +78,19 @@ void DockPanel::DrawViewPort()
 			ImGui::Image((ImTextureID)SpTextureManager::GetGPUDescHandle("RenderTexture").ptr,
 				finalWndSize);
 
+			//Gizmo対応型だったらGizmoを表示
+			Object3D* selectedObj = InspectorWindow::GetSelected<Object3D>();
+			if (selectedObj)
+			{
+				selectedObj->DrawGizmo();
+			}
+
 			ImGui::End();
 		});
 	}
+}
+
+ImGuiWindow* DockPanel::GetViewPortWindow()
+{
+	return viewPortWindow;
 }
