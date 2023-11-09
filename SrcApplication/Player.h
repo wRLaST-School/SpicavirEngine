@@ -3,10 +3,13 @@
 #include <Emitter.h>
 #include <CounterParticle.h>
 #include <OBBCollider.h>
+#include <ComponentFactory.h>
 
 class Player : public IComponent
 {
 public:
+    ComponentFactoryRegister(Player)
+
     void Init();
 
     void Update();

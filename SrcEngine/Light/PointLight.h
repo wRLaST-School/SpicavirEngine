@@ -1,9 +1,13 @@
 #pragma once
 #include "SpMath.h"
 #include "Essentials.h"
+#include <ComponentFactory.h>
+
 class PointLight : public IComponent
 {
 public:
+	ComponentFactoryRegister(PointLight)
+
 	PointLight();
 	PointLight(const Float3& pos, const Float3& color, const Float3& att);
 	~PointLight() override;

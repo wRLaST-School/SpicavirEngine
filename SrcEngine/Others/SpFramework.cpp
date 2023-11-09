@@ -27,6 +27,7 @@
 #include <DockPanel.h>
 #include <InspectorWindow.h>
 #include <ResourceWindow.h>
+#include <CustomComponentRegisterer.h>
 
 void SpFramework::Init()
 {
@@ -111,6 +112,9 @@ void SpFramework::Init()
 
 	//Load Asset Browser Resources
 	AssetBrowser::LoadResources();
+
+	//Register Components to Factory
+	CustomComponentRegisterer::CallRegisters();
 }
 
 void SpFramework::Run()
