@@ -3,6 +3,8 @@
 #include "Model.h"
 #include "SpTextureManager.h"
 #include <Quaternion.h>
+#include <ComponentFactory.h>
+
 struct ConstBufferDataTransform {
 	Matrix mat;//3D変換行列
 };
@@ -18,6 +20,8 @@ struct ConstBufferDataMisc {
 class Object3D : public IComponent
 {
 public:
+	ComponentFactoryRegister(Object3D)
+
 	Object3D() { transformCB.contents->mat = Matrix::Identity(); *brightnessCB.contents = { 1.0f, 1.0f, 1.0f, 1.0f }; miscCB.contents->rimColor = { 1.f, 0.f, 0.f, 1.f }; };
 	void UpdateMatrix();
 	void DecomposeMatrix();

@@ -1,6 +1,14 @@
 #include "stdafx.h"
 #include "IComponent.h"
 
+IComponent* IComponent::AddComponent(std::string key, eastl::unique_ptr<IComponent> component)
+{
+	auto itr = components_.insert(eastl::make_pair(key, eastl::move(component)));
+	itr->second->name_ = itr->first;
+
+	return itr->second.get();
+}
+
 void IComponent::RemoveComponent(std::string key)
 {
 	components_.erase(components_.find(key));
@@ -54,6 +62,32 @@ void IComponent::Update()
 
 void IComponent::Draw()
 {
+}
+
+void IComponent::UpdateAllChildComponents(IComponent* parent)
+{
+	parent->Update();
+
+	if (parent->components_.size())
+	{
+		for (auto& c : parent->components_)
+		{
+			UpdateAllChildComponents(c.second.get());
+		}
+	}
+}
+
+void IComponent::DrawAllChildComponents(IComponent* parent)
+{
+	parent->Draw();
+
+	if (parent->components_.size())
+	{
+		for (auto& c : parent->components_)
+		{
+			DrawAllChildComponents(c.second.get());
+		}
+	}
 }
 
 void IComponent::DrawParams()

@@ -59,14 +59,14 @@ void SceneManager::Update()
 	if (!GameManager::sDebugTimeStop)
 	{
 		currentScene->Update();
-		currentScene->UpdateAllComponents();
+		IComponent::UpdateAllChildComponents(currentScene.get());
 	}
 }
 
 void SceneManager::Draw3D()
 {
 	currentScene->Draw3D();
-	currentScene->DrawAllComponents();
+	IComponent::DrawAllChildComponents(currentScene.get());
 }
 
 void SceneManager::DrawSprite()
@@ -118,6 +118,12 @@ void SceneManager::ConfirmTransition()
 
 		transitionQueued = false;
 	}
+}
+
+void SceneManager::ReleaseScene()
+{
+	currentScene.reset();
+	nextScene.reset();
 }
 
 SceneManager::LoadState SceneManager::GetLoadState()
