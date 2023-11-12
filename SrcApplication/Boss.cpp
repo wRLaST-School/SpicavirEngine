@@ -312,11 +312,7 @@ void Boss::UpdateMarkers()
 {
 	auto markers = GetComponents<Marker>("Marker");
 	for (auto& m : markers) {
-		if (m->IsActive())
-		{
-			m->Update();
-		}
-		else
+		if (!m->IsActive())
 		{
 			RemoveComponent(m);
 		}
@@ -377,8 +373,6 @@ void Boss::UpdateLineAttacks()
 	auto lineAttacks = GetComponents<LineAttack>("LineAttack");
 	for (auto itr = lineAttacks.begin(); itr != lineAttacks.end(); itr++)
 	{
-		(*itr)->Update();
-
 		if (!(*itr)->IsActive())
 		{
 			RemoveComponent(*itr);
@@ -493,8 +487,6 @@ BT::Status Boss::MarkerAndLineUpdate()
 
 BT::Status Boss::GravSphereUpdate()
 {
-	gravSphere_->Update();
-
 	if (moveTimer_ >= moveTime_)
 	{
 		state_ = State::Idle;

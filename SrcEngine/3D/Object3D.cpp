@@ -70,14 +70,45 @@ void Object3D::DecomposeMatrix()
 
 void Object3D::Draw()
 {
+	//モデルが設定されていないならなにもしない
 	if (!model)
 	{
 		return;
 	}
 
-	if (texture != "")
-		Draw(texture);
+	bool hasTexture = texture != "";
+	
+	//ブレンドモード・テクスチャ指定によって描画関数を変更
+	switch (blendMode)
+	{
+	case Object3D::BlendMode::Opaque:
+		if (hasTexture) {
+			return Draw(texture);
+		}
+		break;
+	case Object3D::BlendMode::Add:
+		if (hasTexture) {
+			return DrawAdd(texture);
+		}
+		else
+		{
+			return DrawAdd();
+		}
+		break;
+	case Object3D::BlendMode::Alpha:
+		if (hasTexture) {
+			return DrawAlpha(texture);
+		}
+		else
+		{
+			return DrawAlpha();
+		}
+		break;
+	default:
+		break;
+	}
 
+	//以下不透明テクスチャ指定なし描画
 	transformCB.contents->mat = matWorld;
 
 	SpRenderer::DrawCommand([&] {

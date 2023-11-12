@@ -57,6 +57,12 @@ public:
 		Quaternion
 	} rotMode = RotMode::Quaternion;
 
+	enum class BlendMode {
+		Opaque,
+		Add,
+		Alpha
+	} blendMode = BlendMode::Opaque;
+
 	Float3 position = { 0, 0, 0 };
 
 	Matrix matWorld = Matrix::Identity();

@@ -15,6 +15,8 @@ GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
 
 	AddComponent<Object3D>("Object3D");
 	sphere_ = GetComponent<Object3D>("Object3D");
+	sphere_->texture = "white";
+	sphere_->blendMode = Object3D::BlendMode::Alpha;
 
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
@@ -96,6 +98,5 @@ void GravSphere::CheckCollisions()
 
 void GravSphere::Draw()
 {
-	sphere_->DrawAlpha("white");
 	SpEffekseer::Manager()->SetLocation(hnd_, Effekseer::Vector3D(pos_.x, pos_.y, pos_.z));
 }
