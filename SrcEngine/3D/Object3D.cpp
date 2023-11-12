@@ -293,8 +293,9 @@ void Object3D::DrawGizmo()
 	ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, 
 		ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
 
+	ImGuizmo::AllowAxisFlip(true);
+
 	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
-	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
 
 	ImGuizmo::Enable(true);
 
@@ -311,7 +312,7 @@ void Object3D::DrawGizmo()
 	UpdateMatrix();
 
 	ImGuizmo::Manipulate(reinterpret_cast<float*>(&view),
-		reinterpret_cast<float*>(&proj), mCurrentGizmoOperation, mCurrentGizmoMode, &matWorld[0][0], NULL, NULL);
+		reinterpret_cast<float*>(&proj), mCurrentGizmoOperation, ImGuizmo::WORLD, &matWorld[0][0], NULL, NULL);
 
 	if (ImGuizmo::IsUsing())
 	{
