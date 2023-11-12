@@ -31,6 +31,9 @@ public:
 
 	IComponent* AddComponent(std::string key, eastl::unique_ptr<IComponent> component);
 
+	//コンポーネントの親を変更
+	void ChangeParent(IComponent* newParent);
+
 	//指定したキーのコンポーネントを一つ削除
 	//該当要素が複数ある場合の動作は保証しない
 	void RemoveComponent(std::string key);

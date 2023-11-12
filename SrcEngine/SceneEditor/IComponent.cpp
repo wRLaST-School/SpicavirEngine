@@ -9,6 +9,21 @@ IComponent* IComponent::AddComponent(std::string key, eastl::unique_ptr<ICompone
 	return itr->second.get();
 }
 
+void IComponent::ChangeParent(IComponent* newParent)
+{
+	for (auto itr = parent_->components_.begin(); itr != parent_->components_.end(); itr++)
+	{
+		if ((*itr).second.get() == this)
+		{
+			//newParent->components_.emplace(name_, std::move((*itr)));
+			newParent;
+			parent_->components_.erase(itr);
+
+			return;
+		}
+	}
+}
+
 void IComponent::RemoveComponent(std::string key)
 {
 	components_.erase(components_.find(key));

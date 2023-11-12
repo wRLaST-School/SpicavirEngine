@@ -70,6 +70,11 @@ void Object3D::DecomposeMatrix()
 
 void Object3D::Draw()
 {
+	if (!model)
+	{
+		return;
+	}
+
 	if (texture != "")
 		Draw(texture);
 
