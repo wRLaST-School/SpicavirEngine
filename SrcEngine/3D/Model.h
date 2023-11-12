@@ -172,9 +172,14 @@ private:
 
 typedef std::string ModelKey;
 
+class ResourceWindow;
+
 class ModelManager
 {
 public:
+	//リソースウィンドウで読み込まれているモデルを表示したいため
+	friend ResourceWindow;
+
 	static void Register(const std::string& modelName, const ModelKey& key);
 	static void Register(const std::string& modelPath, const ModelKey& key, bool useAssimp);
 
