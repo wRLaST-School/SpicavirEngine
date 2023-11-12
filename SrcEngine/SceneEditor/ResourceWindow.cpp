@@ -101,8 +101,10 @@ void ResourceWindow::DrawTextureList()
 
 void ResourceWindow::DrawModelList()
 {
+	int i = 0;
 	ModelManager::sModels.Access([&](auto& map) {
 		for (auto& c : map) {
+			ImGui::PushID(i++);
 			if (SpImGui::DoubleClickImageButton(reinterpret_cast<ImTextureID>(
 					SpTextureManager::GetGPUDescHandle("Engine_3DFileIcon").ptr
 				),
@@ -121,6 +123,8 @@ void ResourceWindow::DrawModelList()
 			ImGui::Text(c.first.c_str());
 
 			ImGui::NextColumn();
+
+			ImGui::PopID();
 		}
 		});
 }

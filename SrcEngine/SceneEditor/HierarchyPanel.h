@@ -8,6 +8,11 @@ public:
 
 	void ShowItemRecursive(IComponent* current);
 
+	void DragDropTarget(IComponent* current);
+
+	void DDTargetTexture(IComponent* current);
+	void DDTargetModel(IComponent* current);
+
 	static void SDraw();
 
 private:

@@ -39,23 +39,7 @@ void HierarchyPanel::ShowItemRecursive(IComponent* current)
 
     bool treeNodeTriggered = ImGui::TreeNodeEx(taggedName.c_str(), nodeFlags);
 
-    if (ImGui::BeginDragDropTarget())
-    {
-        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("RES_WINDOW_ITEM");
-        
-        if (payload) {
-            const char* texKey = reinterpret_cast<const char*>(payload->Data);
-
-            Object3D* obj = dynamic_cast<Object3D*>(current);
-
-            if (obj)
-            {
-                obj->texture = texKey;
-            }
-        }
-
-        ImGui::EndDragDropTarget();
-    }
+    DragDropTarget(current);
     
     if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
     {
@@ -70,6 +54,49 @@ void HierarchyPanel::ShowItemRecursive(IComponent* current)
         }
 
         ImGui::TreePop();
+    }
+}
+
+void HierarchyPanel::DragDropTarget(IComponent* current)
+{
+    if (ImGui::BeginDragDropTarget())
+    {
+        DDTargetTexture(current);
+        DDTargetModel(current);
+
+        ImGui::EndDragDropTarget();
+    }
+}
+
+void HierarchyPanel::DDTargetTexture(IComponent* current)
+{
+    const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("RES_WINDOW_ITEM_TEXTURE");
+
+    if (payload) {
+        const char* texKey = reinterpret_cast<const char*>(payload->Data);
+
+        Object3D* obj = dynamic_cast<Object3D*>(current);
+
+        if (obj)
+        {
+            obj->texture = texKey;
+        }
+    }
+}
+
+void HierarchyPanel::DDTargetModel(IComponent* current)
+{
+    const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("RES_WINDOW_ITEM_MODEL");
+
+    if (payload) {
+        const char* modelKey = reinterpret_cast<const char*>(payload->Data);
+
+        Object3D* obj = dynamic_cast<Object3D*>(current);
+
+        if (obj)
+        {
+            obj->model = ModelManager::GetModel(modelKey);
+        }
     }
 }
 
