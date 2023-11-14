@@ -39,6 +39,22 @@ void DockPanel::EnableScreenDock()
 					ImGui::OpenPopup("SaveScenePopup");
 				}
 
+				//コンポーネント選択ポップアップの設定
+				//TODO:ダイアログにする
+				if (ImGui::BeginPopupModal("SaveScenePopup", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
+				{
+					const int PATH_LENGTH = 256;
+					static char path[PATH_LENGTH];
+
+					ImGui::InputText("FileName", path, PATH_LENGTH);
+
+					if (ImGui::Button("Save"))
+					{
+						SceneRW::SaveScene(SceneManager::currentScene.get(), std::string("Assets/Scene/") + std::string(path));
+					}
+					ImGui::EndPopup();
+				}
+
 				if (ImGui::MenuItem("Load"))
 				{
 					SceneRW::LoadScene(SceneManager::currentScene.get(), "Assets/Scene/TestSceneSave.scene");
@@ -47,22 +63,6 @@ void DockPanel::EnableScreenDock()
 				ImGui::EndMenu();
 			}
 			ImGui::EndMenuBar();
-		}
-
-		//コンポーネント選択ポップアップの設定
-		//TODO:ダイアログにする
-		if (ImGui::BeginPopupModal("SaveScenePopup"))
-		{
-			const int PATH_LENGTH = 256;
-			static char path[PATH_LENGTH];
-
-			ImGui::InputText("FileName", path, PATH_LENGTH);
-
-			if (ImGui::Button("Save"))
-			{
-				SceneRW::SaveScene(SceneManager::currentScene.get(), std::string("Assets/Scene/") + std::string(path));
-			}
-			ImGui::EndPopup();
 		}
 
 
