@@ -33,8 +33,8 @@ void InspectorWindow::DrawWindow()
 						ComponentFactory::AddChildComponent(selected_, item.first.c_str(), item.first.c_str());
 					}
 				}
+				ImGui::EndPopup();
 			}
-			ImGui::EndPopup();
 		}
 
 		ImGui::End();

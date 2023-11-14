@@ -221,8 +221,8 @@ void Boss::Set(Boss* boss)
 void Boss::InitBehaviorTree()
 {
 	//BTのコンポーネントを追加
-	AddComponent<BT::BehaviorTree>("BehaviorTree");
-	tree_ = GetComponent<BT::BehaviorTree>("BehaviorTree");
+	AddComponent<BT::BehaviorTree>("BT::BehaviorTree");
+	tree_ = GetComponent<BT::BehaviorTree>("BT::BehaviorTree");
 
 	//ファクトリーに関数を登録
 	BT::BehaviorTreeFactory factory;
@@ -249,7 +249,7 @@ void Boss::InitBehaviorTree()
 
 void Boss::CastMarker(Float3 pos)
 {
-	AddComponent<Marker>("Marker", pos);
+	AddComponent<Marker>("Marker")->Init(pos);
 }
 
 BT::Status Boss::CastMarkerAim1Rand5()
@@ -365,7 +365,7 @@ BT::Status Boss::CastLineTriple()
 
 void Boss::CastLine(Float3 pos, float angle)
 {
-	AddComponent<LineAttack>("LineAttack", pos, angle);
+	AddComponent<LineAttack>("LineAttack")->Init(pos, angle);
 }
 
 void Boss::UpdateLineAttacks()
@@ -546,17 +546,16 @@ BT::Status Boss::CastGravSphere()
 	front.SetLength(3.f);
 
 	//重力弾を生成
-	AddComponent<GravSphere>( "GravSphere",
+	gravSphere_ = AddComponent<GravSphere>( "GravSphere");
+
+	gravSphere_->Init(
 		(Vec3)obj_->position + front,
 		((Vec3)Player::Get()->obj_->position - obj_->position).GetNorm(),
 		0.2f,
 		gravR_,
 		gravitySpeed_,
 		maxHomeRad_,
-		gravSphereStayTime_
-	);
-
-	gravSphere_ = GetComponent<GravSphere>("GravSphere");
+		gravSphereStayTime_);
 
 	return BT::Status::Success;
 }

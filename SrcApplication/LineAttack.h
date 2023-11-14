@@ -1,9 +1,14 @@
 #pragma once
 #include <OBBCollider.h>
+#include <ComponentFactory.h>
 class LineAttack : public IComponent
 {
 public:
-	LineAttack(const Float3& pos, float angle);
+	ComponentFactoryRegister(LineAttack)
+
+	LineAttack();
+
+	void Init(const Float3& pos, float angle);
 
 	void Update();
 	void Draw();

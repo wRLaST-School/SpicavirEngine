@@ -18,6 +18,9 @@ ComponentFactory.hをインクルードすること。
 static void RegisterToComponentFactory() {\
 	ComponentFactory::Register(#className, className::Create);\
 }\
+std::string GetClassString() override {\
+	return std::string(#className);\
+}\
 
 class HierarchyPanel;
 
@@ -44,6 +47,9 @@ public:
 	//指定したキーのコンポーネントを全て削除
 	void ClearComponentWithKey(std::string key);
 
+	//全てのコンポーネントを削除
+	void ClearAllComponents();
+
 	//指定したキーのコンポーネントのポインタを一つ取得
 	//該当要素が複数ある場合の動作は保証しない
 	IComponent* GetComponent(std::string key);
@@ -58,13 +64,21 @@ public:
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
 	template <class Type> eastl::list<Type*> GetComponents(std::string key);
 
+	//全てのコンポーネントを取得
+	const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& GetAllConponents();
+
 	//つけられている名前を取得
 	const std::string& GetName();
 
-	//コンポーネント共通で毎フレーム呼ばれる処理
+	//コンポーネントのクラス名を取得
+	virtual std::string GetClassString() = 0;
+
+	//コンポーネント共通で自動で呼ばれる処理
+	virtual void Init();
 	virtual void Update();
 	virtual void Draw();
 
+	static void InitAllChildComponents(IComponent* parent);
 	static void UpdateAllChildComponents(IComponent* parent);
 	static void DrawAllChildComponents(IComponent* parent);
 

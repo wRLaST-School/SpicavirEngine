@@ -2,7 +2,7 @@
 #include "GravSphere.h"
 #include <Player.h>
 
-GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
+void GravSphere::Init(const Float3& pos, const Vec3& vel, float speed,
 	float gravR, float gravitySpeed, float maxHomeRad, int32_t stayTime)
 {
 	pos_ = pos;
@@ -21,6 +21,10 @@ GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
 	sphere_->model = ModelManager::GetModel("Sphere");
+}
+
+GravSphere::GravSphere()
+{
 }
 
 void GravSphere::Update()

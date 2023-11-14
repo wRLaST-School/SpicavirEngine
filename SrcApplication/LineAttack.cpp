@@ -3,17 +3,21 @@
 #include <Player.h>
 #include <SpEffekseer.h>
 
-LineAttack::LineAttack(const Float3& pos_, float angle_)
+void LineAttack::Init(const Float3& pos_, float angle)
 {
     pos = pos_;
     timer_ = 0;
     active_ = true;
-    angle_ = angle_;
+    angle_ = angle;
     SpEffekseer::Manager()->SetRotation(SpEffekseer::Play("LineAttack", pos), { 0, 1, 0 }, angle_);
 
     col_.pos = pos_;
     col_.rot = Quaternion(Vec3(0, 1, 0), angle_);
     col_.scale = { 4.f, 2.f, 20.f };
+}
+
+LineAttack::LineAttack()
+{
 }
 
 void LineAttack::Update()

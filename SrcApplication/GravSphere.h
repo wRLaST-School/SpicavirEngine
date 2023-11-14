@@ -1,10 +1,14 @@
 #pragma once
 #include<Object3D.h>
 #include <SpEffekseer.h>
+#include <ComponentFactory.h>
 class GravSphere : public IComponent
 {
 public:
-	GravSphere(const Float3& pos,const Vec3& vel, float speed,
+	ComponentFactoryRegister(GravSphere)
+
+	GravSphere();
+	void Init(const Float3& pos,const Vec3& vel, float speed,
 		float gravR, float gravitySpeed, float maxHomeRad, int32_t stayTime);
 	void Update();
 	void CheckCollisions();

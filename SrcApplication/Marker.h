@@ -1,9 +1,14 @@
 #pragma once
 #include <Object3D.h>
+#include <ComponentFactory.h>
 class Marker : public IComponent
 {
 public:
-	Marker(const Float3& pos);
+	ComponentFactoryRegister(Marker)
+
+	Marker();
+
+	void Init(const Float3& pos);
 
 	void Cast(const Float3& pos);
 
