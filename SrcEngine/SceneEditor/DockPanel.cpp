@@ -50,7 +50,8 @@ void DockPanel::EnableScreenDock()
 
 					if (ImGui::Button("Save"))
 					{
-						SceneRW::SaveScene(SceneManager::currentScene.get(), std::string("Assets/Scene/") + std::string(path));
+						SceneRW::SaveScene(SceneManager::currentScene.get(), std::string("Assets/Scene/") + std::string(path) + std::string(".scene"));
+						ImGui::CloseCurrentPopup();
 					}
 					ImGui::EndPopup();
 				}
