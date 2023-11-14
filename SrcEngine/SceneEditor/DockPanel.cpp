@@ -50,6 +50,7 @@ void DockPanel::EnableScreenDock()
 		}
 
 		//コンポーネント選択ポップアップの設定
+		//TODO:ダイアログにする
 		if (ImGui::BeginPopupModal("SaveScenePopup"))
 		{
 			const int PATH_LENGTH = 256;
