@@ -13,7 +13,6 @@ void DockPanel::EnableScreenDock()
 	SpImGui::Command([&] {
 		ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 		ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
-		if (!GameManager::sShowDebug) dockspace_flags |= ImGuiDockNodeFlags_::ImGuiDockNodeFlags_KeepAliveOnly;
 
 		const ImGuiViewport* viewport = ImGui::GetMainViewport();
 		ImGui::SetNextWindowPos(viewport->WorkPos);
@@ -26,6 +25,11 @@ void DockPanel::EnableScreenDock()
 		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 		window_flags |= ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_MenuBar;
 
+
+		if (!GameManager::sShowDebug) {
+			dockspace_flags |= ImGuiDockNodeFlags_::ImGuiDockNodeFlags_KeepAliveOnly;
+			window_flags &= ~ImGuiWindowFlags_MenuBar;
+		}
 		static bool open = true;
 
 		ImGui::Begin("Editor", &open, window_flags);
