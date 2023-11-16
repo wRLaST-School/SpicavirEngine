@@ -9,6 +9,21 @@ IComponent* IComponent::AddComponent(std::string key, eastl::unique_ptr<ICompone
 	return itr->second.get();
 }
 
+void IComponent::ChangeParent(IComponent* newParent)
+{
+	for (auto itr = parent_->components_.begin(); itr != parent_->components_.end(); itr++)
+	{
+		if ((*itr).second.get() == this)
+		{
+			//newParent->components_.emplace(name_, std::move((*itr)));
+			newParent;
+			parent_->components_.erase(itr);
+
+			return;
+		}
+	}
+}
+
 void IComponent::RemoveComponent(std::string key)
 {
 	components_.erase(components_.find(key));
@@ -31,6 +46,11 @@ void IComponent::ClearComponentWithKey(std::string key)
 	components_.erase(key);
 }
 
+void IComponent::ClearAllComponents()
+{
+	components_.clear();
+}
+
 IComponent* IComponent::GetComponent(std::string key)
 {
 	return components_.find(key)->second.get();
@@ -51,9 +71,18 @@ eastl::list<IComponent*> IComponent::GetComponents(std::string key)
 	return hitComponents;
 }
 
+const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& IComponent::GetAllConponents()
+{
+	return components_;
+}
+
 const std::string& IComponent::GetName()
 {
 	return name_;
+}
+
+void IComponent::Init()
+{
 }
 
 void IComponent::Update()
@@ -62,6 +91,19 @@ void IComponent::Update()
 
 void IComponent::Draw()
 {
+}
+
+void IComponent::InitAllChildComponents(IComponent* parent)
+{
+	parent->Init();
+
+	if (parent->components_.size())
+	{
+		for (auto& c : parent->components_)
+		{
+			InitAllChildComponents(c.second.get());
+		}
+	}
 }
 
 void IComponent::UpdateAllChildComponents(IComponent* parent)

@@ -4,6 +4,7 @@
 #include <PointLight.h>
 #include <Object3D.h>
 #include <BehaviorTree.h>
+#include <IScene.h>
 
 //Application Side
 #include <Player.h>
@@ -20,4 +21,7 @@ void CustomComponentRegisterer::CallRegisters()
 	//Application Side
 	Player::RegisterToComponentFactory();
 	Boss::RegisterToComponentFactory();
+	LineAttack::RegisterToComponentFactory();
+	GravSphere::RegisterToComponentFactory();
+	Marker::RegisterToComponentFactory();
 }

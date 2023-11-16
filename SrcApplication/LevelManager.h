@@ -4,6 +4,8 @@
 class LevelManager : public IComponent
 {
 public:
+	ComponentFactoryRegister(LevelManager)
+
 	LevelManager();
 
 	void Init();

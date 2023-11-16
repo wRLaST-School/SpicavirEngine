@@ -5,7 +5,11 @@
 
 const TextureKey Marker::TEX_KEY = "Marker";
 
-Marker::Marker(const Float3& pos)
+Marker::Marker()
+{
+}
+
+void Marker::Init(const Float3& pos)
 {
     Cast(pos);
 }

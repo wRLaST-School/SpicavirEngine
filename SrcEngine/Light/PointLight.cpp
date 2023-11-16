@@ -25,14 +25,11 @@ void PointLight::DrawFrame()
 
 void PointLight::DrawParams()
 {
-	if (ImGui::TreeNode(name.c_str()))
-	{
-		ImGui::SliderFloat3("Position", &pos.x, -10.f, 10.f);
-		ImGui::SliderFloat3("Color", &color.x, 0.f, 3.f);
-		ImGui::SliderFloat3("Attenuation", &att.x, 0.f, .2f);
-		ImGui::Checkbox("Active", &isActive);
-		ImGui::Checkbox("ShowFrame", &showFrame_);
+	ImGui::SliderFloat3("Position", &pos.x, -10.f, 10.f);
+	ImGui::SliderFloat3("Color", &color.x, 0.f, 3.f);
+	ImGui::SliderFloat3("Attenuation", &att.x, 0.f, .2f);
+	ImGui::Checkbox("Active", &isActive);
+	ImGui::Checkbox("ShowFrame", &showFrame_);
 
-		ImGui::TreePop();
-	}
+	ImGui::TreePop();
 }

@@ -5,7 +5,7 @@
 - DirectX12による3D描画
 - DxLibライクな2D描画関数群
 - IPostEffectorを継承したクラスとシェーダーを作るだけの簡単なポストエフェクト
-- EmitterテンプレートクラスとIParticle基底クラスにより簡単に作れるGPUパーティクル
+- EmitterテンプレートクラスとIParticle基底クラスにより簡単に作れるパーティクル
 - Assimpライブラリを用いたGLTFの読み込みとスキニングアニメーション再生
 - XAudio2によるサウンド再生
 - DInputとXInputによるキーボード、マウス、ゲームパッド入力

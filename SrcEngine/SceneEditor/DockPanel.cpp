@@ -5,6 +5,8 @@
 #include <Util.h>
 #include <InspectorWindow.h>
 #include <Object3D.h>
+#include <SceneManager.h>
+#include <SceneRW.h>
 
 void DockPanel::EnableScreenDock()
 {
@@ -22,11 +24,49 @@ void DockPanel::EnableScreenDock()
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 		window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
 		window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-		window_flags |= ImGuiWindowFlags_NoBackground;
+		window_flags |= ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_MenuBar;
 
 		static bool open = true;
 
 		ImGui::Begin("Editor", &open, window_flags);
+
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("Save"))
+				{
+					ImGui::OpenPopup("SaveScenePopup");
+				}
+
+				//コンポーネント選択ポップアップの設定
+				//TODO:ダイアログにする
+				if (ImGui::BeginPopupModal("SaveScenePopup", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse))
+				{
+					const int PATH_LENGTH = 256;
+					static char path[PATH_LENGTH];
+
+					ImGui::InputText("FileName", path, PATH_LENGTH);
+
+					if (ImGui::Button("Save"))
+					{
+						SceneRW::SaveScene(SceneManager::currentScene.get(), std::string("Assets/Scene/") + std::string(path) + std::string(".scene"));
+						ImGui::CloseCurrentPopup();
+					}
+					ImGui::EndPopup();
+				}
+
+				if (ImGui::MenuItem("Load"))
+				{
+					SceneRW::LoadScene(SceneManager::currentScene.get(), "Assets/Scene/TestSceneSave.scene");
+				}
+
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+
+
 		ImGuiIO& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
 		{

@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ComponentFactory.cpp" />
     <ClCompile Include="SrcApplication\CustomComponentRegisterer.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ResourceWindow.cpp" />
@@ -287,6 +288,7 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ComponentFactory.h" />
     <ClInclude Include="SrcApplication\CustomComponentRegisterer.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ResourceWindow.h" />

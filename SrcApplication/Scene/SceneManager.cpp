@@ -11,6 +11,7 @@
 #include <Transition.h>
 #include <BTEditorScene.h>
 #include <GameManager.h>
+#include <SceneRW.h>
 
 std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
@@ -29,6 +30,8 @@ void SceneManager::Update()
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
 	Transition::Update();
+
+	SceneRW::ConfirmLoadScene();
 
 	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
