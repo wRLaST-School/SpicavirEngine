@@ -2,6 +2,7 @@
 #include<Object3D.h>
 #include <SpEffekseer.h>
 #include <ComponentFactory.h>
+#include <PointLight.h>
 class GravSphere : public IComponent
 {
 public:
@@ -30,6 +31,8 @@ private:
 	int32_t timer_ = 0;
 
 	Object3D* sphere_;
+
+	PointLight* light;
 
 	Effekseer::Handle hnd_;
 };

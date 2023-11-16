@@ -18,6 +18,14 @@ void GravSphere::Init(const Float3& pos, const Vec3& vel, float speed,
 	sphere_->texture = "white";
 	sphere_->blendMode = Object3D::BlendMode::Alpha;
 
+	light = AddComponent<PointLight>("PointLight");
+
+	light->color = { 0.6f, 0.4f, 0.6f };
+
+	light->isActive = true;
+
+	light->att = { 0.02f, 0.03f, 0.02f };
+
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
 	sphere_->model = ModelManager::GetModel("Sphere");
@@ -72,6 +80,8 @@ void GravSphere::Update()
 	}
 
 	sphere_->UpdateMatrix();
+
+	light->pos = pos_;
 }
 
 void GravSphere::CheckCollisions()
