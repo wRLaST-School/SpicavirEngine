@@ -5,6 +5,7 @@
 #include <TitleScene.h>
 #include <GameManager.h>
 #include <SpDS.h>
+#include <SpImGui.h>
 
 void ResultScene::LoadResources()
 {
@@ -68,4 +69,18 @@ void ResultScene::DrawSprite()
 	SpDS::DrawBox(0, 0, (int32_t)center.x * 2, (int32_t)center.y * 2, Color::Black);
 	SpDS::DrawRotaGraph((int32_t)center.x, (int32_t)center.y, multiplier.x, multiplier.y, 0.f, "resultText");
 	SpDS::DrawRotaGraph((int32_t)center.x, (int32_t)center.y, multiplier.x, multiplier.y, 0.f, "rank");
+
+	if (GameManager::sShowDebug)
+	{
+		SpImGui::Command([&] {
+			if (ImGui::Begin("Game Scene"))
+			{
+				ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
+				ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
+				ImGui::Checkbox("Debug Immunity", &GameManager::sDebugImmunity);
+				ImGui::Checkbox("Pause Game", &GameManager::sDebugTimeStop);
+			}
+			ImGui::End();
+			});
+	}
 }

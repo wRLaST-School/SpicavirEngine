@@ -157,7 +157,7 @@ void SpFramework::Run()
 		try {
 			Light::UpdateLightData();
 		}
-		catch (PointLight::QuantityOverflow& e) {
+		catch (PointLight::ReachedLightLimit& e) {
 			OutputDebugStringA((std::string("Too Many PointLights Registered. Limit: ") + std::to_string(e.limit) + std::string(", Used: ") + std::to_string(e.actual)).c_str());
 			assert(false);
 		}

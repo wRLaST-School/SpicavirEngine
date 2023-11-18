@@ -32,6 +32,8 @@ public:
 
 	static void ClearPointLight(PointLight* ptr);
 
+	static void ClearAllPointLights();
+
 	static DirectionalLight sDirectional;
 
 private:

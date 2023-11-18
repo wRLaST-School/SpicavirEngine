@@ -34,9 +34,9 @@ public:
 	static const uint32_t MAX_LIGHTS = 16;
 
 	//点光源数が上限を超えた場合のエラー
-	class QuantityOverflow {
+	class ReachedLightLimit {
 	public:
-		QuantityOverflow(int32_t limit, int32_t actual):limit(limit),actual(actual) {};
+		ReachedLightLimit(int32_t limit, int32_t actual):limit(limit),actual(actual) {};
 		int32_t limit;
 		int32_t actual;
 	};
