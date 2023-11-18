@@ -12,23 +12,11 @@
           "NumChildren":"0"
         },
         "Component1":{
-          "ComponentType":"LineAttack",
-          "NumChildren":"0"
-        },
-        "Component2":{
-          "ComponentType":"LineAttack",
-          "NumChildren":"0"
-        },
-        "Component3":{
-          "ComponentType":"LineAttack",
-          "NumChildren":"0"
-        },
-        "Component4":{
           "ComponentType":"Object3D",
           "NumChildren":"0"
         }
       }],
-      "NumChildren":"5"
+      "NumChildren":"2"
     },
     "Component1":{
       "ComponentType":"LevelManager",
@@ -86,22 +74,29 @@
       "NumChildren":"12"
     },
     "Component2":{
+      "ComponentType":"Object3D",
+      "Children":[
+      {
+        "Component0":{
+          "ComponentType":"PointLight",
+          "NumChildren":"0"
+        }
+      }],
+      "NumChildren":"1"
+    },
+    "Component3":{
       "ComponentType":"Player",
       "Children":[
       {
         "Component0":{
           "ComponentType":"Object3D",
           "NumChildren":"0"
-        },
-        "Component1":{
-          "ComponentType":"PointLight",
-          "NumChildren":"0"
         }
       }],
-      "NumChildren":"2"
+      "NumChildren":"1"
     }
   }],
-  "NumChildren":"3"
+  "NumChildren":"4"
 }
 
 }

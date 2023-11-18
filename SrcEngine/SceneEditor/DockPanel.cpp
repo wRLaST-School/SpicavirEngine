@@ -125,6 +125,12 @@ void DockPanel::DrawViewPort()
 				selectedObj->DrawGizmo();
 			}
 
+			PointLight* selectedPtl = InspectorWindow::GetSelected<PointLight>();
+			if (selectedPtl)
+			{
+				selectedPtl->DrawGizmo();
+			}
+
 			ImGui::End();
 		});
 	}

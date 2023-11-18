@@ -17,6 +17,7 @@ public:
 
 	void DrawFrame();
 	void DrawParams();
+	void DrawGizmo();
 
 	bool isActive = false;
 
