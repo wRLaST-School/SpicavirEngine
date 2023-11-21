@@ -1,5 +1,9 @@
 #pragma once
 
+#pragma warning (push)
+#pragma warning (disable:26800)
+#include <SrcExternal/json.hpp>
+#pragma warning (pop)
 /*
 -------------------------------------------------------------------------------
 コンポーネントを作る際は下記2点を行うこと
@@ -81,6 +85,22 @@ public:
 	static void InitAllChildComponents(IComponent* parent);
 	static void UpdateAllChildComponents(IComponent* parent);
 	static void DrawAllChildComponents(IComponent* parent);
+
+	//読み書きに使う関数
+	/*
+	* "ComponentType":"BraBra", 
+	* "ComponentParams":[
+	*	{
+	*		この中の部分を実装
+	* 　　 |　ここまでのインデントを引数に取る
+	*	}
+	* ]
+	*/
+	virtual void WriteParamJson([[maybe_unused]] nlohmann::json& jsonObj) {};
+	/*
+	* obj["ComponentParams"]のオブジェクトを受け取る
+	*/
+	virtual void ReadParamJson([[maybe_unused]]const nlohmann::json& paramsObject) {};
 
 	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
 	virtual void DrawParams();

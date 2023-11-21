@@ -326,3 +326,27 @@ void Object3D::DrawGizmo()
 		UpdateMatrix();
 	}
 }
+
+void Object3D::WriteParamJson(nlohmann::json& jsonObject)
+{
+	nlohmann::json obj;
+
+	jsonObject["Position"]["X"] = position.x;
+	jsonObject["Position"]["Y"] = position.y;
+	jsonObject["Position"]["Z"] = position.z;
+
+	jsonObject["Scale"]["X"] = scale.x;
+	jsonObject["Scale"]["Y"] = scale.y;
+	jsonObject["Scale"]["Z"] = scale.z;
+
+	jsonObject["Rotation"]["X"] = rotation.v.x;
+	jsonObject["Rotation"]["Y"] = rotation.v.y;
+	jsonObject["Rotation"]["Z"] = rotation.v.z;
+	jsonObject["Rotation"]["W"] = rotation.w;
+
+	jsonObject["RotationEuler"]["X"] = rotationE.x;
+	jsonObject["RotationEuler"]["Y"] = rotationE.y;
+	jsonObject["RotationEuler"]["Z"] = rotationE.z;
+
+	jsonObject["Texture"] = texture;
+}

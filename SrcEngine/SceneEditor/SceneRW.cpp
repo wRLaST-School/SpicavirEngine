@@ -14,74 +14,31 @@ using namespace nlohmann;
 
 void SceneRW::SaveScene(IScene* scene, std::string filePath)
 {
-	stringstream jsonStr;
-
-	jsonStr << "{" << endl;
+	json outputObj;
 
 	//コンポーネントを処理する再起関数
-	function<void(IComponent* currentNode, std::string indent, std::string nodeNum)> processNode = [&](IComponent* current, std::string indent, std::string nodeNum = "") {
-		jsonStr << indent << "\"Component" << nodeNum << "\":{\n";
-		string firstIndent = indent;
-		indent += "  ";
-		jsonStr << indent << "\"ComponentType\":\"" << current->GetClassString() << "\",\n";
+	function<void(json&, IComponent*)> processNode = [&](json& parentJsonObj, IComponent* current) {
+		json curObj;
 
-		int32_t nodeNumInt = 0;
-		if (current->GetAllConponents().size())
+		curObj["Type"] = current->GetClassString();
+		current->WriteParamJson(curObj);
+		for (auto& c : current->GetAllConponents())
 		{
-			jsonStr << indent << "\"Children\":[\n" << indent << "{\n";
-
-			for (auto& c : current->GetAllConponents())
-			{
-				processNode(c.second.get(), indent + "  ", to_string(nodeNumInt));
-				nodeNumInt++;
-			}
-			//最後のカンマを削除
-			string tempStr = jsonStr.str();
-
-			tempStr.pop_back();
-			tempStr.pop_back();
-
-			tempStr += string("\n");
-
-			jsonStr.str("");
-			jsonStr.clear(stringstream::goodbit);
-
-			jsonStr << tempStr;
-
-			jsonStr << indent << "}],\n";
+			processNode(curObj["Children"], c.second.get());
 		}
 
-		jsonStr << indent << "\"NumChildren\":\"" << nodeNumInt << "\"\n";
-
-		jsonStr << firstIndent << "},\n";
+		parentJsonObj.push_back(curObj);
 	};
 
 	//ルートノードから呼び出し
-	processNode(scene, "", "0");
-
-	//最後のカンマを削除
-	string tempStr = jsonStr.str();
-
-	tempStr.pop_back();
-	tempStr.pop_back();
-
-	tempStr += string("\n");
-
-	jsonStr.str("");
-	jsonStr.clear(stringstream::goodbit);
-
-	jsonStr << tempStr;
-	jsonStr << "\n";
-
-	jsonStr << "}" << endl;
-
+	processNode(outputObj, scene);
 
 	//ファイル書き込み
 	std::ofstream file;
 
 	file.open(filePath);
 
-	file << jsonStr.str() << endl;
+	file << outputObj.dump(4);
 
 	file.close();
 }

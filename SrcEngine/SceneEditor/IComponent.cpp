@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "IComponent.h"
 
+#pragma warning (push)
+#pragma warning (disable:26800)
+#include <SrcExternal/json.hpp>
+#pragma warning (pop)
+
+using namespace nlohmann;
+
 IComponent* IComponent::AddComponent(std::string key, eastl::unique_ptr<IComponent> component)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(component)));

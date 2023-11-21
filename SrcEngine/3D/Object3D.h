@@ -45,6 +45,8 @@ public:
 	void DrawParams();
 	void DrawGizmo();
 
+	void WriteParamJson([[maybe_unused]] nlohmann::json& jsonObject) override;
+
 	SpConstBuffer<ConstBufferDataTransform> transformCB;
 	SpConstBuffer<Float4> brightnessCB;
 	SpConstBuffer<ConstBufferDataMisc> miscCB;
