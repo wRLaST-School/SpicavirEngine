@@ -61,7 +61,7 @@ void LevelLoader::Load(std::string path, LevelManager* lm)
 
 			if (obj.contains("texture_file"))
 			{
-				objdata->model->material.front().textureKey = obj["texture_file"];
+				objdata->texture = obj["texture_file"];
 			}
 
 			json& transform = obj["transform"];

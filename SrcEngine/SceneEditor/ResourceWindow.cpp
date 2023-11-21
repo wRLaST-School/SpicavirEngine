@@ -101,7 +101,7 @@ void ResourceWindow::DrawTextureList()
 
 void ResourceWindow::DrawModelList()
 {
-	int i = 0;
+	int32_t i = 0;
 	ModelManager::sModels.Access([&](auto& map) {
 		for (auto& c : map) {
 			ImGui::PushID(i++);
@@ -171,7 +171,7 @@ void ResourceWindow::AdjustLayout()
 
 	float panelW = ImGui::GetContentRegionAvail().x;
 
-	int columnCount = static_cast<int>(panelW / cellSize);
+	int32_t columnCount = static_cast<int>(panelW / cellSize);
 
 	//1つも入らないときも1つは入れる(0だとエラーになる)
 	if (columnCount < 1)

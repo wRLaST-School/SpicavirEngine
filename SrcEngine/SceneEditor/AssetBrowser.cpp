@@ -32,7 +32,7 @@ void AssetBrowser::OnImGuiRender()
 
 	float panelW = ImGui::GetContentRegionAvail().x;
 
-	int columnCount = static_cast<int>(panelW / cellSize);
+	int32_t columnCount = static_cast<int>(panelW / cellSize);
 
 	//1つも入らないときも1つは入れる(0だとエラーになる)
 	if (columnCount < 1)

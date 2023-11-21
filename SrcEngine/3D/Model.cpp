@@ -294,7 +294,7 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 			//ボーンの情報を保存
 			if (mesh->HasBones())
 			{
-				for (int boneIndex = 0; boneIndex < std::min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
+				for (int32_t boneIndex = 0; boneIndex < std::min((int32_t)mesh->mNumBones, ModelConsts::MAX_BONES_PER_MODEL); boneIndex++)
 				{
 					Bone bone;
 					aiMatrix4x4 aioffsetmat = mesh->mBones[boneIndex]->mOffsetMatrix;

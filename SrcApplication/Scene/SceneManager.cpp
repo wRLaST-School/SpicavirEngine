@@ -61,7 +61,6 @@ void SceneManager::Update()
 
 	if (!GameManager::sDebugTimeStop)
 	{
-		currentScene->Update();
 		IComponent::UpdateAllChildComponents(currentScene.get());
 	}
 }
@@ -118,6 +117,8 @@ void SceneManager::ConfirmTransition()
 		ModelManager::ReleasePerSceneModel();
 		SoundManager::ReleasePerSceneSounds();
 		SpEffekseer::ReleasePerSceneEffects();
+
+		Light::ClearAllPointLights();
 
 		transitionQueued = false;
 	}
