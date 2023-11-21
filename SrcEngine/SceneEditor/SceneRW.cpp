@@ -45,6 +45,7 @@ void SceneRW::SaveScene(IScene* scene, std::string filePath)
 
 void SceneRW::ConfirmLoadScene()
 {
+	//TODO:新フォーマットに対応
 	if (!GetInstance()->waitingForLoad_)
 	{
 		return;
