@@ -147,7 +147,7 @@ void DockPanel::DrawSaveDialog()
 
 	if (ImGui::Begin("SaveScenePopup", NULL, ImGuiWindowFlags_Modal | ImGuiWindowFlags_NoResize))
 	{
-		const int PATH_LENGTH = 256;
+		const int32_t PATH_LENGTH = 256;
 		static char path[PATH_LENGTH];
 
 		ImGui::InputText("FileName", path, PATH_LENGTH);

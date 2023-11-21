@@ -106,7 +106,7 @@ void BTENode::Draw()
 			std::string comboName = std::string("NodeType") + uniqueName_;
 			if (ImGui::BeginCombo(comboName.c_str(), currentItem))
 			{
-				for (int i = 0; i < itemList.size(); ++i)
+				for (uint32_t i = 0; i < itemList.size(); ++i)
 				{
 					const bool isSelected = (currentItem == itemList[i].c_str());
 					if (ImGui::Selectable(itemList[i].c_str(), isSelected))
