@@ -8,4 +8,5 @@ public:
 	static bool sShowHitBoxes;
 	static bool sDebugImmunity;
 	inline static bool sDebugTimeStop = false;
+	inline static std::string IP = "";
 };

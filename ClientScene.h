@@ -1,20 +1,19 @@
 #pragma once
-#include "IScene.h"
-#include "Camera.h"
-#include <Color.h>
 #include <Circle.h>
-
-class TestScene :
-    public IScene
+#include <Camera.h>
+#include <IScene.h>
+class ClientScene : public IScene
 {
 public:
-    ~TestScene() {};
+    ~ClientScene() {};
     void LoadResources();
     void Init() override;
     void Update() override;
     void DrawBack() override;
     void Draw3D() override;
     void DrawSprite() override;
+
+    DWORD Threadfunc();
 
 private:
     Camera cam;

@@ -36,24 +36,14 @@ void SceneManager::Update()
 	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
-		if (Input::Key::Triggered(DIK_G))
-		{
-			LoadScene<GameScene>();
-		}
-
 		if (Input::Key::Triggered(DIK_T))
 		{
-			LoadScene<TitleScene>();
+			LoadScene<TestScene>();
 		}
 
 		if (Input::Key::Triggered(DIK_D))
 		{
 			GameManager::sShowDebug = !GameManager::sShowDebug;
-		}
-
-		if (Input::Key::Triggered(DIK_E))
-		{
-			LoadScene<BTEditorScene>();
 		}
 
 		Transition();

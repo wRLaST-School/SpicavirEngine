@@ -172,6 +172,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="ClientScene.cpp" />
+    <ClCompile Include="ServerScene.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ComponentFactory.cpp" />
     <ClCompile Include="SrcApplication\CustomComponentRegisterer.cpp" />
@@ -288,6 +291,9 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="ClientScene.h" />
+    <ClInclude Include="ServerScene.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ComponentFactory.h" />
     <ClInclude Include="SrcApplication\CustomComponentRegisterer.h" />

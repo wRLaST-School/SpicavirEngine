@@ -1,30 +1,11 @@
 #include "TestScene.h"
 #include "Input.h"
 #include <SpDS.h>
-
-Circle::Circle(Vec2 pos, float r)
-{
-	pos_ = pos;
-	r_ = r;
-}
-
-bool Circle::Collide(const Circle& o)
-{
-	float dist = (pos_ - o.pos_).GetSquaredLength();
-	float rsum = powf(r_ + o.r_, 2);
-	return dist <= rsum;
-}
-
-void Circle::Draw()
-{
-	SpDS::DrawCircle(
-		static_cast<int32_t>(pos_.x),
-		static_cast<int32_t>(pos_.y),
-		static_cast<int32_t>(r_),
-		color_
-	);
-}
-
+#include <SpImGui.h>
+#include <SceneManager.h>
+#include <ClientScene.h>
+#include <ServerScene.h>
+#include <GameManager.h>
 void TestScene::LoadResources()
 {
 	
@@ -33,34 +14,36 @@ void TestScene::LoadResources()
 void TestScene::Init()
 {
 	Camera::Set(cam);
-
-	circleA = AddComponent<Circle>("Circle", Vec2(400.f, 400.f), 100.f);
-	circleB = AddComponent<Circle>("Circle", Vec2(100.f, 100.f), 50.f);
 }
 
 void TestScene::Update()
 {
-	const static float spd = 5.f;
+	SpImGui::Command([&] {
+		ImGui::SetNextWindowPos({ 500.f, 200.f });
+		ImGui::Begin("Select Proxy", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+		
+		char buf[256];
 
-	Vec2 vel;
-	vel.x = static_cast<float>(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT));
-	vel.y = static_cast<float>(Input::Key::Down(DIK_DOWN) - Input::Key::Down(DIK_UP));
+		strcpy_s(buf, 256 * sizeof(char), GameManager::IP.c_str());
 
-	if (vel.GetSquaredLength())
-	{
-		vel.SetLength(spd);
-	}
+		ImGui::InputText("Server IP", buf, 256);
 
-	circleB->pos_ += vel;
+		GameManager::IP = buf;
 
-	if (circleA->Collide(*circleB))
-	{
-		circleB->color_ = Color::Blue;
-	}
-	else
-	{
-		circleB->color_ = Color::Red;
-	}
+		if (ImGui::Button("Client", { 200, 400 }))
+		{
+			SceneManager::LoadScene<ClientScene>();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Server", { 200, 400 }))
+		{
+			SceneManager::LoadScene<ServerScene>();
+		}
+
+		ImGui::End();
+	});
+
+	SceneManager::Transition();
 }
 
 void TestScene::DrawBack()
@@ -75,6 +58,5 @@ void TestScene::Draw3D()
 
 void TestScene::DrawSprite()
 {
-	circleA->Draw();
-	circleB->Draw();
+
 }

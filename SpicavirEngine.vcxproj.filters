@@ -531,6 +531,15 @@
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ServerScene.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientScene.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -885,6 +894,15 @@
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerScene.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientScene.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
