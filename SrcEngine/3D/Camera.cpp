@@ -73,15 +73,15 @@ void Camera::UseCurrent()
 
 	GetSpDX()->cmdList->RSSetScissorRects(1, &scissorrect);
 
-	Matrix vMat = sCurrent->targetMode == CameraTargetMode::LookAt ?
+	sCurrent->view = sCurrent->targetMode == CameraTargetMode::LookAt ?
 		Matrix::ViewLookAt(sCurrent->position, sCurrent->target, sCurrent->matWorld.ExtractAxisY()) :
 		Matrix::ViewLookTo(sCurrent->position, sCurrent->matWorld.ExtractAxisZ(), sCurrent->matWorld.ExtractAxisY());
 
-	Matrix pMat = sCurrent->projectionMode == ProjectionMode::Perspective ?
+	sCurrent->proj = sCurrent->projectionMode == ProjectionMode::Perspective ?
 		Matrix::Projection(sCurrent->fov, (float)sCurrent->renderWidth / (float)sCurrent->renderHeight, sCurrent->nearZ, sCurrent->farZ) :
 		Matrix::ProjectionOrtho((int32_t)sCurrent->renderWidth, (int32_t)sCurrent->renderHeight, sCurrent->nearZ, sCurrent->farZ, 20);
 
-	sCurrent->cameraViewProjMatrixCB.contents->vproj = vMat * pMat;
+	sCurrent->cameraViewProjMatrixCB.contents->vproj = sCurrent->view * sCurrent->proj;
 	sCurrent->cameraViewProjMatrixCB.contents->cameraPos = sCurrent->position;
 
 	sCurrent->cameraViewProjMatrixCB.contents->billboardMat = GetCurrentCameraBillboardMat();
@@ -92,9 +92,9 @@ void Camera::UseCurrent()
 	std::function<Effekseer::Matrix44(Matrix)> SpMatToEfkMat = [](Matrix in) {
 		Effekseer::Matrix44 out;
 
-		for (int i = 0; i < 4; i++)
+		for (int32_t i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (int32_t j = 0; j < 4; j++)
 			{
 				out.Values[i][j] = in[i][j];
 			}
@@ -103,8 +103,8 @@ void Camera::UseCurrent()
 		return out;
 	};
 
-	Effekseer::Matrix44 efkViewMat = SpMatToEfkMat(vMat);
-	Effekseer::Matrix44 efkProjMat = SpMatToEfkMat(pMat);
+	Effekseer::Matrix44 efkViewMat = SpMatToEfkMat(sCurrent->view);
+	Effekseer::Matrix44 efkProjMat = SpMatToEfkMat(sCurrent->proj);
 
 	SpEffekseer::SetMatrices(efkViewMat, efkProjMat);
 }
@@ -236,6 +236,16 @@ Ray Camera::GetScreenPosRay(const Float2& screen)
 	r.ray = ray;
 	r.origin = nearPos;
 	return r;
+}
+
+Matrix Camera::GetViewMat()
+{
+	return view;
+}
+
+Matrix Camera::GetProjMat()
+{
+	return proj;
 }
 
 Camera* Camera::sCurrent = nullptr;

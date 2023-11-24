@@ -6,9 +6,13 @@
 #include <Score.h>
 #include <GravSphere.h>
 #include <BehaviorTree.h>
+#include <ComponentFactory.h>
+
 class Boss : public IComponent
 {
 public:
+    ComponentFactoryRegister(Boss)
+
     void Init();
 
     void Update();

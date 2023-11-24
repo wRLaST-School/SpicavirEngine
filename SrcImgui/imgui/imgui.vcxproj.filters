@@ -36,6 +36,12 @@
     <ClCompile Include="ImGuiLibs\imgui_widgets.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="ImGuizmo\GraphEditor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuizmo\ImGuizmo.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGuiLibs\imconfig.h">
@@ -60,6 +66,12 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiLibs\imstb_truetype.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuizmo\GraphEditor.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuizmo\ImGuizmo.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

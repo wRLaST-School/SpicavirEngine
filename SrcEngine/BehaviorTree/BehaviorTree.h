@@ -7,11 +7,14 @@
 #include <BTSelectorNode.h>
 #include <BTSequencerNode.h>
 #include <BTConditionNode.h>
+#include <ComponentFactory.h>
 
 namespace BT {
 	class BehaviorTree : public IComponent
 	{
 	public:
+		ComponentFactoryRegister(BT::BehaviorTree)
+
 		BehaviorTree();
 
 		void SetFactory(const BehaviorTreeFactory& factory);

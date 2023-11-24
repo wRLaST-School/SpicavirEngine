@@ -2,7 +2,7 @@
 #include "GravSphere.h"
 #include <Player.h>
 
-GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
+void GravSphere::Init(const Float3& pos, const Vec3& vel, float speed,
 	float gravR, float gravitySpeed, float maxHomeRad, int32_t stayTime)
 {
 	pos_ = pos;
@@ -15,10 +15,24 @@ GravSphere::GravSphere(const Float3& pos, const Vec3& vel, float speed,
 
 	AddComponent<Object3D>("Object3D");
 	sphere_ = GetComponent<Object3D>("Object3D");
+	sphere_->texture = "white";
+	sphere_->blendMode = Object3D::BlendMode::Alpha;
+
+	light = AddComponent<PointLight>("PointLight");
+
+	light->color = { 0.6f, 0.4f, 0.6f };
+
+	light->isActive = true;
+
+	light->att = { 0.02f, 0.03f, 0.02f };
 
 	hnd_ = SpEffekseer::Play("SphereParticle", pos_);
 
 	sphere_->model = ModelManager::GetModel("Sphere");
+}
+
+GravSphere::GravSphere()
+{
 }
 
 void GravSphere::Update()
@@ -66,6 +80,8 @@ void GravSphere::Update()
 	}
 
 	sphere_->UpdateMatrix();
+
+	light->pos = pos_;
 }
 
 void GravSphere::CheckCollisions()
@@ -96,6 +112,5 @@ void GravSphere::CheckCollisions()
 
 void GravSphere::Draw()
 {
-	sphere_->DrawAlpha("white");
 	SpEffekseer::Manager()->SetLocation(hnd_, Effekseer::Vector3D(pos_.x, pos_.y, pos_.z));
 }

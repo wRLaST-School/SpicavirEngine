@@ -26,6 +26,8 @@
 #include <HierarchyPanel.h>
 #include <DockPanel.h>
 #include <InspectorWindow.h>
+#include <ResourceWindow.h>
+#include <CustomComponentRegisterer.h>
 
 void SpFramework::Init()
 {
@@ -76,6 +78,8 @@ void SpFramework::Init()
 
 	GPipelineManager::CreateAll();
 
+	Light::GetInstance();
+
 	/*Init Draw End*/
 	Sprite::InitCommon();
 
@@ -109,6 +113,9 @@ void SpFramework::Init()
 
 	//Load Asset Browser Resources
 	AssetBrowser::LoadResources();
+
+	//Register Components to Factory
+	CustomComponentRegisterer::CallRegisters();
 }
 
 void SpFramework::Run()
@@ -142,6 +149,8 @@ void SpFramework::Run()
 			HierarchyPanel::SDraw();
 
 			InspectorWindow::SDraw();
+
+			ResourceWindow::SDraw();
 		}
 
 		GetSpDX()->PreDrawCommands();
@@ -149,7 +158,7 @@ void SpFramework::Run()
 		try {
 			Light::UpdateLightData();
 		}
-		catch (PointLight::QuantityOverflow& e) {
+		catch (PointLight::ReachedLightLimit& e) {
 			OutputDebugStringA((std::string("Too Many PointLights Registered. Limit: ") + std::to_string(e.limit) + std::string(", Used: ") + std::to_string(e.actual)).c_str());
 			assert(false);
 		}
@@ -170,6 +179,7 @@ void SpFramework::Run()
 
 	/*ループここまで*/
 	SoundManager::ReleaseAllSounds();
+	SceneManager::ReleaseScene();
 	SpImGui::Shutdown();
 	CloseAllSpWindow();
 }

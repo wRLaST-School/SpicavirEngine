@@ -1,5 +1,6 @@
 #pragma once
 #include <filesystem>
+#include <SpTextureManager.h>
 class AssetBrowser final
 {
 public:
@@ -18,6 +19,12 @@ private:
 
 	float thumbnailSize = 128.f;
 	float padding = 16.f;
+
+	std::string selectedItemPath = "ERROR";
+
+	//非同期プレビュー読み込み関連の排他制御
+	exc_unordered_map<TextureKey, int32_t> loadedPreviewTextures;
+	std::mutex mtx;
 	
 public://singleton
 	AssetBrowser(const AssetBrowser&) = delete;

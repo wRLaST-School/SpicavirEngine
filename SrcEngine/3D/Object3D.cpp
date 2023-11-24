@@ -6,6 +6,8 @@
 #include <SpMath.h>
 #include <SpRenderer.h>
 #include <SpImGui.h>
+#include <Input.h>
+#include <DockPanel.h>
 
 void Object3D::UpdateMatrix()
 {
@@ -36,11 +38,77 @@ void Object3D::UpdateMatrix()
 	}
 }
 
+void Object3D::DecomposeMatrix()
+{
+	Vec3 axisX = matWorld.ExtractAxisX();
+	Vec3 axisY = matWorld.ExtractAxisY();
+	Vec3 axisZ = matWorld.ExtractAxisZ();
+
+	scale.x = axisX.GetLength();
+	scale.y = axisY.GetLength();
+	scale.z = axisZ.GetLength();
+
+	position.x = matWorld[3][0];
+	position.y = matWorld[3][1];
+	position.z = matWorld[3][2];
+
+	axisX.Norm(scale.x);
+	axisY.Norm(scale.y);
+	axisZ.Norm(scale.z);
+
+	Matrix wMatNoScale(
+		static_cast<Float4>(static_cast<Float3>(axisX)),
+		static_cast<Float4>(static_cast<Float3>(axisY)),
+		static_cast<Float4>(static_cast<Float3>(axisZ)),
+		{ position.x, position.y, position.z, 1.f }
+	);
+
+	rotationE.x = atan2f(wMatNoScale[1][2], wMatNoScale[2][2]);
+	rotationE.y = atan2f(-wMatNoScale[0][2], sqrtf(wMatNoScale[1][2] * wMatNoScale[1][2] + wMatNoScale[2][2] * wMatNoScale[2][2]));
+	rotationE.z = atan2f(wMatNoScale[0][1], wMatNoScale[0][0]);
+}
+
 void Object3D::Draw()
 {
-	if (texture != "")
-		Draw(texture);
+	//モデルが設定されていないならなにもしない
+	if (!model)
+	{
+		return;
+	}
 
+	bool hasTexture = texture != "";
+	
+	//ブレンドモード・テクスチャ指定によって描画関数を変更
+	switch (blendMode)
+	{
+	case Object3D::BlendMode::Opaque:
+		if (hasTexture) {
+			return Draw(texture);
+		}
+		break;
+	case Object3D::BlendMode::Add:
+		if (hasTexture) {
+			return DrawAdd(texture);
+		}
+		else
+		{
+			return DrawAdd();
+		}
+		break;
+	case Object3D::BlendMode::Alpha:
+		if (hasTexture) {
+			return DrawAlpha(texture);
+		}
+		else
+		{
+			return DrawAlpha();
+		}
+		break;
+	default:
+		break;
+	}
+
+	//以下不透明テクスチャ指定なし描画
 	transformCB.contents->mat = matWorld;
 
 	SpRenderer::DrawCommand([&] {
@@ -188,16 +256,20 @@ void Object3D::DrawAlpha(const TextureKey& key)
 
 void Object3D::DrawParams()
 {
-	ImGui::DragFloat3("Position", &position.x, 0.1f);
-	ImGui::DragFloat3("Scale", &scale.x, 0.05f);
+	ImGui::InputFloat3("Translation", &position.x);
+
 	if (rotMode == RotMode::Euler)
 	{
 		ImGui::DragFloat3("Rotation", &rotationE.x, PIf / 360.f);
 	}
 	else
 	{
+		ImGui::Text("vvv Gizmo Does Not Work Currently vvv");
 		ImGui::InputFloat4("Rotation", &rotation.w);
 	}
+
+	ImGui::InputFloat3("Scale", &scale.x);
+
 	ImGui::Checkbox("Use Quaternion Rotation", reinterpret_cast<bool*>(&rotMode));
 
 	ImGui::ColorEdit4("Brightness", reinterpret_cast<float*>(brightnessCB.contents));
@@ -211,4 +283,70 @@ void Object3D::DrawParams()
 	{
 		texture = buf;
 	};
+
+	UpdateMatrix();
+}
+
+void Object3D::DrawGizmo()
+{
+	ImGuizmo::SetDrawlist();
+	ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, 
+		ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
+
+	ImGuizmo::AllowAxisFlip(true);
+
+	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
+
+	ImGuizmo::Enable(true);
+
+	if (Input::Key::Down(DIK_T))
+		mCurrentGizmoOperation = ImGuizmo::TRANSLATE;
+	if (Input::Key::Down(DIK_R))
+		mCurrentGizmoOperation = ImGuizmo::ROTATE;
+	if (Input::Key::Down(DIK_S)) 
+		mCurrentGizmoOperation = ImGuizmo::SCALE;
+
+	Matrix view = Camera::sCurrent->GetViewMat();
+	Matrix proj = Camera::sCurrent->GetProjMat();
+
+	UpdateMatrix();
+
+	ImGuizmo::Manipulate(reinterpret_cast<float*>(&view),
+		reinterpret_cast<float*>(&proj), mCurrentGizmoOperation, ImGuizmo::WORLD, &matWorld[0][0], NULL, NULL);
+
+	if (ImGuizmo::IsUsing())
+	{
+		Float3 rot;
+		matWorld.DecomposeTransform(&position, &rot, &scale);
+
+		Vec3 deltaRot = static_cast<Vec3>(rot) - rotationE;
+
+		rotationE += deltaRot;
+
+		UpdateMatrix();
+	}
+}
+
+void Object3D::WriteParamJson(nlohmann::json& jsonObject)
+{
+	nlohmann::json obj;
+
+	jsonObject["Position"]["X"] = position.x;
+	jsonObject["Position"]["Y"] = position.y;
+	jsonObject["Position"]["Z"] = position.z;
+
+	jsonObject["Scale"]["X"] = scale.x;
+	jsonObject["Scale"]["Y"] = scale.y;
+	jsonObject["Scale"]["Z"] = scale.z;
+
+	jsonObject["Rotation"]["X"] = rotation.v.x;
+	jsonObject["Rotation"]["Y"] = rotation.v.y;
+	jsonObject["Rotation"]["Z"] = rotation.v.z;
+	jsonObject["Rotation"]["W"] = rotation.w;
+
+	jsonObject["RotationEuler"]["X"] = rotationE.x;
+	jsonObject["RotationEuler"]["Y"] = rotationE.y;
+	jsonObject["RotationEuler"]["Z"] = rotationE.z;
+
+	jsonObject["Texture"] = texture;
 }

@@ -1,17 +1,23 @@
 #pragma once
 #include "SpMath.h"
 #include "Essentials.h"
-class PointLight
+#include <ComponentFactory.h>
+
+class PointLight : public IComponent
 {
 public:
-	PointLight() :pos({ 0,0,0 }), color({ 0,0,0 }), att({ 0,0,0 }) { isActive = false; }
-	PointLight(const Float3& pos, const Float3& color, const Float3& att) :pos(pos), color(color), att(att), isActive(true) {}
+	ComponentFactoryRegister(PointLight)
+
+	PointLight();
+	PointLight(const Float3& pos, const Float3& color, const Float3& att);
+	~PointLight() override;
 	Float3 pos;
 	Float3 color;
 	Float3 att;
 
 	void DrawFrame();
-	void DrawLightEditor();
+	void DrawParams();
+	void DrawGizmo();
 
 	bool isActive = false;
 
@@ -29,9 +35,9 @@ public:
 	static const uint32_t MAX_LIGHTS = 16;
 
 	//点光源数が上限を超えた場合のエラー
-	class QuantityOverflow {
+	class ReachedLightLimit {
 	public:
-		QuantityOverflow(int32_t limit, int32_t actual):limit(limit),actual(actual) {};
+		ReachedLightLimit(int32_t limit, int32_t actual):limit(limit),actual(actual) {};
 		int32_t limit;
 		int32_t actual;
 	};

@@ -64,9 +64,6 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
-	GetComponent<LevelManager>("Level Manager")->Update();
-	boss_->Update();
-	player_->Update();
 	cam_.Update();
 
 	MainTimer::Update();
@@ -79,10 +76,6 @@ void GameScene::DrawBack()
 void GameScene::Draw3D()
 {
 	cam_.Set();
-
-	GetComponent<LevelManager>("Level Manager")->Draw();
-	boss_->Draw();
-	player_->Draw();
 
 	MainTimer::Draw();
 }

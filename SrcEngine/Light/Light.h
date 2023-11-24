@@ -28,25 +28,21 @@ public:
 
 	static PointLightKey CreatePointLight(const Float3& position, const Float3& color, const Float3& attenuation, const PointLightKey& key);
 
-	static void RemovePointLight(const PointLightKey& key);
+	static void RegisterPointLight(PointLight* ptr);
 
-	static PointLight* GetPointLightPtr(const PointLightKey& key);
-
-	static Float3 GetPointLightPos(const PointLightKey& key);
-
-	static void SetPointLightPos(const PointLightKey& key, const Float3& pos);
+	static void ClearPointLight(PointLight* ptr);
 
 	static void ClearAllPointLights();
-
 
 	static DirectionalLight sDirectional;
 
 private:
 	SpConstBuffer<LightCBData> lightCB_;
 
-	std::map<PointLightKey, PointLight> pointLights_;
+	std::list<PointLight*> pointLights_;
 
 	Light(){ };
-	~Light(){ };
+	~Light(){ 
+	};
 };
 

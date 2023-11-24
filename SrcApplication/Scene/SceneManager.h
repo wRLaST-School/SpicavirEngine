@@ -44,6 +44,8 @@ public:
 
 	static void ConfirmTransition();
 
+	static void ReleaseScene();
+
 	enum class LoadState {
 		NotInProgress,
 		Loading,

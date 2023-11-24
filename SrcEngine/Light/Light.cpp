@@ -24,16 +24,16 @@ void Light::UpdateLightData()
 
 	if (instance->pointLights_.size() > PointLight::MAX_LIGHTS) 
 	{
-		throw PointLight::QuantityOverflow(PointLight::MAX_LIGHTS, (int32_t)instance->pointLights_.size());
+		throw PointLight::ReachedLightLimit(PointLight::MAX_LIGHTS, (int32_t)instance->pointLights_.size());
 	};
 
 	for (auto itr = instance->pointLights_.begin(); itr != instance->pointLights_.end(); itr++)
 	{
 		PointLight::CBData* pLight = &instance->lightCB_.contents->pointLights[nextTransferIndex];
-		pLight->pos = itr->second.pos;
-		pLight->color = itr->second.color;
-		pLight->att = itr->second.att;
-		pLight->isActive = itr->second.isActive;
+		pLight->pos =  (*itr)->pos;
+		pLight->color = (*itr)->color;
+		pLight->att = (*itr)->att;
+		pLight->isActive = (*itr)->isActive;
 
 		nextTransferIndex++;
 	}
@@ -56,30 +56,24 @@ Light* Light::GetInstance()
 	return &obj;
 }
 
-PointLightKey Light::CreatePointLight(const Float3& position, const Float3& color, const Float3& attenuation, const PointLightKey& key)
+void Light::RegisterPointLight(PointLight* ptr)
 {
-	GetInstance()->pointLights_.emplace(key, PointLight(position, color, attenuation)).first->second.name = key;
-	return key;
+	GetInstance()->pointLights_.emplace_back(ptr);
 }
 
-void Light::RemovePointLight(const PointLightKey& key)
+void Light::ClearPointLight(PointLight* ptr)
 {
-	GetInstance()->pointLights_.erase(key);
-}
-
-PointLight* Light::GetPointLightPtr(const PointLightKey& key)
-{
-	return &GetInstance()->pointLights_.find(key)->second;
-}
-
-Float3 Light::GetPointLightPos(const PointLightKey& key)
-{
-	return GetPointLightPtr(key)->pos;
-}
-
-void Light::SetPointLightPos(const PointLightKey& key, const Float3& pos)
-{
-	GetPointLightPtr(key)->pos = pos;
+	for (auto itr = GetInstance()->pointLights_.begin(); itr != GetInstance()->pointLights_.end();)
+	{
+		if ((*itr) == ptr)
+		{
+			itr = GetInstance()->pointLights_.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
+	}
 }
 
 void Light::ClearAllPointLights()

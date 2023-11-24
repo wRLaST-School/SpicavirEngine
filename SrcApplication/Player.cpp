@@ -8,6 +8,7 @@
 #include <SoundManager.h>
 #include <MainTimer.h>
 #include <GameManager.h>
+#include <PointLight.h>
 
 void Player::Load()
 {

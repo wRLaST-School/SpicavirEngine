@@ -11,6 +11,7 @@
 #include <Transition.h>
 #include <BTEditorScene.h>
 #include <GameManager.h>
+#include <SceneRW.h>
 
 std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
@@ -29,6 +30,8 @@ void SceneManager::Update()
 	FrameRate::FrameStartWithWait();
 	UpdateLoadState();
 	Transition::Update();
+
+	SceneRW::ConfirmLoadScene();
 
 	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
@@ -56,13 +59,16 @@ void SceneManager::Update()
 		Transition();
 	}
 
-	if(!GameManager::sDebugTimeStop)
-		currentScene->Update();
+	if (!GameManager::sDebugTimeStop)
+	{
+		IComponent::UpdateAllChildComponents(currentScene.get());
+	}
 }
 
 void SceneManager::Draw3D()
 {
 	currentScene->Draw3D();
+	IComponent::DrawAllChildComponents(currentScene.get());
 }
 
 void SceneManager::DrawSprite()
@@ -112,8 +118,16 @@ void SceneManager::ConfirmTransition()
 		SoundManager::ReleasePerSceneSounds();
 		SpEffekseer::ReleasePerSceneEffects();
 
+		Light::ClearAllPointLights();
+
 		transitionQueued = false;
 	}
+}
+
+void SceneManager::ReleaseScene()
+{
+	currentScene.reset();
+	nextScene.reset();
 }
 
 SceneManager::LoadState SceneManager::GetLoadState()

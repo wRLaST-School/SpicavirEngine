@@ -49,8 +49,8 @@ void SingleCamTestScene::Init()
 	pane2.model = ModelManager::GetModel("Cube");
 	sky.model = ModelManager::GetModel("Sky");
 
-	light1 = Light::GetPointLightPtr(Light::CreatePointLight({5.f, 1.f, -5.f}, {1.f, 1.f, 1.f}, {.05f, .0f, .02f}, "light1"));
-	light2 = Light::GetPointLightPtr(Light::CreatePointLight({ -10.f, 0.f, 0.f }, { 1.f, 1.f, 1.f }, { .05f, .0f, .02f }, "light2"));
+	light1 = AddComponent<PointLight>("Light1", Vec3(5.f, 1.f, -5.f), Vec3( 1.f, 1.f, 1.f ), Vec3(.05f, .0f, .02f ));
+	light2 = AddComponent<PointLight>("Light2", Vec3(-10.f, 0.f, 0.f), Vec3(1.f, 1.f, 1.f), Vec3(.05f, .0f, .02f ));
 }
 
 void SingleCamTestScene::Update()
@@ -156,8 +156,6 @@ void SingleCamTestScene::Update()
 
 	light1->DrawFrame();
 	light2->DrawFrame();
-	light1->DrawLightEditor();
-	light2->DrawLightEditor();
 
 	//anim.Update();
 

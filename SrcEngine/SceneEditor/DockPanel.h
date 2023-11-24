@@ -3,12 +3,19 @@
 class DockPanel
 {
 public:
-	static Float2 GetViewPortSize();
-
 	static void EnableScreenDock();
 
 	static void DrawViewPort();
-private:
 
+	static void DrawSaveDialog();
+
+	static void DrawLoadDialog();
+
+	static ImGuiWindow* GetViewPortWindow();
+private:
+	inline static ImGuiWindow* sViewPortWindow;
+
+	inline static bool showSaveDialog = false;
+	inline static bool showLoadDialog = false;
 };
 
