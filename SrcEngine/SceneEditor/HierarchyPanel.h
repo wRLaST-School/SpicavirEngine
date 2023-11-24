@@ -1,5 +1,5 @@
 #pragma once
-class HierarchyPanel
+class HierarchyPanel final
 {
 public:
 	void Draw();

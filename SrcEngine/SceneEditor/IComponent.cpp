@@ -8,7 +8,7 @@
 
 using namespace nlohmann;
 
-IComponent* IComponent::AddComponent(std::string key, eastl::unique_ptr<IComponent> component)
+IComponent* IComponent::AddComponent(const std::string& key, eastl::unique_ptr<IComponent> component)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(component)));
 	itr->second->name_ = itr->first;
@@ -31,7 +31,7 @@ void IComponent::ChangeParent(IComponent* newParent)
 	}
 }
 
-void IComponent::RemoveComponent(std::string key)
+void IComponent::RemoveComponent(const std::string& key)
 {
 	components_.erase(components_.find(key));
 }
@@ -48,7 +48,7 @@ void IComponent::RemoveComponent(IComponent* ptr)
 	}
 }
 
-void IComponent::ClearComponentWithKey(std::string key)
+void IComponent::ClearComponentWithKey(const std::string& key)
 {
 	components_.erase(key);
 }
@@ -58,12 +58,12 @@ void IComponent::ClearAllComponents()
 	components_.clear();
 }
 
-IComponent* IComponent::GetComponent(std::string key)
+IComponent* IComponent::GetComponent(const std::string& key)
 {
 	return components_.find(key)->second.get();
 }
 
-eastl::list<IComponent*> IComponent::GetComponents(std::string key)
+eastl::list<IComponent*> IComponent::GetComponents(const std::string& key)
 {
 	eastl::list<IComponent*> hitComponents;
 
@@ -78,7 +78,7 @@ eastl::list<IComponent*> IComponent::GetComponents(std::string key)
 	return hitComponents;
 }
 
-const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& IComponent::GetAllConponents()
+const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& IComponent::GetAllComponents()
 {
 	return components_;
 }

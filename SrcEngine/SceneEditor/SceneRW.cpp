@@ -22,7 +22,7 @@ void SceneRW::SaveScene(IScene* scene, std::string filePath)
 
 		curObj["Type"] = current->GetClassString();
 		current->WriteParamJson(curObj);
-		for (auto& c : current->GetAllConponents())
+		for (auto& c : current->GetAllComponents())
 		{
 			processNode(curObj["Children"], c.second.get());
 		}

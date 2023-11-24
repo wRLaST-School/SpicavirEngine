@@ -34,42 +34,42 @@ public:
 	//指定したキーのコンポーネントを指定したクラスで作成
 	//指定したクラスのコンストラクタの引数を取る
 	template <class Type, class ...Args>
-	Type* AddComponent(std::string key, Args ...args);
+	Type* AddComponent(const std::string& key, Args ...args);
 
-	IComponent* AddComponent(std::string key, eastl::unique_ptr<IComponent> component);
+	IComponent* AddComponent(const std::string& key, eastl::unique_ptr<IComponent> component);
 
 	//コンポーネントの親を変更
 	void ChangeParent(IComponent* newParent);
 
 	//指定したキーのコンポーネントを一つ削除
 	//該当要素が複数ある場合の動作は保証しない
-	void RemoveComponent(std::string key);
+	void RemoveComponent(const std::string& key);
 
 	//ポインタが指すコンポーネントを所持している場合削除する
 	void RemoveComponent(IComponent* ptr);
 
 	//指定したキーのコンポーネントを全て削除
-	void ClearComponentWithKey(std::string key);
+	void ClearComponentWithKey(const std::string& key);
 
 	//全てのコンポーネントを削除
 	void ClearAllComponents();
 
 	//指定したキーのコンポーネントのポインタを一つ取得
 	//該当要素が複数ある場合の動作は保証しない
-	IComponent* GetComponent(std::string key);
+	IComponent* GetComponent(const std::string& key);
 	
 	//指定したキーのコンポーネントをTypeで指定した型のポインタにして一つ取得
 	//該当要素が複数ある場合の動作は保証しない
-	template <class Type> Type* GetComponent(std::string key);
+	template <class Type> Type* GetComponent(const std::string& key);
 
 	//指定したキーに該当する全てのコンポーネントのポインタをリストにして取得
-	eastl::list<IComponent*> GetComponents(std::string key);
+	eastl::list<IComponent*> GetComponents(const std::string& key);
 
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
-	template <class Type> eastl::list<Type*> GetComponents(std::string key);
+	template <class Type> eastl::list<Type*> GetComponents(const std::string& key);
 
 	//全てのコンポーネントを取得
-	const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& GetAllConponents();
+	const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& GetAllComponents();
 
 	//つけられている名前を取得
 	const std::string& GetName();
@@ -125,7 +125,7 @@ private:
 };
 
 template<class Type, class ...Args>
-inline Type* IComponent::AddComponent(std::string key, Args ...args)
+inline Type* IComponent::AddComponent(const std::string& key, Args ...args)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
 	itr->second->name_ = itr->first;
@@ -134,13 +134,13 @@ inline Type* IComponent::AddComponent(std::string key, Args ...args)
 }
 
 template<class Type>
-inline Type* IComponent::GetComponent(std::string key)
+inline Type* IComponent::GetComponent(const std::string& key)
 {
 	return dynamic_cast<Type*>(components_.find(key)->second.get());
 }
 
 template<class Type>
-inline eastl::list<Type*> IComponent::GetComponents(std::string key)
+inline eastl::list<Type*> IComponent::GetComponents(const std::string& key)
 {
 	eastl::list<Type*> hitComponents;
 
