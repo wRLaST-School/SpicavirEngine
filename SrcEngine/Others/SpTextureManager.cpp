@@ -161,6 +161,7 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 	ins.texDataMap_.Access(
 		[&](auto& map) {
 			map[key].meta = metadata;
+			map[key].filePath = filePath;
 		}
 	);
 

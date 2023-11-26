@@ -26,6 +26,8 @@ Model::Model(const std::string& modelName)
 	std::string path = "Assets/Models/"+modelName+"/";
 	std::string objfile = modelName + ".obj";
 
+	filePath = path + objfile;
+
 	std::vector<Vertex> vertices;
 
 	std::vector<UINT> indices;
@@ -198,11 +200,11 @@ Model::Model(const std::string& modelName)
 	ibView.SizeInBytes = sizeIB;
 }
 
-Model::Model(const std::string& filePath, bool useSmoothShading)
+Model::Model(const std::string& modelFilePath, bool useSmoothShading)
 {
 	Assimp::Importer importer;
 
-	const aiScene* scene = importer.ReadFile(filePath,
+	const aiScene* scene = importer.ReadFile(modelFilePath,
 		aiProcess_CalcTangentSpace |
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
@@ -502,9 +504,9 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 		//Textrue
 		aimtr->GetTexture(aiTextureType_DIFFUSE, 0, &tempstr);
 		//TODO:埋め込みテクスチャの場合の処理		
-		int32_t pti = (int32_t)filePath.find_last_of("\\");
-		int32_t pti2 = (int32_t)filePath.find_last_of("/");
-		std::string filedir = filePath.substr(0, std::max(pti, pti2));
+		int32_t pti = (int32_t)modelFilePath.find_last_of("\\");
+		int32_t pti2 = (int32_t)modelFilePath.find_last_of("/");
+		std::string filedir = modelFilePath.substr(0, std::max(pti, pti2));
 
 		mtr->textureKey = SpTextureManager::LoadTexture(filedir + std::string("/") + std::string(tempstr.C_Str()), std::string("asmptex:") + filedir + std::string(tempstr.C_Str()));
 	}
@@ -586,6 +588,8 @@ Model::Model(const std::string& filePath, bool useSmoothShading)
 	ibView.BufferLocation = indexBuff->GetGPUVirtualAddress();
 	ibView.Format = DXGI_FORMAT_R32_UINT;
 	ibView.SizeInBytes = sizeIB;
+
+	filePath = modelFilePath;
 
 	UpdateMaterial();
 }
@@ -858,6 +862,8 @@ void ModelManager::Register(const std::string& modelName, const ModelKey& key)
 			map.emplace(key, modelName);
 		}
 	);
+
+	sPerSceneModels[sCurrentSceneResIndex].push_back(key);
 }
 
 void ModelManager::Register(const std::string& modelPath, const ModelKey& key, bool useAssimp)
@@ -869,6 +875,8 @@ void ModelManager::Register(const std::string& modelPath, const ModelKey& key, b
 				eastl::forward_as_tuple(modelPath, useAssimp));
 		}
 	);
+
+	sPerSceneModels[sCurrentSceneResIndex].push_back(key);
 }
 
 Model* ModelManager::GetModel(const ModelKey& key)
@@ -886,6 +894,8 @@ Model* ModelManager::GetModel(const ModelKey& key)
 void ModelManager::ReleasePerSceneModel()
 {
 	int32_t lastSceneResIndex = sCurrentSceneResIndex == 0 ? 1 : 0;
+	sPerSceneModels[lastSceneResIndex].sort();
+	sPerSceneModels[lastSceneResIndex].unique();
 	for (auto itr = sPerSceneModels[lastSceneResIndex].begin(); itr != sPerSceneModels[lastSceneResIndex].end(); itr++)
 	{
 		bool usingInCurrentScene = false;

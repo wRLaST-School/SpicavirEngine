@@ -22,9 +22,9 @@ void GameScene::LoadResources()
 	SpTextureManager::LoadTexture("Assets/Images/circleParticle.png", "BasicParticle");
 	SpTextureManager::LoadTexture("Assets/Images/black.png", "black");
 	SpTextureManager::LoadTexture("Assets/Images/hexagonPattern.jpg", "hexagon");
-	SpEffekseer::Load(L"Assets/Effekseer", L"Assets/Effekseer/Marker/Marker.efk", "Marker");
-	SpEffekseer::Load(L"Assets/Effekseer/Line", L"Assets/Effekseer/Line/Line.efk", "LineAttack");
-	SpEffekseer::Load(L"Assets/Effekseer/Sphere", L"Assets/Effekseer/Sphere/sphere.efk", "SphereParticle");
+	SpEffekseer::Load("Assets/Effekseer", "Assets/Effekseer/Marker/Marker.efk", "Marker");
+	SpEffekseer::Load("Assets/Effekseer/Line", "Assets/Effekseer/Line/Line.efk", "LineAttack");
+	SpEffekseer::Load("Assets/Effekseer/Sphere", "Assets/Effekseer/Sphere/sphere.efk", "SphereParticle");
 
 	SoundManager::LoadWave("Assets/Sounds/counterSuccess.wav", "counterSuccess");
 	SoundManager::LoadWave("Assets/Sounds/dodge.wav", "dodge");

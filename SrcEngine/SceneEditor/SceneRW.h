@@ -1,9 +1,20 @@
 #pragma once
 #include <IScene.h>
+
+#pragma warning (push)
+#pragma warning (disable:26800)
+#include <SrcExternal/json.hpp>
+#pragma warning (pop)
+
 class SceneRW
 {
 public:
 	static void SaveScene(IScene* scene, std::string filePath);
+
+	static void SaveTextures(nlohmann::json& dist);
+	static void SaveModels(nlohmann::json& dist);
+	static void SaveSounds(nlohmann::json& dist);
+	static void SaveEffekseers(nlohmann::json& dist);
 
 	static void ConfirmLoadScene();
 

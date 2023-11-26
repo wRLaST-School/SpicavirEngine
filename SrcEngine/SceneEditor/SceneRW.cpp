@@ -4,13 +4,83 @@
 #include <iostream>
 #include <sstream>
 
-#pragma warning (push)
-#pragma warning (disable:26800)
-#include <SrcExternal/json.hpp>
-#pragma warning (pop)
+
+#include <SpTextureManager.h>
+#include <Model.h>
+#include <SoundManager.h>
+#include <SpEffekseer.h>
 
 using namespace std;
 using namespace nlohmann;
+
+void SceneRW::SaveTextures(json& dist)
+{
+	std::map<TextureKey, std::string> keyAndPath;
+
+	SpTextureManager::GetInstance().texDataMap_.Access([&](auto& map) {
+		for (auto& pair : map)
+		{
+			if (SpTextureManager::IsMasterTexture(pair.first)) continue;
+
+			if (pair.second.filePath == "") continue;
+
+			keyAndPath.emplace(pair.first, pair.second.filePath);
+		}
+	});
+
+	json textures = keyAndPath;
+
+	dist.push_back(textures);
+}
+
+void SceneRW::SaveModels(json& dist)
+{
+	std::map<ModelKey, std::string> keyAndPath;
+
+	ModelManager::sModels.Access([&](auto& map) {
+		for (auto& pair : map)
+		{
+			keyAndPath.emplace(pair.first, pair.second.filePath);
+		}
+		});
+
+	json models = keyAndPath;
+
+	dist.push_back(models);
+}
+
+void SceneRW::SaveSounds(json& dist)
+{
+	std::map<SoundKey, std::string> keyAndPath;
+
+	SoundManager::sSndMap.Access([&](auto& map) {
+		for (auto& pair : map)
+		{
+			keyAndPath.emplace(pair.first, pair.second.filePath);
+		}
+		});
+
+	json sounds = keyAndPath;
+
+	dist.push_back(sounds);
+}
+
+void SceneRW::SaveEffekseers(json& dist)
+{
+	std::map<EffectKey, std::pair<std::string, std::string>> keyAndPath;
+
+	SpEffekseer::sEffects.Access([&](auto& map) {
+		for (auto& pair : map)
+		{
+			keyAndPath.emplace(pair.first, 
+				std::pair<std::string, std::string>(pair.second.texFolder, pair.second.filePath));
+		}
+		});
+
+	json effects = keyAndPath;
+
+	dist.push_back(effects);
+}
 
 void SceneRW::SaveScene(IScene* scene, std::string filePath)
 {
@@ -32,6 +102,11 @@ void SceneRW::SaveScene(IScene* scene, std::string filePath)
 
 	//ルートノードから呼び出し
 	processNode(outputObj, scene);
+
+	SaveTextures((*outputObj.begin())["Textures"]);
+	SaveModels((*outputObj.begin())["Models"]);
+	SaveSounds((*outputObj.begin())["Sounds"]);
+	SaveEffekseers((*outputObj.begin())["EfkEffects"]);
 
 	//ファイル書き込み
 	std::ofstream file;

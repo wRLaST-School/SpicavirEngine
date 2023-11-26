@@ -21,9 +21,9 @@ void Player::Load()
 	ModelManager::Register("Assets/Models/Player/Slash2.gltf", "PlayerSlash2", false);
 	ModelManager::Register("Assets/Models/Player/Slash3.gltf", "PlayerSlash3", false);
 
-	SpEffekseer::Load(L"Assets/Effekseer/Slash1", L"Assets/Effekseer/Slash1/Slash1.efk", "Slash1");
-	SpEffekseer::Load(L"Assets/Effekseer/Slash2", L"Assets/Effekseer/Slash2/Slash2.efk", "Slash2");
-	SpEffekseer::Load(L"Assets/Effekseer/Slash3", L"Assets/Effekseer/Slash3/Slash3.efk", "Slash3");
+	SpEffekseer::Load("Assets/Effekseer/Slash1", "Assets/Effekseer/Slash1/Slash1.efk", "Slash1");
+	SpEffekseer::Load("Assets/Effekseer/Slash2", "Assets/Effekseer/Slash2/Slash2.efk", "Slash2");
+	SpEffekseer::Load("Assets/Effekseer/Slash3", "Assets/Effekseer/Slash3/Slash3.efk", "Slash3");
 }
 
 void Player::Init()

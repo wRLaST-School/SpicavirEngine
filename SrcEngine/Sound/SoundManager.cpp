@@ -84,6 +84,7 @@ SoundKey SoundManager::LoadWave(const std::string& path, const SoundKey& key)
     soundData.wfex = format.fmt;
     soundData.pBuffer = reinterpret_cast<BYTE*>(pBuffer);
     soundData.bufferSize = data.size;
+    soundData.filePath = path;
 
     sSndMap.Access(
         [&](auto& map) {
