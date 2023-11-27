@@ -21,17 +21,15 @@ void Player::Load()
 	ModelManager::Register("Assets/Models/Player/Slash2.gltf", "PlayerSlash2", false);
 	ModelManager::Register("Assets/Models/Player/Slash3.gltf", "PlayerSlash3", false);
 
-	SpEffekseer::Load(L"Assets/Effekseer/Slash1", L"Assets/Effekseer/Slash1/Slash1.efk", "Slash1");
-	SpEffekseer::Load(L"Assets/Effekseer/Slash2", L"Assets/Effekseer/Slash2/Slash2.efk", "Slash2");
-	SpEffekseer::Load(L"Assets/Effekseer/Slash3", L"Assets/Effekseer/Slash3/Slash3.efk", "Slash3");
+	SpEffekseer::Load("Assets/Effekseer/Slash1", "Assets/Effekseer/Slash1/Slash1.efk", "Slash1");
+	SpEffekseer::Load("Assets/Effekseer/Slash2", "Assets/Effekseer/Slash2/Slash2.efk", "Slash2");
+	SpEffekseer::Load("Assets/Effekseer/Slash3", "Assets/Effekseer/Slash3/Slash3.efk", "Slash3");
 }
 
 void Player::Init()
 {
 	AddComponent<Object3D>("Object3D");
 	obj_ = GetComponent<Object3D>("Object3D");
-
-	AddComponent<PointLight>("PlayerLight", Vec3(0.f, 0.f, 0.f), Vec3(.8f, .7f, .0f), Vec3(0.5f, 0.2f, 0.1f  ));
 
 	obj_->model = ModelManager::GetModel("PlayerIdle");
 	obj_->position = { 0, 1, -5 };

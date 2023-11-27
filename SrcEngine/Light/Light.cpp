@@ -24,7 +24,7 @@ void Light::UpdateLightData()
 
 	if (instance->pointLights_.size() > PointLight::MAX_LIGHTS) 
 	{
-		throw PointLight::QuantityOverflow(PointLight::MAX_LIGHTS, (int32_t)instance->pointLights_.size());
+		throw PointLight::ReachedLightLimit(PointLight::MAX_LIGHTS, (int32_t)instance->pointLights_.size());
 	};
 
 	for (auto itr = instance->pointLights_.begin(); itr != instance->pointLights_.end(); itr++)
@@ -74,6 +74,11 @@ void Light::ClearPointLight(PointLight* ptr)
 			itr++;
 		}
 	}
+}
+
+void Light::ClearAllPointLights()
+{
+	GetInstance()->pointLights_.clear();
 }
 
 DirectionalLight Light::sDirectional;

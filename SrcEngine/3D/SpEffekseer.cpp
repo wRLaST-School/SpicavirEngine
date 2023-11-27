@@ -2,6 +2,7 @@
 #include "SpEffekseer.h"
 #include <SpDirectX.h>
 #include <GameManager.h>
+#include <Util.h>
 
 Effekseer::RefPtr<EffekseerRenderer::Renderer> SpEffekseer::sEfkRenderer = nullptr;
 
@@ -11,7 +12,7 @@ Effekseer::RefPtr<EffekseerRenderer::SingleFrameMemoryPool> SpEffekseer::sEfkMem
 
 Effekseer::RefPtr<EffekseerRenderer::CommandList> SpEffekseer::sEfkCmdList;
 
-exc_unordered_map<EffectKey, Effekseer::EffectRef> SpEffekseer::sEffects;
+exc_unordered_map<EffectKey, EffekseerData> SpEffekseer::sEffects;
 
 std::list <EffectKey > SpEffekseer::sPerSceneEffects[2];
 int32_t SpEffekseer::sCurrentSceneResIndex;
@@ -66,15 +67,19 @@ void SpEffekseer::Draw()
 	EffekseerRendererDX12::EndCommandList(sEfkCmdList);
 }
 
-EffectKey SpEffekseer::Load(std::wstring texfolder, std::wstring path, EffectKey key)
+EffectKey SpEffekseer::Load(std::string texfolder, std::string path, EffectKey key)
 {
+	auto ref = Effekseer::Effect::Create(
+		sEfkManager,
+		(const EFK_CHAR*)Util::StrToWStr(path).c_str(),
+		1.0f,
+		(const EFK_CHAR*)Util::StrToWStr(texfolder).c_str()
+	);
+
+	EffekseerData data = { ref, path, texfolder };
+
 	sEffects.Access([&](auto& map) {
-		map.emplace(key, Effekseer::Effect::Create(
-			sEfkManager,
-			(const EFK_CHAR*)path.c_str(),
-			1.0f,
-			(const EFK_CHAR*)texfolder.c_str()
-		));
+		map.emplace(key, data);
 	});
 
 	sPerSceneEffects[sCurrentSceneResIndex].push_back(key);

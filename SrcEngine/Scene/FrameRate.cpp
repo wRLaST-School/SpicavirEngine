@@ -8,21 +8,21 @@
 
 void FrameRate::FrameStartWithWait()
 {
-	if (GameManager::sShowDebug)
-	{
-		SpImGui::Command([&] {
-			if (ImGui::Begin("Frame Rate"))
-			{
-				ImGui::InputInt("Micro Seconds per Frame", &sWaitTimeData.waitTimeBase_);
+	//if (GameManager::sShowDebug)
+	//{
+	//	SpImGui::Command([&] {
+	//		if (ImGui::Begin("Frame Rate"))
+	//		{
+	//			ImGui::InputInt("Micro Seconds per Frame", &sWaitTimeData.waitTimeBase_);
 
-				if (ImGui::Button("Save"))
-				{
-					Util::SerializeData("Assets/Data/frameRate.bin", sWaitTimeData);
-				}
-			}
-			ImGui::End();
-			});
-	}
+	//			if (ImGui::Button("Save"))
+	//			{
+	//				Util::SerializeData("Assets/Data/frameRate.bin", sWaitTimeData);
+	//			}
+	//		}
+	//		ImGui::End();
+	//		});
+	//}
 	timeBeginPeriod(1);
 
 	sFrameend = std::chrono::system_clock::now();

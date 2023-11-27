@@ -4,6 +4,13 @@ class ResourceWindow
 public:
 	void Draw();
 
+	void DrawTextureList();
+	void DrawModelList();
+
+	void DragDropTarget();
+
+	void AdjustLayout();
+
 	static void SDraw();
 
 private:

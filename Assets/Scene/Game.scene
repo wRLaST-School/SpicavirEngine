@@ -1,0 +1,443 @@
+[
+    {
+        "Children": [
+            {
+                "Children": [
+                    {
+                        "Type": "BT::BehaviorTree"
+                    },
+                    {
+                        "Position": {
+                            "X": 0.0,
+                            "Y": 5.0,
+                            "Z": 0.0
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "Scale": {
+                            "X": 1.0,
+                            "Y": 1.0,
+                            "Z": 1.0
+                        },
+                        "Texture": "",
+                        "Type": "Object3D"
+                    }
+                ],
+                "Type": "Boss"
+            },
+            {
+                "Children": [
+                    {
+                        "Position": {
+                            "X": 0.0,
+                            "Y": -9.999999747378752e-05,
+                            "Z": -0.0
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 0.0,
+                            "Y": -0.0,
+                            "Z": 0.0
+                        },
+                        "Scale": {
+                            "X": 30.0,
+                            "Y": 30.0,
+                            "Z": 30.0
+                        },
+                        "Texture": "hexagon",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 36.26713562011719,
+                            "Y": 18.885557174682617,
+                            "Z": -44.3880615234375
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 0.0,
+                            "Y": -0.0,
+                            "Z": 120.56674194335938
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 17.421566009521484,
+                            "Y": 13.297981262207031,
+                            "Z": 50.57891845703125
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -1.4128127077128738e-06,
+                            "Y": 27.894643783569336,
+                            "Z": 48.36358642578125
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 15.601475715637207,
+                            "Y": 49.49755859375,
+                            "Z": -43.25684356689453
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 1.4588753174393787e-06,
+                            "Y": -20.411659240722656,
+                            "Z": 48.36357498168945
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": -42.88410186767578,
+                            "Y": 34.936832427978516,
+                            "Z": -43.25684356689453
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -7.6370744705200195,
+                            "Y": 45.79005432128906,
+                            "Z": 39.77558898925781
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": -7.234198570251465,
+                            "Y": 36.87327194213867,
+                            "Z": 73.06214904785156
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -8.1615638691801e-07,
+                            "Y": -71.45060729980469,
+                            "Z": 48.36356735229492
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": -44.00946807861328,
+                            "Y": 22.312545776367188,
+                            "Z": 27.58531379699707
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -7.6370744705200195,
+                            "Y": -5.248887062072754,
+                            "Z": 39.77558898925781
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.09999999403953552
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 40.47604751586914,
+                            "Y": 27.27627944946289,
+                            "Z": 44.02659225463867
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -1.4128127077128738e-06,
+                            "Y": 27.894643783569336,
+                            "Z": 48.36358642578125
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 46.07371520996094,
+                            "Y": 13.297981262207031,
+                            "Z": -4.497042179107666
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -2.3775048703100765e-06,
+                            "Y": 88.45024871826172,
+                            "Z": 48.36357498168945
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 53.53261184692383,
+                            "Y": 36.87327194213867,
+                            "Z": 28.02629280090332
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 1.6234660904501652e-07,
+                            "Y": -10.894994735717773,
+                            "Z": 48.36358642578125
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 51.7008171081543,
+                            "Y": 27.27627944946289,
+                            "Z": -27.79463005065918
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": -18.681640625,
+                            "Y": 57.915565490722656,
+                            "Z": 58.22769546508789
+                        },
+                        "Scale": {
+                            "X": 0.19486702978610992,
+                            "Y": 0.14056238532066345,
+                            "Z": 0.10000000149011612
+                        },
+                        "Texture": "white",
+                        "Type": "Object3D"
+                    },
+                    {
+                        "Position": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": -0.0
+                        },
+                        "Rotation": {
+                            "W": 1.0,
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 0.0,
+                            "Y": -0.0,
+                            "Z": 90.00001525878906
+                        },
+                        "Scale": {
+                            "X": 1.0,
+                            "Y": 1.0,
+                            "Z": 1.0
+                        },
+                        "Texture": "",
+                        "Type": "Object3D"
+                    }
+                ],
+                "Type": "LevelManager"
+            },
+            {
+                "Children": [
+                    {
+                        "Position": {
+                            "X": 0.7478564977645874,
+                            "Y": 0.0,
+                            "Z": -4.9532270431518555
+                        },
+                        "Rotation": {
+                            "W": 0.6615997552871704,
+                            "X": 0.0,
+                            "Y": -0.7498571872711182,
+                            "Z": 0.0
+                        },
+                        "RotationEuler": {
+                            "X": 0.0,
+                            "Y": 0.0,
+                            "Z": 0.0
+                        },
+                        "Scale": {
+                            "X": 0.0625,
+                            "Y": 0.0625,
+                            "Z": 0.0625
+                        },
+                        "Texture": "",
+                        "Type": "Object3D"
+                    }
+                ],
+                "Type": "Player"
+            }
+        ],
+        "EfkEffects": [
+            {
+                "LineAttack": [
+                    "Assets/Effekseer/Line",
+                    "Assets/Effekseer/Line/Line.efk"
+                ],
+                "Marker": [
+                    "Assets/Effekseer",
+                    "Assets/Effekseer/Marker/Marker.efk"
+                ],
+                "Slash1": [
+                    "Assets/Effekseer/Slash1",
+                    "Assets/Effekseer/Slash1/Slash1.efk"
+                ],
+                "Slash2": [
+                    "Assets/Effekseer/Slash2",
+                    "Assets/Effekseer/Slash2/Slash2.efk"
+                ],
+                "Slash3": [
+                    "Assets/Effekseer/Slash3",
+                    "Assets/Effekseer/Slash3/Slash3.efk"
+                ],
+                "SphereParticle": [
+                    "Assets/Effekseer/Sphere",
+                    "Assets/Effekseer/Sphere/sphere.efk"
+                ]
+            }
+        ],
+        "Models": [
+            {
+                "Boss": "Assets/Models/Boss/boss.glb",
+                "Cube": "Assets/Models/cube/cube.obj",
+                "PlayerIdle": "Assets/Models/Player/Idle.gltf",
+                "PlayerRoll": "Assets/Models/Player/Roll.gltf",
+                "PlayerRun": "Assets/Models/Player/Run.gltf",
+                "PlayerSlash1": "Assets/Models/Player/Slash1.gltf",
+                "PlayerSlash2": "Assets/Models/Player/Slash2.gltf",
+                "PlayerSlash3": "Assets/Models/Player/Slash3.gltf",
+                "Sky": "Assets/Models/skydome/skydome.obj",
+                "Sphere": "Assets/Models/Sphere/Sphere.obj",
+                "Triangle": "Assets/Models/triangle/triangle.obj",
+                "cube": "Assets/Models/Cube/Cube.obj",
+                "floor": "Assets/Models/Floor.glb"
+            }
+        ],
+        "Sounds": [
+            {
+                "LineAttack": "Assets/Sounds/LineAttack.wav",
+                "RushImpact": "Assets/Sounds/RushImpact.wav",
+                "Slash12": "Assets/Sounds/Slash12.wav",
+                "Slash3": "Assets/Sounds/Slash3.wav",
+                "counterSuccess": "Assets/Sounds/counterSuccess.wav",
+                "dodge": "Assets/Sounds/dodge.wav",
+                "marker": "Assets/Sounds/marker.wav",
+                "takeDamage": "Assets/Sounds/takeDamage.wav"
+            }
+        ],
+        "Textures": [
+            {
+                "BasicParticle": "Assets/Images/circleParticle.png",
+                "Stars.png": "Assets/Models/skydome/Stars.png",
+                "asmptex:Assets/Models/PlayerSkin.png": "Assets/Models/Player/Skin.png",
+                "black": "Assets/Images/black.png",
+                "hexagon": "Assets/Images/hexagonPattern.jpg",
+                "scoreBase": "Assets/Images/ScoreBase.png",
+                "scoreOverlay": "Assets/Images/ScoreTierOverlay.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

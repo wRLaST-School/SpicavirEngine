@@ -32,7 +32,7 @@ void AssetBrowser::OnImGuiRender()
 
 	float panelW = ImGui::GetContentRegionAvail().x;
 
-	int columnCount = static_cast<int>(panelW / cellSize);
+	int32_t columnCount = static_cast<int>(panelW / cellSize);
 
 	//1つも入らないときも1つは入れる(0だとエラーになる)
 	if (columnCount < 1)
@@ -115,7 +115,7 @@ void AssetBrowser::OnImGuiRender()
 						(ImTextureID)SpTextureManager::GetGPUDescHandle("Engine_FileIcon").ptr,
 						{ thumbnailSize, thumbnailSize });
 				}
-			}
+			}//画像ファイルの場合の処理ここまで
 			else
 			{
 				ImGui::ImageButton("buttonTag",
@@ -198,9 +198,11 @@ void AssetBrowser::LoadResources()
 {
 	SpTextureManager::LoadTexture("Resources/icons/folder.png", "Engine_FolderIcon");
 	SpTextureManager::LoadTexture("Resources/icons/file.png", "Engine_FileIcon");
+	SpTextureManager::LoadTexture("Resources/icons/3d-file.png", "Engine_3DFileIcon");
 
 	SpTextureManager::AddMasterTextureKey("Engine_FolderIcon");
 	SpTextureManager::AddMasterTextureKey("Engine_FileIcon");
+	SpTextureManager::AddMasterTextureKey("Engine_3DFileIcon");
 }
 
 AssetBrowser* AssetBrowser::GetInstance()

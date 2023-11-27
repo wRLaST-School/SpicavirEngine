@@ -92,9 +92,9 @@ void Camera::UseCurrent()
 	std::function<Effekseer::Matrix44(Matrix)> SpMatToEfkMat = [](Matrix in) {
 		Effekseer::Matrix44 out;
 
-		for (int i = 0; i < 4; i++)
+		for (int32_t i = 0; i < 4; i++)
 		{
-			for (int j = 0; j < 4; j++)
+			for (int32_t j = 0; j < 4; j++)
 			{
 				out.Values[i][j] = in[i][j];
 			}

@@ -1,0 +1,19 @@
+[
+    {
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {}
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "titleText": "Assets/Images/title.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

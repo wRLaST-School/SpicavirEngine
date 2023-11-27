@@ -42,7 +42,7 @@ inline void StructuredBuffer<Contents>::Init()
 	auto dev = GetSpDX()->dev;
 	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(m_sizeOfElement * m_numElement);
 	desc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
-	int bufferNo = 0;
+	int32_t bufferNo = 0;
 
 	D3D12_HEAP_PROPERTIES prop{};
 	prop.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;

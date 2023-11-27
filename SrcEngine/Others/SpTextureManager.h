@@ -8,6 +8,7 @@ typedef size_t SRVHeapIndex;
 const size_t wMaxSRVCount = 1024;
 
 class ResourceWindow;
+class SceneRW;
 
 class SpTextureManager
 {
@@ -15,9 +16,13 @@ private:
 	struct TexData {
 		DirectX::TexMetadata meta;
 		Float2 ratio = { 0.f, 0.f }; //xがゼロ以外なら画面比率
+		std::string filePath;
 	};
 public:
+	//リソースウィンドウに一覧を表示するため
 	friend ResourceWindow;
+	//シーン情報書き込みで使用するため
+	friend SceneRW;
 
 	static void Create();
 	static void Init();

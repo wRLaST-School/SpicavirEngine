@@ -70,9 +70,45 @@ void Object3D::DecomposeMatrix()
 
 void Object3D::Draw()
 {
-	if (texture != "")
-		Draw(texture);
+	//モデルが設定されていないならなにもしない
+	if (!model)
+	{
+		return;
+	}
 
+	bool hasTexture = texture != "";
+	
+	//ブレンドモード・テクスチャ指定によって描画関数を変更
+	switch (blendMode)
+	{
+	case Object3D::BlendMode::Opaque:
+		if (hasTexture) {
+			return Draw(texture);
+		}
+		break;
+	case Object3D::BlendMode::Add:
+		if (hasTexture) {
+			return DrawAdd(texture);
+		}
+		else
+		{
+			return DrawAdd();
+		}
+		break;
+	case Object3D::BlendMode::Alpha:
+		if (hasTexture) {
+			return DrawAlpha(texture);
+		}
+		else
+		{
+			return DrawAlpha();
+		}
+		break;
+	default:
+		break;
+	}
+
+	//以下不透明テクスチャ指定なし描画
 	transformCB.contents->mat = matWorld;
 
 	SpRenderer::DrawCommand([&] {
@@ -257,8 +293,9 @@ void Object3D::DrawGizmo()
 	ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, 
 		ImGui::GetWindowWidth(), ImGui::GetWindowHeight());
 
+	ImGuizmo::AllowAxisFlip(true);
+
 	static ImGuizmo::OPERATION mCurrentGizmoOperation(ImGuizmo::TRANSLATE);
-	static ImGuizmo::MODE mCurrentGizmoMode(ImGuizmo::WORLD);
 
 	ImGuizmo::Enable(true);
 
@@ -275,7 +312,7 @@ void Object3D::DrawGizmo()
 	UpdateMatrix();
 
 	ImGuizmo::Manipulate(reinterpret_cast<float*>(&view),
-		reinterpret_cast<float*>(&proj), mCurrentGizmoOperation, mCurrentGizmoMode, &matWorld[0][0], NULL, NULL);
+		reinterpret_cast<float*>(&proj), mCurrentGizmoOperation, ImGuizmo::WORLD, &matWorld[0][0], NULL, NULL);
 
 	if (ImGuizmo::IsUsing())
 	{
@@ -288,4 +325,28 @@ void Object3D::DrawGizmo()
 
 		UpdateMatrix();
 	}
+}
+
+void Object3D::WriteParamJson(nlohmann::json& jsonObject)
+{
+	nlohmann::json obj;
+
+	jsonObject["Position"]["X"] = position.x;
+	jsonObject["Position"]["Y"] = position.y;
+	jsonObject["Position"]["Z"] = position.z;
+
+	jsonObject["Scale"]["X"] = scale.x;
+	jsonObject["Scale"]["Y"] = scale.y;
+	jsonObject["Scale"]["Z"] = scale.z;
+
+	jsonObject["Rotation"]["X"] = rotation.v.x;
+	jsonObject["Rotation"]["Y"] = rotation.v.y;
+	jsonObject["Rotation"]["Z"] = rotation.v.z;
+	jsonObject["Rotation"]["W"] = rotation.w;
+
+	jsonObject["RotationEuler"]["X"] = rotationE.x;
+	jsonObject["RotationEuler"]["Y"] = rotationE.y;
+	jsonObject["RotationEuler"]["Z"] = rotationE.z;
+
+	jsonObject["Texture"] = texture;
 }

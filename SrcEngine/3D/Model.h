@@ -161,6 +161,8 @@ public:
 	std::vector<SpConstBuffer<ConstBufferDataMaterial>> materialCBs;
 	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
 
+	std::string filePath;
+
 	Model operator= (Model& m) = delete;
 
 	float aniSpeed = 1.f;
@@ -172,9 +174,18 @@ private:
 
 typedef std::string ModelKey;
 
+class ResourceWindow;
+class SceneRW;
+
 class ModelManager
 {
 public:
+	//リソースウィンドウで読み込まれているモデルを表示したいため
+	friend ResourceWindow;
+
+	//シーン情報書き込みで使用するため
+	friend SceneRW;
+
 	static void Register(const std::string& modelName, const ModelKey& key);
 	static void Register(const std::string& modelPath, const ModelKey& key, bool useAssimp);
 
