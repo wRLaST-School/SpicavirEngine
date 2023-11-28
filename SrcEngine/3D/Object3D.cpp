@@ -327,10 +327,30 @@ void Object3D::DrawGizmo()
 	}
 }
 
+void Object3D::ReadParamJson(const nlohmann::json& jsonObject)
+{
+	position.x = jsonObject["Position"]["X"];
+	position.y = jsonObject["Position"]["Y"];
+	position.z = jsonObject["Position"]["Z"];
+
+	scale.x = jsonObject["Scale"]["X"];
+	scale.y = jsonObject["Scale"]["Y"];
+	scale.z = jsonObject["Scale"]["Z"] ;
+
+	rotation.v.x = jsonObject["Rotation"]["X"];
+	rotation.v.y = jsonObject["Rotation"]["Y"];
+	rotation.v.z = jsonObject["Rotation"]["Z"];
+	rotation.w   = jsonObject["Rotation"]["W"];
+
+	rotationE.x = jsonObject["RotationEuler"]["X"];
+	rotationE.y = jsonObject["RotationEuler"]["Y"];
+	rotationE.z = jsonObject["RotationEuler"]["Z"];
+
+	texture = jsonObject["Texture"];
+}
+
 void Object3D::WriteParamJson(nlohmann::json& jsonObject)
 {
-	nlohmann::json obj;
-
 	jsonObject["Position"]["X"] = position.x;
 	jsonObject["Position"]["Y"] = position.y;
 	jsonObject["Position"]["Z"] = position.z;
