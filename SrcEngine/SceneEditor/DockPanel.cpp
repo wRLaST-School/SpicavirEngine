@@ -7,6 +7,7 @@
 #include <Object3D.h>
 #include <SceneManager.h>
 #include <SceneRW.h>
+#include <SceneFromFile.h>
 
 void DockPanel::EnableScreenDock()
 {
@@ -172,11 +173,14 @@ void DockPanel::DrawLoadDialog()
 
 	if (ImGui::Begin("SaveScenePopup", NULL, ImGuiWindowFlags_Modal | ImGuiWindowFlags_NoResize))
 	{
-		ImGui::Text("This Function is Not Supported Yet");
+		ImGui::Text("This Feature is Not Fully Supported Yet");
 
 		if (ImGui::Button("OK"))
 		{
 			showLoadDialog = false;
+
+			SceneManager::LoadScene<SceneFromFile>("Assets/Scene/Game.scene");
+			SceneManager::WaitForLoadAndTransition();
 		}
 	}
 	ImGui::End();

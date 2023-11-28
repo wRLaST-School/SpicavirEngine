@@ -529,6 +529,9 @@
       <Filter>Application\ソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp">
+      <Filter>Engine\ソースファイル\SceneEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFromFile.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -885,6 +888,9 @@
       <Filter>Application\ヘッダーファイル</Filter>
     </ClInclude>
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h">
+      <Filter>Engine\ヘッダーファイル\SceneEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFromFile.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

@@ -65,7 +65,7 @@ void SceneRW::SaveSounds(json& dist)
 	dist.push_back(sounds);
 }
 
-void SceneRW::SaveEffekseers(json& dist)
+void SceneRW::SaveEfkEffects(json& dist)
 {
 	std::map<EffectKey, std::pair<std::string, std::string>> keyAndPath;
 
@@ -106,7 +106,7 @@ void SceneRW::SaveScene(IScene* scene, std::string filePath)
 	SaveTextures((*outputObj.begin())["Textures"]);
 	SaveModels((*outputObj.begin())["Models"]);
 	SaveSounds((*outputObj.begin())["Sounds"]);
-	SaveEffekseers((*outputObj.begin())["EfkEffects"]);
+	SaveEfkEffects((*outputObj.begin())["EfkEffects"]);
 
 	//ファイル書き込み
 	std::ofstream file;
@@ -118,18 +118,12 @@ void SceneRW::SaveScene(IScene* scene, std::string filePath)
 	file.close();
 }
 
-void SceneRW::ConfirmLoadScene()
+void SceneRW::LoadScene(IScene* scene, std::string filePath)
 {
-	//TODO:新フォーマットに対応
-	if (!GetInstance()->waitingForLoad_)
-	{
-		return;
-	}
-
 	//ファイル読み込み
 	std::ifstream file;
 
-	file.open(GetInstance()->filePath_);
+	file.open(filePath);
 
 	if (file.fail())
 	{
@@ -139,51 +133,91 @@ void SceneRW::ConfirmLoadScene()
 	json deserialized;
 	file >> deserialized;
 
-	//シーンのリセット
-	GetInstance()->scene_->ClearAllComponents();
+	LoadResources(deserialized);
 
 	//ツリーの構築
 	//読み込みの再起関数
 	function<void(const json& object, IComponent* current)> processNode = [&](const json& object, IComponent* current)
 	{
-		string componentType = object["ComponentType"].get<string>();
+		string componentType = object["Type"].get<string>();
 
 		auto child = ComponentFactory::AddChildComponent(current, componentType, componentType);
+		child->ReadParamJson(object);
 
 		//子ノードの読み込み
 		if (object.contains("Children"))
 		{
 			for (auto& node : object["Children"])
 			{
-				for (auto& singleNode : node)
-				{
-					processNode(singleNode, child);
-				}
+				processNode(node, child);
 			}
 		}
 	};
 
 	//読み込み再起関数呼び出し
-	if (deserialized["Component0"].contains("Children"))
+	if (deserialized.front().contains("Children"))
 	{
-		for (auto& node : deserialized["Component0"]["Children"])
+		for (auto& node : deserialized.front()["Children"])
 		{
-			processNode(node["Component0"], GetInstance()->scene_);
+			processNode(node, scene);
 		}
 	}
 
 	file.close();
-
-	IComponent::InitAllChildComponents(GetInstance()->scene_);
-
-	GetInstance()->waitingForLoad_ = false;
 }
 
-void SceneRW::LoadScene(IScene* scene, std::string filePath)
+void SceneRW::LoadResources(nlohmann::json& root)
 {
-	GetInstance()->scene_ = scene;
-	GetInstance()->filePath_ = filePath;
-	GetInstance()->waitingForLoad_ = true;
+	SpTextureManager::PreLoadNewScene();
+	ModelManager::PreLoadNewScene();
+	SoundManager::PreLoadNewScene();
+	SpEffekseer::PreLoadNewScene();
+
+	LoadTextures(root.front()["Textures"]);
+	LoadModels(root.front()["Models"]);
+	LoadSounds(root.front()["Sounds"]);
+	LoadEfkEffects(root.front()["EfkEffects"]);
+}
+
+void SceneRW::LoadTextures(nlohmann::json& textures)
+{
+	std::map<TextureKey, std::string> tempMap = textures.front().get<std::map<TextureKey, std::string>>();
+
+	for (auto& tex : tempMap)
+	{
+		SpTextureManager::LoadTexture(tex.second, tex.first);
+	}
+}
+
+void SceneRW::LoadModels(nlohmann::json& models)
+{
+	std::map<ModelKey, std::string> tempMap = models.front().get<std::map<ModelKey, std::string>>();
+
+	for (auto& model : tempMap)
+	{
+		ModelManager::Register(model.second, model.first, true);
+	}
+}
+
+void SceneRW::LoadSounds(nlohmann::json& sounds)
+{
+	std::map<SoundKey, std::string> tempMap = sounds.front().get<std::map<SoundKey, std::string>>();
+
+	for (auto& sound : tempMap)
+	{
+		SoundManager::LoadWave(sound.second, sound.first);
+	}
+}
+
+void SceneRW::LoadEfkEffects(nlohmann::json& efks)
+{
+	std::map<EffectKey, std::pair<std::string, std::string>> tempMap 
+		= efks.front().get<std::map<EffectKey, std::pair<std::string, std::string>>>();
+
+	for (auto& effect : tempMap)
+	{
+		SpEffekseer::Load(effect.second.first, effect.second.second, effect.first);
+	}
 }
 
 SceneRW* SceneRW::GetInstance()

@@ -5,6 +5,7 @@
 #include <Object3D.h>
 #include <BehaviorTree.h>
 #include <IScene.h>
+#include <LevelManager.h>
 
 //Application Side
 #include <Player.h>
@@ -17,6 +18,7 @@ void CustomComponentRegisterer::CallRegisters()
 	PointLight::RegisterToComponentFactory();
 	Object3D::RegisterToComponentFactory();
 	BT::BehaviorTree::RegisterToComponentFactory();
+	LevelManager::RegisterToComponentFactory();
 
 	//Application Side
 	Player::RegisterToComponentFactory();
