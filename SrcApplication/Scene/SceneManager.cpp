@@ -133,6 +133,11 @@ SceneManager::LoadState SceneManager::GetLoadState()
 	return loadState;
 }
 
+IScene* SceneManager::GetScene()
+{
+	return currentScene.get();
+}
+
 template <class NextScene> void SceneManager::InstantTransition()
 {
 	currentScene.release();

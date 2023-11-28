@@ -122,6 +122,8 @@ void CameraController::Update()
 	default:
 		break;
 	}
+
+	Set();
 }
 
 void CameraController::Set()

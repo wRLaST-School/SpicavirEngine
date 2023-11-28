@@ -35,6 +35,9 @@
                 "Type": "Boss"
             },
             {
+                "Type": "CameraController"
+            },
+            {
                 "Children": [
                     {
                         "Position": {
@@ -340,17 +343,20 @@
                 "Type": "LevelManager"
             },
             {
+                "Type": "MainTimer"
+            },
+            {
                 "Children": [
                     {
                         "Position": {
-                            "X": 0.7478564977645874,
+                            "X": 0.0,
                             "Y": 0.0,
-                            "Z": -4.9532270431518555
+                            "Z": -5.0
                         },
                         "Rotation": {
-                            "W": 0.6615997552871704,
+                            "W": 1.0,
                             "X": 0.0,
-                            "Y": -0.7498571872711182,
+                            "Y": 0.0,
                             "Z": 0.0
                         },
                         "RotationEuler": {

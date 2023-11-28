@@ -150,6 +150,17 @@ void SpFramework::Run()
 			InspectorWindow::SDraw();
 
 			ResourceWindow::SDraw();
+
+			SpImGui::Command([&] {
+				if (ImGui::Begin("Game Scene"))
+				{
+					ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
+					ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
+					ImGui::Checkbox("Debug Immunity", &GameManager::sDebugImmunity);
+					ImGui::Checkbox("Pause Game", &GameManager::sDebugTimeStop);
+				}
+				ImGui::End();
+				});
 		}
 
 		GetSpDX()->PreDrawCommands();
