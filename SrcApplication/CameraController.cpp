@@ -14,6 +14,8 @@ void CameraController::Init()
 	cam_->position = { 0, 3, -10 };
 
 	freeCamRot_ = {PIf / 4, 0.f};
+
+	Set(this);
 }
 
 void CameraController::Update()
