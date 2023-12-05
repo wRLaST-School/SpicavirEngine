@@ -21,6 +21,8 @@ class Camera :
     public Object3D
 {
 public:
+    ComponentFactoryRegister(Camera)
+
     Camera();
     void SetRenderSize(float w, float h);
     void UseDefaultParams();

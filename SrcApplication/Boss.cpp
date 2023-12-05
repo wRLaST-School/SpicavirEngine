@@ -94,7 +94,7 @@ void Boss::Update()
 
 	GameManager::sScore.Update();
 
-	if (MainTimer::timerSec <= 0 || GameManager::sScore.totDamage >= GameManager::sScore.gradeMax)
+	if (SceneManager::GetScene()->GetComponent<MainTimer>("MainTimer")->timerSec <= 0 || GameManager::sScore.totDamage >= GameManager::sScore.gradeMax)
 	{
 		Transition::Start<ResultScene>();
 	}
@@ -216,6 +216,11 @@ Boss* Boss::Get()
 void Boss::Set(Boss* boss)
 {
 	sCurrent = boss;
+}
+
+Boss::Boss()
+{
+	Set(this);
 }
 
 void Boss::InitBehaviorTree()

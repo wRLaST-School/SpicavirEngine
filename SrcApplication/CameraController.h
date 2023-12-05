@@ -1,9 +1,11 @@
 #pragma once
 #include <Camera.h>
 
-class CameraController
+class CameraController : public IComponent
 {
 public:
+	ComponentFactoryRegister(CameraController)
+
 	enum class Mode {
 		Target,
 		Free

@@ -7,11 +7,11 @@ public:
 	static void Update();
 	static void Draw();
 
-	template <class NextScene>
-	static void Start() {
+	template <class NextScene, class ...Args>
+	static void Start(Args... args) {
 		if (!started)
 		{
-			SceneManager::LoadScene<NextScene>();
+			SceneManager::LoadScene<NextScene>(args...);
 			started = true;
 			timer = 0;
 		}
@@ -22,6 +22,5 @@ private:
 	static bool started;
 	const static int32_t blackOutTime = 60;
 	const static int32_t totalTime = 120;
-	
 };
 

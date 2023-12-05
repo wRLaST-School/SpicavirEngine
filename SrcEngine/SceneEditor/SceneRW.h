@@ -14,16 +14,18 @@ public:
 	static void SaveTextures(nlohmann::json& dist);
 	static void SaveModels(nlohmann::json& dist);
 	static void SaveSounds(nlohmann::json& dist);
-	static void SaveEffekseers(nlohmann::json& dist);
-
-	static void ConfirmLoadScene();
+	static void SaveEfkEffects(nlohmann::json& dist);
 
 	static void LoadScene(IScene* scene, std::string filePath);
 
-private:
-	IScene* scene_;
-	std::string filePath_;
+	static void LoadResources(nlohmann::json& root);
 
+	static void LoadTextures(nlohmann::json& textures);
+	static void LoadModels(nlohmann::json& models);
+	static void LoadSounds(nlohmann::json& sounds);
+	static void LoadEfkEffects(nlohmann::json& efks);
+
+private:
 	bool waitingForLoad_ = false;
 
 public://singleton

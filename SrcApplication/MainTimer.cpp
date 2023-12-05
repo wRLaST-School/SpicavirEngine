@@ -6,31 +6,31 @@
 
 void MainTimer::Load()
 {
-	SpTextureManager::LoadDiv("Assets/Images/Numbers.png", 115, 93, 10, 1, sNumbers);
+	SpTextureManager::LoadDiv("Assets/Images/Numbers.png", 115, 93, 10, 1, numbers_);
 }
 
 void MainTimer::Init()
 {
 	timerSec = 120;
-	sFrameTimer = 60;
+	frameTimer_ = 60;
 }
 
 void MainTimer::Update()
 {
 	if (!GameManager::sDebugImmunity)
 	{
-		if (sDamageTimer > 0)
+		if (damageTimer_ > 0)
 		{
-			sDamageTimer--;
+			damageTimer_--;
 		}
 
-		if (sFrameTimer >= 60)
+		if (frameTimer_ >= 60)
 		{
 			timerSec--;
-			sFrameTimer = 0;
+			frameTimer_ = 0;
 		}
 		else
-			sFrameTimer++;
+			frameTimer_++;
 	}
 }
 
@@ -54,31 +54,12 @@ void MainTimer::Draw()
 			(int32_t)((GetSpWindow()->width - drawPosTR.x) - (float)numWidth * ((float)i + 0.5f)),
 			(int32_t)drawPosTR.y + 48,
 			1.f, 1.f, 0.f,
-			sNumbers.at(digis[i]), Anchor::Center,
-			(sDamageTimer % 20 >= 10) ? Color::Red : Color::White);
+			numbers_.at(digis[i]), Anchor::Center,
+			(damageTimer_ % 20 >= 10) ? Color::Red : Color::White);
 	}
 }
 
 void MainTimer::Damage()
 {
-	sDamageTimer = 60;
+	damageTimer_ = 60;
 }
-
-int32_t MainTimer::timerSec = 120;
-
-int32_t MainTimer::sFrameTimer = 60;
-
-int32_t MainTimer::sDamageTimer = 0;
-
-std::vector<TextureKey> MainTimer::sNumbers ={
-		"num_0",
-		"num_1",
-		"num_2",
-		"num_3",
-		"num_4",
-		"num_5",
-		"num_6",
-		"num_7",
-		"num_8",
-		"num_9"
-};

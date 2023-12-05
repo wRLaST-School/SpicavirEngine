@@ -31,8 +31,6 @@ void SceneManager::Update()
 	UpdateLoadState();
 	Transition::Update();
 
-	SceneRW::ConfirmLoadScene();
-
 	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
@@ -133,6 +131,11 @@ void SceneManager::ReleaseScene()
 SceneManager::LoadState SceneManager::GetLoadState()
 {
 	return loadState;
+}
+
+IScene* SceneManager::GetScene()
+{
+	return currentScene.get();
 }
 
 template <class NextScene> void SceneManager::InstantTransition()

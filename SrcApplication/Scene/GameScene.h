@@ -5,6 +5,7 @@
 #include <Boss.h>
 #include <Player.h>
 #include <CameraController.h>
+#include <MainTimer.h>
 class GameScene :
     public IScene
 {
@@ -21,6 +22,7 @@ private:
     Boss* boss_;
     Player* player_;
 
-    CameraController cam_;
+    CameraController* cam_;
+    MainTimer* timer_;
 };
 

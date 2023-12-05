@@ -9,6 +9,7 @@
 #include <MainTimer.h>
 #include <GameManager.h>
 #include <PointLight.h>
+#include <SceneManager.h>
 
 void Player::Load()
 {
@@ -218,8 +219,8 @@ void Player::Damage()
 				//SE再生
 				SoundManager::Play("takeDamage");
 
-				MainTimer::timerSec -= 5;
-				MainTimer::Damage();
+				SceneManager::GetScene()->GetComponent<MainTimer>("MainTimer")->timerSec -= 5;
+				SceneManager::GetScene()->GetComponent<MainTimer>("MainTimer")->Damage();
 			}
 		}
 		else
@@ -575,6 +576,11 @@ Player* Player::Get()
 void Player::Set(Player* player)
 {
 	sCurrent = player;
+}
+
+Player::Player()
+{
+	Set(this);
 }
 
 Player* Player::sCurrent = nullptr;

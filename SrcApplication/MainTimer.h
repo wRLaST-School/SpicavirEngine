@@ -1,21 +1,35 @@
 #pragma once
 #include <SpTextureManager.h>
-class MainTimer
+#include <ComponentFactory.h>
+class MainTimer : public IComponent
 {
 public:
-	static void Load();
-	static void Init();
+	ComponentFactoryRegister(MainTimer)
 
-	static void Update();
-	static void Draw();
+	void Load();
+	void Init();
 
-	static void Damage();
+	void Update();
+	void Draw();
 
-	static int32_t timerSec;
+	void Damage();
+
+	int32_t timerSec = 120;
 
 private:
-	static int32_t sFrameTimer;
-	static const int32_t FRAME_TIME = 60;
-	static std::vector<TextureKey> sNumbers;
-	static int32_t sDamageTimer;
+	int32_t frameTimer_ = 60;
+	const int32_t FRAME_TIME = 60;
+	std::vector<TextureKey> numbers_ = {
+		"num_0",
+		"num_1",
+		"num_2",
+		"num_3",
+		"num_4",
+		"num_5",
+		"num_6",
+		"num_7",
+		"num_8",
+		"num_9"
+	};
+	int32_t damageTimer_ = 0;
 };
