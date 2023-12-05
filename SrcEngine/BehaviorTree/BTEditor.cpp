@@ -45,9 +45,10 @@ void BTEditor::Draw()
                 ImGui::EndMenuBar();
             }
 
-            char path[256];
+			const uint32_t bufLength = 256;
+            char path[bufLength];
             strcpy_s(path, GetInstance()->filePath.c_str());
-            ImGui::InputText("FilePath", path, 256);
+            ImGui::InputText("FilePath", path, bufLength);
 
             GetInstance()->filePath = path;
 

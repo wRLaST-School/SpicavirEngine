@@ -5,7 +5,6 @@
 #include <LevelManager.h>
 #include <SpEffekseer.h>
 #include <SoundManager.h>
-#include <MainTimer.h>
 #include <GameManager.h>
 #include <SpImGui.h>
 
@@ -22,9 +21,9 @@ void GameScene::LoadResources()
 	SpTextureManager::LoadTexture("Assets/Images/circleParticle.png", "BasicParticle");
 	SpTextureManager::LoadTexture("Assets/Images/black.png", "black");
 	SpTextureManager::LoadTexture("Assets/Images/hexagonPattern.jpg", "hexagon");
-	SpEffekseer::Load(L"Assets/Effekseer", L"Assets/Effekseer/Marker/Marker.efk", "Marker");
-	SpEffekseer::Load(L"Assets/Effekseer/Line", L"Assets/Effekseer/Line/Line.efk", "LineAttack");
-	SpEffekseer::Load(L"Assets/Effekseer/Sphere", L"Assets/Effekseer/Sphere/sphere.efk", "SphereParticle");
+	SpEffekseer::Load("Assets/Effekseer", "Assets/Effekseer/Marker/Marker.efk", "Marker");
+	SpEffekseer::Load("Assets/Effekseer/Line", "Assets/Effekseer/Line/Line.efk", "LineAttack");
+	SpEffekseer::Load("Assets/Effekseer/Sphere", "Assets/Effekseer/Sphere/sphere.efk", "SphereParticle");
 
 	SoundManager::LoadWave("Assets/Sounds/counterSuccess.wav", "counterSuccess");
 	SoundManager::LoadWave("Assets/Sounds/dodge.wav", "dodge");
@@ -34,19 +33,21 @@ void GameScene::LoadResources()
 	SoundManager::LoadWave("Assets/Sounds/Slash12.wav", "Slash12");
 	SoundManager::LoadWave("Assets/Sounds/takeDamage.wav", "takeDamage");
 	SoundManager::LoadWave("Assets/Sounds/RushImpact.wav", "RushImpact");
-
-	MainTimer::Load();
 }
 
 void GameScene::Init()
 {
 	AddComponent<Player>("Player");
 	AddComponent<Boss>("Boss");
+	cam_ = AddComponent<CameraController>("CameraCtrl");
 
 	player_ = GetComponent<Player>("Player");
 	boss_ = GetComponent<Boss>("Boss");
 
 	AddComponent<LevelManager>("Level Manager");
+
+	timer_ = AddComponent<MainTimer>("MainTimer");
+	
 	Boss::Set(boss_);
 	Player::Set(player_);
 
@@ -55,18 +56,13 @@ void GameScene::Init()
 
 	Light::sDirectional.direction = Vec3(1, -1, 0).GetNorm();
 
-	cam_.Init();
+	cam_->Init();
 
-	CameraController::Set(&cam_);
-
-	MainTimer::Init();
+	CameraController::Set(cam_);
 }
 
 void GameScene::Update()
 {
-	cam_.Update();
-
-	MainTimer::Update();
 }
 
 void GameScene::DrawBack()
@@ -75,24 +71,8 @@ void GameScene::DrawBack()
 
 void GameScene::Draw3D()
 {
-	cam_.Set();
-
-	MainTimer::Draw();
 }
 
 void GameScene::DrawSprite()
 {
-	if (GameManager::sShowDebug)
-	{
-		SpImGui::Command([&] {
-			if (ImGui::Begin("Game Scene"))
-			{
-				ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
-				ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
-				ImGui::Checkbox("Debug Immunity", &GameManager::sDebugImmunity);
-				ImGui::Checkbox("Pause Game", &GameManager::sDebugTimeStop);
-			}
-			ImGui::End();
-			});
-	}
 }

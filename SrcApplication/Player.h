@@ -109,6 +109,8 @@ public:
 
     static void Set(Player* player);
 
+    Player();
+
     Object3D* obj_;
 
 private:

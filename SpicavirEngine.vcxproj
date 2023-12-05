@@ -175,6 +175,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="ClientScene.cpp" />
     <ClCompile Include="ServerScene.cpp" />
+    <ClCompile Include="SceneFromFile.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ComponentFactory.cpp" />
     <ClCompile Include="SrcApplication\CustomComponentRegisterer.cpp" />
@@ -294,6 +295,7 @@
     <ClInclude Include="Circle.h" />
     <ClInclude Include="ClientScene.h" />
     <ClInclude Include="ServerScene.h" />
+    <ClInclude Include="SceneFromFile.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ComponentFactory.h" />
     <ClInclude Include="SrcApplication\CustomComponentRegisterer.h" />

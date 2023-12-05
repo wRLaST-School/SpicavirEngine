@@ -54,6 +54,8 @@ public:
 	//現在のシーン読み込みの状態を取得
 	static LoadState GetLoadState();
 
+	static IScene* GetScene();
+
 	static std::unique_ptr<IScene> currentScene;
 	static std::unique_ptr<IScene> nextScene;
 

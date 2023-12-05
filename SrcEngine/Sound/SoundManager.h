@@ -39,6 +39,8 @@ public:
 
 	IXAudio2SourceVoice* sound;
 
+	std::string filePath;
+
 	void Release() {
 		if (sound != nullptr)
 		{
@@ -54,8 +56,13 @@ public:
 	}
 };
 
+class SceneRW;
+
 class SoundManager {
 public:
+	//シーン情報書き込みで使用するため
+	friend SceneRW;
+
 	static SoundManager* GetInstance();
 	static void Init();
 

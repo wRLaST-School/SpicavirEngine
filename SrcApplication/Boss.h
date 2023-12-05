@@ -33,6 +33,8 @@ public:
     //Object3D
     Object3D* obj_;
 
+    Boss();
+
 public:
     void InitBehaviorTree();
 
