@@ -8,4 +8,16 @@ public:
 	inline static bool sDebugTimeStop = false;
 	inline static std::string IP = "";
 	inline static bool isServer = false;
+
+	inline static enum class GameState {
+		NotInGame,
+		ClientPlacing,
+		ServerPlaying,
+		ClientPowerUp
+	} gameState = GameState::NotInGame;
+
+	inline static bool serverReady = false;
+	inline static bool clientReady = false;
+
+	static void ManageGameState();
 };

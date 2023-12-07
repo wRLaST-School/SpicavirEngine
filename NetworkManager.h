@@ -3,11 +3,15 @@
 #include <ComponentFactory.h>
 
 struct ServerSideData {
-
+    Vec2 playerPos;
+    int playerHealth;
 };
 
 struct ClientSideData {
-
+    float powSiz = 32.f;
+    int powNumBul = 4;
+    float powSpd = 10.0f;
+    int powGain = 50;
 };
 
 class NetworkManager :

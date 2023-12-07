@@ -57,7 +57,7 @@ public:
 	//指定したキーのコンポーネントのポインタを一つ取得
 	//該当要素が複数ある場合の動作は保証しない
 	IComponent* GetComponent(const std::string& key);
-	
+
 	//指定したキーのコンポーネントをTypeで指定した型のポインタにして一つ取得
 	//該当要素が複数ある場合の動作は保証しない
 	template <class Type> Type* GetComponent(const std::string& key);
@@ -88,7 +88,7 @@ public:
 
 	//読み書きに使う関数
 	/*
-	* "ComponentType":"BraBra", 
+	* "ComponentType":"BraBra",
 	* "ComponentParams":[
 	*	{
 	*		この中の部分を実装
@@ -100,7 +100,7 @@ public:
 	/*
 	* obj["ComponentParams"]のオブジェクトを受け取る
 	*/
-	virtual void ReadParamJson([[maybe_unused]]const nlohmann::json& paramsObject) {};
+	virtual void ReadParamJson([[maybe_unused]] const nlohmann::json& paramsObject) {};
 
 	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
 	virtual void DrawParams();
@@ -113,7 +113,7 @@ public:
 
 	//components_の中身をHierarchy Panelからのみ直接操作したいため
 	friend HierarchyPanel;
-	
+
 protected:
 	std::string name_ = "";
 
@@ -122,8 +122,7 @@ protected:
 	IComponent* parent_ = nullptr;
 
 private:
-	eastl::multimap<std::string, eastl::unique_ptr<IComponent>>::iterator childRemovedNewItr_;
-
+	std::optional<eastl::multimap<std::string, eastl::unique_ptr<IComponent>>::iterator> childRemovedNewItr_;
 };
 
 template<class Type, class ...Args>

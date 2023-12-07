@@ -24,6 +24,9 @@ void Vec2::SetY(float y_)
 void Vec2::SetLength(float l)
 {
 	float len2 = this->GetLength();
+
+	if (len2 == 0) return;
+
 	float mul = l / len2;
 	x *= mul;
 	y *= mul;

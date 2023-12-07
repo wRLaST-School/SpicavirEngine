@@ -3,6 +3,9 @@
 #include <SpDS.h>
 #include <Input.h>
 #include <Util.h>
+#include <GameManager.h>
+#include <NetworkManager.h>
+#include <SceneManager.h>
 
 void ServerPlayer::Init()
 {
@@ -14,20 +17,36 @@ void ServerPlayer::Update()
 	auto col = GetComponent<CircleCollider>("CircleCollider");
 	if (col)
 	{
-		Vec2 vMove;
-
-		vMove.x = (float)(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT));
-		vMove.y = (float)(Input::Key::Down(DIK_DOWN) - Input::Key::Down(DIK_UP));
-
-		if (vMove.GetSquaredLength())
+		if (true /* && GameManager::isServer*/)
 		{
-			vMove.SetLength(spd);
+			Vec2 vMove;
+
+			vMove.x = (float)(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT));
+			vMove.y = (float)(Input::Key::Down(DIK_DOWN) - Input::Key::Down(DIK_UP));
+
+			if (vMove.GetSquaredLength())
+			{
+				vMove.SetLength(spd);
+			}
+
+			col->pos_ = (Vec2)col->pos_ + vMove;
+
+			col->pos_.x = Util::Clamp(col->pos_.x, col->r_, Util::GetWinWidth() - col->r_);
+			col->pos_.y = Util::Clamp(col->pos_.y, col->r_, Util::GetWinHeight() - col->r_);
+
+			SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.playerPos = col->pos_;
+			SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.playerHealth = hp; 
+			
+			if (Input::Key::Triggered(DIK_SPACE))
+			{
+				GameManager::serverReady = !GameManager::serverReady;
+			}
 		}
-
-		col->pos_ = (Vec2)col->pos_ + vMove;
-
-		col->pos_.x = Util::Clamp(col->pos_.x, col->r_, Util::GetWinWidth() - col->r_);
-		col->pos_.y = Util::Clamp(col->pos_.y, col->r_, Util::GetWinHeight() - col->r_);
+		else
+		{
+			col->pos_ = SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.playerPos;
+			hp = SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.playerHealth;
+		}
 	}
 }
 

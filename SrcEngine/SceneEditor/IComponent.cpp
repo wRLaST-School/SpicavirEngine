@@ -116,17 +116,17 @@ void IComponent::InitAllChildComponents(IComponent* parent)
 
 void IComponent::UpdateAllChildComponents(IComponent* parent)
 {
-	parent->childRemovedNewItr_ = parent->components_.begin();
+	parent->childRemovedNewItr_.reset();
 
 	if (parent->components_.size())
 	{
 		for (auto itr = parent->components_.begin(); itr != parent->components_.end();)
 		{
 			UpdateAllChildComponents(itr->second.get());
-			if (parent->childRemovedNewItr_ != parent->components_.begin()) // beginでもendでもないitrに変更したい
+			if (parent->childRemovedNewItr_)
 			{
-				itr = parent->childRemovedNewItr_;
-				parent->childRemovedNewItr_ = parent->components_.begin();
+				itr = parent->childRemovedNewItr_.value();
+				parent->childRemovedNewItr_.reset();
 			}
 			else
 			{
