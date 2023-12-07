@@ -5,9 +5,7 @@
 #include <SingleCamTestScene.h>
 #include <IPostEffector.h>
 #include <Bloom.h>
-#include <GameScene.h>
 #include <GlobalTimer.h>
-#include <TitleScene.h>
 #include <Transition.h>
 #include <BTEditorScene.h>
 #include <GameManager.h>

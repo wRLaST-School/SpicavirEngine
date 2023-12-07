@@ -9,10 +9,7 @@
 #include <Camera.h>
 
 //Application Side
-#include <Player.h>
-#include <Boss.h>
-#include <CameraController.h>
-#include <MainTimer.h>
+#include <NetworkManager.h>
 
 void CustomComponentRegisterer::CallRegisters()
 {
@@ -24,11 +21,5 @@ void CustomComponentRegisterer::CallRegisters()
 	Camera::RegisterToComponentFactory();
 
 	//Application Side
-	CameraController::RegisterToComponentFactory();
-	Player::RegisterToComponentFactory();
-	Boss::RegisterToComponentFactory();
-	LineAttack::RegisterToComponentFactory();
-	GravSphere::RegisterToComponentFactory();
-	Marker::RegisterToComponentFactory();
-	MainTimer::RegisterToComponentFactory();
+	NetworkManager::RegisterToComponentFactory();
 }

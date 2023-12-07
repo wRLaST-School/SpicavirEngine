@@ -1,5 +1,10 @@
 [
     {
+        "Children": [
+            {
+                "Type": "NetworkManager"
+            }
+        ],
         "EfkEffects": [
             {}
         ],
@@ -11,7 +16,7 @@
         ],
         "Textures": [
             {
-                "titleText": "Assets/Images/title.png"
+                "Black": "Assets/Images/black.png"
             }
         ],
         "Type": "IScene"
