@@ -11,6 +11,9 @@ void ServerPlayer::Init()
 {
 	GameManager::serverReady = false;
 	GameManager::clientReady = false;
+
+	auto col = GetComponent<CircleCollider>("CircleCollider");
+	col->pos_ = { (float)Util::GetWinWidth() / 4 , (float)Util::GetWinHeight() / 2 };
 }
 
 void ServerPlayer::Update()
