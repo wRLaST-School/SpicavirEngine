@@ -9,4 +9,5 @@ public:
 	static bool sDebugImmunity;
 	inline static bool sDebugTimeStop = false;
 	inline static std::string IP = "";
+	inline static bool isServer = false;
 };

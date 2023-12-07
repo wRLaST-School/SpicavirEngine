@@ -174,6 +174,7 @@
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="ClientScene.cpp" />
+    <ClCompile Include="NetworkManager.cpp" />
     <ClCompile Include="ServerScene.cpp" />
     <ClCompile Include="SceneFromFile.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
@@ -294,6 +295,7 @@
   <ItemGroup>
     <ClInclude Include="Circle.h" />
     <ClInclude Include="ClientScene.h" />
+    <ClInclude Include="NetworkManager.h" />
     <ClInclude Include="ServerScene.h" />
     <ClInclude Include="SceneFromFile.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
