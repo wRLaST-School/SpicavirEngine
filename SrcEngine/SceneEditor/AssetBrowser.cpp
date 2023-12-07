@@ -15,6 +15,9 @@
 #include <future>
 #include <chrono>
 
+#include <SceneRW.h>
+#include <SceneFromFile.h>
+
 constexpr char* sAssetsDirectory = "Assets";
 const static std::filesystem::path sAssetPath = "Assets";
 
@@ -180,6 +183,11 @@ void AssetBrowser::FileOpenAction(const std::filesystem::directory_entry& ditr)
 	if (ext == ".bt")
 	{
 		SceneManager::LoadScene<BTEditorScene>(path);
+		SceneManager::WaitForLoadAndTransition();
+	}
+	else if (ext == ".scene")
+	{
+		SceneManager::LoadScene<SceneFromFile>(path);
 		SceneManager::WaitForLoadAndTransition();
 	}
 	else
