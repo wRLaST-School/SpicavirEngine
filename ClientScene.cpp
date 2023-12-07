@@ -11,8 +11,8 @@ void ClientScene::Init()
 {
 	Camera::Set(cam);
 
-	(circleA = AddComponent<Circle>("Circle"))->Init(Vec2(400.f, 400.f), 100.f);
-	(circleB = AddComponent<Circle>("Circle"))->Init(Vec2(100.f, 100.f), 50.f);
+	(circleA = AddComponent<CircleCollider>("Circle"))->Init(Vec2(400.f, 400.f), 100.f);
+	(circleB = AddComponent<CircleCollider>("Circle"))->Init(Vec2(100.f, 100.f), 50.f);
 
 	static std::thread thread(&ClientScene::Threadfunc, this);
 	thread.detach();

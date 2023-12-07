@@ -18,7 +18,7 @@ public:
 private:
     Camera cam;
 
-    Circle* circleA;
-    Circle* circleB;
+    CircleCollider* circleA;
+    CircleCollider* circleB;
 };
 

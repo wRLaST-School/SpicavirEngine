@@ -196,6 +196,9 @@
     <Filter Include="SampleGame\Background">
       <UniqueIdentifier>{5fa43000-ee27-4de1-8a8b-4c292c20aee8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="!Game">
+      <UniqueIdentifier>{2dd8f71a-85df-47ba-a01c-d06f110e6233}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -508,6 +511,15 @@
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="NetworkManager.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerPlayer.cpp">
+      <Filter>!Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientPlayer.cpp">
+      <Filter>未分類\ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>未分類\ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -843,6 +855,15 @@
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="NetworkManager.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerPlayer.h">
+      <Filter>!Game</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientPlayer.h">
+      <Filter>未分類\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>未分類\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

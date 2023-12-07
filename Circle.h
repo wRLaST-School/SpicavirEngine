@@ -1,18 +1,19 @@
 #pragma once
 #include <Color.h>
 #include <ComponentFactory.h>
-class Circle : public IComponent
+class CircleCollider : public IComponent
 {
 public:
-    Circle();
+    CircleCollider();
 
-    ComponentFactoryRegister(Circle)
+    ComponentFactoryRegister(CircleCollider)
 
-    bool Collide(const Circle& o);
+    bool Collide(const CircleCollider& o);
 
     void Draw();
     void Update();
     void Init(Vec2 pos, float r);
+    void Init();
 
     Vec2 pos_;
     float r_;

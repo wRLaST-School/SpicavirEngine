@@ -1,19 +1,18 @@
 #pragma once
 #include "IComponent.h"
 #include <ComponentFactory.h>
-#include <Circle.h>
-class ServerPlayer :
+
+class Bullet :
     public IComponent
 {
 public:
-    ComponentFactoryRegister(ServerPlayer)
+    ComponentFactoryRegister(Bullet)
 
     void Init() override;
     void Update() override;
     void Draw() override;
 
 private:
-    int hp = 5;
-    float spd = 8.f;
+    size_t timer = 0;
 };
 

@@ -172,9 +172,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="ClientPlayer.cpp" />
     <ClCompile Include="ClientScene.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="ServerPlayer.cpp" />
     <ClCompile Include="ServerScene.cpp" />
     <ClCompile Include="SceneFromFile.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
@@ -281,9 +284,12 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="ClientPlayer.h" />
     <ClInclude Include="ClientScene.h" />
     <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="ServerPlayer.h" />
     <ClInclude Include="ServerScene.h" />
     <ClInclude Include="SceneFromFile.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />

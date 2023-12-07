@@ -119,8 +119,10 @@ protected:
 
 	eastl::multimap<std::string, eastl::unique_ptr<IComponent>> components_;
 
-private:
 	IComponent* parent_ = nullptr;
+
+private:
+	eastl::multimap<std::string, eastl::unique_ptr<IComponent>>::iterator childRemovedNewItr_;
 
 };
 
@@ -129,6 +131,7 @@ inline Type* IComponent::AddComponent(const std::string& key, Args ...args)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
 	itr->second->name_ = itr->first;
+	itr->second->parent_ = this;
 
 	return dynamic_cast<Type*>(itr->second.get());
 }
@@ -136,7 +139,9 @@ inline Type* IComponent::AddComponent(const std::string& key, Args ...args)
 template<class Type>
 inline Type* IComponent::GetComponent(const std::string& key)
 {
-	return dynamic_cast<Type*>(components_.find(key)->second.get());
+	auto c = components_.find(key);
+	if (c == components_.end()) return nullptr;
+	return dynamic_cast<Type*>(c->second.get());
 }
 
 template<class Type>

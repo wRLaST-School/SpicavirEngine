@@ -1,34 +1,42 @@
 #include "stdafx.h"
 #include "Circle.h"
 #include <SpDS.h>
-Circle::Circle()
+#include <GameManager.h>
+CircleCollider::CircleCollider()
 {
 
 }
 
-bool Circle::Collide(const Circle& o)
+bool CircleCollider::Collide(const CircleCollider& o)
 {
 	float dist = (pos_ - o.pos_).GetSquaredLength();
 	float rsum = powf(r_ + o.r_, 2);
 	return dist <= rsum;
 }
 
-void Circle::Draw()
+void CircleCollider::Draw()
 {
-	SpDS::DrawCircle(
-		static_cast<int32_t>(pos_.x),
-		static_cast<int32_t>(pos_.y),
-		static_cast<int32_t>(r_),
-		color_
-	);
+	if (GameManager::sShowDebug)
+	{
+		SpDS::DrawCircle(
+			static_cast<int32_t>(pos_.x),
+			static_cast<int32_t>(pos_.y),
+			static_cast<int32_t>(r_),
+			color_
+		);
+	}
 }
 
-void Circle::Update()
+void CircleCollider::Update()
 {
 }
 
-void Circle::Init(Vec2 pos, float r)
+void CircleCollider::Init(Vec2 pos, float r)
 {
 	pos_ = pos;
 	r_ = r;
+}
+
+void CircleCollider::Init()
+{
 }

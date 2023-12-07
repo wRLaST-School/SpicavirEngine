@@ -10,6 +10,10 @@
 
 //Application Side
 #include <NetworkManager.h>
+#include <ServerPlayer.h>
+#include <Circle.h>
+#include <Bullet.h>
+#include <ClientPlayer.h>
 
 void CustomComponentRegisterer::CallRegisters()
 {
@@ -22,4 +26,8 @@ void CustomComponentRegisterer::CallRegisters()
 
 	//Application Side
 	NetworkManager::RegisterToComponentFactory();
+	ServerPlayer::RegisterToComponentFactory();
+	CircleCollider::RegisterToComponentFactory();
+	ClientPlayer::RegisterToComponentFactory();
+	Bullet::RegisterToComponentFactory();
 }

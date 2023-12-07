@@ -2,7 +2,18 @@
     {
         "Children": [
             {
+                "Type": "ClientPlayer"
+            },
+            {
                 "Type": "NetworkManager"
+            },
+            {
+                "Children": [
+                    {
+                        "Type": "CircleCollider"
+                    }
+                ],
+                "Type": "ServerPlayer"
             }
         ],
         "EfkEffects": [
