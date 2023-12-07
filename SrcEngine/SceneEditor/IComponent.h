@@ -114,12 +114,11 @@ public:
 	//components_の中身をHierarchy Panelからのみ直接操作したいため
 	friend HierarchyPanel;
 
+	IComponent* parent_ = nullptr;
 protected:
 	std::string name_ = "";
 
 	eastl::multimap<std::string, eastl::unique_ptr<IComponent>> components_;
-
-	IComponent* parent_ = nullptr;
 
 private:
 	std::optional<eastl::multimap<std::string, eastl::unique_ptr<IComponent>>::iterator> childRemovedNewItr_;

@@ -22,12 +22,16 @@ public:
 
     void Activate();
 
+    void ReceiveClientBulletData();
+
 private:
     static const size_t MAX_LINE_TIME = 600;
 
     size_t lineTime = 0;
 
     Vec2 line[MAX_LINE_TIME];
+
+    int curBulletNum = 0;
 
     int coin = 50;
 

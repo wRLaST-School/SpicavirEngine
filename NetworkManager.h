@@ -5,6 +5,8 @@
 struct ServerSideData {
     Vec2 playerPos;
     int playerHealth;
+
+    bool isReady = false;
 };
 
 struct ClientSideData {
@@ -12,6 +14,13 @@ struct ClientSideData {
     int powNumBul = 4;
     float powSpd = 10.0f;
     int powGain = 50;
+
+    bool isReady = false;
+
+    struct BulletData {
+        Vec2 path[600];
+        bool active = false;
+    } bullets[64];
 };
 
 class NetworkManager :

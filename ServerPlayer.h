@@ -11,6 +11,7 @@ public:
     void Init() override;
     void Update() override;
     void Draw() override;
+    void Damage();
 
 private:
     int hp = 5;

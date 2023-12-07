@@ -9,6 +9,8 @@
 
 void ServerPlayer::Init()
 {
+	GameManager::serverReady = false;
+	GameManager::clientReady = false;
 }
 
 void ServerPlayer::Update()
@@ -17,7 +19,8 @@ void ServerPlayer::Update()
 	auto col = GetComponent<CircleCollider>("CircleCollider");
 	if (col)
 	{
-		if (true /* && GameManager::isServer*/)
+		col->r_ = 16.f;
+		if (true  && GameManager::isServer)
 		{
 			Vec2 vMove;
 
@@ -41,13 +44,18 @@ void ServerPlayer::Update()
 			{
 				GameManager::serverReady = !GameManager::serverReady;
 			}
+			SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.isReady = GameManager::serverReady;
+
 		}
 		else
 		{
 			col->pos_ = SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.playerPos;
 			hp = SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.playerHealth;
+			GameManager::serverReady = SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.isReady;
 		}
 	}
+
+	GameManager::ManageGameState();
 }
 
 void ServerPlayer::Draw()
@@ -55,6 +63,11 @@ void ServerPlayer::Draw()
 	CircleCollider* col = GetComponent<CircleCollider>("CircleCollider");
 	if (col)
 	{
-		SpDS::DrawBox((int)col->pos_.x, (int)col->pos_.y, 100, 100, 0, Color::Green);
+		SpDS::DrawBoxLine((int)col->pos_.x, (int)col->pos_.y, 100, 100, Color::Green, 3.f);
 	}
+}
+
+void ServerPlayer::Damage()
+{
+	hp--;
 }

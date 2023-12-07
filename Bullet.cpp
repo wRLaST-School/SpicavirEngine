@@ -2,6 +2,7 @@
 #include "Bullet.h"
 #include <SpDS.h>
 #include <Circle.h>
+#include <ServerPlayer.h>
 
 Bullet::Bullet()
 {
@@ -93,12 +94,23 @@ void Bullet::Update()
 
 	timer++;
 
-	//GetComponent<CircleCollider>("Collider")->pos_ = this->pos_;
+	GetComponent<CircleCollider>("Collider")->pos_ = this->pos_;
+	GetComponent<CircleCollider>("Collider")->r_ = this->size;
+	if (GetComponent<CircleCollider>("Collider")->Collide(
+		*parent_->parent_->GetComponent("ServerPlayer")->GetComponent<CircleCollider>("CircleCollider")
+	))
+	{
+		parent_->parent_->GetComponent<ServerPlayer>("ServerPlayer")->Damage();
+		parent_->RemoveComponent(this);
+		return;
+	}
 
 	if (timer >= 600)
 	{
 		parent_->RemoveComponent(this);
 	}
+
+
 }
 
 void Bullet::Draw()

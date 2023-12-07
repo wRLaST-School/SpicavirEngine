@@ -6,6 +6,7 @@
 #include <ClientScene.h>
 #include <ServerScene.h>
 #include <GameManager.h>
+#include <SceneFromFile.h>
 void TestScene::LoadResources()
 {
 	
@@ -32,12 +33,14 @@ void TestScene::Update()
 
 		if (ImGui::Button("Client", { 200, 400 }))
 		{
-			SceneManager::LoadScene<ClientScene>();
+			GameManager::isServer = false;
+			SceneManager::LoadScene<SceneFromFile>("Assets/Scene/NetworkGame.scene");
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Server", { 200, 400 }))
 		{
-			SceneManager::LoadScene<ServerScene>();
+			GameManager::isServer = true;
+			SceneManager::LoadScene<SceneFromFile>("Assets/Scene/NetworkGame.scene");
 		}
 
 		ImGui::End();
