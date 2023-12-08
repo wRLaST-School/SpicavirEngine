@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackSceneObj.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="ClientPlayer.cpp" />
@@ -284,6 +285,7 @@
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackSceneObj.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="ClientPlayer.h" />

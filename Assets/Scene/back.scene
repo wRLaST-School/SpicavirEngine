@@ -1,0 +1,25 @@
+[
+    {
+        "Children": [
+            {
+                "Type": "BackSceneObj"
+            }
+        ],
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {}
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "Black": "Assets/Images/black.png",
+                "result.png": "Assets\\Images\\result.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

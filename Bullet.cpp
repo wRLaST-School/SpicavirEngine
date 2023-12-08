@@ -109,13 +109,11 @@ void Bullet::Update()
 	{
 		parent_->RemoveComponent(this);
 	}
-
-
 }
 
 void Bullet::Draw()
 {
-	SpDS::DrawCircle((int)pos_.x, (int)pos_.y, (int)size, Color::White);
+	SpDS::DrawRotaGraph((int)pos_.x, (int)pos_.y, size / 45, size / 45, 0.f, "bullet.png");
 }
 
 void Bullet::Activate()

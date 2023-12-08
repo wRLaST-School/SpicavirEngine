@@ -3,7 +3,7 @@
 #include <SceneManager.h>
 #include <ClientPlayer.h>
 
-bool GameManager::sShowDebug = true;
+bool GameManager::sShowDebug = false;
 bool GameManager::sShowHitBoxes = false;
 bool GameManager::sDebugImmunity = false;
 

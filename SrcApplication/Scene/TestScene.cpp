@@ -7,6 +7,7 @@
 #include <ServerScene.h>
 #include <GameManager.h>
 #include <SceneFromFile.h>
+#include <Util.h>
 void TestScene::LoadResources()
 {
 	
@@ -20,8 +21,7 @@ void TestScene::Init()
 void TestScene::Update()
 {
 	SpImGui::Command([&] {
-		ImGui::SetNextWindowPos({ 500.f, 200.f });
-		ImGui::Begin("Select Proxy", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
+		ImGui::Begin("Select Proxy", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoDocking);
 		
 		char buf[256];
 
@@ -31,17 +31,21 @@ void TestScene::Update()
 
 		GameManager::IP = buf;
 
-		if (ImGui::Button("Client", { 200, 400 }))
+		if (ImGui::Button("Client", { 512, 512 }))
 		{
 			GameManager::isServer = false;
 			SceneManager::LoadScene<SceneFromFile>("Assets/Scene/NetworkGame.scene");
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Server", { 200, 400 }))
+		if (ImGui::Button("Server", { 512, 512 }))
 		{
 			GameManager::isServer = true;
 			SceneManager::LoadScene<SceneFromFile>("Assets/Scene/NetworkGame.scene");
 		}
+		ImVec2 imSiz = ImGui::GetWindowSize();
+
+		Float2 winSiz = Util::GetWinSize();
+		ImGui::SetWindowPos({ (winSiz.x - imSiz.x) / 2, (winSiz.y - imSiz.y) / 2 });
 
 		ImGui::End();
 	});

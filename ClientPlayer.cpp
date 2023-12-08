@@ -94,7 +94,13 @@ void ClientPlayer::Update()
 
 	if (GameManager::gameState == GameManager::GameState::ServerPlaying)
 	{
-		Activate();
+		GameManager::gameTimer++;
+
+		if (GameManager::gameTimer == 90)
+		{
+			Activate();
+		}
+
 		curBulletNum = 0;
 
 		if (GetComponents<Bullet>("Bullet").size() == 0)
@@ -105,6 +111,7 @@ void ClientPlayer::Update()
 			}
 
 			coin += powGain;
+			GameManager::gameTimer = 0;
 		}
 	}
 
@@ -118,6 +125,39 @@ void ClientPlayer::Update()
 		{
 			GameManager::gameState = GameManager::GameState::ClientPlacing;
 		}
+
+		SpImGui::Command([&] {
+			ImGui::Begin("Power Up", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_::ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize);
+
+			if (ImGui::ImageButton((ImTextureID)SpTextureManager::GetGPUDescHandle("Size.png").ptr,
+				{ 256, 256 }))
+			{
+				UpgradeSize();
+				GameManager::gameState = GameManager::GameState::ClientPlacing;
+			}
+			ImGui::SameLine();
+			if (ImGui::ImageButton((ImTextureID)SpTextureManager::GetGPUDescHandle("Speed.png").ptr,
+				{ 256, 256 }))
+			{
+				UpgradeSpd();
+				GameManager::gameState = GameManager::GameState::ClientPlacing;
+			}
+
+			ImGui::SameLine();
+			if (ImGui::ImageButton((ImTextureID)SpTextureManager::GetGPUDescHandle("Amount.png").ptr,
+				{ 256, 256 }))
+			{
+				UpgradeNum();
+				GameManager::gameState = GameManager::GameState::ClientPlacing;
+			}
+
+			ImVec2 imSiz = ImGui::GetWindowSize();
+
+			Float2 winSiz = Util::GetWinSize();
+			ImGui::SetWindowPos({ (winSiz.x - imSiz.x) / 2, (winSiz.y - imSiz.y) / 2 });
+
+			ImGui::End();
+		});
 	}
 	if (GameManager::gameState == GameManager::GameState::ClientPowerUp && GameManager::isServer)
 	{
@@ -133,9 +173,20 @@ void ClientPlayer::Draw()
 
 		for (int i = 1; i < lineTime; i++)
 		{
-			SpDS::DrawLine((int32_t)lastPos.x, (int32_t)lastPos.y, (int32_t)((lastPos+line[i]).x), (int32_t)((lastPos+line[i]).y), Color::White, 3);
+			SpDS::DrawLine((int32_t)lastPos.x, (int32_t)lastPos.y, (int32_t)((lastPos + line[i]).x), (int32_t)((lastPos + line[i]).y), Color::White, 3);
 			lastPos += line[i];
 		}
+	}
+
+	if (GameManager::gameState == GameManager::GameState::ServerPlaying)
+	{
+		int timerMaxLength = 1000;
+		int timerXStart = 920 / 2;
+		int timerY = 900;
+		float timerLength = GameManager::gameTimer < 90 ? (float)GameManager::gameTimer / 90 : 1.f - ((float)GameManager::gameTimer - 90) / 600;
+		timerLength *= timerMaxLength;
+		SpDS::DrawBox(timerXStart, timerY, (int)timerLength, 60, 0.f, Color::Blue, Anchor::CenterLeft);
+		SpDS::DrawBoxLine(timerXStart + timerMaxLength / 2, timerY, (int)timerMaxLength, 60, Color::White, 4);
 	}
 }
 

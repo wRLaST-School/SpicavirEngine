@@ -7,6 +7,8 @@ struct ServerSideData {
     int playerHealth;
 
     bool isReady = false;
+
+    bool terminate = false;
 };
 
 struct ClientSideData {
@@ -21,6 +23,8 @@ struct ClientSideData {
         Vec2 path[600];
         bool active = false;
     } bullets[64];
+
+    bool terminate = false;
 };
 
 class NetworkManager :
@@ -30,9 +34,15 @@ public:
     ComponentFactoryRegister(NetworkManager);
 
     void Init() override;
+    ~NetworkManager() {
+        srvData.terminate = true;
+        clnData.terminate = true;
+    }
 
     ServerSideData srvData;
     ClientSideData clnData;
+
+    inline static std::thread th;
 
 private:
     void ClientThreadFunc();

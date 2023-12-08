@@ -29,21 +29,21 @@ void SceneManager::Update()
 	UpdateLoadState();
 	Transition::Update();
 
-	//デバッグ用シーン変更
-	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
-	{
-		if (Input::Key::Triggered(DIK_T))
-		{
-			LoadScene<TestScene>();
-		}
+	////デバッグ用シーン変更
+	//if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
+	//{
+	//	if (Input::Key::Triggered(DIK_T))
+	//	{
+	//		LoadScene<TestScene>();
+	//	}
 
-		if (Input::Key::Triggered(DIK_D))
-		{
-			GameManager::sShowDebug = !GameManager::sShowDebug;
-		}
+	//	if (Input::Key::Triggered(DIK_D))
+	//	{
+	//		GameManager::sShowDebug = !GameManager::sShowDebug;
+	//	}
 
-		Transition();
-	}
+	//	Transition();
+	//}
 
 	if (!GameManager::sDebugTimeStop)
 	{

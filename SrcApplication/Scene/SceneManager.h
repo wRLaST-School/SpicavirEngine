@@ -3,6 +3,8 @@
 #include "Essentials.h"
 #include <future>
 #include <thread>
+#include <SpTextureManager.h>
+#include <Model.h>
 #include <SoundManager.h>
 #include <SpEffekseer.h>
 class SceneManager final

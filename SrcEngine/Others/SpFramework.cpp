@@ -123,6 +123,7 @@ void SpFramework::Run()
 	while (true)
 	{
 		if (GetSpDX()->StartFrame()) break;
+		if (GameManager::endGame) break;
 		Input::Key::Update();
 		Input::Pad::Update();
 		Input::Mouse::Update();

@@ -6,6 +6,7 @@
 #include <GameManager.h>
 #include <NetworkManager.h>
 #include <SceneManager.h>
+#include <SceneFromFile.h>
 
 void ServerPlayer::Init()
 {
@@ -18,6 +19,13 @@ void ServerPlayer::Init()
 
 void ServerPlayer::Update()
 {
+	if (hp <= 0)
+	{
+		SceneManager::LoadScene<SceneFromFile>("Assets/Scene/back.scene");
+
+		SceneManager::WaitForLoadAndTransition();
+	}
+
 	spd = 16.0f;
 	auto col = GetComponent<CircleCollider>("CircleCollider");
 	if (col)
@@ -79,6 +87,29 @@ void ServerPlayer::Draw()
 	if (col)
 	{
 		SpDS::DrawBoxLine((int)col->pos_.x, (int)col->pos_.y, 100, 100, Color::Green, 3.f);
+		SpDS::DrawCircle(
+			static_cast<int32_t>(col->pos_.x),
+			static_cast<int32_t>(col->pos_.y),
+			static_cast<int32_t>(col->r_),
+			Color::White
+		);
+
+		if (hp >= 2)
+		{
+			SpDS::DrawBoxLine((int)col->pos_.x -100, (int)col->pos_.y, 25, 25, Color::Green, 2.f, Anchor::CenterRight);
+		}
+		if (hp >= 3)
+		{
+			SpDS::DrawBoxLine((int)col->pos_.x, (int)col->pos_.y + 100, 25, 25, Color::Green, 2.f, Anchor::TopCenter);
+		}
+		if (hp >= 4)
+		{
+			SpDS::DrawBoxLine((int)col->pos_.x + 100, (int)col->pos_.y, 25, 25, Color::Green, 2.f, Anchor::CenterLeft);
+		}
+		if (hp >= 5)
+		{
+			SpDS::DrawBoxLine((int)col->pos_.x, (int)col->pos_.y - 100, 25, 25, Color::Green, 2.f, Anchor::BottomCenter);
+		}
 	}
 }
 

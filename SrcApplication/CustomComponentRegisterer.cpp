@@ -14,6 +14,7 @@
 #include <Circle.h>
 #include <Bullet.h>
 #include <ClientPlayer.h>
+#include <BackSceneObj.h>
 
 void CustomComponentRegisterer::CallRegisters()
 {
@@ -30,4 +31,5 @@ void CustomComponentRegisterer::CallRegisters()
 	CircleCollider::RegisterToComponentFactory();
 	ClientPlayer::RegisterToComponentFactory();
 	Bullet::RegisterToComponentFactory();
+	BackSceneObj::RegisterToComponentFactory();
 }

@@ -6,11 +6,15 @@ void NetworkManager::Init()
 {
 	if (GameManager::isServer)
 	{
-		static std::thread thread(&NetworkManager::ServerThreadFunc, this);
+		if(th.joinable())
+			th.join();
+		th = std::thread(&NetworkManager::ServerThreadFunc, this);
 	}
 	else
 	{
-		static std::thread thread(&NetworkManager::ClientThreadFunc, this);
+		if(th.joinable())
+			th.join();
+		th = std::thread(&NetworkManager::ClientThreadFunc, this);
 	}
 }
 
@@ -26,6 +30,9 @@ void NetworkManager::ClientThreadFunc()
 
 	// リスンソケット
 	sWait = socket(AF_INET, SOCK_STREAM, 0);
+
+	DWORD timeout = 10 * 1000;
+	setsockopt(sWait, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
 
 	//サーバー名から
 	auto lpHost = gethostbyname(szServer);
@@ -70,8 +77,16 @@ void NetworkManager::ClientThreadFunc()
 		// サーバ側キャラの位置情報を受け取り
 		nRcv = recv(sWait, (char*)&srvData, sizeof(ServerSideData), 0);
 
-		if (nRcv == SOCKET_ERROR)break;
+		if (nRcv == SOCKET_ERROR)
+		{
+			if(WSAGetLastError() != WSAETIMEDOUT)
+				break;
+		}
+
+		if (clnData.terminate) break;
 	}
+
+	clnData.terminate = false;
 
 	shutdown(sWait, 2);
 	closesocket(sWait);
@@ -88,6 +103,9 @@ void NetworkManager::ServerThreadFunc()
 
 	// リスンソケット
 	sWait = socket(AF_INET, SOCK_STREAM, 0);
+
+	DWORD timeout = 10 * 1000;
+	setsockopt(sWait, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
 
 	ZeroMemory(&saLocal, sizeof(saLocal));
 
@@ -143,12 +161,18 @@ void NetworkManager::ServerThreadFunc()
 		// クライアント側キャラの位置情報を受け取り
 		nRcv = recv(sConnect, (char*)&clnData, sizeof(ClientSideData), 0);
 
-		if (nRcv == SOCKET_ERROR)break;
+		if (nRcv == SOCKET_ERROR)
+		{
+			if (WSAGetLastError() != WSAETIMEDOUT)
+				break;
+		}
 
 		// サーバ側キャラの位置情報を送信
 		send(sConnect, (const char*)&srvData, sizeof(ServerSideData), 0);
+		if (srvData.terminate) break;
 	}
 
+	srvData.terminate = false;
 	shutdown(sConnect, 2);
 	closesocket(sConnect);
 

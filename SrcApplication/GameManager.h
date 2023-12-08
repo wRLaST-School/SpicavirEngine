@@ -19,5 +19,9 @@ public:
 	inline static bool serverReady = false;
 	inline static bool clientReady = false;
 
+	inline static int gameTimer = 0;
+
 	static void ManageGameState();
+
+	inline static bool endGame = false;
 };
