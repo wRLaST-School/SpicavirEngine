@@ -23,7 +23,7 @@ void ServerPlayer::Update()
 	if (col)
 	{
 		col->r_ = 16.f;
-		if (true  && GameManager::isServer)
+		if (GameManager::isServer)
 		{
 			Vec2 vMove;
 
@@ -49,6 +49,18 @@ void ServerPlayer::Update()
 			}
 			SceneManager::currentScene->GetComponent<NetworkManager>("NetworkManager")->srvData.isReady = GameManager::serverReady;
 
+			SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+				"server_tutorial.png");
+
+			if (GameManager::gameState == GameManager::GameState::ClientPlacing)
+			{
+				SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+					"ready_tutorial.png");
+
+
+				SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+					"Ready.png", Anchor::Center, GameManager::serverReady ? Color::Green : Color::White);
+			}
 		}
 		else
 		{

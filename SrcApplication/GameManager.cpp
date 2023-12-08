@@ -19,6 +19,7 @@ void GameManager::ManageGameState()
 			gameState = GameState::ServerPlaying;
 			if (isServer)
 			{
+				serverReady = false;
 				SceneManager::GetScene()
 					->GetComponent<ClientPlayer>("ClientPlayer")
 					->ReceiveClientBulletData();

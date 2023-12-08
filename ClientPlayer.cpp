@@ -7,6 +7,7 @@
 #include <SpDS.h>
 #include <SceneManager.h>
 #include <NetworkManager.h>
+#include <Util.h>
 
 void ClientPlayer::Init()
 {
@@ -42,6 +43,14 @@ void ClientPlayer::Update()
 
 	if (GameManager::gameState == GameManager::GameState::ClientPlacing && !GameManager::isServer)
 	{
+		SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+			"line_tutorial.png"); 
+		SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+			"ready_tutorial.png");
+
+		SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+			"Ready.png", Anchor::Center, GameManager::clientReady ? Color::Green : Color::White);
+
 		if (Input::Mouse::Triggered(Click::Left) && curBulletNum < powNumBul)
 		{
 			line[0] = Input::Mouse::GetPos();
@@ -87,8 +96,6 @@ void ClientPlayer::Update()
 	{
 		Activate();
 		curBulletNum = 0;
-		GameManager::clientReady = false;
-		GameManager::serverReady = false;
 
 		if (GetComponents<Bullet>("Bullet").size() == 0)
 		{
@@ -96,11 +103,16 @@ void ClientPlayer::Update()
 			{
 				clnData.bullets[i].active = false;
 			}
+
+			coin += powGain;
 		}
 	}
 
 	if (GameManager::gameState == GameManager::GameState::ClientPowerUp && !GameManager::isServer)
-	{		
+	{
+		GameManager::clientReady = false;
+		SpDS::DrawRotaGraph((int)Util::GetWinWidth() / 2, (int)Util::GetWinHeight() / 2, 1.f, 1.f, 0.f,
+			"powerup_tutorial.png");
 		//TODO: パワーアップ選択UIにする
 		if (Input::Key::Triggered(DIK_R))
 		{

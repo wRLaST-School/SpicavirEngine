@@ -18,7 +18,7 @@ void SpImGui::Init()
 {
 	ImGui::CreateContext();
 
-	SpImguiCustom::StyleColorsDarkBlossom();
+	SpImguiCustom::StyleColorsCyber();
 
 	ImGuiIO& io = ImGui::GetIO();
 

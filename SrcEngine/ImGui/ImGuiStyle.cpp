@@ -128,3 +128,57 @@ void SpImguiCustom::StyleColorsDarkBlossom(ImGuiStyle* dst)
         style->WindowRounding = 12.f;
     }
 }
+
+void SpImguiCustom::StyleColorsCyber(ImGuiStyle* dst)
+{
+    ImGuiStyle* style = dst ? dst : &ImGui::GetStyle();
+    ImVec4* colors = style->Colors;
+
+    const ImVec4 kColorPrimary = ImVec4((float)0x1c / 256.f, (float)0xfe / 256.f, (float)0xff / 256.f, (float)0xcc / 256.f);
+    const ImVec4 kColorPrimaryA99 = ImVec4((float)0x1c / 256.f, 0xfe, (float)0xff / 256.f, (float)0x99 / 256.f);
+    const ImVec4 kColorPrimaryA66 = ImVec4((float)0x1c / 256.f, 0xfe, (float)0xff / 256.f, (float)0x66 / 256.f);
+    const ImVec4 kColorPrimaryA33 = ImVec4((float)0x1c / 256.f, (float)0xfe / 256.f, (float)0xff / 256.f, (float)0x33 / 256.f);
+    const ImVec4 kColorPrimaryDark = ImVec4((float)0x03 / 256.f, (float)0x19 / 256.f, (float)0x1a / 256.f, (float)0xbb / 256.f);
+    const ImVec4 kColorAccent = ImVec4((float)0xff / 256.f, (float)0xa1 / 256.f, (float)0x00 / 256.f, (float)0xee / 256.f);
+    const ImVec4 kColorAccentAcc = ImVec4((float)0xff / 256.f, (float)0xa1 / 256.f, (float)0x00 / 256.f, (float)0xcc / 256.f);
+    const ImVec4 kColorAccentA99 = ImVec4((float)0xff / 256.f, (float)0xa1 / 256.f, (float)0x00 / 256.f, (float)0x99 / 256.f);
+
+    const ImVec4 kColorWhite = ImVec4((float)0xdd / 256.f, (float)0xdd / 256.f, (float)0xdd / 256.f, (float)0xcc / 256.f);
+    const ImVec4 kColorBlackA55 = ImVec4((float)0x11 / 256.f, (float)0x11 / 256.f, (float)0x11 / 256.f, (float)0x55 / 256.f);
+    
+    colors[ImGuiCol_MenuBarBg] = kColorPrimaryA33;
+    colors[ImGuiCol_TitleBg] =                kColorPrimaryDark;
+    colors[ImGuiCol_TitleBgCollapsed] =       kColorPrimaryDark;
+    colors[ImGuiCol_TitleBgActive] =          kColorPrimaryA99;
+    colors[ImGuiCol_WindowBg] =               kColorPrimaryDark;
+    colors[ImGuiCol_Border] =                 kColorPrimaryA99;
+    colors[ImGuiCol_FrameBg] =                kColorPrimaryA33;
+    colors[ImGuiCol_FrameBgHovered] =         kColorAccentAcc;
+    colors[ImGuiCol_FrameBgActive] =          kColorAccent;
+    colors[ImGuiCol_ScrollbarBg] =            kColorPrimaryA33;
+    colors[ImGuiCol_ScrollbarGrab] =          kColorPrimaryA99;
+    colors[ImGuiCol_ScrollbarGrabHovered] =   kColorPrimaryA99;
+    colors[ImGuiCol_ScrollbarGrabActive] =    kColorPrimary;
+    colors[ImGuiCol_CheckMark] =              kColorAccent;
+    colors[ImGuiCol_SliderGrab] =             kColorPrimaryA99;
+    colors[ImGuiCol_SliderGrabActive] =       kColorPrimary;
+    colors[ImGuiCol_Button] =                 kColorPrimaryA33;
+    colors[ImGuiCol_ButtonHovered] =          kColorAccentAcc;
+    colors[ImGuiCol_ButtonActive] =           kColorAccent;
+    colors[ImGuiCol_Header] =                 kColorAccentA99;
+    colors[ImGuiCol_HeaderHovered] =          kColorAccentAcc;
+    colors[ImGuiCol_HeaderActive] =           kColorAccent;
+    colors[ImGuiCol_PlotLines] =              kColorPrimaryA99;
+    colors[ImGuiCol_PlotLinesHovered] =       kColorPrimary;
+    colors[ImGuiCol_PlotHistogram] =          kColorPrimaryA99;
+    colors[ImGuiCol_PlotHistogramHovered] =   kColorPrimary;
+    colors[ImGuiCol_Text] =                   kColorPrimary;
+    colors[ImGuiCol_TextDisabled] =           kColorPrimaryA66;
+    colors[ImGuiCol_TextSelectedBg] =         kColorAccent;
+    colors[ImGuiCol_PopupBg] =                kColorPrimaryDark;
+
+    style->AntiAliasedLines = true;
+    style->AntiAliasedFill = true;
+    style->FrameRounding = 0.f;
+    style->WindowRounding = 0.f;
+}

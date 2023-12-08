@@ -27,7 +27,16 @@
         ],
         "Textures": [
             {
-                "Black": "Assets/Images/black.png"
+                "Amount.png": "Assets\\Images\\Amount.png",
+                "Black": "Assets/Images/black.png",
+                "Gain.png": "Assets\\Images\\Gain.png",
+                "Ready.png": "Assets\\Images\\Ready.png",
+                "Size.png": "Assets\\Images\\Size.png",
+                "Speed.png": "Assets\\Images\\Speed.png",
+                "line_tutorial.png": "Assets\\Images\\line_tutorial.png",
+                "powerup_tutorial.png": "Assets\\Images\\powerup_tutorial.png",
+                "ready_tutorial.png": "Assets\\Images\\ready_tutorial.png",
+                "server_tutorial.png": "Assets\\Images\\server_tutorial.png"
             }
         ],
         "Type": "IScene"
