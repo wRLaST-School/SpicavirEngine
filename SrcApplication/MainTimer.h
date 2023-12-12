@@ -7,7 +7,7 @@ public:
 	ComponentFactoryRegister(MainTimer)
 
 	void Load();
-	void Init();
+	void Init() override;
 
 	void Update();
 	void Draw();

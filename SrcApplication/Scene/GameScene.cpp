@@ -47,6 +47,7 @@ void GameScene::Init()
 	AddComponent<LevelManager>("Level Manager");
 
 	timer_ = AddComponent<MainTimer>("MainTimer");
+	timer_->Init();
 	
 	Boss::Set(boss_);
 	Player::Set(player_);

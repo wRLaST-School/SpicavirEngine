@@ -3,6 +3,6 @@
 
 Score GameManager::sScore;
 
-bool GameManager::sShowDebug = true;
+bool GameManager::sShowDebug = false;
 bool GameManager::sShowHitBoxes = false;
 bool GameManager::sDebugImmunity = false;

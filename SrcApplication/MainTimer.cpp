@@ -6,11 +6,12 @@
 
 void MainTimer::Load()
 {
-	SpTextureManager::LoadDiv("Assets/Images/Numbers.png", 115, 93, 10, 1, numbers_);
+	
 }
 
 void MainTimer::Init()
 {
+	SpTextureManager::LoadDiv("Assets/Images/Numbers.png", 115, 93, 10, 1, numbers_);
 	timerSec = 120;
 	frameTimer_ = 60;
 }
