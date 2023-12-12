@@ -57,13 +57,15 @@ public:
 	//指定したキーのコンポーネントのポインタを一つ取得
 	//該当要素が複数ある場合の動作は保証しない
 	IComponent* GetComponent(const std::string& key);
-	
+
 	//指定したキーのコンポーネントをTypeで指定した型のポインタにして一つ取得
 	//該当要素が複数ある場合の動作は保証しない
 	template <class Type> Type* GetComponent(const std::string& key);
 
 	//指定したキーに該当する全てのコンポーネントのポインタをリストにして取得
 	eastl::list<IComponent*> GetComponents(const std::string& key);
+
+	IComponent* Parent();
 
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
 	template <class Type> eastl::list<Type*> GetComponents(const std::string& key);
@@ -88,7 +90,7 @@ public:
 
 	//読み書きに使う関数
 	/*
-	* "ComponentType":"BraBra", 
+	* "ComponentType":"BraBra",
 	* "ComponentParams":[
 	*	{
 	*		この中の部分を実装
@@ -100,7 +102,7 @@ public:
 	/*
 	* obj["ComponentParams"]のオブジェクトを受け取る
 	*/
-	virtual void ReadParamJson([[maybe_unused]]const nlohmann::json& paramsObject) {};
+	virtual void ReadParamJson([[maybe_unused]] const nlohmann::json& paramsObject) {};
 
 	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
 	virtual void DrawParams();
@@ -113,7 +115,6 @@ public:
 
 	//components_の中身をHierarchy Panelからのみ直接操作したいため
 	friend HierarchyPanel;
-	
 protected:
 	std::string name_ = "";
 
@@ -121,7 +122,8 @@ protected:
 
 private:
 	IComponent* parent_ = nullptr;
-
+	
+	std::optional<eastl::multimap<std::string, eastl::unique_ptr<IComponent>>::iterator> childRemovedNewItr_;
 };
 
 template<class Type, class ...Args>
@@ -129,6 +131,7 @@ inline Type* IComponent::AddComponent(const std::string& key, Args ...args)
 {
 	auto itr = components_.insert(eastl::make_pair(key, eastl::move(eastl::make_unique<Type>(args...))));
 	itr->second->name_ = itr->first;
+	itr->second->parent_ = this;
 
 	return dynamic_cast<Type*>(itr->second.get());
 }
@@ -136,7 +139,9 @@ inline Type* IComponent::AddComponent(const std::string& key, Args ...args)
 template<class Type>
 inline Type* IComponent::GetComponent(const std::string& key)
 {
-	return dynamic_cast<Type*>(components_.find(key)->second.get());
+	auto c = components_.find(key);
+	if (c == components_.end()) return nullptr;
+	return dynamic_cast<Type*>(c->second.get());
 }
 
 template<class Type>
