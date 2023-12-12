@@ -2,11 +2,23 @@
 
 #include <SpDirectX.h>
 #include <SpEffekseer.h>
+#include <SpImGui.h>
 
 Camera::Camera()
 {
 	renderWidth = 0;
 	renderHeight = 0;
+
+	useWindowSize = true;
+	nearZ = .1f;
+	farZ = 1000.f;
+
+	position = { 0.f, 0.f, -10.f };
+	rotation = Quaternion::Identity();
+
+	fov = PIf / 2;
+	nearZ = 0.1f;
+	farZ = 1000.0f;
 }
 
 void Camera::SetRenderSize(float w, float h)
@@ -37,6 +49,16 @@ Matrix Camera::GetBillboardMat()
 	camRot[3] = { 0,0,0,1 };
 
 	return -camRot;
+}
+
+void Camera::DrawParams()
+{
+	Object3D::DrawParams();
+
+	if (ImGui::Button("Activate Camera"))
+	{
+		Camera::Set(*this);
+	}
 }
 
 void Camera::Set(Camera& camera)

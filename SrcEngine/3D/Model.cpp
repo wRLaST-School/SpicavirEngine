@@ -45,10 +45,10 @@ Model::Model(const std::string& modelName)
 	while (getline(file, line)) {
 		std::istringstream lineStream(line);
 
-		std::string key;
-		getline(lineStream, key, ' ');
+		std::string tag;
+		getline(lineStream, tag, ' ');
 
-		if (key == "v")
+		if (tag == "v")
 		{
 			Float3 position{};
 			lineStream >> position.x;
@@ -58,7 +58,7 @@ Model::Model(const std::string& modelName)
 			posList.emplace_back(position);
 		}
 
-		if (key == "vt")
+		if (tag == "vt")
 		{
 			Float2 texcoord{};
 			lineStream >> texcoord.x;
@@ -68,7 +68,7 @@ Model::Model(const std::string& modelName)
 			tcList.emplace_back(texcoord);
 		}
 
-		if (key == "vn")
+		if (tag == "vn")
 		{
 			Vec3 normal{};
 
@@ -79,7 +79,7 @@ Model::Model(const std::string& modelName)
 			normalList.emplace_back(normal);
 		}
 
-		if (key == "f")
+		if (tag == "f")
 		{
 			std::string indexString;
 			while (getline(lineStream, indexString, ' ')) 
@@ -109,7 +109,7 @@ Model::Model(const std::string& modelName)
 			}
 		}
 
-		if (key == "mtllib")
+		if (tag == "mtllib")
 		{
 			std::string filename;
 			lineStream >> filename;
@@ -607,37 +607,37 @@ void Model::LoadMaterial(const std::string& path, const std::string& filename)
 	while (getline(file, line)) {
 		std::istringstream lineStream(line);
 
-		std::string key;
-		getline(lineStream, key, ' ');
+		std::string tag;
+		getline(lineStream, tag, ' ');
 
-		if (key[0] == '\t') key.erase(key.begin());
+		if (tag[0] == '\t') tag.erase(tag.begin());
 
-		if (key == "newmtl") {
+		if (tag == "newmtl") {
 			std::string str;
 			lineStream >> str;
 			material.emplace_back();
 			material.back().name = str;
 		}
 
-		if (key == "Ka") {
+		if (tag == "Ka") {
 			lineStream >> material.back().ambient.x;
 			lineStream >> material.back().ambient.y;
 			lineStream >> material.back().ambient.z;
 		}
 
-		if (key == "Kd") {
+		if (tag == "Kd") {
 			lineStream >> material.back().diffuse.x;
 			lineStream >> material.back().diffuse.y;
 			lineStream >> material.back().diffuse.z;
 		}
 
-		if (key == "Ks") {
+		if (tag == "Ks") {
 			lineStream >> material.back().specular.x;
 			lineStream >> material.back().specular.y;
 			lineStream >> material.back().specular.z;
 		}
 
-		if (key == "map_Kd") {
+		if (tag == "map_Kd") {
 			std::string texName;
 			lineStream >> texName;
 			material.back().textureKey = SpTextureManager::LoadTexture(path + texName, texName);
@@ -859,7 +859,7 @@ void ModelManager::Register(const std::string& modelName, const ModelKey& key)
 {
 	sModels.Access(
 		[&](auto& map) {
-			map.emplace(key, modelName);
+			map.emplace(key, modelName).first->second.key = key;
 		}
 	);
 
@@ -872,7 +872,7 @@ void ModelManager::Register(const std::string& modelPath, const ModelKey& key, b
 		[&](auto& map) {
 			map.emplace(eastl::piecewise_construct,
 				eastl::forward_as_tuple(key),
-				eastl::forward_as_tuple(modelPath, useAssimp));
+				eastl::forward_as_tuple(modelPath, useAssimp)).first->second.key = key;
 		}
 	);
 
@@ -884,7 +884,9 @@ Model* ModelManager::GetModel(const ModelKey& key)
 	Model* ret = nullptr;
 	sModels.Access(
 		[&](auto& map) {
-			ret = &map.find(key)->second;
+			auto itr = map.find(key);
+			if (itr == map.end()) ret = nullptr;
+			else ret = &itr->second;
 		}
 	);
 

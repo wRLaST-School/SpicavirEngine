@@ -162,6 +162,7 @@ public:
 	SpConstBuffer<ConstBufferDataBoneMatrix> bMatrixCB;
 
 	std::string filePath;
+	std::string key;
 
 	Model operator= (Model& m) = delete;
 

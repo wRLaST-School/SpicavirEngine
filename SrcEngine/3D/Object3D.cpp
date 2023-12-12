@@ -68,6 +68,11 @@ void Object3D::DecomposeMatrix()
 	rotationE.z = atan2f(wMatNoScale[0][1], wMatNoScale[0][0]);
 }
 
+void Object3D::Update()
+{
+	UpdateMatrix();
+}
+
 void Object3D::Draw()
 {
 	//モデルが設定されていないならなにもしない
@@ -347,6 +352,9 @@ void Object3D::ReadParamJson(const nlohmann::json& jsonObject)
 	rotationE.z = jsonObject["RotationEuler"]["Z"];
 
 	texture = jsonObject["Texture"];
+	std::string modelStr = jsonObject.At("Model");
+
+	model = ModelManager::GetModel(modelStr);
 }
 
 void Object3D::WriteParamJson(nlohmann::json& jsonObject)
@@ -369,4 +377,11 @@ void Object3D::WriteParamJson(nlohmann::json& jsonObject)
 	jsonObject["RotationEuler"]["Z"] = rotationE.z;
 
 	jsonObject["Texture"] = texture;
+
+	if (model)
+		jsonObject["Model"] = model->key;
+	else
+		jsonObject["Model"] = "";
+
+
 }

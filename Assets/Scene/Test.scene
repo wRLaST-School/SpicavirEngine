@@ -1,0 +1,107 @@
+[
+    {
+        "Children": [
+            {
+                "Model": "",
+                "Position": {
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": -10.0
+                },
+                "Rotation": {
+                    "W": 1.0,
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "RotationEuler": {
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "Scale": {
+                    "X": 1.0,
+                    "Y": 1.0,
+                    "Z": 1.0
+                },
+                "Texture": "",
+                "Type": "Camera"
+            },
+            {
+                "Model": "cube.obj",
+                "Position": {
+                    "X": -6.225948333740234,
+                    "Y": -8.764902114868164,
+                    "Z": 4.228254318237305
+                },
+                "Rotation": {
+                    "W": 1.0,
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "RotationEuler": {
+                    "X": -1.8051369741299493e-25,
+                    "Y": 7.912750932310589e-20,
+                    "Z": -0.34358543157577515
+                },
+                "Scale": {
+                    "X": 26.91973304748535,
+                    "Y": 0.0025251321494579315,
+                    "Z": 22.177528381347656
+                },
+                "Texture": "white.png",
+                "Type": "Object3D"
+            },
+            {
+                "Model": "cube.obj",
+                "Position": {
+                    "X": 10.493735313415527,
+                    "Y": -2.2375335693359375,
+                    "Z": 2.5972232818603516
+                },
+                "Rotation": {
+                    "W": 1.0,
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "RotationEuler": {
+                    "X": 0.0,
+                    "Y": 0.0,
+                    "Z": 0.0
+                },
+                "Scale": {
+                    "X": 4.783242225646973,
+                    "Y": 1.4808357954025269,
+                    "Z": 2.7535593509674072
+                },
+                "Texture": "DissolveMap.png",
+                "Type": "Object3D"
+            },
+            {
+                "Type": "PointLight"
+            }
+        ],
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {
+                "cube.obj": "Assets\\Models\\cube\\cube.obj"
+            }
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "Black": "Assets/Images/black.png",
+                "DissolveMap.png": "Assets\\Images\\DissolveMap.png",
+                "titleText": "Assets/Images/title.png",
+                "white.png": "Assets\\Images\\white.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

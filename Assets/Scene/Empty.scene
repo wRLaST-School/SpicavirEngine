@@ -1,0 +1,24 @@
+[
+    {
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {
+                "cube.obj": "Assets\\Models\\cube\\cube.obj"
+            }
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "Black": "Assets/Images/black.png",
+                "DissolveMap.png": "Assets\\Images\\DissolveMap.png",
+                "titleText": "Assets/Images/title.png",
+                "white.png": "Assets\\Images\\white.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

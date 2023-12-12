@@ -21317,6 +21317,22 @@ class basic_json // NOLINT(cppcoreguidelines-special-member-functions,hicpp-spec
         JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a string argument with ", type_name()), this));
     }
 
+    /// @return empty json if nothing found
+    /// @sa https://json.nlohmann.me/api/basic_json/operator%5B%5D/
+    const_reference At(const typename object_t::key_type& key) const
+    {
+        static json empty = json();
+        // const operator[] only works for objects
+        if (JSON_HEDLEY_LIKELY(is_object()))
+        {
+            auto it = m_value.object->find(key);
+            if (it == m_value.object->end()) return empty;
+            return it->second;
+        }
+
+        JSON_THROW(type_error::create(305, detail::concat("cannot use operator[] with a string argument with ", type_name()), this));
+    }
+
     // these two functions resolve a (const) char * ambiguity affecting Clang and MSVC
     // (they seemingly cannot be constrained to resolve the ambiguity)
     template<typename T>

@@ -26,6 +26,8 @@ public:
 	void UpdateMatrix();
 	void DecomposeMatrix();
 
+	void Update()override;
+
 	void Draw();
 	//別途読み込んだテクスチャを使う場合
 	void Draw(const TextureKey& key);

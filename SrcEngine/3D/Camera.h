@@ -37,6 +37,8 @@ public:
 
     Matrix GetBillboardMat();
 
+    void DrawParams() override;
+
     Float3 target = { 0.0f, 0.0f, 0.0f };
 
     //レンダーサイズ

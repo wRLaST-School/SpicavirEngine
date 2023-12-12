@@ -9,8 +9,8 @@ LevelManager::LevelManager()
 
 void LevelManager::Init()
 {
-	Clear();
-	LevelLoader::Load("Levels/scene.json", this);
+	//Clear();
+	//LevelLoader::Load("Levels/scene.json", this);
 }
 
 void LevelManager::Update()

@@ -65,6 +65,7 @@ public:
 	//指定したキーに該当する全てのコンポーネントのポインタをリストにして取得
 	eastl::list<IComponent*> GetComponents(const std::string& key);
 
+	//親コンポーネントを取得
 	IComponent* Parent();
 
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
