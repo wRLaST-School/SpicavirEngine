@@ -164,5 +164,5 @@ inline eastl::list<Type*> IComponent::GetComponents(const std::string& key)
 template<class Type>
 inline Type* IComponent::CastTo()
 {
-	return dynamic_cast<Type>(this);
+	return reinterpret_cast<Type*>(this);
 }

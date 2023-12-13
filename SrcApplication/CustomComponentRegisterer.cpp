@@ -13,6 +13,7 @@
 #include <Boss.h>
 #include <CameraController.h>
 #include <MainTimer.h>
+#include <TestMoveObject.h>
 
 void CustomComponentRegisterer::CallRegisters()
 {
@@ -31,4 +32,5 @@ void CustomComponentRegisterer::CallRegisters()
 	GravSphere::RegisterToComponentFactory();
 	Marker::RegisterToComponentFactory();
 	MainTimer::RegisterToComponentFactory();
+	TestMoveObject::RegisterToComponentFactory();
 }
