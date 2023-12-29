@@ -1,18 +1,48 @@
 #pragma once
+/*****************************************************************//**
+ * @file   AssetBrowser.h
+ * @brief  エディタ画面のAssetBrowserの表示と処理に関するファイル
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include <filesystem>
 #include <SpTextureManager.h>
+/**
+ * @brief AssetBrowserのクラス
+ */
 class AssetBrowser final
 {
 public:
+	/**
+	 * @brief 描画を行う(Static)
+	 * 
+	 */
 	static void SDraw();
 
+	/**
+	 * @brief 必須リソースの読み込み
+	 * 
+	 */
 	static void LoadResources();
 
 private:
+	/**
+	 * @brief ImGui描画時の処理
+	 * 
+	 */
 	void OnImGuiRender();
 
+	/**
+	 * @brief 描画処理
+	 * 
+	 */
 	void Draw();
 
+	/**
+	 * @brief ファイルがダブルクリックされた時の処理
+	 * 
+	 * @param ditr 開くファイルへのdirectory iterator
+	 */
 	void FileOpenAction(const std::filesystem::directory_entry& ditr);
 
 	std::filesystem::path currentDirectory_;
