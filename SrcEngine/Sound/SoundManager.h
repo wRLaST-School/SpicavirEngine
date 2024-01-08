@@ -1,4 +1,11 @@
 #pragma once
+/*****************************************************************//**
+ * @file   SoundManager.h
+ * @brief  サウンド読み込み・再生関連のヘッダー
+ * 
+ * @author Wrelf
+ *********************************************************************/
+
 #include "Essentials.h"
 
 #pragma warning(push, 0)
@@ -28,6 +35,9 @@ struct FormatChunk
 	WAVEFORMATEX fmt;
 };
 
+/**
+ * @brief 音情報
+ */
 class SoundData
 {
 public:
@@ -58,6 +68,9 @@ public:
 
 class SceneRW;
 
+/**
+ * @brief 音の読み込み・再生を行う
+ */
 class SoundManager {
 public:
 	//シーン情報書き込みで使用するため
