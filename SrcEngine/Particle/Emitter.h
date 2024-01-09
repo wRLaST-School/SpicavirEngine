@@ -1,4 +1,11 @@
 #pragma once
+/*****************************************************************//**
+ * @file   Emitter.h
+ * @brief  パーティクルのエミッターテンプレートクラス
+ * @details IParticleを継承したクラスをテンプレートに渡す
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include "ParticleManager.h"
 #include <IParticle.h>
 #include "Essentials.h"
@@ -38,9 +45,20 @@ public:
 		this->texture = ParticleType::sTexture;
 	}
 
+	/**
+	 * @brief パーティクル発生の有効化
+	 */
 	void Activate() { active = true; };
+
+	/**
+	 * @brief パーティクル発生の無効化
+	 */
 	void Deactivate() { active = false; };
 
+	/**
+	 * @brief 更新処理
+	 * 
+	 */
 	void Update() {
 		timer_++;
 		if (timer_ > timeBetweenEmit) {
@@ -72,6 +90,10 @@ public:
 		}
 	}
 
+	/**
+	 * @brief 発生範囲の描画
+	 * 
+	 */
 	void DrawEmitArea()
 	{
 		switch (shape)
@@ -89,6 +111,10 @@ public:
 	};
 
 private:
+	/**
+	 * @brief パーティクル発生処理
+	 * 
+	 */
 	void Emit() {
 		if (!active)
 		{

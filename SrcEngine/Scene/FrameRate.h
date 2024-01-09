@@ -1,11 +1,29 @@
 #pragma once
+/*****************************************************************//**
+ * @file   FrameRate.h
+ * @brief  FPS制御を行うヘッダー
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include "Essentials.h"
 #include <chrono>
 #include <Util.h>
+/**
+ * @brief FPS制御を行うクラス
+ */
 class FrameRate
 {
 public:
+	/**
+	 * @brief 各フレームの開始を待つ
+	 * 
+	 */
 	static void FrameStartWithWait();
+
+	/**
+	 * @brief フレーム開始時のマークをリセット
+	 * 
+	 */
 	static void InitMark();
 
 private:

@@ -1,4 +1,11 @@
 #pragma once
+/*****************************************************************//**
+ * @file   ParticleManager.h
+ * @brief  パーティクルの管理を行うクラス
+ * @details Emitter.hよりは低レイヤー寄り
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include <Essentials.h>
 #include <SpTextureManager.h>
 #include <IParticle.h>
@@ -8,6 +15,11 @@ class ParticleManager
 {
 public:
 	ParticleManager();
+
+	/**
+	 * @brief パーティクルの描画を行う
+	 * 
+	 */
 	void Draw();
 
 	~ParticleManager() {

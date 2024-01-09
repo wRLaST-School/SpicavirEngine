@@ -1,38 +1,80 @@
 #pragma once
+/*****************************************************************//**
+ * @file   Util.h
+ * @brief  便利機能が詰まったヘッダー
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include <string>
 #include <windows.h>
 #include <fstream>
 #include <cereal/archives/binary.hpp>
 
+/**
+ * @brief 便利機能が利用できる
+ */
 namespace Util
 {
+	/**
+	 * @brief 値を範囲内にクランプ
+	 * 
+	 * @param value クランプ元の値
+	 * @param min 最低値
+	 * @param max 最大値
+	 * @return クランプされた値
+	 */
 	template<class T>
 	T Clamp(T value, T min, T max)
 	{
 		return value < min ? min : value > max ? max : value;
 	}
 
+	/**
+	 * @brief 値を範囲内にクランプ
+	 *
+	 * @param value クランプ元の値
+	 * @param min 最低値
+	 * @return クランプされた値
+	 */
 	template<class T>
 	T ClampMin(T value, T min)
 	{
 		return value < min ? min : value;
 	}
 
+	/**
+	 * @brief 値を範囲内にクランプ
+	 *
+	 * @param value クランプ元の値
+	 * @param max 最大値
+	 * @return クランプされた値
+	 */
 	template<class T>
 	T ClampMax(T value, T max)
 	{
 		return value > max ? max : value;
 	}
 
-	//percentage %の確率でtrueを返す
+	/**
+	 * @brief 確率でtrueになる
+	 * 
+	 * @return percentage %の確率でtrue
+	 */
 	bool Chance(int32_t percentage);
 
-	/*
-	乱数を最低値と最高値を設定して返す。
-	RNG(1,3)なら1, 2, 3のどれかが返る。preciseModeをtrueにするとより精密に乱数を取る。
-	*/
+	/**
+	 * @brief 乱数を最低値と最高値を設定して取得
+	 * 
+	 * @param min 最低値
+	 * @param max 最大値
+	 * @param preciseMode trueにするとより精密に乱数を取る
+	 * @return RNG(1,3)なら1, 2, 3のどれかが返る
+	 */
 	int32_t RNG(int32_t min, int32_t max, bool preciseMode = false);
 
+	/**
+	 * @brief stringからwstringへの変換
+	 */
 	std::wstring StrToWStr(const std::string& str, int32_t page = CP_ACP);
 
 	//serialize関数を定義したオブジェクトのファイル保存/読み込み

@@ -1,4 +1,10 @@
 #pragma once
+/*****************************************************************//**
+ * @file   SpTextureManager.h
+ * @brief  テクスチャの読み込みや取得に関するヘッダー
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include "Essentials.h"
 #include <exc_unordered_map.h>
 
@@ -10,6 +16,9 @@ const size_t wMaxSRVCount = 1024;
 class ResourceWindow;
 class SceneRW;
 
+/**
+ * @brief テクスチャの読み込みや取得に関するクラス
+ */
 class SpTextureManager
 {
 private:
@@ -26,12 +35,71 @@ public:
 
 	static void Create();
 	static void Init();
+	/**
+	 * @brief テクスチャの読み込み
+	 * 
+	 * @param filePath ファイルパス
+	 * @param key テクスチャの登録キー
+	 * @return 登録したキー
+	 */
 	static TextureKey LoadTexture(const std::string& filePath, const TextureKey& key);
+	
+	/**
+	* @brief テクスチャの読み込み
+	*
+	* @param filePath ファイルパス
+	* @param key テクスチャの登録キー
+	* @return 登録したキー
+	*/
 	static TextureKey LoadTextureWithUniqueKey(const std::string& filePath, const TextureKey& key);
+	
+	/**
+	 * @brief ダミーテクスチャの生成
+	 * 
+	 * @param width 横幅
+	 * @param height 縦幅
+	 * @param key テクスチャの登録キー
+	 * @param initAsRenderTarget レンダーターゲットとして初期化するか
+	 * @param useRatio widthとheightを画面サイズに対する比率で扱うか
+	 * @return 登録したキー
+	 */
 	static TextureKey CreateDummyTexture(float width, float height, const TextureKey& key, bool initAsRenderTarget = true, bool useRatio = false);
+	
+	/**
+	 * @brief ダミーテクスチャの生成
+	 *
+	 * @param width 横幅
+	 * @param height 縦幅
+	 * @param key テクスチャの登録キー
+	 * @param initAsRenderTarget レンダーターゲットとして初期化するか
+	 * @param useRatio widthとheightを画面サイズに対する比率で扱うか
+	 * @return 登録したキー
+	 */
 	static TextureKey CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget = true);
 
+	/**
+	 * @brief 画像の分割読み込み
+	 * 
+	 * @param filePath ファイルパス
+	 * @param widthPer 一つあたりの横幅
+	 * @param heightPer 一つあたりの縦幅
+	 * @param qx x方向の数
+	 * @param qy y方向の数
+	 * @param keys 登録するキーの配列
+	 */
 	static void LoadDiv(const std::string& filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const std::vector<TextureKey>& keys);
+	
+	/**
+	 * @brief 画像の分割読み込み(一つのみ)
+	 * 
+	 * @param filePath ファイルパス
+	 * @param originX 原点x
+	 * @param originY 原点y
+	 * @param width 原点からの横幅
+	 * @param height 原点からの縦幅
+	 * @param key テクスチャの登録キー
+	 * @return 登録したキー
+	 */
 	static TextureKey LoadSingleDiv(std::string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, const TextureKey& key);
 
 	static TextureKey CreatePlainSRV(const TextureKey& key);
