@@ -63,6 +63,9 @@ public:
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 
+    void ReadParamJson([[maybe_unused]] const nlohmann::json& jsonObject) override;
+    void WriteParamJson([[maybe_unused]] nlohmann::json& jsonObject) override;
+
 private:
     Matrix view;
     Matrix proj;

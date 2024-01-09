@@ -2,7 +2,6 @@
     {
         "Children": [
             {
-                "Model": "",
                 "Position": {
                     "X": 0.0,
                     "Y": 0.0,
@@ -24,8 +23,8 @@
                     "Y": 1.0,
                     "Z": 1.0
                 },
-                "Texture": "",
-                "Type": "Camera"
+                "Type": "Camera",
+                "UseQuaternionRot": 1
             },
             {
                 "Model": "cube.obj",
@@ -84,20 +83,74 @@
             }
         ],
         "EfkEffects": [
-            {}
+            {
+                "LineAttack": [
+                    "Assets/Effekseer/Line",
+                    "Assets/Effekseer/Line/Line.efk"
+                ],
+                "Marker": [
+                    "Assets/Effekseer",
+                    "Assets/Effekseer/Marker/Marker.efk"
+                ],
+                "Slash1": [
+                    "Assets/Effekseer/Slash1",
+                    "Assets/Effekseer/Slash1/Slash1.efk"
+                ],
+                "Slash2": [
+                    "Assets/Effekseer/Slash2",
+                    "Assets/Effekseer/Slash2/Slash2.efk"
+                ],
+                "Slash3": [
+                    "Assets/Effekseer/Slash3",
+                    "Assets/Effekseer/Slash3/Slash3.efk"
+                ],
+                "SphereParticle": [
+                    "Assets/Effekseer/Sphere",
+                    "Assets/Effekseer/Sphere/sphere.efk"
+                ]
+            }
         ],
         "Models": [
             {
-                "cube.obj": "Assets\\Models\\cube\\cube.obj"
+                "Boss": "Assets/Models/Boss/boss.glb",
+                "Cube": "Assets/Models/cube/cube.obj",
+                "PlayerIdle": "Assets/Models/Player/Idle.gltf",
+                "PlayerRoll": "Assets/Models/Player/Roll.gltf",
+                "PlayerRun": "Assets/Models/Player/Run.gltf",
+                "PlayerSlash1": "Assets/Models/Player/Slash1.gltf",
+                "PlayerSlash2": "Assets/Models/Player/Slash2.gltf",
+                "PlayerSlash3": "Assets/Models/Player/Slash3.gltf",
+                "Sky": "Assets/Models/skydome/skydome.obj",
+                "Sphere": "Assets/Models/Sphere/Sphere.obj",
+                "Triangle": "Assets/Models/triangle/triangle.obj",
+                "cube": "Assets/Models/Cube/Cube.obj",
+                "cube.obj": "Assets\\Models\\cube\\cube.obj",
+                "floor": "Assets/Models/Floor.glb"
             }
         ],
         "Sounds": [
-            {}
+            {
+                "LineAttack": "Assets/Sounds/LineAttack.wav",
+                "RushImpact": "Assets/Sounds/RushImpact.wav",
+                "Slash12": "Assets/Sounds/Slash12.wav",
+                "Slash3": "Assets/Sounds/Slash3.wav",
+                "counterSuccess": "Assets/Sounds/counterSuccess.wav",
+                "dodge": "Assets/Sounds/dodge.wav",
+                "marker": "Assets/Sounds/marker.wav",
+                "takeDamage": "Assets/Sounds/takeDamage.wav"
+            }
         ],
         "Textures": [
             {
+                "BasicParticle": "Assets/Images/circleParticle.png",
                 "Black": "Assets/Images/black.png",
                 "DissolveMap.png": "Assets\\Images\\DissolveMap.png",
+                "Stars.png": "Assets/Models/skydome/Stars.png",
+                "asmptex:Assets/Models/PlayerSkin.png": "Assets/Models/Player/Skin.png",
+                "black": "Assets/Images/black.png",
+                "hexagon": "Assets/Images/hexagonPattern.jpg",
+                "scoreBase": "Assets/Images/ScoreBase.png",
+                "scoreOverlay": "Assets/Images/ScoreTierOverlay.png",
                 "titleText": "Assets/Images/title.png",
                 "white.png": "Assets\\Images\\white.png"
             }

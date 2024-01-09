@@ -141,6 +141,50 @@ Matrix Camera::GetCurrentCameraBillboardMat()
 	return -camRot;
 }
 
+void Camera::ReadParamJson(const nlohmann::json& jsonObject)
+{
+	position.x = jsonObject["Position"]["X"];
+	position.y = jsonObject["Position"]["Y"];
+	position.z = jsonObject["Position"]["Z"];
+
+	scale.x = jsonObject["Scale"]["X"];
+	scale.y = jsonObject["Scale"]["Y"];
+	scale.z = jsonObject["Scale"]["Z"];
+
+	rotation.v.x = jsonObject["Rotation"]["X"];
+	rotation.v.y = jsonObject["Rotation"]["Y"];
+	rotation.v.z = jsonObject["Rotation"]["Z"];
+	rotation.w = jsonObject["Rotation"]["W"];
+
+	rotationE.x = jsonObject["RotationEuler"]["X"];
+	rotationE.y = jsonObject["RotationEuler"]["Y"];
+	rotationE.z = jsonObject["RotationEuler"]["Z"];
+
+	rotMode = jsonObject["UseQuaternionRot"];
+}
+
+void Camera::WriteParamJson(nlohmann::json& jsonObject)
+{
+	jsonObject["Position"]["X"] = position.x;
+	jsonObject["Position"]["Y"] = position.y;
+	jsonObject["Position"]["Z"] = position.z;
+
+	jsonObject["Scale"]["X"] = scale.x;
+	jsonObject["Scale"]["Y"] = scale.y;
+	jsonObject["Scale"]["Z"] = scale.z;
+
+	jsonObject["Rotation"]["X"] = rotation.v.x;
+	jsonObject["Rotation"]["Y"] = rotation.v.y;
+	jsonObject["Rotation"]["Z"] = rotation.v.z;
+	jsonObject["Rotation"]["W"] = rotation.w;
+
+	jsonObject["RotationEuler"]["X"] = rotationE.x;
+	jsonObject["RotationEuler"]["Y"] = rotationE.y;
+	jsonObject["RotationEuler"]["Z"] = rotationE.z;
+
+	jsonObject["UseQuaternionRot"] = rotMode;
+}
+
 Float3 Camera::GetWorldPosFromScreen(const Float2& screen, float depth)
 {
 	if (useWindowSize)
