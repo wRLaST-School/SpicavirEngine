@@ -1,9 +1,18 @@
 #pragma once
+/*****************************************************************//**
+ * @file   Matrix.h
+ * @brief  4x4の行列のヘッダー
+ * 
+ * @author Wrelf
+ *********************************************************************/
 #include "Float4.h"
 #include "Float3.h"
 #include "Float2.h"
 #include <Vec3.h>
 
+/**
+ * @briel 4x4行列のクラス
+ */
 class Matrix
 {
 private:
