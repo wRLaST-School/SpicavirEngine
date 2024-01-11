@@ -59,6 +59,12 @@ public:
 	int32_t grad = 0;
 };
 
+struct StringSpDSData {
+	TextureKey key;
+	Float2 scale = {};
+	Vec2 pos = {};
+};
+
 class TextDrawer
 {
 private:
@@ -74,7 +80,7 @@ public:
 	static TextDrawer* GetInstance();
 private:
 	std::vector<TextureKey> releaseQueue;
-	std::vector<Sprite> stringSpriteQueue;
+	std::vector<StringSpDSData> stringSpriteQueue;
 	StringOptions defaultOption = StringOptions();
 };
 

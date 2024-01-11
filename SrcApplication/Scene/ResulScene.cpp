@@ -55,6 +55,8 @@ void ResultScene::Update()
 
 void ResultScene::DrawBack()
 {
+	Float2 center = { (float)GetSpWindow()->width / 2, (float)GetSpWindow()->height / 2 };
+	SpDS::DrawBox(0, 0, (int32_t)center.x * 2, (int32_t)center.y * 2, Color::Black);
 }
 
 void ResultScene::Draw3D()
@@ -66,7 +68,6 @@ void ResultScene::DrawSprite()
 	Float2 center = { (float)GetSpWindow()->width /2, (float)GetSpWindow()->height /2 };
 	Float2 multiplier = { center.x / 640, center.y / 360 };
 
-	SpDS::DrawBox(0, 0, (int32_t)center.x * 2, (int32_t)center.y * 2, Color::Black);
 	SpDS::DrawRotaGraph((int32_t)center.x, (int32_t)center.y, multiplier.x, multiplier.y, 0.f, "resultText");
 	SpDS::DrawRotaGraph((int32_t)center.x, (int32_t)center.y, multiplier.x, multiplier.y, 0.f, "rank");
 }

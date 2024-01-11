@@ -493,6 +493,87 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int3
 	throw std::out_of_range("out of texture resource");
 }
 
+TextureKey SpTextureManager::CreateTextTexture(int32_t width, int32_t height, const TextureKey& key)
+{
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied_[i] && i <= 253)
+		{
+			GetInstance().nextTexIndex_ = i;
+			sPerSceneTextures[sCurrentSceneResIndex].push_back(key);
+			break;
+		}
+	}
+	OutputDebugStringA((string("Creating Text Tex: ") + key + string(" on ") + to_string(GetInstance().nextTexIndex_) + string("\n")).c_str());
+	CD3DX12_HEAP_PROPERTIES texHeapProp = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_CUSTOM);
+
+	texHeapProp.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	texHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+
+	D3D12_RESOURCE_DESC textureResourceDesc =
+		CD3DX12_RESOURCE_DESC::Tex2D(DXGI_FORMAT_R8G8B8A8_UNORM, width, height, 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+
+	D3D12_CLEAR_VALUE clval = { DXGI_FORMAT_R8G8B8A8_UNORM, {0, 0, 0, 0} };
+
+	GetSpDX()->dev->CreateCommittedResource(
+		&texHeapProp,
+		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
+		&textureResourceDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		&clval,
+		IID_PPV_ARGS(&GetInstance().texBuffs[GetInstance().nextTexIndex_]));
+
+	GetInstance().texBuffs[GetInstance().nextTexIndex_]->SetName(L"TEXTURE_BUFFER");
+	//シェーダーリソースビューの生成
+	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * SpTextureManager::GetInstance().nextTexIndex_;
+
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = textureResourceDesc.Format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
+
+	GetSpDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[GetInstance().nextTexIndex_].Get(), &srvDesc, heapHandle);
+
+	int32_t tryNum = 0;
+	bool succeeded = false;
+	string tryKey;
+	for (tryNum = 0; !succeeded; tryNum++)
+	{
+		tryKey = tryNum == 0 ? key : key + std::to_string(tryNum);
+
+		SpTextureManager::GetInstance().textureMap_.Access(
+			[&](auto& map) {
+				succeeded = map.try_emplace(tryKey, SpTextureManager::GetInstance().nextTexIndex_).second;
+			}
+		);
+	}
+	SpTextureManager::GetInstance().texDataMap_.Access(
+		[&](auto& map) {
+			TexMetadata& pTexMeta = map[tryKey].meta;
+			pTexMeta = TexMetadata{};
+			pTexMeta.width = width;
+			pTexMeta.height = height;
+		}
+	);
+
+	GetInstance().isOccupied_[GetInstance().nextTexIndex_] = true;
+
+	for (size_t i = 0; i < wMaxSRVCount; i++)
+	{
+		if (!GetInstance().isOccupied_[i])
+		{
+			GetInstance().nextTexIndex_ = i;
+			sPerSceneTextures[sCurrentSceneResIndex].push_back(tryKey);
+			return tryKey;
+		}
+	}
+
+	throw std::out_of_range("out of texture resource");
+}
+
 void SpTextureManager::LoadDiv(const string& filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const vector<TextureKey>& keys)
 {
 	auto itr = keys.begin();

@@ -239,6 +239,12 @@ void SpDS::RenderGraph()
 			}
 		}
 
+		if (ggp.key == "TEST")
+		{
+			OutputDebugStringA(std::to_string(ggp.matcb.contents->mat[3][1]).c_str());
+			OutputDebugStringA("\n");
+		}
+
 		//描画
 		GetSpDX()->cmdList->SetGraphicsRootDescriptorTable(1, SpTextureManager::GetGPUDescHandle(ggp.key));
 		GetSpDX()->cmdList->SetGraphicsRootConstantBufferView(0, ggp.matcb.buffer->GetGPUVirtualAddress());

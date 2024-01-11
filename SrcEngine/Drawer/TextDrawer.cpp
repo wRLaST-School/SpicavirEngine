@@ -1,6 +1,7 @@
 #include "TextDrawer.h"
 #include "SpDirectX.h"
 #include "Util.h"
+#include <SpDS.h>
 
 using namespace std;
 
@@ -163,7 +164,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 	}
 
 	//ダミーテクスチャ
-	strdata.key = SpTextureManager::CreateDummyTextureWithUniqueKey(strdata.width, strdata.height, str, false);
+	strdata.key = SpTextureManager::CreateTextTexture(strdata.width, strdata.height, str);
 
 	int32_t drawOriginX = 0;
 	int32_t drawOriginY = 0;
@@ -261,40 +262,40 @@ void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, S
 
 	GetInstance()->stringSpriteQueue.emplace_back(strData.key);
 
-	Sprite* spr = &GetInstance()->stringSpriteQueue.back();
+	StringSpDSData* spr = &GetInstance()->stringSpriteQueue.back();
 
-	spr->position = { (float)x, (float)y, 0 };
+	spr->pos.x = (float)x, spr->pos.y = (float)y;
 	float multiplier = (float)options.size / strData.height;
-	spr->scale = { multiplier, multiplier, 1};
+	spr->scale = { multiplier, multiplier };
 
 	strData.width = static_cast<int32_t>(strData.width * multiplier);
-	strData.height *= static_cast<int32_t>(strData.height * multiplier);
+	strData.height = static_cast<int32_t>(strData.height * multiplier);
 
 	switch (alignment)
 	{
 	case Align::TopLeft:
-		spr->position += {(float)strData.width/2, (float)strData.height/2, 0};
+		spr->pos += {(float)strData.width/2, (float)strData.height/2};
 		break;
 	case Align::TopRight:
-		spr->position += {(float)-strData.width / 2, (float)strData.height / 2, 0};
+		spr->pos += {(float)-strData.width / 2, (float)strData.height / 2};
 		break;
 	case Align::BottomLeft:
-		spr->position += {(float)strData.width / 2, (float)-strData.height / 2, 0};
+		spr->pos += {(float)strData.width / 2, (float)-strData.height / 2};
 		break;
 	case Align::BottomRight:
-		spr->position += {(float)-strData.width / 2, (float)-strData.height / 2, 0};
+		spr->pos += {(float)-strData.width / 2, (float)-strData.height / 2};
 		break;
 	case Align::TopCenter:
-		spr->position += {0, (float)strData.height / 2, 0};
+		spr->pos += {0, (float)strData.height / 2};
 		break;
 	case Align::BottomCenter:
-		spr->position += {0, (float)-strData.height / 2, 0};
+		spr->pos += {0, (float)-strData.height / 2};
 		break;
 	case Align::CenterLeft:
-		spr->position += {(float)strData.width / 2, 0, 0};
+		spr->pos += {(float)strData.width / 2, 0};
 		break;
 	case Align::CenterRight:
-		spr->position += {(float)-strData.width / 2, 0, 0};
+		spr->pos += {(float)-strData.width / 2, 0};
 		break;
 	case Align::Center:
 		break;
@@ -302,9 +303,8 @@ void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, S
 		break;
 	}
 
-	spr->UpdateMatrix();
-
-	spr->Draw();
+	SpDS::DrawRotaGraph((int32_t)spr->pos.x, (int32_t)spr->pos.y,
+		spr->scale.x, spr->scale.y, 0.f, spr->key);
 
 	GetInstance()->releaseQueue.push_back(strData.key);
 }

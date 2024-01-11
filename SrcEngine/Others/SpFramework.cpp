@@ -130,12 +130,12 @@ void SpFramework::Run()
 
 		DockPanel::EnableScreenDock();
 
+		SceneManager::DrawBack();
+
 		/*更新処理*/
 		SceneManager::Update();
 		SpEffekseer::Update();
-		/*更新処理ここまで*/
-
-		SceneManager::DrawBack();
+		/*更新処理ここまで*/;
 
 		SceneManager::Draw3D();
 

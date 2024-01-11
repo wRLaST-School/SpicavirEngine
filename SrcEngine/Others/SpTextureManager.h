@@ -78,6 +78,16 @@ public:
 	static TextureKey CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget = true);
 
 	/**
+	 * @brief テキスト描画用ダミーテクスチャの生成
+	 * 
+	 * @param width 横幅
+	 * @param height 縦幅
+	 * @param key テクスチャの登録キー
+	 * @return 登録したキー
+	 */
+	static TextureKey CreateTextTexture(int32_t width, int32_t height, const TextureKey& key);
+
+	/**
 	 * @brief 画像の分割読み込み
 	 * 
 	 * @param filePath ファイルパス

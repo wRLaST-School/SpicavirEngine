@@ -9,6 +9,8 @@ public:
     
     void Update()override;
 
+    void Draw()override;
+
     void DrawParams() override;
 
 private:
