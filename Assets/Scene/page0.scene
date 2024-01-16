@@ -1,0 +1,39 @@
+[
+    {
+        "Children": [
+            {
+                "Type": "PageCtrl"
+            },
+            {
+                "ColorA": 1.0,
+                "ColorB": 1.0,
+                "ColorG": 1.0,
+                "ColorR": 1.0,
+                "FontSize": 128,
+                "PosX": 960.0,
+                "PosY": 540.0,
+                "Res": 128,
+                "Text": "シーンエディタできてきた",
+                "Type": "StringObject"
+            }
+        ],
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {
+                "cube.obj": "Assets\\Models\\cube\\cube.obj"
+            }
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "Black": "Assets/Images/black.png",
+                "titleText": "Assets/Images/title.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

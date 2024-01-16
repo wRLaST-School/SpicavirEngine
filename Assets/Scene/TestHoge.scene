@@ -1,0 +1,45 @@
+[
+    {
+        "Children": [
+            {
+                "Texture": "DissolveMap.png",
+                "Type": "SpriteObject",
+                "posX": 960.0,
+                "posY": 540.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0
+            },
+            {
+                "ColorA": 1.0,
+                "ColorB": 1.0,
+                "ColorG": 1.0,
+                "ColorR": 1.0,
+                "FontSize": 64,
+                "PosX": 960.0,
+                "PosY": 540.0,
+                "Res": 64,
+                "Text": "Hogehogeあいうえintほげ",
+                "Type": "StringObject"
+            }
+        ],
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {
+                "cube.obj": "Assets\\Models\\cube\\cube.obj"
+            }
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "Black": "Assets/Images/black.png",
+                "DissolveMap.png": "Assets\\Images\\DissolveMap.png",
+                "titleText": "Assets/Images/title.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]

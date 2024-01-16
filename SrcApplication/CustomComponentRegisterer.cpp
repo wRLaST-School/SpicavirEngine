@@ -16,6 +16,7 @@
 #include <CameraController.h>
 #include <MainTimer.h>
 #include <TestMoveObject.h>
+#include <PageCtrl.h>
 
 void CustomComponentRegisterer::CallRegisters()
 {
@@ -27,7 +28,7 @@ void CustomComponentRegisterer::CallRegisters()
 	Camera::RegisterToComponentFactory();
 	StringObject::RegisterToComponentFactory();
 	SpriteObject::RegisterToComponentFactory();
-
+	
 	//Application Side
 	CameraController::RegisterToComponentFactory();
 	Player::RegisterToComponentFactory();
@@ -37,4 +38,5 @@ void CustomComponentRegisterer::CallRegisters()
 	Marker::RegisterToComponentFactory();
 	MainTimer::RegisterToComponentFactory();
 	TestMoveObject::RegisterToComponentFactory();
+	PageCtrl::RegisterToComponentFactory();
 }

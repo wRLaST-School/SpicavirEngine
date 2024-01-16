@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PageCtrl.cpp" />
     <ClCompile Include="SceneFromFile.cpp" />
     <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
@@ -292,6 +293,7 @@
     <ClCompile Include="TestMoveObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="PageCtrl.h" />
     <ClInclude Include="SceneFromFile.h" />
     <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />

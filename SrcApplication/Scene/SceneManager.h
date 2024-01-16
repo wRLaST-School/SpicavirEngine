@@ -4,6 +4,8 @@
 #include <future>
 #include <thread>
 #include <SoundManager.h>
+#include <SpTextureManager.h>
+#include <Model.h>
 #include <SpEffekseer.h>
 class SceneManager final
 {
