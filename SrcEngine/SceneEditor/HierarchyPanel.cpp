@@ -5,6 +5,7 @@
 #include <SceneManager.h>
 #include <InspectorWindow.h>
 #include <Object3D.h>
+#include <Input.h>
 
 void HierarchyPanel::Draw()
 {
@@ -17,6 +18,17 @@ void HierarchyPanel::OnImGuiRender()
     if (ImGui::Begin("Hierarchy"))
     {
         ShowItemRecursive(SceneManager::currentScene.get());
+
+        if (Input::Key::Triggered(DIK_DELETE))
+        {
+            if (!(InspectorWindow::GetSelected<IScene>()))
+            {
+                IComponent* cmp = InspectorWindow::GetSelected<IComponent>();
+                IComponent* par = cmp->parent_;
+                cmp->parent_->RemoveComponent(cmp);
+                InspectorWindow::SelectObject(par);
+            }
+        }
     }
 
     ImGui::End();

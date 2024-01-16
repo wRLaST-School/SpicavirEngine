@@ -36,7 +36,7 @@
                 "FontSize": 64,
                 "PosX": 960.0,
                 "PosY": 540.0,
-                "Res": 64,
+                "Res": 128,
                 "Text": "画像描画用コンポーネント「Spriteオブジェクト」",
                 "Type": "StringObject"
             }
