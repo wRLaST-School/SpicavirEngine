@@ -34,7 +34,7 @@ void SpImGui::Init()
 		SpTextureManager::GetCPUDescHandle("imgui_srv"),
 		SpTextureManager::GetGPUDescHandle("imgui_srv"));
 
-	io.Fonts->AddFontFromFileTTF("Resources/fonts/rounded-x-mgenplus-1m-bold.ttf", 18);
+	io.Fonts->AddFontFromFileTTF("Resources/fonts/rounded-x-mgenplus-1m-bold.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
 }
 
 void SpImGui::InitDirectXForImGui()

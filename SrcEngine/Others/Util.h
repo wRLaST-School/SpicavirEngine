@@ -75,7 +75,7 @@ namespace Util
 	/**
 	 * @brief stringからwstringへの変換
 	 */
-	std::wstring StrToWStr(const std::string& str, int32_t page = CP_ACP);
+	std::wstring StrToWStr(const std::string& str, uint32_t page = CP_ACP);
 
 	//serialize関数を定義したオブジェクトのファイル保存/読み込み
 	template<class T>

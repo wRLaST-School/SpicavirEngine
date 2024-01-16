@@ -6,7 +6,7 @@
 std::random_device rnd;
 std::mt19937 mt(rnd());
 
-std::wstring Util::StrToWStr(const std::string& str, int32_t page)
+std::wstring Util::StrToWStr(const std::string& str, uint32_t page)
 {
     // SJIS -> wstring
     int32_t iBufferSize = MultiByteToWideChar(page, 0, str.c_str(), -1, (wchar_t*)NULL, 0);
@@ -15,7 +15,7 @@ std::wstring Util::StrToWStr(const std::string& str, int32_t page)
     wchar_t* cpUCS2 = new wchar_t[iBufferSize];
 
     // SJIS -> wstring
-    MultiByteToWideChar(CP_ACP, 0, str.c_str(), -1, cpUCS2, iBufferSize);
+    MultiByteToWideChar(page, 0, str.c_str(), -1, cpUCS2, iBufferSize);
 
     // stringの生成
     std::wstring ret(cpUCS2, cpUCS2 + iBufferSize - 1);

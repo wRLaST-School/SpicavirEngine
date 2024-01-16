@@ -10,8 +10,7 @@ void StringObject::Draw()
 
 void StringObject::DrawParams()
 {
-	//SpImGui::InputText("Text", &str_, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue, ImGuiInputTextCallback t, );
-
+	SpImGui::InputText("Text", &str_, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue);
 	ImGui::InputFloat2("Pos", &pos_.x);
 
 	ImGui::ColorEdit4("Color", &color_.f4.x);

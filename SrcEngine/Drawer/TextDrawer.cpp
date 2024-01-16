@@ -121,7 +121,7 @@ StringData FontManager::CreateStringTexture(string str, StringOptions options)
 {
 	if (str == "") return StringData();
 
-	wstring wStr = Util::StrToWStr(str);
+	wstring wStr = Util::StrToWStr(str, CP_UTF8);
 	
 	list<FontData*> glyphList;
 
