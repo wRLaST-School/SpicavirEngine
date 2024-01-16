@@ -173,6 +173,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="SceneFromFile.cpp" />
+    <ClCompile Include="SpriteObject.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ComponentFactory.cpp" />
     <ClCompile Include="SrcApplication\CustomComponentRegisterer.cpp" />
@@ -292,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneFromFile.h" />
+    <ClInclude Include="SpriteObject.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ComponentFactory.h" />
     <ClInclude Include="SrcApplication\CustomComponentRegisterer.h" />

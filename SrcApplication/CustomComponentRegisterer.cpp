@@ -8,6 +8,7 @@
 #include <LevelManager.h>
 #include <Camera.h>
 #include <StringObject.h>
+#include <SpriteObject.h>
 
 //Application Side
 #include <Player.h>
@@ -25,6 +26,7 @@ void CustomComponentRegisterer::CallRegisters()
 	LevelManager::RegisterToComponentFactory();
 	Camera::RegisterToComponentFactory();
 	StringObject::RegisterToComponentFactory();
+	SpriteObject::RegisterToComponentFactory();
 
 	//Application Side
 	CameraController::RegisterToComponentFactory();

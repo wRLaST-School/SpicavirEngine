@@ -77,6 +77,11 @@ void ResourceWindow::DrawTextureList()
 				continue;
 			}
 
+			if (c.second == 0)
+			{
+				continue;
+			}
+
 			D3D12_GPU_DESCRIPTOR_HANDLE heapHandle;
 			heapHandle = tmIns.srvHeap->GetGPUDescriptorHandleForHeapStart();
 			heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * c.second;

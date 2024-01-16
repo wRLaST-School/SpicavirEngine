@@ -6,6 +6,8 @@
 #include "SpRootSignature.h"
 #include <RootSignatureManager.h>
 #include <SpRenderer.h>
+#include <SpImGui.h>
+#include <Input.h>
 
 Sprite::Sprite(const TextureKey& key)
 {
@@ -177,6 +179,5 @@ void Sprite::InitCommon()
 {
 	sProj = Matrix::Projection(GetSpWindow()->width, GetSpWindow()->height);
 }
-
 
 Matrix Sprite::sProj;
