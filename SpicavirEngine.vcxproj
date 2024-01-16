@@ -287,6 +287,7 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
+    <ClCompile Include="StringObject.cpp" />
     <ClCompile Include="TestMoveObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -408,6 +409,7 @@
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
     <ClInclude Include="SrcExternal\json.hpp" />
+    <ClInclude Include="StringObject.h" />
     <ClInclude Include="TestMoveObject.h" />
   </ItemGroup>
   <ItemGroup>

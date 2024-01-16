@@ -1,6 +1,7 @@
 #pragma once
 #include "Sprite.h"
 #include "SpTextureManager.h"
+#include <Color.h>
 
 enum class Align
 {
@@ -70,8 +71,8 @@ class TextDrawer
 private:
 
 public:
-	static void DrawString(std::string str, int32_t x, int32_t y, Align alignment, StringOptions options);
-	static void DrawString(std::string str, int32_t x, int32_t y, Align alignment);
+	static void DrawString(std::string str, int32_t x, int32_t y, Align alignment, Color color, StringOptions options);
+	static void DrawString(std::string str, int32_t x, int32_t y, Align alignment, Color color = Color::White);
 	static void SetDefaultStringOptions(StringOptions options);
 
 	static void ReleaseDrawStringData();

@@ -256,7 +256,7 @@ FontData* FontManager::GetFontData(string fontName, wstring glyph)
 	return &fontMap[handle][glyph];
 }
 
-void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, StringOptions options)
+void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, Color color, StringOptions options)
 {
 	StringData strData = FontManager::CreateStringTexture(str, options);
 
@@ -304,14 +304,14 @@ void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, S
 	}
 
 	SpDS::DrawRotaGraph((int32_t)spr->pos.x, (int32_t)spr->pos.y,
-		spr->scale.x, spr->scale.y, 0.f, spr->key);
+		spr->scale.x, spr->scale.y, 0.f, spr->key, Anchor::Center, color);
 
 	GetInstance()->releaseQueue.push_back(strData.key);
 }
 
-void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment)
+void TextDrawer::DrawString(string str, int32_t x, int32_t y, Align alignment, Color color)
 {
-	DrawString(str, x, y, alignment, GetInstance()->defaultOption);
+	DrawString(str, x, y, alignment, color, GetInstance()->defaultOption);
 }
 
 void TextDrawer::ReleaseDrawStringData()

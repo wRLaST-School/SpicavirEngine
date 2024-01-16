@@ -7,6 +7,7 @@
 #include <IScene.h>
 #include <LevelManager.h>
 #include <Camera.h>
+#include <StringObject.h>
 
 //Application Side
 #include <Player.h>
@@ -23,6 +24,7 @@ void CustomComponentRegisterer::CallRegisters()
 	BT::BehaviorTree::RegisterToComponentFactory();
 	LevelManager::RegisterToComponentFactory();
 	Camera::RegisterToComponentFactory();
+	StringObject::RegisterToComponentFactory();
 
 	//Application Side
 	CameraController::RegisterToComponentFactory();
