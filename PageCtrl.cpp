@@ -33,6 +33,10 @@ void PageCtrl::Update()
 	if (change)
 	{
 		SceneManager::LoadScene<SceneFromFile>(files.at(page));
+
+		SceneManager::WaitForLoadAndTransition();
+
+		change = false;
 	}
 }
 

@@ -3,10 +3,15 @@
 #include <ComponentFactory.h>
 #include <Util.h>
 #include <SpTextureManager.h>
+
+class DockPanel;
+
 class SpriteObject :
     public IComponent
 {
 public:
+    friend DockPanel;
+
     ComponentFactoryRegister(SpriteObject)
 
     void Update() override;

@@ -5,27 +5,23 @@
                 "Type": "PageCtrl"
             },
             {
-                "ColorA": 1.0,
-                "ColorB": 1.0,
-                "ColorG": 1.0,
-                "ColorR": 1.0,
-                "FontSize": 128,
-                "PosX": 960.0,
-                "PosY": 540.0,
-                "Res": 128,
-                "Text": "シーンエディタできてきた",
-                "Type": "StringObject"
+                "Texture": "arasuji3.png",
+                "Type": "SpriteObject",
+                "posX": 960.0,
+                "posY": 540.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0
             },
             {
                 "ColorA": 1.0,
                 "ColorB": 1.0,
                 "ColorG": 1.0,
                 "ColorR": 1.0,
-                "FontSize": 64,
-                "PosX": 1300.0,
-                "PosY": 900.0,
+                "FontSize": 48,
+                "PosX": 550.0,
+                "PosY": 540.0,
                 "Res": 128,
-                "Text": "LE3A_19_ムラカミ_ハルヤ",
+                "Text": " この時はまだパラメーターとかガン無視->",
                 "Type": "StringObject"
             }
         ],
@@ -43,6 +39,9 @@
         "Textures": [
             {
                 "Black": "Assets/Images/black.png",
+                "arasuji1.png": "Assets\\Images\\arasuji1.png",
+                "arasuji2.png": "Assets\\Images\\arasuji2.png",
+                "arasuji3.png": "Assets\\Images\\arasuji3.png",
                 "titleText": "Assets/Images/title.png"
             }
         ],

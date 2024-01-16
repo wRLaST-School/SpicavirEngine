@@ -23,6 +23,7 @@ private:
         "Assets/Scene/page8.scene",
         "Assets/Scene/page9.scene",
         "Assets/Scene/page10.scene",
+        "Assets/Scene/page11.scene",
     };
     inline static int page = 0;
 };

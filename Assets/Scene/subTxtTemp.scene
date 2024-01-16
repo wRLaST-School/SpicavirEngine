@@ -9,11 +9,11 @@
                 "ColorB": 1.0,
                 "ColorG": 1.0,
                 "ColorR": 1.0,
-                "FontSize": 128,
-                "PosX": 960.0,
-                "PosY": 540.0,
+                "FontSize": 96,
+                "PosX": 300.0,
+                "PosY": 100.0,
                 "Res": 128,
-                "Text": "シーンエディタできてきた",
+                "Text": "SubTitle",
                 "Type": "StringObject"
             },
             {
@@ -22,10 +22,10 @@
                 "ColorG": 1.0,
                 "ColorR": 1.0,
                 "FontSize": 64,
-                "PosX": 1300.0,
-                "PosY": 900.0,
+                "PosX": 500.0,
+                "PosY": 250.0,
                 "Res": 128,
-                "Text": "LE3A_19_ムラカミ_ハルヤ",
+                "Text": "Some Texts",
                 "Type": "StringObject"
             }
         ],
