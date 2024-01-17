@@ -62,7 +62,10 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 		OutputDebugStringA((string("Texture : ") + key + string(" already exists. skipping.") + string("\n")).c_str());
 		return key;
 	}
-	OutputDebugStringA((string("Loading : ") + key + string(" (Heap Index : ") + to_string(GetInstance().nextTexIndex_) + string(")\n")).c_str());
+
+	size_t nextInd = GetInstance().nextTexIndex_;
+
+	OutputDebugStringA((string("Loading : ") + key + string(" (Heap Index : ") + to_string(nextInd) + string(")\n")).c_str());
 	SpTextureManager& ins = GetInstance();
 	TexMetadata metadata{};
 	ScratchImage srcImg{};
@@ -116,20 +119,20 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 		&texresdesc,
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
-		IID_PPV_ARGS(&ins.texBuffs[ins.nextTexIndex_]));
+		IID_PPV_ARGS(&ins.texBuffs[nextInd]));
 
 	if (hr != S_OK)
 	{
 		return string("notexture");
 	};
 
-	ins.texBuffs[ins.nextTexIndex_]->SetName(L"TEXTURE_BUFFER");
+	ins.texBuffs[nextInd]->SetName(L"TEXTURE_BUFFER");
 
 	for (size_t i = 0; i < metadata.mipLevels; i++)
 	{
 		const Image* img = scratchImg.GetImage(i, 0, 0);
 
-		ins.texBuffs[ins.nextTexIndex_]->WriteToSubresource(
+		ins.texBuffs[nextInd]->WriteToSubresource(
 			(UINT)i,
 			nullptr,
 			img->pixels,
@@ -150,11 +153,11 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = texresdesc.MipLevels;
 
-	GetSpDX()->dev->CreateShaderResourceView(ins.texBuffs[ins.nextTexIndex_].Get(), &srvDesc, heapHandle);
+	GetSpDX()->dev->CreateShaderResourceView(ins.texBuffs[nextInd].Get(), &srvDesc, heapHandle);
 
 	ins.textureMap_.Access(
 		[&](auto& map) {
-			map[key] = ins.nextTexIndex_;
+			map[key] = nextInd;
 		}
 	);
 
@@ -165,7 +168,7 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 		}
 	);
 
-	ins.isOccupied_[ins.nextTexIndex_] = true;
+	ins.isOccupied_[nextInd] = true;
 
 	for (size_t i = 0; i < wMaxSRVCount; i++)
 	{

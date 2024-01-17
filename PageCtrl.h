@@ -24,6 +24,11 @@ private:
         "Assets/Scene/page9.scene",
         "Assets/Scene/page10.scene",
         "Assets/Scene/page11.scene",
+        "Assets/Scene/page12.scene",
+        "Assets/Scene/page13.scene",
+        "Assets/Scene/page14.scene",
+        "Assets/Scene/page15.scene",
+        "Assets/Scene/page16.scene",
     };
     inline static int page = 0;
 };

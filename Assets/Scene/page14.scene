@@ -1,0 +1,74 @@
+[
+    {
+        "Children": [
+            {
+                "Type": "PageCtrl"
+            },
+            {
+                "Texture": "param2.png",
+                "Type": "SpriteObject",
+                "posX": 400.0,
+                "posY": 640.0,
+                "scaleX": 2.0,
+                "scaleY": 2.0
+            },
+            {
+                "Texture": "param3.png",
+                "Type": "SpriteObject",
+                "posX": 1400.0,
+                "posY": 640.0,
+                "scaleX": 1.0,
+                "scaleY": 1.0
+            },
+            {
+                "ColorA": 1.0,
+                "ColorB": 1.0,
+                "ColorG": 1.0,
+                "ColorR": 1.0,
+                "FontSize": 96,
+                "PosX": 560.0,
+                "PosY": 100.0,
+                "Res": 128,
+                "Text": "シーン読み書きの拡張",
+                "Type": "StringObject"
+            },
+            {
+                "ColorA": 1.0,
+                "ColorB": 1.0,
+                "ColorG": 1.0,
+                "ColorR": 1.0,
+                "FontSize": 64,
+                "PosX": 500.0,
+                "PosY": 230.0,
+                "Res": 128,
+                "Text": "実装も簡単にできる",
+                "Type": "StringObject"
+            }
+        ],
+        "EfkEffects": [
+            {}
+        ],
+        "Models": [
+            {
+                "cube.obj": "Assets\\Models\\cube\\cube.obj"
+            }
+        ],
+        "Sounds": [
+            {}
+        ],
+        "Textures": [
+            {
+                "Black": "Assets/Images/black.png",
+                "DissolveMap.png": "Assets\\Images\\DissolveMap.png",
+                "arasuji1.png": "Assets\\Images\\arasuji1.png",
+                "arasuji2.png": "Assets\\Images\\arasuji2.png",
+                "arasuji3.png": "Assets\\Images\\arasuji3.png",
+                "param1.png": "Assets\\Images\\param1.png",
+                "param2.png": "Assets\\Images\\param2.png",
+                "param3.png": "Assets\\Images\\param3.png",
+                "titleText": "Assets/Images/title.png"
+            }
+        ],
+        "Type": "IScene"
+    }
+]
