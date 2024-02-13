@@ -8,7 +8,7 @@ void StringObject::Draw()
 		TextDrawer::DrawString(str_, (int32_t)pos_.x, (int32_t)pos_.y, Align::Center, color_, opt_);
 }
 
-void StringObject::DrawParams()
+void StringObject::OnInspectorWindowDraw()
 {
 	SpImGui::InputText("Text", &str_, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue);
 	ImGui::InputFloat2("Pos", &pos_.x);

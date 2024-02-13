@@ -113,7 +113,7 @@ void Player::Update()
 	col_.rot = obj_->rotation;
 }
 
-void Player::DrawParams()
+void Player::OnInspectorWindowDraw()
 {
 	ImGui::DragFloat3("SlashColScale", &slashScale_.x);
 }

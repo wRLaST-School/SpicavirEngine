@@ -37,7 +37,7 @@ public:
 
     Matrix GetBillboardMat();
 
-    void DrawParams() override;
+    void OnInspectorWindowDraw() override;
 
     Float3 target = { 0.0f, 0.0f, 0.0f };
 

@@ -106,7 +106,7 @@ public:
 	virtual void ReadParamJson([[maybe_unused]] const nlohmann::json& paramsObject) {};
 
 	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
-	virtual void DrawParams();
+	virtual void OnInspectorWindowDraw();
 
 	template <class Type>
 	Type* CastTo();

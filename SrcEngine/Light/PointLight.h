@@ -16,7 +16,7 @@ public:
 	Float3 att;
 
 	void DrawFrame();
-	void DrawParams();
+	void OnInspectorWindowDraw();
 	void DrawGizmo();
 
 	bool isActive = false;

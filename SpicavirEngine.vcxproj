@@ -172,7 +172,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LibraCompiler.cpp" />
     <ClCompile Include="SceneFromFile.cpp" />
+    <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ComponentFactory.cpp" />
     <ClCompile Include="SrcApplication\CustomComponentRegisterer.cpp" />
@@ -291,7 +293,9 @@
     <ClCompile Include="TestMoveObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LibraCompiler.h" />
     <ClInclude Include="SceneFromFile.h" />
+    <ClInclude Include="ScriptComponent.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ComponentFactory.h" />
     <ClInclude Include="SrcApplication\CustomComponentRegisterer.h" />

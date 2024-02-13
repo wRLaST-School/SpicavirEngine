@@ -16,6 +16,6 @@ void TestMoveObject::Draw()
 {
 }
 
-void TestMoveObject::DrawParams()
+void TestMoveObject::OnInspectorWindowDraw()
 {
 }

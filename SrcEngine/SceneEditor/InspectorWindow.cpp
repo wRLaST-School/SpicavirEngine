@@ -16,7 +16,7 @@ void InspectorWindow::DrawWindow()
 		ImGui::Begin("Inspector Window", &open, ImGuiWindowFlags_MenuBar);
 		if (selected_)
 		{
-			selected_->DrawParams();
+			selected_->OnInspectorWindowDraw();
 
 			if (ImGui::Button("Add Component"))
 			{

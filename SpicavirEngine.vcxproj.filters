@@ -196,6 +196,12 @@
     <Filter Include="Engine\ヘッダーファイル\Compute">
       <UniqueIdentifier>{4a244f15-1dea-4a2f-9a8a-cc1c6d2b1d2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ヘッダーファイル\LibraScript">
+      <UniqueIdentifier>{3dc30710-6dac-4cdb-89f7-055698a8261c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ソースファイル\LibraScript">
+      <UniqueIdentifier>{1f1bb01e-2b8d-4209-adf2-5d58d2589a82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -539,6 +545,12 @@
     </ClCompile>
     <ClCompile Include="StringObject.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="LibraCompiler.cpp">
+      <Filter>Engine\ソースファイル\LibraScript</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptComponent.cpp">
+      <Filter>Engine\ソースファイル\LibraScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -904,6 +916,12 @@
     </ClInclude>
     <ClInclude Include="StringObject.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraCompiler.h">
+      <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptComponent.h">
+      <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

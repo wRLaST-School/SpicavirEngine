@@ -14,7 +14,7 @@ public:
 
     void Update();
 
-    void DrawParams() override;
+    void OnInspectorWindowDraw() override;
 
     void Move();
     void GravMove();

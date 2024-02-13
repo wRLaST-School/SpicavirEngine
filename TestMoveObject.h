@@ -11,7 +11,7 @@ public:
 
     void Draw()override;
 
-    void DrawParams() override;
+    void OnInspectorWindowDraw() override;
 
 private:
     float spd = 0.2f;

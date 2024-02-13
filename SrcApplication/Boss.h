@@ -21,7 +21,7 @@ public:
     
     void Damage(int32_t damage = 0);
 
-    void DrawParams();
+    void OnInspectorWindowDraw();
 
 public:
     static void Load();

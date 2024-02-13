@@ -156,7 +156,7 @@ void IComponent::DrawAllChildComponents(IComponent* parent)
 	}
 }
 
-void IComponent::DrawParams()
+void IComponent::OnInspectorWindowDraw()
 {
 }
 

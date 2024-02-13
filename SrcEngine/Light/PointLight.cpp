@@ -24,7 +24,7 @@ void PointLight::DrawFrame()
 		LineDrawer::DrawCube(pos, { .25f, .25f, .25f }, color);
 }
 
-void PointLight::DrawParams()
+void PointLight::OnInspectorWindowDraw()
 {
 	ImGui::SliderFloat3("Position", &pos.x, -10.f, 10.f);
 	ImGui::SliderFloat3("Color", &color.x, 0.f, 3.f);

@@ -126,7 +126,7 @@ void Boss::Damage(int32_t damage)
 	GameManager::sScore.totDamage += damage;
 }
 
-void Boss::DrawParams()
+void Boss::OnInspectorWindowDraw()
 {
 	//セーブとロード
 	if (ImGui::BeginMenuBar()) {

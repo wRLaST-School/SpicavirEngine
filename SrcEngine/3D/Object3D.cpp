@@ -259,7 +259,7 @@ void Object3D::DrawAlpha(const TextureKey& key)
 	SpRenderer::RegisterAlphaObj(this);
 }
 
-void Object3D::DrawParams()
+void Object3D::OnInspectorWindowDraw()
 {
 	ImGui::InputFloat3("Translation", &position.x);
 

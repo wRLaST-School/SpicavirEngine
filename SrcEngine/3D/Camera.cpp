@@ -51,9 +51,9 @@ Matrix Camera::GetBillboardMat()
 	return -camRot;
 }
 
-void Camera::DrawParams()
+void Camera::OnInspectorWindowDraw()
 {
-	Object3D::DrawParams();
+	Object3D::OnInspectorWindowDraw();
 
 	if (ImGui::Button("Activate Camera"))
 	{

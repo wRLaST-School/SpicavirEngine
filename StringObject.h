@@ -12,7 +12,7 @@ public:
 
     void Draw() override;
 
-    void DrawParams() override;
+    void OnInspectorWindowDraw() override;
 
 	void WriteParamJson(nlohmann::json& jsonObj);
 
