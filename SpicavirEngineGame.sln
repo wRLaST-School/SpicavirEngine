@@ -44,6 +44,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffekseerRendererLLGI", "Sr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibraTestDLL", "LibraTestProj\LibraTestDLL\LibraTestDLL.vcxproj", "{675E31ED-288F-4E4E-8A1E-70E79A895EDB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibraCompiler", "Libra\LibraCompiler\LibraCompiler.vcxproj", "{158B8C2C-347D-48C4-A52F-C05D067BA02E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_No_Iterator_Check|x64 = Debug_No_Iterator_Check|x64
@@ -207,6 +209,18 @@ Global
 		{675E31ED-288F-4E4E-8A1E-70E79A895EDB}.Release|x64.ActiveCfg = Release|x64
 		{675E31ED-288F-4E4E-8A1E-70E79A895EDB}.Release|x64.Build.0 = Release|x64
 		{675E31ED-288F-4E4E-8A1E-70E79A895EDB}.Release|x86.ActiveCfg = Release|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug_No_Iterator_Check|x64.ActiveCfg = Debug|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug_No_Iterator_Check|x64.Build.0 = Debug|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug_No_Iterator_Check|x86.ActiveCfg = Debug|Win32
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug_No_Iterator_Check|x86.Build.0 = Debug|Win32
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug|x64.ActiveCfg = Debug|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug|x64.Build.0 = Debug|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug|x86.ActiveCfg = Debug|Win32
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Debug|x86.Build.0 = Debug|Win32
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Release|x64.ActiveCfg = Release|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Release|x64.Build.0 = Release|x64
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Release|x86.ActiveCfg = Release|Win32
+		{158B8C2C-347D-48C4-A52F-C05D067BA02E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -61,7 +61,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
@@ -75,7 +75,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
     <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,7 +109,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;LibraCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -135,7 +135,7 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;LibraCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -167,13 +167,12 @@
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;LibraCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Release\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DLLObject.cpp" />
-    <ClCompile Include="LibraCompiler.cpp" />
     <ClCompile Include="SceneFromFile.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
@@ -295,7 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DLLObject.h" />
-    <ClInclude Include="LibraCompiler.h" />
     <ClInclude Include="SceneFromFile.h" />
     <ClInclude Include="ScriptComponent.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
@@ -598,6 +596,9 @@
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Libra\LibraCompiler\LibraCompiler.vcxproj">
+      <Project>{158b8c2c-347d-48c4-a52f-c05d067ba02e}</Project>
     </ProjectReference>
     <ProjectReference Include="SrcExternal\Assimp\code\assimp.vcxproj">
       <Project>{8fe8f28b-8b25-35d8-a6e1-060c10df0ce7}</Project>

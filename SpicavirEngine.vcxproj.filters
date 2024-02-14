@@ -546,9 +546,6 @@
     <ClCompile Include="StringObject.cpp">
       <Filter>Engine\ソースファイル\2D</Filter>
     </ClCompile>
-    <ClCompile Include="LibraCompiler.cpp">
-      <Filter>Engine\ソースファイル\LibraScript</Filter>
-    </ClCompile>
     <ClCompile Include="ScriptComponent.cpp">
       <Filter>Engine\ソースファイル\LibraScript</Filter>
     </ClCompile>
@@ -919,9 +916,6 @@
     </ClInclude>
     <ClInclude Include="StringObject.h">
       <Filter>Engine\ヘッダーファイル\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="LibraCompiler.h">
-      <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
     </ClInclude>
     <ClInclude Include="ScriptComponent.h">
       <Filter>Engine\ヘッダーファイル\LibraScript</Filter>

@@ -1,5 +1,5 @@
-#include "stdafx.h"
 #include "LibraCompiler.h"
+#include <Windows.h>
 
 void Libra::Compiler::Compile(std::string scriptPath, std::string dllPath)
 {

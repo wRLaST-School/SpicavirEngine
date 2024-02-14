@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ScriptComponent.h"
 #include <SpImGui.h>
-#include <LibraCompiler.h>
+#include <Libra/LibraCompiler/LibraCompiler.h>
 
 void ScriptComponent::Init()
 {
