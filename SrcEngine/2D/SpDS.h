@@ -13,8 +13,11 @@ public:
 	};
 
 	static void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
-		TextureKey key, Anchor anchor = Anchor::Center,
+		TextureKey key, Anchor anchor,
 		Color brightness = Color(0xffffff));
+
+	static void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
+		TextureKey key);
 
 	static void DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, 
 		const Color& color, const Anchor& anchor = Anchor::Center);

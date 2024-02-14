@@ -3,7 +3,9 @@
 #include <windows.h>
 #undef WIN32_LEAN_AND_MEAN
 #include <format>
-#include <string>
+#include <functional>
+
+std::function<void(int32_t, int32_t, float, float, float, std::string)> DrawRotaGraph;
 
 void TestPlayer::Init()
 {
@@ -27,7 +29,17 @@ void TestPlayer::Draw()
 		OutputDebugStringA(c.c_str());
 	}
 
+	if (DrawRotaGraph)
+	{
+		DrawRotaGraph(500, 500, 1.f, 1.f, 0.f, "titleText");
+	}
+
 	count++;
+}
+
+void SetDrawSpriteFunc(void(*dsfunc)(int32_t, int32_t, float, float, float, std::string))
+{
+	DrawRotaGraph = dsfunc;
 }
 
 TestPlayer* Create()

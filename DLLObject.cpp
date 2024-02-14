@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "DLLObject.h"
 #include <LibraTestProj/LibraTestDLL/TestPlayer.h>
+#include <SpDS.h>
 
 const HMODULE& Libra::DLLObject::LoadDLL(const std::string& path)
 {
@@ -20,6 +21,15 @@ const HMODULE& Libra::DLLObject::LoadDLL(const std::string& path)
 
     //生成を行う
     component_ = instantiateFunc();
+
+    //DrawRotaGraph関数をセット(テストコード)
+    using sdsf = void(*)(void(*)(int32_t, int32_t, float, float, float, std::string));
+    void(*psdsf)(int32_t, int32_t, float, float, float, std::string)
+        = SpDS::DrawRotaGraph;
+    
+    sdsf sdsfb = reinterpret_cast<sdsf>(GetProcAddress(hModule_, "SetDrawSpriteFunc"));
+
+    sdsfb(psdsf);
 
     return hModule_;
 }

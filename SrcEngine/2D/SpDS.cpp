@@ -51,6 +51,11 @@ void SpDS::DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot, Te
 	sGraphCount++;
 }
 
+void SpDS::DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot, TextureKey key)
+{
+	DrawRotaGraph(x, y, dx, dy, rot, key, Anchor::Center, Color(0xffffff));
+}
+
 void SpDS::DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, const Color& color, const Anchor& anchor)
 {
 	DrawRotaGraph(x, y, (float)width, (float)height, rot, "white", anchor, color);
