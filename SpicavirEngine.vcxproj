@@ -172,6 +172,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DLLObject.cpp" />
     <ClCompile Include="LibraCompiler.cpp" />
     <ClCompile Include="SceneFromFile.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
@@ -293,6 +294,7 @@
     <ClCompile Include="TestMoveObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DLLObject.h" />
     <ClInclude Include="LibraCompiler.h" />
     <ClInclude Include="SceneFromFile.h" />
     <ClInclude Include="ScriptComponent.h" />
@@ -596,6 +598,9 @@
   <ItemGroup>
     <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022.vcxproj">
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
+    <ProjectReference Include="LibraTestProj\LibraTestDLL\LibraTestDLL.vcxproj">
+      <Project>{675e31ed-288f-4e4e-8a1e-70e79a895edb}</Project>
     </ProjectReference>
     <ProjectReference Include="SrcExternal\Assimp\code\assimp.vcxproj">
       <Project>{8fe8f28b-8b25-35d8-a6e1-060c10df0ce7}</Project>

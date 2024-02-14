@@ -387,3 +387,4 @@ CMakeLists.txt
 /SrcExternal/Effekseer/Dev/Cpp/3rdParty/LLGI/examples/GPUParticle/Shaders/SPIRV
 /SrcExternal/Effekseer/Dev/Cpp/3rdParty/LLGI/examples/thirdparty/glfw/CMake
 /SrcExternal/Effekseer/Dev/Cpp/3rdParty/LLGI/examples/thirdparty/glfw/docs
+/Resources/Compiled

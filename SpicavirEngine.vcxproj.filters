@@ -552,6 +552,9 @@
     <ClCompile Include="ScriptComponent.cpp">
       <Filter>Engine\ソースファイル\LibraScript</Filter>
     </ClCompile>
+    <ClCompile Include="DLLObject.cpp">
+      <Filter>Engine\ソースファイル\LibraScript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SrcEngine\Others\Essentials.h">
@@ -921,6 +924,9 @@
       <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
     </ClInclude>
     <ClInclude Include="ScriptComponent.h">
+      <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
+    </ClInclude>
+    <ClInclude Include="DLLObject.h">
       <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
     </ClInclude>
   </ItemGroup>

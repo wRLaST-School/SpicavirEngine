@@ -1,6 +1,7 @@
 #pragma once
 #include "IComponent.h"
 #include <ComponentFactory.h>
+#include <DLLObject.h>
 class ScriptComponent :
     public IComponent
 {
@@ -18,9 +19,11 @@ public:
 
 private:
     void CompileScript();
-    void ReloadDLL();
+    void LoadDLL();
 
     std::string filePath;
+
+    Libra::DLLObject dllobj_;
 
     inline static std::string compileFolder = "Resources/Compiled/";
 };

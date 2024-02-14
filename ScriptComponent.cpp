@@ -5,19 +5,35 @@
 
 void ScriptComponent::Init()
 {
+	LoadDLL();
+
+	if (dllobj_.GetModule()) dllobj_.GetComponent()->Init();
 }
 
 void ScriptComponent::Update()
 {
+	if (dllobj_.GetModule()) dllobj_.GetComponent()->Update();
 }
 
 void ScriptComponent::Draw()
 {
+	if (dllobj_.GetModule()) dllobj_.GetComponent()->Draw();
 }
 
 void ScriptComponent::OnInspectorWindowDraw()
 {
-	SpImGui::InputText("FilePath", &filePath, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue);
+	if (dllobj_.GetModule()) dllobj_.GetComponent()->OnInspectorWindowDraw();
+
+	if (SpImGui::InputText("FilePath", &filePath, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue))
+	{
+		Init();
+	};
+
+	if (ImGui::Button("Compile"))
+	{
+		CompileScript();
+		LoadDLL();
+	}
 }
 
 void ScriptComponent::WriteParamJson(nlohmann::json& jsonObj)
@@ -32,15 +48,20 @@ void ScriptComponent::ReadParamJson(const nlohmann::json& jsonObj)
 
 void ScriptComponent::CompileScript()
 {
+	if (dllobj_.GetModule()) dllobj_.Free();
+
 	std::string compileDest = compileFolder + filePath;
 
 	//コンパイル処理
 	Libra::Compiler::Compile(filePath, compileDest);
+
+	Libra::Compiler::TestCPPCompile();
 }
 
-void ScriptComponent::ReloadDLL()
+void ScriptComponent::LoadDLL()
 {
 	std::string dllPath = compileFolder + filePath;
 
-	//再読み込み処理
+	//読み込み処理
+	dllobj_.LoadDLL(dllPath);
 }
