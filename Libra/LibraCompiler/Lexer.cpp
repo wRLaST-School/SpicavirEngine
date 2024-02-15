@@ -17,10 +17,10 @@ int Libra::Lexer::GetToken()
 	//なんらかの単語である場合
 	if (isalpha(lastChar))
 	{
-		identifierStr = lastChar;
+		identifierStr = (char)lastChar;
 		while (isalnum((lastChar = getchar())))
 		{
-			identifierStr += lastChar;
+			identifierStr += (char)lastChar;
 		}
 
 		//IdentifierTable(予約語一覧)から一致するものがあればそのトークンを返す
@@ -40,7 +40,7 @@ int Libra::Lexer::GetToken()
 	if (isdigit(lastChar) || lastChar == '.') {
 		std::string numStr;
 		do {
-			numStr += lastChar;
+			numStr += (char)lastChar;
 			lastChar = getchar();
 		} while (isdigit(lastChar) || lastChar == '.');
 
