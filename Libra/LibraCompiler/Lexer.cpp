@@ -1,10 +1,6 @@
 #include "Lexer.h"
 #include "Identifier.h"
 
-void Libra::Lexer::Lex()
-{
-}
-
 int Libra::Lexer::GetToken()
 {
 	static int lastChar = ' ';

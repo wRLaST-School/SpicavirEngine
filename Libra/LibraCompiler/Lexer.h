@@ -6,10 +6,9 @@ namespace Libra {
 	class Lexer
 	{
 	public:
-		void Lex();
+		int GetToken();
 
 	private:
-		int GetToken();
 
 		std::string identifierStr;
 		double numVal;
