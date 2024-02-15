@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="LibraCompiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Identifier.h" />
+    <ClInclude Include="Lexer.h" />
     <ClInclude Include="LibraCompiler.h" />
+    <ClInclude Include="Token.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
