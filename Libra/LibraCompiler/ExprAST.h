@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace Libra {
 	class ExprAST
@@ -66,5 +67,9 @@ namespace Libra {
 		FunctionAST(PrototypeAST* proto, ExprAST* body)
 			: proto_(proto), body_(body) {}
 	};
+
+	std::unique_ptr<ExprAST> Error(const char* str);
+	std::unique_ptr<PrototypeAST> ErrorP(const char* str);
+	std::unique_ptr<FunctionAST> ErrorF(const char* str);
 }
 
