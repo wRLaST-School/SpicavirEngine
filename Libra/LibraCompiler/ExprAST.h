@@ -34,20 +34,20 @@ namespace Libra {
 	private:
 		char op_;
 
-		ExprAST* lhs_, * rhs_;
+		std::unique_ptr<ExprAST> lhs_, rhs_;
 
 	public:
-		BinaryExprAST(char op, ExprAST* lhs, ExprAST* rhs) 
-			: op_(op), lhs_(lhs), rhs_(rhs) {}
+		BinaryExprAST(char op, std::unique_ptr<ExprAST> lhs, std::unique_ptr<ExprAST> rhs)
+			: op_(op), lhs_(std::move(lhs)), rhs_(std::move(rhs)) {}
 	};
 
 	//関数呼び出しのための式クラス
 	class CallExprAST : public ExprAST {
 		std::string callee_;
-		std::vector<ExprAST*> args_;
+		std::vector<std::unique_ptr<ExprAST>> args_{};
 	public:
-		CallExprAST(const std::string& callee, std::vector<ExprAST*>& args)
-			: callee_(callee), args_(args) {}
+		CallExprAST(const std::string& callee, std::vector<std::unique_ptr<ExprAST>> args)
+			: callee_(callee), args_(std::move(args)) {}
 	};
 
 	//関数のプロトタイプ宣言を表すクラス
@@ -61,11 +61,11 @@ namespace Libra {
 
 	//関数定義を表すクラス
 	class FunctionAST {
-		PrototypeAST* proto_;
-		ExprAST* body_;
+		std::unique_ptr<PrototypeAST> proto_;
+		std::unique_ptr<ExprAST> body_;
 	public:
-		FunctionAST(PrototypeAST* proto, ExprAST* body)
-			: proto_(proto), body_(body) {}
+		FunctionAST(std::unique_ptr<PrototypeAST> proto, std::unique_ptr<ExprAST> body)
+			: proto_(std::move(proto)), body_(std::move(body)) {}
 	};
 
 	std::unique_ptr<ExprAST> Error(const char* str);

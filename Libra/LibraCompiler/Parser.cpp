@@ -102,7 +102,7 @@ std::unique_ptr<ExprAST> Libra::Parser::ParseIdentifierExpr()
 		while (true) {
 			std::unique_ptr<ExprAST> arg = ParseExpression();
 			if (!arg) return 0;
-			args.push_back(arg);
+			args.push_back(std::move(arg));
 
 			if (currentToken_ == ')') break;
 
@@ -117,7 +117,7 @@ std::unique_ptr<ExprAST> Libra::Parser::ParseIdentifierExpr()
 
 	GetNextToken(); // ')'を消費
 
-	return std::make_unique<CallExprAST>(idName, args);
+	return std::make_unique<CallExprAST>(idName, std::move(args));
 }
 
 std::unique_ptr<ExprAST> Libra::Parser::ParsePrimary()
@@ -129,8 +129,6 @@ std::unique_ptr<ExprAST> Libra::Parser::ParsePrimary()
 
 	default: return Error("unknown token when expecting an expression");
 	}
-
-	return Error("error while parsing primaries");
 }
 
 std::unique_ptr<ExprAST> Libra::Parser::ParseExpression()
@@ -173,7 +171,7 @@ std::unique_ptr<ExprAST> Libra::Parser::ParseBinOpRHS(int exprPrec, std::unique_
 		}
 
 		//lhsとrhsをマージして一つのブロックにする
-		lhs = std::make_unique<BinaryExprAST>(binOp, lhs, rhs);
+		lhs = std::make_unique<BinaryExprAST>((char)binOp, std::move(lhs), std::move(rhs));
 	}
 }
 
@@ -210,7 +208,7 @@ std::unique_ptr<FunctionAST> Libra::Parser::ParseDefinition()
 
 	if (std::unique_ptr<ExprAST> e = ParseExpression())
 	{
-		return std::make_unique<FunctionAST>(proto, e);
+		return std::make_unique<FunctionAST>(std::move(proto), std::move(e));
 	}
 
 	return nullptr;
@@ -225,8 +223,8 @@ std::unique_ptr<PrototypeAST> Libra::Parser::ParseExtern()
 std::unique_ptr<FunctionAST> Libra::Parser::ParseTopLevelExpr()
 {
 	if (std::unique_ptr<ExprAST> e = ParseExpression()) {
-		PrototypeAST* proto = new PrototypeAST("", std::vector<std::string>());
-		return std::make_unique<FunctionAST>(proto, e);
+		std::unique_ptr<PrototypeAST> proto = std::make_unique<PrototypeAST>("", std::vector<std::string>());
+		return std::make_unique<FunctionAST>(std::move(proto), std::move(e));
 	}
 
 	return nullptr;
@@ -241,8 +239,8 @@ int Libra::Parser::GetTokenPrecedence()
 {
 	if (!isascii(currentToken_)) return -1;
 
+	int tokenPrec = binaryOperatorPrecedence[(char)currentToken_];
 	//未定義の演算子なら-1を返す
-	int tokenPrec = binaryOperatorPrecedence[currentToken_];
 	if (tokenPrec <= 0) return -1;
 
 	return tokenPrec;
