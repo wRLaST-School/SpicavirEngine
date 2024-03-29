@@ -80,7 +80,7 @@ namespace Libra {
             return ErrorV("Incorrect arguments passed (size does not match)");
 
         std::vector<llvm::Value*> argsV;
-        for (unsigned i = 0, e = args_.size(); i != e; ++i)
+        for (unsigned i = 0, e = (unsigned)args_.size(); i != e; ++i)
         {
             argsV.push_back(args_[i]->CodeGen());
             if (argsV.back() == 0) return 0;
