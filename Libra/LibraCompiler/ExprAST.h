@@ -2,21 +2,26 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "LLVMIncludes.h"
 
 namespace Libra {
+	static void InitLLVM();
+
 	class ExprAST
 	{
 	public:
 		virtual ~ExprAST() {};
+		virtual llvm::Value* CodeGen() = 0;
 	};
 
-	//数値を参照する式クラス(一旦全部数値はdoubleで扱う)
+	//数値を参照する式クラス(一旦全部数値はfloatで扱う)
 	class NumberExprAST : public ExprAST {
 	private:
-		double val_;
+		float val_;
 
 	public:
-		NumberExprAST(double val) : val_(val) {}
+		NumberExprAST(float val) : val_(val) {}
+		llvm::Value* CodeGen() override;
 	};
 
 	//変数を参照するための式クラス
@@ -26,6 +31,7 @@ namespace Libra {
 
 	public:
 		VariableExprAST(const std::string& name) : name_(name) {}
+		llvm::Value* CodeGen() override;
 	};
 
 	//演算子の処理のための式クラス
@@ -39,6 +45,7 @@ namespace Libra {
 	public:
 		BinaryExprAST(char op, std::unique_ptr<ExprAST> lhs, std::unique_ptr<ExprAST> rhs)
 			: op_(op), lhs_(std::move(lhs)), rhs_(std::move(rhs)) {}
+		llvm::Value* CodeGen() override;
 	};
 
 	//関数呼び出しのための式クラス
@@ -48,6 +55,7 @@ namespace Libra {
 	public:
 		CallExprAST(const std::string& callee, std::vector<std::unique_ptr<ExprAST>> args)
 			: callee_(callee), args_(std::move(args)) {}
+		llvm::Value* CodeGen() override;
 	};
 
 	//関数のプロトタイプ宣言を表すクラス
@@ -57,6 +65,9 @@ namespace Libra {
 	public:
 		PrototypeAST(const std::string& name, const std::vector<std::string>& args)
 			: name_(name), args_(args) {}
+		llvm::Function* CodeGen();
+
+		std::string GetName();
 	};
 
 	//関数定義を表すクラス
@@ -66,8 +77,10 @@ namespace Libra {
 	public:
 		FunctionAST(std::unique_ptr<PrototypeAST> proto, std::unique_ptr<ExprAST> body)
 			: proto_(std::move(proto)), body_(std::move(body)) {}
+		llvm::Function* CodeGen() ;
 	};
 
+	llvm::Value* ErrorV(const char* str);
 	std::unique_ptr<ExprAST> Error(const char* str);
 	std::unique_ptr<PrototypeAST> ErrorP(const char* str);
 	std::unique_ptr<FunctionAST> ErrorF(const char* str);

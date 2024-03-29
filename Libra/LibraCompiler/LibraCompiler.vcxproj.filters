@@ -33,6 +33,7 @@
     <ClInclude Include="Parser.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="LLVMIncludes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LibraCompiler.cpp">
