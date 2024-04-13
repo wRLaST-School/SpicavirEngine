@@ -10,7 +10,8 @@ namespace Libra {
 	public:
 		void ParserLog(std::string str);
 
-		void ParseCode();
+		void ParseCodeLoop();
+
 
 		void HandleDefinition();
 		void HandleExtern();

@@ -5,7 +5,7 @@
 #include "LLVMIncludes.h"
 
 namespace Libra {
-	static void InitLLVM();
+	extern void InitLLVM();
 
 	class ExprAST
 	{

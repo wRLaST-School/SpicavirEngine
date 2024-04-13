@@ -1,5 +1,6 @@
 #include "Lexer.h"
 #include "Identifier.h"
+#include "CodeObject.h"
 
 int Libra::Lexer::GetToken()
 {
@@ -7,14 +8,14 @@ int Libra::Lexer::GetToken()
 
 	while (isspace(lastChar))
 	{
-		lastChar = getchar();
+		lastChar = CodeObject::GetNextChar();
 	}
 
 	//なんらかの単語である場合
 	if (isalpha(lastChar))
 	{
 		identifierStr = (char)lastChar;
-		while (isalnum((lastChar = getchar())))
+		while (isalnum((lastChar = CodeObject::GetNextChar())))
 		{
 			identifierStr += (char)lastChar;
 		}
@@ -37,7 +38,7 @@ int Libra::Lexer::GetToken()
 		std::string numStr;
 		do {
 			numStr += (char)lastChar;
-			lastChar = getchar();
+			lastChar = CodeObject::GetNextChar();
 		} while (isdigit(lastChar) || lastChar == '.');
 
 		numVal = strtod(numStr.c_str(), 0);
@@ -49,7 +50,7 @@ int Libra::Lexer::GetToken()
 	if (lastChar == '#') {
 		//行の終わりまでコメント
 		do {
-			lastChar = getchar();
+			lastChar = CodeObject::GetNextChar();
 		} while (lastChar != EOF && lastChar != '\n' && lastChar != '\r');
 
 		if (lastChar != EOF)
@@ -64,6 +65,6 @@ int Libra::Lexer::GetToken()
 
 	//何にも当てはまならいなら文字のASCIIコードをそのまま返却
 	int thisChar = lastChar;
-	lastChar = getchar();
+	lastChar = CodeObject::GetNextChar();
 	return thisChar;
 }

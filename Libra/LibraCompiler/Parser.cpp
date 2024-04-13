@@ -8,7 +8,7 @@ void Libra::Parser::ParserLog(std::string str)
 	OutputDebugStringA((std::string("Parser: ") + str + std::string("\n")).c_str());
 }
 
-void Libra::Parser::ParseCode()
+void Libra::Parser::ParseCodeLoop()
 {
 	ParserLog("Starting Parser...");
 	while (true) {
