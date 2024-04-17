@@ -25,7 +25,8 @@ void Libra::Parser::ParseCodeLoop()
 
 void Libra::Parser::HandleDefinition()
 {
-	if (ParseDefinition()) {
+	if (auto FnAST = ParseDefinition()) {
+		FnAST->CodeGen();
 		ParserLog("Parsed a func definition");
 	}
 	else {
@@ -36,7 +37,8 @@ void Libra::Parser::HandleDefinition()
 
 void Libra::Parser::HandleExtern()
 {
-	if (ParseExtern()) {
+	if (auto FnAST = ParseExtern()) {
+		FnAST->CodeGen();
 		ParserLog("Parsed an extern");
 	}
 	else {
@@ -47,7 +49,8 @@ void Libra::Parser::HandleExtern()
 
 void Libra::Parser::HandleTopLevelExpression()
 {
-	if (ParseTopLevelExpr()) {
+	if (auto FnAST = ParseTopLevelExpr()) {
+		FnAST->CodeGen();
 		ParserLog("Parsed a top-level expression");
 	}
 	else {

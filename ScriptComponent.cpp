@@ -32,7 +32,7 @@ void ScriptComponent::OnInspectorWindowDraw()
 	if (ImGui::Button("Compile"))
 	{
 		CompileScript();
-		LoadDLL();
+		//LoadDLL();
 	}
 }
 
@@ -54,8 +54,6 @@ void ScriptComponent::CompileScript()
 
 	//コンパイル処理
 	Libra::Compiler::Compile(filePath, compileDest);
-
-	Libra::Compiler::TestCPPCompile();
 }
 
 void ScriptComponent::LoadDLL()

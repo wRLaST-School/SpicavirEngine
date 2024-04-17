@@ -1,0 +1,3 @@
+def TestFunc(a b) a*a + 2*a*b + b*b;
+
+TestFunc(1,3);

@@ -8,6 +8,10 @@
 namespace Libra {
     void InitLLVM()
     {
+        // Open a new context and module.
+        CodeObject::TheContext = std::make_unique<llvm::LLVMContext>();
+        CodeObject::TheModule = std::make_unique<llvm::Module>("Testing JIT", *CodeObject::TheContext);
+
         CodeObject::Builder = std::make_unique<llvm::IRBuilder<>>(*(CodeObject::TheContext.get()));
     }
 
