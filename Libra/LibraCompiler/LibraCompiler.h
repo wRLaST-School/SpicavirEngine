@@ -10,4 +10,3 @@ namespace Libra {
 		static void TestCPPCompile();
 	};
 }
-
