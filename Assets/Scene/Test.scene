@@ -80,6 +80,10 @@
             },
             {
                 "Type": "PointLight"
+            },
+            {
+                "Type": "ScriptComponent",
+                "filePath": "Assets/Scripts/test.lis"
             }
         ],
         "EfkEffects": [
@@ -147,6 +151,7 @@
                 "DissolveMap.png": "Assets\\Images\\DissolveMap.png",
                 "Stars.png": "Assets/Models/skydome/Stars.png",
                 "asmptex:Assets/Models/PlayerSkin.png": "Assets/Models/Player/Skin.png",
+                "asmptex:Assets/Models/skydomeStars.png": "Assets/Models/skydome/Stars.png",
                 "black": "Assets/Images/black.png",
                 "hexagon": "Assets/Images/hexagonPattern.jpg",
                 "scoreBase": "Assets/Images/ScoreBase.png",

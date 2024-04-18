@@ -11,7 +11,7 @@ namespace Libra {
 
 		static void OutputLLVMIRCode(std::string filePath);
 
-		static char8_t GetNextChar();
+		static char GetNextChar();
 
 		inline static std::string fullCode;
 		inline static size_t curIndex;

@@ -1,6 +1,8 @@
 #include "CodeObject.h"
 #include <fstream>
 #include <sstream>
+#include <Windows.h>
+#include <format>
 
 void Libra::CodeObject::LoadCodes(std::string filePath)
 {
@@ -44,9 +46,14 @@ void Libra::CodeObject::OutputLLVMIRCode(std::string filePath)
     file.close();
 }
 
-char8_t Libra::CodeObject::GetNextChar()
+char Libra::CodeObject::GetNextChar()
 {
-    char8_t r = fullCode[curIndex];
+    if (curIndex >= fullCode.length())
+    {
+        return EOF;
+    }
+
+    char r = fullCode[curIndex];
     curIndex++;
 
     return r;

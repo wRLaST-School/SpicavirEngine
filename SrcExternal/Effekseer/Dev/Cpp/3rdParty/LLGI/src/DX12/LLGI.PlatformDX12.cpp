@@ -140,6 +140,8 @@ bool PlatformDX12::GenerateSwapBuffer()
 	DXGISwapChainDesc.SampleDesc.Quality = 0;
 
 	IDXGISwapChain* swapChain_ = nullptr;
+
+	UINT descriptorHandleIncrementSize = 0;
 	auto hr = dxgiFactory->CreateSwapChain(commandQueue, &DXGISwapChainDesc, &swapChain_);
 	if (FAILED(hr))
 	{
@@ -176,7 +178,7 @@ bool PlatformDX12::GenerateSwapBuffer()
 		goto FAILED_EXIT;
 	}
 
-	auto descriptorHandleIncrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	descriptorHandleIncrementSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	for (int32_t i = 0; i < SwapBufferCount; ++i)
 	{
 
@@ -256,6 +258,7 @@ bool PlatformDX12::Initialize(Window* window, bool waitVSync)
 
 	StartDX12_DRED_Debug();
 #endif
+	IDXGIAdapter1* adapter = nullptr;
 
 	// factory
 	hr = CreateDXGIFactory2(flagsDXGI, IID_PPV_ARGS(&dxgiFactory));
@@ -268,8 +271,6 @@ bool PlatformDX12::Initialize(Window* window, bool waitVSync)
 	}
 
 	// device
-
-	IDXGIAdapter1* adapter = nullptr;
 
 	for (UINT adapterIndex = 0; dxgiFactory->EnumAdapters1(adapterIndex, &adapter) != DXGI_ERROR_NOT_FOUND; adapterIndex++)
 	{
@@ -401,7 +402,6 @@ bool PlatformDX12::Initialize(Window* window, bool waitVSync)
 	return true;
 
 FAILED_EXIT:;
-
 	SafeRelease(descriptorHeapRTV);
 
 	for (int32_t i = 0; i < SwapBufferCount; i++)

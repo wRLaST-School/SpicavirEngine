@@ -88,14 +88,14 @@ bool RenderPassDX12::ReinitializeRenderTargetViews(CommandListDX12* commandList,
 
 	if (!rtDescriptorHeap->Allocate(heapRTV, cpuDescriptorHandleRTV, gpuDescriptorHandleRTV, numRenderTarget_))
 	{
-		return nullptr;
+		return 0;
 	}
 
 	if (GetHasDepthTexture())
 	{
 		if (!dtDescriptorHeap->Allocate(heapDSV, cpuDescriptorHandleDSV, gpuDescriptorHandleDSV, 1))
 		{
-			return nullptr;
+			return 0;
 		}
 	}
 

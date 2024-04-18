@@ -86,7 +86,7 @@ inline std::string GetMaterialCommonDefine(ShaderGeneratorTarget type)
 	return ss.str();
 }
 
-static char* material_common_vs_functions = R"(
+static const char* material_common_vs_functions = R"(
 
 float2 GetUV(float2 uv)
 {
@@ -105,7 +105,7 @@ float CalcDepthFade(float2 screenUV, float meshZ, float softParticleParam) { ret
 
 )";
 
-static char* material_sprite_vs_pre_simple = R"(
+static const char* material_sprite_vs_pre_simple = R"(
 
 struct VS_Input
 {
@@ -138,7 +138,7 @@ float4 cameraPosition : register(c10);
 
 )";
 
-static char* material_sprite_vs_pre = R"(
+static const char* material_sprite_vs_pre = R"(
 
 struct VS_Input
 {
@@ -178,7 +178,7 @@ float4 cameraPosition : register(c10);
 
 )";
 
-static char* material_sprite_vs_suf1_simple = R"(
+static const char* material_sprite_vs_suf1_simple = R"(
 
 
 VS_Output main( const VS_Input Input )
@@ -209,7 +209,7 @@ VS_Output main( const VS_Input Input )
 	float meshZ =  0.0f;
 )";
 
-static char* material_sprite_vs_suf1 = R"(
+static const char* material_sprite_vs_suf1 = R"(
 
 VS_Output main( const VS_Input Input )
 {
@@ -239,7 +239,7 @@ VS_Output main( const VS_Input Input )
 	float meshZ =  0.0f;
 )";
 
-static char* material_sprite_vs_suf2 = R"(
+static const char* material_sprite_vs_suf2 = R"(
 
 	worldPos = worldPos + worldPositionOffset;
 
@@ -345,7 +345,7 @@ float4 cameraPosition : register(c246);
 	return ss.str();
 }
 
-static char* model_vs_suf1 = R"(
+static const char* model_vs_suf1 = R"(
 
 VS_Output main( const VS_Input Input )
 {
@@ -385,7 +385,7 @@ VS_Output main( const VS_Input Input )
 	float meshZ =  0.0f;
 )";
 
-static char* model_vs_suf2 = R"(
+static const char* model_vs_suf2 = R"(
 
 	worldPos = worldPos + worldPositionOffset;
 
@@ -585,7 +585,7 @@ float4 main( const PS_Input Input ) : SV_Target
 	return ss.str();
 }
 
-static char* g_material_ps_suf2_unlit = R"(
+static const char* g_material_ps_suf2_unlit = R"(
 
 	float4 Output = float4(emissive, opacity);
 
@@ -597,7 +597,7 @@ static char* g_material_ps_suf2_unlit = R"(
 
 )";
 
-static char* g_material_ps_suf2_lit = R"(
+static const char* g_material_ps_suf2_lit = R"(
 	float3 viewDir = normalize(cameraPosition.xyz - worldPos);
 	float3 diffuse = calcDirectionalLightDiffuseColor(baseColor, pixelNormalDir, lightDirection.xyz, ambientOcclusion);
 	float3 specular = lightColor.xyz * lightScale * calcLightingGGX(pixelNormalDir, viewDir, lightDirection.xyz, roughness, 0.9);
