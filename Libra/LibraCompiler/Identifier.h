@@ -9,7 +9,10 @@
 namespace Libra {
 	std::unordered_map<std::string, Token> identifierTable = {
 		{"def", tok_def},
-		{"extern", tok_extern}
+		{"extern", tok_extern},
+		{"if", tok_if},
+		{"then", tok_then},
+		{"else", tok_else}
 	};
 }
 
