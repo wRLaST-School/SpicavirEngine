@@ -20,7 +20,7 @@ namespace Libra {
 		inline static std::unique_ptr<llvm::LLVMContext> TheContext;
 		inline static std::unique_ptr<llvm::IRBuilder<>> Builder;
 		inline static std::unique_ptr<llvm::Module> TheModule;
-		inline static std::map<std::string, llvm::Value*> NamedValues;
+		inline static std::map<std::string, llvm::AllocaInst*> NamedValues;
 	};
 }
 

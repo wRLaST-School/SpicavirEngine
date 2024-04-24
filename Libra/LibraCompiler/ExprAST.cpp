@@ -126,7 +126,7 @@ namespace Libra {
             ai->setName(args_[idx]);
 
             // 変数シンボルテーブルに引数を追加する。
-            CodeObject::NamedValues[args_[idx]] = ai;
+            CodeObject::NamedValues[args_[idx]] = reinterpret_cast<llvm::AllocaInst*>(ai);
         }
         return f;
     }
@@ -230,7 +230,7 @@ namespace Libra {
         variable->addIncoming(startVal, preHeaderBB);
 
         llvm::Value* oldVal = CodeObject::NamedValues[varName_];
-        CodeObject::NamedValues[varName_] = variable;
+        CodeObject::NamedValues[varName_] = reinterpret_cast<llvm::AllocaInst*>(variable);
 
         if (body_->CodeGen() == nullptr)
             return 0;
@@ -265,7 +265,7 @@ namespace Libra {
 
         //スコープ外に同名変数があった場合復元する
         if (oldVal)
-            CodeObject::NamedValues[varName_] = oldVal;
+            CodeObject::NamedValues[varName_] = reinterpret_cast<llvm::AllocaInst*>(oldVal);
         else
             CodeObject::NamedValues.erase(varName_);
 
