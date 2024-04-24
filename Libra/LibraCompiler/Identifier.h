@@ -12,7 +12,9 @@ namespace Libra {
 		{"extern", tok_extern},
 		{"if", tok_if},
 		{"then", tok_then},
-		{"else", tok_else}
+		{"else", tok_else},
+		{"for", tok_for},
+		{"in", tok_in}
 	};
 }
 

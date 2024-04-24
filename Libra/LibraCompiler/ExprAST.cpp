@@ -4,6 +4,8 @@
 #include <format>
 #include <map>
 #include "CodeObject.h"
+#define nullret(v) if(!v) return nullptr
+
 
 namespace Libra {
     void InitLLVM()
@@ -157,7 +159,7 @@ namespace Libra {
     llvm::Value* IfExprAST::CodeGen()
     {
         llvm::Value* condV = cond_->CodeGen();
-        if (!condV) return 0;
+        nullret(condV);
 
         condV = CodeObject::Builder->CreateFCmpONE(condV,
             llvm::ConstantFP::get(*CodeObject::TheContext, llvm::APFloat(0.0)), "ifcond");
@@ -174,7 +176,7 @@ namespace Libra {
         CodeObject::Builder->SetInsertPoint(thenBB);
 
         llvm::Value* thenV = then_->CodeGen();
-        if (!thenV) return 0;
+        nullret(thenV);
 
         CodeObject::Builder->CreateBr(mergeBB);
 
@@ -187,7 +189,7 @@ namespace Libra {
 
         llvm::Value* elseV = else_->CodeGen();
 
-        if (!elseV) return 0;
+        nullret(elseV);
 
         CodeObject::Builder->CreateBr(mergeBB);
 
@@ -207,5 +209,36 @@ namespace Libra {
         PN->addIncoming(elseV, elseBB);
 
         return PN;
+    }
+    llvm::Value* ForExprAST::CodeGen()
+    {
+        //スコープ内の変数なしで開始コードを出力する
+        llvm::Value* startVal = start_->CodeGen();
+        nullret(startVal);
+
+        // ループのヘッダ用の基本ブロックを作成
+        llvm::Function* theFunc = CodeObject::Builder->GetInsertBlock()->getParent();
+        llvm::BasicBlock* preHeaderBB = CodeObject::Builder->GetInsertBlock();
+        llvm::BasicBlock* LoopBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "loop", theFunc);
+
+        CodeObject::Builder->CreateBr(LoopBB);
+
+        CodeObject::Builder->SetInsertPoint(LoopBB);
+
+        llvm::PHINode* variable = CodeObject::Builder->CreatePHI(
+            llvm::Type::getFloatTy(*CodeObject::TheContext), 2, varName_.c_str());
+        variable->addIncoming(startVal, preHeaderBB);
+
+        llvm::Value* oldVal = CodeObject::NamedValues[varName_];
+        CodeObject::NamedValues[varName_] = variable;
+
+        if (body_->CodeGen() == nullptr)
+            return 0;
+
+        llvm::Value* stepVal;
+
+        if (step_) {
+
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace Libra {
 		llvm::Function* CodeGen() ;
 	};
 
-	// If文による制御を表すクラス
+	// if文による制御を表すクラス
 	class IfExprAST : public ExprAST {
 		std::unique_ptr<ExprAST> cond_, then_, else_;
 	public:
@@ -88,6 +88,25 @@ namespace Libra {
 			std::unique_ptr<ExprAST> then, 
 			std::unique_ptr<ExprAST> arg_else)
 			: cond_(std::move(cond)), then_(std::move(then)), else_(std::move(arg_else)) {}
+
+		virtual llvm::Value* CodeGen();
+	};
+
+	// for文による制御を表すクラス
+	class ForExprAST : public ExprAST {
+		std::string varName_;
+		std::unique_ptr<ExprAST> start_, end_, step_, body_;
+	public:
+		ForExprAST(const std::string& varName,
+			std::unique_ptr<ExprAST> start,
+			std::unique_ptr<ExprAST> end,
+			std::unique_ptr<ExprAST> step,
+			std::unique_ptr<ExprAST> body)
+			: varName_(varName),
+			start_(std::move(start)),
+			end_(std::move(end)),
+			step_(std::move(step)),
+			body_(std::move(body)) {}
 
 		virtual llvm::Value* CodeGen();
 	};

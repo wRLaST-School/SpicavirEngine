@@ -262,6 +262,51 @@ std::unique_ptr<ExprAST> Libra::Parser::ParseIfExpr()
 		(std::move(cond), std::move(then), std::move(elsE)));
 }
 
+std::unique_ptr<ExprAST> Libra::Parser::ParseForExpr()
+{
+	GetNextToken(); // forを消化
+
+	if (currentToken_ != tok_identifier)
+		return Error("expected identifier after for");
+
+	std::string idName = lexer_.identifierStr;
+
+	GetNextToken(); // 識別子を消化
+
+	if (currentToken_ != '=')
+		return Error("expected '=' after for");
+
+	GetNextToken(); // '='を消化
+
+	std::unique_ptr<ExprAST> start = ParseExpression();
+	if (!start) return 0;
+	if (currentToken_ != ',')
+		return Error("expected ',' after for start value");
+	GetNextToken();
+
+	std::unique_ptr<ExprAST> end = ParseExpression();
+	if (!end) return 0;
+
+	//Stepの値は無くても良い
+	std::unique_ptr<ExprAST> step = nullptr;
+	if (currentToken_ == ',') {
+		GetNextToken();
+		step = ParseExpression();
+		if (!step) return 0;
+	}
+
+	if (currentToken_ != tok_in)
+		return Error("expected 'in' after for");
+
+	GetNextToken(); // inを消化
+
+	std::unique_ptr<ExprAST> body = ParseExpression();
+	if (!body) return 0;
+
+	return std::move(std::make_unique<ForExprAST>(idName, std::move(start),
+		std::move(end), std::move(step), std::move(body)));
+}
+
 int Libra::Parser::GetNextToken()
 {
 	return currentToken_ = lexer_.GetToken();

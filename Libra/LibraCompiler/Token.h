@@ -15,6 +15,8 @@ namespace Libra {
 		// cond
 		tok_if = -6,
 		tok_then = -7,
-		tok_else = -8
+		tok_else = -8,
+		tok_for = -9,
+		tok_in = -10
 	};
 }
