@@ -226,7 +226,7 @@ namespace Libra {
         CodeObject::Builder->SetInsertPoint(loopBB);
 
         llvm::PHINode* variable = CodeObject::Builder->CreatePHI(
-            llvm::Type::getFloatTy(*CodeObject::TheContext), 2, varName_.c_str());
+            llvm::Type::getFloatTy(*CodeObject::TheContext), 2, varName_);
         variable->addIncoming(startVal, preHeaderBB);
 
         llvm::Value* oldVal = CodeObject::NamedValues[varName_];

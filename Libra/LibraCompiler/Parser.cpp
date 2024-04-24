@@ -130,6 +130,7 @@ std::unique_ptr<ExprAST> Libra::Parser::ParsePrimary()
 	case tok_number: return ParseNumberExpr();
 	case '(': return ParseParenExpr();
 	case tok_if: return ParseIfExpr();
+	case tok_for: return ParseForExpr();
 
 	default: return Error("unknown token when expecting an expression");
 	}
