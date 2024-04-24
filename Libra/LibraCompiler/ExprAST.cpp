@@ -219,11 +219,11 @@ namespace Libra {
         // ループのヘッダ用の基本ブロックを作成
         llvm::Function* theFunc = CodeObject::Builder->GetInsertBlock()->getParent();
         llvm::BasicBlock* preHeaderBB = CodeObject::Builder->GetInsertBlock();
-        llvm::BasicBlock* LoopBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "loop", theFunc);
+        llvm::BasicBlock* loopBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "loop", theFunc);
 
-        CodeObject::Builder->CreateBr(LoopBB);
+        CodeObject::Builder->CreateBr(loopBB);
 
-        CodeObject::Builder->SetInsertPoint(LoopBB);
+        CodeObject::Builder->SetInsertPoint(loopBB);
 
         llvm::PHINode* variable = CodeObject::Builder->CreatePHI(
             llvm::Type::getFloatTy(*CodeObject::TheContext), 2, varName_.c_str());
@@ -238,7 +238,38 @@ namespace Libra {
         llvm::Value* stepVal;
 
         if (step_) {
-
+            stepVal = step_->CodeGen();
+            nullret(stepVal);
         }
+        else {
+            stepVal = llvm::ConstantFP::get(*CodeObject::TheContext, llvm::APFloat(1.0));
+        }
+
+        llvm::Value* nextVar = CodeObject::Builder->CreateFAdd(variable, stepVal, "nextvar");
+
+        // 終了条件
+        llvm::Value* endCond = end_->CodeGen();
+        nullret(endCond);
+
+        endCond = CodeObject::Builder->CreateFCmpONE(endCond,
+            llvm::ConstantFP::get(*CodeObject::TheContext, llvm::APFloat(0.0)), "loopcond");
+
+        llvm::BasicBlock* loopEndBB = CodeObject::Builder->GetInsertBlock();
+        llvm::BasicBlock* afterBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "afterloop", theFunc);
+
+        CodeObject::Builder->CreateCondBr(endCond, loopBB, afterBB);
+
+        CodeObject::Builder->SetInsertPoint(afterBB);
+
+        variable->addIncoming(nextVar, loopEndBB);
+
+        //スコープ外に同名変数があった場合復元する
+        if (oldVal)
+            CodeObject::NamedValues[varName_] = oldVal;
+        else
+            CodeObject::NamedValues.erase(varName_);
+
+        // forは常に0.0fを返す
+        return llvm::Constant::getNullValue(llvm::Type::getFloatTy(*CodeObject::TheContext));
     }
 }

@@ -102,11 +102,7 @@ namespace Libra {
 			std::unique_ptr<ExprAST> end,
 			std::unique_ptr<ExprAST> step,
 			std::unique_ptr<ExprAST> body)
-			: varName_(varName),
-			start_(std::move(start)),
-			end_(std::move(end)),
-			step_(std::move(step)),
-			body_(std::move(body)) {}
+			: varName_(varName), start_(std::move(start)), end_(std::move(end)), step_(std::move(step)), body_(std::move(body)) {}
 
 		virtual llvm::Value* CodeGen();
 	};
