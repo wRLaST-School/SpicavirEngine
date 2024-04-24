@@ -1,3 +1,5 @@
 def TestFunc(a b) a*a + 2*a*b + b*b;
+def TestRet(x) if x < 10 then TestFunc(1,3) else TestFunc(5,4);
 
-TestFunc(1,3);
+TestRet(1);
+TestRet(100);

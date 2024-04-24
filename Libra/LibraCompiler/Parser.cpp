@@ -129,6 +129,7 @@ std::unique_ptr<ExprAST> Libra::Parser::ParsePrimary()
 	case tok_identifier: return ParseIdentifierExpr();
 	case tok_number: return ParseNumberExpr();
 	case '(': return ParseParenExpr();
+	case tok_if: return ParseIfExpr();
 
 	default: return Error("unknown token when expecting an expression");
 	}
@@ -231,6 +232,34 @@ std::unique_ptr<FunctionAST> Libra::Parser::ParseTopLevelExpr()
 	}
 
 	return nullptr;
+}
+
+std::unique_ptr<ExprAST> Libra::Parser::ParseIfExpr()
+{
+	GetNextToken(); // ifの消化
+
+	//Cond
+	std::unique_ptr<ExprAST> cond = ParseExpression();
+	if (!cond) return 0;
+
+	if (currentToken_ != Token::tok_then)
+		return Error("expected \"then\"");
+
+	GetNextToken(); // thenの消化
+
+	std::unique_ptr<ExprAST> then = ParseExpression();
+	if (!then) return 0;
+
+	if (currentToken_ != Token::tok_else)
+		return Error("expected \"else\"");
+
+	GetNextToken(); // elseの消化
+
+	std::unique_ptr<ExprAST> elsE = ParseExpression();
+	if (!elsE) return 0;
+
+	return std::move(std::make_unique<IfExprAST>
+		(std::move(cond), std::move(then), std::move(elsE)));
 }
 
 int Libra::Parser::GetNextToken()

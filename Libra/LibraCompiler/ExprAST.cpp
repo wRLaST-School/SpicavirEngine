@@ -154,4 +154,58 @@ namespace Libra {
 
         return 0;
     }
+    llvm::Value* IfExprAST::CodeGen()
+    {
+        llvm::Value* condV = cond_->CodeGen();
+        if (!condV) return 0;
+
+        condV = CodeObject::Builder->CreateFCmpONE(condV,
+            llvm::ConstantFP::get(*CodeObject::TheContext, llvm::APFloat(0.0)), "ifcond");
+
+        llvm::Function* theFunc = CodeObject::Builder->GetInsertBlock()->getParent();
+
+        //thenとelseのブロックを生成
+        llvm::BasicBlock* thenBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "then", theFunc);
+        llvm::BasicBlock* elseBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "else");
+        llvm::BasicBlock* mergeBB = llvm::BasicBlock::Create(*CodeObject::TheContext, "ifcont");
+
+        CodeObject::Builder->CreateCondBr(condV, thenBB, elseBB);
+
+        CodeObject::Builder->SetInsertPoint(thenBB);
+
+        llvm::Value* thenV = then_->CodeGen();
+        if (!thenV) return 0;
+
+        CodeObject::Builder->CreateBr(mergeBB);
+
+        thenBB = CodeObject::Builder->GetInsertBlock();
+
+        // elseブロックを発行する
+        theFunc->insert(theFunc->end(), elseBB);
+
+        CodeObject::Builder->SetInsertPoint(elseBB);
+
+        llvm::Value* elseV = else_->CodeGen();
+
+        if (!elseV) return 0;
+
+        CodeObject::Builder->CreateBr(mergeBB);
+
+        elseBB = CodeObject::Builder->GetInsertBlock();
+
+        // mergeブロックを発行する
+        theFunc->insert(theFunc->end(), mergeBB);
+
+        CodeObject::Builder->SetInsertPoint(mergeBB);
+
+        llvm::PHINode* PN = CodeObject::Builder->CreatePHI(
+            llvm::Type::getFloatTy(*CodeObject::TheContext),
+            2, "iftmp"
+        );
+
+        PN->addIncoming(thenV, thenBB);
+        PN->addIncoming(elseV, elseBB);
+
+        return PN;
+    }
 }
