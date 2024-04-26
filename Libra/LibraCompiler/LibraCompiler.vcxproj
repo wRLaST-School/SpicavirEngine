@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CodeObject.cpp" />
+    <ClCompile Include="CPPCompiler.cpp" />
     <ClCompile Include="ExprAST.cpp" />
     <ClCompile Include="Lexer.cpp" />
     <ClCompile Include="LibraCompiler.cpp" />
@@ -27,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CodeObject.h" />
+    <ClInclude Include="CPPCompiler.h" />
     <ClInclude Include="ExprAST.h" />
     <ClInclude Include="Identifier.h" />
     <ClInclude Include="Lexer.h" />

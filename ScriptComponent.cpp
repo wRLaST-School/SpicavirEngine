@@ -32,7 +32,7 @@ void ScriptComponent::OnInspectorWindowDraw()
 	if (ImGui::Button("Compile"))
 	{
 		CompileScript();
-		//LoadDLL();
+		LoadDLL();
 	}
 }
 
