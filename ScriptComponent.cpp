@@ -2,6 +2,7 @@
 #include "ScriptComponent.h"
 #include <SpImGui.h>
 #include <Libra/LibraCompiler/LibraCompiler.h>
+#include <Libra/LibraCompiler/CPPCompiler.h>
 
 void ScriptComponent::Init()
 {
@@ -53,7 +54,8 @@ void ScriptComponent::CompileScript()
 	std::string compileDest = compileFolder + filePath;
 
 	//コンパイル処理
-	Libra::Compiler::Compile(filePath, compileDest);
+	//Libra::Compiler::Compile(filePath, compileDest);
+	CPPCompiler::Compile();
 }
 
 void ScriptComponent::LoadDLL()
