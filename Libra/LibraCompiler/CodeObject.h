@@ -17,10 +17,10 @@ namespace Libra {
 		inline static size_t curIndex;
 
 
-		inline static std::unique_ptr<llvm::LLVMContext> TheContext;
-		inline static std::unique_ptr<llvm::IRBuilder<>> Builder;
-		inline static std::unique_ptr<llvm::Module> TheModule;
-		inline static std::map<std::string, llvm::AllocaInst*> NamedValues;
+		//inline static std::unique_ptr<llvm::LLVMContext> TheContext;
+		//inline static std::unique_ptr<llvm::IRBuilder<>> Builder;
+		//inline static std::unique_ptr<llvm::Module> TheModule;
+		//inline static std::map<std::string, llvm::AllocaInst*> NamedValues;
 	};
 }
 
