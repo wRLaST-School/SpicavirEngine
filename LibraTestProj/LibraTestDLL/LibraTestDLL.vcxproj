@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bases.h" />
     <ClInclude Include="IScriptObject.h" />
     <ClInclude Include="TestPlayer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bases.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
