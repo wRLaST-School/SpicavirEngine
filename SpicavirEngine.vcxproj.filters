@@ -204,9 +204,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Engine\ソースファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SrcEngine\Others\Input.cpp">
       <Filter>Engine\ソースファイル\Others</Filter>
     </ClCompile>
@@ -922,6 +919,9 @@
     </ClInclude>
     <ClInclude Include="DLLObject.h">
       <Filter>Engine\ヘッダーファイル\LibraScript</Filter>
+    </ClInclude>
+    <ClInclude Include="DLLDef.h">
+      <Filter>Engine\ヘッダーファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

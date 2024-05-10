@@ -1,5 +1,6 @@
 #pragma once
-class SpFramework
+#include <DLLDef.h>
+class DLLExport SpFramework
 {
 public:
 	void Init();
