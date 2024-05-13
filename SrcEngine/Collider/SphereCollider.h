@@ -2,7 +2,7 @@
 #include "ICollider.h"
 #include "SpMath.h"
 #include <PlaneCollider.h>
-class SphereCollider :
+class DLLExport SphereCollider :
     public ICollider
 {
 public:

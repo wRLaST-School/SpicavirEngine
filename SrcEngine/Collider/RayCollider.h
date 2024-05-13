@@ -2,7 +2,7 @@
 #include "ICollider.h"
 #include "SphereCollider.h"
 #include "SpMath.h"
-class RayCollider :
+class DLLExport RayCollider :
     public ICollider
 {
 public:

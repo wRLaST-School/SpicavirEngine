@@ -1,6 +1,6 @@
 #pragma once
 #include "ICollider.h"
-class PlaneCollider :
+class DLLExport PlaneCollider :
     public ICollider
 {
 public:

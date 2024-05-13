@@ -27,6 +27,6 @@ public:
 private:
 };
 
-SpDirectX* GetSpDX();
+DLLExport SpDirectX* GetSpDX();
 void InitSpDX();
 

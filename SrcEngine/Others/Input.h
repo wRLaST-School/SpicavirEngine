@@ -34,7 +34,7 @@ enum class Trigger {
 };
 
 namespace Input {
-	class Key
+	class DLLExport Key
 	{
 	public:
 		static void Init();
@@ -61,7 +61,7 @@ namespace Input {
 		friend IDirectInput8* GetDInput();
 	};
 
-	class Mouse {
+	class DLLExport Mouse {
 	public:
 
 		static void Init();
@@ -93,7 +93,7 @@ namespace Input {
 		DIMOUSESTATE prevState_;
 	};
 
-	class Pad
+	class DLLExport Pad
 	{
 	public:
 		static void Init();

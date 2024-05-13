@@ -7,7 +7,7 @@ struct ColorInt {
 	int32_t a;
 };
 
-class Color
+class DLLExport Color
 {
 public:
 	Color(); //黒で初期化

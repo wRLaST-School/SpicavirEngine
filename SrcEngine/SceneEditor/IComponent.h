@@ -4,6 +4,8 @@
 #pragma warning (disable:26800)
 #include <SrcExternal/json.hpp>
 #pragma warning (pop)
+
+#include <DLLDef.h>
 /*
 -------------------------------------------------------------------------------
 コンポーネントを作る際は下記2点を行うこと
@@ -36,49 +38,49 @@ public:
 	template <class Type, class ...Args>
 	Type* AddComponent(const std::string& key, Args ...args);
 
-	IComponent* AddComponent(const std::string& key, eastl::unique_ptr<IComponent> component);
+	DLLExport IComponent* AddComponent(const std::string& key, eastl::unique_ptr<IComponent> component);
 
 	//コンポーネントの親を変更
-	void ChangeParent(IComponent* newParent);
+	DLLExport void ChangeParent(IComponent* newParent);
 
 	//指定したキーのコンポーネントを一つ削除
 	//該当要素が複数ある場合の動作は保証しない
-	void RemoveComponent(const std::string& key);
+	DLLExport void RemoveComponent(const std::string& key);
 
 	//ポインタが指すコンポーネントを所持している場合削除する
-	void RemoveComponent(IComponent* ptr);
+	DLLExport void RemoveComponent(IComponent* ptr);
 
 	//指定したキーのコンポーネントを全て削除
-	void ClearComponentWithKey(const std::string& key);
+	DLLExport void ClearComponentWithKey(const std::string& key);
 
 	//全てのコンポーネントを削除
-	void ClearAllComponents();
+	DLLExport void ClearAllComponents();
 
 	//指定したキーのコンポーネントのポインタを一つ取得
 	//該当要素が複数ある場合の動作は保証しない
-	IComponent* GetComponent(const std::string& key);
+	DLLExport IComponent* GetComponent(const std::string& key);
 
 	//指定したキーのコンポーネントをTypeで指定した型のポインタにして一つ取得
 	//該当要素が複数ある場合の動作は保証しない
 	template <class Type> Type* GetComponent(const std::string& key);
 
 	//指定したキーに該当する全てのコンポーネントのポインタをリストにして取得
-	eastl::list<IComponent*> GetComponents(const std::string& key);
+	DLLExport eastl::list<IComponent*> GetComponents(const std::string& key);
 
 	//親コンポーネントを取得
-	IComponent* Parent();
+	DLLExport IComponent* Parent();
 
 	//指定したキーに該当する全てのコンポーネントをTypeで指定した型のポインタのリストにして取得
 	template <class Type> eastl::list<Type*> GetComponents(const std::string& key);
 
 	//全てのコンポーネントを取得
-	const eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& GetAllComponents();
+	const DLLExport eastl::multimap<std::string, eastl::unique_ptr<IComponent>>& GetAllComponents();
 
 	//つけられている名前を取得
-	const std::string& GetName();
+	const DLLExport std::string& GetName();
 
 	//コンポーネントのクラス名を取得
-	virtual std::string GetClassString() = 0;
+	virtual DLLExport std::string GetClassString() = 0;
 
 	//コンポーネント共通で自動で呼ばれる処理
 	virtual void Init();

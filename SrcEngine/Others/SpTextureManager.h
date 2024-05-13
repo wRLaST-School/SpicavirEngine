@@ -42,7 +42,7 @@ public:
 	 * @param key テクスチャの登録キー
 	 * @return 登録したキー
 	 */
-	static TextureKey LoadTexture(const std::string& filePath, const TextureKey& key);
+	static DLLExport TextureKey LoadTexture(const std::string& filePath, const TextureKey& key);
 	
 	/**
 	* @brief テクスチャの読み込み
@@ -51,7 +51,7 @@ public:
 	* @param key テクスチャの登録キー
 	* @return 登録したキー
 	*/
-	static TextureKey LoadTextureWithUniqueKey(const std::string& filePath, const TextureKey& key);
+	static DLLExport TextureKey LoadTextureWithUniqueKey(const std::string& filePath, const TextureKey& key);
 	
 	/**
 	 * @brief ダミーテクスチャの生成
@@ -63,7 +63,7 @@ public:
 	 * @param useRatio widthとheightを画面サイズに対する比率で扱うか
 	 * @return 登録したキー
 	 */
-	static TextureKey CreateDummyTexture(float width, float height, const TextureKey& key, bool initAsRenderTarget = true, bool useRatio = false);
+	static DLLExport TextureKey CreateDummyTexture(float width, float height, const TextureKey& key, bool initAsRenderTarget = true, bool useRatio = false);
 	
 	/**
 	 * @brief ダミーテクスチャの生成
@@ -75,7 +75,7 @@ public:
 	 * @param useRatio widthとheightを画面サイズに対する比率で扱うか
 	 * @return 登録したキー
 	 */
-	static TextureKey CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget = true);
+	static DLLExport TextureKey CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget = true);
 
 	/**
 	 * @brief テキスト描画用ダミーテクスチャの生成
@@ -85,7 +85,7 @@ public:
 	 * @param key テクスチャの登録キー
 	 * @return 登録したキー
 	 */
-	static TextureKey CreateTextTexture(int32_t width, int32_t height, const TextureKey& key);
+	static DLLExport TextureKey CreateTextTexture(int32_t width, int32_t height, const TextureKey& key);
 
 	/**
 	 * @brief 画像の分割読み込み
@@ -97,7 +97,7 @@ public:
 	 * @param qy y方向の数
 	 * @param keys 登録するキーの配列
 	 */
-	static void LoadDiv(const std::string& filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const std::vector<TextureKey>& keys);
+	static DLLExport void LoadDiv(const std::string& filePath, int32_t widthPer, int32_t heightPer, int32_t qx, int32_t qy, const std::vector<TextureKey>& keys);
 	
 	/**
 	 * @brief 画像の分割読み込み(一つのみ)
@@ -110,7 +110,7 @@ public:
 	 * @param key テクスチャの登録キー
 	 * @return 登録したキー
 	 */
-	static TextureKey LoadSingleDiv(std::string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, const TextureKey& key);
+	static DLLExport TextureKey LoadSingleDiv(std::string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, const TextureKey& key);
 
 	static TextureKey CreatePlainSRV(const TextureKey& key);
 
@@ -119,7 +119,7 @@ public:
 	static D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescHandle(const TextureKey& key);
 	static D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescHandle(const TextureKey& key);
 	static DirectX::TexMetadata GetTextureMetadata(const TextureKey& key);
-	static TexData GetTextureData(const TextureKey& key);
+	static DLLExport TexData GetTextureData(const TextureKey& key);
 	static ID3D12Resource* GetTextureBuff(const TextureKey& key);
 	static int32_t GetIndex(const TextureKey& key);
 

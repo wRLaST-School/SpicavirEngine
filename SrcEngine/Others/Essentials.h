@@ -1,5 +1,6 @@
 #pragma once
 #include "stdafx.h"
+#include <DLLDef.h>
 
 LRESULT WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 

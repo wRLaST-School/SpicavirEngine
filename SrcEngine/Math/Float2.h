@@ -1,6 +1,6 @@
 #pragma once
 #include "Vec2.h"
-struct Float2
+struct DLLExport Float2
 {
 	float x;
 	float y;

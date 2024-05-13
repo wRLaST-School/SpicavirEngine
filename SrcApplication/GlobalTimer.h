@@ -1,5 +1,5 @@
 #pragma once
-class GlobalTimer
+class DLLExport GlobalTimer
 {
 public:
 	static void Update();

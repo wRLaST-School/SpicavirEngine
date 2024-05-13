@@ -1,7 +1,7 @@
 #pragma once
 #include <Essentials.h>
 
-class Line 
+class DLLExport Line
 {
 public:
 	Line(const Float3& start, const Float3& end, const Float4& color) : start(start), end(end), color(color) {}
@@ -16,11 +16,11 @@ class LineDrawer
 public:
 	static void Init();
 
-	static void DrawLine(const Float3& start, const Float3& end, const Float4& color);
-	static void DrawLines(const std::vector<Float3>& positions, const Float4& color);
-	static void DrawCube(const Float3& center, const Float3& scale, const Float4& color);
-	static void DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color);
-	static void DrawRotaCube(const Float3& center, const Float3& scale, const Quaternion& rot, const Float4& color);
+	static DLLExport void DrawLine(const Float3& start, const Float3& end, const Float4& color);
+	static DLLExport void DrawLines(const std::vector<Float3>& positions, const Float4& color);
+	static DLLExport void DrawCube(const Float3& center, const Float3& scale, const Float4& color);
+	static DLLExport void DrawRotaCube(const Float3& center, const Float3& scale, const Float3& rot, const Float4& color);
+	static DLLExport void DrawRotaCube(const Float3& center, const Float3& scale, const Quaternion& rot, const Float4& color);
 
 	static void DrawAllLines();
 

@@ -5,7 +5,7 @@ template <class Contents> class SpConstBuffer
 {
 public:
 	//ConstBufferを生成してマッピング
-	SpConstBuffer() {
+	DLLExport SpConstBuffer() {
 		//ヒープ設定
 		D3D12_HEAP_PROPERTIES cbheapprop{};
 		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
@@ -34,7 +34,7 @@ public:
 		buffer->Map(0, nullptr, (void**)&contents);
 	};
 
-	SpConstBuffer(bool empty) {
+	DLLExport SpConstBuffer(bool empty) {
 		if (empty)
 		{
 			buffer = nullptr;
@@ -45,7 +45,7 @@ public:
 		}
 	}
 
-	void Create() {		
+	DLLExport void Create() {
 		//ヒープ設定
 		D3D12_HEAP_PROPERTIES cbheapprop{};
 		cbheapprop.Type = D3D12_HEAP_TYPE_UPLOAD;
@@ -74,11 +74,11 @@ public:
 		buffer->Map(0, nullptr, (void**)&contents);
 	}
 
-	~SpConstBuffer() {
+	DLLExport ~SpConstBuffer() {
 		/*buffer->Unmap(0, nullptr);*/
 	};
 
-	SpConstBuffer<Contents>& operator=(const SpConstBuffer<Contents>& second) {
+	DLLExport SpConstBuffer<Contents>& operator=(const SpConstBuffer<Contents>& second) {
 		*this->contents = *second.contents;
 		return *this;
 	}

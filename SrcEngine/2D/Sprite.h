@@ -17,11 +17,11 @@ public:
 	};
 
 public:
-	Sprite() {};
+	DLLExport Sprite() {};
 	//既存のテクスチャを使って生成
-	Sprite(const TextureKey& key);
+	DLLExport Sprite(const TextureKey& key);
 	//テクスチャを読み込んでキーに保存、それを使ってSpriteを生成
-	Sprite(const std::string& path, const TextureKey& newKey);
+	DLLExport Sprite(const std::string& path, const TextureKey& newKey);
 
 	static void PreSpriteDraw();
 	static void PostSpriteDraw();

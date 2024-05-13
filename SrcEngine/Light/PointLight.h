@@ -8,9 +8,9 @@ class PointLight : public IComponent
 public:
 	ComponentFactoryRegister(PointLight)
 
-	PointLight();
-	PointLight(const Float3& pos, const Float3& color, const Float3& att);
-	~PointLight() override;
+	DLLExport PointLight();
+	DLLExport PointLight(const Float3& pos, const Float3& color, const Float3& att);
+	DLLExport ~PointLight() override;
 	Float3 pos;
 	Float3 color;
 	Float3 att;
@@ -22,7 +22,7 @@ public:
 	bool isActive = false;
 
 public:
-	struct CBData {
+	struct DLLExport CBData {
 		Float3 pos;
 		float padding1;
 		Float3 color;
@@ -35,7 +35,7 @@ public:
 	static const uint32_t MAX_LIGHTS = 16;
 
 	//点光源数が上限を超えた場合のエラー
-	class ReachedLightLimit {
+	class DLLExport ReachedLightLimit {
 	public:
 		ReachedLightLimit(int32_t limit, int32_t actual):limit(limit),actual(actual) {};
 		int32_t limit;

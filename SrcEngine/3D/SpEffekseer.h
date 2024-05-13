@@ -38,9 +38,9 @@ public:
 
 	static void Draw();
 
-	static EffectKey Load(std::string texFolder, std::string path, EffectKey key);
+	static DLLExport EffectKey Load(std::string texFolder, std::string path, EffectKey key);
 
-	static Effekseer::Handle Play(EffectKey key, Float3 pos);
+	static DLLExport Effekseer::Handle Play(EffectKey key, Float3 pos);
 
 	static void SetMatrices(Effekseer::Matrix44 view, Effekseer::Matrix44 proj);
 

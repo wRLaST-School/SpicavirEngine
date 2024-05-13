@@ -10,7 +10,7 @@ public:
 	friend InspectorWindow;
 
 	static IComponent* AddChildComponent(IComponent* parent, std::string key, std::string newComponentTypeStr);
-	static void Register(std::string type, std::function<eastl::unique_ptr<IComponent>(void)> createFunc);
+	static DLLExport void Register(std::string type, std::function<eastl::unique_ptr<IComponent>(void)> createFunc);
 
 private:
 	eastl::unordered_map<std::string, std::function<eastl::unique_ptr<IComponent>()>> factory;

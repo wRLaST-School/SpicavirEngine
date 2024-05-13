@@ -1,6 +1,6 @@
 #pragma once
 #include <SpDS.h>
-class Camera2D
+class DLLExport Camera2D
 {
 public:
 	int32_t x = 0;

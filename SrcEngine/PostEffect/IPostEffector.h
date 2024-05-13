@@ -11,7 +11,7 @@
 /**
  * @brief ポストエフェクト作成の基底クラス
  */
-class IPostEffector
+class DLLExport IPostEffector
 {
 public:
 	/**

@@ -9,14 +9,15 @@
 #include "Float3.h"
 #include "Float2.h"
 #include <Vec3.h>
+#include <DLLDef.h>
 
 /**
  * @briel 4x4行列のクラス
  */
-class Matrix
+class DLLExport Matrix
 {
 private:
-	class Row {
+	class DLLExport Row {
 		float c[4];
 	public:
 		float operator[](size_t index) const;

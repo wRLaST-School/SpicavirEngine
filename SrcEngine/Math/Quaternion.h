@@ -9,7 +9,7 @@
 /**
  * @briel クォータニオンクラス
  */
-class Quaternion
+class DLLExport Quaternion
 {
 public:
 	float w;

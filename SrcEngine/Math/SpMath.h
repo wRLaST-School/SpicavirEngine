@@ -21,7 +21,7 @@
 #endif
 
 //ラジアンから角度
-float ConvertRadianToAngle(float radian);
+float DLLExport ConvertRadianToAngle(float radian);
 
 //角度からラジアン
-float ConvertAngleToRadian(float angle);
+float DLLExport ConvertAngleToRadian(float angle);

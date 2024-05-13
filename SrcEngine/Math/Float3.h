@@ -2,7 +2,7 @@
 #include "Float4.h"
 #include <Vec3.h>
 
-struct Float3
+struct DLLExport Float3
 {
 	float x;
 	float y;

@@ -6,6 +6,7 @@
  * @author Wrelf
  *********************************************************************/
 #include <vector>
+#include <DLLDef.h>
 
 struct Float3;
 class Vec2;
@@ -13,7 +14,7 @@ class Vec2;
 /**
  * @briel 3次元ベクトルのクラス
  */
-class Vec3
+class DLLExport Vec3
 {
 public:
 	float x;

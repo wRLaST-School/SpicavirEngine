@@ -9,7 +9,7 @@
 /**
  * @brief イージング関連の関数がまとまっているクラス
  */
-class Easing {
+class DLLExport Easing {
 public:
 	/**
 	 * @brief 累乗を利用したEaseInの関数

@@ -11,7 +11,7 @@
 /**
  * @brief WindowsAPI関連の処理を行うクラス
  */
-class SpWindow
+class DLLExport SpWindow
 {
 public:
 	/**

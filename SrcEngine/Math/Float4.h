@@ -1,5 +1,7 @@
 #pragma once
-struct Float4
+#include <DLLDef.h>
+
+struct DLLExport Float4
 {
 	float x;
 	float y;

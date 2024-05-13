@@ -12,29 +12,29 @@ public:
 		Sub
 	};
 
-	static void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
+	static DLLExport void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
 		TextureKey key, Anchor anchor,
 		Color brightness = Color(0xffffff));
 
-	static void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
+	static DLLExport void DrawRotaGraph(int32_t x, int32_t y, float dx, float dy, float rot,
 		TextureKey key);
 
-	static void DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot, 
+	static DLLExport void DrawBox(int32_t x, int32_t y, int32_t width, int32_t height, float rot,
 		const Color& color, const Anchor& anchor = Anchor::Center);
 
-	static void DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, const Color& color);
+	static DLLExport void DrawBox(int32_t x0, int32_t y0, int32_t x1, int32_t y1, const Color& color);
 
-	static void SetBlendMode(const Blend& blendMode);
-	static void SetRenderTarget(const TextureKey& key);
-	static void SetPreDrawFunc(std::function<void(void)> prop);
+	static DLLExport void SetBlendMode(const Blend& blendMode);
+	static DLLExport void SetRenderTarget(const TextureKey& key);
+	static DLLExport void SetPreDrawFunc(std::function<void(void)> prop);
 
-	static void DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height, 
+	static DLLExport void DrawBoxLine(int32_t x, int32_t y, int32_t width, int32_t height,
 		const Color& color, float thickness, const  Anchor& anchor = Anchor::Center);
 
-	static void DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY,
+	static DLLExport void DrawLine(int32_t startX, int32_t startY, int32_t endX, int32_t endY,
 		const Color& color, int32_t thickness = 1);
 
-	static void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
+	static DLLExport void DrawCircleLine(int32_t x, int32_t y, int32_t r, Color color, int32_t edges = 100);
 	//各バッファと大量のダミースプライト初期化
 	static void CreateBuffers();
 	static void Render();

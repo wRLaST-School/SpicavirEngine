@@ -187,8 +187,8 @@ public:
 	//シーン情報書き込みで使用するため
 	friend SceneRW;
 
-	static void Register(const std::string& modelName, const ModelKey& key);
-	static void Register(const std::string& modelPath, const ModelKey& key, bool useAssimp);
+	static DLLExport void Register(const std::string& modelName, const ModelKey& key);
+	static DLLExport void Register(const std::string& modelPath, const ModelKey& key, bool useAssimp);
 
 	static Model* GetModel(const ModelKey& key);
 

@@ -23,12 +23,12 @@ class Camera :
 public:
     ComponentFactoryRegister(Camera)
 
-    Camera();
-    void SetRenderSize(float w, float h);
+    DLLExport Camera();
+    DLLExport void SetRenderSize(float w, float h);
     void UseDefaultParams();
 
-    Float3 GetWorldPosFromScreen(const Float2& screen, float depth);
-    Ray GetScreenPosRay(const Float2& screen);
+    DLLExport Float3 GetWorldPosFromScreen(const Float2& screen, float depth);
+    DLLExport Ray GetScreenPosRay(const Float2& screen);
 
     //UseCurrentより後に呼ばれる場合のみ動作保証
     Matrix GetViewMat();
@@ -55,11 +55,11 @@ public:
 
     CameraTargetMode targetMode = CameraTargetMode::LookTo;
 
-    static void Set(Camera& camera);
+    static DLLExport void Set(Camera& camera);
     static Camera* sCurrent;
     static void UseCurrent();
 
-    static Matrix GetCurrentCameraBillboardMat();
+    static DLLExport Matrix GetCurrentCameraBillboardMat();
 
     ProjectionMode projectionMode = ProjectionMode::Perspective;
 

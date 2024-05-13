@@ -1,6 +1,6 @@
 #pragma once
 #include <Color.h>
-class OBBCollider
+class DLLExport OBBCollider
 {
 public:
 	bool Collide(const OBBCollider& other);

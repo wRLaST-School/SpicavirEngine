@@ -1,6 +1,6 @@
 #pragma once
 #include "SpMath.h"
-class DirectionalLight
+class DLLExport DirectionalLight
 {
 public:
 	Vec3 direction = Vec3(1,0,0);

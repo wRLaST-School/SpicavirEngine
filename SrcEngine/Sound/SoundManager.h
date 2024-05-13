@@ -79,12 +79,12 @@ public:
 	static SoundManager* GetInstance();
 	static void Init();
 
-	static SoundKey LoadWave(const std::string& path, const SoundKey& key);
-	static void Play(const SoundKey& key);
-	static SoundData* PlayBGM(const SoundKey& key, bool loopFlag);
+	static DLLExport SoundKey LoadWave(const std::string& path, const SoundKey& key);
+	static DLLExport void Play(const SoundKey& key);
+	static DLLExport SoundData* PlayBGM(const SoundKey& key, bool loopFlag);
 
-	static SoundData* GetSoundData(const SoundKey& key);
-	static void StopBGM(const SoundKey& key);
+	static DLLExport SoundData* GetSoundData(const SoundKey& key);
+	static DLLExport void StopBGM(const SoundKey& key);
 
 	static void ReleaseAllSounds();
 	static void ReleasePerSceneSounds();

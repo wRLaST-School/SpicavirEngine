@@ -3,7 +3,7 @@
 #include <LibraTestProj/LibraTestDLL/IScriptObject.h>
 
 namespace Libra {
-	class DLLObject
+	class DLLExport DLLObject
 	{
 	public:
 		const HMODULE& LoadDLL(const std::string& path);

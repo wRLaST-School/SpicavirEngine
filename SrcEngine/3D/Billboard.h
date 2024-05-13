@@ -5,7 +5,7 @@ class Billboard :
     public Object3D
 {
 public:
-    Billboard()
+    DLLExport Billboard()
     {
     };
 
@@ -18,7 +18,7 @@ class BillboardY :
     public Billboard
 {
 public:
-    BillboardY()
+    DLLExport BillboardY()
     {
     }
 

@@ -1,5 +1,5 @@
 #pragma once
-enum class Anchor
+enum class DLLExport Anchor
 {
 	TopLeft,
 	TopCenter,
