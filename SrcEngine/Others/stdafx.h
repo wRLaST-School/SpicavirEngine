@@ -15,6 +15,7 @@
 #pragma warning(disable:5052)
 #include <Windows.h>
 #include <d3d12.h>
+
 #include <d3dx12.h>
 #include <DirectXTex.h>
 

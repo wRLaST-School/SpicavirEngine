@@ -5,6 +5,7 @@
 #include <SrcExternal/json.hpp>
 #pragma warning (pop)
 
+#include <Essentials.h>
 #include <DLLDef.h>
 /*
 -------------------------------------------------------------------------------
@@ -83,9 +84,9 @@ public:
 	virtual DLLExport std::string GetClassString() = 0;
 
 	//コンポーネント共通で自動で呼ばれる処理
-	virtual void Init();
-	virtual void Update();
-	virtual void Draw();
+	virtual DLLExport void Init();
+	virtual DLLExport void Update();
+	virtual DLLExport void Draw();
 
 	static void InitAllChildComponents(IComponent* parent);
 	static void UpdateAllChildComponents(IComponent* parent);
@@ -108,7 +109,7 @@ public:
 	virtual void ReadParamJson([[maybe_unused]] const nlohmann::json& paramsObject) {};
 
 	//Inspector Windowに描画する内容。継承先で何も定義しなくてもOK(なにも表示されないだけ)
-	virtual void OnInspectorWindowDraw();
+	virtual DLLExport void OnInspectorWindowDraw();
 
 	template <class Type>
 	Type* CastTo();

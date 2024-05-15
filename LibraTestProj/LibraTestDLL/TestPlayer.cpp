@@ -4,6 +4,10 @@
 #undef WIN32_LEAN_AND_MEAN
 #include <format>
 #include <functional>
+#include <SpDS.h>
+#include <Object3D.h>
+#include <Input.h>
+#include <ScriptComponent.h>
 
 std::function<void(int32_t, int32_t, float, float, float, std::string)> DrawRotaGraph;
 
@@ -14,35 +18,29 @@ void TestPlayer::Init()
 
 void TestPlayer::Update()
 {
-	if (count < 30)
+	auto obj = This()->Parent()->CastTo<Object3D>();
+
+	if (obj)
 	{
-		std::string c = std::format("TestPlayer Update {}\n", count);
-		OutputDebugStringA(c.c_str());
+		float move = (float)Input::Key::Down(DIK_UP) - (float)Input::Key::Down(DIK_DOWN);
+		move *= 0.1f;
+
+		obj->position.z += move;
+
+		move = (float)(Input::Key::Down(DIK_RIGHT) - Input::Key::Down(DIK_LEFT));
+
+		move *= 0.1f;
+		
+		obj->position.x += move;
 	}
 }
 
 void TestPlayer::Draw()
 {
-	if (count < 30)
-	{
-		std::string c = std::format("TestPlayer Draw {}\n", count);
-		OutputDebugStringA(c.c_str());
-	}
-
-	if (DrawRotaGraph)
-	{
-		DrawRotaGraph(500, 500, 1.f, 1.f, 0.f, "titleText");
-	}
-
-	count++;
+	
 }
 
 void SetDrawSpriteFunc(void(*dsfunc)(int32_t, int32_t, float, float, float, std::string))
 {
 	DrawRotaGraph = dsfunc;
-}
-
-TestPlayer* Create()
-{
-	return new TestPlayer();
 }

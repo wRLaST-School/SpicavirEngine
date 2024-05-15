@@ -53,6 +53,12 @@
                 "Type": "Object3D"
             },
             {
+                "Children": [
+                    {
+                        "Type": "ScriptComponent",
+                        "filePath": "TestPlayer"
+                    }
+                ],
                 "Model": "cube.obj",
                 "Position": {
                     "X": 10.493735313415527,
@@ -83,7 +89,7 @@
             },
             {
                 "Type": "ScriptComponent",
-                "filePath": "Assets/Scripts/test.lis"
+                "filePath": "TestPlayer"
             }
         ],
         "EfkEffects": [

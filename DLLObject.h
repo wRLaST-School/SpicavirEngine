@@ -6,7 +6,7 @@ namespace Libra {
 	class DLLExport DLLObject
 	{
 	public:
-		const HMODULE& LoadDLL(const std::string& path);
+		const HMODULE& LoadDLL(const std::string& className);
 
 		const HMODULE& GetModule();
 

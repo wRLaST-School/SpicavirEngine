@@ -3,29 +3,30 @@
 #include <SpImGui.h>
 #include <Libra/LibraCompiler/LibraCompiler.h>
 #include <Libra/LibraCompiler/CPPCompiler.h>
+#include <format>
 
 void ScriptComponent::Init()
 {
 	LoadDLL();
 
-	if (dllobj_.GetModule()) dllobj_.GetComponent()->Init();
+	if (dllobj_.GetComponent()) dllobj_.GetComponent()->Init();
 }
 
 void ScriptComponent::Update()
 {
-	if (dllobj_.GetModule()) dllobj_.GetComponent()->Update();
+	if (dllobj_.GetComponent()) dllobj_.GetComponent()->Update();
 }
 
 void ScriptComponent::Draw()
 {
-	if (dllobj_.GetModule()) dllobj_.GetComponent()->Draw();
+	if (dllobj_.GetComponent()) dllobj_.GetComponent()->Draw();
 }
 
 void ScriptComponent::OnInspectorWindowDraw()
 {
-	if (dllobj_.GetModule()) dllobj_.GetComponent()->OnInspectorWindowDraw();
+	if (dllobj_.GetComponent()) dllobj_.GetComponent()->OnInspectorWindowDraw();
 
-	if (SpImGui::InputText("FilePath", &filePath, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue))
+	if (SpImGui::InputText("Class Name", &className, ImGuiInputTextFlags_::ImGuiInputTextFlags_EnterReturnsTrue))
 	{
 		Init();
 	};
@@ -39,29 +40,30 @@ void ScriptComponent::OnInspectorWindowDraw()
 
 void ScriptComponent::WriteParamJson(nlohmann::json& jsonObj)
 {
-	jsonObj["filePath"] = filePath;
+	jsonObj["filePath"] = className;
 }
 
 void ScriptComponent::ReadParamJson(const nlohmann::json& jsonObj)
 {
-	filePath = jsonObj["filePath"];
+	className = jsonObj["filePath"];
 }
 
 void ScriptComponent::CompileScript()
 {
 	if (dllobj_.GetModule()) dllobj_.Free();
 
-	std::string compileDest = compileFolder + filePath;
-
 	//コンパイル処理
 	//Libra::Compiler::Compile(filePath, compileDest);
 	CPPCompiler::Compile();
+
+	LoadDLL();
 }
 
 void ScriptComponent::LoadDLL()
 {
-	std::string dllPath = compileFolder + filePath;
-
 	//読み込み処理
-	dllobj_.LoadDLL(dllPath);
+	dllobj_.LoadDLL(className);
+
+	if (dllobj_.GetComponent()) dllobj_.GetComponent()->body = this;
+	else OutputDebugStringA(std::format("No Such Class Found. Class Name: {}\n", className).c_str());
 }

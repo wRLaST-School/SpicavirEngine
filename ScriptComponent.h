@@ -21,7 +21,7 @@ private:
     void CompileScript();
     void LoadDLL();
 
-    std::string filePath;
+    std::string className;
 
     Libra::DLLObject dllobj_;
 

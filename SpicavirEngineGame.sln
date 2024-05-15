@@ -43,6 +43,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EffekseerRendererLLGI", "SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererLLGI\EffekseerRendererLLGI.vcxproj", "{B81591EC-4A8B-38CF-8D42-703136287C1A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibraTestDLL", "LibraTestProj\LibraTestDLL\LibraTestDLL.vcxproj", "{675E31ED-288F-4E4E-8A1E-70E79A895EDB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44AC3038-21F4-4D3A-B846-3091B26D74CC} = {44AC3038-21F4-4D3A-B846-3091B26D74CC}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibraCompiler", "Libra\LibraCompiler\LibraCompiler.vcxproj", "{158B8C2C-347D-48C4-A52F-C05D067BA02E}"
 EndProject

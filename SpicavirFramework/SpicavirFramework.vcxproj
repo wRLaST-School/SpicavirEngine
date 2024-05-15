@@ -308,6 +308,9 @@
     <ClCompile Include="..\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LibraTestProj\LibraTestDLL\LibraTestDLL.vcxproj">
+      <Project>{675e31ed-288f-4e4e-8a1e-70e79a895edb}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\SpicavirEngine.vcxproj">
       <Project>{44ac3038-21f4-4d3a-b846-3091b26d74cc}</Project>
     </ProjectReference>
