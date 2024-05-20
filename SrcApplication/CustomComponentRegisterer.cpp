@@ -9,6 +9,7 @@
 #include <Camera.h>
 #include <StringObject.h>
 #include <ScriptComponent.h>
+#include <SpriteObject.h>
 
 //Application Side
 #include <Player.h>
@@ -27,6 +28,7 @@ void CustomComponentRegisterer::CallRegisters()
 	Camera::RegisterToComponentFactory();
 	StringObject::RegisterToComponentFactory();
 	ScriptComponent::RegisterToComponentFactory();
+	SpriteObject::RegisterToComponentFactory();
 
 	//Application Side
 	CameraController::RegisterToComponentFactory();

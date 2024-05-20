@@ -86,10 +86,6 @@
             },
             {
                 "Type": "PointLight"
-            },
-            {
-                "Type": "ScriptComponent",
-                "filePath": "TestPlayer"
             }
         ],
         "EfkEffects": [

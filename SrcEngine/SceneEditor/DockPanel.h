@@ -25,6 +25,18 @@ public:
 	static void DrawViewPort();
 
 	/**
+	 * @brief ドラッグドロップ受付
+	 *
+	 */
+	static void DragDropTarget();
+
+	/**
+	 * @brief DD Texture
+	 */
+	static void DDTargetTexture();
+
+
+	/**
 	 * @brief シーン保存ダイアログ
 	 * 
 	 */

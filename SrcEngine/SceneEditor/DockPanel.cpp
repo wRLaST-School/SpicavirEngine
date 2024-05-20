@@ -8,6 +8,7 @@
 #include <SceneManager.h>
 #include <SceneRW.h>
 #include <SceneFromFile.h>
+#include <SpriteObject.h>
 
 void DockPanel::EnableScreenDock()
 {
@@ -119,6 +120,8 @@ void DockPanel::DrawViewPort()
 			ImGui::Image((ImTextureID)SpTextureManager::GetGPUDescHandle("RenderTexture").ptr,
 				finalWndSize);
 
+			DragDropTarget();
+
 			//Gizmo対応型だったらGizmoを表示
 			Object3D* selectedObj = InspectorWindow::GetSelected<Object3D>();
 			if (selectedObj)
@@ -134,6 +137,33 @@ void DockPanel::DrawViewPort()
 
 			ImGui::End();
 		});
+	}
+}
+
+void DockPanel::DragDropTarget()
+{
+	if (ImGui::BeginDragDropTarget())
+	{
+		DDTargetTexture();
+
+		ImGui::EndDragDropTarget();
+	}
+}
+
+void DockPanel::DDTargetTexture()
+{
+	const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("RES_WINDOW_ITEM_TEXTURE");
+
+	if (payload) {
+		const char* texKey = reinterpret_cast<const char*>(payload->Data);
+
+		SpriteObject* obj = SceneManager::currentScene->AddComponent<SpriteObject>("SpriteObject");
+
+
+		if (obj)
+		{
+			obj->tex = texKey;
+		}
 	}
 }
 
