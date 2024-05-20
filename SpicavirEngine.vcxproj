@@ -59,24 +59,24 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(ProjectDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(ProjectDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
-    <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
+    <ReferencePath>$(ProjectDir)assimp/code;$(ProjectDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(ProjectDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(ProjectDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Debug;$(LibraryPath)</LibraryPath>
-    <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
+    <ReferencePath>$(ProjectDir)assimp/code;$(ProjectDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)SrcEngine\Sound\;$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Particle\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(ProjectDir);$(ProjectDir)SrcApplication\Particle;$(ProjectDir)SrcApplication;$(ProjectDir)SrcEngine\ImGui;$(ProjectDir)SrcEngine\ImGuiLibs;$(ProjectDir)SrcImgui\imgui\ImGuiLibs;$(ProjectDir)SrcEngine\PostEffect;$(ProjectDir)SrcEngine\Drawer;$(ProjectDir)SrcExternal\Assimp\include;$(ProjectDir)SrcEngine\Renderer;$(ProjectDir)SrcEngine\BehaviorTree;$(ProjectDir)SrcEngine\Compute;$(ProjectDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <SourcePath>$(VC_SourcePath);$(ProjectDir)SrcEngine\2D\;$(ProjectDir)SrcEngine\3D\;$(ProjectDir)SrcEngine\Collider\;$(ProjectDir)SrcEngine\DirectX\;$(ProjectDir)SrcEngine\Light\;$(ProjectDir)SrcEngine\Math\;$(ProjectDir)SrcEngine\Others\;$(ProjectDir)SrcEngine\Scene\;$(ProjectDir)SrcEngine\Windows\;$(ProjectDir)SrcApplication\Scene;$(ProjectDir)SrcApplication\Others;$(IncludePath)</SourcePath>
     <LibraryPath>$(SolutionDir)/assimp/lib/Release;$(SolutionDir)$(Platform)\$(Configuration);$(LibraryPath)</LibraryPath>
-    <ReferencePath>$(SolutionDir)assimp/code;$(SolutionDir)assimp;$(ReferencePath)</ReferencePath>
+    <ReferencePath>$(ProjectDir)assimp/code;$(ProjectDir)assimp;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <VcpkgUseStatic>false</VcpkgUseStatic>
@@ -93,7 +93,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions);ENGINE_DLL_</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(SolutionDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)DirectXTex;$(ProjectDir)SrcExternal\EASTL\include;$(ProjectDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(ProjectDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(ProjectDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(ProjectDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -120,7 +120,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_ITERATOR_DEBUG_LEVEL=0;%(PreprocessorDefinitions);ENGINE_DLL_</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(SolutionDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)DirectXTex;$(ProjectDir)SrcExternal\EASTL\include;$(ProjectDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(ProjectDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(ProjectDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(ProjectDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -149,7 +149,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions);ENGINE_DLL_</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)DirectXTex;$(SolutionDir)SrcExternal\EASTL\include;$(SolutionDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(SolutionDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)DirectXTex;$(ProjectDir)SrcExternal\EASTL\include;$(ProjectDir)SrcExternal\EASTL\test\packages\EABase\include\Common;$(ProjectDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(ProjectDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(ProjectDir)SrcExternal\Cereal\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>

@@ -47,8 +47,8 @@ void CPPCompiler::Compile()
 	//ログ出力
 	cmd << "/v:diag /fl";
 
-	////デバッグ一時停止
-	//cmd << " & pause";
+	//デバッグ一時停止
+	cmd << " & pause";
 
 	std::string buf;
 	buf = cmd.str();
