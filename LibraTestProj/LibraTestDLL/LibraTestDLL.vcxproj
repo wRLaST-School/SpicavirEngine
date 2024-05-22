@@ -21,14 +21,6 @@
     <ClCompile Include="IScriptObject.cpp" />
     <ClCompile Include="TestPlayer.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\SpicavirEngine.vcxproj">
-      <Project>{44ac3038-21f4-4d3a-b846-3091b26d74cc}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SrcExternal\EASTL\EASTL.vcxproj">
-      <Project>{2ebf2370-9313-3e61-93e2-bf9215e3be2e}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -66,11 +58,13 @@
     <OutDir>$(ProjectDir)..\..\Resources\Compiled\</OutDir>
     <IncludePath>$(ProjectDir);$(ProjectDir)..\..\SrcEngine\Sound\;$(ProjectDir)..\..\SrcEngine\2D\;$(ProjectDir)..\..\SrcEngine\3D\;$(ProjectDir)..\..\SrcEngine\Collider\;$(ProjectDir)..\..\SrcEngine\DirectX\;$(ProjectDir)..\..\SrcEngine\Light\;$(ProjectDir)..\..\SrcEngine\Math\;$(ProjectDir)..\..\SrcEngine\Others\;$(ProjectDir)..\..\SrcEngine\Scene\;$(ProjectDir)..\..\SrcEngine\Particle\;$(ProjectDir)..\..\SrcEngine\Windows\;$(ProjectDir)..\..\SrcApplication\Scene;$(ProjectDir)..\..\SrcApplication\Others;$(ProjectDir)..\..\;$(ProjectDir)..\..\SrcApplication\Particle;$(ProjectDir)..\..\SrcApplication;$(ProjectDir)..\..\SrcEngine\ImGui;$(ProjectDir)..\..\SrcEngine\ImGuiLibs;$(ProjectDir)..\..\SrcImgui\imgui\ImGuiLibs;$(ProjectDir)..\..\SrcEngine\PostEffect;$(ProjectDir)..\..\SrcEngine\Drawer;$(ProjectDir)..\..\SrcExternal\Assimp\include;$(ProjectDir)..\..\SrcEngine\Renderer;$(ProjectDir)..\..\SrcEngine\BehaviorTree;$(ProjectDir)..\..\SrcEngine\Compute;$(ProjectDir)..\..\SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <TargetName>Scripts</TargetName>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)..\..\Resources\Compiled\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)..\..\Resources\Compiled\</OutDir>
     <IncludePath>$(ProjectDir);$(ProjectDir)..\..\SrcEngine\Sound\;$(ProjectDir)..\..\SrcEngine\2D\;$(ProjectDir)..\..\SrcEngine\3D\;$(ProjectDir)..\..\SrcEngine\Collider\;$(ProjectDir)..\..\SrcEngine\DirectX\;$(ProjectDir)..\..\SrcEngine\Light\;$(ProjectDir)..\..\SrcEngine\Math\;$(ProjectDir)..\..\SrcEngine\Others\;$(ProjectDir)..\..\SrcEngine\Scene\;$(ProjectDir)..\..\SrcEngine\Particle\;$(ProjectDir)..\..\SrcEngine\Windows\;$(ProjectDir)..\..\SrcApplication\Scene;$(ProjectDir)..\..\SrcApplication\Others;$(ProjectDir)..\..\;$(ProjectDir)..\..\SrcApplication\Particle;$(ProjectDir)..\..\SrcApplication;$(ProjectDir)..\..\SrcEngine\ImGui;$(ProjectDir)..\..\SrcEngine\ImGuiLibs;$(ProjectDir)..\..\SrcImgui\imgui\ImGuiLibs;$(ProjectDir)..\..\SrcEngine\PostEffect;$(ProjectDir)..\..\SrcEngine\Drawer;$(ProjectDir)..\..\SrcExternal\Assimp\include;$(ProjectDir)..\..\SrcEngine\Renderer;$(ProjectDir)..\..\SrcEngine\BehaviorTree;$(ProjectDir)..\..\SrcEngine\Compute;$(ProjectDir)..\..\SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
     <TargetName>Scripts</TargetName>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(ProjectDir)..\..\Resources\Compiled\$(Configuration)\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -82,13 +76,13 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\DirectXTex;$(ProjectDir)..\..\SrcExternal\EASTL\include;$(ProjectDir)..\..\SrcExternal\EASTL\test\packages\EABase\include\Common;$(ProjectDir)..\..\SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(ProjectDir)..\..\SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(ProjectDir)..\..\SrcExternal\Cereal\include</AdditionalIncludeDirectories>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;SpicavirEngineGame.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -103,7 +97,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\DirectXTex;$(ProjectDir)..\..\SrcExternal\EASTL\include;$(ProjectDir)..\..\SrcExternal\EASTL\test\packages\EABase\include\Common;$(ProjectDir)..\..\SrcExternal\Effekseer\Dev\Cpp\Effekseer;$(ProjectDir)..\..\SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12;$(ProjectDir)..\..\SrcExternal\Cereal\include</AdditionalIncludeDirectories>
-      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/utf-8 /FS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,7 +105,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;SpicavirEngineGame.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

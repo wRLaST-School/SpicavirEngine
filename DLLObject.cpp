@@ -6,7 +6,7 @@ const HMODULE& Libra::DLLObject::LoadDLL(const std::string& className)
 {
     //何か登録されてたら解放
     if (hModule_) { Free(); }
-    
+
     //DLL読み込み
     hModule_ = LoadLibraryA("Resources/Compiled/Scripts.dll");
 
@@ -22,6 +22,12 @@ const HMODULE& Libra::DLLObject::LoadDLL(const std::string& className)
     fType instantiateFunc = reinterpret_cast<fType>(GetProcAddress(hModule_, createFuncName.c_str()));
 
     if (instantiateFunc == nullptr) { return hModule_; }
+
+    //生成済みの場合はリセット
+    if (component_)
+    {
+        delete component_;
+    }
 
     //生成を行う
     component_ = instantiateFunc();

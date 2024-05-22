@@ -65,7 +65,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\..\Effekseer;$(ProjectDir)../../../../../SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -100,7 +100,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\..\Effekseer;$(ProjectDir)../../../../../SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -135,7 +135,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\..\Effekseer;$(SolutionDir)SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon\..\Effekseer;$(ProjectDir)../../../../../SrcExternal\Effekseer\ThirdParty\Install\glfw\include;$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\3rdParty\flatbuffers\include;$(ProjectDir)../../../../../SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererCommon;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>

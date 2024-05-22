@@ -13,7 +13,7 @@ public:
 
 	ScriptComponent* This();
 
-	std::string DLLExport GetClassString() override;
+	std::string GetClassString() override;
 
 	ScriptComponent* body;
 };

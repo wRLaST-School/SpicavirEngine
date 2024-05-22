@@ -31,13 +31,12 @@ void TestPlayer::Update()
 
 		move *= 0.1f;
 		
-		obj->position.x += move;
+		obj->position.y += move;
 	}
 }
 
 void TestPlayer::Draw()
 {
-	
 }
 
 void SetDrawSpriteFunc(void(*dsfunc)(int32_t, int32_t, float, float, float, std::string))

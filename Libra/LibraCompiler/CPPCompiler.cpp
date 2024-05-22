@@ -32,7 +32,7 @@ void CPPCompiler::Compile()
 	cmd << "LibraTestProj/LibraTestDLL/LibraTestDLL.vcxproj ";
 
 	//オプションの選択
-	cmd << "/t:build "; //インクリメンタルビルドを実行
+	cmd << "/t:build "; //"build"を実行
 
 	cmd << "/p:Configuration=";
 
@@ -47,7 +47,7 @@ void CPPCompiler::Compile()
 	//ログ出力
 	cmd << "/v:diag /fl";
 
-	//デバッグ一時停止
+	//デバッグ用一時停止
 	cmd << " & pause";
 
 	std::string buf;
