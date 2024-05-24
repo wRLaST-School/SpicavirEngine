@@ -4,6 +4,8 @@
 #include <Libra/LibraCompiler/LibraCompiler.h>
 #include <Libra/LibraCompiler/CPPCompiler.h>
 #include <format>
+#include <functional>
+#include <SceneManager.h>
 
 void ScriptComponent::Init()
 {
@@ -50,13 +52,41 @@ void ScriptComponent::ReadParamJson(const nlohmann::json& jsonObj)
 
 void ScriptComponent::CompileScript()
 {
-	if (dllobj_.GetModule()) dllobj_.Free();
+	//スクリプトコンポーネントを全て保持してdllobjをfree
+	eastl::vector<ScriptComponent*> scriptcomps;
+
+	std::function<void(eastl::vector<ScriptComponent*>&, IComponent*)> GetAllScriptCompsRecursive =
+		[&](eastl::vector<ScriptComponent*>& list, IComponent* parent) {
+		auto& components = parent->GetAllComponents();
+		if (components.size())
+		{
+			for (auto itr = components.begin(); itr != components.end(); itr++)
+			{
+				GetAllScriptCompsRecursive(list, itr->second.get());
+			}
+		}
+
+		auto castedParent = parent->CastTo<ScriptComponent>();
+		if (castedParent) {
+			list.push_back(castedParent);
+		}
+	};
+
+	GetAllScriptCompsRecursive(scriptcomps, SceneManager::currentScene.get());
+
+	for (auto& c : scriptcomps) {
+		if(c->dllobj_.GetModule())
+			c->dllobj_.Free();
+	}
 
 	//コンパイル処理
 	//Libra::Compiler::Compile(filePath, compileDest);
 	CPPCompiler::Compile();
 
-	LoadDLL();
+	//スクリプトコンポーネントを全て保持してdllobjをfree
+	for (auto& c : scriptcomps) {
+		c->LoadDLL();
+	}
 }
 
 void ScriptComponent::LoadDLL()
@@ -66,4 +96,6 @@ void ScriptComponent::LoadDLL()
 
 	if (dllobj_.GetComponent()) dllobj_.GetComponent()->body = this;
 	else OutputDebugStringA(std::format("No Such Class Found. Class Name: {}\n", className).c_str());
+
+	if (dllobj_.GetComponent()) dllobj_.GetComponent()->Init();
 }

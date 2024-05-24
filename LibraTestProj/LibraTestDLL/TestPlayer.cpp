@@ -9,8 +9,6 @@
 #include <Input.h>
 #include <ScriptComponent.h>
 
-std::function<void(int32_t, int32_t, float, float, float, std::string)> DrawRotaGraph;
-
 void TestPlayer::Init()
 {
 	OutputDebugStringA("TestPlayer Initialize\n");
@@ -37,9 +35,4 @@ void TestPlayer::Update()
 
 void TestPlayer::Draw()
 {
-}
-
-void SetDrawSpriteFunc(void(*dsfunc)(int32_t, int32_t, float, float, float, std::string))
-{
-	DrawRotaGraph = dsfunc;
 }
