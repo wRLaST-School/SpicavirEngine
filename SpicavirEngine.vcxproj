@@ -116,6 +116,9 @@
       <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;LibraCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>COPY $(SolutionDir)Resources\Compiled\$(Configuration)\SpicavirEngineGame.dll $(SolutionDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <ClCompile>
@@ -143,6 +146,9 @@
       <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;LibraCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Debug\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Debug;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Debug</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>COPY $(SolutionDir)Resources\Compiled\$(Configuration)\SpicavirEngineGame.dll $(SolutionDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -176,6 +182,9 @@
       <AdditionalDependencies>d3d12.lib;dxgi.lib;d3dcompiler.lib;EASTL.lib;dinput8.lib;dxguid.lib;xinput.lib;xaudio2.lib;EffekseerRendererDX12.lib;Effekseer.lib;LLGI.lib;winmm.lib;LibraCompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)SrcExternal\EASTL\export\Release\;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\EffekseerRendererDX12\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\Effekseer\Release;$(SolutionDir)SrcExternal\Effekseer\Dev\Cpp\3rdParty\LLGI\src\Release</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>COPY $(SolutionDir)Resources\Compiled\$(Configuration)\SpicavirEngineGame.dll $(SolutionDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DLLObject.cpp" />

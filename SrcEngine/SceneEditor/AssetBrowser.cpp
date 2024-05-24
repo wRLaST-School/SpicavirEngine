@@ -17,6 +17,9 @@
 
 #include <SceneRW.h>
 #include <SceneFromFile.h>
+#include <GameManager.h>
+
+#include <format>
 
 constexpr char* sAssetsDirectory = "Assets";
 const static std::filesystem::path sAssetPath = "Assets";
@@ -211,6 +214,18 @@ void AssetBrowser::LoadResources()
 	SpTextureManager::AddMasterTextureKey("Engine_FolderIcon");
 	SpTextureManager::AddMasterTextureKey("Engine_FileIcon");
 	SpTextureManager::AddMasterTextureKey("Engine_3DFileIcon");
+}
+
+void AssetBrowser::CopyFileByDD(std::wstring path)
+{
+	if (!GameManager::sShowDebug) return;
+
+	std::filesystem::path oldFile = path;
+
+	OutputDebugStringA(std::format("Copy {} to {}\n", oldFile.string(), (currentDirectory_.string() + "/" + oldFile.filename().string())).c_str());
+
+	std::filesystem::copy(oldFile.c_str(), (currentDirectory_.string() + "/" + oldFile.filename().string()).c_str(),
+		std::filesystem::copy_options::recursive | std::filesystem::copy_options::skip_existing);
 }
 
 AssetBrowser* AssetBrowser::GetInstance()

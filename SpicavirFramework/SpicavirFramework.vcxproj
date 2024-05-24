@@ -144,12 +144,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(SolutionDir)SrcEngine\Sound\;$(SolutionDir)SrcEngine\2D\;$(SolutionDir)SrcEngine\3D\;$(SolutionDir)SrcEngine\Collider\;$(SolutionDir)SrcEngine\DirectX\;$(SolutionDir)SrcEngine\Light\;$(SolutionDir)SrcEngine\Math\;$(SolutionDir)SrcEngine\Others\;$(SolutionDir)SrcEngine\Scene\;$(SolutionDir)SrcEngine\Particle\;$(SolutionDir)SrcEngine\Windows\;$(SolutionDir)SrcApplication\Scene;$(SolutionDir)SrcApplication\Others;$(SolutionDir);$(SolutionDir)SrcApplication\Particle;$(SolutionDir)SrcApplication;$(SolutionDir)SrcEngine\ImGui;$(SolutionDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(SolutionDir)SrcEngine\PostEffect;$(SolutionDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcEngine\Renderer;$(SolutionDir)SrcEngine\BehaviorTree;$(SolutionDir)SrcEngine\Compute;$(SolutionDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Resources\Compiled\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
     <IncludePath>$(SolutionDir)SrcEngine\Sound\;$(SolutionDir)SrcEngine\2D\;$(SolutionDir)SrcEngine\3D\;$(SolutionDir)SrcEngine\Collider\;$(SolutionDir)SrcEngine\DirectX\;$(SolutionDir)SrcEngine\Light\;$(SolutionDir)SrcEngine\Math\;$(SolutionDir)SrcEngine\Others\;$(SolutionDir)SrcEngine\Scene\;$(SolutionDir)SrcEngine\Particle\;$(SolutionDir)SrcEngine\Windows\;$(SolutionDir)SrcApplication\Scene;$(SolutionDir)SrcApplication\Others;$(SolutionDir);$(SolutionDir)SrcApplication\Particle;$(SolutionDir)SrcApplication;$(SolutionDir)SrcEngine\ImGui;$(SolutionDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(SolutionDir)SrcEngine\PostEffect;$(SolutionDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcEngine\Renderer;$(SolutionDir)SrcEngine\BehaviorTree;$(SolutionDir)SrcEngine\Compute;$(SolutionDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Resources\Compiled\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(SolutionDir)SrcEngine\Sound\;$(SolutionDir)SrcEngine\2D\;$(SolutionDir)SrcEngine\3D\;$(SolutionDir)SrcEngine\Collider\;$(SolutionDir)SrcEngine\DirectX\;$(SolutionDir)SrcEngine\Light\;$(SolutionDir)SrcEngine\Math\;$(SolutionDir)SrcEngine\Others\;$(SolutionDir)SrcEngine\Scene\;$(SolutionDir)SrcEngine\Particle\;$(SolutionDir)SrcEngine\Windows\;$(SolutionDir)SrcApplication\Scene;$(SolutionDir)SrcApplication\Others;$(SolutionDir);$(SolutionDir)SrcApplication\Particle;$(SolutionDir)SrcApplication;$(SolutionDir)SrcEngine\ImGui;$(SolutionDir)SrcEngine\ImGuiLibs;$(SolutionDir)SrcImgui\imgui\ImGuiLibs;$(SolutionDir)SrcEngine\PostEffect;$(SolutionDir)SrcEngine\Drawer;$(SolutionDir)SrcExternal\Assimp\include;$(SolutionDir)SrcEngine\Renderer;$(SolutionDir)SrcEngine\BehaviorTree;$(SolutionDir)SrcEngine\Compute;$(SolutionDir)SrcEngine\SceneEditor;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Resources\Compiled\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -264,6 +267,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -283,6 +287,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_No_Iterator_Check|x64'">
@@ -302,6 +307,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include <SpSwapChainManager.h>
 #include <SpDepth.h>
 #include <Sprite.h>
+#include <AssetBrowser.h>
 
 #pragma warning(push, 0)
 #include <imgui_impl_win32.h>
@@ -71,6 +72,8 @@ void SpWindow::Create(LPCWSTR title, int32_t windowWidth, int32_t windowHeight) 
 		w.hInstance,
 		nullptr);
 
+	DragAcceptFiles(hwnd, TRUE);
+
 	ShowWindow(hwnd, SW_SHOW);
 }
 
@@ -135,6 +138,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 				return 0;
 			}
+		}
+	case WM_DROPFILES:
+		{
+			auto hdrop = (HDROP)wParam;
+			//ドロップされたFile数
+			int32_t num = DragQueryFile(hdrop, (UINT)(-1), NULL, 0);
+
+			TCHAR filename[255];
+
+			for (size_t i = 0; i < num; i++) {
+				DragQueryFile(hdrop, (UINT)i, filename, sizeof(filename) / sizeof(TCHAR));
+
+				AssetBrowser::GetInstance()->CopyFileByDD(filename);
+			}
+
+			DragFinish(hdrop);
+			return 0;
 		}
 	}
 

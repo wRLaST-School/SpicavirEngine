@@ -24,9 +24,12 @@ void HierarchyPanel::OnImGuiRender()
             if (!(InspectorWindow::GetSelected<IScene>()))
             {
                 IComponent* cmp = InspectorWindow::GetSelected<IComponent>();
-                IComponent* par = cmp->parent_;
-                cmp->parent_->RemoveComponent(cmp);
-                InspectorWindow::SelectObject(par);
+                if (cmp)
+                {
+                    IComponent* par = cmp->parent_;
+                    cmp->parent_->RemoveComponent(cmp);
+                    InspectorWindow::SelectObject(par);
+                }
             }
         }
     }

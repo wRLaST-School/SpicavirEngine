@@ -25,6 +25,11 @@ public:
 	 */
 	static void LoadResources();
 
+	/**
+	 * @brief ファイルのDnD読み込み
+	 */
+	void CopyFileByDD(std::wstring path);
+
 private:
 	/**
 	 * @brief ImGui描画時の処理
