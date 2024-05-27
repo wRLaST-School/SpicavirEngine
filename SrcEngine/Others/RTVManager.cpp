@@ -6,7 +6,7 @@
 void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 {
 	CloseCurrentResBar();
-	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	GetSpDX()->cmdList->ClearDepthStencilView(GetSpDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	SpDirectX* dx = GetSpDX();
 	//リソースバリアーを書き込み可能状態に
 	dx->barrierDesc.Transition.pResource = GetSCM()->backBuffers[bbIndex].Get();
@@ -18,7 +18,7 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 
 	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvH = CD3DX12_CPU_DESCRIPTOR_HANDLE(GetInstance().GetHeapCPUHandle(GetInstance().numRT - 2),
 		bbIndex, GetSpDX()->dev->GetDescriptorHandleIncrementSize(GetInstance().heapDesc_.Type));
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetSpDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 	GetSpDX()->cmdList->OMSetRenderTargets(1, &rtvH, false, &dsvH);
 
 	GetInstance().currentRTIndex_[0] = GetInstance().numRT - 2 + bbIndex;
@@ -32,7 +32,7 @@ void RTVManager::SetRenderTargetToBackBuffer(UINT bbIndex)
 void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 {
 	CloseCurrentResBar();
-	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	GetSpDX()->cmdList->ClearDepthStencilView(GetSpDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 	int32_t index = (int32_t)SpTextureManager::GetIndex(key);
 
 	SpDirectX* dx = GetSpDX();
@@ -45,7 +45,7 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 	GetInstance().isAllResBarClosed = false;
 
 	//TODO:専用のDSVを用意
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetSpDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
 	auto cpuhnd = (GetInstance().GetHeapCPUHandle(index));
 	D3D12_CPU_DESCRIPTOR_HANDLE* pcpuhnd = &cpuhnd;
@@ -63,7 +63,7 @@ void RTVManager::SetRenderTargetToTexture(const TextureKey& key, bool clear)
 void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 {
 	CloseCurrentResBar();
-	GetSpDX()->cmdList->ClearDepthStencilView(GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
+	GetSpDX()->cmdList->ClearDepthStencilView(GetSpDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart(), D3D12_CLEAR_FLAG_DEPTH, 1.0, 0, 0, nullptr);
 
 	for (auto& key : keys)
 	{
@@ -91,7 +91,7 @@ void RTVManager::SetRenderTargets(const std::vector<TextureKey>& keys)
 	}
 
 	//TODO:専用のDSVを用意
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetWDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvH = GetSpDepth()->dsvHeap->GetCPUDescriptorHandleForHeapStart();
 
 	std::vector<D3D12_CPU_DESCRIPTOR_HANDLE> pcpuhnds;
 	for (auto& key : keys)

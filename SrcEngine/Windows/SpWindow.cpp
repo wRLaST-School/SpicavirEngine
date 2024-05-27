@@ -129,9 +129,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 					GetSCM()->ResizeAllBuffers();
 				}
 
-				if (GetWDepth()->depthBuffer != nullptr)
+				if (GetSpDepth()->depthBuffer != nullptr)
 				{
-					GetWDepth()->Resize();
+					GetSpDepth()->Resize();
 				}
 
 				SpTextureManager::ResizeScreenTextures();

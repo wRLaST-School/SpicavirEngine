@@ -1,13 +1,22 @@
 #include "SpDepth.h"
 #include "SpWindow.h"
 #include "SpDirectX.h"
+#include <SpTextureManager.h>
 
 SpDepth wdp;
 
 void SpDepth::Init()
 {
+	depthBuffer = SpTextureManager::GetTextureBuff(
+		SpTextureManager::CreateResourceWithoutView("depth_resource")
+	);
+
+	SpTextureManager::CreateSRVOnResource("depth_resource", DXGI_FORMAT_R32G8X24_TYPELESS);
+
+	SpTextureManager::AddMasterTextureKey("depth_resource");
+
 	D3D12_RESOURCE_DESC dResDesc = CD3DX12_RESOURCE_DESC::Tex2D(
-		DXGI_FORMAT_D32_FLOAT,
+		DXGI_FORMAT_D32_FLOAT_S8X24_UINT,
 		GetSpWindow()->width,
 		GetSpWindow()->height,
 		1, 0, 1, 0,
@@ -40,12 +49,12 @@ void SpDepth::Init()
 
 	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
-	GetSpDX()->dev->CreateDepthStencilView(depthBuffer.Get(), &dsvDesc, dsvHeap->GetCPUDescriptorHandleForHeapStart());
+	GetSpDX()->dev->CreateDepthStencilView(depthBuffer, &dsvDesc, dsvHeap->GetCPUDescriptorHandleForHeapStart());
 }
 
 void SpDepth::Resize()
 {
-	depthBuffer->Release();
+	SpTextureManager::Release("depth_resource");
 	Init();
 }
 
@@ -54,7 +63,7 @@ void InitSpDepth()
 	wdp.Init();
 }
 
-SpDepth* GetWDepth()
+SpDepth* GetSpDepth()
 {
 	return &wdp;
 }

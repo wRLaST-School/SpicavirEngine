@@ -15,7 +15,7 @@ void SpTextureManager::Create()
 
 	srvHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
 	srvHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE;
-	srvHeapDesc.NumDescriptors = wMaxSRVCount;
+	srvHeapDesc.NumDescriptors = spMaxSRVCount;
 
 	GetSpDX()->dev->CreateDescriptorHeap(&srvHeapDesc, IID_PPV_ARGS(&GetInstance().srvHeap));
 }
@@ -25,7 +25,7 @@ void SpTextureManager::Init()
 	SpTextureManager& ins = GetInstance();
 	ins.nextTexIndex_ = 0;
 
-	for (int32_t i = 0; i < wMaxSRVCount; i++)
+	for (int32_t i = 0; i < spMaxSRVCount; i++)
 	{
 		ins.isOccupied_[i] = false;
 	}
@@ -167,7 +167,7 @@ TextureKey SpTextureManager::LoadTexture(const string& filePath, const TextureKe
 
 	ins.isOccupied_[ins.nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!ins.isOccupied_[i])
 		{
@@ -292,7 +292,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 
 	GetInstance().isOccupied_[GetInstance().nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i])
 		{
@@ -308,7 +308,7 @@ TextureKey SpTextureManager::LoadTextureWithUniqueKey(const string& filePath, co
 TextureKey SpTextureManager::CreateDummyTexture(float width, float height, const TextureKey& key, bool initAsRenderTarget, bool useRatio)
 {
 	sPerSceneTextures[sCurrentSceneResIndex].push_back(key);
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i] && i <= 253)
 		{
@@ -404,7 +404,7 @@ TextureKey SpTextureManager::CreateDummyTexture(float width, float height, const
 
 	GetInstance().isOccupied_[GetInstance().nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i])
 		{
@@ -418,7 +418,7 @@ TextureKey SpTextureManager::CreateDummyTexture(float width, float height, const
 
 TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int32_t height, const TextureKey& key, bool initAsRenderTarget)
 {//テクスチャバッファ
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i] && i <= 253)
 		{
@@ -480,7 +480,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int3
 
 	GetInstance().isOccupied_[GetInstance().nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i])
 		{
@@ -495,7 +495,7 @@ TextureKey SpTextureManager::CreateDummyTextureWithUniqueKey(int32_t width, int3
 
 TextureKey SpTextureManager::CreateTextTexture(int32_t width, int32_t height, const TextureKey& key)
 {
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i] && i <= 253)
 		{
@@ -561,7 +561,7 @@ TextureKey SpTextureManager::CreateTextTexture(int32_t width, int32_t height, co
 
 	GetInstance().isOccupied_[GetInstance().nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i])
 		{
@@ -743,7 +743,7 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 
 	ins.isOccupied_[ins.nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!ins.isOccupied_[i])
 		{
@@ -755,10 +755,10 @@ TextureKey SpTextureManager::LoadSingleDiv(string filePath, int32_t originX, int
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::CreatePlainSRV(const TextureKey& key)
+TextureKey SpTextureManager::CreateResourceWithoutView(const TextureKey& key)
 {
 	sPerSceneTextures[sCurrentSceneResIndex].push_back(key);
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i] && i <= 253)
 		{
@@ -799,7 +799,7 @@ TextureKey SpTextureManager::CreatePlainSRV(const TextureKey& key)
 
 	GetInstance().isOccupied_[GetInstance().nextTexIndex_] = true;
 
-	for (size_t i = 0; i < wMaxSRVCount; i++)
+	for (size_t i = 0; i < spMaxSRVCount; i++)
 	{
 		if (!GetInstance().isOccupied_[i])
 		{
@@ -809,6 +809,44 @@ TextureKey SpTextureManager::CreatePlainSRV(const TextureKey& key)
 	}
 
 	throw std::out_of_range("out of texture resource");
+}
+
+TextureKey SpTextureManager::CreateSRVOnResource(const TextureKey& key, DXGI_FORMAT format)
+{
+	D3D12_RESOURCE_DESC textureResourceDesc;
+
+	int32_t index = GetIndex(key);
+
+	CD3DX12_HEAP_PROPERTIES texHeapProp = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_CUSTOM);
+
+	Float2 ratio = { 1.f, 1.f };
+	textureResourceDesc =
+		CD3DX12_RESOURCE_DESC::Tex2D(format, (UINT)(ratio.x * GetSpWindow()->width), (UINT)(ratio.y * GetSpWindow()->height), 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+
+	D3D12_CLEAR_VALUE clval = { format, {0, 0, 0, 0} };
+
+	GetSpDX()->dev->CreateCommittedResource(
+		&texHeapProp,
+		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
+		&textureResourceDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		&clval,
+		IID_PPV_ARGS(&GetInstance().texBuffs[index]));
+
+	//シェーダーリソースビューの生成
+	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
+	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();
+	heapHandle.ptr += GetSpDX()->dev->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * index;
+
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = textureResourceDesc.Format;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = textureResourceDesc.MipLevels;
+
+	GetSpDX()->dev->CreateShaderResourceView(GetInstance().texBuffs[index].Get(), &srvDesc, heapHandle);
+
+	return key;
 }
 
 void SpTextureManager::ResizeScreenTextures()

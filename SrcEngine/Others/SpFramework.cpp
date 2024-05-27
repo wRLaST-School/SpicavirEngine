@@ -70,9 +70,9 @@ void SpFramework::Init()
 	/*Init Draw*/
 	//ダブルバッファリングとか
 	InitSpSCM();
-	InitSpDepth();
 
 	SpTextureManager::Create();
+	InitSpDepth();
 
 	RootSignatureManager::RegisterAllRS();
 

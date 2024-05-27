@@ -11,7 +11,7 @@
 typedef std::string TextureKey;
 typedef size_t SRVHeapIndex;
 //indexがunsigned charになってるからここを変更するならそっちも変更
-const size_t wMaxSRVCount = 1024;
+const size_t spMaxSRVCount = 1024;
 
 class ResourceWindow;
 class SceneRW;
@@ -112,7 +112,9 @@ public:
 	 */
 	static DLLExport TextureKey LoadSingleDiv(std::string filePath, int32_t originX, int32_t originY, int32_t width, int32_t height, const TextureKey& key);
 
-	static TextureKey CreatePlainSRV(const TextureKey& key);
+	static TextureKey CreateResourceWithoutView(const TextureKey& key);
+
+	static TextureKey CreateSRVOnResource(const TextureKey& key,DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM);
 
 	static void ResizeScreenTextures();
 
@@ -138,13 +140,13 @@ public:
 
 	static SpTextureManager& GetInstance();
 
-	Microsoft::WRL::ComPtr<ID3D12Resource>texBuffs[wMaxSRVCount] = {};
+	Microsoft::WRL::ComPtr<ID3D12Resource>texBuffs[spMaxSRVCount] = {};
 
 private:
 	size_t nextTexIndex_ = 0;
 	exc_unordered_map<TextureKey, SRVHeapIndex> textureMap_ = {};
 	exc_unordered_map<TextureKey, TexData> texDataMap_ = {};
-	bool isOccupied_[wMaxSRVCount] = {};
+	bool isOccupied_[spMaxSRVCount] = {};
 
 	static std::list<TextureKey> sPerSceneTextures[2];
 	static int32_t sCurrentSceneResIndex;

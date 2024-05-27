@@ -39,7 +39,7 @@ void SpImGui::Init()
 
 void SpImGui::InitDirectXForImGui()
 {
-	SpTextureManager::CreatePlainSRV("imgui_srv");
+	SpTextureManager::CreateResourceWithoutView("imgui_srv");
 	SpTextureManager::AddMasterTextureKey("imgui_srv");
 }
 
