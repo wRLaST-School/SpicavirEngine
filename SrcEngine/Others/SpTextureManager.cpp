@@ -811,28 +811,40 @@ TextureKey SpTextureManager::CreateResourceWithoutView(const TextureKey& key)
 	throw std::out_of_range("out of texture resource");
 }
 
-TextureKey SpTextureManager::CreateSRVOnResource(const TextureKey& key, DXGI_FORMAT format)
+TextureKey SpTextureManager::CreateSRVOnResource(const TextureKey& key, DXGI_FORMAT format, D3D12_HEAP_TYPE heaptype, D3D12_RESOURCE_FLAGS resourceFlag)
 {
 	D3D12_RESOURCE_DESC textureResourceDesc;
 
 	int32_t index = GetIndex(key);
 
-	CD3DX12_HEAP_PROPERTIES texHeapProp = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_CUSTOM);
+	CD3DX12_HEAP_PROPERTIES texHeapProp = CD3DX12_HEAP_PROPERTIES(heaptype);
 
 	Float2 ratio = { 1.f, 1.f };
 	textureResourceDesc =
-		CD3DX12_RESOURCE_DESC::Tex2D(format, (UINT)(ratio.x * GetSpWindow()->width), (UINT)(ratio.y * GetSpWindow()->height), 1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
+		CD3DX12_RESOURCE_DESC::Tex2D(format, (UINT)(ratio.x * GetSpWindow()->width), (UINT)(ratio.y * GetSpWindow()->height), 1, 1, 1, 0, resourceFlag);
 
-	D3D12_CLEAR_VALUE clval = { format, {0, 0, 0, 0} };
+	if (format != DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS)
+	{
+		D3D12_CLEAR_VALUE clval = { format, {0, 0, 0, 0} };
 
-	GetSpDX()->dev->CreateCommittedResource(
-		&texHeapProp,
-		D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
-		&textureResourceDesc,
-		D3D12_RESOURCE_STATE_GENERIC_READ,
-		&clval,
-		IID_PPV_ARGS(&GetInstance().texBuffs[index]));
-
+		GetSpDX()->dev->CreateCommittedResource(
+			&texHeapProp,
+			D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
+			&textureResourceDesc,
+			D3D12_RESOURCE_STATE_GENERIC_READ,
+			&clval,
+			IID_PPV_ARGS(&GetInstance().texBuffs[index]));
+	}
+	else
+	{
+		GetSpDX()->dev->CreateCommittedResource(
+			&texHeapProp,
+			D3D12_HEAP_FLAG_ALLOW_ALL_BUFFERS_AND_TEXTURES,
+			&textureResourceDesc,
+			D3D12_RESOURCE_STATE_GENERIC_READ,
+			nullptr,
+			IID_PPV_ARGS(&GetInstance().texBuffs[index]));
+	}
 	//シェーダーリソースビューの生成
 	D3D12_CPU_DESCRIPTOR_HANDLE heapHandle;
 	heapHandle = SpTextureManager::GetInstance().srvHeap->GetCPUDescriptorHandleForHeapStart();

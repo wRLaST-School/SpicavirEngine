@@ -57,7 +57,7 @@ void SpFramework::Init()
 	if (SUCCEEDED(GetSpDX()->dev->QueryInterface(IID_PPV_ARGS(&infoQueue))))
 	{
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_CORRUPTION, true);
-		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
+		//infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_WARNING, true);
 		infoQueue->SetBreakOnSeverity(D3D12_MESSAGE_SEVERITY_ERROR, true);
 	}
 #endif //  _DEBUG
@@ -127,6 +127,7 @@ void SpFramework::Run()
 		Input::Mouse::Update();
 
 		/*毎フレーム処理*/
+		SceneManager::currentScene->CheckDelete();
 
 		DockPanel::EnableScreenDock();
 

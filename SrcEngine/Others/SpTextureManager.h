@@ -114,7 +114,7 @@ public:
 
 	static TextureKey CreateResourceWithoutView(const TextureKey& key);
 
-	static TextureKey CreateSRVOnResource(const TextureKey& key,DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM);
+	static TextureKey CreateSRVOnResource(const TextureKey& key,DXGI_FORMAT format = DXGI_FORMAT_R8G8B8A8_UNORM, D3D12_HEAP_TYPE heaptype = D3D12_HEAP_TYPE_CUSTOM, D3D12_RESOURCE_FLAGS resourceFlag = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET);
 
 	static void ResizeScreenTextures();
 

@@ -88,6 +88,9 @@ public:
 	virtual DLLExport void Update();
 	virtual DLLExport void Draw();
 
+	DLLExport void PrepDelete();
+	bool CheckDelete();
+
 	static void InitAllChildComponents(IComponent* parent);
 	static void UpdateAllChildComponents(IComponent* parent);
 	static void DrawAllChildComponents(IComponent* parent);
@@ -126,6 +129,8 @@ protected:
 
 private:
 	IComponent* parent_ = nullptr;
+
+	bool deleting = false;
 	
 	std::optional<eastl::multimap<std::string, eastl::unique_ptr<IComponent>>::iterator> childRemovedNewItr_;
 };
@@ -167,5 +172,5 @@ inline eastl::list<Type*> IComponent::GetComponents(const std::string& key)
 template<class Type>
 inline Type* IComponent::CastTo()
 {
-	return reinterpret_cast<Type*>(this);
+	return dynamic_cast<Type*>(this);
 }

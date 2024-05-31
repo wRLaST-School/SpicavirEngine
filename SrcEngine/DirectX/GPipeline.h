@@ -63,7 +63,7 @@ struct PipelineDesc
 			D3D12_DEPTH_STENCILOP_DESC{},
 			D3D12_DEPTH_STENCILOP_DESC{}
 		};
-		DXGI_FORMAT DSVFormat = DXGI_FORMAT_D32_FLOAT;
+		DXGI_FORMAT DSVFormat = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 	} Depth;
 
 	struct RootSignature {

@@ -48,6 +48,7 @@ IScriptObject* Libra::DLLObject::GetComponent()
 Libra::DLLObject::~DLLObject()
 {
     Free();
+    //delete component_;
 }
 
 void Libra::DLLObject::Free()

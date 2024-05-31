@@ -26,9 +26,7 @@ void HierarchyPanel::OnImGuiRender()
                 IComponent* cmp = InspectorWindow::GetSelected<IComponent>();
                 if (cmp)
                 {
-                    IComponent* par = cmp->parent_;
-                    cmp->parent_->RemoveComponent(cmp);
-                    InspectorWindow::SelectObject(par);
+                    cmp->PrepDelete();
                 }
             }
         }

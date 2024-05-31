@@ -4,6 +4,7 @@
 #pragma warning (push)
 #pragma warning (disable:26800)
 #include <SrcExternal/json.hpp>
+#include <InspectorWindow.h>
 #pragma warning (pop)
 
 using namespace nlohmann;
@@ -104,6 +105,32 @@ void IComponent::Update()
 
 void IComponent::Draw()
 {
+}
+
+void IComponent::PrepDelete()
+{
+	deleting = true;
+}
+
+bool IComponent::CheckDelete()
+{
+	if (deleting)
+	{
+		IComponent* par = parent_;
+		parent_->RemoveComponent(this);
+		InspectorWindow::SelectObject(par);
+
+		return true;
+	}
+
+	for (auto& c : components_)
+	{
+		if (c.second->CheckDelete()) {
+			return true;
+		};
+	}
+
+	return false;
 }
 
 void IComponent::InitAllChildComponents(IComponent* parent)

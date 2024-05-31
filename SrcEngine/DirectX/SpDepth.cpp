@@ -11,7 +11,7 @@ void SpDepth::Init()
 		SpTextureManager::CreateResourceWithoutView("depth_resource")
 	);
 
-	SpTextureManager::CreateSRVOnResource("depth_resource", DXGI_FORMAT_R32G8X24_TYPELESS);
+	SpTextureManager::CreateSRVOnResource("depth_resource", DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS, D3D12_HEAP_TYPE_DEFAULT, D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL);
 
 	SpTextureManager::AddMasterTextureKey("depth_resource");
 
@@ -26,7 +26,7 @@ void SpDepth::Init()
 	CD3DX12_HEAP_PROPERTIES htp(D3D12_HEAP_TYPE_DEFAULT);
 	CD3DX12_HEAP_PROPERTIES* phtp = &htp;
 
-	CD3DX12_CLEAR_VALUE clval(DXGI_FORMAT_D32_FLOAT, 1.0f, 0);
+	CD3DX12_CLEAR_VALUE clval(DXGI_FORMAT_D32_FLOAT_S8X24_UINT, 1.0f, 0);
 	CD3DX12_CLEAR_VALUE* pclval = &clval;
 
 	GetSpDX()->dev->CreateCommittedResource(
@@ -47,7 +47,7 @@ void SpDepth::Init()
 
 	D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
 
-	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	dsvDesc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 	dsvDesc.ViewDimension = D3D12_DSV_DIMENSION_TEXTURE2D;
 	GetSpDX()->dev->CreateDepthStencilView(depthBuffer, &dsvDesc, dsvHeap->GetCPUDescriptorHandleForHeapStart());
 }
