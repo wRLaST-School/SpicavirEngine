@@ -658,6 +658,8 @@
     <None Include="Assets\Shaders\Particle.hlsli">
       <FileType>Document</FileType>
     </None>
+    <None Include="Assets\Shaders\ShaderMathUtil.hlsli" />
+    <None Include="Assets\Shaders\ShaderUtil.hlsli" />
     <None Include="Assets\Shaders\Sprite.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

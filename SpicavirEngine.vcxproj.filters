@@ -1035,5 +1035,9 @@
     <None Include=".editorconfig">
       <Filter>未分類</Filter>
     </None>
+    <None Include="Assets\Shaders\ShaderUtil.hlsli">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Assets\Shaders\ShaderMathUtil.hlsli" />
   </ItemGroup>
 </Project>
