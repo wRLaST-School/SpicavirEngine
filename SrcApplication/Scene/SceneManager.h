@@ -70,7 +70,7 @@ private:
 	//以下基本使用禁止
 public:
 	//非同期でのシーン読み込みを行わずに直接シーン切り替えをする(バグ起きがちなので注意)
-	template <class NextScene> static void InstantTransition();
+	template <class NextScene, class... Args> static void InstantTransition(Args... args);
 
 private:
 	SceneManager();

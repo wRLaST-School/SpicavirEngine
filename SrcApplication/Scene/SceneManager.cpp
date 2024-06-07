@@ -12,6 +12,7 @@
 #include <BTEditorScene.h>
 #include <GameManager.h>
 #include <SceneRW.h>
+#include <SceneFromFile.h>
 
 std::future<void> SceneManager::ftr;
 bool SceneManager::transitionQueued = false;
@@ -20,7 +21,8 @@ void SceneManager::Init()
 {
 	Transition::Load();
 	InstantTransition<TitleScene>();
-	//InstantTransition<GameScene>();
+	LoadScene<SceneFromFile>("Assets/Scene/Test.scene");
+	WaitForLoadAndTransition();
 }
 
 void SceneManager::Update()
@@ -138,12 +140,12 @@ IScene* SceneManager::GetScene()
 	return currentScene.get();
 }
 
-template <class NextScene> void SceneManager::InstantTransition()
+template <class NextScene,  class... Args> void SceneManager::InstantTransition(Args... args)
 {
 	currentScene.release();
 	currentScene = nullptr;
 	Light::Init();
-	currentScene = std::make_unique<NextScene>();
+	currentScene = std::make_unique<NextScene>(args...);
 	currentScene->LoadResources();
 	currentScene->Init();
 	FrameRate::InitMark();
