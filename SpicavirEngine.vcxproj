@@ -620,6 +620,9 @@
     <ProjectReference Include="SrcExternal\Assimp\code\assimp.vcxproj">
       <Project>{8fe8f28b-8b25-35d8-a6e1-060c10df0ce7}</Project>
     </ProjectReference>
+    <ProjectReference Include="SrcExternal\Assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{b5b5a607-b88e-392d-ba9a-dcd3f57cee52}</Project>
+    </ProjectReference>
     <ProjectReference Include="SrcExternal\EASTL\EASTL.vcxproj">
       <Project>{2ebf2370-9313-3e61-93e2-bf9215e3be2e}</Project>
     </ProjectReference>

@@ -20,9 +20,7 @@ bool SceneManager::transitionQueued = false;
 void SceneManager::Init()
 {
 	Transition::Load();
-	InstantTransition<TitleScene>();
-	LoadScene<SceneFromFile>("Assets/Scene/Test.scene");
-	WaitForLoadAndTransition();
+	InstantTransition<TestScene>();
 }
 
 void SceneManager::Update()
@@ -36,7 +34,7 @@ void SceneManager::Update()
 	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
-		if (Input::Key::Triggered(DIK_G))
+		/*if (Input::Key::Triggered(DIK_G))
 		{
 			LoadScene<GameScene>();
 		}
@@ -44,19 +42,19 @@ void SceneManager::Update()
 		if (Input::Key::Triggered(DIK_T))
 		{
 			LoadScene<TitleScene>();
-		}
+		}*/
 
 		if (Input::Key::Triggered(DIK_D))
 		{
 			GameManager::sShowDebug = !GameManager::sShowDebug;
 		}
 
-		if (Input::Key::Triggered(DIK_E))
-		{
-			LoadScene<BTEditorScene>();
-		}
+		//if (Input::Key::Triggered(DIK_E))
+		//{
+		//	LoadScene<BTEditorScene>();
+		//}
 
-		Transition();
+		//Transition();
 	}
 
 	if (!GameManager::sDebugTimeStop)
