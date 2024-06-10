@@ -187,10 +187,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DLLObject.cpp" />
-    <ClCompile Include="SceneFromFile.cpp" />
-    <ClCompile Include="ScriptComponent.cpp" />
-    <ClCompile Include="SpriteObject.cpp" />
+    <ClCompile Include="SrcEngine\SceneEditor\DLLObject.cpp" />
+    <ClCompile Include="SrcEngine\SceneEditor\SceneFromFile.cpp" />
+    <ClCompile Include="SrcEngine\SceneEditor\ScriptComponent.cpp" />
+    <ClCompile Include="SrcEngine\SceneEditor\SpriteObject.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\SceneRW.cpp" />
     <ClCompile Include="SrcEngine\SceneEditor\ComponentFactory.cpp" />
     <ClCompile Include="SrcApplication\CustomComponentRegisterer.cpp" />
@@ -213,28 +213,14 @@
     <ClCompile Include="SrcEngine\BehaviorTree\BTRootNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTSelectorNode.cpp" />
     <ClCompile Include="SrcEngine\BehaviorTree\BTSequencerNode.cpp" />
-    <ClCompile Include="SrcApplication\GravSphere.cpp" />
-    <ClCompile Include="SrcApplication\Boss.cpp" />
-    <ClCompile Include="SrcApplication\CameraController.cpp" />
     <ClCompile Include="SrcApplication\GameManager.cpp" />
     <ClCompile Include="SrcApplication\GlobalTimer.cpp" />
-    <ClCompile Include="SrcApplication\LevelLoader.cpp" />
-    <ClCompile Include="SrcApplication\LevelManager.cpp" />
-    <ClCompile Include="SrcApplication\LineAttack.cpp" />
-    <ClCompile Include="SrcApplication\MainTimer.cpp" />
-    <ClCompile Include="SrcApplication\Marker.cpp" />
-    <ClCompile Include="SrcApplication\Particle\CounterParticle.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample1.cpp" />
     <ClCompile Include="SrcApplication\Particle\ParticleSample2.cpp" />
-    <ClCompile Include="SrcApplication\Player.cpp" />
-    <ClCompile Include="SrcApplication\Scene\GameScene.cpp" />
-    <ClCompile Include="SrcApplication\Scene\ResulScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\SceneManager.cpp" />
     <ClCompile Include="SrcApplication\Scene\SingleCamTestScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\TestScene.cpp" />
-    <ClCompile Include="SrcApplication\Scene\TitleScene.cpp" />
     <ClCompile Include="SrcApplication\Scene\Transition.cpp" />
-    <ClCompile Include="SrcApplication\Score.cpp" />
     <ClCompile Include="SrcEngine\2D\Animation2D.cpp" />
     <ClCompile Include="SrcEngine\2D\Camera2D.cpp" />
     <ClCompile Include="SrcEngine\2D\SpDS.cpp" />
@@ -304,15 +290,15 @@
     <ClCompile Include="SrcEngine\Scene\IScene.cpp" />
     <ClCompile Include="SrcEngine\Sound\SoundManager.cpp" />
     <ClCompile Include="SrcEngine\Windows\SpWindow.cpp" />
-    <ClCompile Include="StringObject.cpp" />
-    <ClCompile Include="TestMoveObject.cpp" />
+    <ClCompile Include="SrcEngine\SceneEditor\StringObject.cpp" />
+    <ClCompile Include="SrcEngine\SceneEditor\TestMoveObject.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DLLDef.h" />
-    <ClInclude Include="DLLObject.h" />
-    <ClInclude Include="SceneFromFile.h" />
-    <ClInclude Include="ScriptComponent.h" />
-    <ClInclude Include="SpriteObject.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\DLLDef.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\DLLObject.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\SceneFromFile.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\ScriptComponent.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\SpriteObject.h" />
     <ClInclude Include="SrcEngine\SceneEditor\SceneRW.h" />
     <ClInclude Include="SrcEngine\SceneEditor\ComponentFactory.h" />
     <ClInclude Include="SrcApplication\CustomComponentRegisterer.h" />
@@ -335,28 +321,14 @@
     <ClInclude Include="SrcEngine\BehaviorTree\BTRootNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTSelectorNode.h" />
     <ClInclude Include="SrcEngine\BehaviorTree\BTSequencerNode.h" />
-    <ClInclude Include="SrcApplication\GravSphere.h" />
-    <ClInclude Include="SrcApplication\Boss.h" />
-    <ClInclude Include="SrcApplication\CameraController.h" />
     <ClInclude Include="SrcApplication\GameManager.h" />
     <ClInclude Include="SrcApplication\GlobalTimer.h" />
-    <ClInclude Include="SrcApplication\LevelLoader.h" />
-    <ClInclude Include="SrcApplication\LevelManager.h" />
-    <ClInclude Include="SrcApplication\LineAttack.h" />
-    <ClInclude Include="SrcApplication\MainTimer.h" />
-    <ClInclude Include="SrcApplication\Marker.h" />
-    <ClInclude Include="SrcApplication\Particle\CounterParticle.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample1.h" />
     <ClInclude Include="SrcApplication\Particle\ParticleSample2.h" />
-    <ClInclude Include="SrcApplication\Player.h" />
-    <ClInclude Include="SrcApplication\Scene\GameScene.h" />
-    <ClInclude Include="SrcApplication\Scene\ResulScene.h" />
     <ClInclude Include="SrcApplication\Scene\SceneManager.h" />
     <ClInclude Include="SrcApplication\Scene\SingleCamTestScene.h" />
     <ClInclude Include="SrcApplication\Scene\TestScene.h" />
-    <ClInclude Include="SrcApplication\Scene\TitleScene.h" />
     <ClInclude Include="SrcApplication\Scene\Transition.h" />
-    <ClInclude Include="SrcApplication\Score.h" />
     <ClInclude Include="SrcEngine\2D\Animation2D.h" />
     <ClInclude Include="SrcEngine\2D\Camera2D.h" />
     <ClInclude Include="SrcEngine\2D\SpDS.h" />
@@ -430,8 +402,8 @@
     <ClInclude Include="SrcEngine\Sound\SoundManager.h" />
     <ClInclude Include="SrcEngine\Windows\SpWindow.h" />
     <ClInclude Include="SrcExternal\json.hpp" />
-    <ClInclude Include="StringObject.h" />
-    <ClInclude Include="TestMoveObject.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\StringObject.h" />
+    <ClInclude Include="SrcEngine\SceneEditor\TestMoveObject.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shaders\BasicGS.hlsl">

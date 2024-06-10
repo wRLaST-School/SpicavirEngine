@@ -5,9 +5,7 @@
 #include <SingleCamTestScene.h>
 #include <IPostEffector.h>
 #include <Bloom.h>
-#include <GameScene.h>
 #include <GlobalTimer.h>
-#include <TitleScene.h>
 #include <Transition.h>
 #include <BTEditorScene.h>
 #include <GameManager.h>
@@ -34,27 +32,10 @@ void SceneManager::Update()
 	//デバッグ用シーン変更
 	if (Input::Key::Down(DIK_LSHIFT) || Input::Key::Down(DIK_RSHIFT))
 	{
-		/*if (Input::Key::Triggered(DIK_G))
-		{
-			LoadScene<GameScene>();
-		}
-
-		if (Input::Key::Triggered(DIK_T))
-		{
-			LoadScene<TitleScene>();
-		}*/
-
 		if (Input::Key::Triggered(DIK_D))
 		{
 			GameManager::sShowDebug = !GameManager::sShowDebug;
 		}
-
-		//if (Input::Key::Triggered(DIK_E))
-		//{
-		//	LoadScene<BTEditorScene>();
-		//}
-
-		//Transition();
 	}
 
 	if (!GameManager::sDebugTimeStop)

@@ -157,7 +157,6 @@ void SpFramework::Run()
 				{
 					ImGui::Text("FPS : %.1f", ImGui::GetIO().Framerate);
 					ImGui::Checkbox("Show Hit Box", &GameManager::sShowHitBoxes);
-					ImGui::Checkbox("Debug Immunity", &GameManager::sDebugImmunity);
 					ImGui::Checkbox("Pause Game", &GameManager::sDebugTimeStop);
 				}
 				ImGui::End();
